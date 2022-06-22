@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>員工後台首頁</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back_end/css/emp_all.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back_end/css/emp_main.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back_end/css/emp_footer.css">
@@ -14,15 +14,7 @@
 
 <body>
     <header>
-        <nav>
-            <div id="logo">
-                <img src="${pageContext.request.contextPath}/back_end/logo2noline.jpg">
-            </div>
-            <h2>員工後台操作系統</h2>
-            <ul>
-                <li>登出</li>
-            </ul>
-        </nav>
+        <%@ include file="/back_end/header_html.jsp"%>   
     </header>
     <aside id="aside">     
     	<%@ include file="/back_end/aside_html.jsp"%>   
@@ -30,6 +22,7 @@
     <!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
     <main>
         <div id="main">
+        ${empAccount.emp_name} 成功登入!
         主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔
         主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔
         主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔主要內容喔

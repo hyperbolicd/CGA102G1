@@ -14,16 +14,16 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 	
 	private static final String INSERT =
 			"insert into wishing_pond (WISH_NO, WISH_OPTION, MV_ID, WISH_COUNT, WISH_START, WISH_END) values "
-			+ "(?, ?, ?, ?, ?, ?);";
+			+ "(?, ?, ?, ?, ?, ?)";
 	private static final String READ_ONE =
-			"select WISH_NO, WISH_OPTION, MV_ID, WISH_COUNT, WISH_START, WISH_END from wishing_pond where WISH_NO = ? order by WISH_COUNT desc, WISH_OPTION;";
+			"select WISH_NO, WISH_OPTION, MV_ID, WISH_COUNT, WISH_START, WISH_END from wishing_pond where WISH_NO = ? order by WISH_COUNT desc, WISH_OPTION";
 	private static final String READ_ALL =
-			"select WISH_NO, WISH_OPTION, MV_ID, WISH_COUNT, WISH_START, WISH_END from wishing_pond order by WISH_NO, WISH_OPTION;";
+			"select WISH_NO, WISH_OPTION, MV_ID, WISH_COUNT, WISH_START, WISH_END from wishing_pond order by WISH_NO, WISH_OPTION";
 	private static final String UPDATE =
 			"update wishing_pond set MV_ID = ?, WISH_COUNT = ?, WISH_START = ?, WISH_END = ? "
-			+ "where WISH_NO = ? and WISH_OPTION = ?;";
+			+ "where WISH_NO = ? and WISH_OPTION = ?";
 	private static final String DELETE =
-			"delete from wishing_pond where WISH_NO = ? and WISH_OPTION = ?;";
+			"delete from wishing_pond where WISH_NO = ? and WISH_OPTION = ?";
 	
 	@Override
 	public void insert(WishingPondVO wishingPondVO) {

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <ul>
-	<li id="index"><span>首頁</span></li>
+	<li id="index"><span><a href="${pageContext.request.contextPath}/back_end/empIndex.jsp">首頁</a></span></li>
 	<li><span>資訊管理</span>
 		<ul>
 			<li>影城資訊管理</li>
@@ -42,7 +42,7 @@
 	<li><span>員工管理</span>
 		<ul>
 			<li><a href="${pageContext.request.contextPath}/back_end/emp/empAcc.jsp">帳號與權限</a></li>
-			<li><a href="${pageContext.request.contextPath}/back_end/emp/empDetail.jsp">個人資料維護</a></li>
+			<li><a href="${pageContext.request.contextPath}/back_end/emp/empSelf.jsp">個人資料維護</a></li>
 		</ul></li>
 	<li><span>會員管理</span>
 		<ul>
