@@ -62,7 +62,7 @@ public class EmpLogin extends HttpServlet {
 			request.getSession().setAttribute("empAccount", empVO);
 			String lastPage = (String) request.getSession().getAttribute("lastPage");
 			
-			if(lastPage == null) {
+			if(lastPage == null) { // 好像不會跑到?
 				response.sendRedirect(request.getContextPath() + "/back_end/empIndex.jsp");
 			} else {
 				response.sendRedirect(lastPage);
