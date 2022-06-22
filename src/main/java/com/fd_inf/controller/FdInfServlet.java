@@ -23,7 +23,7 @@ import com.fd_inf.model.FdInfVO;
 //import org.json.JSONException;
 //import org.json.JSONObject;
 
-@WebServlet("/back/fd_inf/fd_inf.do")
+@WebServlet("/back_end/fd_inf/fd_inf.do")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class FdInfServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -52,7 +52,7 @@ public class FdInfServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back/fd_inf/allFdInf.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/fd_inf/allFdInf.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -65,7 +65,7 @@ public class FdInfServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back/fd_inf/allFdInf.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/fd_inf/allFdInf.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -78,14 +78,14 @@ public class FdInfServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back/fd_inf/allFdInf.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/fd_inf/allFdInf.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("fdInfVO", fdInfVO); // 資料庫取出的fdInfVO物件,存入req
-			String url = "/back/fd_inf/allFdInf.jsp";
+			String url = "/back_end/fd_inf/allFdInf.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 allFdInf.jsp
 			successView.forward(req, res);
 		}
@@ -108,7 +108,7 @@ public class FdInfServlet extends HttpServlet {
 //			String param = "?fdID=" + fdInfVO.getFdID() + "&fdType=" + fdInfVO.getFdType() + "&fdName="
 //					+ fdInfVO.getFdName() + "&fdprice=" + fdInfVO.getFdprice() + "&fdDT=" + fdInfVO.getFdDT()
 //					+ "&fdPicture=" + fdInfVO.getFdPicture() + "&fdState=" + fdInfVO.getFdState();
-			String url = "/back/fd_inf/updateFdInf.jsp";
+			String url = "/back_end/fd_inf/updateFdInf.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 updateFdInf.jsp
 			successView.forward(req, res);
 		}
@@ -123,7 +123,7 @@ public class FdInfServlet extends HttpServlet {
 				
 				res.getOutputStream().write(fdPicture);
 			}else {
-				InputStream in = getServletContext().getResourceAsStream("/back/fd_inf/imges/123.png");
+				InputStream in = getServletContext().getResourceAsStream("/back_end/fd_inf/imges/123.png");
 			    byte[] b = new byte[in.available()];
 			    in.read(b);
 			    res.getOutputStream().write(b);
@@ -183,7 +183,7 @@ public class FdInfServlet extends HttpServlet {
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("fdInfVO", fdInfVO);
-				RequestDispatcher failureView = req.getRequestDispatcher("/back/fd_inf/updateFdInf.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/fd_inf/updateFdInf.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
@@ -194,7 +194,7 @@ public class FdInfServlet extends HttpServlet {
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("fdInfVO", fdInfVO); // 資料庫update成功後,正確的的fdInfVO物件,存入req
-			String url = "/back/fd_inf/allFdInf.jsp";
+			String url = "/back_end/fd_inf/allFdInf.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交allFdInf.jsp
 			successView.forward(req, res);
 		}
@@ -242,7 +242,7 @@ public class FdInfServlet extends HttpServlet {
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back/fd_inf/addFdInf.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/fd_inf/addFdInf.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -252,7 +252,7 @@ public class FdInfServlet extends HttpServlet {
 			fdInfSvc.addFdInf(fdType, fdName, fdprice, fdDT, fdPicture, fdState);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/back/fd_inf/allFdInf.jsp";
+			String url = "/back_end/fd_inf/allFdInf.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交allFdInf.jsp
 			successView.forward(req, res);
 		}
@@ -271,7 +271,7 @@ public class FdInfServlet extends HttpServlet {
 			fdInfSvc.deleteFdInf(fdID);
 
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-			String url = "/back/fd_inf/allFdInf.jsp";
+			String url = "/back_end/fd_inf/allFdInf.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
 		}
@@ -306,7 +306,7 @@ public class FdInfServlet extends HttpServlet {
 //			}
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) ***********/
-			String url = "/back/fd_inf/allFdinf.jsp";
+			String url = "/back_end/fd_inf/allFdinf.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
 		}
