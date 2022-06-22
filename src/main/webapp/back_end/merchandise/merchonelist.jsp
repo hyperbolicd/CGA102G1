@@ -10,13 +10,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back/emp/css/emp_all.css">
+	href="<%=request.getContextPath()%>/back_end/emp/css/emp_all.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back/emp/css/emp_main.css">
+	href="<%=request.getContextPath()%>/back_end/emp/css/emp_main.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back/emp/css/emp_footer.css">
+	href="<%=request.getContextPath()%>/back_end/emp/css/emp_footer.css">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/back/merchandise/css/FDINFBack.css">
+	href="${pageContext.request.contextPath}/back_end/merchandise/css/FDINFBack.css">
 </head>
 
 <body>
@@ -136,7 +136,7 @@
 					</div>
 					<div class="btBlock">
 						<a class="tablebt"
-								href="${pageContext.request.contextPath}/back/merchandise/mallIndex.jsp">首頁</a>
+								href="${pageContext.request.contextPath}/back_end/merchandise/mallIndex.jsp">首頁</a>
 					</div>
 				</FORM>
 			</div>
@@ -146,9 +146,9 @@
 	</main>
 	<!-- <div id="tree"></div> -->
 	<footer> 嗨邇覓影城 &copy; HIREME CINEMA 2022 </footer>
-	<aside id="aside">
-		<%@ include file="/back/emp/aside_html.jsp"%>
-	</aside>
+	<aside id="aside">     
+     <%@ include file="/back_end/aside_html.jsp"%>   
+    </aside>
 </body>
 
 </html>

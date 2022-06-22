@@ -140,9 +140,9 @@
 		
 	</c:if>
 	<footer> 嗨邇覓影城 &copy; HIREME CINEMA 2022 </footer>
-	<aside id="aside">
-		<%@ include file="/back/emp/aside_html.jsp"%>
-	</aside>
+	<aside id="aside">     
+     <%@ include file="/back_end/aside_html.jsp"%>   
+    </aside>
 </body>
 
 </html>
