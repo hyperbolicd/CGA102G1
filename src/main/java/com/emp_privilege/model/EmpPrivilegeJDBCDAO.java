@@ -11,13 +11,13 @@ import java.sql.*;
 public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 	
 	private static final String INSERT = 
-			"insert into emp_privilege (EMP_NO, FC_NO) values (?, ?);";
+			"insert into emp_privilege (EMP_NO, FC_NO) values (?, ?)";
 	private static final String READ_ONE =
-			"select EMP_NO, FC_NO from emp_privilege where EMP_NO = ? order by EMP_NO;";
+			"select EMP_NO, FC_NO from emp_privilege where EMP_NO = ? order by EMP_NO";
 	private static final String READ_ALL =
-			"select EMP_NO, FC_NO from emp_privilege order by EMP_NO;";
+			"select EMP_NO, FC_NO from emp_privilege order by EMP_NO";
 	private static final String DELETE =
-			"delete from emp_privilege where EMP_NO = ? and FC_NO = ?;";
+			"delete from emp_privilege where EMP_NO = ? and FC_NO = ?";
 
 	@Override
 	public void insert(EmpPrivilegeVO empPrivilegeVO) {

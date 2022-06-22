@@ -75,4 +75,8 @@ public class EmpAccountService {
 	public Integer getNextId() {
 		return dao.getNextId();
 	}
+	
+	public String getPassword(Integer emp_no) {
+		return dao.getPassword(emp_no);
+	}
 }

@@ -12,5 +12,6 @@ public interface EmpAccountDAO_interface {
 	public List<EmpAccountVO> getAll(Map<String, String[]> map);
 	public List<EmpAccountVO> getAllDesc(); 
 	public Integer getNextId(); 
+	public String getPassword(Integer empAcocuntNo); 
 
 }

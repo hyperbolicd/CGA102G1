@@ -16,10 +16,12 @@
     <main>
         <div id="login">
             <h1>員工登入系統</h1>
-            <form action="${pageContext.request.contextPath}/EmpLogin" method="post">
-                <input type="text" id="empNameLG" name="loginId" placeholder="請輸入編號">
+            <form action="${pageContext.request.contextPath}/emp/EmpLogin" method="post">
+            	<label for="empNameLG">編號:</label>
+                <input type="text" id="empNameLG" name="loginId" placeholder="${errMsg.loginId}">
                 <br>
-                <input type="password" id="empPasswordLG" name="loginPassword" placeholder="請輸入密碼">
+            	<label for="empPasswordLG">密碼:</label>
+                <input type="password" id="empPasswordLG" name="loginPassword" placeholder="${errMsg.loginPassword}">
                 <div>
                     <button type="submit" id="loginbtn" name="action" value="login">登入</button>
                 </div>

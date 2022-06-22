@@ -10,9 +10,9 @@ import com.common.JDBCUtil;
 public class EmpFunctionJDBCDAO implements EmpFunctionDAO_interface{
 	
 	private static final String READ_ONE =
-			"select FC_NO, FC_NAME, FC_DESCRIPTION, FC_CATEGORY from emp_function where FC_NO = ?;";
+			"select FC_NO, FC_NAME, FC_DESCRIPTION, FC_CATEGORY from emp_function where FC_NO = ?";
 	private static final String READ_ALL =
-			"select FC_NO, FC_NAME, FC_DESCRIPTION, FC_CATEGORY from emp_function order by FC_NO;";
+			"select FC_NO, FC_NAME, FC_DESCRIPTION, FC_CATEGORY from emp_function order by FC_NO";
 
 	@Override
 	public EmpFunctionVO findByPrimaryKey(Integer empFunctionNo) {

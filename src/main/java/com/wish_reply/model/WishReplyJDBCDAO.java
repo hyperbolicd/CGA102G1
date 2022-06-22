@@ -11,13 +11,13 @@ import java.sql.*;
 public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 	private static final String INSERT =
 			"insert into wish_reply (WISH_NO, WISH_OPTION, MEMBER_ID, WISH_MSG) values "
-			+ "(?, ?, ?, ?);";
+			+ "(?, ?, ?, ?)";
 	private static final String READ_ONE =
-			"select WISH_REONO, WISH_NO, WISH_OPTION, MEMBER_ID, WISH_MSG from wish_reply where WISH_NO = ? order by WISH_NO, WISH_OPTION;";
+			"select WISH_REONO, WISH_NO, WISH_OPTION, MEMBER_ID, WISH_MSG from wish_reply where WISH_NO = ? order by WISH_NO, WISH_OPTION";
 	private static final String READ_ALL =
-			"select WISH_REONO, WISH_NO, WISH_OPTION, MEMBER_ID, WISH_MSG from wish_reply order by WISH_NO, WISH_OPTION;";
+			"select WISH_REONO, WISH_NO, WISH_OPTION, MEMBER_ID, WISH_MSG from wish_reply order by WISH_NO, WISH_OPTION";
 	private static final String DELETE =
-			"delete from wish_reply where WISH_REONO = ?;";
+			"delete from wish_reply where WISH_REONO = ?";
 
 	@Override
 	public void insert(WishReplyVO wishReplyVO) {

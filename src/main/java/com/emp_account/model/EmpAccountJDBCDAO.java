@@ -18,26 +18,26 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 	private static final String INSERT = 
 			"insert into emp_account "
 			+ "	(EMP_EMAIL, EMP_PASSWORD, EMP_NAME, EMP_PHONE, EMP_ADDRESS, EMP_PHOTO, EMP_STATUS) VALUES "
-			+ "	(?, ?, ?, ?, ?, ?, ?);";
+			+ "	(?, ?, ?, ?, ?, ?, ?)";
 	private static final String READ_ONE =
 			"select EMP_NO, EMP_EMAIL, EMP_PASSWORD, EMP_NAME, EMP_PHONE, EMP_ADDRESS, EMP_PHOTO, EMP_STATUS "
-			+ "from emp_account where EMP_NO = ?;";
+			+ "from emp_account where EMP_NO = ?";
 	private static final String READ_ALL =
 			"select EMP_NO, EMP_EMAIL, EMP_PASSWORD, EMP_NAME, EMP_PHONE, EMP_ADDRESS, EMP_PHOTO, EMP_STATUS "
-			+ "from emp_account order by EMP_NO;";
+			+ "from emp_account order by EMP_NO";
 	private static final String READ_ALL_DESC =
 			"select EMP_NO, EMP_EMAIL, EMP_PASSWORD, EMP_NAME, EMP_PHONE, EMP_ADDRESS, EMP_PHOTO, EMP_STATUS "
-			+ "from emp_account order by EMP_NO desc;";
+			+ "from emp_account order by EMP_NO desc";
 	private static final String UPDATE =
 			"update emp_account set "
 			+ "EMP_EMAIL = ?, EMP_PASSWORD = ?, EMP_NAME = ?, EMP_PHONE = ?, EMP_ADDRESS = ?, EMP_PHOTO = ?, EMP_STATUS = ? "
-			+ "where (EMP_NO = ?);";
+			+ "where (EMP_NO = ?)";
 	private static final String DELETE =
-			"delete from emp_account where (EMP_NO = ?);";
+			"delete from emp_account where (EMP_NO = ?)";
 	private static final String GET_NEXT_ID =
-			"select AUTO_INCREMENT from information_schema.tables where table_name = 'emp_account' and table_schema = 'movietheater' ;";
-	private static final String GET_ALL_EMP_NO = 
-			"select EMP_NO from emp_account;";
+			"select AUTO_INCREMENT from information_schema.tables where table_name = 'emp_account' and table_schema = 'movietheater' ";
+	private static final String GET_PASSWORD = 
+			"select EMP_PASSWORD from emp_account where EMP_NO = ?";
 	
 	@Override
 	public Integer insert(EmpAccountVO empAccountVO) {
@@ -482,6 +482,56 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 			}
 		}
 		return nextId;
+	}
+
+	@Override
+	public String getPassword(Integer empAcocuntNo) {
+		String password = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			con = JDBCUtil.getConnection();
+			ps = con.prepareStatement(GET_PASSWORD);
+			
+			ps.setInt(1, empAcocuntNo);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				password = rs.getString("EMP_PASSWORD");
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return password;
 	}
 
 	public static void main(String[] args) {

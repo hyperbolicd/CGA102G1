@@ -19,16 +19,8 @@
 
 <body>
 	<header>
-		<nav>
-			<div id="logo">
-				<img src="${pageContext.request.contextPath}/back_end/emp/logo2noline.jpg">
-			</div>
-			<h2>員工後台操作系統</h2>
-			<ul>
-				<li>登出</li>
-			</ul>
-		</nav>
-	</header>
+        <%@ include file="/back_end/header_html.jsp"%>   
+    </header>
 	<aside id="aside">
 		<%@ include file="/back_end/aside_html.jsp"%>
 	</aside>
@@ -36,12 +28,6 @@
 	<main>
 		<div id="main">
 			<h1>帳號與權限</h1>
-<%-- 			--${listAll == null}-- --%>
-<%-- 			==${listAll != null}== --%>
-<%-- 			++${orderType}++ --%>
-<%-- 			<c:forEach var="xxx" items="${listAll}"> --%>
-<%-- 				${xxx.emp_no} --%>
-<%-- 			</c:forEach> --%>
 			<button class="add" onclick="addAccount()">新增</button><span style="color: red;">${isSucess}</span>
 			<div id="search">
 				<label>顯示: </label>
@@ -55,7 +41,7 @@
 			<table id="empData">
 				<tr>
 					<th class="tb0">
-						<form action="${pageContext.request.contextPath}/OrderBy" method="post">
+						<form action="${pageContext.request.contextPath}/emp/OrderBy" method="post">
 							<button id="listOrder" name="action" value="listAll">
 								編號 ${orderSign==null? "&#8595;":orderSign}
 								<input type="hidden" name="orderType" value='${orderType==null? "asc":orderType}'>
