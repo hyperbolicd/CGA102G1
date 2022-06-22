@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理檢舉</title>
+    <link rel="stylesheet" type="text/css" href="emp_all.css">
+    <link rel="stylesheet" type="text/css" href="emp_main.css">
+    <link rel="stylesheet" type="text/css" href="emp_footer.css">
+    <!-- ****************************************************** -->
+    <link rel="stylesheet" href="./editReport.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div id="logo">
+                <img src="logo2noline.jpg">
+            </div>
+            <h2>員工後台操作系統</h2>
+            <ul>
+                <li>登出</li>
+            </ul>
+        </nav>
+    </header>
+    <aside id="aside">        
+    </aside>
+    <main>
+        <div id="main" class="mainBox">
+            <div class="statusBox">
+                <div class="alert alert-warning" style="margin:5px ;">檢舉原因:謾罵</div>
+                <div class="alert alert-warning" style="margin:5px ;">目前狀態:正常顯示</div>
+                <div class="selectBox">
+                    <label for="">請選擇處理方式:</label>
+                    <select class="selectpicker">
+                        <option value="0">正常顯示</option>
+                        <option value="1">暴雷隱藏</option>
+                        <option value="2">刪除隱藏</option>
+                      </select>
+                      
+                </div>
+            </div>
+            <hr size="8px" align="center" width="100%">
+            <div class="badBox">
+                <div class="pic">
+                    <img src="./Big5.png" class="rounded-circle" alt="">
+                    <p>會員名字1</p>
+                </div>
+                <div class="commInfo">
+                    
+                    <div class="speech-bubble" >
+                        <h4 id="commText">
+                            同學不是跟你亂跳喔。跟我翻到109頁
+                            我這model進去五六個小時出不來耶，你有在嗎？
+                            不要雞雞歪歪，有人在嗎?我服務不錯吧!
+                            我剛要做什麼?最喜歡維仁了,冠宏老師在線上喔，
+                            我這PPT調很久耶，這就是品質
+                        </h1>
+                    </div>
+                </div>
+                <hr size="8px" align="center" width="100%">
+                
+                <div class="commInfo">
+                    
+                    <div class="speech-bubble2" >
+                        <h4 id="rpText">
+                            請吳老師不要再消費我
+                            謝謝!
+                        </h1>
+                    </div>
+                </div>
+                <div class="pic">
+                    <img src="./mrma.jpg" class="rounded-circle" alt="">
+                    <p>會員名字2</p>
+                </div>
+            </div>
+            <div class="editBox">
+                <button type="button" class="btn btn-primary btn-lg">送出</button>
+                <button type="button" class="btn btn-secondary btn-lg">取消</button>
+            </div>
+        </div>
+    </main>
+    <!-- <div id="tree"></div> -->
+    <footer>
+        嗨邇覓影城 &copy; HIREME CINEMA 2022
+    </footer>
+    <script src="emp_aside.js"></script>
+</body>
+
+</html>

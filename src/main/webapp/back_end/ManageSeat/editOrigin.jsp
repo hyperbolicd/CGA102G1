@@ -14,13 +14,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>管理原始座位</title>
-    <link rel="stylesheet" type="text/css" href="/HireMe/back/ManageSeat/emp_all.css">
-    <link rel="stylesheet" type="text/css" href="/HireMe/back/ManageSeat/emp_main.css">
-    <link rel="stylesheet" type="text/css" href="/HireMe/back/ManageSeat/emp_footer.css">
+   	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back_end/css/emp_all.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back_end/css/emp_main.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back_end/css/emp_footer.css">
      <!-- *************************************************************************** -->
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-     <link rel="stylesheet" href="/HireMe/back/ManageSeat/createHall.css">
-     <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/back_end/ManageSeat/createHall.css">
+    <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
      
 </head>
 
@@ -28,7 +28,7 @@
     <header>
         <nav>
             <div id="logo">
-                <img src="/HireMe/back/ManageSeat/logo2noline.jpg">
+                <img src="${pageContext.request.contextPath}/back_end/logo2noline.jpg">
             </div>
             <h2>員工後台操作系統</h2>
             <ul>
@@ -36,7 +36,8 @@
             </ul>
         </nav>
     </header>
-    <aside id="aside">        
+    <aside id="aside">
+    <%@ include file="/back_end/aside_html.jsp"%>        
     </aside>
     <!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
     <main>
@@ -48,7 +49,7 @@
                                 <br>
                                 本次修改不會影響已排場次
                             </div>
-                        <form class="form1" id="formId" method="post" action="<%=request.getContextPath()%>/HallServlet.do">
+                        <form class="form1" id="formId" method="post" action="${pageContext.request.contextPath}/HallServlet.do">
                             <div class="form-group">
                               <label class="alert alert-light" style="margin-bottom: 5px" >影廳名稱:${hallVO.hlName}</label>
                               <c:if test="${hallVO.hlType==0}">
@@ -69,7 +70,7 @@
                               <input type="hidden" id="hlSeat" name="hlSeat" value="${hallVO.hlSeat}">
                               <input type="hidden" id="hlSeatCount" name="hlSeatCount" value="${hallVO.hlSeatCount}">
                               <input type="hidden" name="action" value="UpdateOriginalSeat">
-                              <a href="/HireMe/back/ManageSeat/ManageSeat.html" class="btn btn-danger" id="submitBtn" >取消</a>
+                              <a href="${pageContext.request.contextPath}/back_end/ManageSeat/manageSeat.jsp" class="btn btn-danger" id="submitBtn" >取消</a>
                               <button type="submit" class="btn btn-primary" id="submitBtn" >送出修改</a>
                               
                             </div>
@@ -102,8 +103,7 @@
     <footer>
         嗨邇覓影城 &copy; HIREME CINEMA 2022
     </footer>
-    <script src="/HireMe/back/ManageSeat/editOrigin.js"></script>
-    <script src="/HireMe/back/ManageSeat/emp_aside.js"></script>
+    <script src="${pageContext.request.contextPath}/back_end/ManageSeat/editOrigin.js"></script>
 </body>
 
 </html>

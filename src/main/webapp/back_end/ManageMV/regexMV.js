@@ -3,7 +3,13 @@ const mvName = document.getElementById('mvName');
 mvName.addEventListener("blur",()=>{
         if(mvName.value.length===0){
             mvName.setAttribute('class',"form-control is-invalid")
-            alert('此欄位不可為空!')
+            Swal.fire(
+                "此欄位不可為空", //標題 
+                "",
+                "warning"
+                //圖示(可省略) success/info/warning/error/question
+                //圖示範例：https://sweetalert2.github.io/#icons
+            );
         }else
         mvName.setAttribute('class',"form-control is-valid")
     })
@@ -14,12 +20,24 @@ mvEName.addEventListener("blur",()=>{
     
     if(mvEName.value.length===0){
             mvEName.setAttribute('class',"form-control is-invalid")
-            alert('此欄位不可為空!')
+            Swal.fire(
+                "此欄位不可為空", //標題 
+                "",
+                "warning"
+                //圖示(可省略) success/info/warning/error/question
+                //圖示範例：https://sweetalert2.github.io/#icons
+            );
         }else if (regex.test(mvEName.value)){
         mvEName.setAttribute('class',"form-control is-valid");
     }
     else{
-        alert("請輸入英文和數字");
+        Swal.fire(
+                "只接受輸入英文或數字", //標題 
+                "",
+                "warning"
+                //圖示(可省略) success/info/warning/error/question
+                //圖示範例：https://sweetalert2.github.io/#icons
+            );
         mvEName.value="";
         mvEName.setAttribute('class',"form-control is-invalid");
     }
@@ -32,7 +50,13 @@ stDate.addEventListener('change',()=>{
 		stDate.setAttribute('class',"form-control is-valid");
 	}else{
 		stDate.setAttribute('class',"form-control is-invalid");
-		alert('注意!上映日不可小於今日');
+		Swal.fire(
+                "上映日不得小於今日", //標題 
+                "",
+                "warning"
+                //圖示(可省略) success/info/warning/error/question
+                //圖示範例：https://sweetalert2.github.io/#icons
+            );
 		stDate.value="";
 	}
 })
@@ -43,7 +67,13 @@ edDate.addEventListener('change',()=>{
 		edDate.setAttribute('class',"form-control is-valid");
 	}else{
 		edDate.setAttribute('class',"form-control is-invalid");
-		alert('注意!下檔日不可小於上映日');
+		Swal.fire(
+                "下檔日不可小於上檔日", //標題 
+                "",
+                "warning"
+                //圖示(可省略) success/info/warning/error/question
+                //圖示範例：https://sweetalert2.github.io/#icons
+            );
 		edDate.value="";
 	}
 })
@@ -67,7 +97,13 @@ mvCast.addEventListener("blur",()=>{
 const mvLong = document.getElementById('mvLong');
 mvLong.addEventListener('blur',()=>{
 	if(!checkNum(mvLong.value)){
-        alert('請輸入正整數');
+        Swal.fire(
+                "請輸入正整數", //標題 
+                "",
+                "warning"
+                //圖示(可省略) success/info/warning/error/question
+                //圖示範例：https://sweetalert2.github.io/#icons
+            );
         mvLong.value="";
         mvLong.setAttribute('class',"form-control is-invalid");
     }else
@@ -104,5 +140,7 @@ function uploadListner({target}){
             img.src = URL.createObjectURL(tFile);
             
         }
+        
+/* ******************************************************** */
 
     

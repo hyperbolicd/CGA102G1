@@ -130,7 +130,7 @@ public class HallServlet extends HttpServlet {
 			HallVO hallVO = hlSvc.findByPrimaryKey(hlId);
 			
 			req.setAttribute("hallVO", hallVO);
-			String url =req.getContextPath()+"/back/ManageSeat/editOrigin.jsp";
+			String url ="/back_end/ManageSeat/editOrigin.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
 			
@@ -158,7 +158,7 @@ public class HallServlet extends HttpServlet {
 			hallVO = hlSvc.updateOriginSeat(hlId, hlName, hlSeat, hlRow, hlCol, hlType, hlSeatCount);
 			req.setAttribute("hallVO", hallVO);
 			
-			String url =req.getContextPath()+"/back/ManageSeat/manageSeat.jsp";
+			String url ="/back_end/ManageSeat/manageSeat.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
 		}

@@ -51,5 +51,7 @@ public class ReportService {
 		
 		return dao.getAll();
 	}
+
+	
 }
 

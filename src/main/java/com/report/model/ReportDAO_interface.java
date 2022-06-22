@@ -9,4 +9,5 @@ public interface ReportDAO_interface {
 	public void delete(Integer hlId);
 	public ReportVO findByPrimaryKey(Integer hlId);
 	public List<ReportVO> getAll();
+	
 }

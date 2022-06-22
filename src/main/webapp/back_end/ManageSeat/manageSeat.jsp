@@ -15,9 +15,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>座位管理首頁</title>
-    <link rel="stylesheet" type="text/css" href="/HireMe/back/ManageSeat/emp_all.css">
-    <link rel="stylesheet" type="text/css" href="/HireMe/back/ManageSeat/emp_main.css">
-    <link rel="stylesheet" type="text/css" href="/HireMe/back/ManageSeat/emp_footer.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back_end/css/emp_all.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back_end/css/emp_main.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back_end/css/emp_footer.css">
     <!-- ************************************************************** -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
@@ -27,7 +27,7 @@
     <header>
         <nav>
             <div id="logo">
-                <img src="/HireMe/back/ManageSeat/logo2noline.jpg">
+                <img src="${pageContext.request.contextPath}/back_end/logo2noline.jpg">
             </div>
             <h2>員工後台操作系統</h2>
             <ul>
@@ -35,14 +35,15 @@
             </ul>
         </nav>
     </header>
-    <aside id="aside">        
+    <aside id="aside">
+    <%@ include file="/back_end/aside_html.jsp"%>         
     </aside>
     <!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
     <main>
         <div id="main">
             <div class="container1">
             	<div class="" style="margin-bottom:10px">
-                <a href="/HireMe/back/ManageHall/manageHall.jsp" class="btn btn-info"  >座位管理</a>
+                <a href="${pageContext.request.contextPath}/back_end/ManageHall/manageHall.jsp" class="btn btn-info"  >影廳資訊管理</a>
             	</div>
                 <table class="table table-hover table-dark" id="table1">
                   <thead>
@@ -72,12 +73,12 @@
 					</c:if>
 					<td>${HallVO.hlSeatCount}</td>
 					<td>
-						<form METHOD="post"action="<%=request.getContextPath()%>/HallServlet.do">
+						<form METHOD="post" action="${pageContext.request.contextPath}/HallServlet.do">
 							<input type="submit" value="原始座位"class="btn btn-danger"> 
 							<input type="hidden"name="hlId" value="${HallVO.hlId}"> 
 							<input type="hidden" name="action" value="editOriginalSeat">
 						</form>
-						<form METHOD="post"action="<%=request.getContextPath()%>/HallServlet.do">
+						<form METHOD="post"action="${pageContext.request.contextPath}/HallServlet.do">
 							<input type="submit" value="場次座位"class="btn btn-success" style="margin-top: 5px"> 
 							<input type="hidden"name="hlId" value="${HallVO.hlId}"> 
 							<input type="hidden" name="action" value="editShowSeat">
@@ -96,7 +97,6 @@
     <footer>
         嗨邇覓影城 &copy; HIREME CINEMA 2022
     </footer>
-    <script src="/HireMe/back/ManageSeat/emp_aside.js"></script>
 </body>
 
 </html>

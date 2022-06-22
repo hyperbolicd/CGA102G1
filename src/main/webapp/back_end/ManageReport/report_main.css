@@ -1,0 +1,11 @@
+.notifybox {
+    display: flex;
+    justify-content: flex-start
+}
+.alertbox {
+    width: 30%;
+}
+.tablebox{
+  padding: 15px;
+}
+/* ---------------------------按鈕CSS--------------------------- */

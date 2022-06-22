@@ -118,11 +118,11 @@
                         <div class="ename">${showingVO.mvEName}</div>
                         <div class="stDate">上映日期:${showingVO.mvStDate}</div>
                         <div class="star">${showingVO.mvTtStar/showingVO.mvTtCm}
-                            <img src="/HireMe/front/showAllMovie/MV_ICON/star.png" alt="">
+                            <img src="/CGA102G1/front_end/showAllMovie/MV_ICON/star.png" alt="">
                         </div>
                     </div>
                     <div class="icon">
-                        <img src="/HireMe/front/showAllMovie/MV_ICON/level${showingVO.mvLevel}.jpg" alt="">
+                        <img src="/CGA102G1/front_end/showAllMovie/MV_ICON/level${showingVO.mvLevel}.jpg" alt="">
                     </div>
                 </div>
                 <div class="bt">
@@ -150,7 +150,7 @@
                         <div class="stDate">預計上映:${comingVO.mvStDate}</div>
                     </div>
                     <div class="icon">
-                        <img src="/HireMe/front/showAllMovie/MV_ICON/level${comingVO.mvLevel}.jpg" alt="">
+                        <img src="/CGA102G1/front_end/showAllMovie/MV_ICON/level${comingVO.mvLevel}.jpg" alt="">
                     </div>
                 </div>
                 <div class="bt">

@@ -129,6 +129,15 @@ $(document).ready(function(){
             }
             index += 5;
         }
+        if(seatCount==0){
+			Swal.fire(
+                "沒有位置可以賣了!", //標題 
+                "",
+                "warning"
+                //圖示(可省略) success/info/warning/error/question
+                //圖示範例：https://sweetalert2.github.io/#icons
+            );
+		}
         document.getElementById('hlSeatCount').value=seatCount;
         document.getElementById('showCount').value='目前可賣座位:'+seatCount+'個';
 

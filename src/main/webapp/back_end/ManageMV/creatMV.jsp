@@ -114,6 +114,7 @@
     <footer>
         嗨邇覓影城 &copy; HIREME CINEMA 2022
     </footer>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="${pageContext.request.contextPath}/back_end//ManageMV/regexMV.js"></script>
 </body>
 

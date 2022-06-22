@@ -79,7 +79,7 @@
                       	           </c:if> 
 	                               <td>${HallVO.hlSeatCount}</td>
 	                               <td >
-	                               		<form METHOD="post" action="<%=request.getContextPath()%>/HallServlet.do">
+	                               		<form METHOD="post" action="${pageContext.request.contextPath}/HallServlet.do">
 	                               		<input type="submit" value="編輯影廳"  class="btn btn-outline-primary">
 			     						<input type="hidden" name="hlId"  value="${HallVO.hlId}">
 			     						<input type="hidden" name="action"	value="getOne_For_Update">
