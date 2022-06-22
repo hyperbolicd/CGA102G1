@@ -49,7 +49,7 @@ public class MerchServlet extends HttpServlet {
 			List<MerchVO> list = merchSvc.getAll();
 			HttpSession session = req.getSession();
 			session.setAttribute("merchlist", list);
-			String url = "/back/merchandise/merchlist.jsp";
+			String url = "/back_end/merchandise/merchlist.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
@@ -73,20 +73,20 @@ public class MerchServlet extends HttpServlet {
 				errorMsgs.put("merchID", "查無資料!!!");
 			}
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back/merchandise/mallIndex.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/merchandise/mallIndex.jsp");
 				failureView.forward(req, res);
 				return;
 			}
 			/* ====================================3.查詢完成,準備轉交=========================== */
 			if (list == null) {
 				req.setAttribute("merchVo", merchVo);
-				String url = "/back/merchandise/merchonelist.jsp";
+				String url = "/back_end/merchandise/merchonelist.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} else {
 				HttpSession session = req.getSession();
 				session.setAttribute("merchlist", list);
-				String url = "/back/merchandise/merchlist.jsp";
+				String url = "/back_end/merchandise/merchlist.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}
@@ -108,8 +108,8 @@ public class MerchServlet extends HttpServlet {
 					+ merchVo.getMerchPrice() + "&merchClass=" + merchVo.getMerchClass() + "&soldTotal="
 					+ merchVo.getSoldTotal() + "&merchStatus=" + merchVo.getMerchStatus() + "&merchStock="
 					+ merchVo.getMerchStock();
-			String url = "/back/merchandise/merchupdate.jsp" + param;
-//			String url = "/back/merchandise/merchupdate.jsp";
+			String url = "/back_end/merchandise/merchupdate.jsp" + param;
+//			String url = "/back_end/merchandise/merchupdate.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
@@ -143,7 +143,7 @@ public class MerchServlet extends HttpServlet {
 				byte[] bb = blob.getBytes(1, (int) blob.length());
 				res.getOutputStream().write(bb);
 			} catch (Exception e) {
-				InputStream in = getServletContext().getResourceAsStream("/back/merchandise/images/noimage.png");
+				InputStream in = getServletContext().getResourceAsStream("/back_end/merchandise/images/noimage.png");
 				byte[] b = new byte[in.available()];
 				in.read(b);
 				res.getOutputStream().write(b);
@@ -255,7 +255,7 @@ public class MerchServlet extends HttpServlet {
 			merchVo.setSoldTotal(soldTotal);
 			req.setAttribute("merchVo", merchVo);
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back/merchandise/merchupdate.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/merchandise/merchupdate.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
@@ -266,7 +266,7 @@ public class MerchServlet extends HttpServlet {
 			/* ==============修改完成,準備轉交================================ */
 			req.setAttribute("success", "修改成功");
 			req.setAttribute("merchVo", merchVo); // 資料庫update成功後,正確的的empVO物件,存入req
-			String url = "/back/merchandise/mallIndex.jsp";
+			String url = "/back_end/merchandise/mallIndex.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 		}
@@ -352,7 +352,7 @@ public class MerchServlet extends HttpServlet {
 			merchVo.setSoldTotal(soldTotal);
 			req.setAttribute("merchVo", merchVo);
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back/merchandise/merchinsert.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/merchandise/merchinsert.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
@@ -362,7 +362,7 @@ public class MerchServlet extends HttpServlet {
 					merchPrice, merchClass, merchStatus, merchStock);
 			/* ==============修改完成,準備轉交================================ */
 			req.setAttribute("success", "新增成功!");
-			String url = "/back/merchandise/mallIndex.jsp";
+			String url = "/back_end/merchandise/mallIndex.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
@@ -382,7 +382,7 @@ public class MerchServlet extends HttpServlet {
 			merchSvc = new MerchService();
 			List<MerchVO> list = merchSvc.getAll();
 			req.setAttribute("list", list);
-			String url = "/back/merchandise/merchlist.jsp";
+			String url = "/back_end/merchandise/merchlist.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
