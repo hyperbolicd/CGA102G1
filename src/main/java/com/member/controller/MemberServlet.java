@@ -16,6 +16,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.servlet.http.Part;
 
+import com.member.model.MemberService;
+import com.member.model.MemberVO;
 import com.movie.model.*;
 
 @MultipartConfig()
