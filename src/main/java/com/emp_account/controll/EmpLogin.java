@@ -42,7 +42,8 @@ public class EmpLogin extends HttpServlet {
 				request.setAttribute("loginPassword", loginPassword);
 				return;
 			}
-			/***************************2.開始新增資料*****************************************/
+			/***************************2.開始檢查帳號密罵*************************************/
+			
 			
 			/***************************3.新增完成,準備轉交(Send the Success view)*************/
 		}

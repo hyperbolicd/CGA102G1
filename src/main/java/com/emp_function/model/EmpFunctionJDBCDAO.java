@@ -1,8 +1,11 @@
 package com.emp_function.model;
 
-import static com.common.Common.*;
 import java.sql.*;
 import java.util.*;
+
+import javax.naming.NamingException;
+
+import com.common.JDBCUtil;
 
 public class EmpFunctionJDBCDAO implements EmpFunctionDAO_interface{
 	
@@ -19,8 +22,7 @@ public class EmpFunctionJDBCDAO implements EmpFunctionDAO_interface{
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(READ_ONE);
 			
 			ps.setInt(1, empFunctionNo);
@@ -37,6 +39,8 @@ public class EmpFunctionJDBCDAO implements EmpFunctionDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(rs != null) {
@@ -72,8 +76,7 @@ public class EmpFunctionJDBCDAO implements EmpFunctionDAO_interface{
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(READ_ALL);
 			
 			rs = ps.executeQuery();
@@ -89,6 +92,8 @@ public class EmpFunctionJDBCDAO implements EmpFunctionDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(rs != null) {
