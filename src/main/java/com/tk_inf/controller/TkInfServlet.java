@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 
 import com.tk_inf.model.*;
 
-@WebServlet("/back/tk_inf/tk_inf.do")
+@WebServlet("/back_end/tk_inf/tk_inf.do")
 public class TkInfServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -37,7 +37,7 @@ public class TkInfServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back/tk_inf/allTkInf.jsp");
+							.getRequestDispatcher("/back_end/tk_inf/allTkInf.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -51,7 +51,7 @@ public class TkInfServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req		
-							.getRequestDispatcher("/back/tk_inf/allTkInf.jsp");
+							.getRequestDispatcher("/back_end/tk_inf/allTkInf.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -65,14 +65,14 @@ public class TkInfServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back/tk_inf/allTkInf.jsp");
+							.getRequestDispatcher("/back_end/tk_inf/allTkInf.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("tkInfVO", tkInfVO); // 資料庫取出的tkInfVO物件,存入req
-				String url = "/back/tk_inf/allTkInf.jsp";
+				String url = "/back_end/tk_inf/allTkInf.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 allTkInf.jsp
 				successView.forward(req, res);
 		}
@@ -96,7 +96,7 @@ public class TkInfServlet extends HttpServlet {
 						       "&tkPrice="    +tkInfVO.getTkPrice()+
 						       "&tkDI="+tkInfVO.getTkDI()+
 						       "&tkTypeDT="    +tkInfVO.getTkTypeDT();
-				String url = "/back/tk_inf/updateTkInf.jsp"+param;
+				String url = "/back_end/tk_inf/updateTkInf.jsp"+param;
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 updateTkInf.jsp
 				successView.forward(req, res);
 		}
@@ -129,7 +129,7 @@ public class TkInfServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back/tk_inf/updateTkInf.jsp");
+							.getRequestDispatcher("/back_end/tk_inf/updateTkInf.jsp");
 					failureView.forward(req, res);
 					return; //程式中斷
 				}
@@ -140,7 +140,7 @@ public class TkInfServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back/tk_inf/updateTkInf.jsp");
+							.getRequestDispatcher("/back_end/tk_inf/updateTkInf.jsp");
 					failureView.forward(req, res);
 					return; //程式中斷
 				}
@@ -151,7 +151,7 @@ public class TkInfServlet extends HttpServlet {
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("tkInfVO", tkInfVO); // 資料庫update成功後,正確的的tkTypeVO物件,存入req
-				String url = "/back/tk_inf/allTkInf.jsp";
+				String url = "/back_end/tk_inf/allTkInf.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交allTkInf.jsp
 				successView.forward(req, res);
 			}
@@ -185,7 +185,7 @@ public class TkInfServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back/tk_inf/addTkInf.jsp");
+							.getRequestDispatcher("/back_end/tk_inf/addTkInf.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -195,7 +195,7 @@ public class TkInfServlet extends HttpServlet {
 				tkInfSvc.addTkInf(tkType, tkPrice, tkDI, tkTypeDT);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/back/tk_inf/allTkInf.jsp";
+				String url = "/back_end/tk_inf/allTkInf.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交allTkInf.jsp
 				successView.forward(req, res);				
 		}
@@ -214,7 +214,7 @@ public class TkInfServlet extends HttpServlet {
 				tkInfSvc.deleteTkInf(tkTypeID);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/back/tk_inf/allTkInf.jsp";
+				String url = "/back_end/tk_inf/allTkInf.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 		}
