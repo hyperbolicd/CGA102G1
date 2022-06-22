@@ -1,0 +1,577 @@
+package com.emp_account.model;
+
+import static com.common.Common.DR;
+import static com.common.Common.PW;
+import static com.common.Common.URL;
+import static com.common.Common.USER;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
+	
+	private static final String INSERT = 
+			"insert into emp_account "
+			+ "	(EMP_EMAIL, EMP_PASSWORD, EMP_NAME, EMP_PHONE, EMP_ADDRESS, EMP_PHOTO, EMP_STATUS) VALUES "
+			+ "	(?, ?, ?, ?, ?, ?, ?);";
+	private static final String READ_ONE =
+			"select EMP_NO, EMP_EMAIL, EMP_PASSWORD, EMP_NAME, EMP_PHONE, EMP_ADDRESS, EMP_PHOTO, EMP_STATUS "
+			+ "from emp_account where EMP_NO = ?;";
+	private static final String READ_ALL =
+			"select EMP_NO, EMP_EMAIL, EMP_PASSWORD, EMP_NAME, EMP_PHONE, EMP_ADDRESS, EMP_PHOTO, EMP_STATUS "
+			+ "from emp_account order by EMP_NO;";
+	private static final String READ_ALL_DESC =
+			"select EMP_NO, EMP_EMAIL, EMP_PASSWORD, EMP_NAME, EMP_PHONE, EMP_ADDRESS, EMP_PHOTO, EMP_STATUS "
+			+ "from emp_account order by EMP_NO desc;";
+	private static final String UPDATE =
+			"update emp_account set "
+			+ "EMP_EMAIL = ?, EMP_PASSWORD = ?, EMP_NAME = ?, EMP_PHONE = ?, EMP_ADDRESS = ?, EMP_PHOTO = ?, EMP_STATUS = ? "
+			+ "where (EMP_NO = ?);";
+	private static final String DELETE =
+			"delete from emp_account where (EMP_NO = ?);";
+	private static final String GET_NEXT_ID =
+			"SELECT AUTO_INCREMENT FROM information_schema.tables WHERE table_name = 'emp_account' AND table_schema = 'movietheater' ;";
+	
+	@Override
+	public Integer insert(EmpAccountVO empAccountVO) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Integer emp_no = null;
+		try {
+			Class.forName(DR);
+			con = DriverManager.getConnection(URL, USER, PW);
+			String columns[] = { "emp_id" };
+			ps = con.prepareStatement(INSERT, columns);
+			
+			ps.setString(1, empAccountVO.getEmp_email());
+			ps.setString(2, empAccountVO.getEmp_password());
+			ps.setString(3, empAccountVO.getEmp_name());
+			ps.setString(4, empAccountVO.getEmp_phone());
+			ps.setString(5, empAccountVO.getEmp_address());
+			ps.setBytes(6, empAccountVO.getEmp_photo());
+			ps.setInt(7, empAccountVO.getEmp_status());
+			
+			ps.executeUpdate();
+			
+			rs = ps.getGeneratedKeys(); // 取得自動編號的號碼
+			if (rs.next()) {
+				emp_no = rs.getInt(1); // 第一欄
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return emp_no;
+	}
+
+	@Override
+	public void delete(Integer empAccountNo) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			Class.forName(DR);
+			con = DriverManager.getConnection(URL, USER, PW);
+			ps = con.prepareStatement(DELETE);
+			
+			ps.setInt(1, empAccountNo);
+			
+			ps.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
+
+	@Override
+	public void update(EmpAccountVO empAccountVO) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			Class.forName(DR);
+			con = DriverManager.getConnection(URL, USER, PW);
+			ps = con.prepareStatement(UPDATE);
+			
+			ps.setString(1, empAccountVO.getEmp_email());
+			ps.setString(2, empAccountVO.getEmp_password());
+			ps.setString(3, empAccountVO.getEmp_name());
+			ps.setString(4, empAccountVO.getEmp_phone());
+			ps.setString(5, empAccountVO.getEmp_address());
+			ps.setBytes(6, empAccountVO.getEmp_photo());
+			ps.setInt(7, empAccountVO.getEmp_status());
+			ps.setInt(8, empAccountVO.getEmp_no());
+			
+			ps.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	@Override
+	public EmpAccountVO findByPrimaryKey(Integer empAccountNo) {
+		EmpAccountVO empAccountVO = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			Class.forName(DR);
+			con = DriverManager.getConnection(URL, USER, PW);
+			ps = con.prepareStatement(READ_ONE);
+			
+			ps.setInt(1, empAccountNo);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				empAccountVO = new EmpAccountVO();
+				empAccountVO.setEmp_no(rs.getInt("EMP_NO"));
+				empAccountVO.setEmp_email(rs.getString("EMP_EMAIL"));
+				empAccountVO.setEmp_password(rs.getString("EMP_PASSWORD"));
+				empAccountVO.setEmp_name(rs.getString("EMP_NAME"));
+				empAccountVO.setEmp_phone(rs.getString("EMP_PHONE"));
+				empAccountVO.setEmp_address(rs.getString("EMP_ADDRESS"));
+				empAccountVO.setEmp_photo(rs.getBytes("EMP_PHOTO"));
+				empAccountVO.setEmp_status(rs.getInt("EMP_STATUS"));
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return empAccountVO;
+	}
+
+	@Override
+	public List<EmpAccountVO> getAll() {
+		List<EmpAccountVO> list = new ArrayList<EmpAccountVO>();
+		EmpAccountVO empAccountVO = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			Class.forName(DR);
+			con = DriverManager.getConnection(URL, USER, PW);
+			ps = con.prepareStatement(READ_ALL);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				empAccountVO = new EmpAccountVO();
+				empAccountVO.setEmp_no(rs.getInt("EMP_NO"));
+				empAccountVO.setEmp_email(rs.getString("EMP_EMAIL"));
+				empAccountVO.setEmp_password(rs.getString("EMP_PASSWORD"));
+				empAccountVO.setEmp_name(rs.getString("EMP_NAME"));
+				empAccountVO.setEmp_phone(rs.getString("EMP_PHONE"));
+				empAccountVO.setEmp_address(rs.getString("EMP_ADDRESS"));
+				empAccountVO.setEmp_photo(rs.getBytes("EMP_PHOTO"));
+				empAccountVO.setEmp_status(rs.getInt("EMP_STATUS"));
+				list.add(empAccountVO);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<EmpAccountVO> getAllDesc() {
+		List<EmpAccountVO> list = new ArrayList<EmpAccountVO>();
+		EmpAccountVO empAccountVO = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			Class.forName(DR);
+			con = DriverManager.getConnection(URL, USER, PW);
+			ps = con.prepareStatement(READ_ALL_DESC);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				empAccountVO = new EmpAccountVO();
+				empAccountVO.setEmp_no(rs.getInt("EMP_NO"));
+				empAccountVO.setEmp_email(rs.getString("EMP_EMAIL"));
+				empAccountVO.setEmp_password(rs.getString("EMP_PASSWORD"));
+				empAccountVO.setEmp_name(rs.getString("EMP_NAME"));
+				empAccountVO.setEmp_phone(rs.getString("EMP_PHONE"));
+				empAccountVO.setEmp_address(rs.getString("EMP_ADDRESS"));
+				empAccountVO.setEmp_photo(rs.getBytes("EMP_PHOTO"));
+				empAccountVO.setEmp_status(rs.getInt("EMP_STATUS"));
+				list.add(empAccountVO);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<EmpAccountVO> getAll(Map<String, String[]> map) {
+		String sql = "select EMP_NO, EMP_EMAIL, EMP_PASSWORD, EMP_NAME, EMP_PHONE, EMP_ADDRESS, EMP_PHOTO, EMP_STATUS "
+						+ "from emp_account ";
+		
+//		String[] val = {"EMP_NO", "1", "EMP_EMAIL", "xxx", "EMP_PASSWORD", "", "EMP_NAME", "a", "EMP_PHONE", "12", "EMP_ADDRESS", "���c", "EMP_STATUS", "1"};
+		// add sql
+		int countStatement = 0;
+		for(int i = 1; i < map.get("multiSearch").length; i = i + 2) {
+			if(map.get("multiSearch")[i].length() != 0) {
+				if(countStatement == 0) { // �Ĥ@�ӱ���e���[ where
+					sql += "where " + map.get("multiSearch")[i - 1] + " like ? ";
+				} else { // ���᪺����e���[ and
+					sql += "and " + map.get("multiSearch")[i - 1] + " like ? ";
+				}
+				countStatement++;
+			}
+		}
+				
+		sql += "order by EMP_NO;";
+		System.out.println(sql);
+	
+		List<EmpAccountVO> list = new ArrayList<EmpAccountVO>();
+		EmpAccountVO empAccountVO = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			Class.forName(DR);
+			con = DriverManager.getConnection(URL, USER, PW);
+			ps = con.prepareStatement(sql);
+			
+			// set ?
+			int countTimes = 1;
+			for(int i = 1; i < map.get("multiSearch").length; i = i + 2) {
+				if(map.get("multiSearch")[i].length() != 0) {
+					// �i��� metadata + switch
+					if(i == 1 || i == map.get("multiSearch").length - 1) { // EMP_NO, EMP_STATUS �ǤJ Integer
+						ps.setInt(countTimes, Integer.parseInt(map.get("multiSearch")[i]));
+					} else { // ��L�ǤJ String
+						ps.setString(countTimes, "%" + map.get("multiSearch")[i] + "%");
+					}
+					countTimes++;
+				}
+			}
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				empAccountVO = new EmpAccountVO();
+				empAccountVO.setEmp_no(rs.getInt("EMP_NO"));
+				empAccountVO.setEmp_email(rs.getString("EMP_EMAIL"));
+				empAccountVO.setEmp_password(rs.getString("EMP_PASSWORD"));
+				empAccountVO.setEmp_name(rs.getString("EMP_NAME"));
+				empAccountVO.setEmp_phone(rs.getString("EMP_PHONE"));
+				empAccountVO.setEmp_address(rs.getString("EMP_ADDRESS"));
+				empAccountVO.setEmp_photo(rs.getBytes("EMP_PHOTO"));
+				empAccountVO.setEmp_status(rs.getInt("EMP_STATUS"));
+				list.add(empAccountVO);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public Integer getNextId() {
+		Integer nextId = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			Class.forName(DR);
+			con = DriverManager.getConnection(URL, USER, PW);
+			ps = con.prepareStatement(GET_NEXT_ID);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				nextId = rs.getInt("AUTO_INCREMENT");
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return nextId;
+	}
+
+	public static void main(String[] args) {
+		EmpAccountJDBCDAO dao = new EmpAccountJDBCDAO();
+		
+		// C
+		try (FileInputStream in = new FileInputStream("emp01.png");){
+			byte[] imageb;
+			imageb = new byte[in.available()];
+			in.read(imageb);
+//			Blob blob = new SerialBlob(imageb);
+			EmpAccountVO empAccountVO1 = new EmpAccountVO();
+			empAccountVO1.setEmp_email("test3@gmail.com");
+			empAccountVO1.setEmp_password("testtest");
+			empAccountVO1.setEmp_name("TESTNAME");
+			empAccountVO1.setEmp_phone("0922-222222");
+			empAccountVO1.setEmp_address("aaaaa");
+			empAccountVO1.setEmp_photo(imageb);
+			empAccountVO1.setEmp_status(1);
+			Integer new_emp_no = dao.insert(empAccountVO1);
+			System.out.println(new_emp_no);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} 
+		
+		// R-ONE
+//		EmpAccountVO empAccountVO3 = dao.findByPrimaryKey(2);
+//		System.out.print(empAccountVO3.getEmp_no() + ", ");
+//		System.out.print(empAccountVO3.getEmp_email() + ", ");
+//		System.out.print(empAccountVO3.getEmp_password() + ", ");
+//		System.out.print(empAccountVO3.getEmp_name() + ", ");
+//		System.out.print(empAccountVO3.getEmp_phone() + ", ");
+//		System.out.print(empAccountVO3.getEmp_address() + ", ");
+//		System.out.print(empAccountVO3.getEmp_photo() + ", ");
+//		System.out.println(empAccountVO3.getEmp_status());
+
+		// R-ALL
+//		List<EmpAccountVO> list = dao.getAllDesc();
+//		for(EmpAccountVO e: list) {
+//			System.out.print(e.getEmp_no() + ", ");
+//			System.out.print(e.getEmp_email() + ", ");
+//			System.out.print(e.getEmp_password() + ", ");
+//			System.out.print(e.getEmp_name() + ", ");
+//			System.out.print(e.getEmp_phone() + ", ");
+//			System.out.print(e.getEmp_address() + ", ");
+//			System.out.print(e.getEmp_photo() + ", ");
+//			System.out.println(e.getEmp_status());
+//		}
+		
+		// R-�ƦX
+		
+//		Map<String, String[]> map = new HashMap();
+//		String[] val = {"EMP_NO", "6", "EMP_EMAIL", "zzz", "EMP_PASSWORD", "jj", 
+//				"EMP_NAME", "F", "EMP_PHONE", "0967", "EMP_ADDRESS", "�x��", "EMP_STATUS", "0"};
+//		map.put("multiSearch", val);
+//		
+//		List<EmpAccountVO> list = dao.getAll(map);
+//		for(EmpAccountVO e: list) {
+//			System.out.print(e.getEmp_no() + ", ");
+//			System.out.print(e.getEmp_email() + ", ");
+//			System.out.print(e.getEmp_password() + ", ");
+//			System.out.print(e.getEmp_name() + ", ");
+//			System.out.print(e.getEmp_phone() + ", ");
+//			System.out.print(e.getEmp_address() + ", ");
+//			System.out.print(e.getEmp_photo() + ", ");
+//			System.out.println(e.getEmp_status());
+//		}
+		
+		// U
+//		EmpAccountVO empAccountVO2 = new EmpAccountVO();
+//		empAccountVO2.setEmp_no(2);
+//		empAccountVO2.setEmp_email("belle@xxx.com");
+//		empAccountVO2.setEmp_password("testtest");
+//		empAccountVO2.setEmp_name("Belle");
+//		empAccountVO2.setEmp_phone("0922-222222");
+//		empAccountVO2.setEmp_address("�s�˥��˥_��");
+//		
+//		try (FileInputStream in = new FileInputStream("emp1.jpg");){
+//			byte[] imageb;
+//			imageb = new byte[in.available()];
+//			in.read(imageb);
+//			Blob blob = new SerialBlob(imageb);
+//			empAccountVO2.setEmp_photo(blob);
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (SerialException e) {
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		empAccountVO2.setEmp_status(0);
+//		dao.update(empAccountVO2);
+		
+		// D
+//		dao.delete(7);
+	}
+
+}
