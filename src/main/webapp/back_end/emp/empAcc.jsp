@@ -11,9 +11,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>帳號與權限</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/back_end/emp/css/emp_all.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/back_end/emp/css/emp_main.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/back_end/emp/css/emp_footer.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/back_end/css/emp_all.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/back_end/css/emp_main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/back_end/css/emp_footer.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/back_end/emp/css/empAcc.css">
 </head>
 

@@ -150,3 +150,17 @@ aside>ul>li>ul>li:active {
     bottom: 40px;
     background-image: url(icons8-leaf-64.png);
 }
+
+/* aside 的 a 標籤 */
+aside a {
+    text-decoration: none;
+}
+
+aside a:active {
+    color: rgb(190, 191, 216);
+}
+
+aside a:link,
+aside a:visited {
+    color: white;
+}
