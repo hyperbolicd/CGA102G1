@@ -2,3 +2,4 @@
 !.gitignore
 /com/
 /jdbc/
+org.eclipse.core.resources.prefs
