@@ -199,6 +199,42 @@ public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 		return list;
 	}
 	
+	@Override
+	public void insert(EmpPrivilegeVO empPrivilegeVO, Connection con) {
+		PreparedStatement ps = null;
+		
+		try {
+			ps = con.prepareStatement(INSERT);
+			
+			ps.setInt(1, empPrivilegeVO.getEmp_no());
+			ps.setInt(2, empPrivilegeVO.getFc_no());
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			if(con != null) {
+				try {
+					con.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		} finally {
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}			
+		}
+	}
+
+	@Override
+	public void update(List<EmpPrivilegeVO> empPrivilegeVOs) {
+		
+	}
+
 	public static void main(String[] args) {
 		EmpPrivilegeJDBCDAO dao = new EmpPrivilegeJDBCDAO();
 		// C
@@ -214,11 +250,11 @@ public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 //			System.out.println(ep.getFc_no());
 //		}
 		// R_ALL
-		List<EmpPrivilegeVO> list = dao.getAll();
-		for(EmpPrivilegeVO ep: list) {
-			System.out.print(ep.getEmp_no() + ", ");
-			System.out.println(ep.getFc_no());
-		}
+//		List<EmpPrivilegeVO> list = dao.getAll();
+//		for(EmpPrivilegeVO ep: list) {
+//			System.out.print(ep.getEmp_no() + ", ");
+//			System.out.println(ep.getFc_no());
+//		}
 		
 		// U X
 		

@@ -85,13 +85,16 @@
 					<td>
 						<form method="post" action="${pageContext.request.contextPath}/emp/EmpAccount.do" >
 							<button type="submit" class="see" name="action" value="seeEmp">個人資料</button>
-							<input type="hidden" name="seeEmpNo" value="${e.emp_no}">
+							<input type="hidden" name="emp_no" value="${e.emp_no}">
 						</form>
-						<button class="edit">查看/修改權限</button>
+						<form method="post" action="${pageContext.request.contextPath}/emp/EmpAccount.do" >
+							<button type="submit" class="edit" name="action" value="seeEmpPrivilege">查看/修改權限</button>
+							<input type="hidden" name="emp_no" value="${e.emp_no}">
+						</form>
 						<button class="resetPw" onclick="resetPw(${e.emp_no})">重設密碼</button>
 						<form method="post" action="${pageContext.request.contextPath}/emp/EmpAccount.do" >
 							<button type="submit" class="delete" name="action" value="deleteEmp">刪除</button>
-							<input type="hidden" name="deleteEmpNo" value="${e.emp_no}">
+							<input type="hidden" name="emp_no" value="${e.emp_no}">
 						</form>
 					</td>
 				</tr>
@@ -127,7 +130,7 @@
 			    <h1>權限功能</h1>
 			    <div id="auth">
 				    	<input type="checkbox" id="funcs0" onclick="chooseAll(this)">
-				        <label for="funcs2" class="big">一般職員權限</label>
+				        <label for="funcs0" class="big">一般職員權限</label>
 				    	<input type="checkbox" id="funcs1" onclick="chooseAll(this)">
 				        <label for="funcs1" class="big">管理員權限</label>
 			        <br>
@@ -135,21 +138,21 @@
 			    	<jsp:useBean id="listF" scope="page" class="com.emp_function.model.EmpFunctionService"/>
 			    	<div class="fc_block">
 				    	<c:forEach var="function" items="${listF.all}" begin="1" step="3">
-				    		<input type="checkbox" name="newEmpFunctions" value="${function.fc_no}" class="funcs${function.fc_category}" id="func${function.fc_no}">
+				    		<input type="checkbox" name="fc_nos" value="${function.fc_no}" class="funcs${function.fc_category}" id="func${function.fc_no}">
 	           				<label for="func${function.fc_no}">${function.fc_name}</label>
 	           				<br>
 				    	</c:forEach>
 			    	</div>
 			    	<div class="fc_block">
 				    	<c:forEach var="function" items="${listF.all}" begin="2" step="3">
-				    		<input type="checkbox" name="newEmpFunctions" value="${function.fc_no}" class="funcs${function.fc_category}" id="func${function.fc_no}">
+				    		<input type="checkbox" name="fc_nos" value="${function.fc_no}" class="funcs${function.fc_category}" id="func${function.fc_no}">
 	           				<label for="func${function.fc_no}">${function.fc_name}</label>
 	           				<br>
 				    	</c:forEach>
 			    	</div>
 			    	<div class="fc_block">
 				    	<c:forEach var="function" items="${listF.all}" begin="3" step="3">
-				    		<input type="checkbox" name="newEmpFunctions" value="${function.fc_no}" class="funcs${function.fc_category}" id="func${function.fc_no}">
+				    		<input type="checkbox" name="fc_nos" value="${function.fc_no}" class="funcs${function.fc_category}" id="func${function.fc_no}">
 	           				<label for="func${function.fc_no}">${function.fc_name}</label>
 	           				<br>
 				    	</c:forEach>

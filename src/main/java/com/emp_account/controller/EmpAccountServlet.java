@@ -1,8 +1,8 @@
-package com.emp_account.controll;
+package com.emp_account.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +17,8 @@ import javax.servlet.http.Part;
 
 import com.emp_account.model.EmpAccountService;
 import com.emp_account.model.EmpAccountVO;
+import com.emp_privilege.model.EmpPrivilegeService;
+import com.emp_privilege.model.EmpPrivilegeVO;
 
 @WebServlet("/emp/EmpAccount.do")
 @MultipartConfig(fileSizeThreshold=1024*1024, maxFileSize=5*1024*1024)
@@ -65,9 +67,16 @@ public class EmpAccountServlet extends HttpServlet {
 			
 			// 權限
 			boolean fcIsNotEmpty = false;
-			String[] emp_fcs = request.getParameterValues("newEmpFunctions");
+			String[] emp_fcs = request.getParameterValues("fc_nos");
+			List<EmpPrivilegeVO> emp_fc_list = new ArrayList<>();
+			
 			if(emp_fcs != null) {
 				fcIsNotEmpty = true;
+				for(String emp_fc: emp_fcs) {
+					EmpPrivilegeVO empPrivilegeVO = new EmpPrivilegeVO();
+					empPrivilegeVO.setFc_no(Integer.valueOf(emp_fc));
+					emp_fc_list.add(empPrivilegeVO);
+				}
 			}
 			
 			EmpAccountVO empVO = new EmpAccountVO();
@@ -83,10 +92,15 @@ public class EmpAccountServlet extends HttpServlet {
 			}
 			/***************************2.開始新增資料*****************************************/
 			EmpAccountService empSvc = new EmpAccountService();
-			empVO = empSvc.addEmp("", emp_password, emp_name, "", "", null, emp_status);
+			empVO.setEmp_email("");
+			empVO.setEmp_phone("");
+			empVO.setEmp_address("");
+			empVO.setEmp_photo(null);
 			
-			if(fcIsNotEmpty) {
-				// 權限
+			if(fcIsNotEmpty) {// 權限
+				empVO = empSvc.addEmp(empVO, emp_fc_list);
+			} else {
+				empVO = empSvc.addEmp("", emp_password, emp_name, "", "", null, emp_status);
 			}
 			/***************************3.新增完成,準備轉交(Send the Success view)*************/
 //			request.getRequestDispatcher("/back_end/emp/empAcc.jsp").forward(request, response);
@@ -102,7 +116,7 @@ public class EmpAccountServlet extends HttpServlet {
 			request.setAttribute("errMsg", errMsg);
 			
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-			Integer emp_no = Integer.valueOf(request.getParameter("seeEmpNo"));
+			Integer emp_no = Integer.valueOf(request.getParameter("emp_no"));
 			
 			/***************************2.開始查詢資料*****************************************/
 			EmpAccountService empSvc = new EmpAccountService();
@@ -123,6 +137,26 @@ public class EmpAccountServlet extends HttpServlet {
 		}
 		// R_ALL
 		// JSP直接getAll()
+		
+		// R emp_privilege
+		if("seeEmpPrivilege".equals(action)) {
+			
+			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			Integer emp_no = Integer.valueOf(request.getParameter("emp_no"));
+			
+			/***************************2.開始查詢資料*****************************************/
+			EmpPrivilegeService empPriSvc = new EmpPrivilegeService();
+			List<EmpPrivilegeVO> empPriVOs = empPriSvc.getOneEmpPrivileges(emp_no);
+
+			if(empPriVOs == null) {
+				empPriVOs = new ArrayList<EmpPrivilegeVO>();
+				empPriVOs.add(new EmpPrivilegeVO());
+			}
+			
+			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+			request.setAttribute("empPriVOs", empPriVOs);
+			request.getRequestDispatcher("/back_end/emp/empPrivilege.jsp").forward(request, response);
+		}
 		
 		// U
 		if("updateEmp".equals(action)) {
@@ -209,7 +243,7 @@ public class EmpAccountServlet extends HttpServlet {
 			Map<String, String> errMsg = new LinkedHashMap<String, String>();
 			request.setAttribute("errMsg", errMsg);
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-			Integer emp_no = Integer.valueOf(request.getParameter("deleteEmpNo"));
+			Integer emp_no = Integer.valueOf(request.getParameter("emp_no"));
 			/***************************2.開始刪除資料*****************************************/
 			EmpAccountService empSvc = new EmpAccountService();
 			empSvc.deleteEmp(emp_no);

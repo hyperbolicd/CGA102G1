@@ -1,5 +1,6 @@
 package com.emp_privilege.model;
 
+import java.sql.Connection;
 import java.util.List;
 
 public class EmpPrivilegeService {
@@ -26,6 +27,10 @@ public class EmpPrivilegeService {
 	
 	public void deletePrivilege(Integer empNo, Integer fcNo) {
 		dao.delete(empNo, fcNo);
+	}
+	
+	public void updatePrivilege(List<EmpPrivilegeVO> empPrivilegeVOs) {
+		dao.update(empPrivilegeVOs);
 	}
 	
 	public List<EmpPrivilegeVO> getOneEmpPrivileges(Integer emp_no) {
