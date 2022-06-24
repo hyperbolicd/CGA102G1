@@ -5,14 +5,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.naming.NamingException;
 import javax.servlet.jsp.tagext.TryCatchFinally;
 
 import com.common.JDBCUtil;
+import com.showing.model.ShowingVO;
 
 public class MovieJDBCDAO implements MovieDAO_interface{
 	
@@ -51,7 +50,6 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 	
 	private static final String GET_Showings_BymvId_STMT = 
 			"SELECT SH_ID,MV_ID,HL_ID,SH_STATE,SH_SEAT_STATE,SH_TIME,SH_TYPE FROM showing where MV_ID = ? order by MV_ID";
-
 	
 	@Override
 	public void insert(MovieVO movieVO) {
@@ -476,73 +474,7 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 		return list;
 	}
 	
-	@Override
-	public List<MovieVO> getAll(Map<String, String[]> map) {
-		
-		List<MovieVO> list = new ArrayList<MovieVO>();
-		MovieVO movieVO = null;
-		
-		Connection conn = null;
-		ResultSet rs =null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			conn = JDBCUtil.getConnection();
-			String finalSQL=
-					"SELECT * FROM MOVIE"
-					+ CompositeQuery_movie.get_WhereCondition(map)
-					+ "order by MV_ID";
-			pstmt = conn.prepareStatement(finalSQL);
-			System.out.println(finalSQL);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				movieVO = new MovieVO();
-				movieVO.setMvName(rs.getString("MV_NAME"));
-				movieVO.setMvEName(rs.getString("MV_E_NAME"));
-				movieVO.setMvLevel(rs.getInt("MV_LEVEL"));
-				movieVO.setMvType(rs.getString("MV_TYPE"));
-				
-				list.add(movieVO);
-			}
-			
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		
-		return list;
-	}
 	
-
 	@Override
 	public Set<ShowingVO> getShowingsBymvId(Integer mvId) {
 		Set<ShowingVO> set = new LinkedHashSet<ShowingVO>();
@@ -606,6 +538,75 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 		}
 		return set;
 	}
+	
+	
+	@Override
+	 public List<MovieVO> getAll(Map<String, String[]> map) {
+	  
+	  List<MovieVO> list = new ArrayList<MovieVO>();
+	  MovieVO movieVO = null;
+	  
+	  Connection conn = null;
+	  ResultSet rs =null;
+	  PreparedStatement pstmt = null;
+	  
+	  try {
+	   conn = JDBCUtil.getConnection();
+	   String finalSQL=
+	     "SELECT * FROM MOVIE"
+	     + CompositeQuery_movie.get_WhereCondition(map)
+	     + "order by MV_ID";
+	   pstmt = conn.prepareStatement(finalSQL);
+	   System.out.println(finalSQL);
+	   rs = pstmt.executeQuery();
+	   
+	   while(rs.next()) {
+	    movieVO = new MovieVO();
+	    movieVO.setMvName(rs.getString("MV_NAME"));
+	    movieVO.setMvEName(rs.getString("MV_E_NAME"));
+	    movieVO.setMvLevel(rs.getInt("MV_LEVEL"));
+	    movieVO.setMvType(rs.getString("MV_TYPE"));
+	    
+	    list.add(movieVO);
+	   }
+	   
+	  } catch (SQLException se) {
+	   throw new RuntimeException("A database error occured. "
+	     + se.getMessage());
+	  } catch (ClassNotFoundException e) {
+	   // TODO Auto-generated catch block
+	   e.printStackTrace();
+	  } catch (NamingException e) {
+	   // TODO Auto-generated catch block
+	   e.printStackTrace();
+	  } finally {
+	   if (rs != null) {
+	    try {
+	     rs.close();
+	    } catch (SQLException se) {
+	     se.printStackTrace(System.err);
+	    }
+	   }
+	   if (pstmt != null) {
+	    try {
+	     pstmt.close();
+	    } catch (SQLException se) {
+	     se.printStackTrace(System.err);
+	    }
+	   }
+	   if (conn != null) {
+	    try {
+	     conn.close();
+	    } catch (Exception e) {
+	     e.printStackTrace(System.err);
+	    }
+	   }
+	  }
+	  
+	  return list;
+	 }
+		
+	
 	
 	public static void main(String[] args) {
 		MovieJDBCDAO dao = new MovieJDBCDAO();
@@ -711,8 +712,6 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 //		}
 		
 	}
-
-	
 
 	
 	}

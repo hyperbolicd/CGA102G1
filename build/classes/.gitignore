@@ -1,10 +1,2 @@
-<<<<<<< HEAD
-/com/
-/test/
-=======
 *.class
 !.gitignore
-/com/
-/jdbc/
-org.eclipse.core.resources.prefs
->>>>>>> 337bfebb98ad89e314983431439b767dfc0774a0

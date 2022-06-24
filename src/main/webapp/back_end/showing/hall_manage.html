@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="emp_all.css">
+    <link rel="stylesheet" type="text/css" href="emp_main.css">
+    <link rel="stylesheet" type="text/css" href="emp_footer.css">
+
+    <!-- TimePicker.css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/md-date-time-picker@2.3.0/dist/css/mdDateTimePicker.min.css">
+    <link rel="stylesheet" href="./css/jquery.timepicker.css">
+    <!-- DatePicker.css -->
+    <link rel="stylesheet" type="text/css" href="./css/daterangepicker.css"/>
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div id="logo">
+                <img src="logo2noline.jpg">
+            </div>
+            <h2>員工後台操作系統</h2>
+            <ul>
+                <li>登出</li>
+            </ul>
+        </nav>
+    </header>
+    <aside>
+        <ul>
+            <li id="index"><span>首頁</span></li>
+            <li>
+                <span>資訊管理</span>
+                <ul>
+                    <li>影城資訊管理</li>
+                    <li>電影資訊管理</li>
+                    <li>票價資訊管理</li>
+                    <li>餐飲資訊管理</li>
+                    <li>影廳資訊管理</li>
+                    <li>場次管理</li>
+                    <li>座位管理</li>
+                </ul>
+            </li>
+            <li>
+                <span>票務管理</span>
+                <ul>
+                    <li>現場購票/購餐</li>
+                    <li>退票管理</li>
+                </ul>
+            </li>
+            <li>
+                <span>評論相關</span>
+                <ul>
+                    <li>舉報回應管理</li>
+                </ul>
+            </li>
+            <li>
+                <span>商城相關</span>
+                <ul>
+                    <li>商品上下架</li>
+                    <li>商品訂單管理</li>
+                </ul>
+            </li>
+            <li>
+                <span>活動相關</span>
+                <ul>
+                    <li>促銷活動管理</li>
+                    <li>許願池管理</li>
+                </ul>
+            </li>
+            <li>
+                <span>公告客服</span>
+                <ul>
+                    <li>公告管理</li>
+                    <li>Q&A文字管理</li>
+                    <li>線上客服</li>
+                </ul>
+            </li>
+            <li>
+                <span>員工管理</span>
+                <ul>
+                    <li>帳號與權限</li>
+                    <li>個人資料維護</li>
+                </ul>
+            </li>
+            <li>
+                <span>會員管理</span>
+                <ul>
+                    <li>會員帳號管理</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+    <!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
+    <main>
+        <div id="main">
+            <ul class="item_list">
+                <li>
+                  <a href="#">
+                    <div>
+                        <select name="" id="">
+                            <option value="">選擇電影</option>
+                            <option value="">電影A</option>
+                            <option value="">電影B</option>
+                            <option value="">電影C</option>
+                            <option value="">電影D</option>
+                    </div>
+                    <div class="img_block">
+                      <img src="https://via.placeholder.com/400x300" />
+                    </div>
+                    <span class="item_text">電影標題</span>
+                  </a>
+                </li>
+                <li>
+                  <div>
+                    <select name="" id="">
+                      <option value="">選擇影廳</option>
+                      <option value="">1廳</option>
+                      <option value="">2廳</option>
+                      <option value="">3廳</option>
+                      <option value="">4廳</option>
+                      <option value="">5廳</option>
+                    </select>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <input type="text" name="dates" id="" />
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <!-- <input type="text" class="timepicker"> -->
+                    <input type="text" id="timePicker">
+                    <input type="text" id="timePicker">
+                    <input type="text" id="timePicker">
+                    <input type="text" id="timePicker">
+                    <input type="text" id="timePicker">
+                    <input type="text" id="timePicker">
+                    <input type="text" id="timePicker">
+                    <input type="text" id="timePicker">
+                    <input type="text" id="timePicker">
+                    <input type="text" id="timePicker">
+                    <button>➕</button>
+                  </div>
+                </li>
+              </ul>
+        </div>
+    </main>
+    <!-- <div id="tree"></div> -->
+    <footer>
+        嗨邇覓影城 &copy; HIREME CINEMA 2022
+    </footer>
+
+    <!-- TimePicker.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-clock-timepicker@2.5.0/jquery-clock-timepicker.min.js"></script>
+    <script src="./js/jquery.timepicker.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('input.timepicker').timepicker({
+            timeFormat: 'HH:mm',
+            interval: 30
+        });
+    });
+
+
+    $('#timePicker').clockTimePicker({  
+  	duration: true,
+  	durationNegative: true,
+ 	precision: 15,
+ 	i18n: {
+    cancelButton: 'Abbrechen'
+  	},
+ 	onAdjust: function(newVal, oldVal) {
+    //...
+  	}
+  });
+
+    </script>
+
+    <!-- DatePicker.js -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/moment.min.js"></script>
+    <script type="text/javascript" src="./js/daterangepicker.js"></script>
+    <script>
+        $('input[name="dates"]').daterangepicker();
+    </script>
+
+</body>
+
+</html>

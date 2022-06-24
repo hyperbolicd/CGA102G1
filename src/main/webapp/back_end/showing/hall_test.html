@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="emp_all.css">
+    <link rel="stylesheet" type="text/css" href="emp_main.css">
+    <link rel="stylesheet" type="text/css" href="emp_footer.css">
+    <link rel="stylesheet" type="text/css" href="./css/hall.css">
+
+    <!-- TimePicker.css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/md-date-time-picker@2.3.0/dist/css/mdDateTimePicker.min.css">
+    <link rel="stylesheet" href="./css/jquery.timepicker.css">
+    <!-- DatePicker.css -->
+    <link rel="stylesheet" type="text/css" href="./css/daterangepicker.css"/>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div id="logo">
+                <img src="logo2noline.jpg">
+            </div>
+            <h2>員工後台操作系統</h2>
+            <ul>
+                <li>登出</li>
+            </ul>
+        </nav>
+    </header>
+    <aside id="aside">        
+    </aside>
+    <!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
+    <main>
+        <div id="main">
+            <div id="movie">
+                <span>選擇電影: </span>
+                <select name="" id="addMovie"> <!-- $("#addMovie").find(':selected').text() -->
+                    <option value="--">--</option>
+                    <option value="劇場版 咒術迴戰 0">劇場版 咒術迴戰 0</option>
+                    <option value="怪獸與鄧不利多的秘密">怪獸與鄧不利多的秘密</option>
+                    <option value="進擊的巨人 劇場版:覺醒的咆哮">進擊的巨人 劇場版:覺醒的咆哮</option>
+                    <option value="福音戰士新劇場版：Q">福音戰士新劇場版：Q</option>
+                </select>
+            </div>
+            <div id="hall">
+                <span>選擇影廳: </span>
+                <select name="" id="addHall">
+                    <option value="">--</option>
+                    <option value="">1廳</option>
+                    <option value="">2廳</option>
+                    <option value="">3廳</option>
+                    <option value="">4廳</option>
+                    <option value="">5廳</option>
+                </select>
+            </div>
+            <div id="date">
+                <span>放映日期: </span>
+                <input type="text" name="dates" id="datePicker" />
+            </div>
+            <div id="time">
+                <span>放映時段: </span>
+                <input id="time01" type="text" class="timePicker">
+                <input id="time02" type="text" class="timePicker">
+                <input id="time03" type="text" class="timePicker">
+                <input id="time04" type="text" class="timePicker">
+                <input id="time05" type="text" class="timePicker">
+                <input id="time06" type="text" class="timePicker">
+                <input id="time07" type="text" class="timePicker">
+                <input id="time08" type="text" class="timePicker">
+                <input id="time09" type="text" class="timePicker">
+                <input id="time10" type="text" class="timePicker">
+                <!-- <button id="addTp">➕</button>
+                <button id="delTp">➖</button> -->
+            </div>
+            <div id="add">
+                <button id="add-todo">➕</button>
+            </div>
+        </div>
+        <hr id="bar">
+        <div id="selectByName" class="selectBy">
+            <div id="selectByName_title">
+                <span>Select By Name: </span>
+            </div>
+            <div id="selectByName_input">
+                <select name="" id="movieList">
+                    <option value="">劇場版 咒術迴戰 0</option>
+                    <option value="">怪獸與鄧不利多的秘密</option>
+                    <option value="">進擊的巨人 劇場版:覺醒的咆哮</option>
+                    <option value="">福音戰士新劇場版：Q</option>
+                    <option value="">FGO 絕對魔獸戰線</option>
+                    <option value="">鬼滅之刃劇場版 無限列車篇</option>
+                    <option value="">賽道狂人</option>
+                    <option value="">神力女超人</option>
+                </select>
+                <button class="selectBtn">search</button>
+            </div>
+        </div>
+        <div id="selectByHall" class="selectBy">
+            <div id="selectByHall_title">
+                <span>Select By Hall: </span>
+            </div>
+            <div id="selectByHall_input">
+                <select name="" id="hallList">
+                    <option value="">1廳</option>
+                    <option value="">2廳</option>
+                    <option value="">3廳</option>
+                    <option value="">4廳</option>
+                    <option value="">5廳</option>
+                    <option value="">6廳</option>
+                </select>
+                <button class="selectBtn">search</button>
+            </div>
+        </div>
+        <div id="selectByDate" class="selectBy">
+            <div id="selectByDate_title">
+                <span>Select By Date: </span>
+            </div>
+            <div id="selectByDate_input">
+                <input id="dateInput" type="date" placeholder="">
+                <button class="selectBtn">search</button>
+            </div>
+        </div>
+        <div id="selectByChoice" class="selectBy">
+            <div id="selectByChoice_title">
+                <span>Select By Choice: </span>
+            </div>
+            <div id="selectByChoice_input">
+                <button class="selectBtn">search</button>
+            </div>
+        </div>
+        <!-- <div class="data">
+            <div id="idData" class="innerData">idData</div>
+            <div class="vl"></div>
+            <div id="movieData" class="innerData">
+                <span>劇場版 咒術迴戰 0</span><br>
+                <span>JUJUTSU KAISEN:ZERO</span><br>
+                <span>01:45:00</span><br>
+            </div>
+            <div class="vl"></div>
+            <div id="hallData" class="innerData">
+                <span>第 2 廳</span>
+            </div>
+            <div class="vl"></div>
+            <div id="dateData" class="innerData">
+                <span>Date</span>
+                <ul>
+                    <li>06/01</li>
+                    <li>06/02</li>
+                    <li>06/03</li>
+                    <li>06/04</li>
+                    <li>06/05</li>
+                    <li>06/06</li>
+                    <li>06/07</li>
+                </ul>
+            </div>
+            <div class="vl"></div>
+            <div id="timeData" class="innerData">
+                <span>time</span>
+                <ol>
+                    <li>09:00</li>
+                    <li>12:00</li>
+                    <li>15:00</li>
+                    <li>18:00</li>
+                    <li>21:00</li>
+                    <li>00:00</li>
+                </ol>
+            </div>
+            <div class="vl"></div>
+            <div id="editor" class="editor">
+                <button>EDIT</button>
+                <button>SAVE</button>
+                <button class="delete">DELETE</button>
+            </div>
+        </div>
+        <div class="data">
+            <div id="idData" class="innerData">idData</div>
+            <div class="vl"></div>
+            <div id="movieData" class="innerData">
+                <span>福音戰士新劇場版：Q</span><br>
+                <span>Evangelion 3.0: You Can (Not) Redo</span><br>
+                <span>01:36:00</span><br>
+            </div>
+            <div class="vl"></div>
+            <div id="hallData" class="innerData">
+                <span>第 4 廳</span>
+            </div>
+            <div class="vl"></div>
+            <div id="dateData" class="innerData">
+                <span>Date</span>
+                <ul>
+                    <li>06/01</li>
+                    <li>06/02</li>
+                    <li>06/03</li>
+                    <li>06/04</li>
+                    <li>06/05</li>
+                    <li>06/06</li>
+                    <li>06/07</li>
+                </ul>
+            </div>
+            <div class="vl"></div>
+            <div id="timeData" class="innerData">
+                <span>time</span>
+                <ol>
+                    <li>09:00</li>
+                    <li>09:00</li>
+                    <li>09:00</li>
+                    <li>12:00</li>
+                    <li>15:00</li>
+                    <li>18:00</li>
+                    <li>21:00</li>
+                    <li>00:00</li>
+                </ol>
+            </div>
+            <div class="vl"></div>
+            <div id="editor" class="editor">
+                <button>EDIT</button>
+                <button>SAVE</button>
+                <button class="delete">DELETE</button>
+            </div>
+        </div> -->
+    </main>
+    <!-- <div id="tree"></div> -->
+    <footer>
+        嗨邇覓影城 &copy; HIREME CINEMA 2022
+    </footer>
+    <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="emp_aside.js"></script>
+
+
+
+    <!-- SaveList.js -->
+    <!-- <script src="./js/SaveList.js"></script> -->
+
+    <!-- TimePicker.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-clock-timepicker@2.5.0/jquery-clock-timepicker.min.js"></script>
+    <script src="./js/jquery.timepicker.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('.timepicker').timepicker({
+            timeFormat: 'HH:mm',
+            interval: 30
+        });
+    });
+
+    $('.timePicker').clockTimePicker({  
+        duration: true,
+        durationNegative: true,
+        precision: 15,
+        i18n: {
+    cancelButton: 'Abbrechen'
+        },
+        onAdjust: function(newVal, oldVal) {
+    //...
+        }
+    });
+
+    </script>
+
+    <!-- DatePicker.js -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/moment.min.js"></script>
+    <script type="text/javascript" src="./js/daterangepicker.js"></script>
+    <script>
+        $('input[name="dates"]').daterangepicker({
+            locale: {
+                format: 'YYYY-MM-DD',
+            }
+        });
+
+        var DateDiff = function (sDate1, sDate2) { // sDate1 和 sDate2 是 2016-06-18 格式
+            var oDate1 = new Date(sDate1);
+            var oDate2 = new Date(sDate2);
+            var iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24); // 把相差的毫秒數轉換為天數
+            return iDays;
+        };
+    </script>
+
+    <script>
+        // 取得日期相差天數
+        $("div").click(function(){
+            let startDate = $("#datePicker").val().substr(0,10);
+            let endDate = $("#datePicker").val().substr(-10,10); 
+            console.log(startDate);
+            console.log(endDate);
+            let GetDateDiff = DateDiff(startDate, endDate); // 轉換為天數 : 1
+            console.log(GetDateDiff);
+        })
+
+        
+    </script>
+</body>
+
+</html>
