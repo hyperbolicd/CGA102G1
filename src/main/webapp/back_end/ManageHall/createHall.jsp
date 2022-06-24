@@ -31,15 +31,7 @@
 
 <body>
     <header>
-        <nav>
-            <div id="logo">
-                <img src="${pageContext.request.contextPath}/back_end/logo2noline.jpg">
-            </div>
-            <h2>員工後台操作系統</h2>
-            <ul>
-                <li>登出</li>
-            </ul>
-        </nav>
+     <%@ include file="/back_end/header_html.jsp"%> 
     </header>
     <aside id="aside">     
      <%@ include file="/back_end/aside_html.jsp"%>   
@@ -87,7 +79,7 @@
                               
                             <div class="btnbox">
                               <a href="${pageContext.request.contextPath}/back_end/ManageHall/manageHall.jsp" class="btn btn-danger">取消</a>
-                              <button class="btn btn-primary" id="submitBtn" >確定新增</button>
+                              <input type="submit" value="確定新增" class="btn btn-primary" id="submitBtn" disabled>
                               <input type="hidden" name="action" value="insert">
                             </div>
                           </form>

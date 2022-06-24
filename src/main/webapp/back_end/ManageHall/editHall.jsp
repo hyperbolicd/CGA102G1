@@ -29,18 +29,10 @@ HallVO hallVO = (HallVO)request.getAttribute("hallVO");
 
 <body>
     <header>
-        <nav>
-            <div id="logo">
-            	<img src="${pageContext.request.contextPath}/back_end/logo2noline.jpg">
-            </div>
-            <h2>員工後台操作系統</h2>
-            <ul>
-                <li>登出</li>
-            </ul>
-        </nav>
+        <%@ include file="/back_end/header_html.jsp"%> 
     </header>
     <aside id="aside"> 
-     <%@ include file="/back_end/aside_html.jsp"%>   
+     	<%@ include file="/back_end/aside_html.jsp"%>   
     </aside>
     <!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
     <main>
@@ -69,7 +61,7 @@ HallVO hallVO = (HallVO)request.getAttribute("hallVO");
                               <input type="hidden" name="hlRow" id="hlRow" value="${hallVO.hlRow}">
                               <input type="hidden" name="hlSeatCount" id="hlSeatCount" value="${hallVO.hlSeatCount}">
                     		  
-                    		  <button type="submit" id="sumbitBtn" class="btn btn-primary btn-lg">送出修改</button>
+                    		  <button type="submit" id="sumbitBtn" class="btn btn-primary">送出修改</button>
                     		  <a href="/HireMe/back/ManageHall/manageHall.jsp" class="btn btn-danger">取消</a>
                             </div>
                           </form>

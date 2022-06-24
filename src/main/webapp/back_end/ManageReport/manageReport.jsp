@@ -12,12 +12,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>檢舉管理</title>
-    <link rel="stylesheet" type="text/css" href="emp_all.css">
-    <link rel="stylesheet" type="text/css" href="emp_main.css">
-    <link rel="stylesheet" type="text/css" href="emp_footer.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back_end/css/emp_all.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back_end/css/emp_main.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back_end/css/emp_footer.css">
 
     <!-- ***************************自己的CSS****************************** -->
-    <link rel="stylesheet" href="./report_main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/back_end/ManageReport/report_main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.2.1/font-awesome-animation.min.css">
@@ -28,7 +28,7 @@
     <header>
         <nav>
             <div id="logo">
-                <img src="logo2noline.jpg">
+                <img src="${pageContext.request.contextPath}/back_end/logo2noline.jpg">
             </div>
             <h2>員工後台操作系統</h2>
             <ul>
@@ -36,7 +36,8 @@
             </ul>
         </nav>
     </header>
-    <aside id="aside">        
+    <aside id="aside">
+    <%@ include file="/back_end/aside_html.jsp"%>         
     </aside>
     <!-- ********************************************* -->
     <main>
@@ -96,7 +97,6 @@
     <footer>
         嗨邇覓影城 &copy; HIREME CINEMA 2022
     </footer>
-    <script src="emp_aside.js"></script>
 </body>
 
 </html>

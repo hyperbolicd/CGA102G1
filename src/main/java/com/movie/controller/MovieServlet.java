@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -113,7 +114,7 @@ public class MovieServlet extends HttpServlet {
 		}
 		if("update".equals(action)) {
 			
-			/*********************************/
+			/****************獲取參數*****************/
 			Integer mvId =Integer.valueOf(req.getParameter("mvId").trim());
 			String mvName = req.getParameter("mvName");
 			String mvEName = req.getParameter("mvEName");
@@ -166,6 +167,22 @@ public class MovieServlet extends HttpServlet {
 			String url ="/back_end/ManageMV/manageMV.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
+		}
+		
+		if ("listMovie_ByCompositeQuery".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			// 將資料轉為map
+			Map<String, String[]> map = req.getParameterMap();
+			// 傳入service
+			MovieService mvSvc = new MovieService();
+			List<MovieVO> list =mvSvc.getAll(map);
+			// 存入Attribute
+			req.setAttribute("listMovie_ByCompositeQuery", list);
+			RequestDispatcher rd = req.getRequestDispatcher("/back_end/ManageMV/TEST_Composite2.jsp");
+			rd.forward(req, res);
+			
 		}
 			
 	}
