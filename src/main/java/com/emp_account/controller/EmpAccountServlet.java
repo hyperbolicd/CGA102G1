@@ -154,6 +154,7 @@ public class EmpAccountServlet extends HttpServlet {
 			}
 			
 			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+			request.setAttribute("emp_no", emp_no);
 			request.setAttribute("empPriVOs", empPriVOs);
 			request.getRequestDispatcher("/back_end/emp/empPrivilege.jsp").forward(request, response);
 		}

@@ -43,7 +43,7 @@
     <main>
         <div id="main">
         	<form method="post" action="${pageContext.request.contextPath}/emp/EmpPrivilege.do">
-	            <h1>查詢/修改權限功能 - 員工編號: ${empPriVOs[0].emp_no}</h1>
+	            <h1>查詢/修改權限功能 - 員工編號: ${emp_no}</h1>
 	            <button type="button" id="back"><a href="${pageContext.request.contextPath}/back_end/emp/empAcc.jsp">返回</a></button>
 			    <div id="auth">
 			    	<input type="checkbox" id="funcs0" onclick="chooseAll(this)">
@@ -52,7 +52,7 @@
 			        <label for="funcs1" class="big">管理員權限</label>
 			        <button type="button" id="clearAll">清空</button>
 	                <button type="submit" name="action" value="updatePrivilege">修改</button>
-	                <input type="hidden" name="emp_no" value="${empPriVOs[0].emp_no}">
+	                <input type="hidden" name="emp_no" value="${emp_no}">
 		        	<hr>
 	<!-- 			        從BD抓所有權限 -->
 			    	<jsp:useBean id="listF" scope="page" class="com.emp_function.model.EmpFunctionService"/>

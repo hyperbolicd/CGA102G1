@@ -23,7 +23,7 @@ public class EmpPrivilegeServlet extends HttpServlet {
 		
 		if("updatePrivilege".equals(action)) {
 			Integer emp_no = Integer.valueOf(request.getParameter("emp_no"));
-			response.getWriter().println(emp_no);
+response.getWriter().println(emp_no);
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 			String[] emp_fcs = request.getParameterValues("fc_nos");
 			
@@ -41,11 +41,13 @@ public class EmpPrivilegeServlet extends HttpServlet {
 			/***************************2.開始刪除/新增權限**********************************/
 			EmpPrivilegeService empPriSvc = new EmpPrivilegeService();
 			List<EmpPrivilegeVO> updateList = new ArrayList();
-			for(String emp_fc: emp_fcs) {
-				EmpPrivilegeVO empPriVO = new EmpPrivilegeVO();
-				empPriVO.setEmp_no(emp_no);
-				empPriVO.setFc_no(Integer.valueOf(emp_fc));
-				updateList.add(empPriVO);
+			if(fcIsNotEmpty) {
+				for(String emp_fc: emp_fcs) {
+					EmpPrivilegeVO empPriVO = new EmpPrivilegeVO();
+					empPriVO.setEmp_no(emp_no);
+					empPriVO.setFc_no(Integer.valueOf(emp_fc));
+					updateList.add(empPriVO);
+				}
 			}
 			empPriSvc.updatePrivilege(updateList);
 			
