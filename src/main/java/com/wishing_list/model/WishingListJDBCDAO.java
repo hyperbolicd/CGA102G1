@@ -1,32 +1,32 @@
-package com.wishing_pond.model;
+package com.wishing_list.model;
 
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.NamingException;
 
 import com.common.JDBCUtil;
 
-import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-
-public class WishingPondJDBCDAO implements WishingPondDAO_interface{
+public class WishingListJDBCDAO implements WishingListDAO_interface{
 	
 	private static final String INSERT =
-			"insert into wishing_pond (WISH_NAME, WISH_START, WISH_END) values "
-			+ "(?, ?, ?)";
+			"insert into wishing_list (WISH_NO, WISH_OPTION, MV_ID, WISH_COUNT) values "
+			+ "(?, ?, ?, ?)";
 	private static final String READ_ONE =
-			"select WISH_NO, WISH_NAME, WISH_START, WISH_END, TOP_ONE from wishing_pond where WISH_NO = ?";
+			"select WISH_NO, WISH_OPTION, MV_ID, WISH_COUNT from wishing_list where WISH_NO = ? order by WISH_COUNT desc, WISH_OPTION";
 	private static final String READ_ALL =
-			"select WISH_NO, WISH_NAME, WISH_START, WISH_END, TOP_ONE from wishing_pond";
+			"select WISH_NO, WISH_OPTION, MV_ID, WISH_COUNT from wishing_list order by WISH_NO, WISH_OPTION";
 	private static final String UPDATE =
-			"update wishing_pond set WISH_NAME = ?, WISH_START = ?, WISH_END = ?  "
-			+ "where WISH_NO = ?";
+			"update wishing_list set MV_ID = ?, WISH_COUNT = ? where WISH_NO = ? and WISH_OPTION = ?";
 	private static final String DELETE =
-			"delete from wishing_pond where WISH_NO = ?";
+			"delete from wishing_list where WISH_NO = ? and WISH_OPTION = ?";
 	
 	@Override
-	public void insert(WishingPondVO wishingPondVO) {
+	public void insert(WishingListVO wishingPondVO) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -34,9 +34,10 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(INSERT);
 			
-			ps.setString(1, wishingPondVO.getWish_name());
-			ps.setTimestamp(2, wishingPondVO.getWish_start());
-			ps.setTimestamp(3, wishingPondVO.getWish_end());
+			ps.setInt(1, wishingPondVO.getWish_no());
+			ps.setInt(2, wishingPondVO.getWish_option());
+			ps.setInt(3, wishingPondVO.getMv_id());
+			ps.setInt(4, wishingPondVO.getWish_count());
 			
 			ps.executeUpdate();
 			
@@ -64,7 +65,7 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 		}
 	}
 	@Override
-	public void delete(Integer wishNo) {
+	public void delete(Integer wishNo, Integer wishOption) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -73,6 +74,7 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 			ps = con.prepareStatement(DELETE);
 			
 			ps.setInt(1, wishNo);
+			ps.setInt(2, wishOption);
 			
 			ps.executeUpdate();
 			
@@ -100,7 +102,7 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 		}		
 	}
 	@Override
-	public void update(WishingPondVO wishingPondVO) {
+	public void update(WishingListVO wishingPondVO) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -108,10 +110,10 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(UPDATE);
 			
-			ps.setString(1, wishingPondVO.getWish_name());
-			ps.setTimestamp(2, wishingPondVO.getWish_start());
-			ps.setTimestamp(3, wishingPondVO.getWish_end());
-			ps.setInt(4, wishingPondVO.getWish_no());
+			ps.setInt(1, wishingPondVO.getMv_id());
+			ps.setInt(2, wishingPondVO.getWish_count());
+			ps.setInt(3, wishingPondVO.getWish_no());
+			ps.setInt(4, wishingPondVO.getWish_option());
 			
 			ps.executeUpdate();
 			
@@ -139,8 +141,8 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 		}		
 	}
 	@Override
-	public List<WishingPondVO> findByWishNo(Integer wishNo) {
-		List<WishingPondVO> list = new ArrayList<WishingPondVO>();
+	public List<WishingListVO> findByWishNo(Integer wishNo) {
+		List<WishingListVO> list = new ArrayList<WishingListVO>();
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -154,12 +156,11 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				WishingPondVO wishingPondVO = new WishingPondVO();
+				WishingListVO wishingPondVO = new WishingListVO();
 				wishingPondVO.setWish_no(rs.getInt("WISH_NO"));
-				wishingPondVO.setWish_name(rs.getString("WISH_NAME"));
-				wishingPondVO.setWish_start(rs.getTimestamp("WISH_START"));
-				wishingPondVO.setWish_end(rs.getTimestamp("WISH_END"));
-				wishingPondVO.setTop_one(rs.getInt("TOP_ONE"));
+				wishingPondVO.setWish_option(rs.getInt("WISH_OPTION"));
+				wishingPondVO.setMv_id(rs.getInt("MV_ID"));
+				wishingPondVO.setWish_count(rs.getInt("WISH_COUNT"));
 				list.add(wishingPondVO);
 			}
 			
@@ -195,8 +196,8 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 		return list;
 	}
 	@Override
-	public List<WishingPondVO> getAll() {
-		List<WishingPondVO> list = new ArrayList<WishingPondVO>();
+	public List<WishingListVO> getAll() {
+		List<WishingListVO> list = new ArrayList<WishingListVO>();
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -208,12 +209,11 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				WishingPondVO wishingPondVO = new WishingPondVO();
+				WishingListVO wishingPondVO = new WishingListVO();
 				wishingPondVO.setWish_no(rs.getInt("WISH_NO"));
-				wishingPondVO.setWish_name(rs.getString("WISH_NAME"));
-				wishingPondVO.setWish_start(rs.getTimestamp("WISH_START"));
-				wishingPondVO.setWish_end(rs.getTimestamp("WISH_END"));
-				wishingPondVO.setTop_one(rs.getInt("TOP_ONE"));
+				wishingPondVO.setWish_option(rs.getInt("WISH_OPTION"));
+				wishingPondVO.setMv_id(rs.getInt("MV_ID"));
+				wishingPondVO.setWish_count(rs.getInt("WISH_COUNT"));
 				list.add(wishingPondVO);
 			}
 			
@@ -250,46 +250,44 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 	}
 	
 	public static void main(String[] args) {
-		WishingPondJDBCDAO dao = new WishingPondJDBCDAO();
+//		WishingListJDBCDAO dao = new WishingListJDBCDAO();
 		
 		// C
-//		WishingPondVO wishingPondVO1 = new WishingPondVO();
-//		wishingPondVO1.setWish_name("端午特選");
-//		wishingPondVO1.setWish_start(Timestamp.valueOf("2022-06-01 00:00:00"));
-//		wishingPondVO1.setWish_end(Timestamp.valueOf("2022-07-31 23:59:59"));
-//		dao.insert(wishingPondVO1);
+//		WishingListVO wishingListVO1 = new WishingListVO();
+//		wishingListVO1.setWish_no(2);
+//		wishingListVO1.setWish_option(8);
+//		wishingListVO1.setMv_id(1);
+//		wishingListVO1.setWish_count(0);
+//		dao.insert(wishingListVO1);
 		
 		// R_ONE
-//		List<WishingPondVO> list = dao.findByWishNo(1);
-//		for(WishingPondVO wp: list) {
+//		List<WishingListVO> list = dao.findByWishNo(1);
+//		for(WishingListVO wp: list) {
 //			System.out.print(wp.getWish_no() + ", ");
-//			System.out.print(wp.getWish_name() + ", ");
-//			System.out.print(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(wp.getWish_start()) + ", ");
-//			System.out.print(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(wp.getWish_end()) + ", ");
-//			System.out.println(wp.getTop_one());
+//			System.out.print(wp.getWish_option() + ", ");
+//			System.out.print(wp.getMv_id() + ", ");
+//			System.out.println(wp.getWish_count());
 //		}
 		
 		// R_ALL
-//		List<WishingPondVO> list = dao.getAll();
-//		for(WishingPondVO wp: list) {
+//		List<WishingListVO> list = dao.getAll();
+//		for(WishingListVO wp: list) {
 //			System.out.print(wp.getWish_no() + ", ");
-//			System.out.print(wp.getWish_name() + ", ");
-//			System.out.print(wp.getWish_start().toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + ", ");
-////			System.out.println(wp.getWish_end().toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-//			System.out.print(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(wp.getWish_end()) + ", ");
-//			System.out.println(wp.getTop_one());
+//			System.out.print(wp.getWish_option() + ", ");
+//			System.out.print(wp.getMv_id() + ", ");
+//			System.out.println(wp.getWish_count());
 //		}
 		
 		// U
-		WishingPondVO wishingPondVO2 = new WishingPondVO();
-		wishingPondVO2.setWish_no(3);
-		wishingPondVO2.setWish_name("端午節特選");
-		wishingPondVO2.setWish_start(Timestamp.valueOf("2022-08-01 00:00:00"));
-		wishingPondVO2.setWish_end(Timestamp.valueOf("2022-09-31 23:59:59"));
-		dao.update(wishingPondVO2);
+//		WishingListVO wishingListVO2 = new WishingListVO();
+//		wishingListVO2.setWish_no(2);
+//		wishingListVO2.setWish_option(8);
+//		wishingListVO2.setMv_id(1);
+//		wishingListVO2.setWish_count(100);
+//		dao.update(wishingListVO2);
 		
 		// D
-//		dao.delete(3);
+//		dao.delete(2, 8);
 	}
 
 }

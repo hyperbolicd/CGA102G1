@@ -25,6 +25,7 @@
         <div id="main">
             <h1>許願池 - 母親節特選</h1>
             <button id="return"><a href="${pageContext.request.contextPath}/back_end/wish/wishPond.jsp">返回</a></button>
+            <h2>投票期間: 2022-05-01 ~ 2022-05-31</h2>
             <h2>投票結果</h2>
             <div id="vote">
 

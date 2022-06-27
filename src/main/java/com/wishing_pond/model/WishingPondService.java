@@ -12,13 +12,9 @@ public class WishingPondService {
 //		dao = new WishingPondDAO();
 	}
 	
-	public WishingPondVO addWishingPond(Integer wish_no, Integer wish_option, Integer mv_id,
-								Integer wish_count,	Timestamp wish_start, Timestamp wish_end) {
+	public WishingPondVO addWishingPond(String wish_name, Timestamp wish_start, Timestamp wish_end) {
 		WishingPondVO wishingPondVO = new WishingPondVO();
-		wishingPondVO.setWish_no(wish_no);
-		wishingPondVO.setWish_option(wish_option);
-		wishingPondVO.setMv_id(mv_id);
-		wishingPondVO.setWish_count(wish_count);
+		wishingPondVO.setWish_name(wish_name);
 		wishingPondVO.setWish_start(wish_start);
 		wishingPondVO.setWish_end(wish_end);
 		dao.insert(wishingPondVO);
@@ -30,13 +26,11 @@ public class WishingPondService {
 		dao.insert(wishingPondVO);
 	}
 	
-	public void updateWishingPond(Integer wish_no, Integer wish_option, Integer mv_id,
-			Integer wish_count,	Timestamp wish_start, Timestamp wish_end) {
+	public void updateWishingPond(Integer wish_no, String wish_name, 
+			Timestamp wish_start, Timestamp wish_end) {
 		WishingPondVO wishingPondVO = new WishingPondVO();
 		wishingPondVO.setWish_no(wish_no);
-		wishingPondVO.setWish_option(wish_option);
-		wishingPondVO.setMv_id(mv_id);
-		wishingPondVO.setWish_count(wish_count);
+		wishingPondVO.setWish_name(wish_name);
 		wishingPondVO.setWish_start(wish_start);
 		wishingPondVO.setWish_end(wish_end);
 		dao.update(wishingPondVO);
@@ -46,8 +40,8 @@ public class WishingPondService {
 		dao.update(wishingPondVO);
 	}
 	
-	public void deleteWishingPond(Integer wish_no, Integer wish_option) {
-		dao.delete(wish_no, wish_option);
+	public void deleteWishingPond(Integer wish_no) {
+		dao.delete(wish_no);
 	}
 	
 	public List<WishingPondVO> getOneWishingPond(Integer wish_no) {

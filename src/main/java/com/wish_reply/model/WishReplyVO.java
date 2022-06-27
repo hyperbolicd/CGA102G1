@@ -5,7 +5,6 @@ public class WishReplyVO implements java.io.Serializable{
 	
 	private Integer wish_reono;
 	private Integer wish_no;
-	private Integer wish_option;
 	private Integer member_id;
 	private String wish_msg;
 	
@@ -20,12 +19,6 @@ public class WishReplyVO implements java.io.Serializable{
 	}
 	public void setWish_no(Integer wish_no) {
 		this.wish_no = wish_no;
-	}
-	public Integer getWish_option() {
-		return wish_option;
-	}
-	public void setWish_option(Integer wish_option) {
-		this.wish_option = wish_option;
 	}
 	public Integer getMember_id() {
 		return member_id;

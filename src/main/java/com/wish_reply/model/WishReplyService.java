@@ -11,10 +11,9 @@ public class WishReplyService {
 //		dao = new WishReplyDAO();
 	}
 	
-	public WishReplyVO addWishReply(Integer wish_no, Integer wish_option, Integer member_id, String wish_msg) {
+	public WishReplyVO addWishReply(Integer wish_no, Integer member_id, String wish_msg) {
 		WishReplyVO wishReplyVO = new WishReplyVO();
 		wishReplyVO.setWish_no(wish_no); 
-		wishReplyVO.setWish_option(wish_option);; 
 		wishReplyVO.setMember_id(member_id); 
 		wishReplyVO.setWish_msg(wish_msg);
 		dao.insert(wishReplyVO);
