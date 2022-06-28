@@ -32,4 +32,16 @@ public class WishingListVO implements java.io.Serializable{
 	public void setWish_count(Integer wish_count) {
 		this.wish_count = wish_count;
 	}
+	
+	// 取得電影資訊
+	public com.movie.model.MovieVO getMvVO() {
+		com.movie.model.MovieService mvSvc = new com.movie.model.MovieService();
+		return mvSvc.findByPrimaryKey(mv_id);
+	}
+	// 取得活動資訊
+	public com.wishing_pond.model.WishingPondVO getWishVO() {
+		com.wishing_pond.model.WishingPondService wishSvc = new com.wishing_pond.model.WishingPondService();
+		return wishSvc.getOneWishingPond(wish_no);
+	}
+	
 }

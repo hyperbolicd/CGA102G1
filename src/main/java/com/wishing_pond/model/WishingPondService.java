@@ -2,6 +2,7 @@ package com.wishing_pond.model;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 public class WishingPondService {
 	WishingPondDAO_interface dao;
@@ -44,12 +45,16 @@ public class WishingPondService {
 		dao.delete(wish_no);
 	}
 	
-	public List<WishingPondVO> getOneWishingPond(Integer wish_no) {
+	public WishingPondVO getOneWishingPond(Integer wish_no) {
 		return dao.findByWishNo(wish_no);
 	}
 
 	public List<WishingPondVO> getAll(){
 		return dao.getAll();
+	}
+	// 複合查詢
+	public List<WishingPondVO> getAll(Map<String, String[]> map){
+		return dao.getAll(map);
 	}
 
 }

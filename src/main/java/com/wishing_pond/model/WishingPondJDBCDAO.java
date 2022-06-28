@@ -139,8 +139,8 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 		}		
 	}
 	@Override
-	public List<WishingPondVO> findByWishNo(Integer wishNo) {
-		List<WishingPondVO> list = new ArrayList<WishingPondVO>();
+	public WishingPondVO findByWishNo(Integer wishNo) {
+		WishingPondVO wishingPondVO = new WishingPondVO();
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -154,13 +154,11 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				WishingPondVO wishingPondVO = new WishingPondVO();
 				wishingPondVO.setWish_no(rs.getInt("WISH_NO"));
 				wishingPondVO.setWish_name(rs.getString("WISH_NAME"));
 				wishingPondVO.setWish_start(rs.getTimestamp("WISH_START"));
 				wishingPondVO.setWish_end(rs.getTimestamp("WISH_END"));
 				wishingPondVO.setTop_one(rs.getInt("TOP_ONE"));
-				list.add(wishingPondVO);
 			}
 			
 		} catch (ClassNotFoundException e) {
@@ -192,7 +190,7 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 				}
 			}
 		}		
-		return list;
+		return wishingPondVO;
 	}
 	@Override
 	public List<WishingPondVO> getAll() {
@@ -249,6 +247,112 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 		return list;
 	}
 	
+	@Override
+	public List<WishingPondVO> getAll(Map<String, String[]> map) {
+		String sql = "select WISH_NO, WISH_NAME, WISH_START, WISH_END, TOP_ONE "
+				+ "from wishing_pond ";
+		
+//		System.out.println(map.get("searchName")[0]);
+//		System.out.println(map.get("searchPeriod")[0]);
+//		System.out.println(map.get("start_date")[0]);
+//		System.out.println(map.get("end_date")[0]);
+
+		// add sql
+		int countStatement = 0;
+		
+		// date condition
+		if(map.get("start_date")[0].length() != 0 && map.get("end_date")[0].length() != 0){
+			sql += "where " + map.get("searchPeriod")[0] + " between ? and ? "; 
+			countStatement++;
+		} else if(map.get("start_date")[0].length() != 0) {
+			sql += "where " + map.get("searchPeriod")[0] + " > ? "; 
+			countStatement++;
+		} else if(map.get("end_date")[0].length() != 0) {
+			sql += "where " + map.get("searchPeriod")[0] + " < ? ";
+			countStatement++;
+		}
+		// key word
+		if(map.get("searchName")[0].length() != 0) {
+			if(countStatement == 0) {
+				sql += "where WISH_NAME like ? ";
+			} else { 
+				sql += "and WISH_NAME like ? ";
+			}
+		}
+		// end		
+		sql += "order by WISH_NO ";
+		System.out.println(sql);
+		
+		List<WishingPondVO> list = new ArrayList<WishingPondVO>();
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = JDBCUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			
+			// set ?
+			int countTimes = 1;
+			Set<String> keys = map.keySet();
+			for(String key: keys) {
+				String value = map.get(key)[0];
+				if(value.length() != 0) {
+					if("start_date".equals(key) || "end_date".equals(key)) { 
+						ps.setDate(countTimes, java.sql.Date.valueOf(value));
+						countTimes++;
+					} else if("searchName".equals(key)) { 
+						ps.setString(countTimes, "%" + value + "%");
+						countTimes++;
+					}
+				}
+			}
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				WishingPondVO wishingPondVO = new WishingPondVO();
+				wishingPondVO.setWish_no(rs.getInt("WISH_NO"));
+				wishingPondVO.setWish_name(rs.getString("WISH_NAME"));
+				wishingPondVO.setWish_start(rs.getTimestamp("WISH_START"));
+				wishingPondVO.setWish_end(rs.getTimestamp("WISH_END"));
+				wishingPondVO.setTop_one(rs.getInt("TOP_ONE"));
+				list.add(wishingPondVO);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}		
+		return list;
+	}
+	
+	
 	public static void main(String[] args) {
 		WishingPondJDBCDAO dao = new WishingPondJDBCDAO();
 		
@@ -280,13 +384,30 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 //			System.out.println(wp.getTop_one());
 //		}
 		
+		//R_MUL
+		Map<String, String[]> map = new LinkedHashMap<String, String[]>();
+		map.put("searchPeriod", new String[] {"WISH_END"});
+		map.put("start_date", new String[] {"2022-05-28"});
+		map.put("end_date", new String[] {"2022-08-01"});
+		map.put("searchName", new String[] {"活動"});
+		
+		List<WishingPondVO> list = dao.getAll(map);
+		for(WishingPondVO wp: list) {
+			System.out.print(wp.getWish_no() + ", ");
+			System.out.print(wp.getWish_name() + ", ");
+			System.out.print(wp.getWish_start().toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + ", ");
+//			System.out.println(wp.getWish_end().toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+			System.out.print(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(wp.getWish_end()) + ", ");
+			System.out.println(wp.getTop_one());
+		}
+		
 		// U
-		WishingPondVO wishingPondVO2 = new WishingPondVO();
-		wishingPondVO2.setWish_no(3);
-		wishingPondVO2.setWish_name("端午節特選");
-		wishingPondVO2.setWish_start(Timestamp.valueOf("2022-08-01 00:00:00"));
-		wishingPondVO2.setWish_end(Timestamp.valueOf("2022-09-31 23:59:59"));
-		dao.update(wishingPondVO2);
+//		WishingPondVO wishingPondVO2 = new WishingPondVO();
+//		wishingPondVO2.setWish_no(3);
+//		wishingPondVO2.setWish_name("端午節特選");
+//		wishingPondVO2.setWish_start(Timestamp.valueOf("2022-08-01 00:00:00"));
+//		wishingPondVO2.setWish_end(Timestamp.valueOf("2022-09-31 23:59:59"));
+//		dao.update(wishingPondVO2);
 		
 		// D
 //		dao.delete(3);

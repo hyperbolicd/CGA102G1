@@ -44,4 +44,10 @@ public class WishingPondVO implements java.io.Serializable{
 	public void setWish_end(Timestamp wish_end) {
 		this.wish_end = wish_end;
 	}
+	
+	// 取得電影資訊
+	public com.movie.model.MovieVO getMvVO() {
+		com.movie.model.MovieService mvSvc = new com.movie.model.MovieService();
+		return mvSvc.findByPrimaryKey(top_one);
+	}
 }
