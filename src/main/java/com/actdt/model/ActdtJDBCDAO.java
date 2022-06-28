@@ -313,14 +313,14 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 //			System.out.println("---------------------");
 
 		// 全部查詢 OK
-		List<ActdtVO> list = dao.getAll();
-		for (ActdtVO aActdt : list) {
-			System.out.print(aActdt.getAct_id() + ",");
-			System.out.print(aActdt.getTk_type_id() + ",");
-			System.out.print(aActdt.getAct_discount() + ",");
-			System.out.print(aActdt.getAct_coupon() + ",");
-			System.out.println();
-			}
+//		List<ActdtVO> list = dao.getAll();
+//		for (ActdtVO aActdt : list) {
+//			System.out.print(aActdt.getAct_id() + ",");
+//			System.out.print(aActdt.getTk_type_id() + ",");
+//			System.out.print(aActdt.getAct_discount() + ",");
+//			System.out.print(aActdt.getAct_coupon() + ",");
+//			System.out.println();
+//			}
 			
 		// 刪除
 //		dao.delete(5);

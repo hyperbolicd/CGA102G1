@@ -12,7 +12,7 @@ import com.act.model.*;
 import com.fd_inf.model.FdInfService;
 import com.fd_inf.model.FdInfVO;
 
-@WebServlet("act/act.do")
+@WebServlet("/act/act.do")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 
 public class ActServlet extends HttpServlet {

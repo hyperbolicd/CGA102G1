@@ -21,7 +21,6 @@ import javax.sql.rowset.serial.SerialBlob;
 
 import com.merchandise_inf.model.MerchService;
 import com.merchandise_inf.model.MerchVO;
-import com.mysql.cj.Session;
 
 @WebServlet("/merch/controller")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
