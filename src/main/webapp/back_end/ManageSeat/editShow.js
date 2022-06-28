@@ -1,10 +1,120 @@
-$(document).ready(function(){
-    let seat='010120102201030010410105101061010700108101091011010111001121011310201102021020300204102051020610207002081020910210102110021210213103011030210303003041030510306103070030810309103101031100312103131040110402104030040410405104061040700408104091041010411004121041310501105021050300504105051050610507005081050910510105110051210513106013060230603006043060530606306070060830609306103061100612306133070130702307030070430705307063070700708307093071030711007123071330801108021080300804108051080610807008081080910810108110081210813109011090210903009041090510906109070090810909109101091100912109131100111002110030100411005110061100701008110091101011011010121101311101111021110301104111051110611107011081110911110111110111211113112011120211203012041120511206112070120811209112101121101212112131130111302113030130411305113061130701308113091131011311013121131311401114021140301404114051140611407014081140911410114110141211413115011150211503015041150511506115070150811509115101151101512115131';
-    // 調用DB內的長跟寬
-    let inputRow =15;
-    let inputCol =13;
+		
+    	// 創建一陣列蒐集選中的座位物件
+    	let selectedSeat = [];
+    
+   		function selectedBtn(){
+        // 獲取座位的資訊
+        let text =this.innerText;
+        // 加進 目前已選
+        if(selectedSeat.indexOf(this)===-1){
+            document.getElementById('numberBox').innerText += '\n'+text  ;
+            this.setAttribute('class','btn btn-outline-danger');
+            // 利用bootstrap樣式改變 達到選取效果
+            selectedSeat.push(this);  
+        }
+    }
+		// 監聽連動下拉選單
+		document.getElementById('datePick').addEventListener('change',selectDate);
+		document.getElementById('showPick').addEventListener('change',selectTime);
+		
+		// 監聽改變狀態的按鈕
+		document.getElementById('colorsample1').addEventListener('click',changeStatus)
+    	document.getElementById('colorsample2').addEventListener('click',changeStatus)
+    	document.getElementById('colorsample3').addEventListener('click',changeStatus)
+    	document.getElementById('colorsample4').addEventListener('click',changeStatus)
+    	
+	// 監聽 日期的選單
+	function selectDate (){
+		
+		// 獲取預存在頁面的hlId
+		const hlId = document.getElementById('hlId').value;
+		// 獲取USER選擇的日期
+		let dateOption = this.value;
+		
+		const showPick=	document.getElementById('showPick');
+		
+		// 清空 showPick的option
+		let child = showPick.lastElementChild;  
+        while (child) { 
+            showPick.removeChild(child); 
+            child = showPick.lastElementChild; 
+        } 
+		
+		$.ajax({
+			url: '/CGA102G1/ShowSeatServlet.do',   // url位置
+			type: 'post',                   // post/get
+			data: { "action": "getTimeByDate",
+					"dateOption" : dateOption,
+					"hlId" : hlId },       // 輸入的資料
+			error: function(xhr) { },      // 錯誤後執行的函數
+			success: function(response) {
+				
+				// 把被清掉的 option放回去
+				let option = document.createElement('option');
+				option.innerText = "請選擇時段"
+				showPick.append(option);
+				
+				for(let i =0 ; i < response.length ; i++){
+					
+					let showVO = response[i];
+					// 轉換timestamp to 易讀的option
+					let ShowTime = showVO.SH_TIME;
+					let date = new Date(ShowTime);
+					let timeOption =date.getHours()+"點"+date.getMinutes()+"分"
+					let option = document.createElement('option');
+					option.innerText = timeOption;
+					option.value = showVO.SH_ID;
+					
+					showPick.append(option);
+				}
+			 }// 成功後要執行的函數
+		});
+	}
+	
+	// 監聽USER選擇的時段
+	function selectTime(){
+		// 獲取預存在頁面的hlId
+		const hlId = document.getElementById('hlId').value;
+		// 獲取USER選擇的時段(場次)
+		let SH_ID = this.value;
+		
+		$.ajax({
+			url: '/CGA102G1/ShowSeatServlet.do',   // url位置
+			type: 'post',                   // post/get
+			dataType:'json',
+			data: {
+				"action": "getShowByTime",
+				"SH_ID": SH_ID,
+				"hlId": hlId
+			},       // 輸入的資料
+			error: function(xhr) { },      // 錯誤後執行的函數
+			success: function(response) {
+				
+				let showSeatVO = response.showSeatVO;
+				let hallVO = response.hallVO;
+				console.log('座位字串:'+showSeatVO.SH_SEAT_STATE);
+				generateSeat(showSeatVO.SH_SEAT_STATE);
+			}// 成功後要執行的函數
+		});
+	}
+	
+	// 動態生成座位
+    function generateSeat(seatStr){
+	
     // 獲取預覽區塊
     let prBox = document.getElementById("prBox");
+	let seat=seatStr;
+	// 清空prBox
+	let child = prBox.lastElementChild;  
+        while (child) { 
+            prBox.removeChild(child); 
+            child = prBox.lastElementChild; 
+        } 
+    // 調用JSP裡預藏的長跟寬
+    let inputRow =document.getElementById('hlRow').value;
+    let inputCol =document.getElementById('hlCol').value;
+    console.log(inputRow);
+    console.log(inputCol);
     // 配置索引值
     let seq =0;
     // 第一排第一個位置的狀態索引值必為4
@@ -15,12 +125,16 @@ $(document).ready(function(){
             
             const btn = document.createElement('button');
 
-            if(Number(seat[seatIndex]) ===0)
+            if(Number(seat[seatIndex]) ===0){
             btn.setAttribute('class',"btn btn-secondary");
+			btn.setAttribute('disabled',"true");
+			}
             if(Number(seat[seatIndex]) ===1)
             btn.setAttribute('class',"btn btn-success");
-            if(Number(seat[seatIndex]) ===2)
+            if(Number(seat[seatIndex]) ===2){
             btn.setAttribute('class',"btn btn-primary");
+			btn.setAttribute('disabled',"true");
+			}
             if(Number(seat[seatIndex]) ===3)
             btn.setAttribute('class',"btn btn-warning");
             if(Number(seat[seatIndex]) ===4)
@@ -36,8 +150,6 @@ $(document).ready(function(){
             btn.style.margin ='3px'
             btn.innerText=`${row}排${col}號`;
 
-            // 禁止已出售的位置被綁定監聽
-            if(Number(seat[seatIndex]) !==2)
             btn.addEventListener('click',selectedBtn);
             
             // debug專用:檢查按鈕的底層索引值
@@ -50,23 +162,17 @@ $(document).ready(function(){
         const br = document.createElement("br");
         prBox.append(br);
     }
-    // 創建一陣列蒐集選中的座位物件
-    let selectedSeat = [];
+    // 顯示操作的介面
+    document.getElementById('screen').style.display='block';
+    document.getElementById('numberBox').style.display='block';
+    document.getElementById('colorsample1').style.display='block';
+    document.getElementById('colorsample5').style.display='block';
+    document.getElementById('colorsample2').style.display='block';
+    document.getElementById('colorsample3').style.display='block';
+    document.getElementById('colorsample4').style.display='block';
     
-    function selectedBtn(){
-        // 獲取座位的資訊
-        let text =this.innerText;
-        // 加進 目前已選
-        document.getElementById('numberBox').innerText += '\n'+text  ;
-        // 利用bootstrap樣式改變 達到選取效果
-        this.setAttribute('class','btn btn-outline-danger');
-        selectedSeat.push(this);
-    }
+}
 
-    document.getElementById('colorsample1').addEventListener('click',changeStatus)
-    document.getElementById('colorsample2').addEventListener('click',changeStatus)
-    document.getElementById('colorsample3').addEventListener('click',changeStatus)
-    document.getElementById('colorsample4').addEventListener('click',changeStatus)
     
     // 改變狀態
     function changeStatus({target}){
@@ -129,25 +235,6 @@ $(document).ready(function(){
         return seatCount;
     }
 
-    // 假資料測試區------需要跟DB互動獲取兩個select內的option!-------------------------------------------------
-    document.getElementById('date').addEventListener('change',({target})=>{
-      const show = document.getElementById('show');
-      show.innerHTML="";
-      const showList = mappingShow[target.value];
-      for (let showOption of showList) {
-       const option = document.createElement('option');
-       option.innerText = showOption;
-        show.append(option);
-      }
 
-    });
-    const mappingShow = {
-        0:['15:00','17:00','1900','2000'],
-        1:['11:00','13:00','1500','1900'],
-        2:['12:00','16:00','2200','2359'],
-        3:['13:00','15:00','2300','2369']
-    }
-    // -----------------------------------------------------------------------------------------------------
-})
 
 

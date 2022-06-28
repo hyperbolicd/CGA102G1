@@ -51,7 +51,7 @@ public class MovieServlet extends HttpServlet {
 			/******************處理圖片************************/
 			String mvPicture =null;
 			if(req.getPart("mvPicture").getSize()==0) {
-				mvPicture = "/CGA102G1/mvPicture_upload/sample.jpg";
+				mvPicture = "/mvPicture_upload/sample.jpg";
 			}else {
 				Part photo = req.getPart("mvPicture");
 				String dir = getServletContext().getRealPath("/mvPicture_upload");
@@ -60,7 +60,7 @@ public class MovieServlet extends HttpServlet {
 					 fsaveDirectory.mkdirs();
 				String filename = getFileNameFromPart(photo);
 				photo.write(dir+"/"+filename);
-				mvPicture = "/CGA102G1/mvPicture_upload/"+filename;
+				mvPicture ="/mvPicture_upload/" +filename;
 				System.out.println("insert 63行裡面的圖片路徑:"+mvPicture);
 			}
 			

@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
-HallVO hallVO = (HallVO)request.getAttribute("hallVO");
+	HallVO hallVO = (HallVO)request.getAttribute("hallVO");
 	String typeArr[] = {"數位","IMAX"};
 	request.setAttribute("typeArr", typeArr);
 %>

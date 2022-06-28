@@ -3,6 +3,15 @@
 <%@ page import="com.report.model.*" %>
 <%@ page import="com.member.model.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<%
+	ReportService rpSvc = new ReportService();
+	List<ReportVO> reportList = rpSvc.getAll();
+	pageContext.setAttribute("reportList", reportList);
+	int undealCount = rpSvc.countUndealRP();
+	pageContext.setAttribute("undealCount", undealCount);
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,68 +34,75 @@
 </head>
 
 <body>
-    <header>
-        <nav>
-            <div id="logo">
-                <img src="${pageContext.request.contextPath}/back_end/logo2noline.jpg">
-            </div>
-            <h2>員工後台操作系統</h2>
-            <ul>
-                <li>登出</li>
-            </ul>
-        </nav>
+     <header>
+        <%@ include file="/back_end/header_html.jsp"%>   
     </header>
     <aside id="aside">
-    <%@ include file="/back_end/aside_html.jsp"%>         
+    	<%@ include file="/back_end/aside_html.jsp"%>         
     </aside>
     <!-- ********************************************* -->
     <main>
         <div id="main">
             <div class="notifybox" >
+        <c:if test="${undealCount > 0}">
                 <div class="alertbox">
                     <div class="alert fade alert-simple alert-warning alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
                     <i class="start-icon fa fa-exclamation-triangle faa-flash animated"></i>
-                    <strong class="font__weight-semibold">請注意!</strong>  您有 3 則檢舉尚未處理 !
+                    <strong class="font__weight-semibold">請注意!</strong>您有<strong class="font__weight-semibold">${undealCount}</strong>則檢舉尚未處理 !
                     </div>
                 </div>
+        </c:if>
+        <c:if test="${undealCount == 0}">
                 <div class="alertbox">
                     <div class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
                         <i class="start-icon far fa-check-circle faa-tada animated"></i>
                         <strong class="font__weight-semibold">太棒了!</strong> 目前沒有檢舉需要處理 !
                     </div>
                 </div>
+        </c:if>
             </div>
             <div class="tablebox" style="border:solid 0px red ;">
                 <table id="maintable" class="table table-hover table-bordered single-ellipsis">
                     <thead>
                         <tr>
                             <th>檢舉單號</th>
-                            <th>被檢舉人編號</th>
-                            <th>被檢舉人姓名</th>
                             <th>評論編號</th>
                             <th>檢舉人編號</th>
-                            <th>檢舉人姓名</th>
                             <th>檢舉類別</th>
-                            <th>狀態</th>
+                            <th>檢舉日期</th>
+                            <th>檢舉狀態狀態</th>
                             <th>功能區</th>
                         </tr>
                     </thead>
                     <tbody>
+                    <%@ include file="page1.file" %> 
+                    <c:forEach var="reportVO" items="${reportList}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
                         <tr>
-                            <td class="organisationnumber">140406</td>
-                            <td class="organisationname">sanctus est</td>
-                            <td class="organisationname">sanctus est</td>
-                            <td class="organisationname">sanctus est</td>
-                            <td class="organisationname">sanctus est</td>
-                            <td class="organisationname">sanctus est</td>
-                            <td class="organisationname">sanctus est</td>
-                            <td class="organisationname">sanctus est</td>
-                            <td class="actions">
-                                <a href="?" class="btn btn-secondary" title="Remove" >管理檢舉</a>
+                            <td>${reportVO.rpId}</td>
+                            <td>${reportVO.cmId}</td>
+                            <td>${reportVO.memberId}</td>
+                            <td>${reportVO.rpType}</td>
+                            <td><fmt:formatDate value="${reportVO.rpDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                            <c:if test="${reportVO.rpState==0}">
+                            <td>未處理</td>
+                            </c:if>
+                            <c:if test="${reportVO.rpState==1}">
+                            <td>已處理</td>
+                            </c:if>
+                            <td>
+                            	<form METHOD="post" action="${pageContext.request.contextPath}/ReportServlet.do">
+                            		<input type="hidden" name="action" value="getOne_For_Update">
+                            		<input type="hidden" name="rpId" value="${reportVO.rpId}">
+                            		<input type="hidden" name="cmId" value="${reportVO.cmId}">
+                            		<input type="hidden" name="memberId" value="${reportVO.memberId}">
+                            		<input type="submit" value="管理檢舉"  class="btn btn-secondary">
+                            	</form>
                             </td> 
                         </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
+                <%@ include file="page2.file" %>
             </div>
         </div>
     </main>

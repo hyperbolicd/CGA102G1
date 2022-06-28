@@ -78,7 +78,7 @@
                             <input type="hidden" name="hlRow" id="hlRow" value="${param.hlRow}">
                               
                             <div class="btnbox">
-                              <a href="${pageContext.request.contextPath}/back_end/ManageHall/manageHall.jsp" class="btn btn-danger">取消</a>
+                              <a onclick="history.back()" class="btn btn-danger">取消</a>
                               <input type="submit" value="確定新增" class="btn btn-primary" id="submitBtn" disabled>
                               <input type="hidden" name="action" value="insert">
                             </div>

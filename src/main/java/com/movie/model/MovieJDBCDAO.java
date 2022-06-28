@@ -238,6 +238,7 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 				movieVO.setMvTtStar(rs.getInt("MV_TT_STAR"));
 			}
 			
+			
 		} catch (ClassNotFoundException e) {
 			// Class.forname嚙賠出 ClassNotFound嚙課外
 			throw new RuntimeException("Couldn't load database driver."

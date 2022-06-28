@@ -60,5 +60,9 @@ public class CmtService {
 	public void deleteCmt(Integer CM_ID) {
 		dao.delete(CM_ID);
 	}
+	
+	public void updateCmtState(Integer CM_ID,Integer CM_STATE) {
+		dao.updateCmtState(CM_ID, CM_STATE);
+	}
 
 }

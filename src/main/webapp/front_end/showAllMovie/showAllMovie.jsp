@@ -110,7 +110,7 @@
          <c:forEach var="showingVO" items="${showingList}" >
             <div class="content">
                 <div class="cover">
-                    <img src="${showingVO.mvPicture}" alt="">
+                    <img src="${pageContext.request.contextPath}${showingVO.mvPicture}" alt="">
                 </div>
                 <div class="info_container">
                     <div class="info">
@@ -141,7 +141,7 @@
       		<c:forEach var="comingVO" items="${comingList}" >
             <div class="content">
                 <div class="cover">
-                    <img src="${comingVO.mvPicture}" alt="">
+                    <img src="${pageContext.request.contextPath}${comingVO.mvPicture}" alt="">
                 </div>
                 <div class="info_container">
                     <div class="info">

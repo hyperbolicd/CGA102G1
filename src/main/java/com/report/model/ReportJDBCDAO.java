@@ -15,7 +15,7 @@ import com.common.JDBCUtil;
 public class ReportJDBCDAO implements ReportDAO_interface{
 	
 	private static final String INSERT_STMT= 
-			"INvSERT into REPORT (CM_ID, MEMBER_ID, RP_TEXT, RP_TYPE, RP_STATE) "
+			"INSERT into REPORT (CM_ID, MEMBER_ID, RP_TEXT, RP_TYPE, RP_STATE) "
 			+ "values(?,?,?,?,?)";
 	
 	private static final String UPDATE= "UPDATE REPORT set RP_STATE=? "
@@ -29,6 +29,9 @@ public class ReportJDBCDAO implements ReportDAO_interface{
 	private static final String GET_ALL_STMT= "SELECT RP_ID, CM_ID, MEMBER_ID, RP_TEXT, RP_TYPE, RP_STATE, RP_DATE "
 			+ "FROM REPORT order by RP_ID";
 	
+	private static final String UPDATE_SAME_RP="UPDATE report SET RP_STATE = 1 WHERE CM_ID = ?";
+	
+	private static final String COUNT_UNDEAL_RP="SELECT count(*)as undeal FROM report WHERE RP_STATE = 0";
 	
 	@Override
 	public void insert(ReportVO reportVO) {
@@ -276,11 +279,102 @@ public class ReportJDBCDAO implements ReportDAO_interface{
 		return list;
 	}
 	
+	@Override
+	public void updateSameRP(Integer cmId) {
+		Connection conn = null ;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(UPDATE_SAME_RP);
+			pstmt.setInt(1, cmId);
+			pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+	@Override
+	public Integer countUndealRP() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Integer undeal = null;
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(COUNT_UNDEAL_RP);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next())
+			undeal = rs.getInt("undeal");
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver."
+					+e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("Couldn't load database driver."
+					+se.getMessage());
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		
+		return undeal;
+	}
+	
 	public static void main(String[] args) {
 		ReportJDBCDAO dao = new ReportJDBCDAO();
 		
 		// ?嚙踝蕭嚙�?
-//		ReportVo reportVo1 = new ReportVo();
+//		ReportVO reportVo1 = new ReportVO();
 //		reportVo1.setCmId(1);
 //		reportVo1.setMemberId(4);
 //		reportVo1.setRpText("TEST123");
@@ -288,9 +382,9 @@ public class ReportJDBCDAO implements ReportDAO_interface{
 //		reportVo1.setRpState(0);
 //		dao.insert(reportVo1);
 		// 靽格
-//		ReportVo reportVo2 = new ReportVo();
+//		ReportVO reportVo2 = new ReportVO();
 //		reportVo2.setRpState(1);
-//		reportVo2.setRpId(6);
+//		reportVo2.setRpId(1);
 //		dao.update(reportVo2);
 		
 		// ?嚙踝蕭?嚙踝蕭
@@ -318,6 +412,13 @@ public class ReportJDBCDAO implements ReportDAO_interface{
 //			System.out.println(report.getRpState()+ ",");
 //			System.out.println(report.getRpDate()+ ",");
 //		}
+		
+		System.out.println(dao.countUndealRP());
+		
 	
 	}
+
+
+
+	
 }

@@ -25,16 +25,11 @@ public class ReportService {
 		return reportVO;
 	}
 	
-	public ReportVO update(Integer rpId,Integer cmId,Integer memberId,String rpText,String rpType,
-			Integer rpState,Timestamp rpDate) {
+	public ReportVO update(Integer rpId,Integer rpState) {
 		
 		ReportVO reportVO = new ReportVO();
 		reportVO.setRpId(rpId);
-		reportVO.setCmId(cmId);
-		reportVO.setRpText(rpText);
-		reportVO.setRpType(rpType);
 		reportVO.setRpState(rpState);
-		reportVO.setRpDate(rpDate);
 		
 		dao.update(reportVO);
 		
@@ -51,7 +46,16 @@ public class ReportService {
 		
 		return dao.getAll();
 	}
-
+	
+	public void updateSameRP(Integer cmId) {
+		
+		dao.updateSameRP(cmId);
+	}
+	
+	public Integer countUndealRP() {
+		
+		return dao.countUndealRP();
+	}
 	
 }
 
