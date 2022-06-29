@@ -356,7 +356,7 @@ public class ShowingDAO implements ShowingDAO_interface {
 		try {
 
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ONE_STMT);
+			pstmt = con.prepareStatement(GET_SHOWING_BY_DATE_STMT);
 
 			pstmt.setString(1, SH_TIME);
 			pstmt.setString(2, SH_TIME);

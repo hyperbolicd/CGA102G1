@@ -57,7 +57,8 @@ th, td {
 }
 
 .timePicker {
-	width: 50px;
+	width: 60px;
+	text-align: center;
 }
 #datePicker{
 	width: 180px;
@@ -69,6 +70,22 @@ input, select{
     outline-style: none;
     text-align:justify;
     padding: 5px 10px;
+}
+input[name="HL_ID"]{
+	width: 50px;
+	text-align: center;
+}
+input[name="SH_STATE"]{
+	width: 50px;
+	text-align: center;
+}
+input[name="SH_SEAT_STATE"]{
+/* 	text-align: center; */
+	color: gray;
+}
+input[name="SH_TYPE"]{
+	width: 50px;
+	text-align: center;
 }
 </style>
 
@@ -97,7 +114,7 @@ input, select{
 		</nav>
 	</header>
 	<aside id="aside"></aside>
-		<main>
+		<main id="main">
 
 	<table id="table-1">
 		<tr>
@@ -118,7 +135,7 @@ input, select{
 		</ul>
 	</c:if>
 
-	<FORM METHOD="post" ACTION="showing.do" name="form1">
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/showing/showing.do" name="form1" id="1234">
 		<table>
 			<jsp:useBean id="movieSvc" scope="page"
 				class="com.movie.model.MovieService" />
@@ -127,14 +144,21 @@ input, select{
 				<td><select size="1" name="mvId">
 						<c:forEach var="movieVO" items="${movieSvc.all}">
 							<option value="${movieVO.mvId}"
-								${(showingVO.mvId==movieVO.mvId)? 'selected':'' }>${movieVO.mvId}-[${movieVO.mvName}]
+								${(showingVO.mvId==movieVO.mvId)? 'selected':'' }>${movieVO.mvId} - 【${movieVO.mvName}】
 						</c:forEach>
 				</select></td>
 			</tr>
+			<jsp:useBean id="hallSvc" scope="page"
+				class="com.hall.model.HallService" />
 			<tr>
 				<td>影廳編號:</td>
-				<td><input type="TEXT" name="HL_ID" size="45"
-					value="<%=(showingVO == null) ? "1" : showingVO.getHL_ID()%>" /></td>
+<!-- 				<td><input type="TEXT" name="HL_ID" size="45" -->
+<%-- 					value="<%=(showingVO == null) ? "1" : showingVO.getHL_ID()%>" /></td> --%>
+				<td><select size="1" name="HL_ID">
+						<c:forEach var="hallVO" items="${hallSvc.all}">
+							<option value="${hallVO.hlId}">${hallVO.hlId} - 【${hallVO.hlName}】
+						</c:forEach>
+				</select></td>
 			</tr>
 			<tr>
 				<td>場次狀態:</td>
@@ -142,11 +166,11 @@ input, select{
 					value="<%=(showingVO == null) ? "0" : showingVO.getSH_STATE()%>" /></td>
 				<td>(未滿位0(預設)/已滿位1)</td>
 			</tr>
-			<tr>
-				<td>場次座位狀態:</td>
-				<td><input type="TEXT" name="SH_SEAT_STATE" size="45"
-					value="<%=(showingVO == null) ? "1" : showingVO.getSH_SEAT_STATE()%>" /></td>
-			</tr>
+<!-- 			<tr> -->
+<!-- 				<td>場次座位狀態:</td> -->
+<!-- 				<td><input type="TEXT" name="SH_SEAT_STATE" size="45" readonly="readonly" -->
+<%-- 					value="<%=(showingVO == null) ? "1" : showingVO.getSH_SEAT_STATE()%>" /></td> --%>
+<!-- 			</tr> -->
 			<tr>
 				<td>日期:</td>
 				<td><input name="SH_TIME" id="datePicker" type="text" class="refresh"
@@ -166,10 +190,10 @@ input, select{
 					<input id="time9" type="text" class="timePicker refresh">
 				</td>
 			</tr>
-			<tr>
-				<td>test:</td>
-				<td id="test"></td>
-			</tr>
+<!-- 			<tr> -->
+<!-- 				<td>test:</td> -->
+<!-- 				<td id="test"></td> -->
+<!-- 			</tr> -->
 			<tr>
 				<td>電影播放類型:</td>
 				<td><input type="TEXT" name="SH_TYPE" size="45"
@@ -255,25 +279,42 @@ input, select{
 			let temp = [];
 			let timeArr = [];
 			let dateTimeArr = [];
-		function GetAllSH_TIME(){
-			//取得時段的陣列
-			for(let i = 0; i <= 9; i++){
-			temp.push($("#time" + i).val())
-			};
-			let timeArr = temp.filter(function(e){
-			    return e && e.trim()
-			})
-			//取得日期加時段的陣列
-			for(let j = 0; j <= GetDateDiff; j++){
-				for(let k = 0; k < timeArr.length; k++){
-					let time = new Date(startDate);
-					let showing = time.addDays(j).toLocaleDateString('sv') + " " + timeArr[k] + ":00" 
-					dateTimeArr.push(showing)
-				}
+			function GetAllSH_TIME(){
+				let inputDiv = document.createElement('div');
+			    let newDiv = document.getElementById('newDiv');
+			    if(newDiv){
+			        newDiv.remove();
+			    }
+			    inputDiv.id = "newDiv";
+			    //取得時段的陣列
+			    for(let i = 0; i <= 9; i++){
+			    temp.push($("#time" + i).val())
+			    };
+			    let timeArr = temp.filter(function(e){
+			        return e && e.trim()
+			    })
+			    //取得日期加時段的陣列
+			    for(let j = 0; j <= GetDateDiff; j++){
+			        for(let k = 0; k < timeArr.length; k++){
+			            let time = new Date(startDate);
+			            let showing = time.addDays(j).toLocaleDateString('sv') + " " + timeArr[k] + ":00" 
+			            dateTimeArr.push(showing)
+			        }
+			    }
+// 			    $("#test").html(dateTimeArr);
+			    
+			    console.log(dateTimeArr);
+			    for(let i = 0; i < dateTimeArr.length; i++){
+			    let newInput = document.createElement('input');
+			    newInput.name = "SH_TIME1";
+			    newInput.value = dateTimeArr[i];
+			    newInput.type = "hidden";
+			    newInput.setAttribute("form","1234");
+			    inputDiv.append(newInput);
+			    }
+			    let main = document.getElementById('main');
+			    main.append(inputDiv);
 			}
-			$("#test").html(dateTimeArr);
-			console.log(dateTimeArr);
-		}
 		
 		
 		$(document).ready(function(){

@@ -27,6 +27,11 @@ public class ShowingService {
 		return showingVO;
 	}
 	
+	public ShowingVO addShowing(ShowingVO showingVO) {
+		dao.insert(showingVO);
+		return showingVO;
+	}
+	
 	public ShowingVO updateShowing(Integer SH_ID, Integer mvId, Integer HL_ID,
 			Integer SH_STATE, String SH_SEAT_STATE, Timestamp SH_TIME, Integer SH_TYPE) {
 		
@@ -56,8 +61,11 @@ public class ShowingService {
 		return dao.getAll();
 	}
 
-
 	public List<ShowingVO> getAll(Map<String, String[]> map) {
 		return dao.getAll(map);
+	}
+	
+	public List<ShowingVO> getShowingByDate(String SH_TIME){
+		return dao.getShowingByDate(SH_TIME);
 	}
 }

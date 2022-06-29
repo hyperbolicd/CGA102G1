@@ -1,26 +1,50 @@
 let isNeta = "";
 let cmState = 0;
 
+//Add Days
+Date.prototype.addDays = function (days) {
+    const date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+};
 // ingect date
-let date = new Date();
+let today = new Date();
 const formatDate = (current_datetime)=>{
     let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds();
     return formatted_date;
 }
-console.log(formatDate(date));
-
-let year = date.getFullYear();
-let month = date.getMonth() + 1;
-let day = date.getDate();
-let hour = date.getHours();
-let min = date.getMinutes();
-let sec = date.getSeconds();
 
 for(let i = 0; i < 7; i++){
-    let today = (date.getMonth() + 1) + "/" + (date.getDate() + i);
-    // console.log(today);
-    $("#dateSelector").append(`<option>${today}</option>`)
+    let date = today.addDays(i).toLocaleDateString('sv');
+    let day = today.addDays(i).getDay();
+    let week;
+    switch (day){
+        case 1:
+            week = "星期一";
+            break;
+        case 2:
+            week = "星期二";
+            break;
+        case 3:
+            week = "星期三";
+            break;
+        case 4:
+            week = "星期四";
+            break;
+        case 5:
+            week = "星期五";
+            break;
+        case 6:
+            week = "星期六";
+            break;
+        case 0:
+            week = "星期日";
+            break;
+    }
+    $("#dateSelector").append(`<option value="${date}">${date} ${week}</option>`)
 }
+
+
 
 // inject comment
 $(".cmtBtnArea").click(function(){

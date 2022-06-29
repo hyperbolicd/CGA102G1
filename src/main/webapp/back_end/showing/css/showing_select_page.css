@@ -17,6 +17,11 @@ select, input{
     text-align:justify;
     padding: 5px 10px;
 }
+#f_date1{
+	width: 70px;
+	overflow:hidden;
+	
+}
 /* ------------------ */
 #movie{
     /* border: 2px solid blue; */

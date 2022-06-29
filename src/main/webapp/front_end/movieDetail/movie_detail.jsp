@@ -13,7 +13,7 @@
 <html lang="en" dir="ltr">
 
 <head>
-  <title><%=movieVO.getMvName()%></title>
+  <title>劇場版 咒術迴戰 0</title>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="styles/layout.css" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -119,15 +119,15 @@
       </div>
       <div id="movie_detail_1">
         <div id="movie_title">
-          <span><%=movieVO.getMvName()%></span>
+          <span>劇場版 咒術迴戰 0</span>
         </div><br>
-        <span class="whiteBg" id="movie_title_eng"><%=movieVO.getMvEName()%></span><br>
-        <span class="whiteBg" id="movie_time"><%=movieVO.getMvLong()%></span><br>
-        <span class="whiteBg" id="movie_level"><%=movieVO.getMvLevel()%></span><br>
-        <span class="whiteBg" id="movie_type"><%=movieVO.getMvType()%></span><br>
-        <span class="whiteBg" id="movie_cast"><%=movieVO.getMvCast()%></span><br>
+        <span class="whiteBg" id="movie_title_eng">JUJUTSU KAISEN:ZERO</span><br>
+        <span class="whiteBg" id="movie_time">01:45:00</span><br>
+        <span class="whiteBg" id="movie_level">輔導級12歲</span><br>
+        <span class="whiteBg" id="movie_type">動畫</span><br>
+        <span class="whiteBg" id="movie_cast">緒方惠美、小松未可子、內山昂輝、關智一</span><br>
         <div id="movie_detail_2" class="whiteBg">
-          <p id="movie_dt"><%=movieVO.getMvDt()%></p>
+          <p id="movie_dt">故事敘述一對青梅竹馬的戀人：乙骨憂太與祈本里香原本約定好長大以後要結婚故事敘述一對青梅竹馬的戀人：乙骨憂太與祈本里香原本約定好長大以後要結婚故事敘述一對青梅竹馬的戀人：乙骨憂太與祈本里香原本約定好長大以後要結婚故事敘述一對青梅竹馬的戀人：乙骨憂太與祈本里香原本約定好長大以後要結婚故事敘述一對青梅竹馬的戀人：乙骨憂太與祈本里香原本約定好長大以後要結婚故事敘述一對青梅竹馬的戀人：乙骨憂太與祈本里香原本約定好長大以後要結婚故事敘述一對青梅竹馬的戀人：乙骨憂太與祈本里香原本約定好長大以後要結婚故事敘述一對青梅竹馬的戀人：乙骨憂太與祈本里香原本約定好長大以後要結婚故事敘述一對青梅竹馬的戀人：乙骨憂太與祈本里香原本約定好長大以後要結婚故事敘述一對青梅竹馬的戀人：乙骨憂太與祈本里香原本約定好長大以後要結婚故事敘述一對青梅竹馬的戀人：乙骨憂太與祈本里香原本約定好長大以後要結婚</p>
         </div>
       </div>
     </div>
@@ -138,7 +138,7 @@
         </select>
       </div>
       <div id="time">
-        <select name="" id="" class="picker toRed" >
+        <select name="" id="showingTime" class="picker toRed" >
           <option value="">--:--</option>
           <option value="">08:00</option>
           <option value="">11:00</option>
@@ -344,6 +344,43 @@
   <script src="<%=request.getContextPath()%>/front_end/movieDetail//js/movie_detail.js"></script>
   <!-- rating system -->
   <script src="<%=request.getContextPath()%>/front_end/movieDetail//js/rating.js"></script>
+  
+  
+          <!-- 加載Ajax -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+        <!-- Ajax的測試Script -->
+         <script>
+             //在網頁加載後，對id=doAjaxBtn的Button設定click的function
+            $(document).ready(function(){ 
+            	let url = "${pageContext.request.contextPath}/showing/showing.do?action=getShowingByDate&SH_TIME=" + SH_TIME1;
+               $("#dateSelector").change(function(){
+                   $.ajax({ 
+                        type:"POST",                    //指定http參數傳輸格式為POST
+                        url: "url",        //請求目標的url，可在url內加上GET參數，如 www.xxxx.com?xx=yy&xxx=yyy
+                        dataType: "json",             
+                        async: false,
+                        success : function(response){
+                            $("#showingTime").append("<option>" + reponse.SH_TIME + "</option>");
+                        },
+                        //Ajax失敗後要執行的function，此例為印出錯誤訊息
+                        error:function(xhr, ajaxOptions, thrownError){
+                            alert(xhr.status+"\n"+thrownError);
+                        }
+                    });
+               });
+            });  
+             
+            if("getShowingByDate".equals(action)) {
+                String SH_TIME = Integer.valueOf(req.getParameter("SH_TIME"));
+                ShowingService showingSvc = new ShowingService();
+                ShowingVO showingVO = showingSvc.getShowingByDate(SH_TIME);
+                PrintWriter out = res.getWriter();
+                Gson gson = new Gson();
+                out.print(gson.toJson(showingVO));
+               }
+ 
+        </script>
+  
 </body>
 
 </html>
