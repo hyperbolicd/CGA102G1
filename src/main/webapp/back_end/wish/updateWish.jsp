@@ -24,15 +24,16 @@
     <jsp:useBean id="wishSvc" class="com.wishing_pond.model.WishingPondService"/>
     <main>
         <div id="main">
-            <h1>新增許願活動</h1>
+            <h1>修改許願活動</h1>
             <form action="${pageContext.request.contextPath}/wish/WishingPond.do" method="post">
-                <button type="submit" name="action" value="addWish" id="addWish">新增活動</button>
+                <button type="submit" name="action" value="updateWish" id="addWish">更新活動</button>
                 <button type="button" id="return"><a href="${pageContext.request.contextPath}/back_end/wish/wishPond.jsp">返回</a></button>
             	<span style="color: red;">${errMsg.checkMovie}</span>
                 <h2>活動資訊</h2>
                 <div id="event">
                     <label for="eventNo">活動編號: </label>
-                    <input type="text" id="eventNo" value="${wishSvc.nextId}" disabled>
+                    <input type="text" id="eventNo" value="${wishVO.wish_no}" disabled>
+                    <input type="hidden" name="wish_no" value="${wishVO.wish_no}">
                     <br>
                     <label for="eventName">活動名稱: </label>
                     <input type="text" id="eventName" name="wish_name" value="${wishVO.wish_name}" placeholder="${errMsg.wish_name}" maxlength="10">
@@ -67,8 +68,8 @@
                 <div id="movies">
                 	<jsp:useBean id="movieSvc" class="com.movie.model.MovieService"/>
                 	<c:forEach var="movieVO" items="${movieSvc.all}">
-	                    <div class="movie" title="${movieVO.mvName}" >
-	                        <input type="checkbox" name="checkMovie" id="movie${movieVO.mvId}" value="${movieVO.mvId}" onclick="colorChange(this)">
+	                    <div class="movie <c:forEach var="wishListVO" items="${wishListVOs}"><c:if test="${movieVO.mvId == wishListVO.mv_id}">checked</c:if></c:forEach>" title="${movieVO.mvName}" >
+	                        <input type="checkbox" name="checkMovie" id="movie${movieVO.mvId}" value="${movieVO.mvId}" onclick="colorChange(this)" <c:forEach var="wishListVO" items="${wishListVOs}"><c:if test="${movieVO.mvId == wishListVO.mv_id}">checked</c:if></c:forEach>>
 	                        <label for="movie${movieVO.mvId}">
 	                            <div class="inner">
 	                                <h3>${movieVO.mvName}</h3>

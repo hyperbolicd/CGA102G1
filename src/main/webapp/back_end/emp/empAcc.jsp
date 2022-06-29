@@ -54,14 +54,14 @@
 					<th class="tb4">功能</th>
 				</tr>
 				<% 
+					EmpAccountService empSvc = new EmpAccountService();
+					request.setAttribute("nextId", empSvc.getNextId());
 					if(request.getAttribute("listAll") == null){
-						EmpAccountService empSvc = new EmpAccountService();
 						request.setAttribute("listAll", empSvc.getAll());
 					}
+					
 				%>
 				<c:forEach var="e" items="${listAll}">
-<%-- 				<jsp:useBean id="listA" scope="page" class="com.emp_account.model.EmpAccountService"/> --%>
-<%-- 				<c:forEach var="e" items="${listA.all}"> --%>
 				<c:if test="${e.emp_no == lastUpdateEmpNo}">
 					<tr style="color: red; !important">
 				</c:if>
@@ -109,8 +109,7 @@
    				<table id="newInfo">
 			        <tr>
 			            <td><label for="number">編號：</label></td>
-			            <jsp:useBean id="listToGetNextId" scope="page" class="com.emp_account.model.EmpAccountService"/>
-			            <td><input value="${listToGetNextId.nextId}" id="number" readonly></td>
+			            <td><input value="${nextId}" id="number" readonly></td>
 			            <td><label for="password">密碼：</label></td>
 			            <td><input type="password" id="password" name="emp_password" value="${empVO.emp_password}" placeholder="${errMsg.emp_password}"></td>
 			        </tr>

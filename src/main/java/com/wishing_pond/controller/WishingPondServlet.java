@@ -2,6 +2,7 @@ package com.wishing_pond.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,23 +65,173 @@ public class WishingPondServlet extends HttpServlet {
 			request.setAttribute("errMsg", errMsg);
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 			Map<String, String[]> map = request.getParameterMap();
-//			String searchName = request.getParameter("searchName");
-//			String searchPeriod = request.getParameter("searchPeriod");
-//			String start_date = request.getParameter("start_date");
-//			String end_date = request.getParameter("end_date");
-//			out.print("name:" + searchName + "/ period:" + searchPeriod + "/" + start_date + "/" + end_date);
 			/***************************2.開始查詢資料*****************************************/
-			WishingPondService wishPondSvc = new WishingPondService();
-			List<WishingPondVO> wishPondVOs =  wishPondSvc.getAll(map);
-			if(wishPondVOs == null) {
+			WishingPondService wishSvc = new WishingPondService();
+			List<WishingPondVO> wishVOs =  wishSvc.getAll(map);
+			if(wishVOs.size() == 0) {
+				errMsg.put("notFound", "無符合的資料");
+				request.getRequestDispatcher("/back_end/wish/wishPond.jsp").forward(request, response);
+			}
+			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+			request.setAttribute("list", wishVOs);
+			request.setAttribute("listSize", wishVOs.size());
+			request.getRequestDispatcher("/back_end/wish/wishPond.jsp").forward(request, response);
+		}
+		
+		if("showAll".equals(action)) {
+			// 存放錯誤訊息
+			Map<String, String> errMsg = new LinkedHashMap<String, String>();
+			request.setAttribute("errMsg", errMsg);
+			/***************************2.開始查詢資料*****************************************/
+			WishingPondService wishSvc = new WishingPondService();
+			List<WishingPondVO> wishVOs =  wishSvc.getAll();
+			if(wishVOs.size() == 0) {
 				errMsg.put("notFound", "查無資料");
 				request.getRequestDispatcher("/back_end/wish/wishPond.jsp").forward(request, response);
 			}
 			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-			request.setAttribute("list", wishPondVOs);
+			request.setAttribute("list", wishVOs);
+			request.setAttribute("listSize", wishVOs.size());
 			request.getRequestDispatcher("/back_end/wish/wishPond.jsp").forward(request, response);
 		}
 		
+		if("addWish".equals(action)) {
+			// 存放錯誤訊息
+			Map<String, String> errMsg = new LinkedHashMap<String, String>();
+			request.setAttribute("errMsg", errMsg);
+			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			String wish_name = request.getParameter("wish_name");
+			if(wish_name == null || wish_name.length() == 0) {
+				errMsg.put("wish_name", "請輸入活動名稱");
+			}
+			
+			String start_date = request.getParameter("start_date");
+			String dateReg = "^\\d{4}-\\d{2}-\\d{2}$";
+			if(start_date == null || start_date.length() == 0) {
+				errMsg.put("start_date", "請選擇起始日期");
+			} else if(!start_date.matches(dateReg)) {
+				errMsg.put("start_date", "日期格式不正確");
+			}
+			
+			String end_date = request.getParameter("end_date");
+			if(end_date == null || end_date.length() == 0) {
+				errMsg.put("end_date", "請選擇結束日期");
+			} else if(!end_date.matches(dateReg)) {
+				errMsg.put("start_date", "日期格式不正確");
+			}
+			
+			WishingPondVO wishVO = new WishingPondVO();
+			wishVO.setWish_name(wish_name);
+			
+			String[] movies = request.getParameterValues("checkMovie");
+			if(movies == null) {
+				errMsg.put("checkMovie", "電影選項不可為空!");
+			} 
+			
+			if(!errMsg.isEmpty()) {
+				request.setAttribute("wishVO", wishVO);
+				request.getRequestDispatcher("/back_end/wish/newWish.jsp").forward(request, response);
+				return;
+			}
+			
+			wishVO.setWish_start(java.sql.Date.valueOf(start_date));
+			wishVO.setWish_end(java.sql.Date.valueOf(end_date));
+			
+			List<WishingListVO> list = new ArrayList<WishingListVO>();
+			for(String movie: movies) {
+				WishingListVO wishListVO = new WishingListVO();
+				wishListVO.setMv_id(Integer.valueOf(movie));
+				list.add(wishListVO);
+			}
+			/***************************2.開始新增資料*****************************************/
+			WishingPondService wishSvc = new WishingPondService();
+			wishVO = wishSvc.addWishingPondWithOption(wishVO, list);
+			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+			request.setAttribute("wishVO", wishVO);
+			request.getRequestDispatcher("/back_end/wish/wishPond.jsp").forward(request, response);
+		}
+		
+		if("updateEvent".equals(action)) {
+			// 存放錯誤訊息
+			Map<String, String> errMsg = new LinkedHashMap<String, String>();
+			request.setAttribute("errMsg", errMsg);
+			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			Integer wish_no = Integer.valueOf(request.getParameter("wish_no"));
+			/***************************2.開始查詢資料*****************************************/
+			WishingPondService wishSvc = new WishingPondService();
+			WishingPondVO wishVO = wishSvc.getOneWishingPond(wish_no);
+			WishingListService wishListSvc = new WishingListService();
+			List<WishingListVO> wishListVOs =  wishListSvc.getOneWishingPond(wish_no);
+			if(wishListVOs == null) {
+				errMsg.put("notFound", "查無此筆資料");
+				request.getRequestDispatcher("/back_end/wish/wishPond.jsp").forward(request, response);
+			}
+			
+			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+			request.setAttribute("wishVO", wishVO);
+			request.setAttribute("wishListVOs", wishListVOs);
+			request.getRequestDispatcher("/back_end/wish/updateWish.jsp").forward(request, response);
+		}
+		
+		if("updateWish".equals(action)) {
+			// 存放錯誤訊息
+						Map<String, String> errMsg = new LinkedHashMap<String, String>();
+						request.setAttribute("errMsg", errMsg);
+						/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+						Integer wish_no = Integer.valueOf(request.getParameter("wish_no"));
+						
+						String wish_name = request.getParameter("wish_name");
+						if(wish_name == null || wish_name.length() == 0) {
+							errMsg.put("wish_name", "請輸入活動名稱");
+						}
+						
+						String start_date = request.getParameter("start_date");
+						String dateReg = "^\\d{4}-\\d{2}-\\d{2}$";
+						if(start_date == null || start_date.length() == 0) {
+							errMsg.put("start_date", "請選擇起始日期");
+						} else if(!start_date.matches(dateReg)) {
+							errMsg.put("start_date", "日期格式不正確");
+						}
+						
+						String end_date = request.getParameter("end_date");
+						if(end_date == null || end_date.length() == 0) {
+							errMsg.put("end_date", "請選擇結束日期");
+						} else if(!end_date.matches(dateReg)) {
+							errMsg.put("start_date", "日期格式不正確");
+						}
+						
+						WishingPondVO wishVO = new WishingPondVO();
+						wishVO.setWish_no(wish_no);
+						wishVO.setWish_name(wish_name);
+						
+						String[] movies = request.getParameterValues("checkMovie");
+						if(movies == null) {
+							errMsg.put("checkMovie", "電影選項不可為空!");
+						} 
+						
+						if(!errMsg.isEmpty()) {
+							request.setAttribute("wishVO", wishVO);
+							request.getRequestDispatcher("/back_end/wish/updateWish.jsp").forward(request, response);
+							return;
+						}
+						
+						wishVO.setWish_start(java.sql.Date.valueOf(start_date));
+						wishVO.setWish_end(java.sql.Date.valueOf(end_date));
+						
+						List<WishingListVO> list = new ArrayList<WishingListVO>();
+						for(String movie: movies) {
+							out.println(movie);
+							WishingListVO wishListVO = new WishingListVO();
+							wishListVO.setMv_id(Integer.valueOf(movie));
+							list.add(wishListVO);
+						}
+						/***************************2.開始新增資料*****************************************/
+						WishingPondService wishSvc = new WishingPondService();
+//						wishVO = wishSvc.addWishingPondWithOption(wishVO, list);
+						/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+						request.setAttribute("wishVO", wishVO);
+//						request.getRequestDispatcher("/back_end/wish/wishPond.jsp").forward(request, response);
+		}
 	}
 
 }

@@ -7,8 +7,8 @@ public class WishingPondVO implements java.io.Serializable{
 	
 	private Integer wish_no;
 	private String wish_name;
-	private Timestamp wish_start;
-	private Timestamp wish_end;
+	private Date wish_start;
+	private Date wish_end;
 	private Integer top_one;
 	
 	public String getWish_name() {
@@ -32,16 +32,16 @@ public class WishingPondVO implements java.io.Serializable{
 	public void setWish_no(Integer wish_no) {
 		this.wish_no = wish_no;
 	}
-	public Timestamp getWish_start() {
+	public Date getWish_start() {
 		return wish_start;
 	}
-	public void setWish_start(Timestamp wish_start) {
+	public void setWish_start(Date wish_start) {
 		this.wish_start = wish_start;
 	}
-	public Timestamp getWish_end() {
+	public Date getWish_end() {
 		return wish_end;
 	}
-	public void setWish_end(Timestamp wish_end) {
+	public void setWish_end(Date wish_end) {
 		this.wish_end = wish_end;
 	}
 	

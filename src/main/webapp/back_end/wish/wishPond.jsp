@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.wishing_pond.model.*"%>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,19 +26,29 @@
     </aside>
     <!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
     <% 
+		WishingPondService wishSvc = new WishingPondService();
+		
 		if(request.getAttribute("list") == null){
-			WishingPondService wishSvc = new WishingPondService();
 			request.setAttribute("list", wishSvc.getAll());
+			request.setAttribute("listSize", wishSvc.getAll().size());
 		}
+		
+		List<Boolean> updatables = new ArrayList();
+		List<WishingPondVO> listVO = (List<WishingPondVO>) request.getAttribute("list");
+		for(WishingPondVO vo: listVO){
+			updatables.add(wishSvc.getUpdatable(vo.getWish_no()));
+		}
+		int i = 0;
 	%>
 <%--     <jsp:useBean id="wishSvc" scope="page" class="com.wishing_pond.model.WishingPondService"/> --%>
     <main>
         <div id="main">
-            <h1>許願池管理</h1>
+            <h1>許願池管理</h1> 
             <button id="newWish"><a href="${pageContext.request.contextPath}/back_end/wish/newWish.jsp">新增</a></button>
     		<span style="color: red;">${errMsg.notFound}</span>
             <div id="multiSearch">
                 <form action="${pageContext.request.contextPath}/wish/WishingPond.do" method="post">
+                	資料總筆數: ${listSize} 筆
 	                <label for="perPage">每頁顯示: </label>
                     <select name="" id="perPage">
                         <option value="10">10</option>
@@ -61,7 +72,7 @@
                         <option value="WISH_END">以結束時間搜尋</option>
                         <option value="3">以包含時間搜尋</option> <!-- 再想想 -->
                     </select>
-                    <input name="start_date" id="start_date">~<input name="end_date" id="end_date">
+                    <input name="start_date" id="start_date" autocomplete="off"> ~ <input name="end_date" id="end_date" autocomplete="off">
                     <label for="searchName">名稱: </label>
                     <input name="searchName" id="searchName">
                     <button type="submit" name="action" value="multiSearch">搜尋</button>
@@ -95,11 +106,17 @@
 	                        </td>
 	                        <td>
 	                        	<form action="${pageContext.request.contextPath}/wish/WishingPond.do" method="post">
-		                        	<button type="submit" name="action" value="updateEvent">
-		                        		<img src="${pageContext.request.contextPath}/back_end/wish/icons8-edit-48.png" alt="">
-		                        		<img src="${pageContext.request.contextPath}/back_end/wish/icons8-no-edit-48.png" alt="">
-		                        	</button>
+	                        		<% 
+		                        		if(updatables.get(i++)){
+	                        				out.print("<button type='submit' name='action' value='updateEvent'><img src='" + request.getContextPath() + "/back_end/wish/icons8-edit-48.png' alt=''></button>");
+		                        		} else{
+		                        			out.print("<img src='" + request.getContextPath() + "/back_end/wish/icons8-no-edit-48.png' alt=''>");
+		                        		}
+	                        		%>
 		                        	<input type="hidden" name="wish_no" value="${event.wish_no}">
+		                        	<input type="hidden" name="wish_no" value="${event.wish_name}">
+		                        	<input type="hidden" name="wish_no" value="${event.wish_start}">
+		                        	<input type="hidden" name="wish_no" value="${event.wish_end}">
 	                        	</form>
 	                        </td>
 	                    </tr>

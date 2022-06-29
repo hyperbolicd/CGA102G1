@@ -4,7 +4,6 @@ public class WishingListVO implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer wish_no;
-	private Integer wish_option;
 	private Integer mv_id;
 	private Integer wish_count;
 	
@@ -13,12 +12,6 @@ public class WishingListVO implements java.io.Serializable{
 	}
 	public void setWish_no(Integer wish_no) {
 		this.wish_no = wish_no;
-	}
-	public Integer getWish_option() {
-		return wish_option;
-	}
-	public void setWish_option(Integer wish_option) {
-		this.wish_option = wish_option;
 	}
 	public Integer getMv_id() {
 		return mv_id;
