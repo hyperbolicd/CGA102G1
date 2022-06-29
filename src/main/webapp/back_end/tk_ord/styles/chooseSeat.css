@@ -1,8 +1,10 @@
+
 .all *{
 	box-sizing: border-box;
 	text-decoration:none;
 }
 .all {
+    
     display: flex;
     justify-content: center;
 
@@ -11,12 +13,8 @@
 .main {
     border-radius: 15px;
     border: 5px solid #000;
-    height: 1100px;
-    width: 1100px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-wrap: wrap;
+    height: 950px;
+    width: 900px;
 }
 
 
@@ -35,7 +33,7 @@
     border-radius: 15px;
     color: white;
     background-color: #1b1b1b;
-    width: 850px;
+    width: 750px;
     height: 100px;
     font-size: 35px;
     display: flex;
@@ -61,17 +59,61 @@
     flex-wrap: wrap;
 }
 
+.state1,
+.state2,
+.state3,
+.state4,
+.state5 {
+    background-color: #1b1b1b;
+    height: 20px;
+    width: 20px;
+    border-radius: 5px;
 
+}
+
+.state1outer,
+.state2outer,
+.state3outer,
+.state4outer,
+.state5outer {
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+/* 可選擇 */
+.state1 {
+    background-color: #5c86eb;
+}
+
+/* 已售出 */
+.state2 {
+    background-color: lightcoral;
+}
+
+/* 您的座位 */
+.state3 {
+    background-color: lightgreen;
+}
+
+/* 保留位 */
+.state4 {
+    background-color: rgb(255, 255, 83);
+}
+
+/* 維修中 */
+.state5 {
+    background-color: gray;
+}
 
 
 
 /* 座位開始============================================================== */
 
 .SeatOuter {
-    border-radius: 15px;
-    border: 5px solid #000;
-    height: 720px;
-    width: 850px;
+    height: 630px;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -79,7 +121,7 @@
 }
 
 .front {
-	width: 100%;
+    width: 100%;
     height: 100px;
     display: flex;
     justify-content: center;
@@ -134,6 +176,7 @@
     padding: 10px;
 }
 
+
 .seatSelected {
     background-color: lightgreen;
     color: black;
@@ -151,11 +194,6 @@
 .seatConstruction {
     background-color: gray;
 }
-
-
-
-
-
 
 
 
@@ -178,37 +216,63 @@
 
 
 
+/* 側邊開始============================================================== */
+.temporaryInf {
+    height: 600px;
+    width: 300px;
+}
 
-/* 購票開始====================================== */
-.TKouter {
 
+tr:nth-child(odd) {
+    background: #d9d9d9;
+}
+
+tr:nth-child(even) {
+    background: rgb(255, 255, 255);
+}
+
+tr:nth-child(1) {
+    background: rgb(58, 58, 58);
+    color: white;
+}
+
+
+.sidetable {
+    width: 150px;
+    border-collapse: collapse;
+    border: 2px solid #000;
+    text-align: center;
+}
+
+
+
+.timer,
+.receiptouter {
+    height: 50%;
     display: flex;
     justify-content: center;
     align-content: center;
     flex-wrap: wrap;
 }
 
-.TKinner {
-    text-align: center;
-    height: 100%;
-    width: 90%;
+.all li {
+    display: block;
+    margin: .5em 0;
+    background: #ddd;
+    color: #444;
+    border-radius: .3em;
 }
 
-tr {
-    height: 50px;
+/* 按鈕開始============================================================== */
+
+button {
+    background-color: #000;
+    color: white;
+    border-radius: 5px;
 }
 
-td {
-    width: 100px;
-}
-
-
-
-
-
-.tablebt {
-    text-decoration: none;
-    padding: 10px 10px;
+.bt {
+    padding: 15px 20px;
     /* 按鈕大小 */
     text-align: center;
     text-transform: uppercase;
@@ -221,39 +285,22 @@ td {
     cursor: pointer;
 }
 
-.tablebt:hover {
+.bt:hover {
     background-position: right center;
     /* 變色方向 */
     color: #fff;
     text-decoration: none;
 }
 
-.tablebt:active {
+.bt:active {
     transform: scale(0.95);
 }
 
-
-/* ================================================================= */
-
-#f_date1 {
-	width: 75px;
-	overflow: hidden;
+.btBlock {
+    height: 300px;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
 }
-
-
-/* .selectBy{ */
-/*     border: 1px solid rgb(198, 155, 123); */
-/*     background-color:antiquewhite; */
-/*     height: 40px; */
-/*     width: 400px; */
-/*     padding: 10px; */
-/*     padding-left: 5px; */
-/*     margin-top: 10px; */
-/*     width: 500px; */
-/*     display:flex; */
-/*     align-items: center; */
-/*     justify-content:left; */
-/* } */
-/* .selectBy span{ */
-/*     margin: 5px; */
-/* } */

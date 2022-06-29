@@ -11,12 +11,11 @@ public class TkOrdDtService {
 //		dao = new TkOrdDtDAO();
 	}
 
-	public TkOrdDtVO addTkOrdDt(Long tkOrdID, Integer tkDtID, Integer tkTypeID, Integer actID, java.lang.Byte state,
+	public TkOrdDtVO addTkOrdDt(Long tkOrdID, Integer tkTypeID, Integer actID, java.lang.Byte state,
 			String seat, Integer sellPrice) {
 
 		TkOrdDtVO tkOrdDtVO = new TkOrdDtVO();
 
-		tkOrdDtVO.setTkOrdID(tkOrdID);
 		tkOrdDtVO.setTkOrdID(tkOrdID);
 		tkOrdDtVO.setTkTypeID(tkTypeID);
 		tkOrdDtVO.setActID(actID);
@@ -33,12 +32,12 @@ public class TkOrdDtService {
 		dao.insert(tkOrdDtVO);
 	}
 	
-	public TkOrdDtVO updateTkOrdDt(Long tkOrdID, Integer tkDtID, Integer tkTypeID, Integer actID, java.lang.Byte state,
+	public TkOrdDtVO updateTkOrdDt(Long tkDtID, Long tkOrdID, Integer tkTypeID, Integer actID, java.lang.Byte state,
 			String seat, Integer sellPrice) {
 
 		TkOrdDtVO tkOrdDtVO = new TkOrdDtVO();
 
-		tkOrdDtVO.setTkOrdID(tkOrdID);
+		tkOrdDtVO.setTkDtID(tkDtID);
 		tkOrdDtVO.setTkOrdID(tkOrdID);
 		tkOrdDtVO.setTkTypeID(tkTypeID);
 		tkOrdDtVO.setActID(actID);
@@ -47,7 +46,7 @@ public class TkOrdDtService {
 		tkOrdDtVO.setSellPrice(sellPrice);
 		dao.update(tkOrdDtVO);
 
-		return dao.findByPrimaryKey(tkOrdID, tkDtID);
+		return dao.findByPrimaryKey(tkDtID);
 	}
 	
 	//預留給 Struts 2 用的
@@ -55,12 +54,12 @@ public class TkOrdDtService {
 		dao.update(tkOrdDtVO);
 	}
 
-	public void deleteTkOrdDt(Long tkOrdID, Integer tkDtID) {
-		dao.delete(tkOrdID, tkDtID);
+	public void deleteTkOrdDt(Long tkDtID) {
+		dao.delete(tkDtID);
 	}
 
-	public TkOrdDtVO getOneTkOrdDt(Long tkOrdID, Integer tkDtID) {
-		return dao.findByPrimaryKey(tkOrdID, tkDtID);
+	public TkOrdDtVO getOneTkOrdDt(Long tkDtID) {
+		return dao.findByPrimaryKey(tkDtID);
 	}
 
 	public List<TkOrdDtVO> getAll() {
