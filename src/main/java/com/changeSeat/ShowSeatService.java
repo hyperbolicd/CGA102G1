@@ -27,4 +27,8 @@ public class ShowSeatService {
 	public ShowSeatVO getShowByTime (Integer SH_ID) {
 		return dao.getShowByTime(SH_ID);
 	}
+	
+	public void updateShowSeat (String SH_SEAT_STATE,Integer SH_ID) {
+		dao.updateShowSeat(SH_SEAT_STATE, SH_ID);
+	}
 }

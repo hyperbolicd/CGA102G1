@@ -2,26 +2,44 @@
     	// 創建一陣列蒐集選中的座位物件
     	let selectedSeat = [];
     
-   		function selectedBtn(){
+   	function selectedBtn(){
         // 獲取座位的資訊
         let text =this.innerText;
         // 加進 目前已選
         if(selectedSeat.indexOf(this)===-1){
-            document.getElementById('numberBox').innerText += '\n'+text  ;
-            this.setAttribute('class','btn btn-outline-danger');
             // 利用bootstrap樣式改變 達到選取效果
+            this.setAttribute('class','btn btn-outline-danger');
             selectedSeat.push(this);  
         }
-    }
+    	}
+    function checkReturn(){
+	let seat=document.getElementById('showSeatSource').value;
+	for(let i =0 ; i < selectedSeat.length ; i++){
+			let index = 4 + Number(selectedSeat[i].id)*5;
+			if(Number(seat.charAt(index))===2){
+				
+				Swal.fire(
+                selectedSeat[i]+"已出售!請聯繫客人退票", //標題 
+                "",
+                "error"
+            	);
+			}else{
+				selectedSeat[i].setAttribute('class','btn btn-outline-danger');
+			}
+			
+		}
+	
+}
+    
 		// 監聽連動下拉選單
-		document.getElementById('datePick').addEventListener('change',selectDate);
-		document.getElementById('showPick').addEventListener('change',selectTime);
+	document.getElementById('datePick').addEventListener('change',selectDate);
+	document.getElementById('showPick').addEventListener('change',selectTime);
 		
 		// 監聽改變狀態的按鈕
-		document.getElementById('colorsample1').addEventListener('click',changeStatus)
-    	document.getElementById('colorsample2').addEventListener('click',changeStatus)
-    	document.getElementById('colorsample3').addEventListener('click',changeStatus)
-    	document.getElementById('colorsample4').addEventListener('click',changeStatus)
+	document.getElementById('colorsample1').addEventListener('click',changeStatus)
+    document.getElementById('colorsample2').addEventListener('click',changeStatus)
+    document.getElementById('colorsample3').addEventListener('click',changeStatus)
+    document.getElementById('colorsample4').addEventListener('click',changeStatus)
     	
 	// 監聽 日期的選單
 	function selectDate (){
@@ -91,19 +109,21 @@
 			success: function(response) {
 				
 				let showSeatVO = response.showSeatVO;
+				// 將場次VO拉上來的座位字串指定給input
+				document.getElementById('showSeatSource').value=showSeatVO.SH_SEAT_STATE;
 				let hallVO = response.hallVO;
-				console.log('座位字串:'+showSeatVO.SH_SEAT_STATE);
-				generateSeat(showSeatVO.SH_SEAT_STATE);
+				generateSeat();
 			}// 成功後要執行的函數
 		});
 	}
 	
 	// 動態生成座位
-    function generateSeat(seatStr){
+    function generateSeat(){
 	
     // 獲取預覽區塊
     let prBox = document.getElementById("prBox");
-	let seat=seatStr;
+    // 獲取已被刷新的座位資源
+	let seat=document.getElementById('showSeatSource').value;
 	// 清空prBox
 	let child = prBox.lastElementChild;  
         while (child) { 
@@ -113,8 +133,6 @@
     // 調用JSP裡預藏的長跟寬
     let inputRow =document.getElementById('hlRow').value;
     let inputCol =document.getElementById('hlCol').value;
-    console.log(inputRow);
-    console.log(inputCol);
     // 配置索引值
     let seq =0;
     // 第一排第一個位置的狀態索引值必為4
@@ -164,30 +182,39 @@
     }
     // 顯示操作的介面
     document.getElementById('screen').style.display='block';
-    document.getElementById('numberBox').style.display='block';
+    document.getElementById('nowYouchoose').style.display='block';
     document.getElementById('colorsample1').style.display='block';
     document.getElementById('colorsample5').style.display='block';
     document.getElementById('colorsample2').style.display='block';
     document.getElementById('colorsample3').style.display='block';
     document.getElementById('colorsample4').style.display='block';
     
-}
+	}
 
-    
     // 改變狀態
     function changeStatus({target}){
-        // 清空 目前已選div內的文字
-        document.querySelector('#numberBox').innerHTML = "目前已選:";
         
+        // 獲取座位字串
+        let seat=document.getElementById('showSeatSource').value;
+        // 驗證是否已出售
+        for(let i =0 ; i < selectedSeat.length ; i++){
+			let index = 4 + Number(selectedSeat[i].id)*5;
+			if(Number(seat.charAt(index))===2){
+				
+				Swal.fire(
+                selectedSeat[i].innerText+"已出售!請聯繫客人退票", //標題 
+                "",
+                "error"
+            	);
+            	selectedSeat.length=0;
+            	return
+			}
+			console.log("檢查選取的陣列:"+selectedSeat[i]);
+		}
         // 將字串切割成陣列
         let seatArr = seat.split("",seat.length);
         for(let i =0 ; i < selectedSeat.length ; i++){
             let index = 4 + Number(selectedSeat[i].id)*5
-
-            if(Number(target.value) ===0){
-                seatArr[index]=0;
-                selectedSeat[i].setAttribute('class',"btn btn-secondary");
-            }
             if(Number(target.value) ===1){
                 seatArr[index]=1;
                 selectedSeat[i].setAttribute('class',"btn btn-success");
@@ -208,15 +235,47 @@
         }
         // 更改結束,清空記錄用的陣列
         selectedSeat.length=0;
-        // console.log(seat);
-
-        return seat;
+		
+		// 準備回傳DB
+		let SH_ID = document.getElementById('showPick').value;
+		$.ajax({
+			url: '/CGA102G1/ShowSeatServlet.do',   // url位置
+			type: 'post',                   // post/get
+			dataType:'json',
+			data: {
+				"action": "updateShowSeat",
+				"SH_ID": SH_ID,
+				"SH_SEAT_STATE": seat
+			},       // 輸入的資料
+			error: function(xhr) { },      // 錯誤後執行的函數
+			success: function(response) {
+			document.getElementById("showSeatSource").value = seat;
+			sendMessage();		
+			}// 成功後要執行的函數
+		});
+		
+		
+		Swal.fire(
+                "修改成功!", //標題 
+                "",
+                "success"
+                //圖示(可省略) success/info/warning/error/question
+                //圖示範例：https://sweetalert2.github.io/#icons
+            );
 
     }
+    
 
     // 計算座位數
     document.getElementById('countBtn').addEventListener('click',seatCounter);
     function seatCounter(){
+		
+		// 獲取座位字串
+        let seat=document.getElementById('showSeatSource').value;
+		// 調用JSP裡預藏的長跟寬
+    	let inputRow =document.getElementById('hlRow').value;
+    	let inputCol =document.getElementById('hlCol').value;
+    	
         let seatCount =0;
         let seatArr =seat.split("",seat.length);
         // 座位狀態的索引值由4開始跳, 每次+5
@@ -230,11 +289,32 @@
             }
             index += 5;
         }
-        console.log('座位數:'+seatCount);
+        if(seatCount===0){
+			Swal.fire(
+                "請先選擇場次", //標題 
+                "",
+                "error"
+                //圖示(可省略) success/info/warning/error/question
+                //圖示範例：https://sweetalert2.github.io/#icons
+            );
+		}else{
+			Swal.fire(
+                "目前可賣座位數有"+seatCount+"個", //標題 
+                "",
+                "info"
+                //圖示(可省略) success/info/warning/error/question
+                //圖示範例：https://sweetalert2.github.io/#icons
+            );
+		}
+        
        
         return seatCount;
     }
-
+	document.getElementById('checklist').addEventListener('click',()=>{
+		document.getElementById('showSeatSource').value=
+		"010120102101030010410105101061010710108101091011000111101121020110202102030020410205102061020710208102091021000211102121030110302103030030410305103061030710308103091031000311103121040110402104030040410405104061040710408104091041000411104121050110502105030050410505105061050710508105091051000511105121060110602106030060410605106061060710608106091061000611106121070100702007030070400705007060070700708007090071000711007120080130802308030080430805308063080730808308093081000811308123090110902109030090410905109061090710908109091091000911109121100111002110030100411005110061100711008110091101001011110121110111102111030110411105111061110711108111091111001111111121120111202112030120411205112061120711208112091121001211112121130111302113030130411305113061130711308113091131001311113121140111402114030140411405114061140711408114091141001411114121150111502115030150411505115061150711508115091151001511115121";
+		sendMessage();
+	})
 
 
 

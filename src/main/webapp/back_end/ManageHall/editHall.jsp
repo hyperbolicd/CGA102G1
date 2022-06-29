@@ -62,7 +62,7 @@
                               <input type="hidden" name="hlSeatCount" id="hlSeatCount" value="${hallVO.hlSeatCount}">
                     		  
                     		  <button type="submit" id="sumbitBtn" class="btn btn-primary">送出修改</button>
-                    		  <a href="/HireMe/back/ManageHall/manageHall.jsp" class="btn btn-danger">取消</a>
+                    		  <a onclick="history.back()" class="btn btn-danger" id="submitBtn" >退出</a>
                             </div>
                           </form>
               </div>

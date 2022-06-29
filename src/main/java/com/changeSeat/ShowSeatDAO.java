@@ -27,6 +27,8 @@ public class ShowSeatDAO implements ShowSeatDAO_interface {
 	private static final String GET_SEAT_BY_HL=
 			"SELECT * FROM hall WHERE HL_ID=?";
 	
+	private static final String UPDATE_SHOW_SEAT=
+			"Update showing set SH_SEAT_STATE =? where SH_ID = ?";
 	
 	// 上線用 內含Now排除已經播完的場次
 	// select date_format(SH_TIME,'%Y-%m-%d')ShowingDay from showing where SH_TIME >= NOW() group by date_format(SH_TIME,'%Y-%m-%d') 
@@ -281,6 +283,45 @@ public class ShowSeatDAO implements ShowSeatDAO_interface {
 		}
 		
 		return list;
+	}
+	
+	public void updateShowSeat (String SH_SEAT_STATE,Integer SH_ID) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(UPDATE_SHOW_SEAT);
+			
+			pstmt.setString(1,SH_SEAT_STATE);
+			pstmt.setInt(2,SH_ID);
+			
+			pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver."
+					+e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured."
+					+se.getMessage());
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
 	}
 
 	public static void main(String[] args) {

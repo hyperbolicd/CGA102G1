@@ -85,6 +85,20 @@ public class ShowSeatServlet extends HttpServlet {
 		res.getWriter().print(gson.toJson(voMap));
 			
 		}
+		
+		if("updateShowSeat".equals(action)) {
+			Integer SH_ID =Integer.valueOf(req.getParameter("SH_ID"));
+			String SH_SEAT_STATE = req.getParameter("SH_SEAT_STATE");
+			
+			ShowSeatService ssSvc = new ShowSeatService();
+			
+			ssSvc.updateShowSeat(SH_SEAT_STATE, SH_ID);
+			ShowSeatVO showSeatVO =ssSvc.getShowByTime(SH_ID);
+			
+			Gson gson = new Gson();
+			res.setContentType("application/json; charset=UTF-8");
+			res.getWriter().print(gson.toJson(showSeatVO));
+		}
 	}
 
 }

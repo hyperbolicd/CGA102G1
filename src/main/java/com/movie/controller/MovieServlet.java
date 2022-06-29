@@ -184,6 +184,15 @@ public class MovieServlet extends HttpServlet {
 			rd.forward(req, res);
 			
 		}
+		
+		if("getOneForDisplay".equals(action)) {
+			
+			Integer mvId = Integer.valueOf(req.getParameter("mvId"));
+			MovieService mvSvc = new MovieService();
+			// 單一電影VO
+			MovieVO movieVO = mvSvc.findByPrimaryKey(mvId);
+			System.out.println("movieVO"+movieVO);
+		}
 			
 	}
 	

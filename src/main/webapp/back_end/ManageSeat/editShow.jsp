@@ -35,7 +35,7 @@
     </aside>
     <!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
-		<div></div>
+		<button id="checklist">模擬有人訂1排1號</button>
 		<div id="main" class="main">
 			<div class="container1">
 				<div class="createform">
@@ -52,8 +52,14 @@
 					</div>
 					<form class="form1" id="formId">
 						<div class="form-group" style="margin-top: 5px">
-							<div class="alert alert-warning" style="margin-bottom: 0px">影廳名稱:數位A廳</div>
+							<div class="alert alert-warning" style="margin-bottom: 0px">影廳名稱:${hallVO.hlName}</div>
+							<c:if test="${hallVO.hlType==0}">
 							<div class="alert alert-warning" style="margin-bottom: 5px">影廳類型:數位</div>
+							</c:if>
+							<c:if test="${hallVO.hlType==1}">
+							<div class="alert alert-warning" style="margin-bottom: 5px">影廳類型:IMAX</div>
+							</c:if>
+							<input type="hidden" id="showSeatSource" value="">
 							<input type="hidden" id="hlRow" value="${hallVO.hlRow}">
 							<input type="hidden" id="hlCol" value="${hallVO.hlCol}">
 							<input type="hidden" id="hlId" value="${hallVO.hlId}">
@@ -61,9 +67,7 @@
 						<div class="btnbox">
 							<button type="button" class="btn btn-success"
 								style="margin-bottom: 5px; display: block;" id="countBtn">計算所有可賣座位</button>
-							<a onclick="history.back()" class="btn btn-danger" id="submitBtn" >取消</a>
-							<a href="./ManageSeat.html" class="btn btn-primary"
-								id="submitBtn">送出修改</a>
+							<a onclick="history.back()" class="btn btn-danger" id="submitBtn" >退出</a>
 
 						</div>
 					</form>
@@ -74,8 +78,9 @@
 					<div class="showseat" id="prBox"></div>
 				</div>
 				<div class="statusbox">
-					<div class="alert alert-light" role="alert" style="display:none" id="numberBox" >
-						目前已選:</div>
+					<button type="button" value="" class="btn btn-outline-danger"
+						style="display: none" id="nowYouchoose" disabled>目前選中</button>
+					<br>
 					<button type="button" value="0" class="btn btn-secondary"
 						style="display: none" id="colorsample1" disabled>走道</button>
 					<br>
@@ -99,7 +104,9 @@
     <footer>
         嗨邇覓影城 &copy; HIREME CINEMA 2022
     </footer>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="${pageContext.request.contextPath}/back_end/ManageSeat/editShow.js"></script>
+    <script src="${pageContext.request.contextPath}/back_end/ManageSeat/socketScript.js"></script>
 </body>
 
 </html>

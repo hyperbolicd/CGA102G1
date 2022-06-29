@@ -18,7 +18,7 @@
   <title>showAllMovie</title>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="styles/layout.css" type="text/css">
-  <link rel="stylesheet" href="./styles/allMovie.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/front_end/showAllMovie/styles/allMovie.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   
 </head>
@@ -126,9 +126,10 @@
                     </div>
                 </div>
                 <div class="bt">
-                	<form action="">
-                	
-                    <button>查看電影詳情</button>
+                	<form action="${pageContext.request.contextPath}/MovieServlet.do" method="post">
+                	<input type="hidden" name="mvId" value="${showingVO.mvId}">
+                	<input type="hidden" name="action" value="getOneForDisplay">
+                    <button type="submit">查看電影詳情</button>
                 	</form>
                 </div>
             </div>
