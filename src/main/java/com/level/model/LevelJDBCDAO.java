@@ -2,7 +2,7 @@ package com.level.model;
 
 import java.util.*;
 
-import com.movie.model.MemberDAO_interface;
+import com.member.model.MemberDAO_interface;
 
 import java.sql.*;
 

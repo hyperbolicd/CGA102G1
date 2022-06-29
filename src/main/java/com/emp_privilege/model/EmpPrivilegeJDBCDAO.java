@@ -1,19 +1,23 @@
 package com.emp_privilege.model;
 
-import static com.common.Common.*;
 import java.util.*;
+
+import javax.naming.NamingException;
+
+import com.common.JDBCUtil;
+
 import java.sql.*;
 
 public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 	
 	private static final String INSERT = 
-			"insert into emp_privilege (EMP_NO, FC_NO) values (?, ?);";
+			"insert into emp_privilege (EMP_NO, FC_NO) values (?, ?)";
 	private static final String READ_ONE =
-			"select EMP_NO, FC_NO from emp_privilege where EMP_NO = ? order by EMP_NO;";
+			"select EMP_NO, FC_NO from emp_privilege where EMP_NO = ? order by EMP_NO";
 	private static final String READ_ALL =
-			"select EMP_NO, FC_NO from emp_privilege order by EMP_NO;";
+			"select EMP_NO, FC_NO from emp_privilege order by EMP_NO";
 	private static final String DELETE =
-			"delete from emp_privilege where EMP_NO = ? and FC_NO = ?;";
+			"delete from emp_privilege where EMP_NO = ? and FC_NO = ?";
 
 	@Override
 	public void insert(EmpPrivilegeVO empPrivilegeVO) {
@@ -21,8 +25,7 @@ public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 		PreparedStatement ps = null;
 		
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(INSERT);
 			
 			ps.setInt(1, empPrivilegeVO.getEmp_no());
@@ -32,6 +35,8 @@ public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(ps != null) {
@@ -58,8 +63,7 @@ public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 		PreparedStatement ps = null;
 		
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(DELETE);
 			
 			ps.setInt(1, empNo);
@@ -69,6 +73,8 @@ public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(ps != null) {
@@ -96,8 +102,7 @@ public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(READ_ONE);
 			
 			ps.setInt(1, empNo);
@@ -113,6 +118,8 @@ public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(rs != null) {
@@ -148,8 +155,7 @@ public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(READ_ALL);
 			
 			rs = ps.executeQuery();
@@ -164,6 +170,8 @@ public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(rs != null) {

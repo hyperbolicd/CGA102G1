@@ -1,19 +1,23 @@
 package com.wish_reply.model;
 
-import static com.common.Common.*;
 import java.util.*;
+
+import javax.naming.NamingException;
+
+import com.common.JDBCUtil;
+
 import java.sql.*;
 
 public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 	private static final String INSERT =
 			"insert into wish_reply (WISH_NO, WISH_OPTION, MEMBER_ID, WISH_MSG) values "
-			+ "(?, ?, ?, ?);";
+			+ "(?, ?, ?, ?)";
 	private static final String READ_ONE =
-			"select WISH_REONO, WISH_NO, WISH_OPTION, MEMBER_ID, WISH_MSG from wish_reply where WISH_NO = ? order by WISH_NO, WISH_OPTION;";
+			"select WISH_REONO, WISH_NO, WISH_OPTION, MEMBER_ID, WISH_MSG from wish_reply where WISH_NO = ? order by WISH_NO, WISH_OPTION";
 	private static final String READ_ALL =
-			"select WISH_REONO, WISH_NO, WISH_OPTION, MEMBER_ID, WISH_MSG from wish_reply order by WISH_NO, WISH_OPTION;";
+			"select WISH_REONO, WISH_NO, WISH_OPTION, MEMBER_ID, WISH_MSG from wish_reply order by WISH_NO, WISH_OPTION";
 	private static final String DELETE =
-			"delete from wish_reply where WISH_REONO = ?;";
+			"delete from wish_reply where WISH_REONO = ?";
 
 	@Override
 	public void insert(WishReplyVO wishReplyVO) {
@@ -21,8 +25,7 @@ public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 		PreparedStatement ps = null;
 		
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(INSERT);
 			
 			ps.setInt(1, wishReplyVO.getWish_no());
@@ -34,6 +37,8 @@ public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(ps != null) {
@@ -59,8 +64,7 @@ public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 		PreparedStatement ps = null;
 		
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(DELETE);
 			
 			ps.setInt(1, replyNo);
@@ -69,6 +73,8 @@ public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(ps != null) {
@@ -96,8 +102,7 @@ public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(READ_ONE);
 			
 			ps.setInt(1, wishNo);
@@ -115,6 +120,8 @@ public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(rs != null) {
@@ -150,8 +157,7 @@ public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(READ_ALL);
 			
 			rs = ps.executeQuery();
@@ -167,6 +173,8 @@ public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(rs != null) {

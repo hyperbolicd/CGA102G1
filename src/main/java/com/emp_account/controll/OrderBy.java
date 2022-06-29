@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.emp_account.model.EmpAccountService;
 import com.emp_account.model.EmpAccountVO;
 
-@WebServlet("/OrderBy")
+@WebServlet("/emp/OrderBy")
 public class OrderBy extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

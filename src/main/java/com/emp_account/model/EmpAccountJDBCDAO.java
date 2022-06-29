@@ -1,12 +1,5 @@
 package com.emp_account.model;
 
-import static com.common.Common.DR;
-import static com.common.Common.PW;
-import static com.common.Common.URL;
-import static com.common.Common.USER;
-
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,29 +9,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.naming.NamingException;
+
+import com.common.JDBCUtil;
+
 public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 	
 	private static final String INSERT = 
 			"insert into emp_account "
 			+ "	(EMP_EMAIL, EMP_PASSWORD, EMP_NAME, EMP_PHONE, EMP_ADDRESS, EMP_PHOTO, EMP_STATUS) VALUES "
-			+ "	(?, ?, ?, ?, ?, ?, ?);";
+			+ "	(?, ?, ?, ?, ?, ?, ?)";
 	private static final String READ_ONE =
 			"select EMP_NO, EMP_EMAIL, EMP_PASSWORD, EMP_NAME, EMP_PHONE, EMP_ADDRESS, EMP_PHOTO, EMP_STATUS "
-			+ "from emp_account where EMP_NO = ?;";
+			+ "from emp_account where EMP_NO = ?";
 	private static final String READ_ALL =
 			"select EMP_NO, EMP_EMAIL, EMP_PASSWORD, EMP_NAME, EMP_PHONE, EMP_ADDRESS, EMP_PHOTO, EMP_STATUS "
-			+ "from emp_account order by EMP_NO;";
+			+ "from emp_account order by EMP_NO";
 	private static final String READ_ALL_DESC =
 			"select EMP_NO, EMP_EMAIL, EMP_PASSWORD, EMP_NAME, EMP_PHONE, EMP_ADDRESS, EMP_PHOTO, EMP_STATUS "
-			+ "from emp_account order by EMP_NO desc;";
+			+ "from emp_account order by EMP_NO desc";
 	private static final String UPDATE =
 			"update emp_account set "
 			+ "EMP_EMAIL = ?, EMP_PASSWORD = ?, EMP_NAME = ?, EMP_PHONE = ?, EMP_ADDRESS = ?, EMP_PHOTO = ?, EMP_STATUS = ? "
-			+ "where (EMP_NO = ?);";
+			+ "where (EMP_NO = ?)";
 	private static final String DELETE =
-			"delete from emp_account where (EMP_NO = ?);";
+			"delete from emp_account where (EMP_NO = ?)";
 	private static final String GET_NEXT_ID =
-			"SELECT AUTO_INCREMENT FROM information_schema.tables WHERE table_name = 'emp_account' AND table_schema = 'movietheater' ;";
+			"select AUTO_INCREMENT from information_schema.tables where table_name = 'emp_account' and table_schema = 'movietheater' ";
+	private static final String GET_PASSWORD = 
+			"select EMP_PASSWORD from emp_account where EMP_NO = ?";
 	
 	@Override
 	public Integer insert(EmpAccountVO empAccountVO) {
@@ -47,8 +46,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 		ResultSet rs = null;
 		Integer emp_no = null;
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			String columns[] = { "emp_id" };
 			ps = con.prepareStatement(INSERT, columns);
 			
@@ -70,6 +68,8 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		}finally {
 			if(ps != null) {
@@ -95,8 +95,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(DELETE);
 			
 			ps.setInt(1, empAccountNo);
@@ -106,6 +105,8 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		}finally {
 			if(ps != null) {
@@ -131,8 +132,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 		Connection con = null;
 		PreparedStatement ps = null;
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(UPDATE);
 			
 			ps.setString(1, empAccountVO.getEmp_email());
@@ -149,6 +149,8 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		}finally {
 			if(ps != null) {
@@ -175,8 +177,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(READ_ONE);
 			
 			ps.setInt(1, empAccountNo);
@@ -198,6 +199,8 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		}finally {
 			if(rs != null) {
@@ -233,8 +236,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(READ_ALL);
 			
 			rs = ps.executeQuery();
@@ -255,6 +257,8 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		}finally {
 			if(rs != null) {
@@ -290,8 +294,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(READ_ALL_DESC);
 			
 			rs = ps.executeQuery();
@@ -312,6 +315,8 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		}finally {
 			if(rs != null) {
@@ -367,8 +372,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			
 			// set ?
@@ -404,6 +408,8 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (NamingException e) {
+			e.printStackTrace();
 		}finally {
 			if(rs != null) {
 				try {
@@ -437,8 +443,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(GET_NEXT_ID);
 			
 			rs = ps.executeQuery();
@@ -450,6 +455,8 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		}finally {
 			if(rs != null) {
@@ -477,28 +484,78 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 		return nextId;
 	}
 
+	@Override
+	public String getPassword(Integer empAcocuntNo) {
+		String password = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			con = JDBCUtil.getConnection();
+			ps = con.prepareStatement(GET_PASSWORD);
+			
+			ps.setInt(1, empAcocuntNo);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				password = rs.getString("EMP_PASSWORD");
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return password;
+	}
+
 	public static void main(String[] args) {
 		EmpAccountJDBCDAO dao = new EmpAccountJDBCDAO();
 		
 		// C
-		try (FileInputStream in = new FileInputStream("emp01.png");){
-			byte[] imageb;
-			imageb = new byte[in.available()];
-			in.read(imageb);
-//			Blob blob = new SerialBlob(imageb);
-			EmpAccountVO empAccountVO1 = new EmpAccountVO();
-			empAccountVO1.setEmp_email("test3@gmail.com");
-			empAccountVO1.setEmp_password("testtest");
-			empAccountVO1.setEmp_name("TESTNAME");
-			empAccountVO1.setEmp_phone("0922-222222");
-			empAccountVO1.setEmp_address("aaaaa");
-			empAccountVO1.setEmp_photo(imageb);
-			empAccountVO1.setEmp_status(1);
-			Integer new_emp_no = dao.insert(empAccountVO1);
-			System.out.println(new_emp_no);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} 
+//		try (FileInputStream in = new FileInputStream("emp01.png");){
+//			byte[] imageb;
+//			imageb = new byte[in.available()];
+//			in.read(imageb);
+////			Blob blob = new SerialBlob(imageb);
+//			EmpAccountVO empAccountVO1 = new EmpAccountVO();
+//			empAccountVO1.setEmp_email("test3@gmail.com");
+//			empAccountVO1.setEmp_password("testtest");
+//			empAccountVO1.setEmp_name("TESTNAME");
+//			empAccountVO1.setEmp_phone("0922-222222");
+//			empAccountVO1.setEmp_address("aaaaa");
+//			empAccountVO1.setEmp_photo(imageb);
+//			empAccountVO1.setEmp_status(1);
+//			Integer new_emp_no = dao.insert(empAccountVO1);
+//			System.out.println(new_emp_no);
+//		} catch (IOException e1) {
+//			e1.printStackTrace();
+//		} 
 		
 		// R-ONE
 //		EmpAccountVO empAccountVO3 = dao.findByPrimaryKey(2);
@@ -512,17 +569,17 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 //		System.out.println(empAccountVO3.getEmp_status());
 
 		// R-ALL
-//		List<EmpAccountVO> list = dao.getAllDesc();
-//		for(EmpAccountVO e: list) {
-//			System.out.print(e.getEmp_no() + ", ");
-//			System.out.print(e.getEmp_email() + ", ");
-//			System.out.print(e.getEmp_password() + ", ");
-//			System.out.print(e.getEmp_name() + ", ");
-//			System.out.print(e.getEmp_phone() + ", ");
-//			System.out.print(e.getEmp_address() + ", ");
-//			System.out.print(e.getEmp_photo() + ", ");
-//			System.out.println(e.getEmp_status());
-//		}
+		List<EmpAccountVO> list = dao.getAll();
+		for(EmpAccountVO e: list) {
+			System.out.print(e.getEmp_no() + ", ");
+			System.out.print(e.getEmp_email() + ", ");
+			System.out.print(e.getEmp_password() + ", ");
+			System.out.print(e.getEmp_name() + ", ");
+			System.out.print(e.getEmp_phone() + ", ");
+			System.out.print(e.getEmp_address() + ", ");
+			System.out.print(e.getEmp_photo() + ", ");
+			System.out.println(e.getEmp_status());
+		}
 		
 		// R-�ƦX
 		

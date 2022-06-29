@@ -1,7 +1,11 @@
 package com.wishing_pond.model;
 
-import static com.common.Common.*;
 import java.util.*;
+
+import javax.naming.NamingException;
+
+import com.common.JDBCUtil;
+
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -10,16 +14,16 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 	
 	private static final String INSERT =
 			"insert into wishing_pond (WISH_NO, WISH_OPTION, MV_ID, WISH_COUNT, WISH_START, WISH_END) values "
-			+ "(?, ?, ?, ?, ?, ?);";
+			+ "(?, ?, ?, ?, ?, ?)";
 	private static final String READ_ONE =
-			"select WISH_NO, WISH_OPTION, MV_ID, WISH_COUNT, WISH_START, WISH_END from wishing_pond where WISH_NO = ? order by WISH_COUNT desc, WISH_OPTION;";
+			"select WISH_NO, WISH_OPTION, MV_ID, WISH_COUNT, WISH_START, WISH_END from wishing_pond where WISH_NO = ? order by WISH_COUNT desc, WISH_OPTION";
 	private static final String READ_ALL =
-			"select WISH_NO, WISH_OPTION, MV_ID, WISH_COUNT, WISH_START, WISH_END from wishing_pond order by WISH_NO, WISH_OPTION;";
+			"select WISH_NO, WISH_OPTION, MV_ID, WISH_COUNT, WISH_START, WISH_END from wishing_pond order by WISH_NO, WISH_OPTION";
 	private static final String UPDATE =
 			"update wishing_pond set MV_ID = ?, WISH_COUNT = ?, WISH_START = ?, WISH_END = ? "
-			+ "where WISH_NO = ? and WISH_OPTION = ?;";
+			+ "where WISH_NO = ? and WISH_OPTION = ?";
 	private static final String DELETE =
-			"delete from wishing_pond where WISH_NO = ? and WISH_OPTION = ?;";
+			"delete from wishing_pond where WISH_NO = ? and WISH_OPTION = ?";
 	
 	@Override
 	public void insert(WishingPondVO wishingPondVO) {
@@ -27,8 +31,7 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 		PreparedStatement ps = null;
 		
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(INSERT);
 			
 			ps.setInt(1, wishingPondVO.getWish_no());
@@ -43,6 +46,8 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(ps != null) {
@@ -67,8 +72,7 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 		PreparedStatement ps = null;
 		
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(DELETE);
 			
 			ps.setInt(1, wishNo);
@@ -79,6 +83,8 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(ps != null) {
@@ -103,8 +109,7 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 		PreparedStatement ps = null;
 		
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(UPDATE);
 			
 			ps.setInt(1, wishingPondVO.getMv_id());
@@ -119,6 +124,8 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(ps != null) {
@@ -145,8 +152,7 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(READ_ONE);
 			
 			ps.setInt(1, wishNo);
@@ -167,6 +173,8 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(rs != null) {
@@ -201,8 +209,7 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(DR);
-			con = DriverManager.getConnection(URL, USER, PW);
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(READ_ALL);
 			
 			rs = ps.executeQuery();
@@ -221,6 +228,8 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(rs != null) {

@@ -22,15 +22,7 @@
 
 <body>
     <header>
-        <nav>
-            <div id="logo">
-                <img src="${pageContext.request.contextPath}/back_end/emp/logo2noline.jpg">
-            </div>
-            <h2>員工後台操作系統</h2>
-            <ul>
-                <li>登出</li>
-            </ul>
-        </nav>
+        <%@ include file="/back_end/header_html.jsp"%>   
     </header>
     <aside id="aside">   
     	<%@ include file="/back_end/aside_html.jsp"%>     
@@ -39,21 +31,16 @@
     <main>
         <div id="main">
             <h1>個人資料維護</h1>
-<%--             <c:forEach var="err" items="${errMsg}"> --%>
-<%--             	${err} --%>
-<%--             </c:forEach> --%>
-            
             <div id="emp_detail">
             	<form action="${pageContext.request.contextPath}/emp/EmpAccount.do" method="post" enctype="multipart/form-data">
 	                <div id="left">
 	                    <div id="emp_img">
-	                        <img src="${pageContext.request.contextPath}/ShowBlob?emp_no=${empVO.emp_no}" alt="" id="emp_photo">
+	                        <img src="${pageContext.request.contextPath}/emp/ShowBlob?emp_no=${empVO.emp_no}" alt="" id="emp_photo">
 	                    </div>
 	                    <br>
 	                    <label for="emp_id">員工編號: </label>
 	                    <input id="emp_id" value="${empVO.emp_no}" disabled>
 	                    <input type="hidden" value="${empVO.emp_no}" name="emp_no">
-<%-- 	                    <input type="hidden" value="${empVO.emp_no}" name="emp_no"> --%>
 	                    <br>
 	                    <label for="emp_name">員工姓名: </label>
 	                    <input id="emp_name" value="${empVO.emp_name}" disabled>

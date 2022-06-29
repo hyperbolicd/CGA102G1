@@ -1,0 +1,234 @@
+
+.all {
+	box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+
+}
+
+.main {
+	box-sizing: border-box;
+    border-radius: 15px;
+    border: 5px solid #000;
+    height: 1000px;
+    width: 900px;
+}
+
+
+/* 首欄開始====================================== */
+.showingInf {
+	box-sizing: border-box;
+    margin: 10px 0 0 0;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.showmain {
+	box-sizing: border-box;
+    width: 300px;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+
+.showside {
+	box-sizing: border-box;
+    width: 500px;
+}
+
+.showname,
+.showtime,
+.hellname {
+	box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.showtime,
+.hellname {
+	box-sizing: border-box;
+    height: 50%;
+    /* 視情況調整 */
+}
+
+
+/* 導覽開始====================================== */
+
+.guide1outer,
+.guide2outer {
+	box-sizing: border-box;
+    margin: 20px;
+    /* 跟其他的空隙 */
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.guide1,
+.guide2 {
+	box-sizing: border-box;
+    border-radius: 15px;
+    color: white;
+    background-color: #1b1b1b;
+    width: 800px;
+    height: 100px;
+    font-size: 35px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+
+/* 選票開始====================================== */
+
+.TKouter {
+	box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    height: 200px;
+}
+
+.TKinner {
+	box-sizing: border-box;
+    border-collapse: collapse;
+    border: 2px solid #000;
+    text-align: center;
+    height: 100%;
+    width: 90%;
+}
+
+tr:nth-child(odd) {
+	box-sizing: border-box;
+    background: #d9d9d9;
+}
+
+tr:nth-child(even) {
+	box-sizing: border-box;
+    background: rgb(255, 255, 255);
+}
+
+tr:nth-child(1) {
+	box-sizing: border-box;
+    background: rgb(58, 58, 58);
+    color: white;
+}
+
+
+/* 食物開始====================================== */
+
+.FD {
+	box-sizing: border-box;
+    height: 410px;
+}
+
+.items {
+	box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.item {
+	box-sizing: border-box;
+    height: 200px;
+    width: 180px;
+}
+
+.img_block img {
+	box-sizing: border-box;
+    border-radius: 15px;
+}
+
+.img_block {
+	box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.iteminner {
+	box-sizing: border-box;
+    text-align: center;
+}
+
+.FDInput {
+	box-sizing: border-box;
+    width: 3em;
+}
+
+/* 側邊資訊開始====================================== */
+
+.temporaryInf {
+	box-sizing: border-box;
+    height: 600px;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.sidetable,
+.tablehead {
+	box-sizing: border-box;
+    width: 150px;
+    border-collapse: collapse;
+    border: 2px solid #000;
+    text-align: center;
+}
+
+.tablehead {
+	box-sizing: border-box;
+    background: rgb(58, 58, 58);
+    color: #fff;
+}
+
+/* 按鈕開始====================================== */
+.bt {
+	box-sizing: border-box;
+    padding: 15px 20px;
+    /* 按鈕大小 */
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    border-radius: 10px;
+    font-weight: 700;
+    background-image: linear-gradient(45deg, #000000 0%, #7c7c7c 51%, #000000 100%);
+    cursor: pointer;
+}
+
+.bt:hover {
+	box-sizing: border-box;
+    background-position: right center;
+    /* 變色方向 */
+    color: #fff;
+    text-decoration: none;
+}
+
+.bt:active {
+	box-sizing: border-box;
+    transform: scale(0.95);
+}
+
+.btBlock {
+	box-sizing: border-box;
+    height: 300px;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
