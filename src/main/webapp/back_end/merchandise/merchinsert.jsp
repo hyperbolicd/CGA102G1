@@ -16,7 +16,7 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/emp/css/emp_footer.css">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/back_end/merchandise/css/FDINFBack.css">
+	href="${pageContext.request.contextPath}/back_end/merchandise/css/merchandise.css">
 </head>
 
 <body>
@@ -134,9 +134,9 @@
 						</table>
 					</div>
 					<div class="btBlock">
-						<input type="hidden" name="action" value="insert"> <input
-							type="submit" class="bt" value="送出新增">
-							<button class="tablebt" form="1234">放棄新增</button>
+						<input type="hidden" name="action" value="insert"> 
+						<input type="submit" class="bt" value="送出新增">
+						<input class="tablebt" form="1234" type="submit" value="放棄新增">
 					</div>
 				</FORM>
 				<form action="${pageContext.request.contextPath}/back_end/merchandise/mallIndex.jsp" id="1234"></form>

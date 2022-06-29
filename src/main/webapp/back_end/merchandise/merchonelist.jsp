@@ -16,7 +16,7 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/emp/css/emp_footer.css">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/back_end/merchandise/css/FDINFBack.css">
+	href="${pageContext.request.contextPath}/back_end/merchandise/css/merchlist.css">
 </head>
 
 <body>
@@ -41,13 +41,13 @@
 
 				<div class="guide1outer">
 					<div class="guide1">
-						<div>商品新增頁面</div>
+						<div>商品查詢頁面</div>
 					</div>
 				</div>
 
 					<div class="TKouter">
 
-						<table class="TKinner">
+						<table class="TKinner tablesorter" id="myTable">
 							<tr>
 								<td></td>
 								<td>輸入</td>
@@ -149,6 +149,19 @@
 	<aside id="aside">     
      <%@ include file="/back_end/aside_html.jsp"%>   
     </aside>
+    <script
+		src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/theme.bootstrap.min.css"></link>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
+
+	<script>
+		$("#myTable").tablesorter({
+			theme : "",
+			widgets : [ 'zebra' ]
+		});
+	</script>
 </body>
 
 </html>

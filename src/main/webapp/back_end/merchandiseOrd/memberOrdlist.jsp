@@ -2,10 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.merchandise_inf.model.*"%>
+<%@ page import="com.merchandise_order.model.*"%>
 <%
-List<MerchVO> list = (List<MerchVO>) session.getAttribute("merchlist");
+List<MerchOrdVO> list = (List<MerchOrdVO>) session.getAttribute("merchOrdlist");
 %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +45,7 @@ List<MerchVO> list = (List<MerchVO>) session.getAttribute("merchlist");
 
 				<div class="guide1outer">
 					<div class="guide1">
-						<div>所有商品</div>
+						<div>${memberID}號會員訂單列表</div>
 					</div>
 				</div>
 				<div class="TKouter">
@@ -53,38 +53,34 @@ List<MerchVO> list = (List<MerchVO>) session.getAttribute("merchlist");
 					<table class="TKinner tablesorter" id="myTable">
 						<thead>
 							<tr>
-								<td>商品編號</td>
-								<td>商品名稱</td>
-								<td>商品狀態</td>
+								<td>訂單編號</td>
 								<td>查詢</td>
 								<td>刪除</td>
 							</tr>
 						</thead>
 						<%@ include file="page1.file"%>
 						<tbody>
-							<c:forEach var="merch" items="${merchlist}"
+							<c:forEach var="merchOrd" items="${merchOrdlist}"
 								begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 								<%-- 						<c:forEach var="merch" items="${list}" > --%>
 								<tr>
-									<td>${merch.merchID}</td>
-									<td><a class="tablebt"
-										href="${pageContext.request.contextPath}/merch/controller?action=getOne_For_Display&merchID=${merch.merchID}">${merch.merchName}</td>
-									<td>${merch.merchStatus == 1? '下架':''} ${merch.merchStatus == 2? '上架':''}
-										${merch.merchStatus == 3? '主打':''}</td>
+									<td>${merchOrd.merchOrdID}</td>
 									<td>
 										<form
-											action="${pageContext.request.contextPath}/merch/controller">
-											<input class="tablebt" type="hidden" name="merchID"
-												value="${merch.merchID}">
+											action="${pageContext.request.contextPath}/OrderDetail/OrderDetail.do">
+											<input class="tablebt" type="hidden" name="merchOrdID"
+												value="${merchOrd.merchOrdID}">
 											<button class="tablebt" type="submit" name="action"
-												value="getOne_For_Update">修改</button>
+												value="getOrder_For_Display">查詢</button>
 										</form>
 									</td>
 									<td>
 										<form
-											action="${pageContext.request.contextPath}/merch/controller">
-											<input class="tablebt" type="hidden" name="merchID"
-												value="${merch.merchID}">
+											action="${pageContext.request.contextPath}/merchOrd/merchOrd.do">
+											<input class="tablebt" type="hidden" name="memberID"
+												value="${merchOrd.memberID}">
+											<input class="tablebt" type="hidden" name="merchOrdID"
+												value="${merchOrd.merchOrdID}">
 											<button class="tablebt" type="submit" name="action"
 												value="delete">刪除</button>
 										</form>
