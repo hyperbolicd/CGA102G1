@@ -96,15 +96,15 @@
                             <label for="exampleFormControlFile1">預覽:</label>
                             <img id="pvImg" src="">
                             <label for="exampleFormControlFile1">當前封面:</label>
-                            <input type="hidden" name="Noreupload" value="<%=movieVO.getMvPicture()%>">
-                            <img src="<%= movieVO.getMvPicture() %>" id="oldPc" alt="">
+                            <input type="hidden" name="Noreupload" value="${pageContext.request.contextPath}${movieVO.mvPicture}">
+                            <img src="${pageContext.request.contextPath}${movieVO.mvPicture}" id="oldPc" alt="">
                         </div>
                     <hr>
                     <div class="editBox">
                     	<input type="hidden" name="action" value="update">
                     	<input type="hidden" name="mvId" value="<%=movieVO.getMvId()%>">
                         <button type="submit" id="sumbitBtn" class="btn btn-primary btn-lg">送出</button>
-                        <button type="button" id="cancelBtn" class="btn btn-danger btn-lg">取消</button>
+                        <button type="button" id="cancelBtn" class="btn btn-danger btn-lg" onclick="history.back()">取消</button>
                     </div>
                 </form>
             </div>

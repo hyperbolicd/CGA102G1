@@ -16,14 +16,14 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/emp/css/emp_footer.css">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/back_end/merchandise/css/FDINFBack.css">
+	href="${pageContext.request.contextPath}/back_end/merchandise/css/merchandise.css">
 </head>
 
 <body>
 	<header>
 		<nav>
 			<div id="logo">
-				<img src="logo2noline.jpg">
+				<img src="${pageContext.request.contextPath}/back_end/logo2noline.jpg">
 			</div>
 			<h2>員工後台操作系統</h2>
 			<ul>
@@ -31,7 +31,9 @@
 			</ul>
 		</nav>
 	</header>
-	<aside id="aside"></aside>
+	<aside id="aside">     
+     <%@ include file="/back_end/aside_html.jsp"%>   
+    </aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
 
@@ -108,6 +110,12 @@
 										style="width: 250px">
 									<td><button class="tablebt" type="submit" name="action" value="getOne_For_Display">確認</button>
 								</form>
+<!-- 								<form -->
+<%-- 									action="${pageContext.request.contextPath}/merch/controller"> --%>
+<!-- 									<input class="input" type="text" name="merchID" placeholder="請輸入商品編號或關鍵字查詢" -->
+<!-- 										style="width: 250px"> -->
+<!-- 									<td><button class="tablebt" type="submit" name="action" value="getMerchInfo">確認</button> -->
+<!-- 								</form> -->
 							</td>
 							
 						</tr>
@@ -140,9 +148,7 @@
 		
 	</c:if>
 	<footer> 嗨邇覓影城 &copy; HIREME CINEMA 2022 </footer>
-	<aside id="aside">     
-     <%@ include file="/back_end/aside_html.jsp"%>   
-    </aside>
+
 </body>
 
 </html>

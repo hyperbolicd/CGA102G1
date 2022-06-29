@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
-HallVO hallVO = (HallVO)request.getAttribute("hallVO");
+	HallVO hallVO = (HallVO)request.getAttribute("hallVO");
 	String typeArr[] = {"數位","IMAX"};
 	request.setAttribute("typeArr", typeArr);
 %>
@@ -62,7 +62,7 @@ HallVO hallVO = (HallVO)request.getAttribute("hallVO");
                               <input type="hidden" name="hlSeatCount" id="hlSeatCount" value="${hallVO.hlSeatCount}">
                     		  
                     		  <button type="submit" id="sumbitBtn" class="btn btn-primary">送出修改</button>
-                    		  <a href="/HireMe/back/ManageHall/manageHall.jsp" class="btn btn-danger">取消</a>
+                    		  <a onclick="history.back()" class="btn btn-danger" id="submitBtn" >退出</a>
                             </div>
                           </form>
               </div>

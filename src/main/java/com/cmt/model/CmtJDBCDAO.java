@@ -29,7 +29,9 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 		"DELETE FROM cmt where CM_ID = ?";
 	private static final String UPDATE = 
 		"UPDATE cmt set MEMBER_ID=?, MV_ID=?, CM_TEXT=?, CM_LIKE=?, CM_STAR=?, CM_STATE=?, CM_DATE=? where CM_ID = ?";
-
+	private static final String UPDATE_CMTSTATE =
+		"UPDATE cmt SET CM_STATE =?  WHERE CM_ID =? ;";
+	
 	@Override
 	public void insert(CmtVO cmtVO) {
 
@@ -305,6 +307,47 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 		}
 		return list;
 	}
+	
+	@Override
+	public void updateCmtState(Integer CM_ID,Integer CM_STATE) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_CMTSTATE);
+
+			pstmt.setInt(1, CM_STATE);
+			pstmt.setInt(2, CM_ID);
+			
+			pstmt.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+
 
 	public static void main(String[] args) {
 
@@ -363,4 +406,5 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 		}
 	}
 
+	
 }

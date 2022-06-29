@@ -163,12 +163,6 @@ public class HallServlet extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
 		}
-		if("editShowSeat".equals(action)) {
-			
-		}
-		if("UpdateShowSeat".equals(action)) {
-			
-		}
 	}
 
 }

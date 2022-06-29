@@ -4,7 +4,7 @@ import java.sql.Date;
 public class MemberVO implements java.io.Serializable{
 	private Integer member_ID; //Int               MEMBER_ID x
 	private String member_Level; //Char            MEMBER_LEVEL x
-	private String member_Email; //Varchar        MEMBER_EMAIL x	
+	private String member_Email; //Varchar         MEMBER_EMAIL x	
 	private String member_Password; //Varchar      MEMBER_PASSWORD x
 	private String member_Name; //Varchar          MEMBER_NAME x
 	private String member_Phone ; //Varchar        MEMBER_PHONE x

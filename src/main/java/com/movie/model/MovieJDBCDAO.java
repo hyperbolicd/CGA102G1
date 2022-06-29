@@ -41,11 +41,11 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 			+"FROM Movie order by MV_ID";
 	
 	private static final String GET_SHOWING_MV=
-			"select MV_NAME,MV_E_NAME,MV_LEVEL,MV_PICTURE,MV_ST_DATE,MV_ED_DATE,MV_TT_CM,MV_TT_STAR from movie "
+			"select MV_ID,MV_NAME,MV_E_NAME,MV_LEVEL,MV_PICTURE,MV_ST_DATE,MV_ED_DATE,MV_TT_CM,MV_TT_STAR from movie "
 			+ "where MV_ST_DATE <= CURRENT_DATE and MV_ED_DATE > CURRENT_DATE order by MV_ST_DATE desc";
 	
 	private static final String GET_COMING_MV=
-			"select MV_NAME,MV_E_NAME,MV_LEVEL,MV_PICTURE,MV_ST_DATE from movie "
+			"select MV_ID,MV_NAME,MV_E_NAME,MV_LEVEL,MV_PICTURE,MV_ST_DATE from movie "
 			+ "where MV_ST_DATE > CURRENT_DATE order by MV_ST_DATE asc";
 	
 	private static final String GET_Showings_BymvId_STMT = 
@@ -238,6 +238,7 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 				movieVO.setMvTtStar(rs.getInt("MV_TT_STAR"));
 			}
 			
+			
 		} catch (ClassNotFoundException e) {
 			// Class.forname嚙賠出 ClassNotFound嚙課外
 			throw new RuntimeException("Couldn't load database driver."
@@ -364,6 +365,7 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 			
 			while(rs.next()) {
 				movieVO = new MovieVO();
+				movieVO.setMvId(rs.getInt("MV_ID"));
 				movieVO.setMvName(rs.getString("MV_NAME"));
 				movieVO.setMvEName(rs.getString("MV_E_NAME"));
 				movieVO.setMvLevel(rs.getInt("MV_LEVEL"));
@@ -429,6 +431,7 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 			
 			while(rs.next()) {
 				movieVO = new MovieVO();
+				movieVO.setMvId(rs.getInt("MV_ID"));
 				movieVO.setMvName(rs.getString("MV_NAME"));
 				movieVO.setMvEName(rs.getString("MV_E_NAME"));
 				movieVO.setMvLevel(rs.getInt("MV_LEVEL"));

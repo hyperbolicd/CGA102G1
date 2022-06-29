@@ -70,10 +70,10 @@
 							<input type="hidden"name="hlId" value="${HallVO.hlId}"> 
 							<input type="hidden" name="action" value="editOriginalSeat">
 						</form>
-						<form METHOD="post"action="${pageContext.request.contextPath}/HallServlet.do">
+						<form METHOD="post"action="${pageContext.request.contextPath}/ShowSeatServlet.do">
 							<input type="submit" value="場次座位"class="btn btn-success" style="margin-top: 5px"> 
 							<input type="hidden"name="hlId" value="${HallVO.hlId}"> 
-							<input type="hidden" name="action" value="editShowSeat">
+							<input type="hidden" name="action" value="getDate">
 						</form>
 					</td>
 					</tr>

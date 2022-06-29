@@ -96,7 +96,7 @@
                     <div class="editBox">
                         <input type="hidden" name="action" value="insert">
                         <button type="submit" id="sumbitBtn" class="btn btn-primary btn-lg">送出</button>
-                        <button type="button" id="cancelBtn" class="btn btn-danger btn-lg">取消</button>
+                        <button type="button" id="cancelBtn" class="btn btn-danger btn-lg" onclick="history.back()">取消</button>
                     </div>
                 </form>
             </div>
