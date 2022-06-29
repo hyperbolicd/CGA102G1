@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.hall.model.HallService;
 import com.hall.model.HallVO;
 
+
 @WebServlet("/HallServlet.do")
 public class HallServlet extends HttpServlet {
        
@@ -161,12 +162,6 @@ public class HallServlet extends HttpServlet {
 			String url ="/back_end/ManageSeat/manageSeat.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
-		}
-		if("editShowSeat".equals(action)) {
-			
-		}
-		if("UpdateShowSeat".equals(action)) {
-			
 		}
 	}
 

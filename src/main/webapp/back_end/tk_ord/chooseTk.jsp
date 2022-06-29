@@ -17,6 +17,8 @@ List<FdInfVO> list2 = fdInfSvc.getAll();
 pageContext.setAttribute("list2", list2);
 %>
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,7 +74,6 @@ pageContext.setAttribute("list2", list2);
 							<td>價格</td>
 							<td>數量</td>
 						</tr>
-
 						<c:forEach var="tkinfVO" items="${list}">
 							<c:choose>
 								<c:when test="${(0 == tkinfVO.tkDI) && (tkinfVO.tkTypeID < 4)}">
@@ -128,30 +129,28 @@ pageContext.setAttribute("list2", list2);
 								</div>
 							</c:if>
 						</c:forEach>
-
 					</div>
+				</div>
+				<!-- 				</FORM> -->
+				<div class="btBlock">
+					<a class="bt"
+						href="<%=request.getContextPath()%>/back_end/tk_ord/chooseSeat.jsp"
+						style="text-decoration: none;">繼續</a>
 				</div>
 			</div>
 			<div>
 				<div class="temporaryInf">
 
-					<div>
-						<div class="tablehead">預選資訊</div>
+					<div class="temporaryTable">
+						<div class="tablehead">
+							<font size="5"> 預選資訊</font>
+						</div>
 						<table class="sidetable">
 							<tr>
 								<td>名稱</td>
 								<td>數量</td>
 								<td>價格</td>
 							</tr>
-							<!-- 票價開始 -->
-
-
-
-							<!-- 食物開始 -->
-
-
-
-
 
 							<tr class="TKtable">
 								<td></td>
@@ -162,9 +161,6 @@ pageContext.setAttribute("list2", list2);
 						</table>
 					</div>
 
-				</div>
-				<div class="btBlock">
-					<a class="bt" href="chooseSEAT.html" style="text-decoration: none;">繼續</a>
 				</div>
 			</div>
 		</div>
@@ -181,36 +177,94 @@ pageContext.setAttribute("list2", list2);
 
 	<script>
 	
+
+
 	
+let order = []; 
+let TKCount = [];
+
+// 點擊單一票種	
+<c:forEach var="tkinfVO" items="${list}">					
 	
-	// 點擊單一票種
+	let TKCount${tkinfVO.tkTypeID} = { 'name' : [], 
+			'count' : [],
+	}
 	
-<c:forEach var="tkinfVO" items="${list}">
-						
-	
+	let TK${tkinfVO.tkTypeID} = { 'id' : [],
+			 'name' : [], 
+			 'unitPrice' : [],
+			 'count' : [] };
 	$(".TK${tkinfVO.tkTypeID}").change((e) => {
-	    sessionStorage.setItem("${tkinfVO.tkType}", e.target.value);
-	    $(".trTK${tkinfVO.tkTypeID}").remove();
+// 		覆蓋之前的
+	 TK${tkinfVO.tkTypeID}.id=("${tkinfVO.tkTypeID}");
+	 TK${tkinfVO.tkTypeID}.name=("${tkinfVO.tkType}");
+	 TK${tkinfVO.tkTypeID}.unitPrice=("${tkinfVO.tkPrice}");
+	 TK${tkinfVO.tkTypeID}.count=(e.target.value);
+	 
+	 TKCount${tkinfVO.tkTypeID}.name=("${tkinfVO.tkType}");
+	 TKCount${tkinfVO.tkTypeID}.count=(e.target.value);
+	 
+	    
+		$(".trTK${tkinfVO.tkTypeID}").remove();
 	    $(".TKtable").before('<tr  class="trTK${tkinfVO.tkTypeID}"><td>${tkinfVO.tkType}</td><td>x ' + e.target.value + '</td><td>$ ' + (parseInt(e.target.value) * ${tkinfVO.tkPrice}) + '</td></tr>');
 	    if (e.target.value === '0') {
 	        $(".trTK${tkinfVO.tkTypeID}").remove();
 	    }
+	    
+	    
 	});
-
+// 		點擊加入sessionStorage
+	$('.bt').click(function () {
+		if(TK${tkinfVO.tkTypeID}.count.length === 0 ) {	
+			
+		}else{
+		order.push(TK${tkinfVO.tkTypeID});
+        sessionStorage.setItem('order', JSON.stringify(order));
+        
+        TKCount.push(TKCount${tkinfVO.tkTypeID});
+        sessionStorage.setItem('TKCount', JSON.stringify(TKCount));
+        
+		}
+    });   
 </c:forEach>
 
-<c:forEach var="fdinfVO" items="${list2}">
 
-$(".FD${fdinfVO.fdID}").change((e) => {
-    sessionStorage.setItem("${fdinfVO.fdName}", e.target.value);
-    $(".trFD${fdinfVO.fdID}").remove();
-    $(".TKtable").before('<tr  class="trFD${fdinfVO.fdID}"><td>${fdinfVO.fdName}</td><td>x ' + e.target.value + '</td><td>$ ' + (parseInt(e.target.value) * ${fdinfVO.fdprice}) + '</td></tr>');
-    if (e.target.value === '0') {
-        $(".trFD${fdinfVO.fdID}").remove();
-    }
-});
 
+
+//點擊單一餐飲	
+<c:forEach var="fdinfVO" items="${list2}">				
+	
+	let FD${fdinfVO.fdID} = { 'id' : [],
+			 'name' : [], 
+			 'unitPrice' : [],
+			 'count' : [] };
+	$(".FD${fdinfVO.fdID}").change((e) => {
+// 		覆蓋之前的
+	 FD${fdinfVO.fdID}.id=("${fdinfVO.fdID}");
+	 FD${fdinfVO.fdID}.name=("${fdinfVO.fdName}");
+	 FD${fdinfVO.fdID}.unitPrice=("${fdinfVO.fdprice}");
+	 FD${fdinfVO.fdID}.count=(e.target.value);
+	    
+	 	
+	    $(".trFD${fdinfVO.fdID}").remove();
+	    $(".TKtable").before('<tr  class="trFD${fdinfVO.fdID}"><td>${fdinfVO.fdName}</td><td>x ' + e.target.value + '</td><td>$ ' + (parseInt(e.target.value) * ${fdinfVO.fdprice}) + '</td></tr>');
+	    if (e.target.value === '0') {
+	        $(".trFD${fdinfVO.fdID}").remove();
+	    }
+	    
+	    
+	});
+// 		點擊加入sessionStorage
+	$('.bt').click(function () {
+		if(FD${fdinfVO.fdID}.count.length === 0 ) {	
+			
+		}else{
+        order.push(FD${fdinfVO.fdID});
+        sessionStorage.setItem('order', JSON.stringify(order));
+		}
+    });   
 </c:forEach>
+
 	
 	
 	</script>

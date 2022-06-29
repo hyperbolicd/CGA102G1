@@ -26,18 +26,10 @@
 
 <body>
     <header>
-        <nav>
-            <div id="logo">
-                <img src="${pageContext.request.contextPath}/back_end/logo2noline.jpg">
-            </div>
-            <h2>員工後台操作系統</h2>
-            <ul>
-                <li>登出</li>
-            </ul>
-        </nav>
+    	<%@ include file="/back_end/header_html.jsp"%> 
     </header>
     <aside id="aside">
-    <%@ include file="/back_end/aside_html.jsp"%>        
+    	<%@ include file="/back_end/aside_html.jsp"%>        
     </aside>
     <!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
     <main>
@@ -51,14 +43,14 @@
                             </div>
                         <form class="form1" id="formId" method="post" action="${pageContext.request.contextPath}/HallServlet.do">
                             <div class="form-group">
-                              <label class="alert alert-light" style="margin-bottom: 5px" >影廳名稱:${hallVO.hlName}</label>
+                              <label class="alert alert-light" style="margin-bottom:5px;width:100%" >影廳名稱:${hallVO.hlName}</label>
                               <c:if test="${hallVO.hlType==0}">
-								<label class="alert alert-light" style="margin-bottom: 5px">影廳類型:數位</label>
+								<label class="alert alert-light" style="margin-bottom:5px;width:100%">影廳類型:數位</label>
 							  </c:if>
 							  <c:if test="${hallVO.hlType==1}">
-								<label class="alert alert-light" style="margin-bottom: 5px">影廳類型:IMAX</label>
+								<label class="alert alert-light" style="margin-bottom:5px;width:100%">影廳類型:IMAX</label>
 							  </c:if>
-							  <input  class="alert alert-light" id="showCount" value="" style="margin-bottom: 5px">
+							  <input  class="alert alert-light" id="showCount" value="" style="margin-bottom:5px;width:100%" disabled>
                              </div>
                             <div class="btnbox">
                               
@@ -70,7 +62,7 @@
                               <input type="hidden" id="hlSeat" name="hlSeat" value="${hallVO.hlSeat}">
                               <input type="hidden" id="hlSeatCount" name="hlSeatCount" value="${hallVO.hlSeatCount}">
                               <input type="hidden" name="action" value="UpdateOriginalSeat">
-                              <a href="${pageContext.request.contextPath}/back_end/ManageSeat/manageSeat.jsp" class="btn btn-danger" id="submitBtn" >取消</a>
+                              <a onclick="history.back()" class="btn btn-danger" id="submitBtn" >取消</a>
                               <button type="submit" class="btn btn-primary" id="submitBtn" >送出修改</a>
                               
                             </div>

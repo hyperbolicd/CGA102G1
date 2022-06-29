@@ -28,18 +28,10 @@
 
 <body>
     <header>
-        <nav>
-            <div id="logo">
-               <img src="${pageContext.request.contextPath}/back_end/logo2noline.jpg">
-            </div>
-            <h2>員工後台操作系統</h2>
-            <ul>
-                <li>登出</li>
-            </ul>
-        </nav>
+    	<%@ include file="/back_end/header_html.jsp"%> 
     </header>
     <aside id="aside">
-    <%@ include file="/back_end/aside_html.jsp"%>           
+    	<%@ include file="/back_end/aside_html.jsp"%>           
     </aside>
     <!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
     <main>
@@ -80,7 +72,7 @@
 	                               <td>${HallVO.hlSeatCount}</td>
 	                               <td >
 	                               		<form METHOD="post" action="${pageContext.request.contextPath}/HallServlet.do">
-	                               		<input type="submit" value="編輯影廳"  class="btn btn-outline-primary">
+	                               		<input type="submit" value="編輯資訊"  class="btn btn-outline-primary">
 			     						<input type="hidden" name="hlId"  value="${HallVO.hlId}">
 			     						<input type="hidden" name="action"	value="getOne_For_Update">
 	                               		</form>

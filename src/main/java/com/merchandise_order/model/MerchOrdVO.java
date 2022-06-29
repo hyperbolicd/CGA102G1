@@ -7,8 +7,20 @@ public class MerchOrdVO implements java.io.Serializable {
 	private Integer merchOrdID;
 	private Integer memberID;
 	private Timestamp merchOrdDate;
-	private Integer merchOrdCount;
+	private Double merchOrdCount;
 	private Byte merchOrdStatus;
+	
+	public MerchOrdVO() {
+		super();
+	}
+	public MerchOrdVO(Integer memberID, Timestamp merchOrdDate, Double merchOrdCount,
+			Byte merchOrdStatus) {
+		super();
+		this.memberID = memberID;
+		this.merchOrdDate = merchOrdDate;
+		this.merchOrdCount = merchOrdCount;
+		this.merchOrdStatus = merchOrdStatus;
+	}
 	public Byte getMerchOrdStatus() {
 		return merchOrdStatus;
 	}
@@ -33,10 +45,10 @@ public class MerchOrdVO implements java.io.Serializable {
 	public void setMerchOrdDate(Timestamp merchOrdDate) {
 		this.merchOrdDate = merchOrdDate;
 	}
-	public Integer getMerchOrdCount() {
+	public Double getMerchOrdCount() {
 		return merchOrdCount;
 	}
-	public void setMerchOrdCount(Integer merchOrdCount) {
+	public void setMerchOrdCount(Double merchOrdCount) {
 		this.merchOrdCount = merchOrdCount;
 	}
 

@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cmt.model.CmtService;
+import com.cmt.model.CmtVO;
+import com.member.model.MemberService;
+import com.member.model.MemberVO;
 import com.report.model.ReportService;
 import com.report.model.ReportVO;
 
@@ -54,12 +58,26 @@ public class ReportServlet extends HttpServlet {
 		if("getOne_For_Update".equals(action)) {
 			
 			Integer rpId = Integer.valueOf(req.getParameter("rpId"));
-			
+			Integer cmId = Integer.valueOf(req.getParameter("cmId"));
+			Integer memberId = Integer.valueOf(req.getParameter("memberId"));
+			// 取得完整單筆檢舉資訊
 			ReportService rpSvc = new ReportService();
 			ReportVO reportVO = rpSvc.findByPrimaryKey(rpId);
+			// 取得該筆評論VO & 用該筆評論的會員ID找到他的會員資料
+			CmtService cmtSvc = new CmtService();
+			CmtVO cmtVO = cmtSvc.getOneCmt(cmId);
+			Integer cmtMemberId = cmtVO.getMEMBER_ID();
+			
+			// 取得會員的資訊
+			MemberService mbSvc = new MemberService();
+			MemberVO rpMemberVO = mbSvc.getOneEmp(memberId);
+			MemberVO cmtMemberVO = mbSvc.getOneEmp(cmtMemberId);
 			
 			req.setAttribute("reportVO", reportVO);
-			String url = "";
+			req.setAttribute("cmtVO", cmtVO);
+			req.setAttribute("rpMemberVO", rpMemberVO);
+			req.setAttribute("cmtMemberVO", cmtMemberVO);
+			String url = "/back_end/ManageReport/editReport.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
 			
@@ -68,28 +86,23 @@ public class ReportServlet extends HttpServlet {
 			
 			Integer rpId = Integer.valueOf(req.getParameter("rpId"));
 			Integer cmId = Integer.valueOf(req.getParameter("cmId"));
-			Integer memberId = Integer.valueOf(req.getParameter("memberId"));
-			String rpText = req.getParameter("rpText");
-			String rpType = req.getParameter("rpType");
-			Integer rpState = Integer.valueOf(req.getParameter("rpState"));
-			Timestamp rpDate = java.sql.Timestamp.valueOf(req.getParameter("rpDate"));
-			/* **************************************************************** */
+			Integer changeCmState = Integer.valueOf(req.getParameter("changeCmState"));
 			
-			ReportVO reportVO = new ReportVO();
-			reportVO.setRpId(rpId);
-			reportVO.setCmId(cmId);
-			reportVO.setMemberId(memberId);
-			reportVO.setRpText(rpText);
-			reportVO.setRpType(rpType);
-			reportVO.setRpState(rpState);
-			reportVO.setRpDate(rpDate);
-			/* **************************************************************** */
-			
+			// 無論有沒有要隱藏,只要送出修改就算是處理
+			Integer rpState = 1;
+			/* ***************************更改該則評論狀態********************************* */
+			CmtService cmtSvc = new CmtService();
+			cmtSvc.updateCmtState(cmId, changeCmState);
+			/* ***************************更新檢舉狀態************************************* */
 			ReportService rpSvc = new ReportService();
-			reportVO = rpSvc.update(rpId, cmId, memberId, rpText, rpType, rpState, rpDate);
-			req.setAttribute("reportVO", reportVO);
+			// 一鍵更新
+			if(req.getParameter("updateSameRP")!=null) {
+				rpSvc.updateSameRP(cmId);
+			}else {
+				rpSvc.update(rpId, rpState);
+			}
 			
-			String url = "";
+			String url = "/back_end/ManageReport/manageReport.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
 		}

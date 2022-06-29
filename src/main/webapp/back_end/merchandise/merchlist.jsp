@@ -2,13 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.merchandise_inf.model.*"%>
-<% 
-List<MerchVO> list = (List<MerchVO>)session.getAttribute("merchlist");
+<%
+List<MerchVO> list = (List<MerchVO>) session.getAttribute("merchlist");
 %>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,7 +20,7 @@ List<MerchVO> list = (List<MerchVO>)session.getAttribute("merchlist");
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/emp/css/emp_footer.css">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/back_end/merchandise/css/FDINFBack.css">
+	href="${pageContext.request.contextPath}/back_end/merchandise/css/merchlist.css">
 </head>
 
 <body>
@@ -51,44 +50,48 @@ List<MerchVO> list = (List<MerchVO>)session.getAttribute("merchlist");
 				</div>
 				<div class="TKouter">
 
-					<table class="TKinner">
-<!-- 					<thead> -->
-						<tr>
-							<td>商品編號</td>
-							<td>商品名稱</td>
-							<td>商品狀態</td>
-							<td>查詢</td>
-							<td>刪除</td>
-						</tr>
-<!-- 					</thead> -->
-<!-- 					<tbody> -->
-						<%@ include file="page1.file"%>
-						<c:forEach var="merch" items="${merchlist}" begin="<%=pageIndex%>"
-						end="<%=pageIndex+rowsPerPage-1%>"> 
-<%-- 						<c:forEach var="merch" items="${list}" > --%>
+					<table class="TKinner tablesorter" id="myTable">
+						<thead>
 							<tr>
-								<td>${merch.merchID}</td>
-								<td><a class="tablebt" href="${pageContext.request.contextPath}/merch/controller?action=getOne_For_Display&merchID=${merch.merchID}">${merch.merchName}</td>
-								<td>${merch.merchStatus}</td>
-								<td>
-									<form
-										action="${pageContext.request.contextPath}/merch/controller">
-										<input class="tablebt" type="hidden" name="merchID"
-											value="${merch.merchID}">
-										<button class="tablebt" type="submit" name="action" value="getOne_For_Update">修改</button>
-									</form>
-								</td>
-								<td>
-									<form
-										action="${pageContext.request.contextPath}/merch/controller">
-										<input class="tablebt" type="hidden" name="merchID"
-											value="${merch.merchID}">
-										<button class="tablebt" type="submit" name="action" value="delete">刪除</button>
-									</form>
-								</td>
+								<td>商品編號</td>
+								<td>商品名稱</td>
+								<td>商品狀態</td>
+								<td>查詢</td>
+								<td>刪除</td>
 							</tr>
-						</c:forEach>
-<!-- 						</tbody> -->
+						</thead>
+						<%@ include file="page1.file"%>
+						<tbody>
+							<c:forEach var="merch" items="${merchlist}"
+								begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+								<%-- 						<c:forEach var="merch" items="${list}" > --%>
+								<tr>
+									<td>${merch.merchID}</td>
+									<td><a class="tablebt"
+										href="${pageContext.request.contextPath}/merch/controller?action=getOne_For_Display&merchID=${merch.merchID}">${merch.merchName}</td>
+									<td>${merch.merchStatus == 1? '下架':''} ${merch.merchStatus == 2? '上架':''}
+										${merch.merchStatus == 3? '主打':''}</td>
+									<td>
+										<form
+											action="${pageContext.request.contextPath}/merch/controller">
+											<input class="tablebt" type="hidden" name="merchID"
+												value="${merch.merchID}">
+											<button class="tablebt" type="submit" name="action"
+												value="getOne_For_Update">修改</button>
+										</form>
+									</td>
+									<td>
+										<form
+											action="${pageContext.request.contextPath}/merch/controller">
+											<input class="tablebt" type="hidden" name="merchID"
+												value="${merch.merchID}">
+											<button class="tablebt" type="submit" name="action"
+												value="delete">刪除</button>
+										</form>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
 					</table>
 
 				</div>
@@ -108,9 +111,22 @@ List<MerchVO> list = (List<MerchVO>)session.getAttribute("merchlist");
 	</main>
 
 	<footer> 嗨邇覓影城 &copy; HIREME CINEMA 2022 </footer>
-	<aside id="aside">     
-     <%@ include file="/back_end/aside_html.jsp"%>   
-    </aside>
+	<aside id="aside">
+		<%@ include file="/back_end/aside_html.jsp"%>
+	</aside>
+	<script
+		src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/theme.bootstrap.min.css"></link>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
+
+	<script>
+		$("#myTable").tablesorter({
+			theme : "",
+			widgets : [ 'zebra' ]
+		});
+	</script>
 </body>
 
 </html>

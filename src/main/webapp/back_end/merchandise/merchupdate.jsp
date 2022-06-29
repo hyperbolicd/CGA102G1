@@ -16,7 +16,7 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/emp/css/emp_footer.css">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/back_end/merchandise/css/FDINFBack.css">
+	href="${pageContext.request.contextPath}/back_end/merchandise/css/merchandise.css">
 </head>
 
 <body>

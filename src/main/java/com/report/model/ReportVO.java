@@ -12,6 +12,17 @@ public class ReportVO {
 	private Integer rpState;
 	private Timestamp rpDate;
 	
+	
+	
+	public ReportVO() {
+		super();
+		
+	}
+	public ReportVO(Integer rpId, Integer rpState) {
+		super();
+		this.rpId = rpId;
+		this.rpState = rpState;
+	}
 	public Integer getRpId() {
 		return rpId;
 	}

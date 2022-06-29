@@ -8,8 +8,10 @@ $(document).ready(function(){
     // 獲取預覽按鈕
     let previewBtn = document.getElementById("previewBtn");
     let total;
+    
     // 展示座位
     function previewSeat (){
+		document.getElementById("submitBtn").disabled=false;
 		// 清空prbox
      	let child = prBox.lastElementChild;  
         while (child) { 

@@ -1,7 +1,9 @@
 package com.movie.model;
 
 import java.sql.Date;
-import java.util.List;
+import java.util.*;
+
+import com.showing.model.ShowingVO;
 
 public class MovieService {
 	private MovieDAO_interface dao;
@@ -71,6 +73,10 @@ public class MovieService {
 		return dao.getAll();
 	}
 	
+	public List<MovieVO> getAll(Map<String, String[]> map){
+		  return dao.getAll(map);
+		 }
+	
 	public List<MovieVO> getShowingMV(){
 		
 		return dao.getShowingMV();
@@ -80,5 +86,13 @@ public class MovieService {
 		
 		return dao.getComingMV();
 	};
+	
+	public MovieVO getOneMovie(Integer mvId) {
+		return dao.findByPrimaryKey(mvId);
+	}
+	
+	public Set<ShowingVO> getShowingsBymvId(Integer mvId) {
+		return dao.getShowingsBymvId(mvId);
+	}
 }
 	

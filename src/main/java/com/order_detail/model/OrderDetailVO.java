@@ -1,5 +1,8 @@
 package com.order_detail.model;
 
+import com.merchandise_inf.model.MerchService;
+import com.merchandise_inf.model.MerchVO;
+
 public class OrderDetailVO implements java.io.Serializable {
 		private Integer merchOrdID;
 		private Integer item;
@@ -7,6 +10,7 @@ public class OrderDetailVO implements java.io.Serializable {
 		private Integer ordCount;
 		private Byte ordStatus;
 		private Double ordPrice;
+
 		public Integer getMerchOrdID() {
 			return merchOrdID;
 		}
@@ -42,5 +46,10 @@ public class OrderDetailVO implements java.io.Serializable {
 		}
 		public void setOrdPrice(Double ordPrice) {
 			this.ordPrice = ordPrice;
+		}
+		public MerchVO getMerchVO(){
+			MerchService merchSvc = new MerchService();
+			MerchVO merchVo = merchSvc.getOneMerch(merchID);
+			return merchVo;
 		}
 }

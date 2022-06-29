@@ -18,6 +18,7 @@ public class OrderDetailService {
 		OrderDetailVO orderDetailVo = new OrderDetailVO();
 		orderDetailVo.setMerchOrdID(merchOrdID);
 		orderDetailVo.setItem(item);
+		orderDetailVo.setMerchID(merchID);
 		orderDetailVo.setOrdCount(ordCount);
 		orderDetailVo.setOrdStatus(ordStatus);
 		orderDetailVo.setOrdPrice(ordPrice);
@@ -30,6 +31,7 @@ public class OrderDetailService {
 		OrderDetailVO orderDetailVo = new OrderDetailVO();
 		orderDetailVo.setMerchOrdID(merchOrdID);
 		orderDetailVo.setItem(item);
+		orderDetailVo.setMerchID(merchID);
 		orderDetailVo.setOrdCount(ordCount);
 		orderDetailVo.setOrdStatus(ordStatus);
 		orderDetailVo.setOrdPrice(ordPrice);
@@ -40,6 +42,9 @@ public class OrderDetailService {
 	
 	public List<OrderDetailVO> getALL(){
 		return dao.getAll();
+	}
+	public List<OrderDetailVO> getALL(Integer merchOrdID){
+		return dao.getAll(merchOrdID);
 	}
 	
 	public OrderDetailVO getOneOrderDedail(Integer merchOrdID, Integer item) {
@@ -52,6 +57,13 @@ public class OrderDetailService {
 	
 	public void deleteOrderDetail(Integer merchOrdID, Integer item) {
 		dao.delete(merchOrdID, item);
+	}
+	
+	public void resetItem(List<OrderDetailVO> list) {
+		Integer newItem = 1;
+		for(OrderDetailVO orderDetailVo : list) {
+			dao.resetItem(newItem++, orderDetailVo);
+		}
 	}
 	
 	

@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -50,7 +51,7 @@ public class MovieServlet extends HttpServlet {
 			/******************處理圖片************************/
 			String mvPicture =null;
 			if(req.getPart("mvPicture").getSize()==0) {
-				mvPicture = "/CGA102G1/mvPicture_upload/sample.jpg";
+				mvPicture = "/mvPicture_upload/sample.jpg";
 			}else {
 				Part photo = req.getPart("mvPicture");
 				String dir = getServletContext().getRealPath("/mvPicture_upload");
@@ -59,7 +60,7 @@ public class MovieServlet extends HttpServlet {
 					 fsaveDirectory.mkdirs();
 				String filename = getFileNameFromPart(photo);
 				photo.write(dir+"/"+filename);
-				mvPicture = "/CGA102G1/mvPicture_upload/"+filename;
+				mvPicture ="/mvPicture_upload/" +filename;
 				System.out.println("insert 63行裡面的圖片路徑:"+mvPicture);
 			}
 			
@@ -113,7 +114,7 @@ public class MovieServlet extends HttpServlet {
 		}
 		if("update".equals(action)) {
 			
-			/*********************************/
+			/****************獲取參數*****************/
 			Integer mvId =Integer.valueOf(req.getParameter("mvId").trim());
 			String mvName = req.getParameter("mvName");
 			String mvEName = req.getParameter("mvEName");
@@ -166,6 +167,31 @@ public class MovieServlet extends HttpServlet {
 			String url ="/back_end/ManageMV/manageMV.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
+		}
+		
+		if ("listMovie_ByCompositeQuery".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			// 將資料轉為map
+			Map<String, String[]> map = req.getParameterMap();
+			// 傳入service
+			MovieService mvSvc = new MovieService();
+			List<MovieVO> list =mvSvc.getAll(map);
+			// 存入Attribute
+			req.setAttribute("listMovie_ByCompositeQuery", list);
+			RequestDispatcher rd = req.getRequestDispatcher("/back_end/ManageMV/TEST_Composite2.jsp");
+			rd.forward(req, res);
+			
+		}
+		
+		if("getOneForDisplay".equals(action)) {
+			
+			Integer mvId = Integer.valueOf(req.getParameter("mvId"));
+			MovieService mvSvc = new MovieService();
+			// 單一電影VO
+			MovieVO movieVO = mvSvc.findByPrimaryKey(mvId);
+			System.out.println("movieVO"+movieVO);
 		}
 			
 	}

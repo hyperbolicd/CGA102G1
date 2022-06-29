@@ -5,13 +5,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import javax.naming.NamingException;
 import javax.servlet.jsp.tagext.TryCatchFinally;
 
 import com.common.JDBCUtil;
+import com.showing.model.ShowingVO;
 
 public class MovieJDBCDAO implements MovieDAO_interface{
 	
@@ -41,12 +41,15 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 			+"FROM Movie order by MV_ID";
 	
 	private static final String GET_SHOWING_MV=
-			"select MV_NAME,MV_E_NAME,MV_LEVEL,MV_PICTURE,MV_ST_DATE,MV_ED_DATE,MV_TT_CM,MV_TT_STAR from movie "
+			"select MV_ID,MV_NAME,MV_E_NAME,MV_LEVEL,MV_PICTURE,MV_ST_DATE,MV_ED_DATE,MV_TT_CM,MV_TT_STAR from movie "
 			+ "where MV_ST_DATE <= CURRENT_DATE and MV_ED_DATE > CURRENT_DATE order by MV_ST_DATE desc";
 	
 	private static final String GET_COMING_MV=
-			"select MV_NAME,MV_E_NAME,MV_LEVEL,MV_PICTURE,MV_ST_DATE from movie "
+			"select MV_ID,MV_NAME,MV_E_NAME,MV_LEVEL,MV_PICTURE,MV_ST_DATE from movie "
 			+ "where MV_ST_DATE > CURRENT_DATE order by MV_ST_DATE asc";
+	
+	private static final String GET_Showings_BymvId_STMT = 
+			"SELECT SH_ID,MV_ID,HL_ID,SH_STATE,SH_SEAT_STATE,SH_TIME,SH_TYPE FROM showing where MV_ID = ? order by MV_ID";
 	
 	@Override
 	public void insert(MovieVO movieVO) {
@@ -235,6 +238,7 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 				movieVO.setMvTtStar(rs.getInt("MV_TT_STAR"));
 			}
 			
+			
 		} catch (ClassNotFoundException e) {
 			// Class.forname嚙賠出 ClassNotFound嚙課外
 			throw new RuntimeException("Couldn't load database driver."
@@ -361,6 +365,7 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 			
 			while(rs.next()) {
 				movieVO = new MovieVO();
+				movieVO.setMvId(rs.getInt("MV_ID"));
 				movieVO.setMvName(rs.getString("MV_NAME"));
 				movieVO.setMvEName(rs.getString("MV_E_NAME"));
 				movieVO.setMvLevel(rs.getInt("MV_LEVEL"));
@@ -426,6 +431,7 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 			
 			while(rs.next()) {
 				movieVO = new MovieVO();
+				movieVO.setMvId(rs.getInt("MV_ID"));
 				movieVO.setMvName(rs.getString("MV_NAME"));
 				movieVO.setMvEName(rs.getString("MV_E_NAME"));
 				movieVO.setMvLevel(rs.getInt("MV_LEVEL"));
@@ -470,6 +476,140 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 		}
 		return list;
 	}
+	
+	
+	@Override
+	public Set<ShowingVO> getShowingsBymvId(Integer mvId) {
+		Set<ShowingVO> set = new LinkedHashSet<ShowingVO>();
+		ShowingVO showingVO = null;
+	
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+	
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(GET_Showings_BymvId_STMT);
+			pstmt.setInt(1, mvId);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				showingVO = new ShowingVO();
+				showingVO.setSH_ID(rs.getInt("SH_ID"));
+				showingVO.setmvId(rs.getInt("MV_ID"));
+				showingVO.setHL_ID(rs.getInt("HL_ID"));
+				showingVO.setSH_STATE(rs.getInt("SH_STATE"));
+				showingVO.setSH_SEAT_STATE(rs.getString("SH_SEAT_STATE"));
+				showingVO.setSH_TIME(rs.getTimestamp("SH_TIME"));
+				showingVO.setSH_TYPE(rs.getInt("SH_TYPE"));
+				set.add(showingVO); // Store the row in the vector
+			}
+	
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver."
+					+e.getMessage());
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
+	}
+	
+	
+	@Override
+	 public List<MovieVO> getAll(Map<String, String[]> map) {
+	  
+	  List<MovieVO> list = new ArrayList<MovieVO>();
+	  MovieVO movieVO = null;
+	  
+	  Connection conn = null;
+	  ResultSet rs =null;
+	  PreparedStatement pstmt = null;
+	  
+	  try {
+	   conn = JDBCUtil.getConnection();
+	   String finalSQL=
+	     "SELECT * FROM MOVIE"
+	     + CompositeQuery_movie.get_WhereCondition(map)
+	     + "order by MV_ID";
+	   pstmt = conn.prepareStatement(finalSQL);
+	   System.out.println(finalSQL);
+	   rs = pstmt.executeQuery();
+	   
+	   while(rs.next()) {
+	    movieVO = new MovieVO();
+	    movieVO.setMvName(rs.getString("MV_NAME"));
+	    movieVO.setMvEName(rs.getString("MV_E_NAME"));
+	    movieVO.setMvLevel(rs.getInt("MV_LEVEL"));
+	    movieVO.setMvType(rs.getString("MV_TYPE"));
+	    
+	    list.add(movieVO);
+	   }
+	   
+	  } catch (SQLException se) {
+	   throw new RuntimeException("A database error occured. "
+	     + se.getMessage());
+	  } catch (ClassNotFoundException e) {
+	   // TODO Auto-generated catch block
+	   e.printStackTrace();
+	  } catch (NamingException e) {
+	   // TODO Auto-generated catch block
+	   e.printStackTrace();
+	  } finally {
+	   if (rs != null) {
+	    try {
+	     rs.close();
+	    } catch (SQLException se) {
+	     se.printStackTrace(System.err);
+	    }
+	   }
+	   if (pstmt != null) {
+	    try {
+	     pstmt.close();
+	    } catch (SQLException se) {
+	     se.printStackTrace(System.err);
+	    }
+	   }
+	   if (conn != null) {
+	    try {
+	     conn.close();
+	    } catch (Exception e) {
+	     e.printStackTrace(System.err);
+	    }
+	   }
+	  }
+	  
+	  return list;
+	 }
+		
+	
 	
 	public static void main(String[] args) {
 		MovieJDBCDAO dao = new MovieJDBCDAO();
