@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- <!DOCTYPE html> -->
 <html lang="en" dir="ltr">
 
 <head>
@@ -12,7 +13,7 @@
 
 
 <body>
-  <!-- ¸m³»«ö¶s -->
+  <!-- ç½®é ‚æŒ‰éˆ• -->
   <button type="button" id="BackTop" class="toTop-arrow"></button>
   <script>
     $(function () {
@@ -28,79 +29,20 @@
       }).scroll();
     });
   </script>
-
-  <div class="wrapper row1" style="height:60px;">
-    <header id="header" class="clear">
-      <div id="hgroup">
-       <img src="images/demo/logo6.png" width="200" height="60" alt="">
-      </div>
-
-      <div class="dropdown" style=" margin: 0;padding: 0;list-style: none; ">
-
-        <button class="dropbtn">·|­û±M°Ï</button>
-        <div class="dropdown-content">
-          <a href="#">·|­ûµn¤J</a>
-          <a href="#">·|­û¤¤¤ß</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropbtn">¬¡°Ê¤½§i</button>
-        <div class="dropdown-content">
-          <a href="#">¼v«°¤½§i</a>
-          <a href="#">¼v«°¦n±d</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropbtn">Q & A±M°Ï</button>
-        <div class="dropdown-content">
-          <a href="#">±`¨£°ÝÃD</a>
-          <a href="#">«ÈªA«H½c</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropbtn">¼v«°±M°Ï</button>
-        <div class="dropdown-content">
-          <a href="#">¼v«°¤¶²Ð</a>
-          <a href="#">¼v«°¦aÂI</a>
-          <a href="#">²¼»ù¸ê°T</a>
-          <a href="#">À\¶¼¸ê°T</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropbtn">¹q¼v¸ê°T</button>
-        <div class="dropdown-content">
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropbtn">°Ó«°ÁÊª«</button>
-        <div class="dropdown-content">
-          <a href="#">°Ó«~ÂsÄý</a>
-          <a href="#">ÁÊ¶R°h³f</a>
-        </div>
-      </div>
-
-    </header>
-  </div>
-
-    
-    
+  
+ <jsp:include page="/front_end/header.jsp" />
     
 
  <div style="padding:500px 100px;">
 
-¤º®e©ñ¦b³o¸Ì
+å…§å®¹æ”¾åœ¨é€™è£¡
 
 
 
 
   </div>
-  <!--«ÈªA¹Ï ½Ð¦Û¦æ¥[³sµ²-->
-  <img class="cs" src="images/demo/cs.png" height="50px;" width="60px;" href="#"></img>
+<!--   <!--å®¢æœåœ– è«‹è‡ªè¡ŒåŠ é€£çµ--> -->
+<!--   <img class="cs" src="images/demo/cs.png" height="50px;" width="60px;" href="#"></img> -->
 
   <!-- Copyright -->
   <div class="wrapper row2">

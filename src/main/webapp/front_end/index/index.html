@@ -1,15 +1,10 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.member.model.*"%>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
-<%
- MemberVO memberVO = (MemberVO) session.getAttribute("memberVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
-%>
 
 <head>
   <title>HireMe</title>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/css/layout.css" type="text/css">
+  <link rel="stylesheet" href="styles/layout.css" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
@@ -107,13 +102,14 @@
   <div class="wrapper row1" style="height:60px;">
     <header id="header" class="clear">
       <div id="hgroup">
-        <img src="<%=request.getContextPath()%>/front_end/index/images/demo/logo6.png" width="200" height="60" alt="">
+        <img src="images/demo/logo6.png" width="200" height="60" alt="">
       </div>
 
       <div class="dropdown" style=" margin: 0;padding: 0;list-style: none; ">
         <button class="dropbtn">會員專區</button>
         <div class="dropdown-content">
-          <a href="${pageContext.request.contextPath}/front_end/membercentre/membercentre.jsp">會員中心</a>
+          <a href="#">會員登入</a>
+          <a href="#">會員中心</a>
         </div>
       </div>
 
@@ -156,35 +152,25 @@
           <a href="#">購買退貨</a>
         </div>
       </div>
-    	
-
- 
-<!--       <button class="logout">會員登出</button> -->
- 	<div class="dropdown">
-		<c:if test="${empty sessionScope.memberVO.member_ID}">
-			<a id="logIn" href="${pageContext.request.contextPath}/front_end/login/login.jsp">登入</a>
-		</c:if>
-		<c:if test="${not empty sessionScope.memberVO.member_ID}">
-			<div style="display:flex">
-				<p style="margin-right:20px">${memberVO.member_Name}&nbsp;&nbsp;Hello</p>
-				<a href="<%=request.getContextPath()%>/member.do?action=logout" type="button" id="logOut">登出</a>
-			</div>
-		</c:if>
-	</div>
+    
+      
+    
+      <button class="logout">會員登出</button>
     
 
     </header>
   </div>
 
-  
+    </header>
+  </div>
 
     <div id="banner">    
         <!-- 輪播圖片 -->
         <div id="tab">
-            <img class="tabImg" src="<%=request.getContextPath()%>/front_end/index/images/movie3.jpg" height="400" width="100%"/>
-            <img class="tabImg" src="<%=request.getContextPath()%>/front_end/index/images/movie4.jpg" height="400" width="100%"/>
-            <img class="tabImg" src="<%=request.getContextPath()%>/front_end/index/images/movie5.jpg" height="400" width="100%"/>
-            <img class="tabImg" src="<%=request.getContextPath()%>/front_end/index/images/movie6.jpg" height="400" width="100%"/>
+            <img class="tabImg" src="images/movie3.jpg" height="400" width="100%"/>
+            <img class="tabImg" src="images/movie4.jpg" height="400" width="100%"/>
+            <img class="tabImg" src="images/movie5.jpg" height="400" width="100%"/>
+            <img class="tabImg" src="images/movie6.jpg" height="400" width="100%"/>
         </div>
         <!-- 指示符 -->
         <div class="lunbo_btn">
@@ -201,11 +187,8 @@
             <span class="slider_right"></span>
         </div>    
     </div>
-<!--     <div id="login"> -->
-<%-- 	   <a href="${pageContext.request.contextPath}/front_end/membercentre/membercentre.jsp">會員修改</a> --%>
-<%-- 	   <input type = "text" value="${memberVO.member_ID}"> --%>
-<!--     </div> -->
-	    <script type="text/javascript">
+    
+    <script type="text/javascript">
     
         //輪播圖
         var curIndex=0;//初始化
@@ -286,7 +269,7 @@
 
   </div>
   <!--客服圖 請自行加連結-->
-  <img class="cs" src="<%=request.getContextPath()%>/front_end/index/images/demo/cs.png" height="50px;" width="60px;" href="#"></img>
+  <img class="cs" src="images/demo/cs.png" height="50px;" width="60px;" href="#"></img>
 
   <!-- Copyright -->
   <div class="wrapper row2">

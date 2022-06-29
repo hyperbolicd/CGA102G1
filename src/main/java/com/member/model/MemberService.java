@@ -22,6 +22,10 @@ public class MemberService {
 		memberVO.setMember_Phone(member_Phone);
 		memberVO.setMember_Address(member_Address);
 		memberVO.setMember_Pic(member_Pic);
+		memberVO.setMember_Status(1);
+		memberVO.setWish_Ticket(0);
+		memberVO.setBonus_Points(0);
+		memberVO.setSum_Count(0);
 		dao.insert(memberVO);
 
 		return memberVO;
@@ -64,4 +68,24 @@ public class MemberService {
 	public List<MemberVO> getAll() {
 		return dao.getAll();
 	}
+	
+//修改會員狀態	0為啟用 1為啟用 2為停權
+	public Integer updateStatus(Integer mem_id,Integer member_Status) {
+		dao.updateStatus(mem_id,member_Status);
+		return member_Status;
+	}
+	
+//會員登入 	
+	public MemberVO loginMember(MemberVO memberVO) {
+		
+		return dao.loginMember(memberVO);
+		
+	}
+	
+	public MemberVO getOneMember(Integer member_ID) {
+		return dao.findByPrimaryKey(member_ID);
+	}
+	
+	
+	
 }
