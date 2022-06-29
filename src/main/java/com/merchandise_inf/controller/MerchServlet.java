@@ -21,7 +21,7 @@ import javax.sql.rowset.serial.SerialBlob;
 
 import com.merchandise_inf.model.MerchService;
 import com.merchandise_inf.model.MerchVO;
-import com.mysql.cj.Session;
+
 
 @WebServlet("/merch/controller")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
@@ -386,6 +386,19 @@ public class MerchServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
+		
+		/*===================================前台=============================================*/
+		if("getMerchInfo".equals(action)) {
+			/*接收資料*/
+			Integer merchID = Integer.valueOf(req.getParameter("merchID"));
+			MerchService merchSvc = new MerchService();
+			MerchVO merchVo = merchSvc.getOneMerch(merchID);
+			req.setAttribute("merchVo", merchVo);
+			String url = "/front_end/merchandise/merchandise.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}
+		
 
 	}
 
