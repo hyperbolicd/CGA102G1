@@ -20,4 +20,14 @@ public class RefundTicketService {
 		
 		return dao.getTicketName(tkTypeID);
 	}
+	
+	public String getActTitle(Integer act_id) {
+		
+		return dao.getActTitle(act_id);
+	}
+	
+	public void updateOneDt(Long tkDtID) {
+		
+		dao.updateOneDt(tkDtID);
+	}
 }

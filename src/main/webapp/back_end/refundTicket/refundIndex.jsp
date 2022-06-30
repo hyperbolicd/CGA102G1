@@ -64,6 +64,7 @@
         嗨邇覓影城 &copy; HIREME CINEMA 2022
     </footer>
     <script src="${pageContext.request.contextPath}/back_end/refundTicket/refundIndex.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

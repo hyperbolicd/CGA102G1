@@ -21,9 +21,11 @@ public class RefundTicketDAO implements RefundTicket_interface {
 	public static final String GET_TK_NAME=
 			"SELECT TK_TYPE FROM tk_inf WHERE TK_TYPE_ID = ?";
 	
+	public static final String GET_ACT_TITLE=
+			"SELECT ACT_TITLE FROM activity WHERE ACT_ID = ?;";
 	
 	public static final String UPDATE_ONE_DT=
-			"";
+			"UPDATE tk_ord_dt SET STATE = '2' WHERE TK_DT_ID = ?;";
 	
 	@Override
 	public List<TkOrdDtVO> getDtByOrd(Long tkOrdID) {
@@ -139,9 +141,106 @@ public class RefundTicketDAO implements RefundTicket_interface {
 		return tkType;
 	}
 	
+
 	@Override
-	public TkOrdDtVO updateOneDt(Integer tkDtID) {
-		return null;
+	public String getActTitle(Integer act_id) {
+		String act_title = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(GET_ACT_TITLE);
+			pstmt.setLong(1, act_id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				act_title=rs.getString("act_title");
+			}
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver."
+					+e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("Couldn't load database driver."
+					+se.getMessage());
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return act_title;
+		
 	}
 	
+	@Override
+	public void updateOneDt(Long tkDtID) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(UPDATE_ONE_DT);
+			pstmt.setLong(1, tkDtID);
+			pstmt.executeUpdate();
+			
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver."
+					+e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("Couldn't load database driver."
+					+se.getMessage());
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
 }
