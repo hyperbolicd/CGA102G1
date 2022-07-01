@@ -26,7 +26,7 @@ public class WishingListJDBCDAO implements WishingListDAO_interface{
 			"delete from wishing_list where WISH_NO = ? and MV_ID = ?";
 	
 	@Override
-	public void insert(WishingListVO wishingPondVO) {
+	public void insert(WishingListVO wishingListVO) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -34,8 +34,8 @@ public class WishingListJDBCDAO implements WishingListDAO_interface{
 			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(INSERT);
 			
-			ps.setInt(1, wishingPondVO.getWish_no());
-			ps.setInt(2, wishingPondVO.getMv_id());
+			ps.setInt(1, wishingListVO.getWish_no());
+			ps.setInt(2, wishingListVO.getMv_id());
 			
 			ps.executeUpdate();
 			
@@ -63,14 +63,14 @@ public class WishingListJDBCDAO implements WishingListDAO_interface{
 		}
 	}
 	@Override
-	public void insert(WishingListVO wishingPondVO, Connection con) {
+	public void insert(WishingListVO wishingListVO, Connection con) {
 		PreparedStatement ps = null;
 		
 		try {
 			ps = con.prepareStatement(INSERT);
 			
-			ps.setInt(1, wishingPondVO.getWish_no());
-			ps.setInt(2, wishingPondVO.getMv_id());
+			ps.setInt(1, wishingListVO.getWish_no());
+			ps.setInt(2, wishingListVO.getMv_id());
 			
 			ps.executeUpdate();
 			
@@ -129,8 +129,37 @@ public class WishingListJDBCDAO implements WishingListDAO_interface{
 			}
 		}		
 	}
+	
+	public void delete(WishingListVO wishingListVO, Connection con) {
+		PreparedStatement ps = null;
+		
+		try {
+			ps = con.prepareStatement(DELETE);
+			
+			ps.setInt(1, wishingListVO.getWish_no());
+			ps.setInt(2, wishingListVO.getMv_id());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}		
+	}
 	@Override
-	public void update(WishingListVO wishingPondVO) {
+	public void update(WishingListVO wishingListVO) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -138,9 +167,9 @@ public class WishingListJDBCDAO implements WishingListDAO_interface{
 			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(UPDATE);
 			
-			ps.setInt(1, wishingPondVO.getMv_id());
-			ps.setInt(2, wishingPondVO.getWish_count());
-			ps.setInt(3, wishingPondVO.getWish_no());
+			ps.setInt(1, wishingListVO.getMv_id());
+			ps.setInt(2, wishingListVO.getWish_count());
+			ps.setInt(3, wishingListVO.getWish_no());
 			
 			ps.executeUpdate();
 			
@@ -183,11 +212,11 @@ public class WishingListJDBCDAO implements WishingListDAO_interface{
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				WishingListVO wishingPondVO = new WishingListVO();
-				wishingPondVO.setWish_no(rs.getInt("WISH_NO"));
-				wishingPondVO.setMv_id(rs.getInt("MV_ID"));
-				wishingPondVO.setWish_count(rs.getInt("WISH_COUNT"));
-				list.add(wishingPondVO);
+				WishingListVO wishingListVO = new WishingListVO();
+				wishingListVO.setWish_no(rs.getInt("WISH_NO"));
+				wishingListVO.setMv_id(rs.getInt("MV_ID"));
+				wishingListVO.setWish_count(rs.getInt("WISH_COUNT"));
+				list.add(wishingListVO);
 			}
 			
 		} catch (ClassNotFoundException e) {
@@ -235,11 +264,11 @@ public class WishingListJDBCDAO implements WishingListDAO_interface{
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				WishingListVO wishingPondVO = new WishingListVO();
-				wishingPondVO.setWish_no(rs.getInt("WISH_NO"));
-				wishingPondVO.setMv_id(rs.getInt("MV_ID"));
-				wishingPondVO.setWish_count(rs.getInt("WISH_COUNT"));
-				list.add(wishingPondVO);
+				WishingListVO wishingListVO = new WishingListVO();
+				wishingListVO.setWish_no(rs.getInt("WISH_NO"));
+				wishingListVO.setMv_id(rs.getInt("MV_ID"));
+				wishingListVO.setWish_count(rs.getInt("WISH_COUNT"));
+				list.add(wishingListVO);
 			}
 			
 		} catch (ClassNotFoundException e) {

@@ -47,9 +47,9 @@ public class WishingPondService {
 		dao.update(wishingPondVO);
 	}
 	
-//	public WishingPondVO updateWishingPondWithOption(WishingPondVO wishingPondVO, List<WishingListVO> list) {
-//		Integer wish_no = dao.updateWithOptions(wishingPondVO, list);
-//	}
+	public Integer updateWishingPondWithOption(WishingPondVO wishingPondVO, List<WishingListVO> list) {
+		return dao.updateWithOptions(wishingPondVO, list);
+	}
 	
 	public void updateWishingPond(WishingPondVO wishingPondVO) {
 		dao.update(wishingPondVO);
@@ -65,6 +65,10 @@ public class WishingPondService {
 
 	public List<WishingPondVO> getAll(){
 		return dao.getAll();
+	}
+	
+	public List<WishingPondVO> getAllFromNow(){
+		return dao.getAllFromNow();
 	}
 	// 複合查詢
 	public List<WishingPondVO> getAll(Map<String, String[]> map){

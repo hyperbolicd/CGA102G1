@@ -175,62 +175,62 @@ public class WishingPondServlet extends HttpServlet {
 		
 		if("updateWish".equals(action)) {
 			// 存放錯誤訊息
-						Map<String, String> errMsg = new LinkedHashMap<String, String>();
-						request.setAttribute("errMsg", errMsg);
-						/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-						Integer wish_no = Integer.valueOf(request.getParameter("wish_no"));
-						
-						String wish_name = request.getParameter("wish_name");
-						if(wish_name == null || wish_name.length() == 0) {
-							errMsg.put("wish_name", "請輸入活動名稱");
-						}
-						
-						String start_date = request.getParameter("start_date");
-						String dateReg = "^\\d{4}-\\d{2}-\\d{2}$";
-						if(start_date == null || start_date.length() == 0) {
-							errMsg.put("start_date", "請選擇起始日期");
-						} else if(!start_date.matches(dateReg)) {
-							errMsg.put("start_date", "日期格式不正確");
-						}
-						
-						String end_date = request.getParameter("end_date");
-						if(end_date == null || end_date.length() == 0) {
-							errMsg.put("end_date", "請選擇結束日期");
-						} else if(!end_date.matches(dateReg)) {
-							errMsg.put("start_date", "日期格式不正確");
-						}
-						
-						WishingPondVO wishVO = new WishingPondVO();
-						wishVO.setWish_no(wish_no);
-						wishVO.setWish_name(wish_name);
-						
-						String[] movies = request.getParameterValues("checkMovie");
-						if(movies == null) {
-							errMsg.put("checkMovie", "電影選項不可為空!");
-						} 
-						
-						if(!errMsg.isEmpty()) {
-							request.setAttribute("wishVO", wishVO);
-							request.getRequestDispatcher("/back_end/wish/updateWish.jsp").forward(request, response);
-							return;
-						}
-						
-						wishVO.setWish_start(java.sql.Date.valueOf(start_date));
-						wishVO.setWish_end(java.sql.Date.valueOf(end_date));
-						
-						List<WishingListVO> list = new ArrayList<WishingListVO>();
-						for(String movie: movies) {
-							out.println(movie);
-							WishingListVO wishListVO = new WishingListVO();
-							wishListVO.setMv_id(Integer.valueOf(movie));
-							list.add(wishListVO);
-						}
-						/***************************2.開始新增資料*****************************************/
-						WishingPondService wishSvc = new WishingPondService();
-//						wishVO = wishSvc.addWishingPondWithOption(wishVO, list);
-						/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-						request.setAttribute("wishVO", wishVO);
-//						request.getRequestDispatcher("/back_end/wish/wishPond.jsp").forward(request, response);
+			Map<String, String> errMsg = new LinkedHashMap<String, String>();
+			request.setAttribute("errMsg", errMsg);
+			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			Integer wish_no = Integer.valueOf(request.getParameter("wish_no"));
+			
+			String wish_name = request.getParameter("wish_name");
+			if(wish_name == null || wish_name.length() == 0) {
+				errMsg.put("wish_name", "請輸入活動名稱");
+			}
+			
+			String start_date = request.getParameter("start_date");
+			String dateReg = "^\\d{4}-\\d{2}-\\d{2}$";
+			if(start_date == null || start_date.length() == 0) {
+				errMsg.put("start_date", "請選擇起始日期");
+			} else if(!start_date.matches(dateReg)) {
+				errMsg.put("start_date", "日期格式不正確");
+			}
+			
+			String end_date = request.getParameter("end_date");
+			if(end_date == null || end_date.length() == 0) {
+				errMsg.put("end_date", "請選擇結束日期");
+			} else if(!end_date.matches(dateReg)) {
+				errMsg.put("start_date", "日期格式不正確");
+			}
+			
+			WishingPondVO wishVO = new WishingPondVO();
+			wishVO.setWish_no(wish_no);
+			wishVO.setWish_name(wish_name);
+			
+			String[] movies = request.getParameterValues("checkMovie");
+			if(movies == null) {
+				errMsg.put("checkMovie", "電影選項不可為空!");
+			} 
+			
+			if(!errMsg.isEmpty()) {
+				request.setAttribute("wishVO", wishVO);
+				request.getRequestDispatcher("/back_end/wish/updateWish.jsp").forward(request, response);
+				return;
+			}
+			
+			wishVO.setWish_start(java.sql.Date.valueOf(start_date));
+			wishVO.setWish_end(java.sql.Date.valueOf(end_date));
+			
+			List<WishingListVO> list = new ArrayList<WishingListVO>();
+			for(String movie: movies) {
+				WishingListVO wishListVO = new WishingListVO();
+				wishListVO.setWish_no(wish_no);
+				wishListVO.setMv_id(Integer.valueOf(movie));
+				list.add(wishListVO);
+			}
+			/***************************2.開始新增資料*****************************************/
+			WishingPondService wishSvc = new WishingPondService();
+			Integer lastUpdate = wishSvc.updateWishingPondWithOption(wishVO, list);
+			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+			request.setAttribute("lastUpdate", lastUpdate);
+			request.getRequestDispatcher("/back_end/wish/wishPond.jsp").forward(request, response);
 		}
 	}
 

@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,8 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 			"select WISH_NO, WISH_NAME, WISH_START, WISH_END, TOP_ONE from wishing_pond where WISH_NO = ?";
 	private static final String READ_ALL =
 			"select WISH_NO, WISH_NAME, WISH_START, WISH_END, TOP_ONE from wishing_pond";
+	private static final String READ_ALL_FROM_NOW =
+			"select WISH_NO, WISH_NAME, WISH_START, WISH_END, TOP_ONE from wishing_pond where WISH_END >= NOW();";
 	private static final String UPDATE =
 			"update wishing_pond set WISH_NAME = ?, WISH_START = ?, WISH_END = ?  "
 			+ "where WISH_NO = ?";
@@ -217,9 +220,10 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 	}
 	
 	@Override
-	public void updateWithOptions(WishingPondVO wishingPondVO, List<WishingListVO> list) {
+	public Integer updateWithOptions(WishingPondVO wishingPondVO, List<WishingListVO> list) {
 		Connection con = null;
 		PreparedStatement ps = null;
+		Integer emp_no = null;
 		
 		try {
 			con = JDBCUtil.getConnection();
@@ -232,12 +236,30 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 			
 			ps.executeUpdate();
 			
+			// 刪除並新增選項
+			WishingListJDBCDAO wishListDao = new WishingListJDBCDAO();
+			List<WishingListVO> deleteList = wishListDao.findByWishNo(wishingPondVO.getWish_no());
+			for(WishingListVO deleteVO: deleteList) {
+				wishListDao.delete(deleteVO, con);
+			}
+			for(WishingListVO insertVO: list) {
+				wishListDao.insert(insertVO, con);
+			}
+			
+			con.commit();
+			con.setAutoCommit(true);
+			
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (NamingException e) {
 			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			if(ps != null) {
 				try {
@@ -254,6 +276,7 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 				}
 			}
 		}		
+		return emp_no;
 	}
 	
 	@Override
@@ -365,6 +388,60 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 		return list;
 	}
 	
+	@Override
+	public List<WishingPondVO> getAllFromNow() {
+		List<WishingPondVO> list = new ArrayList<WishingPondVO>();
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = JDBCUtil.getConnection();
+			ps = con.prepareStatement(READ_ALL_FROM_NOW);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				WishingPondVO wishingPondVO = new WishingPondVO();
+				wishingPondVO.setWish_no(rs.getInt("WISH_NO"));
+				wishingPondVO.setWish_name(rs.getString("WISH_NAME"));
+				wishingPondVO.setWish_start(rs.getDate("WISH_START"));
+				wishingPondVO.setWish_end(rs.getDate("WISH_END"));
+				wishingPondVO.setTop_one(rs.getInt("TOP_ONE"));
+				list.add(wishingPondVO);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}		
+		return list;
+	}
 	@Override
 	public List<WishingPondVO> getAll(Map<String, String[]> map) {
 		String sql = "select WISH_NO, WISH_NAME, WISH_START, WISH_END, TOP_ONE "
@@ -605,12 +682,11 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 //		}
 		
 		// R_ALL
-//		List<WishingPondVO> list = dao.getAll();
+//		List<WishingPondVO> list = dao.getAllFromNow();
 //		for(WishingPondVO wp: list) {
 //			System.out.print(wp.getWish_no() + ", ");
 //			System.out.print(wp.getWish_name() + ", ");
-//			System.out.print(wp.getWish_start().toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + ", ");
-////			System.out.println(wp.getWish_end().toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+//			System.out.print(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(wp.getWish_start()) + ", ");
 //			System.out.print(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(wp.getWish_end()) + ", ");
 //			System.out.println(wp.getTop_one());
 //		}

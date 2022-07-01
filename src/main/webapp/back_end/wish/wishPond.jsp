@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.wishing_pond.model.*"%>
 <%@ page import="java.util.*"%>
 <!DOCTYPE html>
@@ -43,7 +42,7 @@
 <%--     <jsp:useBean id="wishSvc" scope="page" class="com.wishing_pond.model.WishingPondService"/> --%>
     <main>
         <div id="main">
-            <h1>許願池管理</h1> 
+            <h1>許願池管理</h1> ${lastUpdate }
             <button id="newWish"><a href="${pageContext.request.contextPath}/back_end/wish/newWish.jsp">新增</a></button>
     		<span style="color: red;">${errMsg.notFound}</span>
             <div id="multiSearch">
@@ -94,8 +93,8 @@
 	                    <tr>
 	                        <td>${event.wish_no}</td>
 	                        <td>${event.wish_name}</td>
-	                        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${event.wish_start}" /></td>
-	                        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${event.wish_end}" /></td>
+	                        <td>${event.wish_start}</td>
+	                        <td>${event.wish_end}</td>
 	                        <td>${event.mvVO.mvName == null ? "結果尚未出爐" : event.mvVO.mvName}</td>
 	                        <td>
 	                        	<form action="${pageContext.request.contextPath}/wish/WishingPond.do" method="post">
