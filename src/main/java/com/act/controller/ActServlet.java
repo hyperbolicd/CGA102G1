@@ -134,50 +134,41 @@ public class ActServlet extends HttpServlet {
 				act_picture = actVO.getAct_picture();
 			}
 
-			String act_title = req.getParameter("act_title");
-			String act_titleReg = "^{2,20}$";
-			if (act_title == null || act_title.trim().length() == 0) {
-				errorMsgs.add("活動方案標題: 請勿空白");
-			} else if (!act_title.trim().matches(act_titleReg)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.add("活動方案標題: 長度必需在2到20之間");
-			}
-
+			
 			String act_subtitle = req.getParameter("act_subtitle");
 			String act_subtitleReg = "^{2,40}$";
 			if (act_subtitle == null || act_subtitle.trim().length() == 0) {
 				errorMsgs.add("活動方案標題: 請勿空白");
-			} else if (!act_title.trim().matches(act_subtitleReg)) { // 以下練習正則(規)表示式(regular-expression)
+			} else if (!act_subtitle.trim().matches(act_subtitleReg)) { // 以下練習正則(規)表示式(regular-expression)
 				errorMsgs.add("活動方案標題: 長度必需在2到40之間");
 			}
 
 			String act_content = req.getParameter("act_content").trim();
 
-			java.sql.Timestamp act_time_start = null;
+			java.sql.Date act_date_start = null;
 			try {
-				act_time_start = java.sql.Timestamp.valueOf(req.getParameter("act_time_start").trim());
+				act_date_start = java.sql.Date.valueOf(req.getParameter("act_date_start").trim());
 			} catch (IllegalArgumentException e) {
-				act_time_start = new java.sql.Timestamp(System.currentTimeMillis());
+				act_date_start = new java.sql.Date(System.currentTimeMillis());
 				errorMsgs.add("請輸入日期!");
 			}
 
-			java.sql.Timestamp act_time_end = null;
+			java.sql.Date act_date_end = null;
 			try {
-				act_time_end = java.sql.Timestamp.valueOf(req.getParameter("act_time_end").trim());
+				act_date_end = java.sql.Date.valueOf(req.getParameter("act_date_end").trim());
 			} catch (IllegalArgumentException e) {
-				act_time_end = new java.sql.Timestamp(System.currentTimeMillis());
+				act_date_end = new java.sql.Date(System.currentTimeMillis());
 				errorMsgs.add("請輸入日期!");
 			}
 
-			java.lang.Byte act_status = java.lang.Byte.valueOf(req.getParameter("act_status"));
 
 			ActVO actVO = new ActVO();
 			actVO.setAct_picture(act_picture);
-			actVO.setAct_title(act_title);
 			actVO.setAct_subtitle(act_subtitle);
 			actVO.setAct_content(act_content);
-			actVO.setAct_time_start(act_time_start);
-			actVO.setAct_time_end(act_time_end);
-			actVO.setAct_status(act_status);
+			actVO.setAct_date_start(act_date_start);
+			actVO.setAct_date_end(act_date_end);
+
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
@@ -189,8 +180,8 @@ public class ActServlet extends HttpServlet {
 
 			/*************************** 2.開始修改資料 *****************************************/
 			ActService actSvc = new ActService();
-			actVO = actSvc.updateAct(act_id, act_picture, act_title, act_subtitle, act_content, act_time_start,
-					act_time_end, act_status);
+			actVO = actSvc.updateAct(act_id, act_picture, act_subtitle, act_content, act_date_start,
+					act_date_end);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("actVO", actVO); // 資料庫update成功後,正確的的empVO物件,存入req
@@ -207,7 +198,7 @@ public class ActServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-			// Integer act_id = Integer.valueOf(req.getParameter("act_id").trim());
+			Integer act_id = Integer.valueOf(req.getParameter("act_id").trim());
 
 			Part part = req.getPart("act_picture");
 			InputStream in = part.getInputStream();
@@ -215,50 +206,41 @@ public class ActServlet extends HttpServlet {
 			in.read(act_picture);
 			in.close();
 
-			String act_title = req.getParameter("act_title");
-			String act_titleReg = "^{2,20}$";
-			if (act_title == null || act_title.trim().length() == 0) {
-				errorMsgs.add("活動方案標題: 請勿空白");
-			} else if (!act_title.trim().matches(act_titleReg)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.add("活動方案標題: 長度必需在2到20之間");
-			}
 
 			String act_subtitle = req.getParameter("act_subtitle");
 			String act_subtitleReg = "^{2,40}$";
 			if (act_subtitle == null || act_subtitle.trim().length() == 0) {
-				errorMsgs.add("活動方案標題: 請勿空白");
-			} else if (!act_title.trim().matches(act_subtitleReg)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.add("活動方案標題: 長度必需在2到40之間");
+				errorMsgs.add("活動方案副標題: 請勿空白");
+			} else if (!act_subtitle.trim().matches(act_subtitleReg)) { // 以下練習正則(規)表示式(regular-expression)
+				errorMsgs.add("活動方案副標題: 長度必需在2到40之間");
 			}
 
 			String act_content = req.getParameter("act_content").trim();
 
-			java.sql.Timestamp act_time_start = null;
+			java.sql.Date act_date_start = null;
 			try {
-				act_time_start = java.sql.Timestamp.valueOf(req.getParameter("act_time_start").trim());
+				act_date_start = java.sql.Date.valueOf(req.getParameter("act_date_start").trim());
 			} catch (IllegalArgumentException e) {
-				act_time_start = new java.sql.Timestamp(System.currentTimeMillis());
+				act_date_start = new java.sql.Date(System.currentTimeMillis());
 				errorMsgs.add("請輸入日期!");
 			}
 
-			java.sql.Timestamp act_time_end = null;
+			java.sql.Date act_date_end = null;
 			try {
-				act_time_end = java.sql.Timestamp.valueOf(req.getParameter("act_time_end").trim());
+				act_date_end = java.sql.Date.valueOf(req.getParameter("act_date_end").trim());
 			} catch (IllegalArgumentException e) {
-				act_time_end = new java.sql.Timestamp(System.currentTimeMillis());
+				act_date_end = new java.sql.Date(System.currentTimeMillis());
 				errorMsgs.add("請輸入日期!");
 			}
 
-			java.lang.Byte act_status = java.lang.Byte.valueOf(req.getParameter("act_status"));
 
 			ActVO actVO = new ActVO();
+			actVO.setAct_id(act_id);
 			actVO.setAct_picture(act_picture);
-			actVO.setAct_title(act_title);
 			actVO.setAct_subtitle(act_subtitle);
 			actVO.setAct_content(act_content);
-			actVO.setAct_time_start(act_time_start);
-			actVO.setAct_time_end(act_time_end);
-			actVO.setAct_status(act_status);
+			actVO.setAct_date_start(act_date_start);
+			actVO.setAct_date_end(act_date_end);
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
@@ -270,8 +252,7 @@ public class ActServlet extends HttpServlet {
 
 			/*************************** 2.開始新增資料 ***************************************/
 			ActService actSvc = new ActService();
-			actVO = actSvc.addAct(act_picture, act_title, act_subtitle, act_content, act_time_start, act_time_end,
-					act_status);
+			actVO = actSvc.addAct(act_id, act_picture, act_subtitle, act_content, act_date_start, act_date_end);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			String url = "/back_end/act/allAct.jsp";
@@ -299,40 +280,40 @@ public class ActServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 
-		if ("updateStatus".equals(action)) { // 來自listAllEmp.jsp 或 /dept/listEmps_ByDeptno.jsp的請求
-
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-			PrintWriter out = res.getWriter();
-
-			/*************************** 1.接收請求參數 ***************************************/
-			Integer act_id = Integer.valueOf(req.getParameter("act_id"));
-
-			/*************************** 2.開始修改資料 ***************************************/
-			ActService actSvc = new ActService();
-			actSvc.actStatus(act_id);
-			ActVO actVO = actSvc.getOneAct(act_id);
-
-			// 將最新的狀態丟回去
-			java.lang.Byte newStatus = actVO.getAct_status();
-//			HashMap<String, Byte> map = new HashMap<String, Byte>();
-//			JSONObject jsonobj = new JSONObject();
-//			try {
-//				jsonobj.put("newStatus", newStatus);
-//				out.print(jsonobj.toString());
-//				return;
-//			}catch(JSONException e) {
-//				e.printStackTrace();
-//			}finally {
-//				out.flush();
-//				out.close();
-//			}
-
-			/*************************** 3.修改完成,準備轉交(Send the Success view) ***********/
-			String url = "/back_end/act/allAct.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
-			successView.forward(req, res);
-		}
+//		if ("updateStatus".equals(action)) { // 來自listAllEmp.jsp 或 /dept/listEmps_ByDeptno.jsp的請求
+//
+//			List<String> errorMsgs = new LinkedList<String>();
+//			req.setAttribute("errorMsgs", errorMsgs);
+//			PrintWriter out = res.getWriter();
+//
+//			/*************************** 1.接收請求參數 ***************************************/
+//			Integer act_id = Integer.valueOf(req.getParameter("act_id"));
+//
+//			/*************************** 2.開始修改資料 ***************************************/
+//			ActService actSvc = new ActService();
+//			actSvc.actStatus(act_id);
+//			ActVO actVO = actSvc.getOneAct(act_id);
+//
+//			// 將最新的狀態丟回去
+//			java.lang.Byte newStatus = actVO.getAct_status();
+////			HashMap<String, Byte> map = new HashMap<String, Byte>();
+////			JSONObject jsonobj = new JSONObject();
+////			try {
+////				jsonobj.put("newStatus", newStatus);
+////				out.print(jsonobj.toString());
+////				return;
+////			}catch(JSONException e) {
+////				e.printStackTrace();
+////			}finally {
+////				out.flush();
+////				out.close();
+////			}
+//
+//			/*************************** 3.修改完成,準備轉交(Send the Success view) ***********/
+//			String url = "/back_end/act/allAct.jsp";
+//			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+//			successView.forward(req, res);
+//		}
 
 	}
 }
