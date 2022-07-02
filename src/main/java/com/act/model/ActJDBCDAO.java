@@ -382,7 +382,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		
 		try {
 
 			Class.forName(driver);
@@ -402,7 +402,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 				actdtVO.setAct_status(rs.getByte("act_status"));
 				set.add(actdtVO); // Store the row in the list
 			}
-
+			
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
@@ -433,6 +433,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 			}
 		}
 		return set;
+		
 	}
 	
 	

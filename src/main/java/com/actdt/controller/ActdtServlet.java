@@ -55,7 +55,7 @@ public class ActdtServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢資料 *****************************************/
 			ActdtService actdtSvc = new ActdtService();
-			ActdtVO actdtVO = actdtSvc.getOneActdt(act_id);
+			ActdtVO actdtVO = actdtSvc.findByPrimaryKey(act_id);
 			if (actdtVO == null) {
 				errorMsgs.put("act_id", "查無資料");
 			}
@@ -83,7 +83,7 @@ public class ActdtServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢資料 ****************************************/
 			ActdtService actdtSvc = new ActdtService();
-			ActdtVO actdtVO = actdtSvc.getOneActdt(act_id);
+			ActdtVO actdtVO = actdtSvc.findByPrimaryKey(act_id);
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("actdtVO", actdtVO); // 資料庫取出的empVO物件,存入req
@@ -135,7 +135,7 @@ public class ActdtServlet extends HttpServlet {
 
 			/*************************** 2.開始修改資料 *****************************************/
 			ActdtService actdtSvc = new ActdtService();
-			ActdtVO actdtVO = actdtSvc.updateActdt(act_id, act_title, tk_type_id, act_discount, act_coupon, act_status);
+			ActdtVO actdtVO = actdtSvc.update(act_id, act_title, tk_type_id, act_discount, act_coupon, act_status);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("actdtVO", actdtVO); // 資料庫update成功後,正確的的empVO物件,存入req
@@ -176,7 +176,7 @@ public class ActdtServlet extends HttpServlet {
 
 			/*************************** 2.開始新增資料 ***************************************/
 			ActdtService actdtSvc = new ActdtService();
-			actdtSvc.addActdt(act_id, act_title, tk_type_id, act_discount, act_coupon, act_status);
+			actdtSvc.insert(act_id, act_title, tk_type_id, act_discount, act_coupon, act_status);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			String url = "/back_end/act/allAct.jsp";
@@ -194,7 +194,7 @@ public class ActdtServlet extends HttpServlet {
 
 			/*************************** 2.開始刪除資料 ***************************************/
 			ActdtService actdtSvc = new ActdtService();
-			actdtSvc.deleteActdt(act_id);
+			actdtSvc.delete(act_id);
 
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
 			String url = "/back_end/act/allAct.jsp";

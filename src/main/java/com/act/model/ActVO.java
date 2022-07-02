@@ -68,10 +68,13 @@ public class ActVO implements java.io.Serializable{
 
 
 	// for join 標題、票種、折價、折扣、狀態 from act_id 呼叫 標題、票種、折價、折扣、狀態 (活動方案明細)
-    public com.actdt.model.ActdtVO getDeptVO() {
+    public com.actdt.model.ActdtVO getActdtVO() {
 	    com.actdt.model.ActdtService actdtSvc = new com.actdt.model.ActdtService();
-	    com.actdt.model.ActdtVO actdtVO = actdtSvc.getOneActdt(act_id);
+	    com.actdt.model.ActdtVO actdtVO = actdtSvc.findByPrimaryKey(act_id);
 	    return actdtVO;
 	}
+    
+	// for join 標題、票種、折價、折扣、狀態 from act_id 呼叫 標題、票種、折價、折扣、狀態 (活動方案明細)
+    
 }
 

@@ -3,6 +3,7 @@ package com.actdt.model;
 import java.util.*;
 
 import com.fd_ord_dt.model.FdOrdDtVO;
+import com.merchandise_inf.model.MerchVO;
 import com.tk_ord_dt.model.TkOrdDtVO;
 
 public interface ActdtDAO_interface {
@@ -19,5 +20,6 @@ public interface ActdtDAO_interface {
           
           //查詢某狀態的員工(一對多)(回傳 Set)
           public List<ActdtVO> getActdtStatus(Byte act_status);
+          
 
 }
