@@ -1,3 +1,5 @@
+
+// 監聽搜尋列並驗證USER有輸入數字
 const searchInput= document.getElementById('searchInput');
 searchInput.addEventListener('blur',()=>{
 	if(!checkNum(searchInput.value)){
@@ -16,12 +18,11 @@ function checkNum(num){
     let regex = new RegExp( "^[0-9]*[1-9][0-9]*$");
     return regex.test(num);
 }
+/***************************************************************** */
 
-
+// 監聽搜尋按鈕
 const searchBtn = document.getElementById('searchBtn');
 searchBtn.addEventListener('click',()=>{
-	
-	
 	
 	// 獲取USER想要查詢的電影票訂單編號
 	let tkOrdID = document.getElementById('searchInput').value;
@@ -65,8 +66,6 @@ searchBtn.addEventListener('click',()=>{
                 //圖示範例：https://sweetalert2.github.io/#icons
             	);
 				}
-				
-				
 				// 取出map裡裝著訂單明細VO的list
 				let dtVOList = response.dtVOList;
 				// 取出裝著每張票的中文票種的list
@@ -105,7 +104,6 @@ searchBtn.addEventListener('click',()=>{
 	                <td><button class="btn btn-secondary" id="${dtVOList[i].tkDtID}" onclick="refund(this)">退票</button></td>
 	            	<input type="hidden" id="seatIndex${dtVOList[i].tkDtID}" value="${seatIndex}">
 	            	<input type="hidden" id="tkOrdID${dtVOList[i].tkDtID}" value="${dtVOList[i].tkOrdID}">
-	            	<input type="hidden" id="seatStr${dtVOList[i].tkDtID}" value="${seatStr}">
 	            </tr>`)	
 				}
 				// 不是在JAVA轉換的資料 使用dt.dtVOlist.屬性名呼叫
@@ -115,12 +113,32 @@ searchBtn.addEventListener('click',()=>{
 		});
 })
 
+// 監聽退票按鈕
 function refund(target){
 	let tkDtID = target.id;
 	let seatIndex = document.getElementById(`seatIndex${tkDtID}`).value;
 	let tkOrdID = document.getElementById(`tkOrdID${tkDtID}`).value;
-	let seatStr = document.getElementById(`seatStr${tkDtID}`).value;
+	console.log("tkDtID:"+tkDtID);
+	// 取回DB內最新的座位字串
+	let seatStr;
+	$.ajax({
+			url: '/CGA102G1//RefundTicketServlet.do',
+			type: 'post',                
+			dataType:'json',
+			async:false,
+			data: {
+				"action": "getUpdatedDt",
+				"tkOrdID": tkOrdID,
+			},      
+			error: function(xhr) { },    
+			success: function(response) {
+				
+			seatStr = response.SH_SEAT_STATE;
+			console.log("seatStr1:"+seatStr);
+			}
+		})
 	
+			console.log("seatStr2:"+seatStr);
 	// 將字串切割成陣列
     let seatArr = seatStr.split("",seatStr.length);
     // 更改狀態
@@ -129,11 +147,12 @@ function refund(target){
     for (const newStr of seatArr){
             seatStr += newStr ;
         };
-	
+		// 將改好的字串送回控制器
 		$.ajax({
 			url: '/CGA102G1//RefundTicketServlet.do',
 			type: 'post',                
 			dataType:'json',
+			async:false,
 			data: {
 				"action": "updateOneDt",
 				"tkDtID": tkDtID,
@@ -155,6 +174,26 @@ function refund(target){
 				
 			}
 		})
+		// 取回改好的字串 用以推播
+//		let newSeatStr;
+//		
+//		$.ajax({
+//			url: '/CGA102G1//RefundTicketServlet.do',
+//			type: 'post',                
+//			dataType:'json',
+//			data: {
+//				"action": "getUpdatedDt",
+//				"tkDtID": tkDtID,
+//			},      
+//			error: function(xhr) { },    
+//			success: function(response) {
+//				
+//			newSeatStr = response.SH_SEAT_STATE;
+//				
+//			}
+//		})
+		// 推播給WebSocket
+		sendMessage();
 		
 }
 

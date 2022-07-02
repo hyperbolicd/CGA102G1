@@ -17,10 +17,8 @@
 <head>
   <title>showAllMovie</title>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="styles/layout.css" type="text/css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/front_end/showAllMovie/styles/allMovie.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -40,65 +38,12 @@
       }).scroll();
     });
   </script>
+<header>
 
- <div class="wrapper row1" style="height:60px;">
-    <header id="header" class="clear">
-      <div id="hgroup">
-        <img src="images/demo/logo6.png" width="200" height="60" alt="">
-      </div>
+<%@ include file="/front_end/header.jsp"%>
+<%@ include file="/front_end/header_css.jsp"%>
 
-      <div class="dropdown" style=" margin: 0;padding: 0;list-style: none; ">
-
-        <button class="dropbtn">會員專區</button>
-        <div class="dropdown-content">
-          <a href="#">會員登入</a>
-          <a href="#">會員中心</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropbtn">活動公告</button>
-        <div class="dropdown-content">
-          <a href="#">影城公告</a>
-          <a href="#">影城好康</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropbtn">Q & A專區</button>
-        <div class="dropdown-content">
-          <a href="#">常見問題</a>
-          <a href="#">客服信箱</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropbtn">影城專區</button>
-        <div class="dropdown-content">
-          <a href="#">影城介紹</a>
-          <a href="#">影城地點</a>
-          <a href="#">票價資訊</a>
-          <a href="#">餐飲資訊</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropbtn">電影資訊</button>
-        <div class="dropdown-content">
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropbtn">商城購物</button>
-        <div class="dropdown-content">
-          <a href="#">商品瀏覽</a>
-          <a href="#">購買退貨</a>
-        </div>
-      </div>
-
-    </header>
-  </div>
-
+</header>
 
   <!--各自的內容--------------------->
     <div class="fm1" style = 'padding:10px 20px; background-color:#ECECEC;'>
@@ -155,9 +100,10 @@
                     </div>
                 </div>
                 <div class="bt">
-                	<form action="">
-                	
-                    <button>查看電影詳情</button>
+                	<form action="${pageContext.request.contextPath}/MovieServlet.do" method="post">
+                	<input type="hidden" name="mvId" value="${comingVO.mvId}">
+                	<input type="hidden" name="action" value="getOneForDisplay">
+                    <button type="submit">查看電影詳情</button>
                 	</form>
                 </div>
             </div>

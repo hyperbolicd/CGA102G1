@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新增電影</title>
+    <title>搜尋電影</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
  	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back_end/css/emp_all.css">
@@ -29,8 +29,8 @@
     </aside>
     <!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
     <main>
-        <div id="main">
-            <div class="form1">
+        <div id="main" style="width:100%">
+            <div class="form1" style="width:100%">
                 <form method="post" action="${pageContext.request.contextPath}/MovieServlet.do" enctype="multipart/form-data" >
                     <div class="mvName">
                             <label class="col-sm-2 col-form-label" for="mvName">電影中文名稱:</label>
@@ -42,6 +42,7 @@
                     <div class="mvLevel">
                         <label class="col-sm-2 col-form-label">電影分級:</label>
                         <select class="custom-select" id="mvLevel" name="MV_LEVEL">
+                        	<option value="">可選擇分級</option>
                             <option value="0">普遍級</option>
                             <option value="1">保護級</option>
                             <option value="2">輔導級(12)</option>
@@ -50,6 +51,7 @@
                         </select>
                         <label class="col-sm-2 col-form-label">電影類型:</label>
                           <select class="custom-select" id="mvType" name="MV_TYPE">
+                            <option value="">可選擇類型</option>
                             <option value="動作">動作</option>
                             <option value="劇情">劇情</option>
                             <option value="動畫">動畫</option>
@@ -66,11 +68,10 @@
                           </select>
                     </div>
                     <hr>
-                    <hr>
                     <div class="editBox">
                         <input type="hidden" name="action" value="listMovie_ByCompositeQuery">
-                        <button type="submit" id="sumbitBtn" class="btn btn-primary btn-lg">送出</button>
-                        <button type="button" id="cancelBtn" class="btn btn-danger btn-lg">取消</button>
+                        <button type="submit" id="sumbitBtn" class="btn btn-primary btn-lg">搜尋</button>
+                        <button type="button" onclick="history.back()" class="btn btn-danger btn-lg">取消</button>
                     </div>
                 </form>
             </div>
@@ -81,6 +82,7 @@
         嗨邇覓影城 &copy; HIREME CINEMA 2022
     </footer>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="${pageContext.request.contextPath}/back_end//ManageMV/query_regex.js"></script>
 </body>
 
 </html>

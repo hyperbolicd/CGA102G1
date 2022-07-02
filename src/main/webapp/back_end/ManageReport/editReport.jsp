@@ -66,11 +66,11 @@
             <hr size="8px" align="center" width="100%">
             <div class="badBox">
                 <div class="pic">
-                    <img src="${cmtMemberVO.member_Pic}" class="rounded-circle" alt="">
-                    <p>${cmtMemberVO.member_Name}</p>
+                    <img src="${pageContext.request.contextPath}${cmtMemberVO.member_Pic}" class="rounded-circle" alt="">
+                    <p>評論會員:${cmtMemberVO.member_Name}</p>
                 </div>
                 <div class="commInfo">
-                    <div class="speech-bubble" >
+                    <div class="speech-bubble" style="word-break: break-all" >
                         <h5 id="commText">
                            ${cmtVO.CM_TEXT}
                         </h5>
@@ -80,15 +80,20 @@
                 
                 <div class="commInfo">
                     
-                    <div class="speech-bubble2" >
+                    <div class="speech-bubble2"style="word-break: break-all" >
                         <h5 id="rpText">
+                        <c:if test="${reportVO.rpText==null}">
+                           檢舉者沒有留下檢舉內容..
+                        </c:if>   
+                        <c:if test="${reportVO.rpText!=null}">
                            ${reportVO.rpText}
+                        </c:if>   
                         </h5>
                     </div>
                 </div>
                 <div class="pic">
-                    <img src="${rpMemberVO.member_Pic}" class="rounded-circle" alt="">
-                    <p>${rpMemberVO.member_Name}</p>
+                    <img src="${pageContext.request.contextPath}${rpMemberVO.member_Pic}" class="rounded-circle" alt="">
+                    <p>檢舉者:${rpMemberVO.member_Name}</p>
                 </div>
             </div>
             <div class="editBox">
