@@ -20,7 +20,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 	/* 活動編號單一查詢 */
 	private static final String GET_ONE_STMT = 
 			"select act_id, act_title, tk_type_id, act_discount, act_coupon, act_status"
-			+ " from movietheater.activity_detail where act_id = ?";
+			+ " from movietheater.activity_detail where act_id = ? and tk_type_id = ? ";
 	
 	
 	/* 活動狀態單一查詢 OK */ 
@@ -195,7 +195,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setInt(1, act_id);
-			//pstmt.setInt(2, tkTypeID);
+			pstmt.setInt(2, tkTypeID);
 
 			rs = pstmt.executeQuery();
 
@@ -377,14 +377,14 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 		ActdtJDBCDAO dao = new ActdtJDBCDAO();
 
 		// 新增 OK
-		ActdtVO actdtVO1 = new ActdtVO();
-		actdtVO1.setAct_id(5);
-		actdtVO1.setAct_title("夏日方案");
-		actdtVO1.settkTypeID(3);
-		actdtVO1.setAct_discount(1.0);
-		actdtVO1.setAct_coupon(-50);
-		actdtVO1.setAct_status(Byte.valueOf("1"));
-		dao.insert(actdtVO1);
+//		ActdtVO actdtVO1 = new ActdtVO();
+//		actdtVO1.setAct_id(5);
+//		actdtVO1.setAct_title("夏日方案");
+//		actdtVO1.settkTypeID(3);
+//		actdtVO1.setAct_discount(1.0);
+//		actdtVO1.setAct_coupon(-50);
+//		actdtVO1.setAct_status(Byte.valueOf("1"));
+//		dao.insert(actdtVO1);
 
 		// 修改 OK
 //		ActdtVO actdtVO2 = new ActdtVO();
@@ -398,14 +398,14 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 
 
 		// 查詢 OK
-//		ActdtVO actdtVO3 = dao.findByPrimaryKey(2,2);
-//			System.out.print(actdtVO3.getAct_id() + ",");
-//			System.out.print(actdtVO3.getAct_title() + ",");
-//			System.out.print(actdtVO3.gettkTypeID() + ",");
-//			System.out.print(actdtVO3.getAct_discount() + ",");
-//			System.out.print(actdtVO3.getAct_coupon() + ",");
-//		    System.out.print(actdtVO3.getAct_status() + ",");
-//			System.out.println("---------------------");
+		ActdtVO actdtVO3 = dao.findByPrimaryKey(1,2);
+			System.out.print(actdtVO3.getAct_id() + ",");
+			System.out.print(actdtVO3.getAct_title() + ",");
+			System.out.print(actdtVO3.gettkTypeID() + ",");
+			System.out.print(actdtVO3.getAct_discount() + ",");
+			System.out.print(actdtVO3.getAct_coupon() + ",");
+		    System.out.print(actdtVO3.getAct_status() + ",");
+			System.out.println("---------------------");
 
 		// 全部查詢 OK
 //		List<ActdtVO> list = dao.getAll();
