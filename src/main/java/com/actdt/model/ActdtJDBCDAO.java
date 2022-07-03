@@ -41,7 +41,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 			+ " where act_id = ? and tk_type_id = ?" ;
 	/* 刪除 */
 	private static final String DELETE = 
-			"delete from movietheater.activity_detail where act_id = ?";
+			"delete from movietheater.activity_detail where act_id = ? and tk_type_id = ?";
 	
 	@Override /* 新增 */
 	public void insert(ActdtVO actdtVO) {
@@ -55,7 +55,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 			
 			pstmt.setInt(1, actdtVO.getAct_id());
 			pstmt.setString(2, actdtVO.getAct_title());
-			pstmt.setInt(3, actdtVO.getTk_type_id());
+			pstmt.setInt(3, actdtVO.gettkTypeID());
 			pstmt.setDouble(4, actdtVO.getAct_discount());
 			pstmt.setInt(5, actdtVO.getAct_coupon());
 			pstmt.setByte(6, actdtVO.getAct_status());
@@ -107,7 +107,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 			pstmt.setInt(3, actdtVO.getAct_coupon());
 			pstmt.setByte(4, actdtVO.getAct_status());
 			pstmt.setInt(5, actdtVO.getAct_id());
-			pstmt.setInt(6, actdtVO.getTk_type_id());
+			pstmt.setInt(6, actdtVO.gettkTypeID());
 
 
 			pstmt.executeUpdate();
@@ -139,7 +139,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 	}
 
 	@Override //刪除
-	public void delete(Integer Actdt_id) {
+	public void delete(Integer Actdt_id, Integer tkTypeID) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -151,6 +151,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setInt(1, Actdt_id);
+			pstmt.setInt(2, tkTypeID);
 
 			pstmt.executeUpdate();
 
@@ -181,7 +182,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 	}
 
 	@Override
-	public ActdtVO findByPrimaryKey(Integer act_id) {
+	public ActdtVO findByPrimaryKey(Integer act_id, Integer tkTypeID) {
 		ActdtVO actdtVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -194,6 +195,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setInt(1, act_id);
+			//pstmt.setInt(2, tkTypeID);
 
 			rs = pstmt.executeQuery();
 
@@ -202,7 +204,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 				actdtVO = new ActdtVO();
 				actdtVO.setAct_id(rs.getInt("act_id"));
 				actdtVO.setAct_title(rs.getString("act_title"));
-				actdtVO.setTk_type_id(rs.getInt("tk_type_id"));
+				actdtVO.settkTypeID(rs.getInt("TK_TYPE_ID"));
 				actdtVO.setAct_discount(rs.getDouble("act_discount"));
 				actdtVO.setAct_coupon(rs.getInt("act_coupon"));
 				actdtVO.setAct_status(rs.getByte("act_status"));
@@ -261,7 +263,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 				actdtVO = new ActdtVO();
 				actdtVO.setAct_id(rs.getInt("act_id"));
 				actdtVO.setAct_title(rs.getString("act_title"));
-				actdtVO.setTk_type_id(rs.getInt("tk_type_id"));
+				actdtVO.settkTypeID(rs.getInt("TK_TYPE_ID"));
 				actdtVO.setAct_discount(rs.getDouble("act_discount"));
 				actdtVO.setAct_coupon(rs.getInt("act_coupon"));
 				actdtVO.setAct_status(rs.getByte("act_status"));
@@ -326,7 +328,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 				actdtVO = new ActdtVO();
 				actdtVO.setAct_id(rs.getInt("act_id"));
 				actdtVO.setAct_title(rs.getString("act_title"));
-				actdtVO.setTk_type_id(rs.getInt("tk_type_id"));
+				actdtVO.settkTypeID(rs.getInt("TK_TYPE_ID"));
 				actdtVO.setAct_discount(rs.getDouble("act_discount"));
 				actdtVO.setAct_coupon(rs.getInt("act_coupon"));
 				actdtVO.setAct_status(rs.getByte("act_status"));
@@ -375,19 +377,19 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 		ActdtJDBCDAO dao = new ActdtJDBCDAO();
 
 		// 新增 OK
-//		ActdtVO actdtVO1 = new ActdtVO();
-//		actdtVO1.setAct_id(5);
-//		actdtVO1.setAct_title("夏日方案");
-//		actdtVO1.setTk_type_id(3);
-//		actdtVO1.setAct_discount(1.0);
-//		actdtVO1.setAct_coupon(-50);
-//		actdtVO1.setAct_status(Byte.valueOf("1"));
-//		dao.insert(actdtVO1);
+		ActdtVO actdtVO1 = new ActdtVO();
+		actdtVO1.setAct_id(5);
+		actdtVO1.setAct_title("夏日方案");
+		actdtVO1.settkTypeID(3);
+		actdtVO1.setAct_discount(1.0);
+		actdtVO1.setAct_coupon(-50);
+		actdtVO1.setAct_status(Byte.valueOf("1"));
+		dao.insert(actdtVO1);
 
 		// 修改 OK
 //		ActdtVO actdtVO2 = new ActdtVO();
 //		actdtVO2.setAct_id(2);
-//		actdtVO2.setTk_type_id(3);
+//		actdtVO2.settkTypeID(3);
 //		actdtVO2.setAct_title("夏日方案");
 //		actdtVO2.setAct_discount(1.0);
 //		actdtVO2.setAct_coupon(-50);
@@ -396,29 +398,29 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 
 
 		// 查詢 OK
-//		ActdtVO actdtVO3 = dao.findByPrimaryKey(2);
+//		ActdtVO actdtVO3 = dao.findByPrimaryKey(2,2);
 //			System.out.print(actdtVO3.getAct_id() + ",");
 //			System.out.print(actdtVO3.getAct_title() + ",");
-//			System.out.print(actdtVO3.getTk_type_id() + ",");
+//			System.out.print(actdtVO3.gettkTypeID() + ",");
 //			System.out.print(actdtVO3.getAct_discount() + ",");
 //			System.out.print(actdtVO3.getAct_coupon() + ",");
 //		    System.out.print(actdtVO3.getAct_status() + ",");
 //			System.out.println("---------------------");
 
 		// 全部查詢 OK
-		List<ActdtVO> list = dao.getAll();
-		for (ActdtVO aActdt : list) {
-			System.out.print(aActdt.getAct_id() + ",");
-		    System.out.print(aActdt.getAct_title() + ",");
-			System.out.print(aActdt.getTk_type_id() + ",");
-			System.out.print(aActdt.getAct_discount() + ",");
-			System.out.print(aActdt.getAct_coupon() + ",");
-	     	System.out.print(aActdt.getAct_status() + ",");
-			System.out.println();
-			}
+//		List<ActdtVO> list = dao.getAll();
+//		for (ActdtVO aActdt : list) {
+//			System.out.print(aActdt.getAct_id() + ",");
+//		    System.out.print(aActdt.getAct_title() + ",");
+//			System.out.print(aActdt.gettkTypeID() + ",");
+//			System.out.print(aActdt.getAct_discount() + ",");
+//			System.out.print(aActdt.getAct_coupon() + ",");
+//	     	System.out.print(aActdt.getAct_status() + ",");
+//			System.out.println();
+//			}
 			
 		// 刪除
-//		dao.delete(5);
+//		dao.delete(5,1);
 
 
 	}

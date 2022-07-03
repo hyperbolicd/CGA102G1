@@ -396,7 +396,7 @@ public class ActJDBCDAO implements ActDAO_interface {
 				actdtVO = new ActdtVO();
 				actdtVO.setAct_id(rs.getInt("act_id"));
 				actdtVO.setAct_title(rs.getString("act_title"));
-				actdtVO.setTk_type_id(rs.getInt("tk_type_id"));
+				actdtVO.settkTypeID(rs.getInt("tk_type_id"));
 				actdtVO.setAct_discount(rs.getDouble("act_discount"));
 				actdtVO.setAct_coupon(rs.getInt("act_coupon"));
 				actdtVO.setAct_status(rs.getByte("act_status"));
@@ -464,14 +464,14 @@ public class ActJDBCDAO implements ActDAO_interface {
 
 
 		// 查詢 OK
-//		ActVO actVO3 = dao.findByPrimaryKey(3);
-//			System.out.print(actVO3.getAct_id() + ",");
-//			System.out.print(actVO3.getAct_picture() + ",");
-//			System.out.print(actVO3.getAct_subtitle() + ",");
-//			System.out.print(actVO3.getAct_content() + ",");
-//			System.out.print(actVO3.getAct_date_start() + ",");
-//			System.out.print(actVO3.getAct_date_end() + ",");
-//			System.out.println("---------------------");
+		ActVO actVO3 = dao.findByPrimaryKey(3);
+			System.out.print(actVO3.getAct_id() + ",");
+			System.out.print(actVO3.getAct_picture() + ",");
+			System.out.print(actVO3.getAct_subtitle() + ",");
+			System.out.print(actVO3.getAct_content() + ",");
+			System.out.print(actVO3.getAct_date_start() + ",");
+			System.out.print(actVO3.getAct_date_end() + ",");
+			System.out.println("---------------------");
 
 		// 全部查詢 OK
 //		List<ActVO> list = dao.getAll();

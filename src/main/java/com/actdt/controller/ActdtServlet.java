@@ -46,6 +46,13 @@ public class ActdtServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.put("act_id", "活動方案編號格式不正確");
 			}
+			
+			Integer tkTypeID = null;
+			try {
+				tkTypeID = Integer.valueOf(tkTypeID);
+			} catch (Exception e) {
+				errorMsgs.put("act_id", "票種編號格式不正確");
+			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/act/allAct.jsp");
@@ -55,7 +62,7 @@ public class ActdtServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢資料 *****************************************/
 			ActdtService actdtSvc = new ActdtService();
-			ActdtVO actdtVO = actdtSvc.findByPrimaryKey(act_id);
+			ActdtVO actdtVO = actdtSvc.findByPrimaryKey(act_id, tkTypeID);
 			if (actdtVO == null) {
 				errorMsgs.put("act_id", "查無資料");
 			}
@@ -80,10 +87,11 @@ public class ActdtServlet extends HttpServlet {
 
 			/*************************** 1.接收請求參數 ****************************************/
 			Integer act_id = Integer.valueOf(req.getParameter("act_id"));
+			Integer tkTypeID = Integer.valueOf(req.getParameter("tkTypeID"));
 
 			/*************************** 2.開始查詢資料 ****************************************/
 			ActdtService actdtSvc = new ActdtService();
-			ActdtVO actdtVO = actdtSvc.findByPrimaryKey(act_id);
+			ActdtVO actdtVO = actdtSvc.findByPrimaryKey(act_id, tkTypeID);
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("actdtVO", actdtVO); // 資料庫取出的empVO物件,存入req
@@ -191,10 +199,11 @@ public class ActdtServlet extends HttpServlet {
 
 			/*************************** 1.接收請求參數 ***************************************/
 			Integer act_id = Integer.valueOf(req.getParameter("act_id"));
+			Integer tkTypeID = Integer.valueOf(req.getParameter("tkTypeID"));
 
 			/*************************** 2.開始刪除資料 ***************************************/
 			ActdtService actdtSvc = new ActdtService();
-			actdtSvc.delete(act_id);
+			actdtSvc.delete(act_id, tkTypeID);
 
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
 			String url = "/back_end/act/allAct.jsp";
