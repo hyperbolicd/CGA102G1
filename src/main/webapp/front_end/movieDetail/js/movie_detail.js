@@ -1,6 +1,37 @@
 let isNeta = "";
 let cmState = 0;
 
+
+//評論的星星
+$(document).ready(function(){
+	$(".cmt_star[value='1']").html('<span class="fa fa-star" ></span>');
+	$(".cmt_star[value='2']").html('<span class="fa fa-star" ></span>' + '<span class="fa fa-star" ></span>');
+	$(".cmt_star[value='3']").html('<span class="fa fa-star" ></span>' + '<span class="fa fa-star" ></span>' + '<span class="fa fa-star" ></span>');
+	$(".cmt_star[value='4']").html('<span class="fa fa-star" ></span>' + '<span class="fa fa-star" ></span>' + '<span class="fa fa-star" ></span>' + '<span class="fa fa-star" ></span>');
+	$(".cmt_star[value='5']").html('<span class="fa fa-star" ></span>' + '<span class="fa fa-star" ></span>' + '<span class="fa fa-star" ></span>' + '<span class="fa fa-star" ></span>' + '<span class="fa fa-star" ></span>');
+})
+
+//分級轉換
+$(document).ready(function(){
+	switch($("#movie_level").text()){
+		case "0":
+		$("#movie_level").html("普遍級");
+		break;
+		case "1":
+		$("#movie_level").html("保護級");
+		break;
+		case "2":
+		$("#movie_level").html("輔導級12歲");
+		break;
+		case "3":
+		$("#movie_level").html("輔導級15歲");
+		break;
+		case "4":
+		$("#movie_level").html("限制級");
+		break;
+	}
+})
+
 //Add Days
 Date.prototype.addDays = function (days) {
     const date = new Date(this.valueOf());
@@ -83,7 +114,7 @@ $(".cmtBtnArea").click(function(){
                 <div class="cmt_text whiteBg ${isNeta}" value="${cmState}">
                     ${$("textarea").val()}
                 </div>
-                <hr>
+                <hr class="hr_cmt">
                 <div class="cmt_like">
                     <span class="fa fa-heart like" >0</span>
                  </div>
@@ -91,7 +122,7 @@ $(".cmtBtnArea").click(function(){
                     <span>${formatDate(now)}</span>
                 </div>
                 </div>
-                <div class="cmt_star">
+                <div class="cmt_star" value="${ratingValue}">
                 ${star}
                 </div>
             </div>
@@ -105,7 +136,8 @@ $(".cmtBtnArea").click(function(){
 // 正常0(預設)/暴雷隱藏1(點擊可看)/刪除隱藏2(員工可看)
 // 劇透馬賽克
 $(document).ready(function() {
-    $("#comment").on("click","[value='1']", function(){
+	$(".cmt_text[value='1']").prop("class", "cmt_text whiteBg neta");
+    $("#comment").on("click",".cmt_text[value='1']", function(){
         if($(this).prop("class") == "cmt_text whiteBg neta"){
             $(this).prop("class", "cmt_text whiteBg");
         }else if($(this).prop("class") == "cmt_text whiteBg"){
@@ -127,8 +159,8 @@ $(document).ready(function() {
 //   });
 // 被刪除的評論
 $(document).ready(function(){
-    $("[value='3']").html("評論已被刪除");
-    $("[value='3'] ~ .cmt_like > span").prop("class", "fa fa-heart deleted");
+    $(".cmt_text[value='2']").html("評論已被刪除");
+    $(".cmt_text[value='2'] ~ .cmt_like > span").prop("class", "fa fa-heart deleted");
 });
 
 

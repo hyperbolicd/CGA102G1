@@ -56,7 +56,19 @@
           <a href="#">購買退貨</a>
         </div>
       </div>
- 
+      
+ <!--       <button class="logout">會員登出</button> -->
+ 	<div class="dropdown">
+		<c:if test="${empty sessionScope.memberVO.member_ID}">
+			<a id="logIn" href="${pageContext.request.contextPath}/front_end/login/login.jsp">登入</a>
+		</c:if>
+		<c:if test="${not empty sessionScope.memberVO.member_ID}">
+			<div style="display:flex">
+				<p style="margin-right:20px">${memberVO.member_Name}&nbsp;&nbsp;Hello</p>
+				<a href="<%=request.getContextPath()%>/member.do?action=logout" type="button" id="logOut">登出</a>
+			</div>
+		</c:if>
+	</div>
 
     </header>
   </div>

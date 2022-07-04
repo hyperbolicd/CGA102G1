@@ -137,8 +137,7 @@ input[name="SH_TYPE"]{
 
 	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/showing/showing.do" name="form1" id="1234">
 		<table>
-			<jsp:useBean id="movieSvc" scope="page"
-				class="com.movie.model.MovieService" />
+			<jsp:useBean id="movieSvc" scope="page" class="com.movie.model.MovieService" />
 			<tr>
 				<td>電影編號:</td>
 				<td><select size="1" name="mvId">
@@ -148,34 +147,33 @@ input[name="SH_TYPE"]{
 						</c:forEach>
 				</select></td>
 			</tr>
-			<jsp:useBean id="hallSvc" scope="page"
-				class="com.hall.model.HallService" />
+			
+			<jsp:useBean id="hallSvc" scope="page" class="com.hall.model.HallService" />
 			<tr>
 				<td>影廳編號:</td>
-<!-- 				<td><input type="TEXT" name="HL_ID" size="45" -->
-<%-- 					value="<%=(showingVO == null) ? "1" : showingVO.getHL_ID()%>" /></td> --%>
 				<td><select size="1" name="HL_ID">
 						<c:forEach var="hallVO" items="${hallSvc.all}">
 							<option value="${hallVO.hlId}">${hallVO.hlId} - 【${hallVO.hlName}】
 						</c:forEach>
 				</select></td>
 			</tr>
+			
 			<tr>
 				<td>場次狀態:</td>
-				<td><input type="TEXT" name="SH_STATE" size="45"
-					value="<%=(showingVO == null) ? "0" : showingVO.getSH_STATE()%>" /></td>
+				<td><select size="1" name="SH_STATE">
+						<option value="0">0
+						<option value="1">1
+					</select></td>
 				<td>(未滿位0(預設)/已滿位1)</td>
 			</tr>
-<!-- 			<tr> -->
-<!-- 				<td>場次座位狀態:</td> -->
-<!-- 				<td><input type="TEXT" name="SH_SEAT_STATE" size="45" readonly="readonly" -->
-<%-- 					value="<%=(showingVO == null) ? "1" : showingVO.getSH_SEAT_STATE()%>" /></td> --%>
-<!-- 			</tr> -->
+
 			<tr>
 				<td>日期:</td>
-				<td><input name="SH_TIME" id="datePicker" type="text" class="refresh"
-					value="<%=(showingVO == null) ? "" : showingVO.getSH_TIME()%>" /></td>
+				<td>
+					<input name="SH_TIME" id="datePicker" type="text" class="refresh"value="<%=(showingVO == null) ? "" : showingVO.getSH_TIME()%>" />
+				</td>
 			</tr>
+			
 			<tr>
 				<td>時段:</td>
 				<td><input id="time0" type="text" class="timePicker refresh">
@@ -190,22 +188,23 @@ input[name="SH_TYPE"]{
 					<input id="time9" type="text" class="timePicker refresh">
 				</td>
 			</tr>
-<!-- 			<tr> -->
-<!-- 				<td>test:</td> -->
-<!-- 				<td id="test"></td> -->
-<!-- 			</tr> -->
+
 			<tr>
 				<td>電影播放類型:</td>
-				<td><input type="TEXT" name="SH_TYPE" size="45"
-					value="<%=(showingVO == null) ? "1" : showingVO.getSH_TYPE()%>" /></td>
+				<td>
+					<select size="1" name="SH_TYPE">
+						<option value="0">0
+						<option value="1">1
+					</select></td>
 				<td>(0-數位/1-IMAX)</td>
 			</tr>
 
 
 
 		</table>
-		<br> <input type="hidden" name="action" value="insert"> <input
-			type="submit" value="送出新增">
+		<br>
+		<input type="hidden" name="action" value="insert">
+		<input type="submit" value="送出新增">
 	</FORM>
 		</main>
 	<!-- <div id="tree"></div> -->

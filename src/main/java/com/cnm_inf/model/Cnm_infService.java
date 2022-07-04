@@ -48,9 +48,6 @@ public class Cnm_infService {
 		return dao.findByPrimaryKey(CNM_INF_ID);
 	}
 
-//	public Set<Cnm_infVO> getCnm_infsByCnm_infno(Integer CNM_INF_ID) {
-//		return dao.getCnm_infsByCnm_infno(CNM_INF_ID);
-//	}
 
 	public void deleteCnm_inf(Integer CNM_INF_ID) {
 		dao.delete(CNM_INF_ID);
