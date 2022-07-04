@@ -62,7 +62,7 @@
   </div>
       <!-- 置頂按鈕 -->
   <button type="button" id="BackTop" class="toTop-arrow"></button>
-  <script>
+  <!--  <script>
     $(function () {
       $('#BackTop').click(function () {
         $('html,body').animate({ scrollTop: 0 }, 333);
@@ -76,3 +76,4 @@
       }).scroll();
     });
   </script>
+-->
