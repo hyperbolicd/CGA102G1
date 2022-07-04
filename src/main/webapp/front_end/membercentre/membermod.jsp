@@ -16,7 +16,8 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front_end/membercentre/css/membercentre.css" />
 
-<%@ include file="/front_end/header.jsp"%>
+ <%@ include file="/front_end/header.jsp"%>
+ <%@ include file="/front_end/header_css.jsp"%>
 
 <style>
 #memInfo {
@@ -135,66 +136,63 @@ body {
 			<div class="rg_center">
 				<div class="rg_form">
 					<!--定義表單 form-->
-					<form action="${pageContext.request.contextPath}/member.do" id="form" method="get">
+					<form action="${pageContext.request.contextPath}/member.do" id="form" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="member_ID" value="${memberVO.member_ID}">
 						<table>
 							<tr>
-								<td class="td_left"><label for="MEMBER_ID">會員編號</label></td>
-								<td class="td_right"><input type="text" name="MEMBER_ID"
-									readonly id="MEMBER_ID" value="${memberVO.member_ID}">
-									<span id="MEMBER_ID" class="error"></span></td>
-							</tr>
-
-
-							<tr>
-								<td class="td_left"><label for="MEMBER_PASSWORD">會員密碼</label></td>
+								<td class="td_left"><label for="member_Password">會員密碼</label></td>
 								<td class="td_right"><input type="text"
-									name="MEMBER_PASSWORD" id="MEMBER_PASSWORD"
+									name="member_Password" id="member_Password"
 									value="${memberVO.member_Password}"></td>
-									<div class="errMsgs"></div>
+									<div class="errMsgs">${errorMsgs}</div>
 							</tr>
 							
 							<tr>
-								<td class="td_left"><label for="MEMBER_PASSWORD">再次確認密碼</label></td>
+								<td class="td_left"><label for="member_Password">更新密碼</label></td>
 								<td class="td_right"><input type="text"
-									name="MEMBER_PASSWORD" id="MEMBER_PASSWORD"
+									name="member_Password" id="member_Password"
 									value="${memberVO.member_Password}"></td>
 									<div class="errMsgs"></div>
 							</tr>
 
 							<tr>
-								<td class="td_left"><label for="MEMBER_NAME">會員名稱</label></td>
-								<td class="td_right"><input type="text" name="MEMBER_NAME"
-									id="MEMBER_NAME" value="${memberVO.member_Name}"></td>
+								<td class="td_left"><label for="member_Name">會員名稱</label></td>
+								<td class="td_right"><input type="text" name="member_Name"
+									id="member_Name" value="${memberVO.member_Name}"></td>
 									<div class="errMsgs"></div>
 							</tr>
 
 							<tr>
-								<td class="td_left"><label for="MEMBER_PHONE">會員電話</label></td>
-								<td class="td_right"><input type="text" name="MEMBER_PHONE"
-									id="MEMBER_PHONE" value="${memberVO.member_Phone}"></td>
+								<td class="td_left"><label for="member_Phone">會員電話</label></td>
+								<td class="td_right"><input type="text" name="member_Phone"
+									id="member_Phone" value="${memberVO.member_Phone}"></td>
 									<div class="errMsgs"></div>
 							</tr>
 
 							<tr>
-								<td class="td_left"><label for="MEMBER_ADDRESS">會員地址</label></td>
+								<td class="td_left"><label for="member_Address">會員地址</label></td>
 								<td class="td_right"><input type="text"
-									name="MEMBER_ADDRESS" id="MEMBER_ADDRESS"
+									name="member_Address" id="member_Address"
 									value="${memberVO.member_Address}"></td>
 									<div class="errMsgs"></div>
 							</tr>
 
 							<tr>
-								<td class="td_left"><label for="MEMBER_PIC">會員照片</label></td>
-								<td class="td_right"><img src=<%=request.getContextPath()%>${memberVO.member_Pic}></td>
-								<td><input type="file" id="file-uploader"></td>
+								<td class="td_left"><label for="member_pic">會員照片</label></td>
+ 								<td class="td_right"><img id="img" src=<%=request.getContextPath()%>${memberVO.member_Pic}></td> 
+								<td>
+								<input type="file" id="file-uploader" accept="image/*" name="myUpfile"><img id="file-uploader">
+								<input type="hidden" name="noUpload" value="${memberVO.member_Pic}">
+								</td>
 
 							</tr>
 
 							<td>
 								<div class="button">
+								<input type="hidden" name="member_ID" value="${memberVO.member_ID}">
 									<input type="submit" id="" value="確認送出"
 										onclick="checkRegister();"> <input type="hidden"
-										name="action" value="insert">
+										name="action" value="update">
 								</div>
 							</td>
 
@@ -219,7 +217,13 @@ body {
 			</p>
 		</footer>
 	</div>
-
+<script>
+let inputfile = document.getElementById('file-uploader');
+let img = document.getElementById('img');
+inputfile.addEventListener('change',function(e){
+    img.src = URL.createObjectURL(e.target.files[0]);
+})
+</script>
 </body>
 
 </html>

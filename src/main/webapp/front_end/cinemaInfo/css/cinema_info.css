@@ -31,11 +31,11 @@
 #cmn_lc{
     /* border: 2px solid green */
     position: relative;
-    min-height: 350px;
+    min-height: 300px;
 }
 #cmn_lc iframe{
     position: absolute;
-    right: 10px;
+    right: 100px;
 }
 #cmn_tpr{
     /* border: 2px solid orange */

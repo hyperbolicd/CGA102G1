@@ -37,11 +37,23 @@ public class RefundTicketServlet extends HttpServlet {
 			Long tkOrdID = Long.valueOf(req.getParameter("tkOrdID"));
 			
 			Map map = new HashMap();
-			
 			// 該張訂單全部的訂單明細
 			RefundTicketService rtSvc = new RefundTicketService();
 			List<TkOrdDtVO> dtVOList = rtSvc.getDtByOrd(tkOrdID);
+			
+			// 如果沒有找到任何一筆 直接把list寫回前端 給JS判斷length
+			if(dtVOList.size()==0) {
+				map.put("dtVOList", dtVOList);
+				Gson gson = new Gson();
+				
+				res.setContentType("text/json; charset=UTF-8");
+				res.getWriter().write(gson.toJson(map));
+				return;
+			}
+			
+			// 取得票種名list
 			List<String> tkNameList = new ArrayList<String>();
+			// 取得活動方案名list
 			List<String> actTitleList = new ArrayList<String>();
 			for (TkOrdDtVO dt : dtVOList) {
 				
@@ -99,6 +111,27 @@ public class RefundTicketServlet extends HttpServlet {
 			Gson gson = new Gson();
 			res.setContentType("text/json; charset=UTF-8");
 			res.getWriter().write(gson.toJson(ordVO));
+		}
+		
+		if("getUpdatedDt".equals(action)) {
+			
+			Long tkOrdID = Long.valueOf(req.getParameter("tkOrdID"));
+			Map map = new HashMap();
+			
+			// 獲取這張訂單內的場次座位字串
+			TkOrdService tkOrdSvc = new TkOrdService();
+			TkOrdVO ordVO = tkOrdSvc.getOneTkInf(tkOrdID);
+						
+			ShowSeatService ssSvc = new ShowSeatService();
+			ShowSeatVO showSeatVO =ssSvc.getShowByTime(ordVO.getShID());
+			String SH_SEAT_STATE = showSeatVO.getSH_SEAT_STATE();
+			
+			map.put("SH_SEAT_STATE", SH_SEAT_STATE);
+			// 回傳AJAX 
+			Gson gson = new Gson();
+			
+			res.setContentType("text/json; charset=UTF-8");
+			res.getWriter().write(gson.toJson(map));
 		}
 		
 	}

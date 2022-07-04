@@ -38,9 +38,7 @@
 
         if (str !=="")
         alert(str);      
-      }  
-      
-      
+      }        
   </script>
 </head>
 
@@ -52,40 +50,52 @@
       <form method="post" ACTION="${pageContext.request.contextPath}/member.do"enctype="multipart/form-data">
         <div class="user-details">
           <div class="input-box">
+          <div style="display:flex">
             <span class="username">會員名稱</span>  
-            <div class="${errorMsgs.memberName}"></div>
+            <div style="color:red">${errorMsgs.member_Name}</div>
+          </div>
             <input type="text" placeholder="請輸入您的使用者名稱" id="member_Name" name="member_Name" >
          	
           </div>
           
           <div class="input-box">
-            <span class="email">電子信箱</span>
-            <div class="errMsgs" vlaue="{param.member_Email}"></div>
+           <div style="display:flex">
+            <span class="errMsgs">電子信箱</span>
+            <div style="color:red">${errorMsgs.member_Email}</div>
+             </div>
             <input type="text" placeholder="請輸入您的電子信箱" id="member_Email" name="member_Email" >
           </div>
           
           <div class="input-box">
-            <span class="phone">會員電話</span>
-            <div class="errMsgs"></div>
-            <input type="text" placeholder="請輸入您的會員電話" id="member_Phone" name="member_Phone">
+           <div style="display:flex">
+            <span>會員電話</span>
+            <div class="errMsgs" style="color:red">${errorMsgs.member_Phone}</div>
+            </div>
+            <input type="text" placeholder="請輸入您的會員電話" id="member_Phone" name="member_Phone" >
           </div>
           
           <div class="input-box">
-            <span class="password">會員密碼</span>
-            <div class="errMsgs"></div>
-            <input type="password" placeholder="請輸入您的密碼" id="member_Password" name="member_Password" >
+          <div style="display:flex">
+            <span class=>會員密碼</span>
+            <div class="errMsgs" style="color:red">${errorMsgs.member_Password}</div>
+            </div>
+            <input type="password" placeholder="請輸入您的密碼" id="member_Password" name="member_Password"  >
           </div>
 
 
           <div class="input-box">
-            <span class="address">會員地址</span>
-            <div class="errMsgs"></div>
-            <input type="text" placeholder="請輸入您的會員地址" id="member_Address" name="member_Address">
+             <div style="display:flex">
+             <span class="address">會員地址</span>
+            <div style="color:red">${errorMsgs.member_Address}</div>
+            </div>
+            <input type="text" placeholder="請輸入您的會員地址"  id="member_Address" name="member_Address" >
           </div>
 
           <div class="input-box">
+          <div style="display:flex">
             <span class="details">再次確認密碼</span>
-            <div class="errMsgs"></div>
+            <div style="color:red">${errorMsgs.member_Password}</div>
+             </div>
             <input type="password" placeholder="再次確認密碼" id="member_Password2" name="member_Password2" >
           </div>
 

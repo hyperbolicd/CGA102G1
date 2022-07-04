@@ -65,6 +65,7 @@
     </footer>
     <script src="${pageContext.request.contextPath}/back_end/refundTicket/refundIndex.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="${pageContext.request.contextPath}/back_end/refundTicket/socketScript.js"></script>
 </body>
 
 </html>

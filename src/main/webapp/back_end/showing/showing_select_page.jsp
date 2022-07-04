@@ -118,15 +118,15 @@
 				a new Showing.</li>
 		</ul>
 
-		<h3>
-			<font color=orange>電影管理</font>
-		</h3>
+<!-- 		<h3> -->
+<!-- 			<font color=orange>電影管理</font> -->
+<!-- 		</h3> -->
 
-		<ul>
-			<li><a
-				href='<%=request.getContextPath()%>/back_end/movie/listAllMovie.jsp'>List</a>
-				all Movies.</li>
-		</ul>
+<!-- 		<ul> -->
+<!-- 			<li><a -->
+<%-- 				href='<%=request.getContextPath()%>/back_end/movie/listAllMovie.jsp'>List</a> --%>
+<!-- 				all Movies.</li> -->
+<!-- 		</ul> -->
 
 	</main>
 	<!-- <div id="tree"></div> -->

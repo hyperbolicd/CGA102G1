@@ -35,7 +35,6 @@
     </aside>
     <!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
-		<button id="checklist">模擬有人訂1排1號</button>
 		<div id="main" class="main">
 			<div class="container1">
 				<div class="createform">

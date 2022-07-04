@@ -9,8 +9,8 @@ public interface CmtDAO_interface {
 	public void delete(Integer CM_ID);
     public CmtVO findByPrimaryKey(Integer CM_ID);
     public List<CmtVO> getAll();
-    //萬用複合查詢(傳入參數型態Map)(回傳 List)
-//  public List<CmtVO> getAll(Map<String, String[]> map);
+    public List<CmtVO> getCmtsByMV_ID(Integer MV_ID);
+
     
     // for檢舉控制器 -更改評論狀態
     public void updateCmtState(Integer CM_ID,Integer CM_STATE);

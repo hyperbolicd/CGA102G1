@@ -43,7 +43,7 @@ public class RefundTicketDAO implements RefundTicket_interface {
 			
 			while(rs.next()) {
 				tkOrdDtVO = new TkOrdDtVO();				
-				tkOrdDtVO.setTkDtID(rs.getInt("TK_DT_ID"));
+				tkOrdDtVO.setTkDtID(rs.getLong("TK_DT_ID"));
 				tkOrdDtVO.setTkOrdID(rs.getLong("TK_ORD_ID"));
 				tkOrdDtVO.setTkTypeID(rs.getInt("TK_TYPE_ID"));
 				tkOrdDtVO.setActID(rs.getInt("ACT_ID"));
@@ -156,7 +156,7 @@ public class RefundTicketDAO implements RefundTicket_interface {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				act_title=rs.getString("act_title");
+				act_title=rs.getString("ACT_SUBTITLE");
 			}
 			
 		} catch (ClassNotFoundException e) {

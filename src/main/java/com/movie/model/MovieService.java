@@ -73,8 +73,8 @@ public class MovieService {
 		return dao.getAll();
 	}
 	
-	public List<MovieVO> getAll(Map<String, String[]> map){
-		  return dao.getAll(map);
+	public List<MovieVO> compositeQuery_Search(Map<String, String[]> map){
+		  return dao.compositeQuery_Search(map);
 		 }
 	
 	public List<MovieVO> getShowingMV(){

@@ -4,10 +4,13 @@ import java.io.*;
 import java.util.*;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import com.cnm_inf.model.*;
 
+
+@WebServlet("/cnm_inf/cnm_inf.do")
 public class Cnm_inf_Servlet  extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)

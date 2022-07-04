@@ -1,3 +1,2 @@
-*.class
-!.gitignore
-org.eclipse.core.resources.prefs
+/com/
+/jdbc/

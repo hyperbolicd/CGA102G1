@@ -34,7 +34,8 @@ MovieService mvSvc = new MovieService();
 
             <div class="table_body" >
                 <div class="btnbox" >
-                    <a href="${pageContext.request.contextPath}/back_end/ManageMV/creatMV.jsp" class="btn btn-success"  >新增電影</a>
+                    <a href="${pageContext.request.contextPath}/back_end/ManageMV/creatMV.jsp" class="btn btn-success">新增電影</a>
+                    <a href="${pageContext.request.contextPath}/back_end/ManageMV/compositeQuery_search.jsp" class="btn btn-dark">搜尋電影</a>
                 </div>    
                 <div class="container1">
                     <table class="table table-hover table-bordered single-ellipsis" id="table1">

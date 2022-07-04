@@ -2,6 +2,8 @@ package com.member.model;
 
 import java.util.List;
 
+import MemberSendEmail.MailService;
+
 public class MemberService {
 	
 	private MemberDAO_interface dao;
@@ -9,10 +11,10 @@ public class MemberService {
 	public MemberService() {
 //		dao = new EmpJDBCDAO();
 		dao = new MemberJDBCDAO();
-	}
-
+	}	
+//新增會員
 	public MemberVO addMember(String member_Level,String member_Email,String member_Password,String member_Name,String member_Phone,
-                  String member_Address, String member_Pic) {
+                  String member_Address, String member_Pic,Integer member_Status,Integer wish_Ticket,Integer bonus_Points,Integer sum_Count) {
 
 		MemberVO memberVO = new MemberVO();
 		memberVO.setMember_Level(member_Level);
@@ -31,11 +33,16 @@ public class MemberService {
 		return memberVO;
 	}
 
-	//預留給 Struts 2 或 Spring MVC 用
+//預留給 Struts 2 或 Spring MVC 用
 	public void addMember(MemberVO memberVO) {
 		dao.insert(memberVO);
 	}
 	
+	public void update(MemberVO memberVO) {
+		dao.update(memberVO);
+	}
+	
+//前台修改會員資料	
 	public MemberVO updateMember(Integer member_ID,String member_Password,String member_Name,String member_Phone,
             String member_Address, String member_Pic) {
 
@@ -51,17 +58,17 @@ public class MemberService {
 
 		return dao.findByPrimaryKey(member_ID);
 	}
-	
-	//預留給 Struts 2 用的
-	public void updateEmp(MemberVO memberVO) {
+
+//預留給 Struts 2 用的
+	public void updateMem(MemberVO memberVO) {
 		dao.update(memberVO);
 	}
 
-	public void deleteEmp(Integer member_ID) {
+	public void deleteMem(Integer member_ID) {
 		dao.delete(member_ID);
 	}
 
-	public MemberVO getOneEmp(Integer member_ID) {
+	public MemberVO getOneMem(Integer member_ID) {
 		return dao.findByPrimaryKey(member_ID);
 	}
 
@@ -81,14 +88,32 @@ public class MemberService {
 		return dao.loginMember(memberVO);
 		
 	}
-	
+//單一查詢會員	
 	public MemberVO getOneMember(Integer member_ID) {
 		return dao.findByPrimaryKey(member_ID);
 	}
 	
+<<<<<<< HEAD
 	// wish
 	public void updateWishTicket(Integer member_id, Integer wish_ticket) {
 		dao.updateWishTicket(member_id, wish_ticket);
 	}
+=======
+//寄送 email
+	public void sendMail() {
+		String to = "wanlly1993@gmail.com";
+		String subject = "密碼通知";
+
+		String ch_name = "JIA";
+		String passRandom = "111";
+		String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" + " (已經啟用)";
+		
+		
+		MailService	mailService = new MailService();
+		mailService.sendMail(to, subject, messageText);
+	}
+	
+	
+>>>>>>> 65f54d41d2fe80a4483005af045ed8a68b097ab1
 	
 }

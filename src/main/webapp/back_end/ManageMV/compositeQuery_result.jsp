@@ -33,22 +33,52 @@
     <!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
     <main>
         <div id="main">
-            <table class="table table-hover table-bordered single-ellipsis">
-	<tr>
-		<th>電影名稱</th>
-		<th>電影英文名稱</th>
-		<th>電影分級</th>
-		<th>電影類型</th>
-	</tr>
-	<c:forEach var="movieVO" items="${listMovie_ByCompositeQuery}">
+        <c:if test="${listMovie_ByCompositeQuery.size()==0}">
+			<p>查無結果...</p>
+		</c:if>
+		<c:if test="${listMovie_ByCompositeQuery.size()!=0}">
+		
+    	<table class="table table-hover table-bordered single-ellipsis">
+		<tr>
+			<th>電影名稱</th>
+			<th>電影英文名稱</th>
+			<th>電影分級</th>
+			<th>電影類型</th>
+			<th></th>
+		</tr>
+	
+		<c:forEach var="movieVO" items="${listMovie_ByCompositeQuery}">
 		<tr align='center' valign='middle'>
 			<td>${movieVO.mvName}</td>
 			<td>${movieVO.mvEName}</td>
-			<td>${movieVO.mvLevel}</td>
+			<c:if test="${movieVO.mvLevel==0}">
+							<td>普遍級</td>
+			</c:if>
+			<c:if test="${movieVO.mvLevel==1}">
+							<td>保護級</td>
+			</c:if>
+			<c:if test="${movieVO.mvLevel==2}">
+							<td>輔導級(12)</td>
+			</c:if>
+			<c:if test="${movieVO.mvLevel==3}">
+							<td>輔導級(15)</td>
+			</c:if>
+			<c:if test="${movieVO.mvLevel==4}">
+							<td>限制級</td>
+			</c:if>
 			<td>${movieVO.mvType}</td>
+			<td>
+				<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/MovieServlet.do">
+			     	<input type="submit" value="查看/修改"  class="btn btn-primary">
+			     	<input type="hidden" name="mvId"  value="${movieVO.mvId}">
+			     	<input type="hidden" name="action"	value="getOne_For_Update">
+			     </FORM>
+			</td>
 		</tr>
 	</c:forEach>
-</table>
+	</table>
+	</c:if>
+<button type="button" onclick="history.back()" class="btn btn-danger btn-lg">返回搜尋頁</button>
         </div>
     </main>
     
