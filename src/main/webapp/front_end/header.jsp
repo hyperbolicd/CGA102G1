@@ -56,8 +56,8 @@
           <a href="#">購買退貨</a>
         </div>
       </div>
-
-<!--       <button class="logout">會員登出</button> -->
+      
+ <!--       <button class="logout">會員登出</button> -->
  	<div class="dropdown">
 		<c:if test="${empty sessionScope.memberVO.member_ID}">
 			<a id="logIn" href="${pageContext.request.contextPath}/front_end/login/login.jsp">登入</a>
@@ -69,7 +69,6 @@
 			</div>
 		</c:if>
 	</div>
- 
 
     </header>
   </div>
