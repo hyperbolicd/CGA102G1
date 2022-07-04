@@ -6,7 +6,7 @@ import redis.clients.jedis.JedisPoolConfig;
 public class JedisPoolUtil {
 	private static JedisPool pool = null;
 
-	public static JedisPool getJedisPool() {
+	public static JedisPool getJedisPool() {  
 		if(pool == null) {
 			synchronized(JedisPoolUtil.class) { // 如果第一次請求有多人時會讓另一個等待，保證只會建立一個連線池
 				JedisPoolConfig config = new JedisPoolConfig();

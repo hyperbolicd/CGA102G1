@@ -14,7 +14,7 @@ public class jdbcUtil_CompositeQuery_showing {
 	public static String get_aCondition_For_myDB(String columnName, String value) {
 
 		String aCondition = null;
-
+  
 		if ("SH_ID".equals(columnName) || "MV_ID".equals(columnName) || "HL_ID".equals(columnName) || "SH_STATE".equals(columnName) || "SH_TYPE".equals(columnName)) // 用於其他
 			aCondition = columnName + "=" + value;
 		else if ("SH_SEAT_STATE".equals(columnName)) // 用於varchar

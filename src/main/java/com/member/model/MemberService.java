@@ -93,12 +93,6 @@ public class MemberService {
 		return dao.findByPrimaryKey(member_ID);
 	}
 	
-<<<<<<< HEAD
-	// wish
-	public void updateWishTicket(Integer member_id, Integer wish_ticket) {
-		dao.updateWishTicket(member_id, wish_ticket);
-	}
-=======
 //寄送 email
 	public void sendMail() {
 		String to = "wanlly1993@gmail.com";
@@ -113,7 +107,9 @@ public class MemberService {
 		mailService.sendMail(to, subject, messageText);
 	}
 	
-	
->>>>>>> 65f54d41d2fe80a4483005af045ed8a68b097ab1
+	// wish
+	public void updateWishTicket(Integer member_id, Integer wish_ticket) {
+		dao.updateWishTicket(member_id, wish_ticket);
+	}
 	
 }

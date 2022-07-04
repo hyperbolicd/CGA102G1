@@ -98,7 +98,7 @@ public class WishingVoteServlet extends HttpServlet {
 				errMsg.put("notFound", "查無此筆資料");
 				request.getRequestDispatcher("/frond_end/wish/wishPage.jsp").forward(request, response);
 			}
-			MemberVO memberVO = new MemberService().getOneEmp(member_id);
+			MemberVO memberVO = new MemberService().getOneMem(member_id);
 			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 			request.setAttribute("wish_ticket", memberVO.getWish_Ticket());
 			request.setAttribute("wishListVOs", wishListVOs);
@@ -120,7 +120,7 @@ public class WishingVoteServlet extends HttpServlet {
 			
 			// 查詢票數是否足夠?
 			MemberService memSvc = new MemberService();
-			MemberVO memberVO = memSvc.getOneEmp(member_id);
+			MemberVO memberVO = memSvc.getOneMem(member_id);
 			if(memberVO.getWish_Ticket() <= 0) {
 				errMsg.put("isSuccess", "許願票不足!");
 				request.setAttribute("wish_ticket", memberVO.getWish_Ticket());
