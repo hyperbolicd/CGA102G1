@@ -96,7 +96,7 @@
                             <label for="exampleFormControlFile1">預覽:</label>
                             <img id="pvImg" src="">
                             <label for="exampleFormControlFile1">當前封面:</label>
-                            <input type="hidden" name="Noreupload" value="${pageContext.request.contextPath}${movieVO.mvPicture}">
+                            <input type="hidden" name="Noreupload" value="${movieVO.mvPicture}">
                             <img src="${pageContext.request.contextPath}${movieVO.mvPicture}" id="oldPc" alt="">
                         </div>
                     <hr>

@@ -1,51 +1,48 @@
 package com.act.model;
 
-import java.sql.Timestamp;
-import java.util.List;
+import java.sql.Date;
+import java.util.*;
+
+import com.actdt.model.ActdtVO;
 
 public class ActService {
-
 	private ActDAO_interface dao;
-
+	
 	public ActService() {
 		dao = new ActJDBCDAO();
 	}
-
-	public ActVO addAct(byte[] act_picture, String act_title, String act_subtitle, String act_content, 
-			Timestamp act_time_start, Timestamp act_time_end, Byte act_status) {
-
+	
+	public ActVO addAct(Integer act_id, byte[] act_picture, String act_subtitle, String act_content,
+			Date act_date_start, Date act_date_end) {
+		
 		ActVO actVO = new ActVO();
-
+		
 		actVO.setAct_picture(act_picture);
-		actVO.setAct_title(act_title);
 		actVO.setAct_subtitle(act_subtitle);
 		actVO.setAct_content(act_content);
-		actVO.setAct_time_start(act_time_start);
-		actVO.setAct_time_end(act_time_end);
-		actVO.setAct_status(act_status);
+		actVO.setAct_date_start(act_date_start);
+		actVO.setAct_date_end(act_date_end);
 		dao.insert(actVO);
-
+		
 		return actVO;
 	}
-
-	public ActVO updateAct(Integer act_id, byte[] act_picture, String act_title, String act_subtitle, String act_content, 
-			Timestamp act_time_start, Timestamp act_time_end, Byte act_status) {
-
+	
+	public ActVO updateAct(Integer act_id, byte[] act_picture, String act_subtitle, String act_content,
+			Date act_date_start, Date act_date_end) {
+		
 		ActVO actVO = new ActVO();
-
-		actVO.setAct_id(act_id);
+		
 		actVO.setAct_picture(act_picture);
-		actVO.setAct_title(act_title);
 		actVO.setAct_subtitle(act_subtitle);
 		actVO.setAct_content(act_content);
-		actVO.setAct_time_start(act_time_start);
-		actVO.setAct_time_end(act_time_end);
-		actVO.setAct_status(act_status);
+		actVO.setAct_date_start(act_date_start);
+		actVO.setAct_date_end(act_date_end);
+		
 		dao.update(actVO);
-
+		
 		return actVO;
 	}
-
+	
 	public void deleteAct(Integer act_id) {
 		dao.delete(act_id);
 	}
@@ -58,8 +55,17 @@ public class ActService {
 		return dao.getAll();
 	}
 	
-	public void actStatus(Integer act_id) {
-		dao.actStatus(act_id);
+	public ActVO findByPrimaryKey(Integer act_id) {
+		
+		return dao.findByPrimaryKey(act_id);
 	}
 	
+	
+	public Set<ActdtVO> getActdtStatus(Byte act_status) {
+		return dao.getActdtStatus(act_status);
+	}
+
+
+	
 }
+	

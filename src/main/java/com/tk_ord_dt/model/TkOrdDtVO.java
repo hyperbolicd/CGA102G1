@@ -2,25 +2,25 @@ package com.tk_ord_dt.model;
 
 public class TkOrdDtVO implements java.io.Serializable{
 	
+	private Long tkDtID;
 	private Long tkOrdID;
-	private Integer tkDtID;
 	private Integer tkTypeID;
 	private Integer actID;
 	private Byte state;
 	private String seat;
 	private Integer sellPrice;
+	public Long getTkDtID() {
+		return tkDtID;
+	}
+	public void setTkDtID(Long tkDtID) {
+		this.tkDtID = tkDtID;
+	}
 	public Long getTkOrdID() {
 		return tkOrdID;
 	}
 	public void setTkOrdID(Long tkOrdID) {
 		this.tkOrdID = tkOrdID;
 	}	
-	public Integer getTkDtID() {
-		return tkDtID;
-	}
-	public void setTkDtID(Integer tkDtID) {
-		this.tkDtID = tkDtID;
-	}
 	public Integer getTkTypeID() {
 		return tkTypeID;
 	}

@@ -12,6 +12,8 @@ import java.util.Map;
 import javax.naming.NamingException;
 
 import com.common.JDBCUtil;
+import com.emp_privilege.model.EmpPrivilegeJDBCDAO;
+import com.emp_privilege.model.EmpPrivilegeVO;
 
 public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 	
@@ -534,6 +536,79 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 		return password;
 	}
 
+	@Override
+	public Integer insertWithFunction(EmpAccountVO empAccountVO, List<EmpPrivilegeVO> lists) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Integer emp_no = null;
+		try {
+			con = JDBCUtil.getConnection();
+			
+			con.setAutoCommit(false);
+			
+			String columns[] = { "emp_id" };
+			ps = con.prepareStatement(INSERT, columns);
+			
+			ps.setString(1, empAccountVO.getEmp_email());
+			ps.setString(2, empAccountVO.getEmp_password());
+			ps.setString(3, empAccountVO.getEmp_name());
+			ps.setString(4, empAccountVO.getEmp_phone());
+			ps.setString(5, empAccountVO.getEmp_address());
+			ps.setBytes(6, empAccountVO.getEmp_photo());
+			ps.setInt(7, empAccountVO.getEmp_status());
+			
+			ps.executeUpdate();
+			
+			rs = ps.getGeneratedKeys(); // 取得自動編號的號碼
+			if (rs.next()) {
+				emp_no = rs.getInt(1); // 第一欄
+			}
+			
+			rs.close();
+			
+			// 同時新增權限
+			EmpPrivilegeJDBCDAO dao = new EmpPrivilegeJDBCDAO();
+			for(EmpPrivilegeVO empPrivilegeVO: lists) {
+				empPrivilegeVO.setEmp_no(emp_no);
+				dao.insert(empPrivilegeVO, con);
+			}
+			
+			con.commit();
+			con.setAutoCommit(true);
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}catch (SQLException e) {
+			e.printStackTrace();
+			if(con != null) {
+				try {
+					con.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		} finally {
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return emp_no;
+	}
+
 	public static void main(String[] args) {
 		EmpAccountJDBCDAO dao = new EmpAccountJDBCDAO();
 		
@@ -569,17 +644,17 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 //		System.out.println(empAccountVO3.getEmp_status());
 
 		// R-ALL
-		List<EmpAccountVO> list = dao.getAll();
-		for(EmpAccountVO e: list) {
-			System.out.print(e.getEmp_no() + ", ");
-			System.out.print(e.getEmp_email() + ", ");
-			System.out.print(e.getEmp_password() + ", ");
-			System.out.print(e.getEmp_name() + ", ");
-			System.out.print(e.getEmp_phone() + ", ");
-			System.out.print(e.getEmp_address() + ", ");
-			System.out.print(e.getEmp_photo() + ", ");
-			System.out.println(e.getEmp_status());
-		}
+//		List<EmpAccountVO> list = dao.getAll();
+//		for(EmpAccountVO e: list) {
+//			System.out.print(e.getEmp_no() + ", ");
+//			System.out.print(e.getEmp_email() + ", ");
+//			System.out.print(e.getEmp_password() + ", ");
+//			System.out.print(e.getEmp_name() + ", ");
+//			System.out.print(e.getEmp_phone() + ", ");
+//			System.out.print(e.getEmp_address() + ", ");
+//			System.out.print(e.getEmp_photo() + ", ");
+//			System.out.println(e.getEmp_status());
+//		}
 		
 		// R-�ƦX
 		
@@ -629,6 +704,32 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 		
 		// D
 //		dao.delete(7);
+		
+		// C with privilege
+//		List<EmpPrivilegeVO> lists = new ArrayList<EmpPrivilegeVO>();
+//		
+//		EmpAccountVO empAccountVO = new EmpAccountVO();
+//		empAccountVO.setEmp_name("test1");
+//		empAccountVO.setEmp_email("sss");
+//		empAccountVO.setEmp_phone("sss");
+//		empAccountVO.setEmp_address("sss");
+//		empAccountVO.setEmp_password("sss");
+//		empAccountVO.setEmp_status(2);
+//		
+//		EmpPrivilegeVO empPriviege1 = new EmpPrivilegeVO();
+//		empPriviege1.setFc_no(1);
+//		lists.add(empPriviege1);
+//		EmpPrivilegeVO empPriviege2 = new EmpPrivilegeVO();
+//		empPriviege2.setFc_no(2);
+//		lists.add(empPriviege2);
+//		EmpPrivilegeVO empPriviege3 = new EmpPrivilegeVO();
+//		empPriviege3.setFc_no(3);
+//		lists.add(empPriviege3);
+//		EmpPrivilegeVO empPriviege4 = new EmpPrivilegeVO();
+//		empPriviege4.setFc_no(5);
+//		lists.add(empPriviege4);
+//		
+//		dao.insertWithFunction(empAccountVO, lists);
 	}
 
 }

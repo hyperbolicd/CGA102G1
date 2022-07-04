@@ -544,7 +544,7 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 	
 	
 	@Override
-	 public List<MovieVO> getAll(Map<String, String[]> map) {
+	 public List<MovieVO> compositeQuery_Search(Map<String, String[]> map) {
 	  
 	  List<MovieVO> list = new ArrayList<MovieVO>();
 	  MovieVO movieVO = null;
@@ -558,13 +558,14 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 	   String finalSQL=
 	     "SELECT * FROM MOVIE"
 	     + CompositeQuery_movie.get_WhereCondition(map)
-	     + "order by MV_ID";
+	     + " order by MV_ID";
 	   pstmt = conn.prepareStatement(finalSQL);
 	   System.out.println(finalSQL);
 	   rs = pstmt.executeQuery();
 	   
 	   while(rs.next()) {
 	    movieVO = new MovieVO();
+	    movieVO.setMvId(rs.getInt("MV_ID"));
 	    movieVO.setMvName(rs.getString("MV_NAME"));
 	    movieVO.setMvEName(rs.getString("MV_E_NAME"));
 	    movieVO.setMvLevel(rs.getInt("MV_LEVEL"));

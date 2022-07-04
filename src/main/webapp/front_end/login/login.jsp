@@ -11,6 +11,7 @@
   <title>HireMe</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/css/layout.css" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
  
    <jsp:include page="/front_end/header.jsp" />
    
@@ -28,12 +29,13 @@
             </div>
             <div class="txt_field">
                 <input type="password" id="password" name="password" required>
+                
                 <span></span>
                 <label>Password</label>
             </div>
             <div class="pass">Forgot Password?</div>
             <input type="submit" value="Login">
-            <div class="signup_link">
+            <div class="signup_link" id=forget>
                 沒有帳號?<a href="${pageContext.request.contextPath}/front_end/register/register.jsp">註冊</a>
 
             </div>
@@ -41,6 +43,28 @@
             </form>
 
         </div>
-       		
+ <!-- Jquery -->
+<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>	
+<!-- <script src="/CGA102G1/front_end/login/js/forget.jsp"></script> -->
+		<script>
+
+        
+// 		const forgetBtn = document.addEventListener('click', () => {
+// 			alert("123");
+// 			$.ajax({
+// 		            type: 'GET',
+// 		            url: '/CGA102G1/member/password/forget',
+// 		            dataType: 'json',
+// 		            async: false,
+// 		            success: function (response) {
+		                
+						
+// 		            },
+// 		            error: function (thrownError) {
+// 		                console.log(thrownError);
+// 		            }
+// 		        });
+// 		});
+		</script>
     </body>
 </html>

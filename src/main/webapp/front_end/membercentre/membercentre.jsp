@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/membercentre/css/membercentre.css" />
   
    <%@ include file="/front_end/header.jsp"%>
+   <%@ include file="/front_end/header_css.jsp"%>
 
   <style>
     #memInfo{
@@ -162,14 +163,14 @@
               <tr>
                   <td class="td_left"><label for="MEMBER_LEVEL">會員等級</label></td>
                   <td class="td_right">
-                      <input type="MEMBER_LEVEL" name="MEMBER_LEVEL" id="MEMBER_LEVEL" readonly value="${memberVO.member_Level}" >
+                      <input type="MEMBER_LEVEL" name="MEMBER_LEVEL" id="MEMBER_LEVEL" readonly value="${memberVO.member_Level}">
                       <span id="MEMBER_LEVEL" class="error"></span>
                   </td>
               </tr>
 
               <tr>
                   <td class="td_left"><label for="MEMBER_EMAIL">電子信箱</label></td>
-                  <td class="td_right"><input type="MEMBER_EMAIL" name="MEMBER_EMAIL" id="MEMBER_EMAIL" readonly value="${memberVO.member_Email}" >
+                  <td class="td_right"><input type="MEMBER_EMAIL" name="MEMBER_EMAIL" id="MEMBER_EMAIL" readonly value="${memberVO.member_Email}">
                   </td>
               </tr>
 

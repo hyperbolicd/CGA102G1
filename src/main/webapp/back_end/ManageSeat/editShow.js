@@ -1,7 +1,6 @@
-		
-    	// 創建一陣列蒐集選中的座位物件
-    	let selectedSeat = [];
-    
+			
+    // 創建一陣列蒐集選中的座位物件
+    let selectedSeat = [];
    	function selectedBtn(){
         // 獲取座位的資訊
         let text =this.innerText;
@@ -10,26 +9,10 @@
             // 利用bootstrap樣式改變 達到選取效果
             this.setAttribute('class','btn btn-outline-danger');
             selectedSeat.push(this);  
+            console.log("加入已選:"+this);
         }
     	}
-    function checkReturn(){
-	let seat=document.getElementById('showSeatSource').value;
-	for(let i =0 ; i < selectedSeat.length ; i++){
-			let index = 4 + Number(selectedSeat[i].id)*5;
-			if(Number(seat.charAt(index))===2){
-				
-				Swal.fire(
-                selectedSeat[i]+"已出售!請聯繫客人退票", //標題 
-                "",
-                "error"
-            	);
-			}else{
-				selectedSeat[i].setAttribute('class','btn btn-outline-danger');
-			}
-			
-		}
-	
-}
+
     
 		// 監聽連動下拉選單
 	document.getElementById('datePick').addEventListener('change',selectDate);
@@ -110,20 +93,17 @@
 				
 				let showSeatVO = response.showSeatVO;
 				// 將場次VO拉上來的座位字串指定給input
-				document.getElementById('showSeatSource').value=showSeatVO.SH_SEAT_STATE;
-				let hallVO = response.hallVO;
-				generateSeat();
+				let seat=showSeatVO.SH_SEAT_STATE;
+				generateSeat(seat);
 			}// 成功後要執行的函數
 		});
 	}
 	
 	// 動態生成座位
-    function generateSeat(){
+    function generateSeat(seat){
 	
     // 獲取預覽區塊
     let prBox = document.getElementById("prBox");
-    // 獲取已被刷新的座位資源
-	let seat=document.getElementById('showSeatSource').value;
 	// 清空prBox
 	let child = prBox.lastElementChild;  
         while (child) { 
@@ -194,8 +174,31 @@
     // 改變狀態
     function changeStatus({target}){
         
-        // 獲取座位字串
-        let seat=document.getElementById('showSeatSource').value;
+        let SH_ID = document.getElementById('showPick').value;
+        const hlId = document.getElementById('hlId').value;
+        let seat="";
+        $.ajax({
+			url: '/CGA102G1/ShowSeatServlet.do',   // url位置
+			type: 'post',                   // post/get
+			dataType:'json',
+			async:false,
+			data: {
+				"action": "getShowByTime",
+				"SH_ID": SH_ID,
+				"hlId" : hlId
+			},       // 輸入的資料
+			error: function(xhr) { },      // 錯誤後執行的函數
+			success: function(response) {
+				
+				let showSeatVO = response.showSeatVO;
+				// 將場次VO拉上來的座位字串指定給回seat變數
+				seat=showSeatVO.SH_SEAT_STATE;
+		console.log("檢查AJAX回傳給input字串1:"+seat);
+			}
+		});
+		console.log("檢查AJAX回傳給input字串2:"+seat);
+		
+		
         // 驗證是否已出售
         for(let i =0 ; i < selectedSeat.length ; i++){
 			let index = 4 + Number(selectedSeat[i].id)*5;
@@ -209,7 +212,6 @@
             	selectedSeat.length=0;
             	return
 			}
-			console.log("檢查選取的陣列:"+selectedSeat[i]);
 		}
         // 將字串切割成陣列
         let seatArr = seat.split("",seat.length);
@@ -237,11 +239,12 @@
         selectedSeat.length=0;
 		
 		// 準備回傳DB
-		let SH_ID = document.getElementById('showPick').value;
+		
 		$.ajax({
 			url: '/CGA102G1/ShowSeatServlet.do',   // url位置
 			type: 'post',                   // post/get
 			dataType:'json',
+			async:false,
 			data: {
 				"action": "updateShowSeat",
 				"SH_ID": SH_ID,
@@ -310,11 +313,23 @@
        
         return seatCount;
     }
-	document.getElementById('checklist').addEventListener('click',()=>{
-		document.getElementById('showSeatSource').value=
-		"010120102101030010410105101061010710108101091011000111101121020110202102030020410205102061020710208102091021000211102121030110302103030030410305103061030710308103091031000311103121040110402104030040410405104061040710408104091041000411104121050110502105030050410505105061050710508105091051000511105121060110602106030060410605106061060710608106091061000611106121070100702007030070400705007060070700708007090071000711007120080130802308030080430805308063080730808308093081000811308123090110902109030090410905109061090710908109091091000911109121100111002110030100411005110061100711008110091101001011110121110111102111030110411105111061110711108111091111001111111121120111202112030120411205112061120711208112091121001211112121130111302113030130411305113061130711308113091131001311113121140111402114030140411405114061140711408114091141001411114121150111502115030150411505115061150711508115091151001511115121";
-		sendMessage();
-	})
 
-
-
+/************************************無用*************************************************** */
+    function checkReturn(){
+	let seat=document.getElementById('showSeatSource').value;
+	for(let i =0 ; i < selectedSeat.length ; i++){
+			let index = 4 + Number(selectedSeat[i].id)*5;
+			if(Number(seat.charAt(index))===2){
+				
+				Swal.fire(
+                selectedSeat[i]+"已出售!請聯繫客人退票", //標題 
+                "",
+                "error"
+            	);
+			}else{
+				selectedSeat[i].setAttribute('class','btn btn-outline-danger');
+			}
+			
+		}
+	
+}

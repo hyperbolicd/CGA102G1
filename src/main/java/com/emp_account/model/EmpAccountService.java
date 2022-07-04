@@ -2,6 +2,8 @@ package com.emp_account.model;
 
 import java.util.List;
 
+import com.emp_privilege.model.EmpPrivilegeVO;
+
 public class EmpAccountService {
 	private EmpAccountDAO_interface dao;
 	
@@ -27,6 +29,12 @@ public class EmpAccountService {
 			empAccountVO.setEmp_no(emp_no);
 			
 			return empAccountVO;
+	}
+
+	public EmpAccountVO addEmp(EmpAccountVO empAccountVO, List<EmpPrivilegeVO> lists) {
+		Integer emp_no = dao.insertWithFunction(empAccountVO, lists);
+		empAccountVO.setEmp_no(emp_no);
+		return empAccountVO;
 	}
 	
 	//預留給 Struts 2 或 Spring MVC 用

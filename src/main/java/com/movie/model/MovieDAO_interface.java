@@ -12,7 +12,7 @@ public interface MovieDAO_interface {
 	public List<MovieVO> getAll();
 	public List<MovieVO> getShowingMV();
 	public List<MovieVO> getComingMV();
-	public List<MovieVO> getAll(Map<String, String[]> map);
+	public List<MovieVO> compositeQuery_Search(Map<String, String[]> map);
 	
 	//查詢某名稱的電影場次(一對多)(回傳 Set)
     public Set<ShowingVO> getShowingsBymvId(Integer mvId);

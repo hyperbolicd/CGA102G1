@@ -5,7 +5,7 @@ import java.util.*;
 import java.sql.*;
 
 
-import java.sql.*;
+
 
 public class MemberJDBCDAO implements MemberDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
@@ -24,9 +24,9 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	private static final String GET_ONE_STMT =  		//查詢單筆資料
 		"select MEMBER_ID,MEMBER_LEVEL,MEMBER_EMAIL,MEMBER_PASSWORD,MEMBER_NAME,MEMBER_PHONE,MEMBER_ADDRESS,MEMBER_PIC,MEMBER_STATUS,WISH_TICKET,BONUS_POINTS,SUM_COUNT " 
 		+"from member where (MEMBER_ID = ?);";
-	private static final String UPDATE =      			//修改資料
+	private static final String UPDATE =      			//前台修改資料
 		"UPDATE `member`"
-		+"set  MEMBER_PASSWORD = ?, MEMBER_NAME = ?, MEMBER_PHONE = ?, MEMBER_ADDRESS = ?,MEMBER_PIC= ?,MEMBER_STATUS=?,WISH_TICKET=?,BONUS_POINTS=?,SUM_COUNT=?"
+		+"set  MEMBER_PASSWORD = ?, MEMBER_NAME = ?, MEMBER_PHONE = ?, MEMBER_ADDRESS = ?,MEMBER_PIC= ?"
 		+"where (MEMBER_ID = ?);";
 	private static final String UPDATE_STATUS =      	//修改會員資狀態
 			"UPDATE `member` "
@@ -38,7 +38,9 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	private static final String loginMember=            //會員登入
 			"select MEMBER_ID,member_Status " 
 					+"from member where (MEMBER_EMAIL = ? && MEMBER_PASSWORD = ?);";
+
 	
+//新增資料	
 	public void insert(MemberVO memberVO) {
 
 		Connection con = null;          //宣告連線物件，以便可以在finally中關閉
@@ -61,7 +63,6 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			pstmt.setInt(9, memberVO.getWish_Ticket());
 			pstmt.setInt(10, memberVO.getBonus_Points());
 			pstmt.setInt(11, memberVO.getSum_Count());
-
 
 			pstmt.executeUpdate();
 
@@ -109,11 +110,8 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			pstmt.setString(2, memberVO.getMember_Name());
 			pstmt.setString(3, memberVO.getMember_Phone());
 			pstmt.setString(4, memberVO.getMember_Address());
-			pstmt.setString(5, "");//照片處理
+			pstmt.setString(5, memberVO.getMember_Pic());//照片處理
 			pstmt.setInt(6, memberVO.getMember_ID());
-			pstmt.setInt(7, memberVO.getWish_Ticket());
-			pstmt.setInt(8, memberVO.getBonus_Points());
-			pstmt.setInt(9, memberVO.getSum_Count());
 			
 			pstmt.executeUpdate();
 
@@ -432,6 +430,7 @@ public MemberVO loginMember(MemberVO memberVO){
 	public static void main(String[] args) {
 		MemberJDBCDAO dao = new MemberJDBCDAO();
 
+		
 		// 新增
 				MemberVO memberVO = new MemberVO();
 				memberVO.setMember_Email("wanluy1996@gmail.com");
@@ -496,7 +495,7 @@ public MemberVO loginMember(MemberVO memberVO){
 //		}
 		
 //		dao.updateMemberStatus(Integer mem_id,Integer status);
-		dao.updateStatus(10,1);
+//		dao.updateStatus(10,1);
 		
 		//dao.loginMember(member_Email,member_Password);
 		

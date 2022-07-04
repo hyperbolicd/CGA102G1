@@ -10,12 +10,12 @@ import java.sql.*;
 
 public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 	private static final String INSERT =
-			"insert into wish_reply (WISH_NO, WISH_OPTION, MEMBER_ID, WISH_MSG) values "
-			+ "(?, ?, ?, ?)";
+			"insert into wish_reply (WISH_NO, MEMBER_ID, WISH_MSG) values "
+			+ "(?, ?, ?)";
 	private static final String READ_ONE =
-			"select WISH_REONO, WISH_NO, WISH_OPTION, MEMBER_ID, WISH_MSG from wish_reply where WISH_NO = ? order by WISH_NO, WISH_OPTION";
+			"select WISH_REONO, WISH_NO, MEMBER_ID, WISH_MSG from wish_reply where WISH_NO = ? order by WISH_NO";
 	private static final String READ_ALL =
-			"select WISH_REONO, WISH_NO, WISH_OPTION, MEMBER_ID, WISH_MSG from wish_reply order by WISH_NO, WISH_OPTION";
+			"select WISH_REONO, WISH_NO, MEMBER_ID, WISH_MSG from wish_reply order by WISH_NO";
 	private static final String DELETE =
 			"delete from wish_reply where WISH_REONO = ?";
 
@@ -29,9 +29,8 @@ public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 			ps = con.prepareStatement(INSERT);
 			
 			ps.setInt(1, wishReplyVO.getWish_no());
-			ps.setInt(2, wishReplyVO.getWish_option());
-			ps.setInt(3, wishReplyVO.getMember_id());
-			ps.setString(4, wishReplyVO.getWish_msg());
+			ps.setInt(2, wishReplyVO.getMember_id());
+			ps.setString(3, wishReplyVO.getWish_msg());
 			
 			ps.executeUpdate();
 		} catch (ClassNotFoundException e) {
@@ -112,7 +111,6 @@ public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 				WishReplyVO wishReplyVO = new WishReplyVO();
 				wishReplyVO.setWish_reono(rs.getInt("WISH_REONO"));
 				wishReplyVO.setWish_no(rs.getInt("WISH_NO"));
-				wishReplyVO.setWish_option(rs.getInt("WISH_OPTION"));
 				wishReplyVO.setMember_id(rs.getInt("MEMBER_ID"));
 				wishReplyVO.setWish_msg(rs.getString("WISH_MSG"));
 				list.add(wishReplyVO);
@@ -165,7 +163,6 @@ public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 				WishReplyVO wishReplyVO = new WishReplyVO();
 				wishReplyVO.setWish_reono(rs.getInt("WISH_REONO"));
 				wishReplyVO.setWish_no(rs.getInt("WISH_NO"));
-				wishReplyVO.setWish_option(rs.getInt("WISH_OPTION"));
 				wishReplyVO.setMember_id(rs.getInt("MEMBER_ID"));
 				wishReplyVO.setWish_msg(rs.getString("WISH_MSG"));
 				list.add(wishReplyVO);
@@ -208,7 +205,6 @@ public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 		// C
 //		WishReplyVO wishReplyVO1 = new WishReplyVO();
 //		wishReplyVO1.setWish_no(1);
-//		wishReplyVO1.setWish_option(1);
 //		wishReplyVO1.setMember_id(10);
 //		wishReplyVO1.setWish_msg("TEST");
 //		dao.insert(wishReplyVO1);
@@ -218,24 +214,22 @@ public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 //		for(WishReplyVO wr: list) {
 //			System.out.print(wr.getWish_reono() + ", ");
 //			System.out.print(wr.getWish_no() + ", ");
-//			System.out.print(wr.getWish_option() + ", ");
 //			System.out.print(wr.getMember_id() + ", ");
 //			System.out.println(wr.getWish_msg());
 //		}
 		
 		// R_ALL
-		List<WishReplyVO> list = dao.getAll();	
-		for(WishReplyVO wr: list) {
-			System.out.print(wr.getWish_reono() + ", ");
-			System.out.print(wr.getWish_no() + ", ");
-			System.out.print(wr.getWish_option() + ", ");
-			System.out.print(wr.getMember_id() + ", ");
-			System.out.println(wr.getWish_msg());
-		}
+//		List<WishReplyVO> list = dao.getAll();	
+//		for(WishReplyVO wr: list) {
+//			System.out.print(wr.getWish_reono() + ", ");
+//			System.out.print(wr.getWish_no() + ", ");
+//			System.out.print(wr.getMember_id() + ", ");
+//			System.out.println(wr.getWish_msg());
+//		}
 		
 		// U X
 		
 		// D
-//		dao.delete(17);
+//		dao.delete(16);
 	}
 }

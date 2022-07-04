@@ -2,8 +2,11 @@ package com.emp_account.model;
 
 import java.util.*;
 
+import com.emp_privilege.model.EmpPrivilegeVO;
+
 public interface EmpAccountDAO_interface {
 	public Integer insert(EmpAccountVO empAcocuntVO);
+	public Integer insertWithFunction(EmpAccountVO empAccountVO, List<EmpPrivilegeVO> lists);
 	public void delete(Integer empAcocuntNo);
 	public void update(EmpAccountVO empAcocuntVO);
 	public EmpAccountVO findByPrimaryKey(Integer empAcocuntNo);
