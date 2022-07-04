@@ -25,7 +25,6 @@ public class EmpFilter extends HttpFilter {
 		
 		// login 頁面 & css pass
 		if(uri.endsWith("empLogin.jsp") || uri.endsWith(".css") || uri.endsWith(".js") || uri.endsWith("logo2noline.jpg")) {
-			
 			chain.doFilter(request, response);	
 			
 		// 判斷是否登入過?
