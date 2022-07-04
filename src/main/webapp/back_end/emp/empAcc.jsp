@@ -11,9 +11,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>帳號與權限</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/back_end/emp/css/emp_all.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/back_end/emp/css/emp_main.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/back_end/emp/css/emp_footer.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/back_end/css/emp_all.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/back_end/css/emp_main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/back_end/css/emp_footer.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/back_end/emp/css/empAcc.css">
 </head>
 
@@ -54,14 +54,14 @@
 					<th class="tb4">功能</th>
 				</tr>
 				<% 
+					EmpAccountService empSvc = new EmpAccountService();
+					request.setAttribute("nextId", empSvc.getNextId());
 					if(request.getAttribute("listAll") == null){
-						EmpAccountService empSvc = new EmpAccountService();
 						request.setAttribute("listAll", empSvc.getAll());
 					}
+					
 				%>
 				<c:forEach var="e" items="${listAll}">
-<%-- 				<jsp:useBean id="listA" scope="page" class="com.emp_account.model.EmpAccountService"/> --%>
-<%-- 				<c:forEach var="e" items="${listA.all}"> --%>
 				<c:if test="${e.emp_no == lastUpdateEmpNo}">
 					<tr style="color: red; !important">
 				</c:if>
@@ -85,13 +85,16 @@
 					<td>
 						<form method="post" action="${pageContext.request.contextPath}/emp/EmpAccount.do" >
 							<button type="submit" class="see" name="action" value="seeEmp">個人資料</button>
-							<input type="hidden" name="seeEmpNo" value="${e.emp_no}">
+							<input type="hidden" name="emp_no" value="${e.emp_no}">
 						</form>
-						<button class="edit">查看/修改權限</button>
+						<form method="post" action="${pageContext.request.contextPath}/emp/EmpAccount.do" >
+							<button type="submit" class="edit" name="action" value="seeEmpPrivilege">查看/修改權限</button>
+							<input type="hidden" name="emp_no" value="${e.emp_no}">
+						</form>
 						<button class="resetPw" onclick="resetPw(${e.emp_no})">重設密碼</button>
 						<form method="post" action="${pageContext.request.contextPath}/emp/EmpAccount.do" >
 							<button type="submit" class="delete" name="action" value="deleteEmp">刪除</button>
-							<input type="hidden" name="deleteEmpNo" value="${e.emp_no}">
+							<input type="hidden" name="emp_no" value="${e.emp_no}">
 						</form>
 					</td>
 				</tr>
@@ -106,8 +109,7 @@
    				<table id="newInfo">
 			        <tr>
 			            <td><label for="number">編號：</label></td>
-			            <jsp:useBean id="listToGetNextId" scope="page" class="com.emp_account.model.EmpAccountService"/>
-			            <td><input value="${listToGetNextId.nextId}" id="number" readonly></td>
+			            <td><input value="${nextId}" id="number" readonly></td>
 			            <td><label for="password">密碼：</label></td>
 			            <td><input type="password" id="password" name="emp_password" value="${empVO.emp_password}" placeholder="${errMsg.emp_password}"></td>
 			        </tr>
@@ -127,7 +129,7 @@
 			    <h1>權限功能</h1>
 			    <div id="auth">
 				    	<input type="checkbox" id="funcs0" onclick="chooseAll(this)">
-				        <label for="funcs2" class="big">一般職員權限</label>
+				        <label for="funcs0" class="big">一般職員權限</label>
 				    	<input type="checkbox" id="funcs1" onclick="chooseAll(this)">
 				        <label for="funcs1" class="big">管理員權限</label>
 			        <br>
@@ -135,21 +137,21 @@
 			    	<jsp:useBean id="listF" scope="page" class="com.emp_function.model.EmpFunctionService"/>
 			    	<div class="fc_block">
 				    	<c:forEach var="function" items="${listF.all}" begin="1" step="3">
-				    		<input type="checkbox" name="newEmpFunctions" value="${function.fc_no}" class="funcs${function.fc_category}" id="func${function.fc_no}">
+				    		<input type="checkbox" name="fc_nos" value="${function.fc_no}" class="funcs${function.fc_category}" id="func${function.fc_no}">
 	           				<label for="func${function.fc_no}">${function.fc_name}</label>
 	           				<br>
 				    	</c:forEach>
 			    	</div>
 			    	<div class="fc_block">
 				    	<c:forEach var="function" items="${listF.all}" begin="2" step="3">
-				    		<input type="checkbox" name="newEmpFunctions" value="${function.fc_no}" class="funcs${function.fc_category}" id="func${function.fc_no}">
+				    		<input type="checkbox" name="fc_nos" value="${function.fc_no}" class="funcs${function.fc_category}" id="func${function.fc_no}">
 	           				<label for="func${function.fc_no}">${function.fc_name}</label>
 	           				<br>
 				    	</c:forEach>
 			    	</div>
 			    	<div class="fc_block">
 				    	<c:forEach var="function" items="${listF.all}" begin="3" step="3">
-				    		<input type="checkbox" name="newEmpFunctions" value="${function.fc_no}" class="funcs${function.fc_category}" id="func${function.fc_no}">
+				    		<input type="checkbox" name="fc_nos" value="${function.fc_no}" class="funcs${function.fc_category}" id="func${function.fc_no}">
 	           				<label for="func${function.fc_no}">${function.fc_name}</label>
 	           				<br>
 				    	</c:forEach>

@@ -6,46 +6,48 @@ public class WishingPondVO implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer wish_no;
-	private Integer wish_option;
-	private Integer mv_id;
-	private Integer wish_count;
-	private Timestamp wish_start;
-	private Timestamp wish_end;
+	private String wish_name;
+	private Date wish_start;
+	private Date wish_end;
+	private Integer top_one;
 	
+	public String getWish_name() {
+		return wish_name;
+	}
+	public void setWish_name(String wish_name) {
+		this.wish_name = wish_name;
+	}
+	public Integer getTop_one() {
+		return top_one;
+	}
+	public void setTop_one(Integer top_one) {
+		this.top_one = top_one;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	public Integer getWish_no() {
 		return wish_no;
 	}
 	public void setWish_no(Integer wish_no) {
 		this.wish_no = wish_no;
 	}
-	public Integer getWish_option() {
-		return wish_option;
-	}
-	public void setWish_option(Integer wish_option) {
-		this.wish_option = wish_option;
-	}
-	public Integer getMv_id() {
-		return mv_id;
-	}
-	public void setMv_id(Integer mv_id) {
-		this.mv_id = mv_id;
-	}
-	public Integer getWish_count() {
-		return wish_count;
-	}
-	public void setWish_count(Integer wish_count) {
-		this.wish_count = wish_count;
-	}
-	public Timestamp getWish_start() {
+	public Date getWish_start() {
 		return wish_start;
 	}
-	public void setWish_start(Timestamp wish_start) {
+	public void setWish_start(Date wish_start) {
 		this.wish_start = wish_start;
 	}
-	public Timestamp getWish_end() {
+	public Date getWish_end() {
 		return wish_end;
 	}
-	public void setWish_end(Timestamp wish_end) {
+	public void setWish_end(Date wish_end) {
 		this.wish_end = wish_end;
+	}
+	
+	// 取得電影資訊
+	public com.movie.model.MovieVO getMvVO() {
+		com.movie.model.MovieService mvSvc = new com.movie.model.MovieService();
+		return mvSvc.findByPrimaryKey(top_one);
 	}
 }

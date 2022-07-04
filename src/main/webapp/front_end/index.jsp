@@ -144,7 +144,9 @@
       </div>
 
       <div class="dropdown">
+        <a href="${pageContext.request.contextPath}/front_end/movieDetail/movie_detail.jsp">
         <button class="dropbtn">電影資訊</button>
+        </a>
         <div class="dropdown-content">
         </div>
       </div>
@@ -152,7 +154,7 @@
       <div class="dropdown">
         <button class="dropbtn">商城購物</button>
         <div class="dropdown-content">
-          <a href="#">商品瀏覽</a>
+          <a href="${pageContext.request.contextPath}/front_end/merchandise/merchandise.jsp">商品瀏覽</a>
           <a href="#">購買退貨</a>
         </div>
       </div>

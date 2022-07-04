@@ -3,27 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.member.model.*" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/front_end/css/layout.css" type="text/css">
-<title>Insert title here</title>
-<style type="text/css">  
-button.logout{
-    margin-left: 150px;
-    background-color: #750000;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-  }
-  </style>
 
-
-</head>
-<body>
 <div class="wrapper row1" style="height:60px;">
     <header id="header" class="clear">
       <div id="hgroup">
@@ -96,5 +76,3 @@ button.logout{
       }).scroll();
     });
   </script>
-</body>
-</html>

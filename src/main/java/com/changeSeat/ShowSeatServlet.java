@@ -68,6 +68,9 @@ public class ShowSeatServlet extends HttpServlet {
 		Integer SH_ID =Integer.valueOf(req.getParameter("SH_ID"));
 		Integer hlId =Integer.valueOf(req.getParameter("hlId"));
 		
+		System.out.println("SHID:"+SH_ID);
+		System.out.println("hlId:"+hlId);
+		
 		ShowSeatService ssSvc = new ShowSeatService();
 		
 		// 依照使用者選取的場次 調回場次VO

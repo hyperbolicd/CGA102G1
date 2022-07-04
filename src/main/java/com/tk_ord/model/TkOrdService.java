@@ -2,6 +2,9 @@ package com.tk_ord.model;
 
 import java.util.List;
 
+import com.fd_ord_dt.model.FdOrdDtVO;
+import com.tk_ord_dt.model.TkOrdDtVO;
+
 public class TkOrdService {
 	
 	private TkOrdDAO_interface dao;
@@ -55,6 +58,12 @@ public class TkOrdService {
 
 	public List<TkOrdVO> getAll() {
 		return dao.getAll();
+	}
+	
+	
+	public void insertWithTkOrdDtsAndFdOrdDts(TkOrdVO tkOrdVO , List<TkOrdDtVO> list , List<FdOrdDtVO> list2) {
+
+		
 	}
 
 }

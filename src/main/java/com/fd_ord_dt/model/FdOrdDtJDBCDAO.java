@@ -1,12 +1,7 @@
 package com.fd_ord_dt.model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.sql.*;
 
 
 public class FdOrdDtJDBCDAO implements FdOrdDtDAO_interface{
@@ -292,6 +287,54 @@ public class FdOrdDtJDBCDAO implements FdOrdDtDAO_interface{
 			}
 		}
 		return list;
+	}
+	
+	@Override
+	public void insert2 (FdOrdDtVO fdOrdDtVO , Connection con) {
+
+		PreparedStatement pstmt = null;
+
+		try {
+
+     		pstmt = con.prepareStatement(INSERT_STMT);
+
+			pstmt.setLong(1, fdOrdDtVO.getTkOrdID());
+			pstmt.setInt(2, fdOrdDtVO.getFdID());
+			pstmt.setInt(3, fdOrdDtVO.getFdCount());
+			pstmt.setByte(4, fdOrdDtVO.getFdState());
+			pstmt.setInt(5, fdOrdDtVO.getSellPrice());
+
+			Statement stmt=	con.createStatement();
+			//stmt.executeUpdate("set auto_increment_offset=7001;"); //自增主鍵-初始值
+			stmt.executeUpdate("set auto_increment_increment=1;");   //自增主鍵-遞增
+			pstmt.executeUpdate();
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-emp");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+
 	}
 
 	public static void main(String[] args) {

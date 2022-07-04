@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back_end/css/emp_footer.css">
     <!-- -------------------------------------------------------- -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -42,27 +43,17 @@
         	  <table id="tableAjax" class="table table-hover table-bordered single-ellipsis" style="width:100%">
             	 <thead>
                         <tr>
+                            <th>電影票訂單編號</th>
                             <th>電影明細編號</th>
                             <th>票種</th>
-                            <th>活動方案標題</th>
-                            <th>座位</th>
+                            <th>活動方案</th>
+                            <th>座位號碼</th>
                             <th>售價</th>
-                            <th>餐飲狀態</th>
                             <th>座位狀態</th>
                             <th>功能區</th>
                         </tr>
                     </thead>
                     <tbody>
-                    	<tr>
-                    		<td>已處理</td>
-                    		<td>已處理</td>
-                    		<td>已處理</td>
-                    		<td>已處理</td>
-                    		<td>已處理</td>
-                    		<td>已處理</td>
-                    		<td>已處理</td>
-                    		<td>已處理</td>
-                    	</tr>
                     </tbody>
             </table>
         	</div>
@@ -73,6 +64,8 @@
         嗨邇覓影城 &copy; HIREME CINEMA 2022
     </footer>
     <script src="${pageContext.request.contextPath}/back_end/refundTicket/refundIndex.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="${pageContext.request.contextPath}/back_end/refundTicket/socketScript.js"></script>
 </body>
 
 </html>

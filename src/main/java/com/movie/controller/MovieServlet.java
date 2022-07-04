@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.google.gson.Gson;
 import com.movie.model.MovieService;
 import com.movie.model.MovieVO;
 
@@ -170,17 +171,14 @@ public class MovieServlet extends HttpServlet {
 		}
 		
 		if ("listMovie_ByCompositeQuery".equals(action)) {
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-			
 			// 將資料轉為map
 			Map<String, String[]> map = req.getParameterMap();
 			// 傳入service
 			MovieService mvSvc = new MovieService();
-			List<MovieVO> list =mvSvc.getAll(map);
+			List<MovieVO> list =mvSvc.compositeQuery_Search(map);
 			// 存入Attribute
 			req.setAttribute("listMovie_ByCompositeQuery", list);
-			RequestDispatcher rd = req.getRequestDispatcher("/back_end/ManageMV/TEST_Composite2.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("/back_end/ManageMV/compositeQuery_result.jsp");
 			rd.forward(req, res);
 			
 		}

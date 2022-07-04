@@ -29,17 +29,31 @@ pageContext.setAttribute("list", list);
 	href="<%=request.getContextPath()%>/back_end/css/emp_footer.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/tk_ord/styles/sellTKback.css">
+<!-- TimePicker.css -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/md-date-time-picker@2.3.0/dist/css/mdDateTimePicker.min.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/back_end/showing/css/jquery.timepicker.css" />
+<!-- DatePicker.css -->
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back_end/showing/css/daterangepicker.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
+<script
+	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 </head>
 
 
 <body>
-	
+
 	<header>
 		<%@ include file="/back_end/header_html.jsp"%>
 	</header>
-	
+
 	<aside id="aside"></aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
@@ -57,35 +71,44 @@ pageContext.setAttribute("list", list);
 					<div class="TKouter">
 						<table class="TKinner">
 							<tr>
-							
+
 								<td>
 									<FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/MovieServlet.do">
-										<select size="1"
-											name="MovieVO">
+										<select size="1" name="MV_ID" class="MV_ID">
 											<c:forEach var="MovieVO" items="${list}">
 												<option value="${MovieVO.mvId}">${MovieVO.mvName}
 											</c:forEach>
-										</select> 
+										</select>
 									</FORM>
 								</td>
 
-								<td>
-								
-								<select name="" id="">
 
-								</select>
-								
+
+
+								<td>
+
+									<div id="selectByDate" class="selectBy">
+										<div id="selectByDate_input">
+											<input name="SH_TIME" id="f_date1" type="text"
+												autocomplete="off"> <input type="hidden"
+												name="action" value="listShowings_ByCompositeQuery">
+										</div>
+									</div>
+
 								</td>
-								<td><select name="" id=""></select></td>
+
+								<td><select class="showTimeSelect"></select></td>
+
 								<td><a class="tablebt checkout">查看</a></td>
-								<td><a class="tablebt" href="checkout.html">購票</a></td>
+								<td><a class="tablebt"
+									href="<%=request.getContextPath()%>/back_end/tk_ord/chooseTK.jsp">購票</a></td>
 							</tr>
 						</table>
 					</div>
 				</div>
 
-				<div class="SeatOuter" style="visibility:hidden;">
+				<div class="SeatOuter" style="visibility: hidden;">
 					<div class="front">
 						<div class="screen">
 							<div class="screeninner">螢幕</div>
@@ -94,12 +117,7 @@ pageContext.setAttribute("list", list);
 					<div>
 						<!-- 座位start -->
 
-						<div class="seatsChart" >
-
-							
-
-
-						</div>
+						<div class="seatsChart"></div>
 
 					</div>
 
@@ -121,19 +139,10 @@ pageContext.setAttribute("list", list);
 		<%@ include file="/back_end/aside_html.jsp"%>
 	</aside>
 	<script>
-	
-	
-	$(".checkout").click(function () {
-        $('.SeatOuter').show();
-    });
-	
-	
-	
-	
-	
-	
-	
-	
+		$('.checkout').click(function() {
+			$('.SeatOuter').css("visibility", "visible");
+		});
+
 		const body = document.getElementsByClassName('seatsChart')[0];
 		let col = 12;
 		let row = 15;
@@ -185,6 +194,179 @@ pageContext.setAttribute("list", list);
 
 		}
 		
+		</script>
+	<script>
+	let MV_ID = '';
+	
+	$('.MV_ID').change((e) => {
+		MV_ID = e.target.value;
+	})
+	
+	$('#f_date1').change((e) => {
+		let SH_TIME = e.target.value;
+		let url = "${pageContext.request.contextPath}/tkOrd12/tkOrd.do?action=listShowings_ByCompositeQuery&MV_ID=" + MV_ID +"&SH_TIME=" + SH_TIME;
+		 
+
+		 $.ajax({
+	            url: url,
+	            type: 'post',
+	            dataType: 'json',
+	            async: false,
+	            timeout: 15000,
+	            success: function (data) {
+	            	for(let show of data){
+	            		let showTimeStr = show.SH_TIME + " "; 
+	            		let showTime = showTimeStr.slice(-11, -7) + showTimeStr.slice(-3, -1);
+	            		console.log(showTime);
+	            		$('.showTimeSelect').append('<option value='+ show.SH_ID + '>' + showTime);
+	            		
+
+	            		
+	            	}
+	            }
+		 
+		 
+		})
+	})
+
+// 	function f1(e) {
+
+// 		    /*製作下一個table的row*/
+// 		    let input = document.createElement('input');
+// 		    input.type = "number";
+// 		    input.name = "merchCount";
+// 		    input.className = "totalCount";
+// 		    input.placeholder = "請輸入需要的商品數量";
+// 		    input.value = "${orderDetailVo.ordCount}";
+// 		    let selectes = document.createElement('select');
+// 		    selectes.name = "merchID";
+// 		    let tr1 = document.createElement('tr');
+// 		    let td4 = document.createElement('td');
+// 		    let td5 = document.createElement('td');
+// 		    let td6 = document.createElement('td');
+// 		    td6.className = "merchPrice";
+// 		    table.append(tr1);
+// 		    tr1.append(td4);
+// 		    tr1.append(td5);
+// 		    tr1.append(td6);
+// 		    td4.textContent = '商品名稱:';
+// 		    td4.append(selectes);
+// 		    td5.textContent = "商品數量:";
+// 		    td5.append(input);
+		    /*第一個選單*/
+// 		    let option1 = document.createElement('option');
+// 		    option1.textContent = "請選擇";
+// 		    option1.value = "0";
+// 		    selectes.append(option1);
+// 		    /*製作沒有被選到商品的選單*/
+// 		    for (let i = 0; i < merchID.length; i++) {
+// 		        let option = document.createElement('option');
+// 		        option.value = merchID[i];
+// 		        let merchID1 = merchID[i];
+// 		        /*傳沒被選到的商品編號回去取得剩下的所有商品名稱*/
+// 		        let url = "${pageContext.request.contextPath}/merchOrd/merchOrd.do?action=getmerchNameByID&merchID=" + merchID1;
+// 		        $.ajax({
+// 		            url: url,
+// 		            type: 'post',
+// 		            dataType: 'json',
+// 		            async: false,
+// 		            timeout: 15000,
+// 		            success: function (data) {
+// 		                option.textContent = data.merchName;
+// 		            }
+// 		        })
+// 		        selectes.append(option);
+// 		    }
+	
+	
+// 	let url = "${pageContext.request.contextPath}/merchOrd/merchOrd.do?action=getmerchNameByID&merchID=" + merchID1;
+//         $.ajax({
+//             url: url,
+//             type: 'post',
+//             dataType: 'json',
+//             async: false,
+//             timeout: 15000,
+//             success: function (data) {
+//                 option.textContent = data.merchName;
+//             }
+//         })
+        
+        
+//       if("getmerchNameByID".equals(action)) {
+//    Integer merchID = Integer.valueOf(req.getParameter("merchID"));
+//    MerchService merchSvc = new MerchService();
+//    MerchVO merchVo = merchSvc.getOneMerch(merchID);
+//    PrintWriter out = res.getWriter();
+//    Gson gson = new Gson();
+//    out.print(gson.toJson(merchVo));
+//   }
+        
+	<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
+
+	
+	</script>
+	<script>
+	
+// 	let today = new Date();
+		
+		 $.datetimepicker.setLocale('zh');
+        $('#f_date1').datetimepicker({
+ 	       theme: '',              //theme: 'dark',
+	       timepicker:false,       //timepicker:true,
+	       step: 30,                //step: 60 (這是timepicker的預設間隔60分鐘)
+	       format:'Y-m-d 09:00:00',         //format:'Y-m-d H:i:s',
+		   value: '',              // value:   new Date(),
+           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+           //startDate:	            '2017/07/10',  // 起始日
+           minDate: '-1970-01-01', // 去除今日(不含)之前
+           maxDate: '+1970-01-08'  // 去除今日(不含)之後
+        });
+
+		// ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
+
+		//      1.以下為某一天之前的日期無法選擇
+		//      var somedate1 = new Date('2017-06-15');
+		//      $('#f_date1').datetimepicker({
+		//          beforeShowDay: function(date) {
+		//        	  if (  date.getYear() <  somedate1.getYear() || 
+		//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
+		//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
+		//              ) {
+		//                   return [false, ""]
+		//              }
+		//              return [true, ""];
+		//      }});
+
+		//      2.以下為某一天之後的日期無法選擇
+		//      var somedate2 = new Date('2017-06-15');
+		//      $('#f_date1').datetimepicker({
+		//          beforeShowDay: function(date) {
+		//        	  if (  date.getYear() >  somedate2.getYear() || 
+		//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
+		//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
+		//              ) {
+		//                   return [false, ""]
+		//              }
+		//              return [true, ""];
+		//      }});
+
+		//      3.以下為兩個日期之外的日期無法選擇 (也可按需要換成其他日期)
+		//      var somedate1 = new Date('2017-06-15');
+		//      var somedate2 = new Date('2017-06-25');
+		//      $('#f_date1').datetimepicker({
+		//          beforeShowDay: function(date) {
+		//        	  if (  date.getYear() <  somedate1.getYear() || 
+		//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
+		//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
+		//		             ||
+		//		            date.getYear() >  somedate2.getYear() || 
+		//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
+		//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
+		//              ) {
+		//                   return [false, ""]
+		//              }
+		//              return [true, ""];
+		//      }});
 	</script>
 </body>
 </html>
