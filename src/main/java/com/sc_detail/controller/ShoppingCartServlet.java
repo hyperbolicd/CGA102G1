@@ -1,6 +1,7 @@
 package com.sc_detail.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
 
+import com.google.gson.Gson;
 import com.member.model.MemberService;
 import com.member.model.MemberVO;
 import com.merchandise_inf.model.MerchService;
@@ -59,7 +61,7 @@ public class ShoppingCartServlet extends HttpServlet {
 				RequestDispatcher rd = req.getRequestDispatcher(url);
 				rd.forward(req, res);
 			} else if ("add".equals(action)) {
-				// 取得後來新增的書籍
+				// 取得後來新增的商品
 				SCDetailVO scDetailVo = getscDetailVO(req);
 
 				if (buylist == null) {
@@ -74,9 +76,13 @@ public class ShoppingCartServlet extends HttpServlet {
 					}
 				}
 				session.setAttribute("shoppingcart", buylist);
-				String url = "/front_end/merchandise/cart.jsp";
-				RequestDispatcher rd = req.getRequestDispatcher(url);
-				rd.forward(req, res);
+				PrintWriter out = res.getWriter();
+				Gson gson = new Gson();
+				String s = "success";
+				out.print(s);
+//				String url = "/front_end/merchandise/cart.jsp";
+//				RequestDispatcher rd = req.getRequestDispatcher(url);
+//				rd.forward(req, res);
 			}
 			
 			
@@ -128,9 +134,13 @@ public class ShoppingCartServlet extends HttpServlet {
 				/* =========================修改完成,準備轉交============================= */
 
 				session.setAttribute("shoppingcart", buylist);
-				String url = "/front_end/merchandise/cart.jsp";
-				RequestDispatcher rd = req.getRequestDispatcher(url);
-				rd.forward(req, res);
+				PrintWriter out = res.getWriter();
+				Gson gson = new Gson();
+				String s = "success";
+				out.print(s);
+//				String url = "/front_end/merchandise/cart.jsp";
+//				RequestDispatcher rd = req.getRequestDispatcher(url);
+//				rd.forward(req, res);
 			}
 			
 			
