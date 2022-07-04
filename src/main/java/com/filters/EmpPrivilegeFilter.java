@@ -35,7 +35,7 @@ public class EmpPrivilegeFilter extends HttpFilter {
 		// 判斷是否登入過?
 		} else if(empAccount == null) {  
 			
-			request.getSession().setAttribute("lastPage", request.getRequestURI());
+			request.getSession().setAttribute("lastPage", request.getRequestURI()); 
 			response.sendRedirect(request.getContextPath() + "/back_end/empLogin.jsp");
 			
 		} else {

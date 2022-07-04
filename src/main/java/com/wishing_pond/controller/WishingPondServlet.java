@@ -71,6 +71,7 @@ public class WishingPondServlet extends HttpServlet {
 			if(wishVOs.size() == 0) {
 				errMsg.put("notFound", "無符合的資料");
 				request.getRequestDispatcher("/back_end/wish/wishPond.jsp").forward(request, response);
+				return;
 			}
 			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 			request.setAttribute("list", wishVOs);

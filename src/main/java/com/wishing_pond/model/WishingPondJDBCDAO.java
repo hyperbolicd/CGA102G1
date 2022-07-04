@@ -291,7 +291,7 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 		
 		try {
 			con = JDBCUtil.getConnection();
-			ps = con.prepareStatement(UPDATE);
+			ps = con.prepareStatement(UPDATE_TOP_ONE);
 			
 			ps.setInt(1, topOne);
 			ps.setInt(2, wishNo);
