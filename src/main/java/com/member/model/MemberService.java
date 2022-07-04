@@ -86,6 +86,9 @@ public class MemberService {
 		return dao.findByPrimaryKey(member_ID);
 	}
 	
-	
+	// wish
+	public void updateWishTicket(Integer member_id, Integer wish_ticket) {
+		dao.updateWishTicket(member_id, wish_ticket);
+	}
 	
 }

@@ -32,6 +32,8 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			"UPDATE `member` "
 			+" set  MEMBER_STATUS = ?"
 			+" where (MEMBER_ID = ?);";
+	private static final String UPDATE_WISH_TICKET =      	//修改會員許願票
+			"update `member` set WISH_TICKET = ? where MEMBER_ID = ?;";
 	private static final String DELETE =                //刪除資料
 	     "DELETE FROM member where MEMBER_ID = ?";
 	
@@ -184,8 +186,46 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			}
 	}
 	
-	
-//刪除會員，利用會員編號	
+	// wish
+	@Override
+	public void updateWishTicket(Integer member_id, Integer wish_ticket) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_WISH_TICKET);
+			
+			pstmt.setInt(1, wish_ticket);
+			pstmt.setInt(2, member_id);
+			
+			pstmt.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+
+	//刪除會員，利用會員編號	
 	public void delete(Integer member_ID) {
 
 		Connection con = null;
