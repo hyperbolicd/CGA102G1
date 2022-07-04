@@ -7,12 +7,14 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cmt.model.*;
 
+@WebServlet("/cmt/cmt.do")
 public class CmtServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -275,7 +277,7 @@ public class CmtServlet extends HttpServlet {
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("cmtVO", cmtVO); // 含有輸入格式錯誤的cmtVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back/addCmt.jsp");
+							.getRequestDispatcher("/front_end/movieDetail/movie_detail.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -285,7 +287,7 @@ public class CmtServlet extends HttpServlet {
 				cmtVO = cmtSvc.addCmt(MEMBER_ID, MV_ID, CM_TEXT, CM_LIKE, CM_STAR, CM_STATE, CM_DATE);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/back/listAllCmt.jsp";
+				String url = "/front_end/movieDetail/movie_detail.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);				
 		}
@@ -306,7 +308,7 @@ public class CmtServlet extends HttpServlet {
 				cmtSvc.deleteCmt(CM_ID);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/back/listAllCmt.jsp";
+				String url = "/front_end/memberCmt/memberCmt.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 		}

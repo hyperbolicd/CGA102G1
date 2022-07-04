@@ -31,6 +31,8 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 		"UPDATE cmt set MEMBER_ID=?, MV_ID=?, CM_TEXT=?, CM_LIKE=?, CM_STAR=?, CM_STATE=?, CM_DATE=? where CM_ID = ?";
 	private static final String UPDATE_CMTSTATE =
 		"UPDATE cmt SET CM_STATE =?  WHERE CM_ID =? ;";
+	private static final String GET_CMTS_BY_MV_ID_STMT =
+			"SELECT CM_ID, MEMBER_ID, MV_ID, CM_TEXT, CM_LIKE, CM_STAR, CM_STATE, CM_DATE FROM cmt where MV_ID = ?";
 	
 	@Override
 	public void insert(CmtVO cmtVO) {
@@ -346,6 +348,72 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 			}
 		}
 		
+	}
+	
+	@Override
+	public List<CmtVO> getCmtsByMV_ID(Integer MV_ID) {
+		List<CmtVO> list = new ArrayList<CmtVO>();
+		CmtVO cmtVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_CMTS_BY_MV_ID_STMT);
+			pstmt.setInt(1, MV_ID);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// cmtVO 也稱為 Domain objects
+				cmtVO = new CmtVO();
+				cmtVO.setCM_ID(rs.getInt("CM_ID"));
+				cmtVO.setMEMBER_ID(rs.getInt("MEMBER_ID"));
+				cmtVO.setMV_ID(rs.getInt("MV_ID"));
+				cmtVO.setCM_TEXT(rs.getString("CM_TEXT"));
+				cmtVO.setCM_LIKE(rs.getInt("CM_LIKE"));
+				cmtVO.setCM_STAR(rs.getInt("CM_STAR"));
+				cmtVO.setCM_STATE(rs.getInt("CM_STATE"));
+				cmtVO.setCM_DATE(rs.getTimestamp("CM_DATE"));
+				list.add(cmtVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 
 

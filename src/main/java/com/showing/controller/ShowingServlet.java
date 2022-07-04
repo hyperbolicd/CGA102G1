@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import com.movie.model.MovieService;
 import com.showing.model.*;
+import com.google.gson.Gson;
 import com.hall.model.*;
 
 @WebServlet("/showing/showing.do")
@@ -434,11 +435,31 @@ public class ShowingServlet extends HttpServlet {
 				successView.forward(req, res);
 		}	
 		
-//		if ("batchAddShowing".equals(action)) { 
-//			HttpSession session = req.getSession();
-//			Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
-//			
-//		}
+
+		
+		if ("getShowingByDate".equals(action)) { // 來自listAllShowing.jsp 或  /movie/listEmps_ByDeptno.jsp 的請求
+			System.out.println("ajax近來");
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			String requestURL = req.getParameter("requestURL"); // 送出修改的來源網頁路徑: 可能為【/showing/listAllShowing.jsp】 或  【/movie/listEmps_ByDeptno.jsp】 或 【 /movie/listAllDept.jsp】		
+			
+				/***************************1.接收請求參數****************************************/
+			String SH_TIME = String.valueOf(req.getParameter("SH_TIME"));
+				
+				/***************************2.開始查詢資料****************************************/
+				ShowingService showingSvc = new ShowingService();
+				List<ShowingVO> list = showingSvc.getShowingByDate(SH_TIME);
+								
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				req.setAttribute("list", list); // 資料庫取出的showingVO物件,存入req
+				PrintWriter out = res.getWriter();
+				Gson gson = new Gson();
+				out.print(gson.toJson(list));
+		}
 		
 	}
 }

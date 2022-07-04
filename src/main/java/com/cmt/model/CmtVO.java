@@ -1,6 +1,9 @@
 package com.cmt.model;
 import java.sql.Timestamp;
 
+import com.member.model.*;
+import com.movie.model.*;
+
 public class CmtVO implements java.io.Serializable{
 	private Integer CM_ID;
 	private Integer MEMBER_ID;
@@ -59,6 +62,16 @@ public class CmtVO implements java.io.Serializable{
 	}
 	public void setCM_DATE(Timestamp cM_DATE) {
 		CM_DATE = cM_DATE;
+	}
+	public MemberVO getMemberVO() {
+		MemberService memberSvc = new MemberService();
+		MemberVO memberVO = memberSvc.getOneMember(MEMBER_ID);
+		return memberVO;
+	}
+	public MovieVO getMovieVO() {
+		MovieService movieSvc = new MovieService();
+		MovieVO movieVO = movieSvc.getOneMovie(MV_ID);
+		return movieVO;
 	}
 	
 	

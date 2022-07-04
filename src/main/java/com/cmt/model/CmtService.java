@@ -53,9 +53,9 @@ public class CmtService {
 		return dao.findByPrimaryKey(CM_ID);
 	}
 
-//	public Set<CmtVO> getCmtsByCmtno(Integer CM_ID) {
-//		return dao.getCmtsByCmtno(CM_ID);
-//	}
+	public List<CmtVO> getCmtsByMV_ID(Integer MV_ID) {
+		return dao.getCmtsByMV_ID(MV_ID);
+	}
 
 	public void deleteCmt(Integer CM_ID) {
 		dao.delete(CM_ID);

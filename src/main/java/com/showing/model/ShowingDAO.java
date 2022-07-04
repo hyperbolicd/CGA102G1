@@ -8,6 +8,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+
 import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_showing;
 
 public class ShowingDAO implements ShowingDAO_interface {
@@ -22,6 +23,15 @@ public class ShowingDAO implements ShowingDAO_interface {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	//JDBC
+	String driver = "com.mysql.cj.jdbc.Driver";
+	String url = "jdbc:mysql://localhost:3306/movietheater?serverTimezone=Asia/Taipei";
+	String userid = "root";
+	String passwd = "password";
+	
+	
 
 		private static final String INSERT_STMT = 
 			"INSERT INTO showing (MV_ID,HL_ID,SH_STATE,SH_SEAT_STATE,SH_TIME,SH_TYPE) VALUES (?, ?, ?, ?, ?, ?)";
@@ -344,6 +354,71 @@ public class ShowingDAO implements ShowingDAO_interface {
 		return list;
 	}
 	
+//	@Override
+//	public List<ShowingVO> getShowingByDate(String SH_TIME){
+//		List<ShowingVO> list = new ArrayList<ShowingVO>();
+//		ShowingVO showingVO = null;
+//
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		try {
+//			
+//			con = ds.getConnection();
+//			pstmt = con.prepareStatement(GET_SHOWING_BY_DATE_STMT);
+//
+//			pstmt.setString(1, SH_TIME);
+//			pstmt.setString(2, SH_TIME);
+//
+//			rs = pstmt.executeQuery();
+//
+//			while (rs.next()) {
+//
+//				showingVO = new ShowingVO();
+//				showingVO.setSH_ID(rs.getInt("SH_ID"));
+//				showingVO.setmvId(rs.getInt("MV_ID"));
+//				showingVO.setHL_ID(rs.getInt("HL_ID"));
+//				showingVO.setSH_STATE(rs.getInt("SH_STATE"));
+//				showingVO.setSH_SEAT_STATE(rs.getString("SH_SEAT_STATE"));
+//				showingVO.setSH_TIME(rs.getTimestamp("SH_TIME"));
+//				showingVO.setSH_TYPE(rs.getInt("SH_TYPE"));
+//				list.add(showingVO); // Store the row in the List
+//			}
+//
+//			// Handle any driver errors
+//		} catch (SQLException se) {
+//			throw new RuntimeException("A database error occured. "
+//					+ se.getMessage());
+//			// Clean up JDBC resources
+//		} finally {
+//			if (rs != null) {
+//				try {
+//					rs.close();
+//				} catch (SQLException se) {
+//					se.printStackTrace(System.err);
+//				}
+//			}
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException se) {
+//					se.printStackTrace(System.err);
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (Exception e) {
+//					e.printStackTrace(System.err);
+//				}
+//			}
+//		}	
+//		
+//		return list;
+//	}
+	
+	
 	@Override
 	public List<ShowingVO> getShowingByDate(String SH_TIME){
 		List<ShowingVO> list = new ArrayList<ShowingVO>();
@@ -355,16 +430,16 @@ public class ShowingDAO implements ShowingDAO_interface {
 		
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_SHOWING_BY_DATE_STMT);
-
+			
 			pstmt.setString(1, SH_TIME);
 			pstmt.setString(2, SH_TIME);
 
 			rs = pstmt.executeQuery();
-
+			
 			while (rs.next()) {
-
 				showingVO = new ShowingVO();
 				showingVO.setSH_ID(rs.getInt("SH_ID"));
 				showingVO.setmvId(rs.getInt("MV_ID"));
@@ -377,6 +452,10 @@ public class ShowingDAO implements ShowingDAO_interface {
 			}
 
 			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -403,8 +482,22 @@ public class ShowingDAO implements ShowingDAO_interface {
 					e.printStackTrace(System.err);
 				}
 			}
-		}	
+		}
 		
 		return list;
 	}
+	
+	
+	
+	
+	
+	//test
+	public static void main(String[] args) {
+		ShowingDAO dao = new ShowingDAO();
+		List<ShowingVO> list = dao.getShowingByDate("2022-07-02 09:00:00");
+		for(ShowingVO item : list ) {
+			System.out.println(item.getSH_ID() + "," + item.getSH_TIME());
+		}
+	}
+	
 }
