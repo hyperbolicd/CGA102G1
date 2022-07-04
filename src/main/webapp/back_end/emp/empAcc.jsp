@@ -28,7 +28,7 @@
 	<main>
 		<div id="main">
 			<h1>帳號與權限</h1>
-			<button class="add" onclick="addAccount()">新增</button><span style="color: red;">${isSucess}</span>
+			<button class="add" onclick="addAccount()">新增</button><span style="color: red;">${isSuccess}</span>
 			<div id="search">
 				<label>顯示: </label>
 				<select id="showStatus">
@@ -92,10 +92,11 @@
 							<input type="hidden" name="emp_no" value="${e.emp_no}">
 						</form>
 						<button class="resetPw" onclick="resetPw(${e.emp_no})">重設密碼</button>
-						<form method="post" action="${pageContext.request.contextPath}/emp/EmpAccount.do" >
-							<button type="submit" class="delete" name="action" value="deleteEmp">刪除</button>
-							<input type="hidden" name="emp_no" value="${e.emp_no}">
-						</form>
+						<button class="resetPw" onclick="resetPw(${e.emp_no})">修改狀態</button>
+<%-- 						<form method="post" action="${pageContext.request.contextPath}/emp/EmpAccount.do" > --%>
+<!-- 							<button type="submit" class="delete" name="action" value="deleteEmp">刪除</button> -->
+<%-- 							<input type="hidden" name="emp_no" value="${e.emp_no}"> --%>
+<!-- 						</form> -->
 					</td>
 				</tr>
 				</c:forEach>

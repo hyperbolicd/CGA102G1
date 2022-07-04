@@ -30,7 +30,7 @@
     <!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
     <main>
         <div id="main">
-            <h1>個人資料維護</h1>
+            <h1>個人資料維護</h1><span style="color: red;">${isOk}</span>
             <div id="emp_detail">
             	<form action="${pageContext.request.contextPath}/emp/EmpAccount.do" method="post" enctype="multipart/form-data">
 	                <div id="left">

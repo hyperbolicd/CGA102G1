@@ -58,7 +58,38 @@ public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 	}
 
 	@Override
-	public void delete(Integer empNo, Integer fcNo) {
+	public void insert(EmpPrivilegeVO empPrivilegeVO, Connection con) {
+		PreparedStatement ps = null;
+		
+		try {
+			ps = con.prepareStatement(INSERT);
+			
+			ps.setInt(1, empPrivilegeVO.getEmp_no());
+			ps.setInt(2, empPrivilegeVO.getFc_no());
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			if(con != null) {
+				try {
+					con.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		} finally {
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}			
+		}
+	}
+
+	@Override
+	public void delete(EmpPrivilegeVO empPrivilegeVO) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -66,8 +97,8 @@ public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(DELETE);
 			
-			ps.setInt(1, empNo);
-			ps.setInt(2, fcNo);
+			ps.setInt(1, empPrivilegeVO.getEmp_no());
+			ps.setInt(2, empPrivilegeVO.getFc_no());
 			ps.executeUpdate();
 			
 		} catch (ClassNotFoundException e) {
@@ -76,6 +107,89 @@ public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 			e.printStackTrace();
 		} catch (NamingException e) {
 			e.printStackTrace();
+		} finally {
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void delete(EmpPrivilegeVO empPrivilegeVO, Connection con) {
+		PreparedStatement ps = null;
+		
+		try {
+			ps = con.prepareStatement(DELETE);
+			
+			ps.setInt(1, empPrivilegeVO.getEmp_no());
+			ps.setInt(2, empPrivilegeVO.getFc_no());
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void update(List<EmpPrivilegeVO> empPrivilegeVOs) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		try {
+			con = JDBCUtil.getConnection();
+			
+			con.setAutoCommit(false);
+			
+			// 查詢現有權限
+			Integer emp_no = empPrivilegeVOs.get(0).getEmp_no();
+			EmpPrivilegeJDBCDAO dao = new EmpPrivilegeJDBCDAO();
+			List<EmpPrivilegeVO> deletePrivilege = dao.findByEmpNo(emp_no);
+			// 刪除所有權限
+			for(EmpPrivilegeVO empPrivilegeVO: deletePrivilege) {
+				dao.delete(empPrivilegeVO, con);
+			}
+			// 新增新的權限
+			for(EmpPrivilegeVO empPrivilege: empPrivilegeVOs) {
+				dao.insert(empPrivilege, con);
+			}
+			
+			con.commit();
+			con.setAutoCommit(true);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			if(ps != null) {
 				try {
@@ -199,42 +313,6 @@ public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 		return list;
 	}
 	
-	@Override
-	public void insert(EmpPrivilegeVO empPrivilegeVO, Connection con) {
-		PreparedStatement ps = null;
-		
-		try {
-			ps = con.prepareStatement(INSERT);
-			
-			ps.setInt(1, empPrivilegeVO.getEmp_no());
-			ps.setInt(2, empPrivilegeVO.getFc_no());
-			ps.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			if(con != null) {
-				try {
-					con.rollback();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}
-		} finally {
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}			
-		}
-	}
-
-	@Override
-	public void update(List<EmpPrivilegeVO> empPrivilegeVOs) {
-		
-	}
-
 	public static void main(String[] args) {
 		EmpPrivilegeJDBCDAO dao = new EmpPrivilegeJDBCDAO();
 		// C

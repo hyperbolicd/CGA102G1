@@ -25,8 +25,8 @@ public class EmpPrivilegeService {
 		dao.insert(empPrivilegeVO);
 	}
 	
-	public void deletePrivilege(Integer empNo, Integer fcNo) {
-		dao.delete(empNo, fcNo);
+	public void deletePrivilege(EmpPrivilegeVO empPrivilegeVO) {
+		dao.delete(empPrivilegeVO);
 	}
 	
 	public void updatePrivilege(List<EmpPrivilegeVO> empPrivilegeVOs) {
