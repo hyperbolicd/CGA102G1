@@ -1,5 +1,8 @@
 package com.emp_privilege.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EmpPrivilegeVO implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -19,5 +22,9 @@ public class EmpPrivilegeVO implements java.io.Serializable{
 		this.fc_no = fc_no;
 	}
 	
-	
+	// 取得功能名稱
+	public String getFcName(){
+		com.emp_function.model.EmpFunctionJDBCDAO dao = new com.emp_function.model.EmpFunctionJDBCDAO();
+		return dao.findByPrimaryKey(fc_no).getFc_name();
+	}
 }

@@ -10,6 +10,9 @@ import java.util.List;
 import javax.naming.NamingException;
 
 import com.common.JDBCUtil;
+import com.common.JedisPoolUtil;
+
+import redis.clients.jedis.Jedis;
 
 public class WishingListJDBCDAO implements WishingListDAO_interface{
 	
@@ -21,7 +24,7 @@ public class WishingListJDBCDAO implements WishingListDAO_interface{
 	private static final String READ_ALL =
 			"select WISH_NO, MV_ID, WISH_COUNT from wishing_list order by WISH_NO";
 	private static final String UPDATE =
-			"update wishing_list WISH_COUNT = ? where WISH_NO = ? and MV_ID = ?";
+			"update wishing_list set WISH_COUNT = ? where WISH_NO = ? and MV_ID = ?";
 	private static final String DELETE =
 			"delete from wishing_list where WISH_NO = ? and MV_ID = ?";
 	
@@ -73,6 +76,12 @@ public class WishingListJDBCDAO implements WishingListDAO_interface{
 			ps.setInt(2, wishingListVO.getMv_id());
 			
 			ps.executeUpdate();
+			
+			// 同時新增至 redis 以利投票進行中可撈 redis 資料
+			Jedis jedis = JedisPoolUtil.getJedisPool().getResource();
+			String jedisKey = new StringBuilder("wish:").append(wishingListVO.getWish_no()).toString();
+			jedis.hset(jedisKey, wishingListVO.getMv_id().toString(), wishingListVO.getMvVO().getMvName());
+			jedis.close();
 			
 		} catch (SQLException e) {
 			try {
@@ -167,9 +176,9 @@ public class WishingListJDBCDAO implements WishingListDAO_interface{
 			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(UPDATE);
 			
-			ps.setInt(1, wishingListVO.getMv_id());
-			ps.setInt(2, wishingListVO.getWish_count());
-			ps.setInt(3, wishingListVO.getWish_no());
+			ps.setInt(1, wishingListVO.getWish_count());
+			ps.setInt(2, wishingListVO.getWish_no());
+			ps.setInt(3, wishingListVO.getMv_id());
 			
 			ps.executeUpdate();
 			

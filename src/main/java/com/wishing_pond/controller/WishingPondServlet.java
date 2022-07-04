@@ -126,7 +126,11 @@ public class WishingPondServlet extends HttpServlet {
 			String[] movies = request.getParameterValues("checkMovie");
 			if(movies == null) {
 				errMsg.put("checkMovie", "電影選項不可為空!");
-			} 
+			} else if(movies.length < 2){
+				errMsg.put("checkMovie", "電影選項最少為2個!");
+			} else if(movies.length > 6) {
+				errMsg.put("checkMovie", "電影選項最多為6個!");
+			}
 			
 			if(!errMsg.isEmpty()) {
 				request.setAttribute("wishVO", wishVO);

@@ -73,8 +73,10 @@
  	
 	<!-- 許願池 -->
 	<div id="main">
-		<h1>許願池投票活動</h1> 
-        <button id="historyWish"><a href="${pageContext.request.contextPath}/front_end/wish/wishHis.jsp">歷屆回顧</a></button>
+		<h1>許願池投票活動</h1>
+		<span style="color: red;">${errMsg.isSuccess}</span>
+<!-- 		取消 -->
+<%--         <button id="historyWish"><a href="${pageContext.request.contextPath}/front_end/wish/wishHis.jsp">歷屆回顧</a></button> --%>
         <div id="wishList">
             <table>
                 <tr>
@@ -86,7 +88,7 @@
                     <th>參加投票</th>
                 </tr>
                 <jsp:useBean id="wishSvc" class="com.wishing_pond.model.WishingPondService"/>
-                <c:forEach var="event" items="${wishSvc.allFromNow}">
+                <c:forEach var="event" items="${wishSvc.avaliable}">
 	                 <tr>
 	                     <td>${event.wish_no}</td>
 	                     <td>${event.wish_name}</td>
@@ -94,14 +96,18 @@
 	                     <td>${event.wish_end}</td>
 	                     <td>
 	                     	<form action="${pageContext.request.contextPath}/wish/WishingVote.do" method="post">
-	                      	<button type="submit" name="action" value="seeOneEvent"><img src="${pageContext.request.contextPath}/back_end/wish/icons8-detail-64.png" alt=""></button>
-	                      	<input type="hidden" name="wish_no" value="${event.wish_no}">
+		                      	<button type="submit" name="action" value="seeOneEvent"><img src="${pageContext.request.contextPath}/back_end/wish/icons8-detail-64.png" alt=""></button>
+		                      	<input type="hidden" name="wish_no" value="${event.wish_no}">
+		                      	<input type="hidden" name="wish_name" value="${event.wish_name}">
+		                      	<input type="hidden" name="wish_start" value="${event.wish_start}">
+		                      	<input type="hidden" name="wish_end" value="${event.wish_end}">
 	                     	</form>
 	                     </td>
 	                     <td>
 	                     	<form action="${pageContext.request.contextPath}/wish/WishingVote.do" method="post">
-	                      	<button type="submit" name="action" value="voteOneEvent"><img src="${pageContext.request.contextPath}/front_end/wish/icons8-vote-64.png" alt=""></button>
-	                      	<input type="hidden" name="wish_no" value="${event.wish_no}">
+		                      	<button type="submit" name="action" value="voteOneEvent"><img src="${pageContext.request.contextPath}/front_end/wish/icons8-vote-64.png" alt=""></button>
+		                      	<input type="hidden" name="member_id" value="${memberVO.member_ID}">
+		                      	<input type="hidden" name="wish_no" value="${event.wish_no}">
 	                     	</form>
 	                     </td>
 	                 </tr>

@@ -69,7 +69,6 @@
                     <select name="searchPeriod" id="searchPeriod">
                         <option value="WISH_START">以起始時間搜尋</option>
                         <option value="WISH_END">以結束時間搜尋</option>
-                        <option value="3">以包含時間搜尋</option> <!-- 再想想 -->
                     </select>
                     <input name="start_date" id="start_date" autocomplete="off"> ~ <input name="end_date" id="end_date" autocomplete="off">
                     <label for="searchName">名稱: </label>

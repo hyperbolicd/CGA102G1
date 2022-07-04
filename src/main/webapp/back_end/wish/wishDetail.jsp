@@ -32,7 +32,7 @@
 	            <c:forEach var="wishListVO" items="${wishListVOs}">
 					<div>
 				    	<h3 <c:if test="${wishListVO.mvVO.mvId == top_one}">style="color: red;"</c:if>>選項: ${wishListVO.mvVO.mvName}</h3>
-				        <div class="color" style='height: 20px; width: ${wishListVO.wish_count * 10}px; background-color: rgb(160, 188, 194); <c:if test="${wishListVO.mvVO.mvId == top_one}"> background-color: rgb(0, 188, 194); </c:if>'>
+				        <div class="color" style='height: 20px; width: ${wishListVO.wish_count * 10}px; background-color: rgb(160, 188, 194); <c:if test="${wishListVO.mvVO.mvId == top_one}"> background-color: rgb(71, 104, 112); </c:if>'>
 				        	<h5 <c:if test="${wishListVO.mvVO.mvId == top_one}">style="color: white;"</c:if>>票數: ${wishListVO.wish_count}</h5>
 				        </div>
 				    </div>

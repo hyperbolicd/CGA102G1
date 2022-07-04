@@ -55,6 +55,7 @@ public class EmpLogin extends HttpServlet {
 				errMsg.put("loginId", "編號或密碼錯誤");
 				errMsg.put("loginPassword", "編號或密碼錯誤");
 				request.getRequestDispatcher("/back_end/empLogin.jsp").forward(request, response);
+				return;
 			}
 			
 			EmpAccountVO empVO = empSvc.getOneEmp(Integer.valueOf(loginId));
@@ -62,7 +63,7 @@ public class EmpLogin extends HttpServlet {
 			request.getSession().setAttribute("empAccount", empVO);
 			String lastPage = (String) request.getSession().getAttribute("lastPage");
 			
-			if(lastPage == null) { // 好像不會跑到?
+			if(lastPage == null) { 
 				response.sendRedirect(request.getContextPath() + "/back_end/empIndex.jsp");
 			} else {
 				response.sendRedirect(lastPage);

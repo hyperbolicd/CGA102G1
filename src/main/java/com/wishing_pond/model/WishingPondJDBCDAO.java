@@ -14,8 +14,11 @@ import java.util.Set;
 import javax.naming.NamingException;
 
 import com.common.JDBCUtil;
+import com.common.JedisPoolUtil;
 import com.wishing_list.model.WishingListJDBCDAO;
 import com.wishing_list.model.WishingListVO;
+
+import redis.clients.jedis.Jedis;
 
 public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 	
@@ -26,11 +29,13 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 			"select WISH_NO, WISH_NAME, WISH_START, WISH_END, TOP_ONE from wishing_pond where WISH_NO = ?";
 	private static final String READ_ALL =
 			"select WISH_NO, WISH_NAME, WISH_START, WISH_END, TOP_ONE from wishing_pond";
-	private static final String READ_ALL_FROM_NOW =
-			"select WISH_NO, WISH_NAME, WISH_START, WISH_END, TOP_ONE from wishing_pond where WISH_END >= NOW();";
+	private static final String READ_AVALIABLE =
+			"select WISH_NO, WISH_NAME, WISH_START, WISH_END, TOP_ONE from wishing_pond where WISH_START <= NOW() and WISH_END >= NOW() ";
 	private static final String UPDATE =
 			"update wishing_pond set WISH_NAME = ?, WISH_START = ?, WISH_END = ?  "
 			+ "where WISH_NO = ?";
+	private static final String UPDATE_TOP_ONE =
+			"update wishing_pond set TOP_ONE = ? where WISH_NO = ?";
 	private static final String DELETE =
 			"delete from wishing_pond where WISH_NO = ?";
 	private static final String UPDATABLE = 
@@ -280,6 +285,43 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 	}
 	
 	@Override
+	public void updateTopOne(Integer wishNo, Integer topOne) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		try {
+			con = JDBCUtil.getConnection();
+			ps = con.prepareStatement(UPDATE);
+			
+			ps.setInt(1, topOne);
+			ps.setInt(2, wishNo);
+			
+			ps.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} finally {
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}		
+	}
+	@Override
 	public WishingPondVO findByWishNo(Integer wishNo) {
 		WishingPondVO wishingPondVO = new WishingPondVO();
 		Connection con = null;
@@ -389,7 +431,7 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 	}
 	
 	@Override
-	public List<WishingPondVO> getAllFromNow() {
+	public List<WishingPondVO> getAvaliable() {
 		List<WishingPondVO> list = new ArrayList<WishingPondVO>();
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -397,7 +439,7 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 		
 		try {
 			con = JDBCUtil.getConnection();
-			ps = con.prepareStatement(READ_ALL_FROM_NOW);
+			ps = con.prepareStatement(READ_AVALIABLE);
 			
 			rs = ps.executeQuery();
 			

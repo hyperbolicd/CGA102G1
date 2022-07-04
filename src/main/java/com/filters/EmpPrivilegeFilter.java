@@ -1,17 +1,19 @@
 package com.filters;
 
 import java.io.IOException;
-
+import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebFilter("/back_end/*")
-public class EmpFilter extends HttpFilter {
+public class EmpPrivilegeFilter extends HttpFilter {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -22,6 +24,8 @@ public class EmpFilter extends HttpFilter {
 		
 		String uri = request.getRequestURI();
 		Object empAccount = request.getSession().getAttribute("empAccount");
+		
+		// 還缺 大家的URI
 		
 		// login 頁面 & css pass
 		if(uri.endsWith("empLogin.jsp") || uri.endsWith(".css") || uri.endsWith(".js") || uri.endsWith("logo2noline.jpg")) {

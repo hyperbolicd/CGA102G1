@@ -35,12 +35,12 @@
                     <input type="text" id="eventNo" value="${wishSvc.nextId}" disabled>
                     <br>
                     <label for="eventName">活動名稱: </label>
-                    <input type="text" id="eventName" name="wish_name" value="${wishVO.wish_name}" placeholder="${errMsg.wish_name}" maxlength="10">
+                    <input type="text" id="eventName" name="wish_name" value="${wishVO.wish_name}" placeholder='${errMsg.wish_name == null ? "字數限制不超過5" : errMsg.wish_name}' maxlength="5">
                     <br>
                     <label for="startDate">活動日期: </label>
                     <input name="start_date" id="start_date" autocomplete="off" value="${wishVO.wish_start}" placeholder="${errMsg.start_date}"> ~ <input name="end_date" id="end_date" autocomplete="off" value="${wishVO.wish_end}" placeholder="${errMsg.end_date}">
                 </div>
-                <h2>選擇電影</h2>
+                <h2>選擇電影(請選擇2~6個)</h2>
                 <div id="multiSearch">
                     <label for="level">分級:</label>
                     <select name="level" id="level">
