@@ -107,6 +107,9 @@ public class MemberService {
 //		mailService.sendMail(to, subject, messageText);
 //	}
 	
-	
+	// wish
+	public void updateWishTicket(Integer member_id, Integer wish_ticket) {
+		dao.updateWishTicket(member_id, wish_ticket);
+	}
 	
 }
