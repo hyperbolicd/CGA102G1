@@ -36,11 +36,19 @@ public class WishingListener implements ServletContextListener {
 				WishingListService wishListSvc = new WishingListService();
 				Jedis jedis = JedisPoolUtil.getJedisPool().getResource();
 				List<WishingPondVO> list = wishSvc.getAll();
-				for(WishingPondVO wish: list) {									// 執行時間
+				for(WishingPondVO wish: list) {	
+					// 活動開始時，將活動資料從 DB 撈出並存入 redis，以利投票進行中可撈 redis 資料
+					//							開始時間		執行時間
+					if(wish.getWish_start().getTime() == scheduledExecutionTime()) {
+						List<WishingListVO> wishOptionList = wishListSvc.getOneWishingPond(wish.getWish_no());
+						for(WishingListVO wishOption: wishOptionList) {
+							String jedisKey = new StringBuilder("wish:").append(wishOption.getWish_no()).toString();
+							jedis.hset(jedisKey, wishOption.getMv_id().toString(), wishOption.getMvVO().getMvName());
+						}
+					}
+					// 活動結束時，到 redis 查詢明細將票數合計存進 DB 並刪除 redis 資料
+					//                       結束時間 + 一天                         執行時間
 					if(wish.getWish_end().getTime() + 1 * 24 * 60 * 60 * 1000 == scheduledExecutionTime()) {
-//						System.out.println(wish.getWish_no());
-//						System.out.println(new java.util.Date(scheduledExecutionTime()));
-						// 到 redis 查詢明細 (結束時間到，將票數合計存進 DB 並刪除 redis 資料
 						// 在此為判斷是否無資料(代表已存進 DB 避免重複存資料)，應該在資料庫設計時多一個欄位紀錄活動狀態(未開始、進行中、已結束)
 						String eventJedisKey = new StringBuilder("wish:").append(wish.getWish_no()).toString();
 						Map<String, String> eventMap = jedis.hgetAll(eventJedisKey);
@@ -83,8 +91,8 @@ public class WishingListener implements ServletContextListener {
 				}
 			}
     	};
-    	Calendar cal = new GregorianCalendar(2022, Calendar.JULY, 1, 0, 0, 0);
-    	timer.scheduleAtFixedRate(task, cal.getTime(), 12*60*60*1000);
+    	Calendar cal = new GregorianCalendar(2022, Calendar.JULY, 2, 0, 0, 0);
+    	timer.scheduleAtFixedRate(task, cal.getTime(), 12 * 60 * 60 * 1000);
     }
 	
     public void contextDestroyed(ServletContextEvent sce)  { 
@@ -92,6 +100,6 @@ public class WishingListener implements ServletContextListener {
     	// 關閉 Redis Pool
     	JedisPoolUtil.shutdownJedisPool(); 
     	// 關閉 Timer
-    	timer.cancel(); // 要關嗎??
+    	timer.cancel(); 
     }
 }

@@ -77,11 +77,11 @@ public class WishingListJDBCDAO implements WishingListDAO_interface{
 			
 			ps.executeUpdate();
 			
-			// 同時新增至 redis 以利投票進行中可撈 redis 資料
-			Jedis jedis = JedisPoolUtil.getJedisPool().getResource();
-			String jedisKey = new StringBuilder("wish:").append(wishingListVO.getWish_no()).toString();
-			jedis.hset(jedisKey, wishingListVO.getMv_id().toString(), wishingListVO.getMvVO().getMvName());
-			jedis.close();
+			// 同時新增至 redis 以利投票進行中可撈 redis 資料  -> 改排程器
+//			Jedis jedis = JedisPoolUtil.getJedisPool().getResource();
+//			String jedisKey = new StringBuilder("wish:").append(wishingListVO.getWish_no()).toString();
+//			jedis.hset(jedisKey, wishingListVO.getMv_id().toString(), wishingListVO.getMvVO().getMvName());
+//			jedis.close();
 			
 		} catch (SQLException e) {
 			try {

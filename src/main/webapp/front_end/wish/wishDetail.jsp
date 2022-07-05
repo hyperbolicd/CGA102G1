@@ -13,7 +13,7 @@
 	<!-- 許願池 -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/front_end/wish/css/wishDetail.css">
 </head>
-<body>
+<body onload="connect();" onunload="disconnect();">
 	<div class="wrapper row1" style="height: 60px;">
 		<header id="header" class="clear">
 			<div id="hgroup">
@@ -112,5 +112,33 @@
 		</footer>
 	</div>
 	<script src="${pageContext.request.contextPath}/front_end/wish/js/voteWish.js"></script>
+	<script>
+		// web socket
+		let ws;
+		const self = 'memberId${memberVO.member_ID}';
+		const MyPoint = "/FreshWhenVote/" + self;
+		const host = window.location.host; // localhost:8081
+		const path = window.location.pathname; // path of this page
+		const webCtx = path.substring(0, path.indexOf('/', 1)); // get project name
+		const endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+			 			// ws://    localhost:8081         /Project /endpoint/${param}
+						// ws 通訊協定
+		function connect(){
+			ws = new WebSocket(endPointURL);
+			
+			ws.onopen = function() {}
+			
+			ws.onmessage = function(){
+				window.setTimeout(( () => location.reload() ), 500);
+			}
+			
+			ws.onclose = function(){}
+			
+			ws.onerr = function(){}
+		}
+						
+		function disconnect(){ ws.close();}
+		
+	</script>
 </body>
 </html>

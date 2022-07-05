@@ -1,6 +1,7 @@
 package com.filters;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,32 +33,46 @@ public class EmpPrivilegeFilter extends HttpFilter {
 		EmpAccountVO empAccount = (EmpAccountVO)request.getSession().getAttribute("empAccount");
 		
 		// login 頁面 & css & js pass
-		if(uri.endsWith("empLogin.jsp") || uri.endsWith(".css") || uri.endsWith(".js") || uri.endsWith("logo2noline.jpg")) {
+		if(uri.endsWith("empLogin.jsp") || uri.endsWith(".css") || uri.endsWith(".js") || uri.endsWith(".jpg") || uri.endsWith(".png")) {
 			chain.doFilter(request, response);	
 			return;
 		} 
 		
-		// 存放可前往的頁面並放入首頁
+		// 存放不可前往的頁面
 		Set<String> priUri = new HashSet<String>();	
-		priUri.add(request.getContextPath() + "/back_end/empIndex.jsp");
 		
 		if(empAccount != null) { // 避免未登入時空指標
 			// 查詢權限號碼
 			List<EmpPrivilegeVO> priList = new EmpPrivilegeService().getOneEmpPrivileges(empAccount.getEmp_no());
-			EmpFunctionService empFcSvc = new EmpFunctionService();
-			// 將權限號碼對應的網址放入 HashSet
+			// 將權限編號單獨拉出來
+			List<Integer> canAccess = new ArrayList<Integer>();
 			for(EmpPrivilegeVO pri: priList) {
-				String accessUri = request.getContextPath() + empFcSvc.getOneFunc(pri.getFc_no()).getFc_description();
+				canAccess.add(pri.getFc_no());
+			}
+			System.out.println(canAccess);
+			// 與既有權限 1~21 的差異加入"無授權"
+			List<Integer> canNotAccess = new ArrayList<Integer>();
+			for(int i = 1; i <= 21; i++) {
+				if(!canAccess.contains(i)) {
+					canNotAccess.add(i);
+				}
+			}
+			System.out.println(canNotAccess);
+			// 將權限號碼對應的網址放入 HashSet
+			for(Integer numNot: canNotAccess) {
+				EmpFunctionService empFcSvc = new EmpFunctionService();
+				String accessUri = request.getContextPath() + empFcSvc.getOneFunc(numNot).getFc_description();
 				priUri.add(accessUri);
+				System.out.println(accessUri);
 			}
 		} else {
 			System.out.println("尚未登入");
 		}
 		
 		// 判斷可前往的頁面是否包含自己
-		if(priUri.contains(uri)) { // 有包含，放行
+		if(!priUri.contains(uri)) { // 有包含，導回首頁 
 			chain.doFilter(request, response);	
-		} else { // 未包含，導回首頁
+		} else { // 未包含，放行
 			response.sendRedirect(request.getContextPath() + "/back_end/empIndex.jsp");
 		}
 	}
