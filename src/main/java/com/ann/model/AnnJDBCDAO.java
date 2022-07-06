@@ -25,6 +25,12 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 	private static final String GET_ALL_STMT = 
 			"select ann_no, ann_date, ann_title, ann_content, ann_picture"
 			+ " from movietheater.announcement order by ann_no";
+	
+	/* 全部查詢 */
+	private static final String GET_ALL_ANNFRONT = 
+			"select ann_no, ann_date, ann_title, ann_content, ann_picture"
+			+ " from movietheater.announcement order by ann_no";
+	
 	/* 修改 */
 	private static final String UPDATE = 
 			"update movietheater.announcement set"
@@ -188,7 +194,7 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 				annVO.setAnn_no(rs.getInt("ann_no"));
 				annVO.setAnn_date(rs.getDate("ann_date"));
 				annVO.setAnn_title(rs.getString("ann_title"));
-				annVO.setAnn_content(rs.getString("editor1"));
+				annVO.setAnn_content(rs.getString("ann_content"));
 				annVO.setAnn_picture(rs.getBytes("ann_picture"));
 			}
 
@@ -246,7 +252,7 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 				annVO.setAnn_no(rs.getInt("ann_no"));
 				annVO.setAnn_date(rs.getDate("ann_date"));
 				annVO.setAnn_title(rs.getString("ann_title"));
-				annVO.setAnn_content(rs.getString("editor1"));
+				annVO.setAnn_content(rs.getString("ann_content"));
 				annVO.setAnn_picture(rs.getBytes("ann_picture"));
 				list.add(annVO); // Store the row in the list
 			}
@@ -288,6 +294,69 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 		return list;
 	}
 
+	@Override
+	public List<AnnVO> getAnnfront() {
+		List<AnnVO> list = new ArrayList<AnnVO>();
+		AnnVO annVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ALL_ANNFRONT);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// AnnVo 也稱為 Domain objects
+				annVO = new AnnVO();
+				annVO.setAnn_no(rs.getInt("ann_no"));
+				annVO.setAnn_date(rs.getDate("ann_date"));
+				annVO.setAnn_title(rs.getString("ann_title"));
+				annVO.setAnn_content(rs.getString("ann_content"));
+				annVO.setAnn_picture(rs.getBytes("ann_picture"));
+				list.add(annVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. "
+//					+ e.getMessage());
+			e.printStackTrace();
+			// Handle any SQL errors
+		} catch (SQLException e) {
+//			throw new RuntimeException("A database error occured. "
+//					+ e.getMessage());
+			e.printStackTrace();
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return list;
+	}
+	
 	public static void main(String[] args) {
 
 		AnnJDBCDAO dao = new AnnJDBCDAO();
@@ -320,16 +389,16 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 //			System.out.println("---------------------");
 
 		// 全部查詢 OK
-		List<AnnVO> list = dao.getAll();
-		for (AnnVO aAnn : list) {
-			System.out.print(aAnn.getAnn_no() + ",");
-			System.out.print(aAnn.getAnn_date() + ",");
-			System.out.print(aAnn.getAnn_title() + ",");
-			System.out.print(aAnn.getAnn_content() + ",");
-			System.out.print(aAnn.getAnn_picture() + ",");
-			System.out.println();
-			}
-			
+//		List<AnnVO> list = dao.getAll();
+//		for (AnnVO aAnn : list) {
+//			System.out.print(aAnn.getAnn_no() + ",");
+//			System.out.print(aAnn.getAnn_date() + ",");
+//			System.out.print(aAnn.getAnn_title() + ",");
+//			System.out.print(aAnn.getAnn_content() + ",");
+//			System.out.print(aAnn.getAnn_picture() + ",");
+//			System.out.println();
+//			}
+//			
 		// 刪除
 //		dao.delete(5);
 

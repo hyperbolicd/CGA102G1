@@ -3,6 +3,8 @@ package com.faq.model;
 import java.sql.Date;
 import java.util.List;
 
+import com.movie.model.MovieVO;
+
 public class FaqService {
 
 	private FaqDAO_interface dao;
@@ -48,6 +50,26 @@ public class FaqService {
 	public List<FaqVO> getAll() {
 		return dao.getAll();
 	}
+	
+	public List<FaqVO> getFaqClass1(){ //會員相關問題
+		
+		return dao.getFaqClass1(null);
+	};
+	
+	public List<FaqVO> getFaqClass2(){ //影城相關問題
+		
+		return dao.getFaqClass2(null);
+	};
+	
+	public List<FaqVO> getFaqClass3(){ //電影上映相關問題
+		
+		return dao.getFaqClass3(null);
+	};
+	
+	public List<FaqVO> getFaqClass4(){ //其他問題
+		
+		return dao.getFaqClass4(null);
+	};
 }
 
 
