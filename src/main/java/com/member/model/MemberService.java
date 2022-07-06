@@ -3,7 +3,7 @@ package com.member.model;
 import java.util.List;
 import java.util.Random;
 
-import MemberSendEmail.MailService;
+//import MemberSendEmail.MailService;
 
 public class MemberService {
 
@@ -129,8 +129,8 @@ public class MemberService {
 		String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" + " (已經啟用)"
 				+ "http://localhost:8081/CGA102G1/front_end/login/login.jsp";
 
-		MailService mailService = new MailService();
-		mailService.sendMail(to, subject, messageText);
+//		MailService mailService = new MailService();
+//		mailService.sendMail(to, subject, messageText);
 	}
 
 	// wish

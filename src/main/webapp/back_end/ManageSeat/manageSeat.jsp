@@ -37,7 +37,7 @@
             	<div class="" style="margin-bottom:10px">
                 <a href="${pageContext.request.contextPath}/back_end/ManageHall/manageHall.jsp" class="btn btn-info"  >影廳資訊管理</a>
             	</div>
-                <table class="table table-hover table-dark" id="table1">
+                <table class="table table-hover table-bordered single-ellipsis" id="table1">
                   <thead>
                     <tr>
                      <th>影廳編號</th>
@@ -50,8 +50,7 @@
                     </tr>
                   </thead>
                   <tbody>
-				  <%@ include file="page1.file" %>
-					<c:forEach var="HallVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+					<c:forEach var="HallVO" items="${list}">
 					<tr>
 					<td>${HallVO.hlId}</td>
 					<td>${HallVO.hlName}</td>
@@ -64,7 +63,7 @@
 						<td>IMAX</td>
 					</c:if>
 					<td>${HallVO.hlSeatCount}</td>
-					<td>
+					<td >
 						<form METHOD="post" action="${pageContext.request.contextPath}/HallServlet.do">
 							<input type="submit" value="原始座位"class="btn btn-danger"> 
 							<input type="hidden"name="hlId" value="${HallVO.hlId}"> 
@@ -81,7 +80,6 @@
 
 					</tbody>
                 </table>
-                <%@ include file="page2.file" %>
               </div>
         </div>
     </main>

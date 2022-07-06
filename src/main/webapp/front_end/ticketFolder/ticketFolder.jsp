@@ -35,6 +35,7 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/front_end/ticketFolder/ticketFolder.css">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -54,14 +55,10 @@
       }).scroll();
     });
   </script>
-
-<header>
-
-<%@ include file="/front_end/header.jsp"%>
-<%@ include file="/front_end/header_css.jsp"%>
-
-</header>
-
+  <header>
+  <%@ include file="/front_end/header.jsp"%>
+  <%@ include file="/front_end/header_css.jsp"%>
+  </header>
  <div class="order_container">
  	<div class="mytabs">
         <input type="radio" id="show" name="mytabs" checked="checked">
