@@ -138,3 +138,10 @@ nav ul{margin:0; padding:0; list-style:none;}
   /* 參數為水平,垂直 */
   cursor: pointer;
 }
+
+/*--------------------------------- 購物車 ------------------------------------------*/
+#cart_btn{
+	 background:transparent;
+	border: none;
+	margin-right: 20px;
+}

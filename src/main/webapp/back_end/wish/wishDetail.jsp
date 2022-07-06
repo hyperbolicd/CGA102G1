@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,13 +26,13 @@
         <div id="main">
             <h1>許願池 - ${wishListVOs[0].wishVO.wish_name}</h1>
             <button id="return"><a href="${pageContext.request.contextPath}/back_end/wish/wishPond.jsp">返回</a></button>
-            <h2>投票期間: <fmt:formatDate pattern="yyyy-MM-dd" value="${wishListVOs[0].wishVO.wish_start}" /> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${wishListVOs[0].wishVO.wish_end}" /></h2>
+            <h2>投票期間: ${wishListVOs[0].wishVO.wish_start} ~ ${wishListVOs[0].wishVO.wish_end}</h2>
             <h2>投票結果</h2>
             <div id="vote">
 	            <c:forEach var="wishListVO" items="${wishListVOs}">
 					<div>
 				    	<h3 <c:if test="${wishListVO.mvVO.mvId == top_one}">style="color: red;"</c:if>>選項: ${wishListVO.mvVO.mvName}</h3>
-				        <div class="color" style='height: 20px; width: ${wishListVO.wish_count * 10}px; background-color: rgb(160, 188, 194); <c:if test="${wishListVO.mvVO.mvId == top_one}"> background-color: rgb(0, 188, 194); </c:if>'>
+				        <div class="color" style='height: 20px; width: ${wishListVO.wish_count * 10}px; background-color: rgb(160, 188, 194); <c:if test="${wishListVO.mvVO.mvId == top_one}"> background-color: rgb(71, 104, 112); </c:if>'>
 				        	<h5 <c:if test="${wishListVO.mvVO.mvId == top_one}">style="color: white;"</c:if>>票數: ${wishListVO.wish_count}</h5>
 				        </div>
 				    </div>

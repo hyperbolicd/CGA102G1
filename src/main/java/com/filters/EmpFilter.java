@@ -10,9 +10,11 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//@WebFilter("/back_end/*")
+@WebFilter("/back_end/*")
 public class EmpFilter extends HttpFilter {
 	
+	private static final long serialVersionUID = 1L;
+
 	public void destroy() {
 	}
 

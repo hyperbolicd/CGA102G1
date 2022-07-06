@@ -11,7 +11,8 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/css/layout.css" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+ 
+ <%@ include file="/front_end/header.jsp"%>
 
   <!-- 輪播圖片 css -->
   <style type="text/css">
@@ -81,6 +82,9 @@
   }
   .arrow:hover{background:#444;}
   #banner:hover .arrow{display:block;}
+  
+
+  
   </style>
 
 </head>
@@ -103,82 +107,6 @@
       }).scroll();
     });
   </script>
-
-  <div class="wrapper row1" style="height:60px;">
-    <header id="header" class="clear">
-      <div id="hgroup">
-        <img src="<%=request.getContextPath()%>/front_end/index/images/demo/logo6.png" width="200" height="60" alt="">
-      </div>
-
-      <div class="dropdown" style=" margin: 0;padding: 0;list-style: none; ">
-        <button class="dropbtn">會員專區</button>
-        <div class="dropdown-content">
-          <a href="${pageContext.request.contextPath}/front_end/membercentre/membercentre.jsp">會員中心</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropbtn">活動公告</button>
-        <div class="dropdown-content">
-          <a href="#">影城公告</a>
-          <a href="#">影城好康</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropbtn">Q & A專區</button>
-        <div class="dropdown-content">
-          <a href="#">常見問題</a>
-          <a href="#">客服信箱</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropbtn">影城專區</button>
-        <div class="dropdown-content">
-          <a href="#">影城介紹</a>
-          <a href="#">影城地點</a>
-          <a href="#">票價資訊</a>
-          <a href="#">餐飲資訊</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <a href="${pageContext.request.contextPath}/front_end/movieDetail/movie_detail.jsp">
-        <button class="dropbtn">電影資訊</button>
-        </a>
-        <div class="dropdown-content">
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropbtn">商城購物</button>
-        <div class="dropdown-content">
-          <a href="${pageContext.request.contextPath}/front_end/merchandise/merchandise.jsp">商品瀏覽</a>
-          <a href="#">購買退貨</a>
-        </div>
-      </div>
-    	
-
- 
-<!--       <button class="logout">會員登出</button> -->
- 	<div class="dropdown">
-		<c:if test="${empty sessionScope.memberVO.member_ID}">
-			<a id="logIn" href="${pageContext.request.contextPath}/front_end/login/login.jsp">登入</a>
-		</c:if>
-		<c:if test="${not empty sessionScope.memberVO.member_ID}">
-			<div style="display:flex">
-				<p style="margin-right:20px">${memberVO.member_Name}&nbsp;&nbsp;Hello</p>
-				<a href="<%=request.getContextPath()%>/member.do?action=logout" type="button" id="logOut">登出</a>
-			</div>
-		</c:if>
-	</div>
-    
-
-    </header>
-  </div>
-
-  
 
     <div id="banner">    
         <!-- 輪播圖片 -->
@@ -203,10 +131,8 @@
             <span class="slider_right"></span>
         </div>    
     </div>
-<!--     <div id="login"> -->
-<%-- 	   <a href="${pageContext.request.contextPath}/front_end/membercentre/membercentre.jsp">會員修改</a> --%>
-<%-- 	   <input type = "text" value="${memberVO.member_ID}"> --%>
-<!--     </div> -->
+
+
 	    <script type="text/javascript">
     
         //輪播圖

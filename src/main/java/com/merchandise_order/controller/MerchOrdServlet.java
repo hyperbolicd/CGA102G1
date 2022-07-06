@@ -275,7 +275,7 @@ public class MerchOrdServlet extends HttpServlet {
 			Integer memberID = 0;
 			try {
 			memberID = Integer.valueOf(map.get("memberID")[0]);
-			MemberVO memberVo = memberSvc.getOneEmp(memberID);
+			MemberVO memberVo = memberSvc.getOneMem(memberID);
 			if(memberVo == null || memberID == 0) {
 				errorMsgs.put("memberID", "查無會員!");
 			}

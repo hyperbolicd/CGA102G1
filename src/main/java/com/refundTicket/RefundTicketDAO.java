@@ -22,10 +22,10 @@ public class RefundTicketDAO implements RefundTicket_interface {
 			"SELECT TK_TYPE FROM tk_inf WHERE TK_TYPE_ID = ?";
 	
 	public static final String GET_ACT_TITLE=
-			"SELECT ACT_TITLE FROM activity WHERE ACT_ID = ?;";
+			"SELECT ACT_SUBTITLE FROM activity WHERE ACT_ID = ?";
 	
 	public static final String UPDATE_ONE_DT=
-			"UPDATE tk_ord_dt SET STATE = '2' WHERE TK_DT_ID = ?;";
+			"UPDATE tk_ord_dt SET STATE = ? WHERE TK_DT_ID = ?";
 	
 	@Override
 	public List<TkOrdDtVO> getDtByOrd(Long tkOrdID) {
@@ -196,7 +196,7 @@ public class RefundTicketDAO implements RefundTicket_interface {
 	}
 	
 	@Override
-	public void updateOneDt(Long tkDtID) {
+	public void updateOneDt(Integer seatState,Long tkDtID) {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -205,7 +205,8 @@ public class RefundTicketDAO implements RefundTicket_interface {
 		try {
 			conn = JDBCUtil.getConnection();
 			pstmt = conn.prepareStatement(UPDATE_ONE_DT);
-			pstmt.setLong(1, tkDtID);
+			pstmt.setInt(1, seatState);
+			pstmt.setLong(2, tkDtID);
 			pstmt.executeUpdate();
 			
 			

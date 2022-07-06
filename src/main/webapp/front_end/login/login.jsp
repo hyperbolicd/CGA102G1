@@ -11,6 +11,7 @@
   <title>HireMe</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/css/layout.css" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 
   
  
    <jsp:include page="/front_end/header.jsp" />
@@ -23,7 +24,7 @@
             <form method="post" ACTION="${pageContext.request.contextPath}/member.do">
             <div class="txt_field">
 <!--                 <input type="text" required> -->
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="usrEmail" name="email" required>
                 <span></span>
                 <label>Email</label>
             </div>
@@ -33,7 +34,7 @@
                 <span></span>
                 <label>Password</label>
             </div>
-            <div class="pass">Forgot Password?</div>
+            <div class="pass" id="forgetBtn">Forgot Password?</div>
             <input type="submit" value="Login">
             <div class="signup_link" id=forget>
                 沒有帳號?<a href="${pageContext.request.contextPath}/front_end/register/register.jsp">註冊</a>
@@ -48,23 +49,24 @@
 <!-- <script src="/CGA102G1/front_end/login/js/forget.jsp"></script> -->
 		<script>
 
-        
-// 		const forgetBtn = document.addEventListener('click', () => {
-// 			alert("123");
-// 			$.ajax({
-// 		            type: 'GET',
-// 		            url: '/CGA102G1/member/password/forget',
-// 		            dataType: 'json',
-// 		            async: false,
-// 		            success: function (response) {
-		                
+        let forgetBtn = document.getElementById('forgetBtn');
+		forgetBtn.addEventListener('click', () => {
+			//取得用戶輸入Email
+			let usrEmail = document.getElementById("usrEmail").value;
+			$.ajax({
+		            type: 'GET',
+		            url: '/CGA102G1/member/password/forget',
+		            data: {'usrEmail': usrEmail},
+		            dataType: 'json',
+		            async: false,
+		            success: function (response) {
 						
-// 		            },
-// 		            error: function (thrownError) {
-// 		                console.log(thrownError);
-// 		            }
-// 		        });
-// 		});
+		            },
+		            error: function (thrownError) {
+		                console.log(thrownError);
+		            }
+		        });
+		});
 		</script>
     </body>
 </html>

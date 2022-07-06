@@ -7,36 +7,34 @@ public class WishingListService {
 	
 	public WishingListService() {
 		dao = new WishingListJDBCDAO();
-		// 連線池版
-//		dao = new WishingPondDAO();
 	}
 	
-	public WishingListVO addWishingPond(Integer wish_no, Integer mv_id) {
-		WishingListVO wishingPondVO = new WishingListVO();
-		wishingPondVO.setWish_no(wish_no);
-		wishingPondVO.setMv_id(mv_id);
-		dao.insert(wishingPondVO);
+	public WishingListVO addWishingList(Integer wish_no, Integer mv_id) {
+		WishingListVO wishingListVO = new WishingListVO();
+		wishingListVO.setWish_no(wish_no);
+		wishingListVO.setMv_id(mv_id);
+		dao.insert(wishingListVO);
 		
-		return wishingPondVO;
+		return wishingListVO;
 	}
 	
-	public void addWishingPond(WishingListVO wishingPondVO) {
-		dao.insert(wishingPondVO);
+	public void addWishingList(WishingListVO wishingListVO) {
+		dao.insert(wishingListVO);
+	}
+	// 好像多寫了
+//	public void updateWishingList(Integer wish_no, Integer mv_id, Integer wish_count) {
+//		WishingListVO wishingListVO = new WishingListVO();
+//		wishingListVO.setWish_no(wish_no);
+//		wishingListVO.setMv_id(mv_id);
+//		wishingListVO.setWish_count(wish_count);
+//		dao.update(wishingListVO);
+//	}
+	
+	public void updateWishingList(WishingListVO wishingListVO) {
+		dao.update(wishingListVO);
 	}
 	
-	public void updateWishingPond(Integer wish_no, Integer mv_id, Integer wish_count) {
-		WishingListVO wishingPondVO = new WishingListVO();
-		wishingPondVO.setWish_no(wish_no);
-		wishingPondVO.setMv_id(mv_id);
-		wishingPondVO.setWish_count(wish_count);
-		dao.update(wishingPondVO);
-	}
-	
-	public void updateWishingPond(WishingListVO wishingPondVO) {
-		dao.update(wishingPondVO);
-	}
-	
-	public void deleteWishingPond(Integer wish_no, Integer mv_id) {
+	public void deleteWishingList(Integer wish_no, Integer mv_id) {
 		dao.delete(wish_no, mv_id);
 	}
 	

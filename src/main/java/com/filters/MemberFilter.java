@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet Filter implementation class MemberFilter
  */
-//@WebFilter("/*")
+//@WebFilter("/front_end/membercentre/*")
 
 public class MemberFilter extends HttpFilter implements Filter {
 	

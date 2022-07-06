@@ -3,14 +3,15 @@
 <html lang="en" dir="ltr">
 
 <head>
-  <meta charset="UTF-8">
-  <!---<title> Responsive Registration Form | CodingLab </title>--->
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/register/css/register.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">	
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<meta charset="UTF-8">
+<!---<title> Responsive Registration Form | CodingLab </title>--->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/front_end/register/css/register.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-  
-  <script type="text/javascript">
+
+<script type="text/javascript">
 
       function checkRegister() {
         var memberName = $("#memberName").val();
@@ -19,9 +20,6 @@
         var memberPassword = $("#memberPassword").val();
         var memberAddress = $("#memberAddress").val();
         var memberPassword2 = $("#memberPassword2").val();
-        // if(memberName == "" || memberEmail == "" || memberPhone == "" || memberPassword == "" || memberAddress == "" || memberPassword2 == ""){
-        //   alert("基本資料填寫未完整");
-        // }
         var str  = '';
         if(memberName == "" ){
          str+="尚未填寫會員名稱,";
@@ -38,84 +36,95 @@
 
         if (str !=="")
         alert(str);      
-      }        
+      }
+        
   </script>
+
+
 </head>
 
 
 <body>
-  <div class="container" name="register" id="register">
-    <div class="title">註冊</div>
-    <div class="content">
-      <form method="post" ACTION="${pageContext.request.contextPath}/member.do"enctype="multipart/form-data">
-        <div class="user-details">
-          <div class="input-box">
-          <div style="display:flex">
-            <span class="username">會員名稱</span>  
-            <div style="color:red">${errorMsgs.member_Name}</div>
-          </div>
-            <input type="text" placeholder="請輸入您的使用者名稱" id="member_Name" name="member_Name" >
-         	
-          </div>
-          
-          <div class="input-box">
-           <div style="display:flex">
-            <span class="errMsgs">電子信箱</span>
-            <div style="color:red">${errorMsgs.member_Email}</div>
-             </div>
-            <input type="text" placeholder="請輸入您的電子信箱" id="member_Email" name="member_Email" >
-          </div>
-          
-          <div class="input-box">
-           <div style="display:flex">
-            <span>會員電話</span>
-            <div class="errMsgs" style="color:red">${errorMsgs.member_Phone}</div>
-            </div>
-            <input type="text" placeholder="請輸入您的會員電話" id="member_Phone" name="member_Phone" >
-          </div>
-          
-          <div class="input-box">
-          <div style="display:flex">
-            <span class=>會員密碼</span>
-            <div class="errMsgs" style="color:red">${errorMsgs.member_Password}</div>
-            </div>
-            <input type="password" placeholder="請輸入您的密碼" id="member_Password" name="member_Password"  >
-          </div>
+	<div class="container" name="register" id="register">
+		<div class="title">註冊</div>
+		<div class="content">
+			<form method="post"
+				ACTION="${pageContext.request.contextPath}/member.do"
+				enctype="multipart/form-data">
+				<div class="user-details">
+					<div class="input-box">
+						<div style="display: flex">
+							<span class="username">會員名稱</span>
+							<div style="color: red">${errorMsgs.member_Name}</div>
+						</div>
+						<input type="text" placeholder="請輸入您的使用者名稱" id="member_Name"
+							name="member_Name">
+
+					</div>
+
+					<div class="input-box">
+						<div style="display: flex">
+							<span class="errMsgs">電子信箱</span>
+							<div style="color: red">${errorMsgs.member_Email}</div>
+						</div>
+						<input type="text" placeholder="請輸入您的電子信箱" id="member_Email"
+							name="member_Email">
+					</div>
+
+					<div class="input-box">
+						<div style="display: flex">
+							<span>會員電話</span>
+							<div class="errMsgs" style="color: red">${errorMsgs.member_Phone}</div>
+						</div>
+						<input type="text" placeholder="請輸入您的會員電話" id="member_Phone"
+							name="member_Phone">
+					</div>
+
+					<div class="input-box">
+						<div style="display: flex">
+							<span class=>會員密碼</span>
+							<div class="errMsgs" style="color: red">${errorMsgs.member_Password}</div>
+						</div>
+						<input type="password" placeholder="請輸入您的密碼" id="member_Password"
+							name="member_Password">
+					</div>
 
 
-          <div class="input-box">
-             <div style="display:flex">
-             <span class="address">會員地址</span>
-            <div style="color:red">${errorMsgs.member_Address}</div>
-            </div>
-            <input type="text" placeholder="請輸入您的會員地址"  id="member_Address" name="member_Address" >
-          </div>
+					<div class="input-box">
+						<div style="display: flex">
+							<span class="address">會員地址</span>
+							<div style="color: red">${errorMsgs.member_Address}</div>
+						</div>
+						<input type="text" placeholder="請輸入您的會員地址" id="member_Address"
+							name="member_Address">
+					</div>
 
-          <div class="input-box">
-          <div style="display:flex">
-            <span class="details">再次確認密碼</span>
-            <div style="color:red">${errorMsgs.member_Password}</div>
-             </div>
-            <input type="password" placeholder="再次確認密碼" id="member_Password2" name="member_Password2" >
-          </div>
+					<div class="input-box">
+						<div style="display: flex">
+							<span class="details">再次確認密碼</span>
+							<div style="color: red">${errorMsgs.member_Password}</div>
+						</div>
+						<input type="password" placeholder="再次確認密碼" id="member_Password2"
+							name="member_Password2">
+					</div>
 
 
 
-          <div class="input">
-            <span class="details">會員照片</span>
-            <div class="errMsgs"></div>
-            <input type="file" id="file-uploader" name="myUpfile">
-          </div>
+					<div class="input">
+						<span class="details">會員照片</span>
+						<div class="errMsgs"></div>
+						<input type="file" id="file-uploader" name="myUpfile">
+					</div>
 
-        </div>
-        
-        <div class="button">
-          <input type="submit" id="" value="註冊" onclick="checkRegister();">
-          <input type="hidden" name="action" value="insert">
-        </div>
-      </form>
-    </div>
-  </div>
+				</div>
+
+				<div class="button">
+					<input type="submit" id="" value="註冊" onclick="checkRegister();">
+					<input type="hidden" name="action" value="insert">
+				</div>
+			</form>
+		</div>
+	</div>
 
 </body>
 

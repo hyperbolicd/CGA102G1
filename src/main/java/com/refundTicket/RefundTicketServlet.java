@@ -86,9 +86,11 @@ public class RefundTicketServlet extends HttpServlet {
 			res.getWriter().write(gson.toJson(map));
 			
 		}
+		
+		// FOR 退票使用
 		if("updateOneDt".equals(action)) {
 			Long tkDtID = Long.valueOf(req.getParameter("tkDtID"));
-			Integer seatIndex = Integer.valueOf(req.getParameter("seatIndex"));
+			Integer seatState = Integer.valueOf(req.getParameter("seatState"));
 			Long tkOrdID = Long.valueOf(req.getParameter("tkOrdID"));
 			String seatStr = req.getParameter("seatStr");
 			// 獲取這張訂單內的場次座位字串
@@ -97,16 +99,11 @@ public class RefundTicketServlet extends HttpServlet {
 						
 			ShowSeatService ssSvc = new ShowSeatService();
 			
-			System.out.println(tkDtID);
-			System.out.println(seatIndex);
-			System.out.println(tkOrdID);
-			System.out.println(seatStr);
-			
 			// Update場次座位字串
 			ssSvc.updateShowSeat(seatStr, ordVO.getShID());
 			// Update訂單明細狀態
 			RefundTicketService rtSvc = new RefundTicketService();
-			rtSvc.updateOneDt(tkDtID);
+			rtSvc.updateOneDt(seatState,tkDtID);
 			
 			Gson gson = new Gson();
 			res.setContentType("text/json; charset=UTF-8");

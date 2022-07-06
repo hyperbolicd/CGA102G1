@@ -61,10 +61,10 @@ th.tb2{
     width:100px;
 }
 th.tb3{
-    width:100px;
+    width:150px;
 }
 th.tb4{
-    width:400px;
+    width:450px;
 }
 
 /* 新增按鈕 */
@@ -95,14 +95,14 @@ button.add:active{
     width: calc(100% - 100px);
     height: calc(100vh - 40px - 52px);
     background-color: transparent;
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 100px;
 }
 
 #dataInput{
-    position: absolute;
-    top: 100px;
+    position: fixed;
+    top: 10vh;
     left: 50%;
     transform: translate(-50%);
     background-color: white;

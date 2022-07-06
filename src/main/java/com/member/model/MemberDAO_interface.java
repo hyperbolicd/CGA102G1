@@ -12,4 +12,9 @@ public interface MemberDAO_interface {
     public List<MemberVO> getAll();						//查詢(全部)
     //萬用複合查詢(傳入參數型態Map)(回傳 List)
 //  public List<EmpVO> getAll(Map<String, String[]> map); 
+    
+ // wish
+ 	public void updateWishTicket(Integer member_id, Integer wish_ticket);
+ 	
+ 	
 }

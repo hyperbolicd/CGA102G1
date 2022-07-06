@@ -49,3 +49,26 @@
 			<li>會員帳號管理</li>
 		</ul></li>
 </ul>
+<script>
+	const privilege = [
+		<%
+			com.emp_account.model.EmpAccountVO eVO = (com.emp_account.model.EmpAccountVO)session.getAttribute("empAccount");
+			// 取出員工權限
+			if(eVO != null){
+				com.emp_privilege.model.EmpPrivilegeService empPriSvc = new com.emp_privilege.model.EmpPrivilegeService();
+				java.util.List<com.emp_privilege.model.EmpPrivilegeVO> empPriVOs = empPriSvc.getOneEmpPrivileges(eVO.getEmp_no());
+				for(com.emp_privilege.model.EmpPrivilegeVO empPriVO: empPriVOs){
+					out.print("'" + empPriVO.getFcName() + "', ");
+				}
+			}
+		%>
+	];
+	// 如果沒有該權限就隱藏側邊欄
+	const lis = document.querySelectorAll('ul>li>ul>li');
+	for(let li of lis){
+		if(!privilege.includes(li.innerText)){
+			console.log(li.innerText);
+			li.style.display = 'none';
+		}
+	}
+</script>

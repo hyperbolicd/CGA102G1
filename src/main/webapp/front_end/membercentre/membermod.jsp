@@ -15,6 +15,7 @@
 	href="https://fontawesome.com/v5/icons/edit?s=solid">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front_end/membercentre/css/membercentre.css" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
  <%@ include file="/front_end/header.jsp"%>
  <%@ include file="/front_end/header_css.jsp"%>
@@ -121,11 +122,11 @@ body {
 			<nav>
 				<a href="#"> <i class="fa fa-edit" aria-hidden="true"></i>
 					會員修改資料
-				</a> <a href="#"> <i class="fa fa-gavel" aria-hidden="true"></i> 票卷匣
 				</a> <a href="#"> <i class="fa fa-object-group" aria-hidden="true"></i>
 					許願池
 				</a> <a href="#"> <i class="fa fa-clone" aria-hidden="true"></i> 評論區
 				</a>
+				 <a href="#"> <i class="fa fa-gavel" aria-hidden="true"></i> 訂單明細</a>
 			</nav>
 		</div>
 		<!-- <div id="content">
@@ -193,6 +194,7 @@ body {
 									<input type="submit" id="" value="確認送出"
 										onclick="checkRegister();"> <input type="hidden"
 										name="action" value="update">
+										
 								</div>
 							</td>
 
@@ -200,7 +202,6 @@ body {
 						</table>
 
 					</form>
-
 				</div>
 
 			</div>
@@ -217,12 +218,34 @@ body {
 			</p>
 		</footer>
 	</div>
+
 <script>
-let inputfile = document.getElementById('file-uploader');
-let img = document.getElementById('img');
-inputfile.addEventListener('change',function(e){
-    img.src = URL.createObjectURL(e.target.files[0]);
-})
+// let inputfile = document.getElementById('file-uploader');
+// let img = document.getElementById('img');
+// inputfile.addEventListener('change',function(e){
+//     img.src = URL.createObjectURL(e.target.files[0]);
+// })
+
+// let button = document.getElementById('button');
+// button.addEventListen('click'function(){
+// 	$.ajax({
+// 		url:,
+// 		data:,
+		
+		
+		
+// 		success:function(){
+// 			Swal.fire({
+//                 icon: 'success',
+//                 title: '',
+//                 text: '新增成功',
+//                 footer: ''
+//             })
+// 		}
+// 	})
+// })
+
+
 </script>
 </body>
 

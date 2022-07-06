@@ -94,7 +94,7 @@ public class MemberServlet extends HttpServlet {
 			Integer member_ID = Integer.valueOf(req.getParameter("member_ID").trim());
 				
 			String member_Password = req.getParameter("member_Password");
-			String member_PasswordReg = "^(?![a-zA-Z]+$)(?![0-9]+$)[0-9A-Za-z]{2,10}$"; // 至少八個字符，至少一個字母和一個數字：
+			String member_PasswordReg = "^(?![a-zA-Z]+$)(?![0-9]+$)[0-9A-Za-z]{2,8}$"; // 至少八個字符，至少一個字母和一個數字：
 			if (member_Password == null || member_Password.trim().length() == 0) {
 				errorMsgs.add("會員密碼: 請勿空白");
 			} else if (!member_Password.trim().matches(member_PasswordReg)) { // 以下練習正則(規)表示式(regular-expression)
@@ -278,6 +278,8 @@ public class MemberServlet extends HttpServlet {
 
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+			
+
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 			String member_Name = req.getParameter("member_Name");
@@ -306,7 +308,7 @@ public class MemberServlet extends HttpServlet {
 
 			String member_Password = req.getParameter("member_Password");
 			System.out.println(member_Password);
-			String member_PasswordReg = "^(?![a-zA-Z]+$)(?![0-9]+$)[0-9A-Za-z]{2,10}$"; // 至少八個字符，至少一個字母和一個數字：
+			String member_PasswordReg = "^(?![a-zA-Z]+$)(?![0-9]+$)[0-9A-Za-z]{2,8}$"; // 至少八個字符，至少一個字母和一個數字：
 			if (member_Password == null || member_Password.trim().length() == 0) {
 				errorMsgs.put("member_Password","：請勿空白");
 			} else if (!member_Password.trim().matches(member_PasswordReg)) { // 以下練習正則(規)表示式(regular-expression)

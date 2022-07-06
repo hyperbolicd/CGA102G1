@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.wishing_pond.model.*"%>
 <%@ page import="java.util.*"%>
 <!DOCTYPE html>
@@ -43,7 +42,7 @@
 <%--     <jsp:useBean id="wishSvc" scope="page" class="com.wishing_pond.model.WishingPondService"/> --%>
     <main>
         <div id="main">
-            <h1>許願池管理</h1> 
+            <h1>許願池管理</h1> ${lastUpdate }
             <button id="newWish"><a href="${pageContext.request.contextPath}/back_end/wish/newWish.jsp">新增</a></button>
     		<span style="color: red;">${errMsg.notFound}</span>
             <div id="multiSearch">
@@ -70,7 +69,6 @@
                     <select name="searchPeriod" id="searchPeriod">
                         <option value="WISH_START">以起始時間搜尋</option>
                         <option value="WISH_END">以結束時間搜尋</option>
-                        <option value="3">以包含時間搜尋</option> <!-- 再想想 -->
                     </select>
                     <input name="start_date" id="start_date" autocomplete="off"> ~ <input name="end_date" id="end_date" autocomplete="off">
                     <label for="searchName">名稱: </label>
@@ -94,8 +92,8 @@
 	                    <tr>
 	                        <td>${event.wish_no}</td>
 	                        <td>${event.wish_name}</td>
-	                        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${event.wish_start}" /></td>
-	                        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${event.wish_end}" /></td>
+	                        <td>${event.wish_start}</td>
+	                        <td>${event.wish_end}</td>
 	                        <td>${event.mvVO.mvName == null ? "結果尚未出爐" : event.mvVO.mvName}</td>
 	                        <td>
 	                        	<form action="${pageContext.request.contextPath}/wish/WishingPond.do" method="post">
