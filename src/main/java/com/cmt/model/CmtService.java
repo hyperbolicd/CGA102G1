@@ -3,6 +3,8 @@ package com.cmt.model;
 import java.sql.Timestamp;
 import java.util.*;
 
+import com.movie.model.*;
+
 public class CmtService {
 
 	private CmtDAO_interface dao;
@@ -56,6 +58,10 @@ public class CmtService {
 	public List<CmtVO> getCmtsByMV_ID(Integer MV_ID) {
 		return dao.getCmtsByMV_ID(MV_ID);
 	}
+	
+	public List<CmtVO> getCmtsBymember_ID(Integer member_ID) {
+		return dao.getCmtsBymember_ID(member_ID);
+	}
 
 	public void deleteCmt(Integer CM_ID) {
 		dao.delete(CM_ID);
@@ -63,6 +69,11 @@ public class CmtService {
 	
 	public void updateCmtState(Integer CM_ID,Integer CM_STATE) {
 		dao.updateCmtState(CM_ID, CM_STATE);
+	}
+	
+	public MovieVO updateMovieTT(MovieVO movieVO) {
+		dao.updateMovieTT(movieVO);
+		return movieVO;
 	}
 
 }

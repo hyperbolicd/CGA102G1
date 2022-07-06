@@ -7,7 +7,7 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Document</title>
+<title>場次查詢</title>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/showing/emp_all.css" />
 <link rel="stylesheet" type="text/css"
@@ -29,25 +29,18 @@
 
 <body>
 	<header>
-		<nav>
-			<div id="logo">
-				<img src="logo2noline.jpg" />
-			</div>
-			<h2>員工後台操作系統</h2>
-			<ul>
-				<li>登出</li>
-			</ul>
-		</nav>
-	</header>
-	<aside id="aside"></aside>
+        <%@ include file="/back_end/header_html.jsp"%>   
+    </header>
+    <aside id="aside">   
+    	<%@ include file="/back_end/aside_html.jsp"%>     
+    </aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
 		<div id="main">
 
-			<jsp:useBean id="showingSvc" scope="page"
-				class="com.showing.model.ShowingService" />
-			<jsp:useBean id="movieSvc" scope="page"
-				class="com.movie.model.MovieService" />
+			<jsp:useBean id="showingSvc" scope="page" class="com.showing.model.ShowingService" />
+			<jsp:useBean id="movieSvc" scope="page" class="com.movie.model.MovieService" />
+			<jsp:useBean id="hallSvc" scope="page" class="com.hall.model.HallService" />
 
 			<%-- 錯誤表列 --%>
 			<c:if test="${not empty errorMsgs}">
@@ -81,7 +74,7 @@
 						<select size="1" name="MV_ID">
 							<option value="">
 								<c:forEach var="movieVO" items="${movieSvc.all}">
-									<option value="${movieVO.mvId}">${movieVO.mvId}-[${movieVO.mvName}]
+									<option value="${movieVO.mvId}">${movieVO.mvId} 【${movieVO.mvName}】
 								</c:forEach>
 						</select><br>
 					</div>
@@ -91,7 +84,13 @@
 						<span>影廳編號: </span>
 					</div>
 					<div id="selectByHall_input">
-						<input type="text" name="HL_ID" value=""><br>
+<!-- 						<input type="text" name="HL_ID" value=""><br> -->
+							<select size="1" name="HL_ID">
+							<option value="">
+								<c:forEach var="hallVO" items="${hallSvc.all}">
+									<option value="${hallVO.hlId}">${hallVO.hlId} 【${hallVO.hlName}】
+								</c:forEach>
+						</select><br>
 					</div>
 				</div>
 				<div id="selectByDate" class="selectBy">

@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cmt.model.*;
+import com.movie.model.MovieService;
+import com.movie.model.MovieVO;
 
 @WebServlet("/cmt/cmt.do")
 public class CmtServlet extends HttpServlet {
@@ -263,7 +265,10 @@ public class CmtServlet extends HttpServlet {
 				errorMsgs.add("請輸入日期!");
 			}
 			
-
+			Integer mvTtCm = Integer.valueOf(req.getParameter("ttcmt"));
+			Integer mvTtStar = Integer.valueOf(req.getParameter("ttstar"));
+			
+			
 			CmtVO cmtVO = new CmtVO();
 			cmtVO.setMEMBER_ID(MEMBER_ID);
 			cmtVO.setMV_ID(MV_ID);
@@ -272,6 +277,13 @@ public class CmtServlet extends HttpServlet {
 			cmtVO.setCM_STAR(CM_STAR);
 			cmtVO.setCM_STATE(CM_STATE);
 			cmtVO.setCM_DATE(CM_DATE);
+			
+			MovieService movieSvc = new MovieService();
+			MovieVO movieVO = movieSvc.findByPrimaryKey(MV_ID);
+			movieVO.setMvTtCm(mvTtCm);
+			movieVO.setMvTtStar(mvTtStar);
+			
+			
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -285,8 +297,11 @@ public class CmtServlet extends HttpServlet {
 				/***************************2.開始新增資料***************************************/
 				CmtService cmtSvc = new CmtService();
 				cmtVO = cmtSvc.addCmt(MEMBER_ID, MV_ID, CM_TEXT, CM_LIKE, CM_STAR, CM_STATE, CM_DATE);
+				//修改電影的總評論及總評星
+				movieVO = cmtSvc.updateMovieTT(movieVO);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
+				req.setAttribute("movieVO", movieVO);
 				String url = "/front_end/movieDetail/movie_detail.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);				

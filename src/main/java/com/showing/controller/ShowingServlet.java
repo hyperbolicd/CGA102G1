@@ -195,6 +195,13 @@ public class ShowingServlet extends HttpServlet {
 				MovieService movieSvc = new MovieService();
 				if(requestURL.equals("/back_end/movie/listShowings_BymvId.jsp") || requestURL.equals("/back_end/movie/listAllMovie.jsp"))
 					req.setAttribute("listShowings_BymvId",movieSvc.getShowingsBymvId(mvId)); // 資料庫取出的list物件,存入request
+				
+				if(requestURL.equals("/back_end/showing/listShowings_ByCompositeQuery.jsp")){
+					HttpSession session = req.getSession();
+					Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
+					List<ShowingVO> list  = showingSvc.getAll(map);
+					req.setAttribute("listShowings_ByCompositeQuery",list); //  複合查詢, 資料庫取出的list物件,存入request
+				}
 
                 String url = requestURL;
 				RequestDispatcher successView = req.getRequestDispatcher(url);   // 修改成功後,轉交回送出修改的來源網頁

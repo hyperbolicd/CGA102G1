@@ -10,12 +10,12 @@ ShowingVO showingVO = (ShowingVO) request.getAttribute("showingVO");
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>場次資料新增 - addShowing.jsp</title>
+<title>場次資料新增</title>
 
 <style>
 table#table-1 {
-	background-color:antiquewhite;
-/* 	border: 2px solid black; */
+	background-color: antiquewhite;
+	/* 	border: 2px solid black; */
 	text-align: center;
 	margin-bottom: 10px;
 }
@@ -30,7 +30,8 @@ h4 {
 	color: blue;
 	display: inline;
 }
-#datePicker{
+
+#datePicker {
 	text-align: center;
 }
 </style>
@@ -38,13 +39,13 @@ h4 {
 <style>
 table {
 	width: 450px;
-	background-color:antiquewhite;
+	background-color: antiquewhite;
 	margin-top: 1px;
 	margin-bottom: 1px;
 }
 
 table, th, td {
-/* 	border: 1px solid black; */
+	/* 	border: 1px solid black; */
 	white-space: nowrap;
 }
 
@@ -60,37 +61,44 @@ th, td {
 	width: 60px;
 	text-align: center;
 }
-#datePicker{
+
+#datePicker {
 	width: 180px;
 }
-input, select{
+
+input, select {
 	border: 1px solid black;
-    background-color: white;
-    border-radius: 10px;
-    outline-style: none;
-    text-align:justify;
-    padding: 5px 10px;
+	background-color: white;
+	border-radius: 10px;
+	outline-style: none;
+	text-align: justify;
+	padding: 5px 10px;
 }
-input[name="HL_ID"]{
+
+input[name="HL_ID"] {
 	width: 50px;
 	text-align: center;
 }
-input[name="SH_STATE"]{
+
+input[name="SH_STATE"] {
 	width: 50px;
 	text-align: center;
 }
-input[name="SH_SEAT_STATE"]{
-/* 	text-align: center; */
+
+input[name="SH_SEAT_STATE"] {
+	/* 	text-align: center; */
 	color: gray;
 }
-input[name="SH_TYPE"]{
+
+input[name="SH_TYPE"] {
 	width: 50px;
 	text-align: center;
 }
 </style>
 
 <!-- TimePicker.css -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/timepicker@1.13.18/jquery.timepicker.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/timepicker@1.13.18/jquery.timepicker.css">
 <!-- DatePicker.css -->
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/showing/emp_all.css" />
@@ -103,121 +111,122 @@ input[name="SH_TYPE"]{
 </head>
 <body bgcolor='white'>
 	<header>
-		<nav>
-			<div id="logo">
-				<img src="logo2noline.jpg" />
-			</div>
-			<h2>員工後台操作系統</h2>
-			<ul>
-				<li>登出</li>
-			</ul>
-		</nav>
+		<%@ include file="/back_end/header_html.jsp"%>
 	</header>
-	<aside id="aside"></aside>
-		<main id="main">
+	<aside id="aside">
+		<%@ include file="/back_end/aside_html.jsp"%>
+	</aside>
+	<main id="main">
 
-	<table id="table-1">
-		<tr>
-			<td>
-				<h3>場次資料新增</h3>
-				<a href="<%=request.getContextPath()%>/back_end/showing/showing_select_page.jsp">回首頁</a>
-			</td>
-		</tr>
-	</table>
-
-	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
-
-	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/showing/showing.do" name="form1" id="1234">
-		<table>
-			<jsp:useBean id="movieSvc" scope="page" class="com.movie.model.MovieService" />
+		<table id="table-1">
 			<tr>
-				<td>電影編號:</td>
-				<td><select size="1" name="mvId">
-						<c:forEach var="movieVO" items="${movieSvc.all}">
-							<option value="${movieVO.mvId}"
-								${(showingVO.mvId==movieVO.mvId)? 'selected':'' }>${movieVO.mvId} - 【${movieVO.mvName}】
-						</c:forEach>
-				</select></td>
-			</tr>
-			
-			<jsp:useBean id="hallSvc" scope="page" class="com.hall.model.HallService" />
-			<tr>
-				<td>影廳編號:</td>
-				<td><select size="1" name="HL_ID">
-						<c:forEach var="hallVO" items="${hallSvc.all}">
-							<option value="${hallVO.hlId}">${hallVO.hlId} - 【${hallVO.hlName}】
-						</c:forEach>
-				</select></td>
-			</tr>
-			
-			<tr>
-				<td>場次狀態:</td>
-				<td><select size="1" name="SH_STATE">
-						<option value="0">0
-						<option value="1">1
-					</select></td>
-				<td>(未滿位0(預設)/已滿位1)</td>
-			</tr>
-
-			<tr>
-				<td>日期:</td>
 				<td>
-					<input name="SH_TIME" id="datePicker" type="text" class="refresh"value="<%=(showingVO == null) ? "" : showingVO.getSH_TIME()%>" />
+					<h3>場次資料新增</h3> <a
+					href="<%=request.getContextPath()%>/back_end/showing/showing_select_page.jsp">回首頁</a>
 				</td>
 			</tr>
-			
-			<tr>
-				<td>時段:</td>
-				<td><input id="time0" type="text" class="timePicker refresh">
-					<input id="time1" type="text" class="timePicker refresh">
-					<input id="time2" type="text" class="timePicker refresh">
-					<input id="time3" type="text" class="timePicker refresh">
-					<input id="time4" type="text" class="timePicker refresh">
-					<input id="time5" type="text" class="timePicker refresh">
-					<input id="time6" type="text" class="timePicker refresh">
-					<input id="time7" type="text" class="timePicker refresh">
-					<input id="time8" type="text" class="timePicker refresh">
-					<input id="time9" type="text" class="timePicker refresh">
-				</td>
-			</tr>
-
-			<tr>
-				<td>電影播放類型:</td>
-				<td>
-					<select size="1" name="SH_TYPE">
-						<option value="0">0
-						<option value="1">1
-					</select></td>
-				<td>(0-數位/1-IMAX)</td>
-			</tr>
-
-
-
 		</table>
-		<br>
-		<input type="hidden" name="action" value="insert">
-		<input type="submit" value="送出新增">
-	</FORM>
-		</main>
+
+		<%-- 錯誤表列 --%>
+		<c:if test="${not empty errorMsgs}">
+			<font style="color: red">請修正以下錯誤:</font>
+			<ul>
+				<c:forEach var="message" items="${errorMsgs}">
+					<li style="color: red">${message}</li>
+				</c:forEach>
+			</ul>
+		</c:if>
+
+		<FORM METHOD="post"
+			ACTION="<%=request.getContextPath()%>/showing/showing.do"
+			name="form1" id="1234">
+			<table>
+				<jsp:useBean id="movieSvc" scope="page"
+					class="com.movie.model.MovieService" />
+				<tr>
+					<td>電影編號:</td>
+					<td><select size="1" name="mvId">
+							<c:forEach var="movieVO" items="${movieSvc.all}">
+								<option value="${movieVO.mvId}"
+									${(showingVO.mvId==movieVO.mvId)? 'selected':'' }>${movieVO.mvId}
+									- 【${movieVO.mvName}】
+							</c:forEach>
+					</select></td>
+				</tr>
+
+				<jsp:useBean id="hallSvc" scope="page"
+					class="com.hall.model.HallService" />
+				<tr>
+					<td>影廳編號:</td>
+					<td><select size="1" name="HL_ID">
+							<c:forEach var="hallVO" items="${hallSvc.all}">
+								<option value="${hallVO.hlId}">${hallVO.hlId}-
+									【${hallVO.hlName}】
+							</c:forEach>
+					</select></td>
+				</tr>
+
+				<tr>
+					<td>場次狀態:</td>
+					<td><select size="1" name="SH_STATE">
+							<option value="0">0
+							<option value="1">1
+					</select></td>
+					<td>(未滿位0(預設)/已滿位1)</td>
+				</tr>
+
+				<tr>
+					<td>日期:</td>
+					<td><input name="SH_TIME" id="datePicker" type="text"
+						class="refresh"
+						value="<%=(showingVO == null) ? "" : showingVO.getSH_TIME()%>" />
+					</td>
+				</tr>
+
+				<tr>
+					<td>時段:</td>
+					<td><input id="time0" type="text" class="timePicker refresh">
+						<input id="time1" type="text" class="timePicker refresh">
+						<input id="time2" type="text" class="timePicker refresh">
+						<input id="time3" type="text" class="timePicker refresh">
+						<input id="time4" type="text" class="timePicker refresh">
+						<input id="time5" type="text" class="timePicker refresh">
+						<input id="time6" type="text" class="timePicker refresh">
+						<input id="time7" type="text" class="timePicker refresh">
+						<input id="time8" type="text" class="timePicker refresh">
+						<input id="time9" type="text" class="timePicker refresh">
+					</td>
+				</tr>
+
+				<tr>
+					<td>電影播放類型:</td>
+					<td><select size="1" name="SH_TYPE">
+							<option value="0">0
+							<option value="1">1
+					</select></td>
+					<td>(0-數位/1-IMAX)</td>
+				</tr>
+
+
+
+			</table>
+			<br> <input type="hidden" name="action" value="insert">
+			<input type="submit" value="送出新增">
+		</FORM>
+	</main>
 	<!-- <div id="tree"></div> -->
 	<footer>嗨邇覓影城 &copy; HIREME CINEMA 2022</footer>
 	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="<%=request.getContextPath()%>/back_end/showing/emp_aside.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/back_end/showing/emp_aside.js"></script>
 </body>
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- TimePicker.js -->
-<script src="https://cdn.jsdelivr.net/npm/timepicker@1.13.18/jquery.timepicker.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/timepicker@1.13.18/jquery.timepicker.js"></script>
 <script>
 
     $('.timePicker').timepicker({

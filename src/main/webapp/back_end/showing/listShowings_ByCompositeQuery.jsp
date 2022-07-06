@@ -32,17 +32,11 @@
 </head>
 <body bgcolor='white'>
 	<header>
-		<nav>
-			<div id="logo">
-				<img src="<%=request.getContextPath()%>/back_end/showing/logo2noline.jpg">
-			</div>
-			<h2>員工後台操作系統</h2>
-			<ul>
-				<li>登出</li>
-			</ul>
-		</nav>
-	</header>
-	<aside id="aside"></aside>
+        <%@ include file="/back_end/header_html.jsp"%>   
+    </header>
+    <aside id="aside">   
+    	<%@ include file="/back_end/aside_html.jsp"%>     
+    </aside>
 	<main>
 		<div id="main">
 
@@ -75,9 +69,8 @@
 									<c:if test="${showingVO.mvId==movieVO.mvId}">${movieVO.mvId}【${movieVO.mvName}】
                     </c:if>
 								</c:forEach></td>
-							<td>${showingVO.HL_ID}</td>
+							<td>${showingVO.HL_ID} 【${showingVO.hallVO.hlName}】</td>
 							<td>${showingVO.SH_STATE}</td>
-							<%-- 			<td>${showingVO.SH_SEAT_STATE}</td> --%>
 							<td><fmt:formatDate value="${showingVO.SH_TIME}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							<td>${showingVO.SH_TYPE}</td>
 							<td>

@@ -380,7 +380,7 @@
     font-family: Gill Sans MT;
     font-size: 20px;
 }
-.cmtBtnArea > p{
+.cmtBtnArea > input{
     letter-spacing: 2px;
     position: relative;
     z-index: 1;
