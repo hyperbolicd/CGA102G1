@@ -7,13 +7,15 @@
 <div class="wrapper row1" style="height:60px;">
     <header id="header" class="clear">
       <div id="hgroup">
-        <img src="<%=request.getContextPath()%>/front_end/index/images/demo/logo6.png" width="200" height="60" alt="">
+      <a href="${pageContext.request.contextPath}/front_end/index.jsp">
+      <img src="<%=request.getContextPath()%>/front_end/index/images/demo/logo6.png" width="200" height="60" alt=""></a>
       </div>
 
       <div class="dropdown" style=" margin: 0;padding: 0;list-style: none; ">
         <button class="dropbtn">會員專區</button>
         <div class="dropdown-content">
           <a href="#">會員中心</a>
+          <a href="#">票卷匣</a>     
         </div>
       </div>
 
@@ -59,7 +61,7 @@
       
       
       
-<!--       <button class="logout">會員登出</button> -->
+ <!--       <button class="logout">會員登出</button> -->
  	<div class="dropdown">
 		<c:if test="${empty sessionScope.memberVO.member_ID}">
 			<a id="logIn" href="${pageContext.request.contextPath}/front_end/login/login.jsp">登入</a>
@@ -67,11 +69,8 @@
 		<c:if test="${not empty sessionScope.memberVO.member_ID}">
 			<div style="display:flex">
 			 
-
-				
                 <button id="cart_btn">
-                <a href="${pageContext.request.contextPath}/ShoppingCartServlet?action=checkout">
-                    <img class="cart" src="<%=request.getContextPath()%>/front_end/images/mall.png" height="25" width="25" ></img>
+                    <img class="cart" src=""<%=request.getContextPath()%>/images/mall.png"" height="25" width="25"></img>
                 </button>
 			
 				<p style="margin-right:20px">${memberVO.member_Name}&nbsp;&nbsp;Hello</p>

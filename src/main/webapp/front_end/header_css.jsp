@@ -16,5 +16,12 @@ button.logout{
     border: none;
     cursor: pointer;
   }
+  
+  /*--------------------------------- 購物車 ------------------------------------------*/
+#cart_btn{
+	 background:transparent;
+	border: none;
+	margin-right: 20px;
+}
   </style>
 </body>
