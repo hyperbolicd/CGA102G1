@@ -15,4 +15,6 @@ public interface MemberDAO_interface {
     
  // wish
  	public void updateWishTicket(Integer member_id, Integer wish_ticket);
+ 	
+ 	
 }

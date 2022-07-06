@@ -14,7 +14,7 @@
       <div class="dropdown" style=" margin: 0;padding: 0;list-style: none; ">
         <button class="dropbtn">會員專區</button>
         <div class="dropdown-content">
-          <a href="#">會員中心</a>
+          <a href="${pageContext.request.contextPath}/front_end/membercentre/membercentre.jsp">會員中心</a>
           <a href="#">票卷匣</a>     
         </div>
       </div>
@@ -70,7 +70,7 @@
 			<div style="display:flex">
 			 
                 <button id="cart_btn">
-                    <img class="cart" src=""<%=request.getContextPath()%>/images/mall.png"" height="25" width="25"></img>
+                    <img class="cart" src="<%=request.getContextPath()%>/front_end/images/mall.png" height="25" width="25"></img>
                 </button>
 			
 				<p style="margin-right:20px">${memberVO.member_Name}&nbsp;&nbsp;Hello</p>

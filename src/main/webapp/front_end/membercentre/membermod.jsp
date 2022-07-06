@@ -220,30 +220,30 @@ body {
 	</div>
 
 <script>
-let inputfile = document.getElementById('file-uploader');
-let img = document.getElementById('img');
-inputfile.addEventListener('change',function(e){
-    img.src = URL.createObjectURL(e.target.files[0]);
-})
+// let inputfile = document.getElementById('file-uploader');
+// let img = document.getElementById('img');
+// inputfile.addEventListener('change',function(e){
+//     img.src = URL.createObjectURL(e.target.files[0]);
+// })
 
-let button = document.getElementById('button');
-button.addEventListen('click'function(){
-	$.ajax({
-		url:,
-		data:,
+// let button = document.getElementById('button');
+// button.addEventListen('click'function(){
+// 	$.ajax({
+// 		url:,
+// 		data:,
 		
 		
 		
-		success:function(){
-			Swal.fire({
-                icon: 'success',
-                title: '',
-                text: '新增成功',
-                footer: ''
-            })
-		}
-	})
-})
+// 		success:function(){
+// 			Swal.fire({
+//                 icon: 'success',
+//                 title: '',
+//                 text: '新增成功',
+//                 footer: ''
+//             })
+// 		}
+// 	})
+// })
 
 
 </script>
