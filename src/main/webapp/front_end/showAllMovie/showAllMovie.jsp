@@ -62,8 +62,14 @@
                         <div class="name">${showingVO.mvName}</div>
                         <div class="ename">${showingVO.mvEName}</div>
                         <div class="stDate">上映日期:${showingVO.mvStDate}</div>
-                        <div class="star">${showingVO.mvTtStar/showingVO.mvTtCm}
+                        <div class="star" style="font-weight: bold;">
+                        	<c:if test="${(showingVO.mvTtStar/showingVO.mvTtCm).isNaN()}">
+                        	這部電影尚未有人評分
+                            </c:if>
+                        	<c:if test="${!(showingVO.mvTtStar/showingVO.mvTtCm).isNaN()}">
+                        	${showingVO.mvTtStar/showingVO.mvTtCm}
                             <img src="/CGA102G1/front_end/showAllMovie/MV_ICON/star.png" alt="">
+                            </c:if>
                         </div>
                     </div>
                     <div class="icon">

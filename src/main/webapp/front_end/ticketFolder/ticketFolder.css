@@ -1,7 +1,7 @@
 
 .order_container{
     font-family: 'Roboto',sans-serif;
-    background: #f2f2f2;
+    background: #f3f2f3;
     padding:10px 20px;
 }
 .mytabs{
@@ -27,7 +27,6 @@
 
 
 
-/* 全部電影容器 */
 .container{
     background: #fff;
     display: flex;
@@ -38,7 +37,6 @@
     order: 1;
     display: none;
 }
-/* 單部電影容器 */
 .content{
     box-sizing: border-box;
     width: 250px;
@@ -66,7 +64,6 @@
     padding: 3px;
     margin: 0px 10px 0px 15px;
 }
-/* 電影資訊 */
 .info_container {
     display: flex;
     margin: 14px;
@@ -81,15 +78,15 @@
 	margin-top: 10px;
 }
 .ticket_icon img{
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
 }
 .food_icon {
 	margin-left: 10px
 }
 .food_icon img{
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
 }
 .mvName{
     /* border: solid blue; */
@@ -116,7 +113,7 @@
     text-align: center;
     font-size: 24px;
     color: #fff;
-    background: #2183a2;
+    background-color: #b73a5c;
     width: 100%;
     padding-top: 10px;
     padding-bottom: 10px;

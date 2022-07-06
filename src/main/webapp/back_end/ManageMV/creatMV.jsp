@@ -51,7 +51,7 @@
                     </div>
                     <hr>
                     <div class="mvLevel">
-                        <label class="col-sm-2 col-form-label" for="mvLong">片長:</label>
+                        <label class="col-sm-2 col-form-label" for="mvLong">片長(分鐘):</label>
                         <input class="form-control" id="mvLong" type="text" name="mvLong" placeholder="請填入正整數" required>
                         <label class="col-sm-2 col-form-label">電影分級:</label>
                         <select class="custom-select" id="mvLevel" name="mvLevel">
@@ -95,8 +95,8 @@
                     <hr>
                     <div class="editBox">
                         <input type="hidden" name="action" value="insert">
-                        <button type="submit" id="sumbitBtn" class="btn btn-primary btn-lg">送出</button>
                         <button type="button" id="cancelBtn" class="btn btn-danger btn-lg" onclick="history.back()">取消</button>
+                        <button type="submit" id="sumbitBtn" class="btn btn-primary btn-lg">送出</button>
                     </div>
                 </form>
             </div>

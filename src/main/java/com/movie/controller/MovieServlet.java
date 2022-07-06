@@ -135,7 +135,7 @@ public class MovieServlet extends HttpServlet {
 				String filename = getFileNameFromPart(photo);
 				photo.write(dir+"/"+filename);
 				
-				mvPicture = "/CGA102G1/mvPicture_upload/"+filename;
+				mvPicture = "/mvPicture_upload/"+filename;
 			}
 			
 			/********************************/
