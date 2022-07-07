@@ -33,17 +33,17 @@ pageContext.setAttribute("SellTkMVlist", SellTkMVlist);
 	href="${pageContext.request.contextPath}/front_end/css/allMovie.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-<<<<<<< HEAD
 <!-- DatePicker.css -->
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/showing/css/daterangepicker.css" />
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
+<link rel="stylesheet"href="${pageContext.request.contextPath}/front_end/css/sellTK.css">
 <script
 	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-=======
-  <!-- 輪播圖片 css -->
+
+<!-- 輪播圖片 css -->
   <style type="text/css">
   div,ul,li,a,span,img{margin:0;padding:0;}
   #banner { 
@@ -114,8 +114,7 @@ pageContext.setAttribute("SellTkMVlist", SellTkMVlist);
   
 >>>>>>> c73c2f523bd6213ef308503cad847545641fc13f
 
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/front_end/css/sellTK.css">
+
 <%@ include file="/front_end/header.jsp"%>
 
 <!-- 輪播圖片 css -->
