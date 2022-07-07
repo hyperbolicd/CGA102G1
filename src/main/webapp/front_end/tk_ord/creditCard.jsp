@@ -827,7 +827,7 @@
     });
     //    付款完成
     $(".bt").click(function () {
-        setTimeout(function () { window.location.href = "<%=request.getContextPath()%>/back_end/tk_ord/completeOrder.jsp" }, 1300);
+        setTimeout(function () { window.location.href = "<%=request.getContextPath()%>/front_end/tk_ord/completeOrder.jsp" }, 1300);
     })
     function alertTest() {
         swal.fire({

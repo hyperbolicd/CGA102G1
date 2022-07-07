@@ -96,32 +96,6 @@
 					<div>
 						<!-- 座位start -->
 						<div class="seatsChart">
-
-
-							<!-- 以下改為用長的 -->
-							<!-- <div class="seatRow">
-                            <div class="seatRowNumber">
-                                A
-                            </div>
-                            <div id="A_1" role="checkbox" value="1" aria-checked="false" focusable="true"
-                                class=" seatNumber seatUnavailable">1</div>
-                            <div id="A_2" role="checkbox" value="1" aria-checked="false" focusable="true"
-                                class=" seatNumber ">2</div>
-                            <div id="A_3" role="checkbox" value="1" aria-checked="false" focusable="true"
-                                class=" seatNumber ">3</div>
-                            <div id="A_4" role="checkbox" value="1" aria-checked="false" focusable="true"
-                                class=" seatNumber seatUnavailable">4</div>
-                            <div id="A_5" role="checkbox" value="1" aria-checked="false" focusable="true"
-                                class=" seatNumber ">5</div>
-                            <div id="A_6" role="checkbox" value="1" aria-checked="false" focusable="true"
-                                class=" seatNumber  ">6</div>
-                            <div id="A_7" role="checkbox" value="1" aria-checked="false" focusable="true"
-                                class=" seatNumber ">7</div>
-                            <div id="A_8" role="checkbox" value="1" aria-checked="false" focusable="true"
-                                class=" seatNumber ">8</div>
-
-
-                        </div>-->
 						</div>
 
 					</div>
@@ -135,16 +109,7 @@
 
 			<div>
 				<div class="temporaryInf">
-<!-- 					<div class="timer"> -->
-<!-- 						<table class="sidetable"> -->
-<!-- 							<tr> -->
-<!-- 								<td>剩下時間</td> -->
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<!-- 								<td>01:00</td> -->
-<!-- 							</tr> -->
-<!-- 						</table> -->
-<!-- 					</div> -->
+
 					<div class="receiptouter">
 						<div class="seatsReceipt">
 							<p>
@@ -159,12 +124,7 @@
 				<div class="btBlock">
 					<a class="bt">繼續</a>
 				</div>
-				<!-- 				<form> -->
-				<!-- 					<input type="hidden" name="id" class="id"> -->
-				<!-- 					<input type="hidden" name="name" class= "name"> -->
-				<!-- 					<input type="hidden" name="unitPrice" class= "unitPrice"> -->
-				<!-- 					<input type="hidden" name="count" class= "count"> -->
-				<!-- 				</form> -->
+
 			</div>
 		</div>
 
@@ -208,7 +168,7 @@
 		
 			})
 			
-			document.location.href="<%=request.getContextPath()%>/back_end/tk_ord/confirmOrder.jsp";
+			document.location.href="<%=request.getContextPath()%>/front_end/tk_ord/confirmOrder.jsp";
 		}
     });   
 	
@@ -357,10 +317,7 @@
 													+ seatDetails
 													+ "</li>");
 															
-// 															有需要再加
-// 															+ "<button id='remove:" + thisId + "'+ class='btn btn-default btn-sm removeSeat' value='" + price + 
-// 													"'><strong>X</strong></button></li>");
-															
+
 															
 									$(this).addClass("seatSelected");
 									
@@ -506,7 +463,5 @@ let webSocket;
 
 	</script>
 	
-
-<%-- 	<script src="${pageContext.request.contextPath}/back_end/tk_ord/javaScript/chooseSeatSocket.js"></script> --%>
 </body>
 </html>

@@ -9,26 +9,44 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>確認訂單</title>
+
+
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/css/emp_all.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/css/emp_main.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/css/emp_footer.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/tk_ord/styles/confirmOrder.css">
+	href="<%=request.getContextPath()%>/front_end/tk_ord/styles/confirmOrder.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
+<!-- 置頂按鈕 -->
+	<button type="button" id="BackTop" class="toTop-arrow"></button>
+	<script>
+		$(function() {
+			$('#BackTop').click(function() {
+				$('html,body').animate({
+					scrollTop : 0
+				}, 333);
+			});
+			$(window).scroll(function() {
+				if ($(this).scrollTop() > 300) {
+					$('#BackTop').fadeIn(222);
+				} else {
+					$('#BackTop').stop().fadeOut(222);
+				}
+			}).scroll();
+		});
+	</script>
 	<header>
-		<%@ include file="/back_end/header_html.jsp"%>
+
+		<%@ include file="/front_end/header.jsp"%>
+		<%@ include file="/front_end/header_css.jsp"%>
+
 	</header>
 
-	<aside id="aside"></aside>
-	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
-	<main>
+	<div style="padding: 30px 30px;">
+
+
+		<!--各自的內容--------------------->
 		<FORM METHOD="post"
 			ACTION="<%=request.getContextPath()%>/tkOrd/tkOrd.do"
 			style="margin-bottom: 0px;">
@@ -81,25 +99,27 @@
 
 					<div class="checkout">
 						<div class="btBlock">
-							<a class="bt"href="<%=request.getContextPath()%>/back_end/tk_ord/creditCard.jsp">信用卡付款</a>
+							<a class="bt"
+								href="<%=request.getContextPath()%>/front_end/tk_ord/creditCard.jsp">信用卡付款</a>
 						</div>
-						<div class="btBlock">
-							<a class="bt" href="<%=request.getContextPath()%>/back_end/tk_ord/completeOrder.jsp">現場付款</a>
-						</div>
-
 					</div>
 				</div>
 			</div>
 		</FORM>
-	</main>
-	<!-- <div id="tree"></div> -->
-	<footer> 嗨邇覓影城 &copy; HIREME CINEMA 2022 </footer>
 
+	</div>
+	<!--   <!--客服圖 請自行加連結-->
 
-	<aside id="aside">
-		<%@ include file="/back_end/aside_html.jsp"%>
-	</aside>
+	<!--   <img class="cs" src="images/demo/cs.png" height="50px;" width="60px;" href="#"></img> -->
 
+	<!-- Copyright -->
+	<div class="wrapper row2">
+		<footer id="copyright" class="clear">
+			<p class="fl_left">
+				Copyright &copy; 2022 - All Rights Reserved <a href="#"></a>
+			</p>
+		</footer>
+	</div>
 	<script>
 // 	處理場次時間==================================
 	

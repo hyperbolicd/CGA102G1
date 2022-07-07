@@ -127,7 +127,7 @@ pageContext.setAttribute("list2", list2);
 								<div class="item">
 									<div class="img_block">
 										<img
-											src="<%=request.getContextPath()%>/back_end/fd_inf/fd_inf.do?action=getPic&fdID=${fdinfVO.fdID}"
+											src="<%=request.getContextPath()%>/fd_inf/fd_inf.do?action=getPic&fdID=${fdinfVO.fdID}"
 											style="width: 100px; height: 120px;">
 									</div>
 									<div class="iteminner">
