@@ -15,6 +15,6 @@ public interface FdOrdDtDAO_interface {
   //萬用複合查詢(傳入參數型態Map)(回傳 List)
 //  public List<FdOrdDtVO> getAll(Map<String, String[]> map); 
     
-    public void insert2 (FdOrdDtVO fdOrdDtVOVO , java.sql.Connection con);
+    public void insert2 (FdOrdDtVO fdOrdDtVO , java.sql.Connection con);
     
 }

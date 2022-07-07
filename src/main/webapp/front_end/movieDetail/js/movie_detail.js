@@ -1,5 +1,6 @@
 let isNeta = "";
 let cmState = 0;
+let now;
 
 
 //評論的星星
@@ -82,7 +83,8 @@ $(".cmtBtnArea").click(function(){
         if(($("textarea").val() == "") || (ratingValue == undefined)){
             alert("請輸入評論及評星!");
         }else{
-            let now = new Date();
+            now = formatDate(new Date());
+            $("input[name='CM_DATE']").prop("value", `${now}`)
             let star = "";
             if(ratingValue == 1){
                 star = '<span class="fa fa-star" ></span>';
@@ -165,11 +167,11 @@ $(document).ready(function(){
 
 
 // 評論點讚計數
-$(document).ready(function(){
-    $("#comment").on("click",".like", function(e){
-        $(this).html(parseInt($(this).html()) + 1);
-    })
-});
+//$(document).ready(function(){
+//    $("#comment").on("click",".like", function(e){
+//        $(this).html(parseInt($(this).html()) + 1);
+//    })
+//});
 
 // 劇透checkbox
 $(document).ready(function(){
@@ -177,9 +179,11 @@ $(document).ready(function(){
         if($("#netabare").is(":checked") == true){
             isNeta = "neta";
             cmState = 1;
+            $("input[name='CM_STATE']").prop("value", `${cmState}`)
         }else{
             isNeta = "";
             cmState = 0;
+            $("input[name='CM_STATE']").prop("value", `${cmState}`)
         }
     })
 });
@@ -203,4 +207,11 @@ $(document).ready(function(){
         }
     })
 })
+
+// 未登入時無法評論
+$(document).ready(function(){
+	if($('input[name="MEMBER_ID"]').prop('value') == ''){
+		$("#newCmt").remove();
+	}
+});
 

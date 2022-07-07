@@ -3,6 +3,11 @@ package com.faq.model;
 import java.sql.*;
 import java.util.*;
 
+import javax.naming.NamingException;
+
+import com.common.JDBCUtil;
+import com.movie.model.MovieVO;
+
 public class FaqJDBCDAO implements FaqDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/movietheater?serverTimezone=Asia/Taipei"; //連結的MySQL路徑
@@ -30,6 +35,26 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 	/* 刪除 */
 	private static final String DELETE = 
 			"delete from faq where faq_no = ?";
+	
+	/* 會員相關問題單一查詢 */
+	private static final String GET_FaqClass1 = 
+			"select faq_class, faq_title, faq_content"
+			+ " from faq order by faq_class = 1";
+	
+	/* 影城相關問題單一查詢 */
+	private static final String GET_FaqClass2 = 
+			"select faq_class, faq_title, faq_content"
+			+ " from faq order by faq_class = 2";
+	
+	/* 電影上映相關問題單一查詢 */
+	private static final String GET_FaqClass3 = 
+			"select faq_class, faq_title, faq_content"
+			+ " from faq order by faq_class = 3";
+	
+	/* 其他問題單一查詢 */
+	private static final String GET_FaqClass4 = 
+			"select faq_class, faq_title, faq_content"
+			+ " from faq order by faq_class = 4";
 	
 	@Override /* 新增 */
 	public void insert(FaqVO faqVO) {
@@ -281,6 +306,241 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 		}
 		return list;
 	}
+	
+	
+	@Override
+	public List<FaqVO> getFaqClass1(Byte faq_class) {
+		
+		List<FaqVO> list = new ArrayList<FaqVO>();
+		FaqVO faqVO = null;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(GET_FaqClass4);
+			pstmt.setByte(1, faq_class);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				faqVO = new FaqVO();
+				faqVO.setFaq_class(rs.getByte("faq_class"));
+				faqVO.setFaq_title(rs.getString("faq_title"));
+				faqVO.setFaq_content(rs.getString("faq_content"));
+				list.add(faqVO);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver."
+			+e.getMessage());
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured."
+			+e.getMessage());
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<FaqVO> getFaqClass2(Byte faq_class) {
+		
+		List<FaqVO> list = new ArrayList<FaqVO>();
+		FaqVO faqVO = null;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(GET_FaqClass4);
+			pstmt.setByte(2, faq_class);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				faqVO = new FaqVO();
+				faqVO.setFaq_class(rs.getByte("faq_class"));
+				faqVO.setFaq_title(rs.getString("faq_title"));
+				faqVO.setFaq_content(rs.getString("faq_content"));
+				list.add(faqVO);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver."
+			+e.getMessage());
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured."
+			+e.getMessage());
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<FaqVO> getFaqClass3(Byte faq_class) {
+		
+		List<FaqVO> list = new ArrayList<FaqVO>();
+		FaqVO faqVO = null;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(GET_FaqClass4);
+			pstmt.setByte(3, faq_class);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				faqVO = new FaqVO();
+				faqVO.setFaq_class(rs.getByte("faq_class"));
+				faqVO.setFaq_title(rs.getString("faq_title"));
+				faqVO.setFaq_content(rs.getString("faq_content"));
+				list.add(faqVO);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver."
+			+e.getMessage());
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured."
+			+e.getMessage());
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<FaqVO> getFaqClass4(Byte faq_class) {
+		
+		List<FaqVO> list = new ArrayList<FaqVO>();
+		FaqVO faqVO = null;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(GET_FaqClass4);
+			pstmt.setByte(4, faq_class);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				faqVO = new FaqVO();
+				faqVO.setFaq_class(rs.getByte("faq_class"));
+				faqVO.setFaq_title(rs.getString("faq_title"));
+				faqVO.setFaq_content(rs.getString("faq_content"));
+				list.add(faqVO);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver."
+			+e.getMessage());
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured."
+			+e.getMessage());
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	
 
 	public static void main(String[] args) {
 

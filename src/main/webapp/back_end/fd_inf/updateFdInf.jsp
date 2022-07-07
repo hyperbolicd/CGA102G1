@@ -16,11 +16,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>餐飲資料管理</title>
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_all.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_all.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_main.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_main.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_footer.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_footer.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/fd_inf/styles/FDINFBack.css">
 </head>

@@ -1,9 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
 <%@ page import="com.member.model.*"%>
+<%@ page import="com.movie.model.*" %>
 <html lang="en" dir="ltr">
 <%
  MemberVO memberVO = (MemberVO) session.getAttribute("memberVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
+ 
+ 	MovieService mvSvc = new MovieService();
+	List<MovieVO> showingList = mvSvc.getShowingMV();
+	List<MovieVO> comingList = mvSvc.getComingMV();
+	pageContext.setAttribute("showingList", showingList);
+	pageContext.setAttribute("comingList", comingList);
 %>
 
 <head>
@@ -11,6 +19,8 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/css/layout.css" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/front_end/css/allMovie.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
  
  <%@ include file="/front_end/header.jsp"%>
 
@@ -205,9 +215,89 @@
         
     </script>
 
- <div style="padding:500px 100px;">
+ <div id="mainDiv">
 
-內容放在這裡
+<hr id="hr1">
+
+	<div id="testDiv">
+	留給你ㄉdiv留給你ㄉdiv留給你ㄉdiv留給你ㄉdiv留給你ㄉdiv留給你ㄉdiv
+	</div>
+
+   <div class="fm1" style = 'padding:10px 20px;'>
+      <!--將內容存-->
+      <div class="mytabs">
+        <input type="radio" id="show" name="mytabs" checked="checked">
+        <label for="show">上映中</label>
+        <div class="container">
+         <c:forEach var="showingVO" items="${showingList}" >
+            <div class="content">
+                <div class="cover">
+                    <img src="${pageContext.request.contextPath}${showingVO.mvPicture}" alt="">
+                </div>
+                <div class="info_container">
+                    <div class="info">
+                        <div class="name">${showingVO.mvName}</div>
+                        <div class="ename">${showingVO.mvEName}</div>
+                        <div class="stDate">上映日期:${showingVO.mvStDate}</div>
+                        <div class="star" style="font-weight: bold;">
+                        	<c:if test="${(showingVO.mvTtStar/showingVO.mvTtCm).isNaN()}">
+                        	這部電影尚未有人評分
+                            </c:if>
+                        	<c:if test="${!(showingVO.mvTtStar/showingVO.mvTtCm).isNaN()}">
+                        	${showingVO.mvTtStar/showingVO.mvTtCm}
+                            <img src="/CGA102G1/front_end/showAllMovie/MV_ICON/star.png" alt="">
+                            </c:if>
+                        </div>
+                    </div>
+                    <div class="icon">
+                        <img src="/CGA102G1/front_end/showAllMovie/MV_ICON/level${showingVO.mvLevel}.jpg" alt="">
+                    </div>
+                </div>
+                <div class="bt">
+                	<form action="${pageContext.request.contextPath}/MovieServlet.do" method="post">
+                	<input type="hidden" name="mvId" value="${showingVO.mvId}">
+                	<input type="hidden" name="action" value="getOneForDisplay">
+                    <button type="submit">查看電影詳情</button>
+                	</form>
+                </div>
+            </div>
+            </c:forEach>
+        </div>
+        
+        <input type="radio" id="soon" name="mytabs">
+        <label for="soon">即將上映</label>
+        <div class="container">
+      		<c:forEach var="comingVO" items="${comingList}" >
+            <div class="content">
+                <div class="cover">
+                    <img src="${pageContext.request.contextPath}${comingVO.mvPicture}" alt="">
+                </div>
+                <div class="info_container">
+                    <div class="info">
+                        <div class="name">${comingVO.mvName}</div>
+                        <div class="ename">${comingVO.mvEName}</div>
+                        <div class="stDate">預計上映:${comingVO.mvStDate}</div>
+                    </div>
+                    <div class="icon">
+                        <img src="/CGA102G1/front_end/showAllMovie/MV_ICON/level${comingVO.mvLevel}.jpg" alt="">
+                    </div>
+                </div>
+                <div class="bt">
+                	<form action="${pageContext.request.contextPath}/MovieServlet.do" method="post">
+                	<input type="hidden" name="mvId" value="${comingVO.mvId}">
+                	<input type="hidden" name="action" value="getOneForDisplay">
+                    <button type="submit">查看電影詳情</button>
+                	</form>
+                </div>
+            </div>
+            </c:forEach>
+            
+        </div>
+      </div>
+      
+      
+      </div>
+
 
 
 

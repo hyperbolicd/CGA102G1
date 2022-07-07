@@ -27,7 +27,7 @@ public class ReportJDBCDAO implements ReportDAO_interface{
 			+ "FROM REPORT WHERE RP_ID = ?";
 	
 	private static final String GET_ALL_STMT= "SELECT RP_ID, CM_ID, MEMBER_ID, RP_TEXT, RP_TYPE, RP_STATE, RP_DATE "
-			+ "FROM REPORT order by RP_ID";
+			+ "FROM REPORT order by RP_STATE";
 	
 	private static final String UPDATE_SAME_RP="UPDATE report SET RP_STATE = 1 WHERE CM_ID = ?";
 	

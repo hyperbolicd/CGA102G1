@@ -3,12 +3,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*"%>
 <%@ page import="com.showing.model.*"%>
+<%@ page import="com.hall.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
 ShowingService showingSvc = new ShowingService();
 List<ShowingVO> list = showingSvc.getAll();
 pageContext.setAttribute("list", list);
+
+// HallService hallSvc = new HallService();
+// List<HallVO> hallList = hallSvc.getAll();
+// pageContext.setAttribute("hallList", hallList);
+
 %>
 
 
@@ -16,12 +22,11 @@ pageContext.setAttribute("list", list);
 
 <html>
 <head>
-<title>所有場次資料 - listAllShowing.jsp</title>
+<title>所有場次資料</title>
 
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back_end/showing/emp_all.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back_end/showing/emp_main.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back_end/showing/emp_footer.css">
@@ -30,21 +35,19 @@ pageContext.setAttribute("list", list);
 </head>
 <body bgcolor='white'>
 	<header>
-		<nav>
-			<div id="logo">
-				<img src="<%=request.getContextPath()%>/back_end/showing/logo2noline.jpg">
-			</div>
-			<h2>員工後台操作系統</h2>
-			<ul>
-				<li>登出</li>
-			</ul>
-		</nav>
-	</header>
-	<aside id="aside"></aside>
+        <%@ include file="/back_end/header_html.jsp"%>   
+    </header>
+    <aside id="aside">   
+    	<%@ include file="/back_end/aside_html.jsp"%>     
+    </aside>
+	
 	<main>
+	
+	<jsp:useBean id="movieSvc" scope="page" class="com.movie.model.MovieService" />
+	
 		<div id="main">
 			<div id="title">
-				<span>所有電影資料 - listAllShowing.jsp</span><br>
+				<span>所有電影資料</span><br>
 				<span><a href="<%=request.getContextPath()%>/back_end/showing/showing_select_page.jsp">回首頁</a></span>
 			</div>
 
@@ -65,12 +68,22 @@ pageContext.setAttribute("list", list);
 				<%@ include file="pages/page1.file"%>
 				<tbody>
 					<c:forEach var="showingVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+<%-- 					<c:set var="STATE" scope="session" value="${showingVO.SH_STATE}"/> --%>
 						<tr>
 							<td>${showingVO.SH_ID}</td>
-							<td>${showingVO.mvId}-[${showingVO.movieVO.mvName}]</td>
-							<td>${showingVO.HL_ID}</td>
+							<td>${showingVO.mvId} 【${showingVO.movieVO.mvName}】</td>
+							<td>${showingVO.HL_ID} 【${showingVO.hallVO.hlName}】</td>
 							<td>${showingVO.SH_STATE}</td>
-<%-- 							<td>${showingVO.SH_SEAT_STATE}</td> --%>
+<!-- 							<td> -->
+<%-- 								<c:choose> --%>
+<%-- 									<c:when test="${STATE = 0}"> --%>
+<!-- 								       未滿位 -->
+<%-- 								    </c:when> --%>
+<%-- 									<c:when test="${STATE = 1}"> --%>
+<!-- 								       已滿位 -->
+<%-- 								    </c:when> --%>
+<%-- 								</c:choose> --%>
+<!-- 							</td> -->
 							<td><fmt:formatDate value="${showingVO.SH_TIME}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							<td>${showingVO.SH_TYPE}</td>
 							<td>

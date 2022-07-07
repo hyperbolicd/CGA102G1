@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.member.model.*" %>
 
-
 <div class="wrapper row1" style="height:60px;">
     <header id="header" class="clear">
       <div id="hgroup">
@@ -15,7 +14,11 @@
         <button class="dropbtn">會員專區</button>
         <div class="dropdown-content">
           <a href="${pageContext.request.contextPath}/front_end/membercentre/membercentre.jsp">會員中心</a>
+<<<<<<< HEAD
           <a href="${pageContext.request.contextPath}/front_end/ticketFolder/ticketFolder.jsp">票卷匣</a>     
+=======
+          <a href="${pageContext.request.contextPath}/TkFolderServlet.do?member_ID=${memberVO.member_ID}&action=listAllOrdInf">票卷匣</a>     
+>>>>>>> e0b2f07cdbdcf4459ca381fcdadd35744b04f20a
         </div>
       </div>
 

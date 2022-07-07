@@ -76,9 +76,17 @@ tr:nth-child(even) {
     background: rgb(255, 255, 255);
 }
 
-tr:nth-child(1) {
+th {
     background: rgb(58, 58, 58);
     color: white;
+}
+
+tr:hover{
+
+background-color: gray;
+
+color: #000000;
+
 }
 
 /* 按鈕開始====================================== */

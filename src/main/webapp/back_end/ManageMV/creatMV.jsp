@@ -45,7 +45,7 @@
                     <hr>
                     <div class="mvCast">
                         <label class="col-sm-2 col-form-label">導演:</label>
-                        <input class="form-control" id="mvDrt" type="text" name="mvDrt" placeholder="請填入導演名" required>
+                        <input class="form-control" id="mvDrt" type="text" name="mvDrt" placeholder="請填入導演名" maxlength ="100" required>
                         <label class="col-sm-2 col-form-label">演員:</label>
                         <input class="form-control" id="mvCast" type="text" name="mvCast" placeholder="請填入演員名" required>
                     </div>
@@ -107,7 +107,7 @@
         嗨邇覓影城 &copy; HIREME CINEMA 2022
     </footer>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="${pageContext.request.contextPath}/back_end//ManageMV/regexMV.js"></script>
+    <script src="${pageContext.request.contextPath}/back_end/ManageMV/regexMV.js"></script>
 </body>
 
 </html>

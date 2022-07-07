@@ -234,6 +234,7 @@ public class MemberServlet extends HttpServlet {
 
 //會員登入	控制器	
 		if ("login".equals(action)) {
+			System.out.println("start");
 			/*************************** 1.接收請求參數 ***************************************/
 			String member_Email = String.valueOf(req.getParameter("email")); // 請輸入email
 			String member_Password = String.valueOf(req.getParameter("password")); // 請輸入密碼
@@ -258,8 +259,8 @@ public class MemberServlet extends HttpServlet {
 			} else {
 				url = "/front_end/index.jsp";
 				session.setAttribute("memberVO", memberVo);
+				
 			}
-
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			System.out.println("account");
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listAllMember.jsp
