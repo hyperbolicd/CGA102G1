@@ -42,7 +42,6 @@ import com.google.gson.JsonParser;
 @WebServlet("/OrderCompleteServlet")
 
 
-
 public class OrderCompleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
