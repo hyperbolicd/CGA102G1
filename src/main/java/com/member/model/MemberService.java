@@ -27,13 +27,21 @@ public class MemberService {
 		memberVO.setMember_Phone(member_Phone);
 		memberVO.setMember_Address(member_Address);
 		memberVO.setMember_Pic(member_Pic);
-		memberVO.setMember_Status(1);
+		memberVO.setMember_Status(member_Status);
 		memberVO.setWish_Ticket(0);
 		memberVO.setBonus_Points(0);
 		memberVO.setSum_Count(0);
 		dao.insert(memberVO);
-
+		
+		
+		
 		return memberVO;
+		
+/*-----------------------當會員註冊時會寄送信件更改會員權限--------------------------------*/		
+//		memberVO.setMember_ID(member_Status);
+//		return member_Status;
+
+		
 	}
 
 //預留給 Struts 2 或 Spring MVC 用
@@ -136,6 +144,13 @@ public class MemberService {
 	// wish
 	public void updateWishTicket(Integer member_id, Integer wish_ticket) {
 		dao.updateWishTicket(member_id, wish_ticket);
+	}
+	
+	
+	//會員註冊時會傳送信件，並修改會員狀態(藉由Email搜尋會員ID)
+	public  MemberVO Register(MemberVO memberVO) {
+		return dao.register(memberVO);
+		
 	}
 
 }

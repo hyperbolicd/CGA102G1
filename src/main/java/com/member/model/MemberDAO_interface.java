@@ -13,8 +13,12 @@ public interface MemberDAO_interface {
     //萬用複合查詢(傳入參數型態Map)(回傳 List)
 //  public List<EmpVO> getAll(Map<String, String[]> map); 
     
- // wish
+// wish
  	public void updateWishTicket(Integer member_id, Integer wish_ticket);
+
+// 會員註冊時會傳送信件，並修改會員狀態(藉由Email搜尋會員ID)
+ 	public MemberVO register(MemberVO memberVO);
+
  	
  	
 }

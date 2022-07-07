@@ -15,8 +15,6 @@
 	href="https://fontawesome.com/v5/icons/edit?s=solid">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front_end/membercentre/css/membercentre.css" />
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-
  <%@ include file="/front_end/header.jsp"%>
  <%@ include file="/front_end/header_css.jsp"%>
 
@@ -143,7 +141,7 @@ body {
 							<tr>
 								<td class="td_left"><label for="member_Password">會員密碼</label></td>
 								<td class="td_right"><input type="text"
-									name="member_Password" id="member_Password"
+									id="member_Password"
 									value="${memberVO.member_Password}"></td>
 									<div class="errMsgs">${errorMsgs}</div>
 							</tr>
@@ -194,7 +192,6 @@ body {
 									<input type="submit" id="" value="確認送出"
 										onclick="checkRegister();"> <input type="hidden"
 										name="action" value="update">
-										
 								</div>
 							</td>
 
@@ -202,6 +199,7 @@ body {
 						</table>
 
 					</form>
+
 				</div>
 
 			</div>
@@ -218,32 +216,13 @@ body {
 			</p>
 		</footer>
 	</div>
-
 <script>
-// let inputfile = document.getElementById('file-uploader');
-// let img = document.getElementById('img');
-// inputfile.addEventListener('change',function(e){
-//     img.src = URL.createObjectURL(e.target.files[0]);
-// })
+let inputfile = document.getElementById('file-uploader');
+let img = document.getElementById('img');
+inputfile.addEventListener('change',function(e){
+    img.src = URL.createObjectURL(e.target.files[0]);
+})
 
-// let button = document.getElementById('button');
-// button.addEventListen('click'function(){
-// 	$.ajax({
-// 		url:,
-// 		data:,
-		
-		
-		
-// 		success:function(){
-// 			Swal.fire({
-//                 icon: 'success',
-//                 title: '',
-//                 text: '新增成功',
-//                 footer: ''
-//             })
-// 		}
-// 	})
-// })
 
 
 </script>

@@ -61,7 +61,7 @@
   }
   .arrow span {
       display: block;
-      width: 10px;
+      width: 10px;&cross;
       height: 10px;
       border-bottom: 2px solid #fff;
       border-left: 2px solid #fff;
