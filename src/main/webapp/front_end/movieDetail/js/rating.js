@@ -18,6 +18,7 @@ for (let i = 0; i < stars.length; i++) {
   stars[i].addEventListener("click", function () {
     ratingValue = i + 1;
     index = i;
+    $("input[name='CM_STAR']").prop("value", `${ratingValue}`)
     // document.getElementById("rating-value").innerHTML =
     //   "你打的分數是 " + ratingValue;
   });

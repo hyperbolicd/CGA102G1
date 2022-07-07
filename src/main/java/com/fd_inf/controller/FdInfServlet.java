@@ -3,6 +3,7 @@ package com.fd_inf.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,6 +17,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.fd_inf.model.FdInfService;
 import com.fd_inf.model.FdInfVO;
@@ -114,7 +118,6 @@ public class FdInfServlet extends HttpServlet {
 		}
 		if ("getPic".equals(action)) {
 
-//			Integer fdID = Integer.valueOf(req.getParameter("fdID"));
 			Integer fdID = Integer.valueOf(req.getParameter("fdID").trim());
 			FdInfService fdInfSvc = new FdInfService();
 			FdInfVO fdInfVO = fdInfSvc.getOneFdInf(fdID);
@@ -123,7 +126,7 @@ public class FdInfServlet extends HttpServlet {
 				
 				res.getOutputStream().write(fdPicture);
 			}else {
-				InputStream in = getServletContext().getResourceAsStream("/back_end/fd_inf/imges/123.png");
+				InputStream in = getServletContext().getResourceAsStream("/back_end/fd_inf/imges/123.jpg");
 			    byte[] b = new byte[in.available()];
 			    in.read(b);
 			    res.getOutputStream().write(b);
@@ -157,17 +160,14 @@ public class FdInfServlet extends HttpServlet {
 
 			String fdDT = req.getParameter("fdDT").trim();
 
-//			Part part = req.getPart("fdPicture");
-//			InputStream in = part.getInputStream();
-//			byte[] fdPicture = new byte[in.available()];
+
 			byte[] fdPicture = req.getPart("fdPicture").getInputStream().readAllBytes();
 			if (fdPicture.length == 0) {
 				FdInfService fdInfSvc = new FdInfService();
 				FdInfVO fdInfVO = fdInfSvc.getOneFdInf(fdID);
 				fdPicture = fdInfVO.getFdPicture();
 			}
-	//		in.read(fdPicture);
-	//		in.close();
+
 
 			java.lang.Byte fdState = java.lang.Byte.valueOf(req.getParameter("fdState"));
 
@@ -276,7 +276,7 @@ public class FdInfServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 
-		if ("updateStatus".equals(action)) { // 來自listAllEmp.jsp 或 /dept/listEmps_ByDeptno.jsp的請求
+		if ("updateStatus".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -292,18 +292,18 @@ public class FdInfServlet extends HttpServlet {
 
 			// 將最新的狀態丟回去
 			java.lang.Byte newStatus = fdInfVO.getFdState();
-//			HashMap<String, Byte> map = new HashMap<String, Byte>();
-//			JSONObject jsonobj = new JSONObject();
-//			try {
-//				jsonobj.put("newStatus", newStatus);
-//				out.print(jsonobj.toString());
-//				return;
-//			}catch(JSONException e) {
-//				e.printStackTrace();
-//			}finally {
-//				out.flush();
-//				out.close();
-//			}
+			HashMap<String, Byte> map = new HashMap<String, Byte>();
+			JSONObject jsonobj = new JSONObject();
+			try {
+				jsonobj.put("newStatus", newStatus);
+				out.print(jsonobj.toString());
+				return;
+			}catch(JSONException e) {
+				e.printStackTrace();
+			}finally {
+				out.flush();
+				out.close();
+			}
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) ***********/
 			String url = "/back_end/fd_inf/allFdinf.jsp";

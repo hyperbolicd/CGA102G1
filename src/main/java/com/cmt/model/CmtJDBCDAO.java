@@ -11,6 +11,7 @@ import java.util.List;
 
 import com.cmt.model.CmtJDBCDAO;
 import com.cmt.model.CmtVO;
+import com.movie.model.MovieVO;
 
 public class CmtJDBCDAO implements CmtDAO_interface{
 
@@ -33,6 +34,11 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 		"UPDATE cmt SET CM_STATE =?  WHERE CM_ID =? ;";
 	private static final String GET_CMTS_BY_MV_ID_STMT =
 			"SELECT CM_ID, MEMBER_ID, MV_ID, CM_TEXT, CM_LIKE, CM_STAR, CM_STATE, CM_DATE FROM cmt where MV_ID = ?";
+	private static final String GET_CMTS_BY_member_ID_STMT =
+			"SELECT CM_ID, MEMBER_ID, MV_ID, CM_TEXT, CM_LIKE, CM_STAR, CM_STATE, CM_DATE FROM cmt where MEMBER_ID = ?";
+	private static final String UPDATE_MOVIE_TT_STMT = 
+			"UPDATE movie SET MV_TT_CM=?, MV_TT_STAR=? WHERE MV_ID=?";
+	
 	
 	@Override
 	public void insert(CmtVO cmtVO) {
@@ -180,7 +186,7 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 	}
 
 	@Override
-	public CmtVO findByPrimaryKey(Integer empno) {
+	public CmtVO findByPrimaryKey(Integer CM_ID) {
 
 		CmtVO cmtVO = null;
 		Connection con = null;
@@ -193,7 +199,7 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
-			pstmt.setInt(1, empno);
+			pstmt.setInt(1, CM_ID);
 
 			rs = pstmt.executeQuery();
 
@@ -358,6 +364,7 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 
 		try {
 
@@ -414,6 +421,120 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 			}
 		}
 		return list;
+	}
+	
+	@Override
+	public List<CmtVO> getCmtsBymember_ID(Integer member_ID) {
+		List<CmtVO> list = new ArrayList<CmtVO>();
+		CmtVO cmtVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_CMTS_BY_member_ID_STMT);
+			pstmt.setInt(1, member_ID);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				// cmtVO 也稱為 Domain objects
+				cmtVO = new CmtVO();
+				cmtVO.setCM_ID(rs.getInt("CM_ID"));
+				cmtVO.setMEMBER_ID(rs.getInt("MEMBER_ID"));
+				cmtVO.setMV_ID(rs.getInt("MV_ID"));
+				cmtVO.setCM_TEXT(rs.getString("CM_TEXT"));
+				cmtVO.setCM_LIKE(rs.getInt("CM_LIKE"));
+				cmtVO.setCM_STAR(rs.getInt("CM_STAR"));
+				cmtVO.setCM_STATE(rs.getInt("CM_STATE"));
+				cmtVO.setCM_DATE(rs.getTimestamp("CM_DATE"));
+				list.add(cmtVO); // Store the row in the list
+			}
+			
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	
+	@Override
+	public MovieVO updateMovieTT(MovieVO movieVO) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_MOVIE_TT_STMT);
+
+			pstmt.setInt(1, movieVO.getMvTtCm());
+			pstmt.setInt(2, movieVO.getMvTtStar());
+			pstmt.setInt(3, movieVO.getMvId());
+			
+
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return movieVO;
 	}
 
 

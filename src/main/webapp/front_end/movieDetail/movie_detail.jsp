@@ -5,7 +5,10 @@
 <%@ page import="com.movie.model.*"%>
 <%@ page import="com.cmt.model.*"%>
 <%@ page import="com.showing.model.*"%>
+<%@ page import="com.member.model.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="redis.clients.jedis.Jedis"%>
+<%@ page import="redis.clients.jedis.JedisPool"%>
 
 <%
 //MovieServlet.java(Controller), 存入req的MovieVO物件
@@ -14,16 +17,23 @@ MovieVO movieVO = (MovieVO) request.getAttribute("movieVO");
 CmtService cmtSvc = new CmtService();
 List<CmtVO> list = cmtSvc.getCmtsByMV_ID(movieVO.getMvId());
 pageContext.setAttribute("list", list);
+//該電影的總星數
+int ttstar = 0;
 for (CmtVO lis : list) {
-	System.out.println(lis.getCM_ID());
+	ttstar += lis.getCM_STAR();
+	System.out.println(lis.getCM_ID() + " , " + lis.getCM_STAR());
 }
-//取得場次的VO
-ShowingService showingSvc = new ShowingService();
-// List<ShowingVO> showingList = showingSvc.getShowingByDate();
+	System.out.println(ttstar);
+pageContext.setAttribute("ttstar", ttstar);
+//該電影的評論數
+int ttcmt = list.size();
+pageContext.setAttribute("ttcmt", ttcmt);
+//該電影的平均星數
+int avgstar = ttstar / ttcmt;
+pageContext.setAttribute("avgstar", avgstar);
+//點讚的部分
 
-//平均星數
-int avgStar = (movieVO.getMvTtStar() / movieVO.getMvTtCm());
-pageContext.setAttribute("avgStar", avgStar);
+
 %>
 
 <!DOCTYPE html>
@@ -32,9 +42,7 @@ pageContext.setAttribute("avgStar", avgStar);
 <head>
 <title>${movieVO.mvName}</title>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/front_end/movieDetail/styles/layout.css"
-	type="text/css">
+<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/movieDetail/styles/layout.css" type="text/css"> --%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link
@@ -55,79 +63,29 @@ pageContext.setAttribute("avgStar", avgStar);
 </head>
 
 <body>
+
 	<!-- 置頂按鈕 -->
 	<button type="button" id="BackTop" class="toTop-arrow"></button>
-	<script>
-		$(function() {
-			$('#BackTop').click(function() {
-				$('html,body').animate({
-					scrollTop : 0
-				}, 333);
-			});
-			$(window).scroll(function() {
-				if ($(this).scrollTop() > 300) {
-					$('#BackTop').fadeIn(222);
-				} else {
-					$('#BackTop').stop().fadeOut(222);
-				}
-			}).scroll();
-		});
-	</script>
+	 <script>
+	    $(function () {
+	      $('#BackTop').click(function () {
+	        $('html,body').animate({ scrollTop: 0 }, 333);
+	      });
+	      $(window).scroll(function () {
+	        if ($(this).scrollTop() > 300) {
+	          $('#BackTop').fadeIn(222);
+	        } else {
+	          $('#BackTop').stop().fadeOut(222);
+	        }
+	      }).scroll();
+	    });
+	  </script>
+	 <div class="wrapper row1" style="height: 60px;">
+	  <jsp:include page="/front_end/header.jsp" />
+	  <jsp:include page="/front_end/header_css.jsp" />
+	 </div>
 
-	<div class="wrapper row1" style="height: 60px;">
-		<header id="header" class="clear">
-			<div id="hgroup">
-				<img
-					src="<%=request.getContextPath()%>/front_end/movieDetail/images/demo/logo6.png"
-					width="200" height="60" alt="">
-			</div>
 
-			<div class="dropdown"
-				style="margin: 0; padding: 0; list-style: none;">
-
-				<button class="dropbtn">會員專區</button>
-				<div class="dropdown-content">
-					<a href="#">會員登入</a> <a href="#">會員註冊</a> <a href="#">查看票夾</a> <a
-						href="#">查看評論</a> <a href="#">許願池</a>
-				</div>
-			</div>
-
-			<div class="dropdown">
-				<button class="dropbtn">最新消息</button>
-				<div class="dropdown-content">
-					<a href="#">影城公告</a> <a href="#">影城好康</a>
-				</div>
-			</div>
-
-			<div class="dropdown">
-				<button class="dropbtn">電影資訊</button>
-				<!-- <a href="#"></a>
-        <a href="#"></a> 下拉選單-->
-			</div>
-
-			<div class="dropdown">
-				<button class="dropbtn">影城專區</button>
-				<div class="dropdown-content">
-					<a href="#">影城介紹</a> <a href="#">影城地點</a> <a href="#">票價資訊</a> <a
-						href="#">餐飲資訊</a>
-				</div>
-			</div>
-
-			<div class="dropdown">
-				<button class="dropbtn">商城</button>
-				<!-- <a href="#"></a>
-        <a href="#"></a> 下拉選單-->
-			</div>
-
-			<div class="dropdown">
-				<button class="dropbtn">Q & A專區</button>
-				<div class="dropdown-content">
-					<a href="#">常見問題</a> <a href="#">聯絡我們</a>
-				</div>
-			</div>
-
-		</header>
-	</div>
 
 	<!-- 內容 -->
 	<jsp:useBean id="movieSvc" scope="page" class="com.movie.model.MovieService" />
@@ -156,18 +114,13 @@ pageContext.setAttribute("avgStar", avgStar);
 		<div id="booking">
 			<div id="date">
 				<select name="" id="dateSelector" class="picker toRed">
+				<option>選擇日期</option>
 					<!-- inject date -->
 				</select>
 			</div>
 			<div id="time">
 				<select name="" id="showingTime" class="picker toRed">
-<!-- 					<option value="">--:--</option> -->
-<!-- 					<option value="">08:00</option> -->
-<!-- 					<option value="">11:00</option> -->
-<!-- 					<option value="">14:00</option> -->
-<!-- 					<option value="">17:00</option> -->
-<!-- 					<option value="">20:00</option> -->
-<!-- 					<option value="">23:00</option> -->
+					<!-- inject showing time -->
 				</select>
 			</div>
 			<div id="book">
@@ -180,11 +133,11 @@ pageContext.setAttribute("avgStar", avgStar);
 				<div id="cmt_title">
 					<span>COMMENTS</span>
 				</div>
-				<div id="cmt_avg" value="${avgStar}" class="cmt_star">
+				<div id="cmt_avg" value="${avgstar}" class="cmt_star">
 					
 				</div>
 				<div id="cmt_ttcmt">
-					<span>【${movieVO.mvTtCm}則評論】</span>
+					<span>【${ttcmt}則評論】</span>
 				</div>
 				<div id="cmt_open">
 					<span class="fa fa-plus"></span>
@@ -214,6 +167,7 @@ pageContext.setAttribute("avgStar", avgStar);
 						<hr class="hr_cmt">
 						<div class="cmt_like">
 							<span class="fa fa-heart like">${cmtVO.CM_LIKE}</span>
+							<input type="hidden" name="CM_ID" value="${cmtVO.CM_ID}">
 						</div>
 						<div class="cmt_date">
 							<span><fmt:formatDate value="${cmtVO.CM_DATE}"
@@ -229,28 +183,31 @@ pageContext.setAttribute("avgStar", avgStar);
 		<!--     新評論 -->
 <hr class="hr-shadow">
 
+
+		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cmt/cmt.do" name="form1">
 		<div id="newCmt">
 			<div class="member">
 				<div class="member_pic">
-					<img id="thisMemPic" src="./images/test0003.jpg" alt="">
+					<img id="thisMemPic" src="<%=request.getContextPath()%>${memberVO.member_Pic}" alt="">
 				</div>
 				<div class="member_name">
 					<div class="member_nickname">
-						<span id="thisMemNickname">乙骨憂太</span>
+						<span id="thisMemNickname">${memberVO.member_Name}</span>
 					</div>
 					<div class="member_id">
-						<span id="thisMemId">test0003</span>
+						<span id="thisMemId">${memberVO.member_ID}</span>
 					</div>
 				</div>
 			</div>
 			<div class="cmt_detail">
 				<div class="cmt_text">
-					<textarea name="" id=""></textarea>
+					<textarea name="CM_TEXT" id="" maxlength="500"></textarea>
 				</div>
 				<hr>
 				<div id="conf">
 					<div class="cmtBtnArea">
-						<p>comment</p>
+						<input type="submit" value="comment">
+<!-- 					<p>comment</p> -->
 					</div>
 					<div id="netaArea">
 						<div>評論是否劇透</div>
@@ -270,7 +227,19 @@ pageContext.setAttribute("avgStar", avgStar);
 				</div>
 			</div>
 		</div>
-
+		<input type="hidden" name="MEMBER_ID" value="${memberVO.member_ID}">
+		<input type="hidden" name="MV_ID" value="${movieVO.mvId}">
+		<input type="hidden" name="CM_LIKE" value="0">
+		<input type="hidden" name="CM_STAR" value="">
+		<input type="hidden" name="CM_STATE" value="0">
+		<input type="hidden" name="CM_DATE" value="">
+		
+		<input type="hidden" name="ttcmt" value="${ttcmt}">
+		<input type="hidden" name="ttstar" value="${ttstar}">
+		
+		<input type="hidden" name="action" value="insert">
+<!-- 		<input type="submit" value="送出新增"> -->
+	</FORM>
 
 
 
@@ -313,8 +282,9 @@ pageContext.setAttribute("avgStar", avgStar);
 		src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 	<!-- Ajax的測試Script -->
 	<script>
-		//在網頁加載後，對id=doAjaxBtn的Button設定click的function
+		//日期對應時段的Ajax
 		$("#dateSelector").change(function(){
+			$("#showingTime").html("");
 			let SH_TIME1 = $("#dateSelector").val() + " 09:00:00";
 			console.log(SH_TIME1);
 			let url = "${pageContext.request.contextPath}/showing/showing.do?action=getShowingByDate&SH_TIME=" + SH_TIME1;
@@ -337,30 +307,43 @@ pageContext.setAttribute("avgStar", avgStar);
 		    });
 		});
 		
-// 		let SH_TIME1 = $("#dateSelector").val();
-// 		  console.log(SH_TIME1);
-// 	$(document).ready(function () {
-// 	  $("#dateSelector").change(function (e) {
-// 		  let SH_TIME1 = $("#dateSelector").val() + " 09:00:00";
-// 		  console.log(SH_TIME1);
-// 	  let url = ${pageContext.request.contextPath}"/showing/showing.do?action=getShowingByDate&SH_TIME=" + SH_TIME1;
-// 	    $.ajax({
-// 	      type: "POST", //指定http參數傳輸格式為POST
-// 	      url: "url", //請求目標的url，可在url內加上GET參數，如 www.xxxx.com?xx=yy&xxx=yyy
-// 	      dataType: "json",
-// 	      async: false,
-// 	      success: function (response) {
-// 	    	  for(ShowingVO res : response){
-// 		        $("#showingTime").append("<option>" + res.SH_TIME + "</option>");  
-// 	    	  }
-// 	      },
-// 	      //Ajax失敗後要執行的function，此例為印出錯誤訊息
-// 	      error: function (xhr, ajaxOptions, thrownError) {
-// 	        alert(xhr.status + "\n" + thrownError);
-// 	      },
-// 	    });
-// 	  });
-// 	});
+
+		//評論點讚的Ajax
+		$(document).ready(function(){
+			
+// 			$(".like").click(function(e){
+// 				let MEMBER_ID1 = $('#thisMemId').text();
+// 		    	let CM_ID1 = $(this).next().val();
+// 		    	console.log(MEMBER_ID1);
+//                 console.log(CM_ID1);
+// 			})
+			
+			
+		    $("#comment").on("click",".like", function(e){
+		    	let MEMBER_ID1 = $('#thisMemId').text();
+		    	let CM_ID1 = $(this).next().val();
+		    	console.log("member ID: " + MEMBER_ID1);
+                console.log("comment ID: " + CM_ID1);
+		    	
+		    	$.ajax({
+				      type: "POST", //指定http參數傳輸格式為POST
+				      url: "${pageContext.request.contextPath}/cmt/cmt.do?action=commentLike&MEMBER_ID=" + MEMBER_ID1 + "&CM_ID=" + CM_ID1, //請求目標的url，可在url內加上GET參數，如 www.xxxx.com?xx=yy&xxx=yyy
+				      dataType: "json",
+				      async: false,
+				      success: function (response) {
+				    	  console.log("total like: " + response);
+				    	  console.log(e.target.textContent);
+				    	  e.target.textContent = response;
+					
+				      },
+				      //Ajax失敗後要執行的function，此例為印出錯誤訊息
+				      error: function (xhr, ajaxOptions, thrownError) {
+				        alert(xhr.status + "\n" + thrownError);
+				      }
+			    });
+		    	
+		    })
+		});
 
 	
 	</script>

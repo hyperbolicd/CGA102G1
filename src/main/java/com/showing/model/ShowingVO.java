@@ -1,6 +1,9 @@
 package com.showing.model;
 import java.sql.Timestamp;
 
+import com.hall.model.HallService;
+import com.hall.model.HallVO;
+
 public class ShowingVO implements java.io.Serializable{
 	private Integer SH_ID;
 	private Integer mvId;
@@ -67,11 +70,17 @@ public class ShowingVO implements java.io.Serializable{
 	}
 	
 	
-    // for join MV_NAME from mvId
+
     public com.movie.model.MovieVO getMovieVO() {
 	    com.movie.model.MovieService movieSvc = new com.movie.model.MovieService();
 	    com.movie.model.MovieVO movieVO = movieSvc.getOneMovie(mvId);
 	    return movieVO;
+    }
+    
+    public HallVO getHallVO() {
+    	HallService hallSvc = new HallService();
+    	HallVO hallVO = hallSvc.findByPrimaryKey(HL_ID);
+    	return hallVO;
     }
 
 }
