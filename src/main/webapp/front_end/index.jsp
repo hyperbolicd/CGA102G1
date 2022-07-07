@@ -33,6 +33,7 @@ pageContext.setAttribute("SellTkMVlist", SellTkMVlist);
 	href="${pageContext.request.contextPath}/front_end/css/allMovie.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
+<<<<<<< HEAD
 <!-- DatePicker.css -->
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/showing/css/daterangepicker.css" />
@@ -41,6 +42,77 @@ pageContext.setAttribute("SellTkMVlist", SellTkMVlist);
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script
 	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+=======
+  <!-- 輪播圖片 css -->
+  <style type="text/css">
+  div,ul,li,a,span,img{margin:0;padding:0;}
+  #banner { 
+      overflow:hidden; 
+      width:100%; 
+      height:400px; 
+      position:relative; 
+      float:left;
+      padding-bottom: 10px;
+  }
+  #tab>img:not(:first-child){ 
+      display:none; 
+  }
+  .lunbo_btn {
+      height: 15px;
+      width: 100%;
+      margin: 0px auto;
+      margin-top: -40px;
+      position: absolute;
+      z-index: 3;
+      text-align: center;
+  }
+  .lunbo_btn span {
+      width:14px;
+      height:14px;
+      display:inline-block;
+      background-color:#b4b5b7;
+      border-radius:50%;
+      margin:0px 2px;
+      cursor:pointer;
+  }
+  .lunbo_btn span.hover {
+      background-color:#ffb23c;
+  }
+  .arrow {
+      display: none;
+      width: 30px;
+      height: 60px;
+      background-color: rgba(0,0,0,0.4);
+      position: absolute;
+      top: 50%;
+      margin-top: -30px;
+      z-index:999;
+  }
+  .arrow span {
+      display: block;
+      width: 10px;&cross;
+      height: 10px;
+      border-bottom: 2px solid #fff;
+      border-left: 2px solid #fff;
+  }
+  .slider_left {
+      margin: 25px 0 0 10px;
+      transform: rotate(45deg);
+  }
+  .prve {
+      left: 0;
+  }
+  .next {
+      right: 0;
+  }
+  .slider_right {
+      margin: 25px 0 0 5px;
+      transform: rotate(-135deg);
+  }
+  .arrow:hover{background:#444;}
+  #banner:hover .arrow{display:block;}
+  
+>>>>>>> c73c2f523bd6213ef308503cad847545641fc13f
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/front_end/css/sellTK.css">

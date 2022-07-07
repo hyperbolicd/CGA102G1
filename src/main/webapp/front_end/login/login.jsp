@@ -12,9 +12,8 @@
   <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/css/layout.css" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
  
-  
- 
-   <jsp:include page="/front_end/header.jsp" />
+<%@ include file="/front_end/header.jsp"%>
+<%@ include file="/front_end/header_css.jsp"%>
    
     </head>
     <body>
