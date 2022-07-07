@@ -7,17 +7,25 @@ import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 
 import com.ann.model.*;
-import com.faq.model.FaqService;
-import com.faq.model.FaqVO;
+import com.emp_account.model.EmpAccountService;
 import com.fd_inf.model.FdInfService;
 import com.fd_inf.model.FdInfVO;
+
+
 
 @WebServlet("/ann/ann.do")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 
 public class AnnServlet extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
@@ -91,37 +99,37 @@ public class AnnServlet extends HttpServlet {
 			AnnVO annVO = annSvc.getOneAnn(ann_no);
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-			String param = "?ann_no=" + annVO.getAnn_no() + "&ann_date=" + annVO.getAnn_date() + "&ann_title="
-					+ annVO.getAnn_title() + "&editor1=" + annVO.getAnn_content() + "&ann_picture="
-					+ annVO.getAnn_picture();
-			String url = "/back_end/ann/updateAnn.jsp" + param;
+			req.setAttribute("annVO", annVO);
+			String url = "/back_end/ann/updateAnn.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 updateTkInf.jsp
 			successView.forward(req, res);
 		}
 		
-		if ("getPic".equals(action)) {
-
-//			Integer ann_no = Integer.valueOf(req.getParameter("ann_no"));
-			Integer ann_no = Integer.valueOf(req.getParameter("ann_no").trim());
-			AnnService annSvc = new AnnService();
-			AnnVO annVO = annSvc.getOneAnn(ann_no);
-			byte[] ann_picture = annVO.getAnn_picture();
-			if (ann_picture.length != 0) {
-				
-				res.getOutputStream().write(ann_picture);
-			}else {
-				InputStream in = getServletContext().getResourceAsStream("/back_end/ann/imges/123.png");
-			    byte[] b = new byte[in.available()];
-			    in.read(b);
-			    res.getOutputStream().write(b);
-			    in.close();
-			}
-		}
+//		if ("getPic".equals(action)) {
+//			System.out.println("抓");
+//			Integer ann_no = Integer.valueOf(req.getParameter("ann_no").trim());
+//			System.out.println(ann_no);
+//			AnnService annSvc = new AnnService();
+//			AnnVO annVO = annSvc.getOneAnn(ann_no);
+//			byte[] ann_picture = null; 
+//					
+//			if (annVO.getAnn_picture()!= null) {
+//				ann_picture = annVO.getAnn_picture();
+//				res.getOutputStream().write(ann_picture);
+//			}else {
+//				InputStream in = getServletContext().getResourceAsStream("/back_end/ann/images");
+//			    byte[] b = new byte[in.available()];
+//			    in.read(b);
+//			    res.getOutputStream().write(b);
+//			    in.close();
+//			}
+//		}
 		
 
 		if ("update".equals(action)) { // 來自updateTkInf.jsp的請求
 
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+			//List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
@@ -135,20 +143,24 @@ public class AnnServlet extends HttpServlet {
 			}
 
 			String ann_title = req.getParameter("ann_title");
-			String ann_titleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,50}$";
 			if (ann_title == null || ann_title.trim().length() == 0) {
 				errorMsgs.put("ann_title", "公告標題: 請勿空白");
-			} else if (!ann_title.trim().matches(ann_titleReg)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.put("ann_title", "公告標題: 只能是中、英文字母、數字和_ , 且長度必需在2到50之間");
 			}
 
-			String ann_content = req.getParameter("editor1").trim();
+			String ann_content = req.getParameter("ann_content").trim();
 
 			Part part = req.getPart("ann_picture");
-			InputStream in = part.getInputStream();
-			byte[] ann_picture = new byte[in.available()];
-			in.read(ann_picture);
-			in.close();
+			byte[] ann_picture = null;
+			InputStream in = null;
+			if(part.getSize() == 0) {
+				AnnService annSvc = new AnnService();
+				ann_picture = annSvc.getOneAnn(ann_no).getAnn_picture();
+			} else {
+				in = part.getInputStream();
+				ann_picture = new byte[in.available()];
+				in.read(ann_picture);
+				in.close();
+			}
 			
 			AnnVO annVO = new AnnVO();
 			annVO.setAnn_no(ann_no);
@@ -179,6 +191,7 @@ public class AnnServlet extends HttpServlet {
 		if ("insert".equals(action)) { // 來自addTkInf.jsp的請求
 
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+			//List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
@@ -189,19 +202,16 @@ public class AnnServlet extends HttpServlet {
 				ann_date = java.sql.Date.valueOf(req.getParameter("ann_date").trim());
 			} catch (IllegalArgumentException e) {
 				ann_date = new java.sql.Date(System.currentTimeMillis());
-				errorMsgs.put("請輸入日期!!", "2022-03-14");
+				errorMsgs.put("ann_date", "請輸入日期!!");
 			}
 
 			String ann_title = req.getParameter("ann_title");
-			String ann_titleReg = "{2,50}$";
 			if (ann_title == null || ann_title.trim().length() == 0) {
 				errorMsgs.put("ann_title", "公告標題: 請勿空白");
-			} else if (!ann_title.trim().matches(ann_titleReg)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.put("ann_title", "公告標題: 長度必需在2到50之間");
 			}
 
-			String ann_content = req.getParameter("editor1").trim();
-
+			String ann_content = req.getParameter("ann_content").trim();
+			
 			Part part = req.getPart("ann_picture");
 			InputStream in = part.getInputStream();
 			byte[] ann_picture = new byte[in.available()];
@@ -225,7 +235,8 @@ public class AnnServlet extends HttpServlet {
 
 			/*************************** 2.開始新增資料 ***************************************/
 			AnnService annSvc = new AnnService();
-			annSvc.addAnn(ann_date, ann_title, ann_content, ann_picture);
+			annSvc.addAnn(ann_date, ann_title, ann_content);
+			//annSvc.addAnn(ann_date, ann_title, ann_content, ann_picture);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			String url = "/back_end/ann/allAnn.jsp";

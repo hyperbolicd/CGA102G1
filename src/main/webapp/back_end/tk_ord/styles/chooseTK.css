@@ -25,16 +25,16 @@
 }
 
 .showmain {
-	width: 300px;
-	font-size: 50px;
+	width: 400px;
+	font-size: 25px;
 	font-weight: bold;
 }
 
 .showside {
-	width: 500px;
+	width: 400px;
 }
 
-.showname, .showtime, .hellname {
+.showname, .showtime, .hellname, .showmain {
 	display: flex;
 	justify-content: center;
 	align-content: center;

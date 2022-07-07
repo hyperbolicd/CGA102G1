@@ -7,6 +7,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -118,16 +119,16 @@
 
 			<div>
 				<div class="temporaryInf">
-					<div class="timer">
-						<table class="sidetable">
-							<tr>
-								<td>剩下時間</td>
-							</tr>
-							<tr>
-								<td>01:00</td>
-							</tr>
-						</table>
-					</div>
+<!-- 					<div class="timer"> -->
+<!-- 						<table class="sidetable"> -->
+<!-- 							<tr> -->
+<!-- 								<td>剩下時間</td> -->
+<!-- 							</tr> -->
+<!-- 							<tr> -->
+<!-- 								<td>01:00</td> -->
+<!-- 							</tr> -->
+<!-- 						</table> -->
+<!-- 					</div> -->
 					<div class="receiptouter">
 						<div class="seatsReceipt">
 							<p>
@@ -140,9 +141,14 @@
 				</div>
 
 				<div class="btBlock">
-					<a class="bt"
-						href="<%=request.getContextPath()%>/back_end/tk_ord/confirmOrder.jsp">繼續</a>
+					<a class="bt">繼續</a>
 				</div>
+				<!-- 				<form> -->
+				<!-- 					<input type="hidden" name="id" class="id"> -->
+				<!-- 					<input type="hidden" name="name" class= "name"> -->
+				<!-- 					<input type="hidden" name="unitPrice" class= "unitPrice"> -->
+				<!-- 					<input type="hidden" name="count" class= "count"> -->
+				<!-- 				</form> -->
 			</div>
 		</div>
 
@@ -163,15 +169,26 @@
 	let seatindex = [];
 	
 	$('.bt').click(function () {
+		if ($(".seatSelected").length < (TotalCount)) {
+            Swal.fire({
+                icon: 'error',
+                title: '很抱歉',
+                text: '您還有座位未選擇!',
+                footer: '請繼續選擇您的座位'
+            })
+		}else{	
 		
-		$(".seatSelected").each(function(){		
-			seatSelected.push($(this).attr("title"));
-			sessionStorage.setItem('seatSelected', JSON.stringify(seatSelected));
-			seatindex.push($(this).attr("seatindex"));
-			sessionStorage.setItem('seatindex', JSON.stringify(seatindex));
 		
-		})
+			$(".seatSelected").each(function(){		
+				seatSelected.push($(this).attr("title"));
+				sessionStorage.setItem('seatSelected', JSON.stringify(seatSelected));
+				seatindex.push($(this).attr("seatindex"));
+				sessionStorage.setItem('seatindex', JSON.stringify(seatindex));
 		
+			})
+			
+			document.location.href="<%=request.getContextPath()%>/back_end/tk_ord/confirmOrder.jsp";
+		}
     });   
 	
 	
@@ -179,21 +196,21 @@
 		
 // 	長座位==================================================
 		const body = document.getElementsByClassName('seatsChart')[0];
-		let col = 12;
-		let row = 15;
-		let seat = '010120102201030010410105101061010710108101091011000111101121020110202102030020410205102061020710208102091021000211102121030110302103030030410305103061030710308103091031000311103121040110402104030040410405104061040710408104091041000411104121050110502105030050410505105061050710508105091051000511105121060110602106030060410605106061060710608106091061000611106121070100702007030070400705007060070700708007090071000711007120080130802308030080430805308063080730808308093081000811308123090110902109030090410905109061090710908109091091000911109121100111002110030100411005110061100711008110091101001011110121110111102111030110411105111061110711108111091111001111111121120111202112030120411205112061120711208112091121001211112121130111302113030130411305113061130711308113091131001311113121140111402114030140411405114061140711408114091141001411114121150111502115030150411505115061150711508115091151001511115121';
+		let col = ${OrderHallVO.hlCol};
+		let row = ${OrderHallVO.hlRow};
+		let seat = '${OrderShowingVO.SH_SEAT_STATE}';
+
+		let showingID = ${OrderShowingVO.SH_ID};
+
+		
+		
+		
 		let rowname = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 		for (let j = 0; j < row; j++) {
 			const singeRow = document.createElement('div');
 			singeRow.className = 'seatRow';
 			body.append(singeRow);
-
-			// 			已放棄加字因為會跑版
-			// 			const rowtitle = document.createElement('div');
-			// 			rowtitle.className = 'seatRowNumber';
-			// 			singeRow.append(rowtitle)
-			// rowtitle.innerHTML = rowname[j] 已放棄加字因為會跑版
 
 			for (let i = 4 + (j * 5 * col); i < seat.length; i += 5) {
 				const input = document.createElement("div");
@@ -217,6 +234,8 @@
 					input.className = 'seatNumber seatReserved';
 				} else if (state === '4') {
 					input.className = 'seatNumber seatConstruction';
+				} else if (state === '5') {
+					input.className = 'seatNumber seatSelected';	
 				} else {
 					input.className = 'seatNumber seatUnavailable';
 				}
@@ -235,14 +254,14 @@
 
 		//  取出之前選的票數=====================================================
 		
-		const TKCountStr = sessionStorage.getItem('TKCount');
-        const TKCount = JSON.parse(TKCountStr);
+		const TKorderStr = sessionStorage.getItem('TKorder');
+        const TKorder = JSON.parse(TKorderStr);
         
 		let TotalCount = 0;
-		for (let TK of TKCount){
+		for (let TK of TKorder){
 			TotalCount += parseInt(TK.count);
 		}
-		
+		console.log(TotalCount);
 		// 點擊單一座位=========================================================
 		$(".seatNumber")
 				.click(
@@ -252,21 +271,40 @@
 								// 如果座位已選過
 								if ($(this).hasClass("seatSelected")) {
 									
-									
-									var thisId = $(this).attr('id');
-									var price = $('#seatsList .' + thisId)
+									console.log("有啟動取消");
+									let thisId = $(this).attr('id');
+									let price = $('#seatsList .' + thisId)
 											.val();
 									$(this).removeClass("seatSelected");
 										
                                     //把對應座位字串改回未選
-									let seatArray = seat.split("",seat.length);
-									let i = $(this).attr("seatIndex");
-									seatArray[i]= '1';
-									seat="";
-							        for (const newStr of seatArray){
-							            seat += newStr ;
-							        }
+                                    let index = $(this).attr("seatIndex");
+                                    seat = changeSeat(seat, index, '1');
+									console.log(seat);
+// 							        更新資料庫座位
+							        
+							        
+							        let url = "${pageContext.request.contextPath}/tkOrd/tkOrd.do?action=updateShowingByShowingID&SH_ID=" + showingID + "&SH_SEAT_STATE=" + seat;
+									$.ajax({
+           								url: url,
+            							type: 'post',
+           							 	dataType: 'json',
+            							async: false,
+            							timeout: 15000,
+            							success: function (data) {
+            								console.log("成功取消");
+            								seat = data.SH_SEAT_STATE;
+//             								
+            								sendMessage(index);
+            							} 
+	 
+									})
+							        
+							        
+							        
 									
+									
+							        
 									$('#seatsList .' + thisId).remove();
 									// 呼叫方法更新預覽
 									removeFromCheckout(price);
@@ -284,15 +322,13 @@
 									}else{
 									
 									// 取值
-									var thisId = $(this).attr('id');
-									var id = thisId.split("_");
-									var price = $(this).attr('value');
-									var seatDetails = "Row: " + id[0]
-											+ " Seat:" + id[1] + " Price:CA$:"
-											+ price;
+									let thisId = $(this).attr('id');
+									let id = thisId.split("_");
+									let price = $(this).attr('value');
+
 
 									// 將座位加到預覽
-									var seatDetails = "" + id[0] + "排" + id[1]
+									let seatDetails = "" + id[0] + "排" + id[1]
 											+ "號";
 									$("#seatsList")
 											.append(
@@ -307,15 +343,31 @@
 															
 									$(this).addClass("seatSelected");
 									
-									let seatArray = seat.split("",seat.length);
-									let i = $(this).attr("seatIndex");
-									seatArray[i]= '2';
-									seat="";
-							        for (const newStr of seatArray){
-							        	seat += newStr ;
-							            
-							        }
-									
+									let index = $(this).attr("seatIndex");
+                                    seat = changeSeat(seat, index, '5');
+							        
+							        
+// 							        更新資料庫座位=============================================================
+							        
+							      	let url = "${pageContext.request.contextPath}/tkOrd/tkOrd.do?action=updateShowingByShowingID&SH_ID=" + showingID + "&SH_SEAT_STATE=" + seat;
+									$.ajax({
+           								url: url,
+            							type: 'post',
+           							 	dataType: 'json',
+            							async: false,
+            							timeout: 15000,
+            							success: function (data) {
+            								console.log("成功新增");
+            								seat = data.SH_SEAT_STATE;
+
+            								console.log("成功長出新增");
+            								sendMessage(index);
+            								
+            							} 
+	 
+									})
+	
+		        
 									addToCheckout(price);
 									refreshCounter();
 									}
@@ -323,21 +375,7 @@
 							}
 						});
 
-		
-		
-		
-		
-		
-		// 清除單個座位
-// 		$(document).on('click', ".removeSeat", function() {
-// 			// 從座位取得id
-// 			var id = $(this).attr('id').split(":");
-// 			var price = $(this).attr('value')
-// 			$('#seatsList .' + id[1]).remove();
-// 			$("#" + id[1] + ".seatNumber").removeClass("seatSelected");
-// 			removeFromCheckout(price);
-// 			refreshCounter();
-// 		});
+
 		// 停留時顯示座位
 		$(".seatNumber").hover(function() {
 			if (!$(this).hasClass("seatUnavailable")) {
@@ -371,33 +409,83 @@
 			$('.txtSubTotal').text(num);
 		}
 
-		// 清除座位按鈕
-		// 		$("#btnClear").click(function() {
-		// 			$('.txtSubTotal').text(0);
-		// 			$(".seatsAmount").text(0);
-		// 			$('.seatSelected').removeClass('seatSelected');
-		// 			$('#seatsList li').remove();
-		// 		});
 
+
+let MyPoint = "/WebSocket_server_order/chooseSeat_user";
+let host = window.location.host;
+let path = window.location.pathname;
+let webCtx = path.substring(0, path.indexOf('/', 1));
+let endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+//串接起來=> ws://localhost:8081/CGA102G1/WebSocket_server/backend_user
+
+let webSocket;
+
+	function connect() {
+		webSocket = new WebSocket(endPointURL);
 		
-		
-			//計時器
-// 	let sec = 59;
-// 		setInterval(function() {
-// 			$("#timeOut").text(timeFormat(sec));
-// 			sec -= 1;
-// 		}, 1000)
-// 		setTimeout(
-// 			function() {
-// 				window.location.replace("${pageContext.request.contextPath}/index.jsp");
-// 			}, sec * 1000);
-// 		function timeFormat(second) {
-// 			let minute = parseInt(second / 60);
-// 			second %= 60;
-// 			(second < 10) ? second = '0' + second : second;
-// 			return minute + ":" + second;
-// 		}
-		
+		webSocket.onopen = function(event) {
+		};
+		// 此處收到來自server的session.getAsyncRemote().sendText(message);
+		webSocket.onmessage = function(event) {
+			let obj = JSON.parse(event.data);
+			let seat_index = obj.seat_index;
+			console.log(seat[seat_index])
+			console.log(seat[seat_index])
+// 			if (seat[seat_index] === '1'){
+			// Data
+            seat = changeSeat(seat, seat_index, '2');
+            // UI
+            var doms = $('.seatNumber'); 
+            for (let i = 0; i < doms.length; i++) {
+            	if($(doms[i]).attr('seatindex') === seat_index) {
+            		
+
+            		$(doms[i]).addClass('seatNumber seatUnavailable');
+            		break;
+            	}
+            }
+//             else if {}
+				
+// 			}
+			
+
+			console.log("選位頁面-收到推播!")
+
+		};
+
+		webSocket.onclose = function(event) {
+		};
+	}
+	connect();
+	
+	function sendMessage(index) {
+		let jsonObj = {
+			"seat_index" : index
+		};
+		// JSON API 轉成文字 送到SERVER 清空欄位 focus
+		webSocket.send(JSON.stringify(jsonObj));
+			
+	}
+
+	function disconnect() {
+		webSocket.close();
+	}
+
+	// common 
+	function changeSeat(seat, index, status) {
+		let seatArray = seat.split("");
+		seatArray[index] = status;
+		seat = "";
+        for (const newStr of seatArray){
+        	seat += newStr;
+        }
+        return seat;
+	}
+
+
 	</script>
+	
+
+<%-- 	<script src="${pageContext.request.contextPath}/back_end/tk_ord/javaScript/chooseSeatSocket.js"></script> --%>
 </body>
 </html>
