@@ -167,11 +167,11 @@ $(document).ready(function(){
 
 
 // 評論點讚計數
-$(document).ready(function(){
-    $("#comment").on("click",".like", function(e){
-        $(this).html(parseInt($(this).html()) + 1);
-    })
-});
+//$(document).ready(function(){
+//    $("#comment").on("click",".like", function(e){
+//        $(this).html(parseInt($(this).html()) + 1);
+//    })
+//});
 
 // 劇透checkbox
 $(document).ready(function(){

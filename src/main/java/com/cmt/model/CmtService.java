@@ -31,7 +31,7 @@ public class CmtService {
 	}
 	
 	public CmtVO updateCmt(Integer MEMBER_ID, Integer MV_ID, String CM_TEXT,
-			Integer CM_LIKE, Integer CM_STAR, Integer CM_STATE, Timestamp CM_DATE) {
+			Integer CM_LIKE, Integer CM_STAR, Integer CM_STATE, Timestamp CM_DATE, Integer CM_ID) {
 		
 		CmtVO cmtVO = new CmtVO();
 		
@@ -42,6 +42,7 @@ public class CmtService {
 		cmtVO.setCM_STAR(CM_STAR);
 		cmtVO.setCM_STATE(CM_STATE);
 		cmtVO.setCM_DATE(CM_DATE);
+		cmtVO.setCM_ID(CM_ID);
 		dao.update(cmtVO);
 		
 		return cmtVO;

@@ -186,7 +186,7 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 	}
 
 	@Override
-	public CmtVO findByPrimaryKey(Integer empno) {
+	public CmtVO findByPrimaryKey(Integer CM_ID) {
 
 		CmtVO cmtVO = null;
 		Connection con = null;
@@ -199,7 +199,7 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
-			pstmt.setInt(1, empno);
+			pstmt.setInt(1, CM_ID);
 
 			rs = pstmt.executeQuery();
 

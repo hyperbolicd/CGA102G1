@@ -1,6 +1,7 @@
 package com.cmt.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,8 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cmt.model.*;
+import com.common.JedisPoolUtil;
+import com.google.gson.Gson;
 import com.movie.model.MovieService;
 import com.movie.model.MovieVO;
+
+import redis.clients.jedis.Jedis;
 
 @WebServlet("/cmt/cmt.do")
 public class CmtServlet extends HttpServlet {
@@ -198,7 +203,7 @@ public class CmtServlet extends HttpServlet {
 				
 				/***************************2.開始修改資料*****************************************/
 				CmtService cmtSvc = new CmtService();
-				cmtVO = cmtSvc.updateCmt(MEMBER_ID, MV_ID, CM_TEXT, CM_LIKE,CM_STAR, CM_STATE, CM_DATE);
+				cmtVO = cmtSvc.updateCmt(MEMBER_ID, MV_ID, CM_TEXT, CM_LIKE,CM_STAR, CM_STATE, CM_DATE, CM_ID);
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("cmtVO", cmtVO); // 資料庫update成功後,正確的的cmtVO物件,存入req
@@ -327,5 +332,34 @@ public class CmtServlet extends HttpServlet {
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 		}
+		
+		
+		if ("commentLike".equals(action)) {
+			System.out.println("ajax test");
+			String requestURL = req.getParameter("requestURL");
+			
+			Integer MEMBER_ID = Integer.valueOf(req.getParameter("MEMBER_ID"));
+			Integer CM_ID = Integer.valueOf(req.getParameter("CM_ID"));
+			
+			Jedis jedis = JedisPoolUtil.getJedisPool().getResource();
+			jedis.sadd("comment:" + CM_ID + ":member", '"' + MEMBER_ID.toString() + '"');
+			Long totalLike = jedis.scard("comment:" + CM_ID.toString() + ":member");
+			
+			CmtService cmtSvc = new CmtService();
+			CmtVO cmtVO = cmtSvc.getOneCmt(CM_ID);
+			
+			cmtVO = cmtSvc.updateCmt(cmtVO.getMEMBER_ID(), cmtVO.getMV_ID(), cmtVO.getCM_TEXT(), totalLike.intValue(), cmtVO.getCM_STAR(), cmtVO.getCM_STATE(), cmtVO.getCM_DATE(), cmtVO.getCM_ID());
+			
+			
+			res.setContentType("application/json; charset=UTF-8");
+			req.setAttribute("totalLike", totalLike);
+			PrintWriter out = res.getWriter();
+			Gson gson = new Gson();
+			out.print(gson.toJson(totalLike));
+			
+			jedis.close();
+		}
+		
+		
 	}
 }

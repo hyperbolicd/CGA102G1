@@ -42,9 +42,7 @@ pageContext.setAttribute("avgstar", avgstar);
 <head>
 <title>${movieVO.mvName}</title>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/front_end/movieDetail/styles/layout.css"
-	type="text/css">
+<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/movieDetail/styles/layout.css" type="text/css"> --%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link
@@ -84,6 +82,7 @@ pageContext.setAttribute("avgstar", avgstar);
 	  </script>
 	 <div class="wrapper row1" style="height: 60px;">
 	  <jsp:include page="/front_end/header.jsp" />
+	  <jsp:include page="/front_end/header_css.jsp" />
 	 </div>
 
 
@@ -168,6 +167,7 @@ pageContext.setAttribute("avgstar", avgstar);
 						<hr class="hr_cmt">
 						<div class="cmt_like">
 							<span class="fa fa-heart like">${cmtVO.CM_LIKE}</span>
+							<input type="hidden" name="CM_ID" value="${cmtVO.CM_ID}">
 						</div>
 						<div class="cmt_date">
 							<span><fmt:formatDate value="${cmtVO.CM_DATE}"
@@ -282,7 +282,7 @@ pageContext.setAttribute("avgstar", avgstar);
 		src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 	<!-- Ajax的測試Script -->
 	<script>
-		//在網頁加載後，對id=doAjaxBtn的Button設定click的function
+		//日期對應時段的Ajax
 		$("#dateSelector").change(function(){
 			$("#showingTime").html("");
 			let SH_TIME1 = $("#dateSelector").val() + " 09:00:00";
@@ -307,30 +307,43 @@ pageContext.setAttribute("avgstar", avgstar);
 		    });
 		});
 		
-// 		let SH_TIME1 = $("#dateSelector").val();
-// 		  console.log(SH_TIME1);
-// 	$(document).ready(function () {
-// 	  $("#dateSelector").change(function (e) {
-// 		  let SH_TIME1 = $("#dateSelector").val() + " 09:00:00";
-// 		  console.log(SH_TIME1);
-// 	  let url = ${pageContext.request.contextPath}"/showing/showing.do?action=getShowingByDate&SH_TIME=" + SH_TIME1;
-// 	    $.ajax({
-// 	      type: "POST", //指定http參數傳輸格式為POST
-// 	      url: "url", //請求目標的url，可在url內加上GET參數，如 www.xxxx.com?xx=yy&xxx=yyy
-// 	      dataType: "json",
-// 	      async: false,
-// 	      success: function (response) {
-// 	    	  for(ShowingVO res : response){
-// 		        $("#showingTime").append("<option>" + res.SH_TIME + "</option>");  
-// 	    	  }
-// 	      },
-// 	      //Ajax失敗後要執行的function，此例為印出錯誤訊息
-// 	      error: function (xhr, ajaxOptions, thrownError) {
-// 	        alert(xhr.status + "\n" + thrownError);
-// 	      },
-// 	    });
-// 	  });
-// 	});
+
+		//評論點讚的Ajax
+		$(document).ready(function(){
+			
+// 			$(".like").click(function(e){
+// 				let MEMBER_ID1 = $('#thisMemId').text();
+// 		    	let CM_ID1 = $(this).next().val();
+// 		    	console.log(MEMBER_ID1);
+//                 console.log(CM_ID1);
+// 			})
+			
+			
+		    $("#comment").on("click",".like", function(e){
+		    	let MEMBER_ID1 = $('#thisMemId').text();
+		    	let CM_ID1 = $(this).next().val();
+		    	console.log("member ID: " + MEMBER_ID1);
+                console.log("comment ID: " + CM_ID1);
+		    	
+		    	$.ajax({
+				      type: "POST", //指定http參數傳輸格式為POST
+				      url: "${pageContext.request.contextPath}/cmt/cmt.do?action=commentLike&MEMBER_ID=" + MEMBER_ID1 + "&CM_ID=" + CM_ID1, //請求目標的url，可在url內加上GET參數，如 www.xxxx.com?xx=yy&xxx=yyy
+				      dataType: "json",
+				      async: false,
+				      success: function (response) {
+				    	  console.log("total like: " + response);
+				    	  console.log(e.target.textContent);
+				    	  e.target.textContent = response;
+					
+				      },
+				      //Ajax失敗後要執行的function，此例為印出錯誤訊息
+				      error: function (xhr, ajaxOptions, thrownError) {
+				        alert(xhr.status + "\n" + thrownError);
+				      }
+			    });
+		    	
+		    })
+		});
 
 	
 	</script>
