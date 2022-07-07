@@ -36,7 +36,7 @@ public class TkFolderServlet extends HttpServlet {
 			
 			req.setAttribute("map", map);
 			req.setAttribute("member_ID", member_ID);
-			String url = "/front_end/ticketFolder/ticketFolder2.jsp";
+			String url = "/front_end/ticketFolder/ticketFolder.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
 		}
