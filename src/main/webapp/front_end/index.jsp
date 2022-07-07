@@ -43,6 +43,7 @@ pageContext.setAttribute("SellTkMVlist", SellTkMVlist);
 <script
 	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
+<%@ include file="/front_end/header.jsp"%>
 <!-- 輪播圖片 css -->
   <style type="text/css">
   div,ul,li,a,span,img{margin:0;padding:0;}
@@ -112,10 +113,8 @@ pageContext.setAttribute("SellTkMVlist", SellTkMVlist);
   .arrow:hover{background:#444;}
   #banner:hover .arrow{display:block;}
   
->>>>>>> c73c2f523bd6213ef308503cad847545641fc13f
 
 
-<%@ include file="/front_end/header.jsp"%>
 
 <!-- 輪播圖片 css -->
 <style type="text/css">
