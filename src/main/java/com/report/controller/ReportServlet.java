@@ -70,8 +70,8 @@ public class ReportServlet extends HttpServlet {
 			
 			// 取得會員的資訊
 			MemberService mbSvc = new MemberService();
-			MemberVO rpMemberVO = mbSvc.getOneEmp(memberId);
-			MemberVO cmtMemberVO = mbSvc.getOneEmp(cmtMemberId);
+			MemberVO rpMemberVO = mbSvc.getOneMem(memberId);
+			MemberVO cmtMemberVO = mbSvc.getOneMem(cmtMemberId);
 			
 			req.setAttribute("reportVO", reportVO);
 			req.setAttribute("cmtVO", cmtVO);
