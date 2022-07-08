@@ -78,9 +78,9 @@ pageContext.setAttribute("list2", list2);
 				<div class="TKouter">
 					<table class="TKinner">
 						<tr class="TKh">
-							<td>票種</td>
-							<td>價格</td>
-							<td>描述</td>
+							<th>票種</th>
+							<th>價格</th>
+							<th>描述</th>
 						</tr>
 						<c:forEach var="tkinfVO" items="${list}">
 

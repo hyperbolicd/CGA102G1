@@ -38,7 +38,7 @@
 					<div class="guide1">
 						<div>新增票種</div>
 					</div>
-				</div><FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/tk_inf/tk_inf.do" name="form1">
+				</div><FORM METHOD="post" ACTION="<%=request.getContextPath()%>/tk_inf/tk_inf.do" name="form1">
 				<div class="TKouter">
 					
 						<table class="TKinner">

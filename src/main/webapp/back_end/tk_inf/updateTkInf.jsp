@@ -41,7 +41,7 @@
 					</div>
 				</div>
 				<FORM METHOD="post"
-					ACTION="<%=request.getContextPath()%>/back_end/tk_inf/tk_inf.do"
+					ACTION="<%=request.getContextPath()%>/tk_inf/tk_inf.do"
 					name="form1">
 					<div class="TKouter">
 

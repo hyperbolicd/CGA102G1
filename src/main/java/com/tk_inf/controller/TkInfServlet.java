@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 
 import com.tk_inf.model.*;
 
-@WebServlet("/back_end/tk_inf/tk_inf.do")
+@WebServlet("/tk_inf/tk_inf.do")
 public class TkInfServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)

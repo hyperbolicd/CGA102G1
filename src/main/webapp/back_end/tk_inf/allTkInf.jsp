@@ -74,7 +74,7 @@ pageContext.setAttribute("list", list);
 								<td>${tkinfVO.tkTypeDT}</td>
 								<td>
 									<FORM METHOD="post"
-										ACTION="<%=request.getContextPath()%>/back_end/tk_inf/tk_inf.do"
+										ACTION="<%=request.getContextPath()%>/tk_inf/tk_inf.do"
 										style="margin-bottom: 0px;">
 										<input class="tablebt" type="submit" value="н╫зя"> <input
 											type="hidden" name="tkTypeID" value="${tkinfVO.tkTypeID}">
