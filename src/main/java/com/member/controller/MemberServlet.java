@@ -195,11 +195,13 @@ public class MemberServlet extends HttpServlet {
 
 //更新會員狀態
 		if ("updateStatus".equals(action)) { // 來自listAllMember.jsp 修正會員狀態資料
-
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
+			
+			
+			
 			/*************************** 1.接收請求參數 ***************************************/
 			Integer member_Status = Integer.valueOf(req.getParameter("member_Status"));
 			Integer member_Id = Integer.valueOf(req.getParameter("member_Id"));
@@ -236,30 +238,31 @@ public class MemberServlet extends HttpServlet {
 		if ("login".equals(action)) {
 			System.out.println("start");
 			/*************************** 1.接收請求參數 ***************************************/
-			String member_Email = String.valueOf(req.getParameter("email")); // 請輸入email
+			String member_Email = String.valueOf(req.getParameter("email"));       // 請輸入email
 			String member_Password = String.valueOf(req.getParameter("password")); // 請輸入密碼
 			/*************************** 2.開始修改資料 *****************************************/
-			MemberService memberSvc = new MemberService();
-			MemberVO memberVo = new MemberVO();
-			memberVo.setMember_Email(member_Email);
-			memberVo.setMember_Password(member_Password);
-			System.out.println(member_Email);
-			System.out.println(member_Password);
-			HttpSession session = req.getSession(); // 取得session物件
-			session.setAttribute("account", req.getParameter("account")); // 在session內設定屬性 Attribte，指已登入過的標示與值
-			String location = (String) session.getAttribute("location");
+			MemberService memberSvc = new MemberService(); 
+			MemberVO memberVo = new MemberVO();            
+			memberVo.setMember_Email(member_Email);        
+			memberVo.setMember_Password(member_Password);  
+			System.out.println(member_Email);              
+			System.out.println(member_Password);           
+			HttpSession session = req.getSession();        
+			String location = (String) session.getAttribute("location");   
 			// =========================
-			memberVo = memberSvc.loginMember(memberVo);
-			Integer memberId = memberVo.getMember_ID();
-			memberVo = memberSvc.getOneMember(memberId);
+			memberVo = memberSvc.loginMember(memberVo);  
+			Integer memberId = memberVo.getMember_ID();  
+			memberVo = memberSvc.getOneMember(memberId); 
+			session.setAttribute("account", memberVo.getMember_ID()); // 在session內設定屬性 Attribte，指已登入過的標示與值
 			String url = "";
 			System.out.println(memberId);
-			if (memberId == null) {
-				url = "/front_end/login/login.jsp";
-			} else {
-				url = "/front_end/index.jsp";
-				session.setAttribute("memberVO", memberVo);
-				
+			if (memberId == null) {                      
+				url = "/front_end/login/login.jsp";		 
+			} else if(session.getAttribute("location") != null){  
+				res.sendRedirect((String) session.getAttribute("location"));
+			}else{
+				url = "/front_end/index.jsp";            
+				session.setAttribute("memberVO", memberVo);	//在session內設定屬性(Attribute)註冊的Email.password	
 			}
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			System.out.println("account");
@@ -382,6 +385,8 @@ public class MemberServlet extends HttpServlet {
 			successView.forward(req, res);
 			return;
 		}
+		
+		
 
 	}
 }

@@ -22,10 +22,12 @@ nav ul{margin:0; padding:0; list-style:none;}
   width:calc(100% - 40px);
   }
 
-#header #hgroup{float:left; margin:0 0 20px 0;}
-#header #hgroup h1, #header #hgroup h2{font-weight:normal; font-style:normal; text-transform:none;}
-#header #hgroup h1{font-size:20px;}
-#header #hgroup h2{font-size:15px;}
+#header #hgroup{float:left;} 
+
+/*margin:0 0 20px 0;*/
+/* #header #hgroup h1, #header #hgroup h2{font-weight:normal; font-style:normal; text-transform:none;} */
+/* #header #hgroup h1{font-size:20px;} */
+/* #header #hgroup h2{font-size:15px;} */
 
 #header nav{display:block; float:right; margin:10px 0 0 0; padding:20px 0; color:#750000; 
     background-color:#750000;opacity:1;}  /*下拉按鈕背景顏色*/

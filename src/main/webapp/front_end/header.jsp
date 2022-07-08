@@ -5,16 +5,17 @@
 
 <div class="wrapper row1" style="height:60px;">
     <header id="header" class="clear">
-      <div id="hgroup">
-      <a href="${pageContext.request.contextPath}/front_end/index.jsp">
-      <img src="<%=request.getContextPath()%>/front_end/index/images/demo/logo6.png" width="200" height="60" alt=""></a>
+      <div id="hgroup" >
+      <a href="${pageContext.request.contextPath}/front_end/index.jsp" > 
+           <img src="<%=request.getContextPath()%>/front_end/index/images/demo/logo6.png" width="200" height="50" alt=""></a>  
       </div>
+      
 
       <div class="dropdown" style=" margin: 0;padding: 0;list-style: none; ">
         <button class="dropbtn">會員專區</button>
         <div class="dropdown-content">
-          <a href="${pageContext.request.contextPath}/front_end/membercentre/membercentre.jsp">會員中心</a>
-          <a href="${pageContext.request.contextPath}/front_end/ticketFolder/ticketFolder.jsp">票卷匣</a>     
+          <a href="${pageContext.request.contextPath}/front_end/membercentre/membercentre.jsp">會員中心</a> 
+            
           <a href="${pageContext.request.contextPath}/TkFolderServlet.do?member_ID=${memberVO.member_ID}&action=listAllOrdInf">票卷匣</a>     
 
         </div>
@@ -39,8 +40,8 @@
       <div class="dropdown">
         <button class="dropbtn">影城專區</button>
         <div class="dropdown-content">
-          <a href="${pageContext.request.contextPath}/front_end/movieDetail/cinema_info.jsp">影城資訊</a>
-          <a href="#">票價與餐飲資訊</a>
+          <a href="${pageContext.request.contextPath}/front_end/cinemaInfo/cinema_info.jsp">影城資訊</a>
+          <a href="${pageContext.request.contextPath}/front_end/foodAndTicket/foodAndTicketInf.jsp">票價與餐飲資訊</a>
 <!--           <a href="#">餐飲資訊</a> -->
         </div>
       </div>

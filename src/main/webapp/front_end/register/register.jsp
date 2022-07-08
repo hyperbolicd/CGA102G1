@@ -112,7 +112,8 @@
 
 					<div class="input-box">
 						<span class="address">會員地址</span>
-						<div id="twzipcode" name="address">${errorMsgs.member_Address}</div>
+						<div class="errMsgs" style="color: red">${errorMsgs.member_Phone}</div>
+						<div id="twzipcode" name="address"></div>
 						<div style="display: flex">
 							<input type="text" placeholder="請輸入您的會員地址" id="member_Address"
 								name="member_Address">
