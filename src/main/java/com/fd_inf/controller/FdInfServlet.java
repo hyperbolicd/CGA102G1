@@ -27,7 +27,7 @@ import com.fd_inf.model.FdInfVO;
 //import org.json.JSONException;
 //import org.json.JSONObject;
 
-@WebServlet("/back_end/fd_inf/fd_inf.do")
+@WebServlet("/fd_inf/fd_inf.do")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class FdInfServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -109,9 +109,7 @@ public class FdInfServlet extends HttpServlet {
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("fdInfVO", fdInfVO);
 
-//			String param = "?fdID=" + fdInfVO.getFdID() + "&fdType=" + fdInfVO.getFdType() + "&fdName="
-//					+ fdInfVO.getFdName() + "&fdprice=" + fdInfVO.getFdprice() + "&fdDT=" + fdInfVO.getFdDT()
-//					+ "&fdPicture=" + fdInfVO.getFdPicture() + "&fdState=" + fdInfVO.getFdState();
+
 			String url = "/back_end/fd_inf/updateFdInf.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 updateFdInf.jsp
 			successView.forward(req, res);

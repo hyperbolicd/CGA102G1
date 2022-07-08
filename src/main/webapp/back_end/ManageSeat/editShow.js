@@ -14,11 +14,11 @@
     	}
 
     
-		// 監聽連動下拉選單
+	// 監聽連動下拉選單
 	document.getElementById('datePick').addEventListener('change',selectDate);
 	document.getElementById('showPick').addEventListener('change',selectTime);
 		
-		// 監聽改變狀態的按鈕
+	// 監聽改變狀態的按鈕
 	document.getElementById('colorsample1').addEventListener('click',changeStatus)
     document.getElementById('colorsample2').addEventListener('click',changeStatus)
     document.getElementById('colorsample3').addEventListener('click',changeStatus)
@@ -92,7 +92,7 @@
 			success: function(response) {
 				
 				let showSeatVO = response.showSeatVO;
-				// 將場次VO拉上來的座位字串指定給input
+				
 				let seat=showSeatVO.SH_SEAT_STATE;
 				generateSeat(seat);
 			}// 成功後要執行的函數

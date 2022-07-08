@@ -56,7 +56,7 @@
 				</div>
 
 				<FORM METHOD="post" name="form1" enctype="multipart/form-data"
-					ACTION="<%=request.getContextPath()%>/back_end/fd_inf/fd_inf.do"
+					ACTION="<%=request.getContextPath()%>/fd_inf/fd_inf.do"
 					name="form1">
 					<div class="TKouter">
 
@@ -101,7 +101,7 @@
 								<td></td>
 								
 								<td>
-								<img id="preview_img" src="<%=request.getContextPath()%>/back_end/fd_inf/fd_inf.do?action=getPic&fdID=${fdInfVO.fdID}"><br>
+								<img id="preview_img" src="<%=request.getContextPath()%>/fd_inf/fd_inf.do?action=getPic&fdID=${fdInfVO.fdID}"><br>
  													<input type="file" name="fdPicture" size="45" accept="image/*" onchange="readURL(this)" targetID="preview_img" 
  													value="${fdInfVO.fdPicture}" />
 									

@@ -22,7 +22,7 @@ public class RefundTicketDAO implements RefundTicket_interface {
 			"SELECT TK_TYPE FROM tk_inf WHERE TK_TYPE_ID = ?";
 	
 	public static final String GET_ACT_TITLE=
-			"SELECT ACT_SUBTITLE FROM activity WHERE ACT_ID = ?";
+			"SELECT ACT_SUBTITLE FROM activity_detail WHERE ACT_ID = ?";
 	
 	public static final String UPDATE_ONE_DT=
 			"UPDATE tk_ord_dt SET STATE = ? WHERE TK_DT_ID = ?";

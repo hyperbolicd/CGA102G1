@@ -2,6 +2,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.movie.model.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%
 	MovieService mvSvc = new MovieService();
@@ -67,7 +68,8 @@
                         	這部電影尚未有人評分
                             </c:if>
                         	<c:if test="${!(showingVO.mvTtStar/showingVO.mvTtCm).isNaN()}">
-                        	${showingVO.mvTtStar/showingVO.mvTtCm}
+                        	<fmt:formatNumber value="${showingVO.mvTtStar/showingVO.mvTtCm}" maxFractionDigits="1"/>
+                        	
                             <img src="/CGA102G1/front_end/showAllMovie/MV_ICON/star.png" alt="">
                             </c:if>
                         </div>

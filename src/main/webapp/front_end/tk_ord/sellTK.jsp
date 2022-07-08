@@ -29,8 +29,11 @@ pageContext.setAttribute("list", list);
 	href="<%=request.getContextPath()%>/back_end/css/emp_footer.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/tk_ord/styles/sellTKback.css">
-
-
+<!-- TimePicker.css -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/md-date-time-picker@2.3.0/dist/css/mdDateTimePicker.min.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/back_end/showing/css/jquery.timepicker.css" />
 <!-- DatePicker.css -->
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/showing/css/daterangepicker.css" />
@@ -101,7 +104,6 @@ pageContext.setAttribute("list", list);
 										<option value=0>請選擇場次
 								</select></td>
 
-								<td><a class="tablebt checkout">查看</a></td>
 								<td><FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/tkOrd/tkOrd.do"
 										style="margin-bottom: 0px;">
@@ -147,16 +149,7 @@ pageContext.setAttribute("list", list);
 		<%@ include file="/back_end/aside_html.jsp"%>
 	</aside>
 	<script>
-	$('.checkout').click(function() {
-// 		if($('.SeatOuter').css("opacity") == 0 ){
-				
-			$('.SeatOuter').fadeTo("fast",1);
-		});
-// 		else{
-// 			$('.SeatOuter').fadeTo("fast",0);
-// 			}
-// 		}
-			
+	
 	let col = '';
 	let row = '';
 	let seat = '';
@@ -175,7 +168,7 @@ pageContext.setAttribute("list", list);
 	
 	$('#f_date1').change((e) => {
 		SH_TIME = e.target.value;
-		let url = "${pageContext.request.contextPath}/tkOrd/tkOrd.do?action=listShowings_ByCompositeQuery&MV_ID=" + MV_ID +"&SH_TIME=" + SH_TIME;
+		let url = "${pageContext.request.contextPath}/front/tkOrd.do?action=listShowings_ByCompositeQuery&MV_ID=" + MV_ID +"&SH_TIME=" + SH_TIME;
 		
 
 		$('.showTimeSelect').empty();
@@ -207,7 +200,7 @@ pageContext.setAttribute("list", list);
 		let SH_ID = e.target.value;
 		$('.inputSH_ID').val(SH_ID);
 		
-		let url = "${pageContext.request.contextPath}/tkOrd/tkOrd.do?action=listShowings_ByCompositeQuery&MV_ID=" + MV_ID +"&SH_ID=" + SH_ID;
+		let url = "${pageContext.request.contextPath}/front/tkOrd.do?action=listShowings_ByCompositeQuery&MV_ID=" + MV_ID +"&SH_ID=" + SH_ID;
 		
 		 $.ajax({
 	            url: url,
@@ -220,16 +213,13 @@ pageContext.setAttribute("list", list);
 	            		HL_ID = show.HL_ID;
 	            		seat = show.SH_SEAT_STATE;
 	            		let showTimeStr = show.SH_TIME + " "; 
-	            		
-	            	
-	            		
-	            		
+	            			            		
 	            	}
 	            } 
 		 
 			})
 		
-		let url2 = "${pageContext.request.contextPath}/tkOrd/tkOrd.do?action=findHallByhlId&hlId=" + HL_ID;
+		let url2 = "${pageContext.request.contextPath}/front/tkOrd.do?action=findHallByhlId&hlId=" + HL_ID;
 		$('.inputHL_ID').val(HL_ID);
 		$.ajax({
             url: url2,
@@ -246,57 +236,6 @@ pageContext.setAttribute("list", list);
 	 
 		})
 		
-		let rowname = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-			const body = document.getElementsByClassName('seatsChart')[0];
-			$('.seatsChart').empty();
-			for (let j = 0; j < row; j++) {
-				const singeRow = document.createElement('div');
-				singeRow.className = 'seatRow';
-				body.append(singeRow);
-
-				const rowtitle = document.createElement('div');
-				rowtitle.className = 'seatRowNumber';
-				singeRow.append(rowtitle)
-				// rowtitle.innerHTML = rowname[j] 已放棄加字因為會跑版
-
-				for (let i = 4 + (j * 5 * col); i < seat.length; i += 5) {
-					const input = document.createElement("div");
-					input.setAttribute("role", "checkbox");
-					input.setAttribute("aria-checked", "false");
-					input.setAttribute("focusable", "true");
-
-					// 用from
-					input.innerHTML = (seat[i - 2] + seat[i - 1]);
-					let state = seat[i];
-					input.id = rowname[j] + "_" + (seat[i - 2] + seat[i - 1]);
-
-					if (state === '1') {
-						input.className = 'seatNumber';
-					} else if (state === '0') {
-						input.className = 'seatNumber aisle';
-					} else if (state === '3') {
-						input.className = 'seatNumber seatReserved';
-					} else if (state === '4') {
-						input.className = 'seatNumber seatConstruction';
-					} else {
-						input.className = 'seatNumber seatUnavailable';
-					}
-
-					singeRow.append(input);
-
-					// 換排
-					if (((i + 1) / 5) % col === 0) {
-
-						break;
-					}
-
-				}
-
-			};
-		
-		
-	})
-	
 	
 	let showSelected = [];
 	
@@ -320,8 +259,6 @@ pageContext.setAttribute("list", list);
 	
 	</script>
 	<script>
-	
-// 	let today = new Date();
 		
 		$.datetimepicker.setLocale('zh');
         $('#f_date1').datetimepicker({
@@ -330,57 +267,10 @@ pageContext.setAttribute("list", list);
 	       step: 30,                //step: 60 (這是timepicker的預設間隔60分鐘)
 	       format:'Y-m-d 09:00:00',         //format:'Y-m-d H:i:s',
 		   value: '',              // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
            minDate: '-1970-01-01', // 去除今日(不含)之前
            maxDate: '+1970-01-08'  // 去除今日(不含)之後
         });
 
-		// ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
-
-		//      1.以下為某一天之前的日期無法選擇
-		//      var somedate1 = new Date('2017-06-15');
-		//      $('#f_date1').datetimepicker({
-		//          beforeShowDay: function(date) {
-		//        	  if (  date.getYear() <  somedate1.getYear() || 
-		//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-		//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-		//              ) {
-		//                   return [false, ""]
-		//              }
-		//              return [true, ""];
-		//      }});
-
-		//      2.以下為某一天之後的日期無法選擇
-		//      var somedate2 = new Date('2017-06-15');
-		//      $('#f_date1').datetimepicker({
-		//          beforeShowDay: function(date) {
-		//        	  if (  date.getYear() >  somedate2.getYear() || 
-		//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-		//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-		//              ) {
-		//                   return [false, ""]
-		//              }
-		//              return [true, ""];
-		//      }});
-
-		//      3.以下為兩個日期之外的日期無法選擇 (也可按需要換成其他日期)
-		//      var somedate1 = new Date('2017-06-15');
-		//      var somedate2 = new Date('2017-06-25');
-		//      $('#f_date1').datetimepicker({
-		//          beforeShowDay: function(date) {
-		//        	  if (  date.getYear() <  somedate1.getYear() || 
-		//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-		//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-		//		             ||
-		//		            date.getYear() >  somedate2.getYear() || 
-		//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-		//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-		//              ) {
-		//                   return [false, ""]
-		//              }
-		//              return [true, ""];
-		//      }});
 	</script>
 </body>
 </html>

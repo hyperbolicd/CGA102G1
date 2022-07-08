@@ -81,11 +81,11 @@ pageContext.setAttribute("list", list);
 								<td>$ ${fdinfVO.fdprice}</td>
 								<td>${fdinfVO.fdDT}</td>
 								<td><img
-									src="<%=request.getContextPath()%>/back_end/fd_inf/fd_inf.do?action=getPic&fdID=${fdinfVO.fdID}"
+									src="<%=request.getContextPath()%>/fd_inf/fd_inf.do?action=getPic&fdID=${fdinfVO.fdID}"
 									style="width: 100px; height: 120px;"></td>
 								<td id="status-${fdinfVO.fdID}">${fdinfVO.fdState == 0 ? "下架" : "上架"}</td>
 								<td><FORM METHOD="post"
-										ACTION="<%=request.getContextPath()%>/back_end/fd_inf/fd_inf.do"
+										ACTION="<%=request.getContextPath()%>/fd_inf/fd_inf.do"
 										style="margin-bottom: 0px;">
 										<input class="tablebt" type="submit" value="修改"> <input
 											type="hidden" name="fdID" value="${fdinfVO.fdID}"> <input

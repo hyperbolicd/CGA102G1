@@ -10,30 +10,34 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	String userid = "root";
 	String passwd = "password";
 
-	private static final String INSERT = // 新增資料
+	private static final String INSERT =             // 新增資料
 			"insert into `member`"
 					+ "(MEMBER_LEVEL,MEMBER_EMAIL,MEMBER_PASSWORD,MEMBER_NAME,MEMBER_PHONE,MEMBER_ADDRESS,MEMBER_PIC,MEMBER_STATUS,WISH_TICKET,BONUS_POINTS,SUM_COUNT) VALUES"
 					+ "(?,?,?,?,?,?,?,?,?,?,?) ;";
 
-	private static final String GET_ALL_MEM = // 查詢全部資料
+	private static final String GET_ALL_MEM =        // 查詢全部資料
 			"select MEMBER_ID,MEMBER_LEVEL,MEMBER_EMAIL,MEMBER_PASSWORD,MEMBER_NAME,MEMBER_PHONE,MEMBER_ADDRESS,MEMBER_PIC,MEMBER_STATUS,WISH_TICKET,BONUS_POINTS,SUM_COUNT "
 					+ "from member order by MEMBER_ID ";
-	private static final String GET_ONE_STMT = // 查詢單筆資料
+	private static final String GET_ONE_STMT =       // 查詢單筆資料
 			"select MEMBER_ID,MEMBER_LEVEL,MEMBER_EMAIL,MEMBER_PASSWORD,MEMBER_NAME,MEMBER_PHONE,MEMBER_ADDRESS,MEMBER_PIC,MEMBER_STATUS,WISH_TICKET,BONUS_POINTS,SUM_COUNT "
 					+ "from member where (MEMBER_ID = ?);";
-	private static final String UPDATE = // 前台修改資料
+	private static final String UPDATE =             // 前台修改資料
 			"UPDATE `member`"
 					+ "set  MEMBER_PASSWORD = ?, MEMBER_NAME = ?, MEMBER_PHONE = ?, MEMBER_ADDRESS = ?,MEMBER_PIC= ?"
 					+ "where (MEMBER_ID = ?);";
-	private static final String UPDATE_STATUS = // 修改會員資狀態
+	private static final String UPDATE_STATUS =      // 修改會員資狀態
 			"UPDATE `member` " + " set  MEMBER_STATUS = ?" + " where (MEMBER_ID = ?);";
 	private static final String UPDATE_WISH_TICKET = // 修改會員許願票
 			"update `member` set WISH_TICKET = ? where MEMBER_ID = ?;";
-	private static final String DELETE = // 刪除資料
+	private static final String DELETE =             // 刪除資料
 			"DELETE FROM member where MEMBER_ID = ?";
 
-	private static final String loginMember = // 會員登入
+	private static final String loginMember =        // 會員登入
 			"select MEMBER_ID,member_Status " + "from member where (MEMBER_EMAIL = ? && MEMBER_PASSWORD = ?);";
+	
+	private static final String Register =           //會員註冊時會傳送信件，並修改會員狀態(藉由Email搜尋會員ID)
+			"select MEMBER_ID " + "from member where (MEMBER_EMAIL = ? );";
+	
 
 
 //新增資料	
@@ -172,8 +176,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	}
 
 //修改/修正 會員狀態
-
-	public void updateStatus(Integer member_ID, Integer member_Status) {
+     public void updateStatus(Integer member_ID, Integer member_Status) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -402,7 +405,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVo 也稱為 Domain objects
+				// memberVO 也稱為 Domain objects
 				memberVO.setMember_ID(rs.getInt("member_ID"));
 				memberVO.setMember_Status(rs.getInt("member_Status"));
 			}
@@ -440,6 +443,61 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		}
 		return memberVO;
 	}
+	
+//會員註冊時會傳送信件，並修改會員狀態(藉由Email搜尋會員ID)
+		public  MemberVO register(MemberVO memberVO) {
+
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			try {
+				Class.forName(driver);
+				con = DriverManager.getConnection(url, userid, passwd);
+				pstmt = con.prepareStatement(Register);
+				pstmt.setString(1, memberVO.getMember_Email());
+
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					// memberVO 也稱為 Domain objects
+					memberVO.setMember_ID(rs.getInt("member_ID"));
+				}
+				System.out.println(memberVO.getMember_ID());
+				// Handle any driver errors
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. " + se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return memberVO;
+		}
+	
+	
 	
 
 
