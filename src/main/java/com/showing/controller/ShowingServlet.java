@@ -445,7 +445,6 @@ public class ShowingServlet extends HttpServlet {
 
 		
 		if ("getShowingByDate".equals(action)) { // 來自listAllShowing.jsp 或  /movie/listEmps_ByDeptno.jsp 的請求
-			System.out.println("ajax近來");
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to

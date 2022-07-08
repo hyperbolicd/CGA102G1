@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -325,17 +326,39 @@ public class CmtServlet extends HttpServlet {
 				
 				/***************************2.開始刪除資料***************************************/
 				CmtService cmtSvc = new CmtService();
-				cmtSvc.deleteCmt(CM_ID);
+				cmtSvc.updateCmtState(CM_ID, 2);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
 				String url = "/front_end/memberCmt/memberCmt.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 		}
+		if ("selectedDelete".equals(action)) { // 來自listAllCmt.jsp
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			/***************************1.接收請求參數***************************************/
+			Map<String, String[]> map = req.getParameterMap();
+			
+			/***************************2.開始刪除資料***************************************/
+			CmtService cmtSvc = new CmtService();
+			for(int i = 0; i < map.get("cmtID").length; i++) {
+				Integer CM_ID = Integer.valueOf(map.get("cmtID")[i]);
+				cmtSvc.updateCmtState(CM_ID, 2);
+			}
+			
+			/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
+			String url = "/front_end/memberCmt/memberCmt.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+			successView.forward(req, res);
+		}
 		
 		
 		if ("commentLike".equals(action)) {
-			System.out.println("ajax test");
+
 			String requestURL = req.getParameter("requestURL");
 			
 			Integer MEMBER_ID = Integer.valueOf(req.getParameter("MEMBER_ID"));

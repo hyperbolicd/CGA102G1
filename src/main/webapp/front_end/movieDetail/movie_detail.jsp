@@ -338,7 +338,8 @@ pageContext.setAttribute("avgstar", avgstar);
 				      },
 				      //Ajax失敗後要執行的function，此例為印出錯誤訊息
 				      error: function (xhr, ajaxOptions, thrownError) {
-				        alert(xhr.status + "\n" + thrownError);
+// 				        alert(xhr.status + "\n" + thrownError);
+				        alert("登入啦");
 				      }
 			    });
 		    	
