@@ -78,9 +78,9 @@ pageContext.setAttribute("list2", list2);
 				<div class="TKouter">
 					<table class="TKinner">
 						<tr class="TKh">
-							<td>票種</td>
-							<td>價格</td>
-							<td>描述</td>
+							<th>票種</th>
+							<th>價格</th>
+							<th>描述</th>
 						</tr>
 						<c:forEach var="tkinfVO" items="${list}">
 
@@ -109,7 +109,7 @@ pageContext.setAttribute("list2", list2);
 								<div class="item">
 									<div class="img_block">
 										<img
-											src="<%=request.getContextPath()%>/back_end/fd_inf/fd_inf.do?action=getPic&fdID=${fdinfVO.fdID}"
+											src="<%=request.getContextPath()%>/fd_inf/fd_inf.do?action=getPic&fdID=${fdinfVO.fdID}"
 											style="width: 100px; height: 120px;">
 									</div>
 									<div class="iteminner">

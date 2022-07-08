@@ -81,31 +81,6 @@
 						<!-- 座位start -->
 						<div class="seatsChart">
 
-
-							<!-- 以下改為用長的 -->
-							<!-- <div class="seatRow">
-                            <div class="seatRowNumber">
-                                A
-                            </div>
-                            <div id="A_1" role="checkbox" value="1" aria-checked="false" focusable="true"
-                                class=" seatNumber seatUnavailable">1</div>
-                            <div id="A_2" role="checkbox" value="1" aria-checked="false" focusable="true"
-                                class=" seatNumber ">2</div>
-                            <div id="A_3" role="checkbox" value="1" aria-checked="false" focusable="true"
-                                class=" seatNumber ">3</div>
-                            <div id="A_4" role="checkbox" value="1" aria-checked="false" focusable="true"
-                                class=" seatNumber seatUnavailable">4</div>
-                            <div id="A_5" role="checkbox" value="1" aria-checked="false" focusable="true"
-                                class=" seatNumber ">5</div>
-                            <div id="A_6" role="checkbox" value="1" aria-checked="false" focusable="true"
-                                class=" seatNumber  ">6</div>
-                            <div id="A_7" role="checkbox" value="1" aria-checked="false" focusable="true"
-                                class=" seatNumber ">7</div>
-                            <div id="A_8" role="checkbox" value="1" aria-checked="false" focusable="true"
-                                class=" seatNumber ">8</div>
-
-
-                        </div>-->
 						</div>
 
 					</div>
@@ -143,12 +118,7 @@
 				<div class="btBlock">
 					<a class="bt">繼續</a>
 				</div>
-				<!-- 				<form> -->
-				<!-- 					<input type="hidden" name="id" class="id"> -->
-				<!-- 					<input type="hidden" name="name" class= "name"> -->
-				<!-- 					<input type="hidden" name="unitPrice" class= "unitPrice"> -->
-				<!-- 					<input type="hidden" name="count" class= "count"> -->
-				<!-- 				</form> -->
+
 			</div>
 		</div>
 
@@ -173,7 +143,7 @@
             Swal.fire({
                 icon: 'error',
                 title: '很抱歉',
-                text: '您還有座位未選擇!',
+                text: '您還有'+(TotalCount - $(".seatSelected").length)+'個座位未選擇!',
                 footer: '請繼續選擇您的座位'
             })
 		}else{	
@@ -344,7 +314,7 @@
 									$(this).addClass("seatSelected");
 									
 									let index = $(this).attr("seatIndex");
-                                    seat = changeSeat(seat, index, '5');
+                                    seat = changeSeat(seat, index, '2');
 							        
 							        
 // 							        更新資料庫座位=============================================================

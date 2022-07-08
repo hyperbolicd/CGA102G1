@@ -290,7 +290,7 @@ public class FdInfServlet extends HttpServlet {
 
 			// 將最新的狀態丟回去
 			java.lang.Byte newStatus = fdInfVO.getFdState();
-			HashMap<String, Byte> map = new HashMap<String, Byte>();
+			newStatus.toString();
 			JSONObject jsonobj = new JSONObject();
 			try {
 				jsonobj.put("newStatus", newStatus);

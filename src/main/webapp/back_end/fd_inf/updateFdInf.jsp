@@ -62,9 +62,9 @@
 
 						<table class="TKinner">
 							<tr>
-								<td></td>
-								<td>輸入</td>
-								<td></td>
+								<th></th>
+								<th>輸入</th>
+								<th></th>
 							</tr>
 							<tr>
 								<td>餐飲編號:</td>
@@ -83,19 +83,19 @@
 								<td>餐飲名稱:</td>
 								<td><input type="text" name="fdName" size="45"
 									value="${fdInfVO.fdName}"></td>
-								<td>${errorMsgs.fdName}</td>
+								<td style="color:red;">${errorMsgs.fdName}</td>
 							</tr>
 							<tr>
 								<td>定價:</td>
 								<td><input type="text" name="fdprice" size="45"
 									value="${fdInfVO.fdprice}"></td>
-								<td>${errorMsgs.fdprice}</td>
+								<td style="color:red;">${errorMsgs.fdprice}</td>
 							</tr>
 							<tr>
 								<td>備註:</td>
 								<td><input type="text" name="fdDT" size="45"
 									value="${fdInfVO.fdDT}" /></td>
-								<td>${errorMsgs.fdDT}</td>
+								<td style="color:red;">${errorMsgs.fdDT}</td>
 							</tr>
 							<tr>
 								<td></td>

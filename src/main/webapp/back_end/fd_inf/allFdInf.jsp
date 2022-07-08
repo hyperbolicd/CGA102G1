@@ -25,7 +25,8 @@ pageContext.setAttribute("list", list);
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/fd_inf/styles/FDINFBack.css">
 
-
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 
@@ -83,7 +84,7 @@ pageContext.setAttribute("list", list);
 								<td><img
 									src="<%=request.getContextPath()%>/fd_inf/fd_inf.do?action=getPic&fdID=${fdinfVO.fdID}"
 									style="width: 100px; height: 120px;"></td>
-								<td id="status-${fdinfVO.fdID}">${fdinfVO.fdState == 0 ? "下架" : "上架"}</td>
+								<td id="state${fdinfVO.fdID}" >${fdinfVO.fdState == 0 ? "下架" : "上架"}</td>
 								<td><FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/fd_inf/fd_inf.do"
 										style="margin-bottom: 0px;">
@@ -93,7 +94,7 @@ pageContext.setAttribute("list", list);
 									</FORM></td>
 								<td>
 									<div class="btBlock">
-										<a class="tablebt updateState">下架</a>
+										<a id="${fdinfVO.fdID}" class="tablebt updateState">${fdinfVO.fdState== 1 ? "下架" : "上架"}</a>
 									</div>
 								</td>
 							</tr>
@@ -124,8 +125,43 @@ pageContext.setAttribute("list", list);
 	</aside>
 	<script>
 // 	$('.updateState').click(function(){
+		$('.updateState').click(function(){
+			
+		let fdID = $(this).attr('id');
+		console.log(fdID);
 		
-// 	})
+		let url = "${pageContext.request.contextPath}/fd_inf/fd_inf.do?action=updateStatus&fdID="+fdID;
+
+		
+		$.ajax({
+				url: url,
+		        type: 'post',
+		        dataType: 'json',
+		        async: false,
+		        timeout: 15000,
+		        success: function (data) {
+				        
+				let newStatus = data.newStatus;
+
+				let s = '';
+				let t = '';
+				if(newStatus == "1"){
+					s = "上架";
+					t = "下架";
+
+				}else{
+					s = "下架";
+					t = "上架";
+				}
+				$("#state"+ fdID).text(s);
+				$("#"+ fdID).text(t);
+				
+
+
+			}
+		 });
+	});
+
 	</script>
 </body>
 </html>

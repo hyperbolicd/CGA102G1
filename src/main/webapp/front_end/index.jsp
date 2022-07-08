@@ -374,7 +374,7 @@ div, ul, li, a, span, img {
 									style="margin-bottom: 0px;">
 									<div class="tablebtBlock">
 										<a class="tablebt checkIn"
-											style="font-size: 18; width: 150px;">購票</a>
+											style="font-size: 18; width: 150px;">BOOKING!</a>
 
 									</div>
 									<input type="hidden" name="MV_ID" class="inputMV_ID"> <input
