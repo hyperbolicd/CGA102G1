@@ -1,3 +1,4 @@
+<%@page import="com.merchandise_inf.model.MerchVO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -177,6 +178,14 @@ function decreaseCount(a, b) {
  
  		let payMerch = document.getElementsByClassName('payMerch')[0];
  		payMerch.addEventListener('click',function(){
+ 			console.log("1.${memberVO}");
+ 			if(${memberVO==null?true:false}){
+ 				<%
+ 				session.setAttribute("location","http://localhost:8081/CGA102G1/merch/controller?action=getMerchInfo&merchID="+((MerchVO)request.getAttribute("merchVo")).getMerchID().toString());
+ 				%>
+ 				window.location.href="${pageContext.request.contextPath}/front_end/login/login.jsp";
+ 				return;
+ 			}
         	Swal.fire({
         		  title: '你確定嗎?',
         		  text: "按下確認後即生成訂單!",
@@ -189,7 +198,7 @@ function decreaseCount(a, b) {
         		  if (result.isConfirmed) {
         			  let payMerchaction = document.getElementsByClassName('payMerchaction')[0];
         	            let addCartscCount = document.getElementsByClassName('payMerchscCount')[0];
-        	            let url = "${pageContext.request.contextPath}/ShoppingCartServlet?"+"action=" + payMerchaction.value + "&merchID=" + ${merchVo.merchID} + "&memberID=" + ${memberVO.member_ID} + "&scCount=" + addCartscCount.value;
+        	            let url = "${pageContext.request.contextPath}/ShoppingCartServlet?"+"action=" + payMerchaction.value + "&merchID=" + ${merchVo.merchID} + "&memberID=${memberVO.member_ID}" + "&scCount=" + addCartscCount.value;
         	            $.ajax({
         	            url: url,
         	            type: 'post',
@@ -197,8 +206,9 @@ function decreaseCount(a, b) {
         	            async: false,
         	            timeout: 15000,
         	            success: function (data) {
+        	            	console.log(data)
         	            	Swal.fire(
-        	          		      '成功!您的訂單已生成',
+        	          		      '成功購買!',
         	          		      '您的訂單已生成.',
         	          		      'success'
         	          		    )
@@ -211,12 +221,12 @@ function decreaseCount(a, b) {
         })
 /*加入購物車*/
  
- let addCartButton = document.getElementsByClassName('addCartButton')[0]
+ let addCartButton = document.getElementsByClassName('addCartButton')[0];
  		addCartButton.addEventListener('click',function(){
  		
       			let addCartaction = document.getElementsByClassName('addCartaction')[0];
                 let addCartscCount = document.getElementsByClassName('payMerchscCount')[0];
-      	            let url = "${pageContext.request.contextPath}/ShoppingCartServlet?"+"action=" + addCartaction.value + "&merchID=" + ${merchVo.merchID} + "&memberID=" + ${memberVO.member_ID} + "&scCount=" + addCartscCount.value;
+      	            let url = "${pageContext.request.contextPath}/ShoppingCartServlet?action=" + addCartaction.value + "&merchID=" + ${merchVo.merchID} + "&memberID=${memberVO.member_ID}"+"&scCount=" + addCartscCount.value;
       	            $.ajax({
       	            url: url,
       	            type: 'post',

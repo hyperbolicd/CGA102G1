@@ -117,7 +117,6 @@
 <!-- 									<td><button class="tablebt" type="submit" name="action" value="getMerchInfo">確認</button> -->
 <!-- 								</form> -->
 							</td>
-							
 						</tr>
 						<tr>
 							<td>顯示商品詳情:</td>

@@ -80,14 +80,18 @@ public class ShoppingCartServlet extends HttpServlet {
 				Gson gson = new Gson();
 				String s = "success";
 				out.print(s);
-//				String url = "/front_end/merchandise/cart.jsp";
-//				RequestDispatcher rd = req.getRequestDispatcher(url);
-//				rd.forward(req, res);
+
 			}
 			
 			
 			/*購物車購物*/
 			if ("insertfromcart".equals(action)) {
+				Integer memberID1 = (Integer) session.getAttribute("account");
+				if(memberID1 == null) {
+					session.setAttribute("location", req.getRequestURI());
+					res.sendRedirect(req.getContextPath()+"/front_end/login/login.jsp");
+					return;
+				}
 				/* =========================接受請求參數===================================== */
 				Map<String, String[]> map = req.getParameterMap();
 				List<OrderDetailVO> list = new LinkedList<OrderDetailVO>();
@@ -147,6 +151,7 @@ public class ShoppingCartServlet extends HttpServlet {
 			/*商品頁購物*/
 			if("payForOneMerch".equals(action)) {
 				Map<String, String[]> map = req.getParameterMap();
+				/*接值*/
 				List<OrderDetailVO> list = new LinkedList<OrderDetailVO>();
 				MerchOrdService merchOrdSvc = new MerchOrdService();
 				MerchService merchSvc = new MerchService();
@@ -183,6 +188,16 @@ public class ShoppingCartServlet extends HttpServlet {
 		
 		// 查看購物車
 		if ("checkout".equals(action)) {
+			Integer memberID1 = (Integer) session.getAttribute("account");
+			System.out.println("1."+ memberID1);
+			if(memberID1 == null) {
+				session.setAttribute("location", req.getRequestURI());
+				res.sendRedirect(req.getContextPath()+"/front_end/login/login.jsp");
+				return;
+			}else {
+				ShoppingCartListener cartListener = new ShoppingCartListener(getServletContext());
+				session.setAttribute("bindingListener", cartListener);
+			}
 			double total = 0;
 			for (int i = 0; i < buylist.size(); i++) {
 				SCDetailVO scDetailVo = buylist.get(i);
@@ -200,11 +215,11 @@ public class ShoppingCartServlet extends HttpServlet {
 
 	public SCDetailVO getscDetailVO(HttpServletRequest req) {
 		SCDetailVO scDetailVo = new SCDetailVO();
-		Integer memberID = Integer.valueOf(req.getParameter("memberID"));
+//		Integer memberID = Integer.valueOf(req.getParameter("memberID"));
 		Integer merchID = Integer.valueOf(req.getParameter("merchID"));
 		Integer scCount = Integer.valueOf(req.getParameter("scCount"));
 
-		scDetailVo.setMemberID(memberID);
+//		scDetailVo.setMemberID(memberID);
 		scDetailVo.setMerchID(merchID);
 		scDetailVo.setScCount(scCount);
 

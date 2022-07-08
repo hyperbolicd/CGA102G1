@@ -77,4 +77,34 @@ public class MerchService {
 	public void deleteMerch(Integer merchID) {
 		dao.delete(merchID);
 	}
+	public List<MerchVO> getHotSell(){
+		Double minPrice = 0.0;
+		Double maxPrice = 100000.0;
+		return dao.getAll(minPrice,maxPrice);
+	}
+	public List<MerchVO> getHotSell(Double minPrice, Double maxPrice){
+		return dao.getAll(minPrice, maxPrice);
+	}
+	public List<MerchVO> getNewest(){
+		Double minPrice = 0.0;
+		Double maxPrice = 100000.0;
+		return dao.getNewest(minPrice, maxPrice);
+	}
+	public List<MerchVO> getNewest(Double minPrice, Double maxPrice ){
+		return dao.getNewest(minPrice, maxPrice);
+	}
+	public List<MerchVO> getMostSold(){
+		Double minPrice = 0.0;
+		Double maxPrice = 100000.0;
+		return dao.getMostSell(minPrice, maxPrice);
+	}
+	public List<MerchVO> getMostSold(Double minPrice, Double maxPrice){
+		return dao.getMostSell(minPrice, maxPrice);
+	}
+	public List<MerchVO> getByClass(String merchClass){
+		return dao.getByclass(merchClass);
+	}
+	public List<MerchVO> getBySearch(String merchName, Double min, Double max){
+		return dao.getBySearch(merchName, min, max);
+	}
 }
