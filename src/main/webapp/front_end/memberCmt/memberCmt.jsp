@@ -22,7 +22,7 @@ Integer item = 1;
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/memberCmt/css/memberCmt.css" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/movieDetail/styles/layout.css" type="text/css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/css/layout.css" type="text/css">
 </head>
 <body>
 
