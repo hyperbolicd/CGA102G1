@@ -13,20 +13,12 @@ public interface FaqDAO_interface {
 
 	public List<FaqVO> getAll();
 
-//	public List<FaqVO> getFaqClass1(); // 會員相關問題
-//
-//	public List<FaqVO> getFaqClass2(); // 影城相關問題
-//
-//	public List<FaqVO> getFaqClass3(); // 電影上映相關問題
-//
-//	public List<FaqVO> getFaqClass4(); // 其他問題
+	public List<FaqVO> getFaqClass1(); // 會員相關問題
 
-	List<FaqVO> getFaqClass4(Byte faq_class); // 會員相關問題
+	public List<FaqVO> getFaqClass2(); // 影城相關問題
 
-	List<FaqVO> getFaqClass3(Byte faq_class); // 影城相關問題
+	public List<FaqVO> getFaqClass3(); // 電影上映相關問題
 
-	List<FaqVO> getFaqClass2(Byte faq_class); // 電影上映相關問題
-
-	List<FaqVO> getFaqClass1(Byte faq_class); // 其他問題
+	public List<FaqVO> getFaqClass4(); // 其他問題
 
 }

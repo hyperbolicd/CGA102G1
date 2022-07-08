@@ -3,8 +3,7 @@ package com.ann.model;
 import java.sql.*;
 import java.util.*;
 
-import com.faq.model.FaqJDBCDAO;
-import com.faq.model.FaqVO;
+
 
 public class AnnJDBCDAO implements AnnDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
@@ -52,7 +51,7 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 			pstmt.setDate(1, annVO.getAnn_date());
 			pstmt.setString(2, annVO.getAnn_title());
 			pstmt.setString(3, annVO.getAnn_content());
-			pstmt.setBytes(4, annVO.getAnn_picture());
+			pstmt.setString(4, annVO.getAnn_picture());
 
 
 			pstmt.executeUpdate();
@@ -98,7 +97,7 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 			pstmt.setDate(1, annVO.getAnn_date());
 			pstmt.setString(2, annVO.getAnn_title());
 			pstmt.setString(3, annVO.getAnn_content());
-			pstmt.setBytes(4, annVO.getAnn_picture());
+			pstmt.setString(4, annVO.getAnn_picture());
 			pstmt.setInt(5, annVO.getAnn_no());
 			
 			pstmt.executeUpdate();
@@ -195,7 +194,7 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 				annVO.setAnn_date(rs.getDate("ann_date"));
 				annVO.setAnn_title(rs.getString("ann_title"));
 				annVO.setAnn_content(rs.getString("ann_content"));
-				annVO.setAnn_picture(rs.getBytes("ann_picture"));
+				annVO.setAnn_picture(rs.getString("ann_picture"));
 			}
 
 			// Handle any driver errors
@@ -253,7 +252,7 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 				annVO.setAnn_date(rs.getDate("ann_date"));
 				annVO.setAnn_title(rs.getString("ann_title"));
 				annVO.setAnn_content(rs.getString("ann_content"));
-				annVO.setAnn_picture(rs.getBytes("ann_picture"));
+				annVO.setAnn_picture(rs.getString("ann_picture"));
 				list.add(annVO); // Store the row in the list
 			}
 
@@ -316,7 +315,7 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 				annVO.setAnn_date(rs.getDate("ann_date"));
 				annVO.setAnn_title(rs.getString("ann_title"));
 				annVO.setAnn_content(rs.getString("ann_content"));
-				annVO.setAnn_picture(rs.getBytes("ann_picture"));
+				annVO.setAnn_picture(rs.getString("ann_picture"));
 				list.add(annVO); // Store the row in the list
 			}
 
@@ -359,7 +358,7 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 	
 	public static void main(String[] args) {
 
-		AnnJDBCDAO dao = new AnnJDBCDAO();
+//		AnnJDBCDAO dao = new AnnJDBCDAO();
 
 		// 新增 OK
 //		AnnVO annVO1 = new AnnVO();
