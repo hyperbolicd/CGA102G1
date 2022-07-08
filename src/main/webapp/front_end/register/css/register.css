@@ -24,7 +24,7 @@ body{
 .container .title{
   font-size: 25px;
   font-weight: 500;
-  position: relative;
+  position: relative;  
 }
 .container .title::before{
   content: "";
@@ -41,6 +41,7 @@ body{
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 20px 0 12px 0;
+/*   border:2px solid red ; */
 }
 form .user-details .input-box{
   margin-bottom: 15px;
@@ -50,6 +51,7 @@ form .input-box span.details{
   display: block;
   font-weight: 500;
   margin-bottom: 5px;
+/*   border:2px solid yellow ; */
 }
 .user-details .input-box input{
   height: 45px;
@@ -115,6 +117,7 @@ form .input-box span.details{
    cursor: pointer;
    transition: all 0.3s ease;
    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+/*    border:2px solid blue; */
  }
  form .button input:hover{      /*當滑鼠移動到提交按鈕時的變化*/
   /* transform: scale(0.99); */
@@ -124,7 +127,7 @@ form .input-box span.details{
  .container{
   max-width: 100%;
 }
-form .user-details .input-box{
+  form .user-details .input-box{
     margin-bottom: 15px;
     width: 100%;
   }
@@ -143,4 +146,6 @@ form .user-details .input-box{
   .container .content .category{
     flex-direction: column;
   }
+  
+  
 }

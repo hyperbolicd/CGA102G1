@@ -26,8 +26,8 @@ public class RefundTicketService {
 		return dao.getActTitle(act_id);
 	}
 	
-	public void updateOneDt(Long tkDtID) {
+	public void updateOneDt(Integer seatState,Long tkDtID) {
 		
-		dao.updateOneDt(tkDtID);
+		dao.updateOneDt(seatState,tkDtID);
 	}
 }

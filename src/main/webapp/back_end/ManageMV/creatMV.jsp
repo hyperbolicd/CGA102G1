@@ -45,13 +45,13 @@
                     <hr>
                     <div class="mvCast">
                         <label class="col-sm-2 col-form-label">導演:</label>
-                        <input class="form-control" id="mvDrt" type="text" name="mvDrt" placeholder="請填入導演名" required>
+                        <input class="form-control" id="mvDrt" type="text" name="mvDrt" placeholder="請填入導演名" maxlength ="100" required>
                         <label class="col-sm-2 col-form-label">演員:</label>
                         <input class="form-control" id="mvCast" type="text" name="mvCast" placeholder="請填入演員名" required>
                     </div>
                     <hr>
                     <div class="mvLevel">
-                        <label class="col-sm-2 col-form-label" for="mvLong">片長:</label>
+                        <label class="col-sm-2 col-form-label" for="mvLong">片長(分鐘):</label>
                         <input class="form-control" id="mvLong" type="text" name="mvLong" placeholder="請填入正整數" required>
                         <label class="col-sm-2 col-form-label">電影分級:</label>
                         <select class="custom-select" id="mvLevel" name="mvLevel">
@@ -95,8 +95,8 @@
                     <hr>
                     <div class="editBox">
                         <input type="hidden" name="action" value="insert">
-                        <button type="submit" id="sumbitBtn" class="btn btn-primary btn-lg">送出</button>
                         <button type="button" id="cancelBtn" class="btn btn-danger btn-lg" onclick="history.back()">取消</button>
+                        <button type="submit" id="sumbitBtn" class="btn btn-primary btn-lg">送出</button>
                     </div>
                 </form>
             </div>
@@ -107,7 +107,7 @@
         嗨邇覓影城 &copy; HIREME CINEMA 2022
     </footer>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="${pageContext.request.contextPath}/back_end//ManageMV/regexMV.js"></script>
+    <script src="${pageContext.request.contextPath}/back_end/ManageMV/regexMV.js"></script>
 </body>
 
 </html>

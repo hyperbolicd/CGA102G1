@@ -4,7 +4,7 @@
 <%@ page import="com.fd_inf.model.*"%>
 
 <%
-	FdInfVO fdInfVO = (FdInfVO) request.getAttribute("fdInfVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+FdInfVO fdInfVO = (FdInfVO) request.getAttribute("fdInfVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 %>
 
 <!DOCTYPE html>
@@ -41,7 +41,7 @@
 	<header>
 		<%@ include file="/back_end/header_html.jsp"%>
 	</header>
-	
+
 	<aside id="aside"></aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
@@ -53,17 +53,17 @@
 						<div>新增餐飲</div>
 					</div>
 				</div>
-				
+
 				<FORM METHOD="post" enctype="multipart/form-data"
-					ACTION="<%=request.getContextPath()%>/back_end/fd_inf/fd_inf.do"
-					name="form1" >
+					ACTION="<%=request.getContextPath()%>/fd_inf/fd_inf.do"
+					name="form1">
 					<div class="TKouter">
 
 						<table class="TKinner">
 							<tr>
-								<td></td>
-								<td>輸入</td>
-								<td></td>
+								<th></th>
+								<th>輸入</th>
+								<th></th>
 							</tr>
 							<tr>
 								<td>餐影種類:</td>
@@ -77,26 +77,27 @@
 								<td>餐飲名稱:</td>
 								<td><input type="text" name="fdName" size="45"
 									value="${param.fdName}"></td>
-								<td>${errorMsgs.fdName}</td>
+								<td style="color: red;">${errorMsgs.fdName}</td>
 							</tr>
 							<tr>
 								<td>定價:</td>
 								<td><input type="text" name="fdprice" size="45"
 									value="${param.fdprice}"></td>
-								<td>${errorMsgs.fdprice}</td>
+								<td style="color: red;">${errorMsgs.fdprice}</td>
 							</tr>
 							<tr>
 								<td>備註:</td>
 								<td><input type="text" name="fdDT" size="45"
 									value="${param.fdDT}" /></td>
-								<td>${errorMsgs.fdDT}</td>
+								<td style="color: red;">${errorMsgs.fdDT}</td>
 							</tr>
 							<tr>
 								<td></td>
-								<td>
-								<img id="preview_img" src="<%=request.getContextPath()%>/back_end/fd_inf/fd_inf.do?action=getPic&fdID=${fdInfVO.fdID}"><br>
- 													<input type="file" name="fdPicture" size="45" accept="image/*" onchange="readURL(this)" targetID="preview_img" 
- 													value="${fdInfVO.fdPicture}" />
+								<td><img id="preview_img"
+									src="<%=request.getContextPath()%>/fd_inf/fd_inf.do?action=getPic&fdID=${fdInfVO.fdID}"><br>
+									<input type="file" name="fdPicture" size="45" accept="image/*"
+									onchange="readURL(this)" targetID="preview_img"
+									value="${fdInfVO.fdPicture}" />
 								<td></td>
 							</tr>
 

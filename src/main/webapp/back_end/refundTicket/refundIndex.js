@@ -118,7 +118,6 @@ function refund(target){
 	let tkDtID = target.id;
 	let seatIndex = document.getElementById(`seatIndex${tkDtID}`).value;
 	let tkOrdID = document.getElementById(`tkOrdID${tkDtID}`).value;
-	console.log("tkDtID:"+tkDtID);
 	// 取回DB內最新的座位字串
 	let seatStr;
 	$.ajax({
@@ -134,11 +133,9 @@ function refund(target){
 			success: function(response) {
 				
 			seatStr = response.SH_SEAT_STATE;
-			console.log("seatStr1:"+seatStr);
 			}
 		})
 	
-			console.log("seatStr2:"+seatStr);
 	// 將字串切割成陣列
     let seatArr = seatStr.split("",seatStr.length);
     // 更改狀態
@@ -158,7 +155,8 @@ function refund(target){
 				"tkDtID": tkDtID,
 				"seatIndex": seatIndex,
 				"tkOrdID": tkOrdID,
-				"seatStr": seatStr
+				"seatStr": seatStr,
+				"seatState" : 2
 			},      
 			error: function(xhr) { },    
 			success: function(response) {
@@ -171,29 +169,11 @@ function refund(target){
                 //圖示(可省略) success/info/warning/error/question
                 //圖示範例：https://sweetalert2.github.io/#icons
             	);
-				
+				// 推播給WebSocket
+				sendMessage();
 			}
 		})
-		// 取回改好的字串 用以推播
-//		let newSeatStr;
-//		
-//		$.ajax({
-//			url: '/CGA102G1//RefundTicketServlet.do',
-//			type: 'post',                
-//			dataType:'json',
-//			data: {
-//				"action": "getUpdatedDt",
-//				"tkDtID": tkDtID,
-//			},      
-//			error: function(xhr) { },    
-//			success: function(response) {
-//				
-//			newSeatStr = response.SH_SEAT_STATE;
-//				
-//			}
-//		})
-		// 推播給WebSocket
-		sendMessage();
+		
 		
 }
 

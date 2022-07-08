@@ -1,0 +1,95 @@
+/* 購票css================================================== */
+
+.guide2outer * {
+	font-size:20px;
+}
+.guide2outer {
+	
+    margin: 20px;
+    /* 跟其他的空隙 */
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.guide2 {
+    width: 850px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.guide2inner {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.TKouter {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	flex-wrap: wrap;
+	width: 90%;
+}
+
+.TKinner {
+	text-align: center;
+	height: 100%;
+	width: 90%;
+}
+
+tr {
+	height: 50px;
+}
+
+td {
+	width: 200px;
+}
+
+.tablebt {
+	border-color: white;
+	border-width:0.01px;
+	text-decoration: none;
+	padding: 4px 4px;
+	/* 按鈕大小 */
+	text-align: center;
+	text-transform: uppercase;
+	transition: 0.5s;
+	background-size: 250% auto;
+	color: white;
+	border-radius: 10px;
+	font-weight: 700;
+	background-image: linear-gradient(45deg, #000000 0%, #7c7c7c 51%, #000000 100%);
+	cursor: pointer;
+}
+
+.tablebt:hover {
+	background-position: right center;
+	/* 變色方向 */
+	color: #fff;
+	text-decoration: none;
+}
+
+.tablebt:active {
+	transform: scale(0.95);
+}
+
+.tablebtBlock {
+	border-color: white;
+	border-width:0.1px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+#f_date1 {
+	width: 110px;
+	overflow: hidden;
+}
+/* ================================================================= */

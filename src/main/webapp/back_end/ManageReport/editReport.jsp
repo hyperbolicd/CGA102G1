@@ -83,7 +83,7 @@
                     <div class="speech-bubble2"style="word-break: break-all" >
                         <h5 id="rpText">
                         <c:if test="${reportVO.rpText==null}">
-                           檢舉者沒有留下檢舉內容..
+                           這位檢舉者沒有留下任何檢舉內容...
                         </c:if>   
                         <c:if test="${reportVO.rpText!=null}">
                            ${reportVO.rpText}
@@ -100,8 +100,8 @@
             	<input type="hidden" name="rpId" value="${reportVO.rpId}">
             	<input type="hidden" name="cmId" value="${reportVO.cmId}">
             	<input type="hidden" name="action" value="update">
-                <button type="submit" class="btn btn-primary btn-lg">送出</button>
                 <button type="button" onclick="history.back()" class="btn btn-secondary btn-lg">取消</button>
+                <button type="submit" class="btn btn-primary btn-lg">送出</button>
             </div>
             </form>
         </div>

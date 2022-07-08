@@ -91,3 +91,8 @@ nav a:hover .fa{
     position: absolute;
     bottom: 0;
 }
+.td_right img{
+	width:100px;
+	height:100px;
+	
+}

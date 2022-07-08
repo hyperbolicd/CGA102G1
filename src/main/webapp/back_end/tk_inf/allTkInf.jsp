@@ -50,13 +50,12 @@ pageContext.setAttribute("list", list);
 				<div class="TKouter">
 					<table class="TKinner">
 						<tr>
-							<td>編號</td>
-							<td>票名</td>
-							<td>價格</td>
-							<td>票種</td>
-							<td>備註</td>
-							<td>修改</td>
-							<td>刪除</td>
+							<th>編號</th>
+							<th>票名</th>
+							<th>價格</th>
+							<th>票種</th>
+							<th>備註</th>
+							<th>修改</th>
 
 						</tr>
 						<c:forEach var="tkinfVO" items="${list}">
@@ -75,22 +74,14 @@ pageContext.setAttribute("list", list);
 								<td>${tkinfVO.tkTypeDT}</td>
 								<td>
 									<FORM METHOD="post"
-										ACTION="<%=request.getContextPath()%>/back_end/tk_inf/tk_inf.do"
+										ACTION="<%=request.getContextPath()%>/tk_inf/tk_inf.do"
 										style="margin-bottom: 0px;">
 										<input class="tablebt" type="submit" value="修改"> <input
 											type="hidden" name="tkTypeID" value="${tkinfVO.tkTypeID}">
 										<input type="hidden" name="action" value="getOne_For_Update">
 									</FORM>
 								</td>
-								<td>
-									<FORM METHOD="post"
-										ACTION="<%=request.getContextPath()%>/back_end/tk_inf/tk_inf.do"
-										style="margin-bottom: 0px;">
-										<input class="tablebt" type="submit" value="刪除"> <input
-											type="hidden" name="tkTypeID" value="${tkinfVO.tkTypeID}">
-										<input type="hidden" name="action" value="delete">
-									</FORM>
-								</td>
+
 							</tr>
 
 						</c:forEach>
