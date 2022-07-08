@@ -57,7 +57,7 @@ public class EmpPrivilegeFilter extends HttpFilter {
 					canNotAccess.add(i);
 				}
 			}
-			System.out.println(canNotAccess);
+//			System.out.println(canNotAccess);
 			// 將權限號碼對應的網址放入 HashSet
 			for(Integer numNot: canNotAccess) {
 				EmpFunctionService empFcSvc = new EmpFunctionService();

@@ -58,6 +58,13 @@
 	<!-- 			        從BD抓所有權限 -->
 			    	<jsp:useBean id="listF" scope="page" class="com.emp_function.model.EmpFunctionService"/>
 			    	<div class="fc_block">
+				    	<c:forEach var="function" items="${listF.all}" begin="0" step="3">
+				    		<input type="checkbox" name="fc_nos" value="${function.fc_no}" class="funcs${function.fc_category}" id="func${function.fc_no}" <c:forEach var="empPriVO" items="${empPriVOs}"><c:if test="${function.fc_no == empPriVO.fc_no}">checked</c:if></c:forEach>>
+	           				<label for="func${function.fc_no}">${function.fc_name}</label>
+	           				<br>
+				    	</c:forEach>
+			    	</div>
+			    	<div class="fc_block">
 				    	<c:forEach var="function" items="${listF.all}" begin="1" step="3">
 				    		<input type="checkbox" name="fc_nos" value="${function.fc_no}" class="funcs${function.fc_category}" id="func${function.fc_no}" <c:forEach var="empPriVO" items="${empPriVOs}"><c:if test="${function.fc_no == empPriVO.fc_no}">checked</c:if></c:forEach>>
 	           				<label for="func${function.fc_no}">${function.fc_name}</label>
@@ -66,13 +73,6 @@
 			    	</div>
 			    	<div class="fc_block">
 				    	<c:forEach var="function" items="${listF.all}" begin="2" step="3">
-				    		<input type="checkbox" name="fc_nos" value="${function.fc_no}" class="funcs${function.fc_category}" id="func${function.fc_no}" <c:forEach var="empPriVO" items="${empPriVOs}"><c:if test="${function.fc_no == empPriVO.fc_no}">checked</c:if></c:forEach>>
-	           				<label for="func${function.fc_no}">${function.fc_name}</label>
-	           				<br>
-				    	</c:forEach>
-			    	</div>
-			    	<div class="fc_block">
-				    	<c:forEach var="function" items="${listF.all}" begin="3" step="3">
 				    		<input type="checkbox" name="fc_nos" value="${function.fc_no}" class="funcs${function.fc_category}" id="func${function.fc_no}" <c:forEach var="empPriVO" items="${empPriVOs}"><c:if test="${function.fc_no == empPriVO.fc_no}">checked</c:if></c:forEach>>
 	           				<label for="func${function.fc_no}">${function.fc_name}</label>
 	           				<br>
