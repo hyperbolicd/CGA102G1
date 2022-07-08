@@ -302,22 +302,15 @@ pageContext.setAttribute("avgstar", avgstar);
 			      },
 			      //Ajax失敗後要執行的function，此例為印出錯誤訊息
 			      error: function (xhr, ajaxOptions, thrownError) {
-			        alert(xhr.status + "\n" + thrownError);
+// 			        alert(xhr.status + "\n" + thrownError);
+			        alert("沒場ㄛ換一天ㄅ");
 			      }
 		    });
 		});
 		
 
 		//評論點讚的Ajax
-		$(document).ready(function(){
-			
-// 			$(".like").click(function(e){
-// 				let MEMBER_ID1 = $('#thisMemId').text();
-// 		    	let CM_ID1 = $(this).next().val();
-// 		    	console.log(MEMBER_ID1);
-//                 console.log(CM_ID1);
-// 			})
-			
+		$(document).ready(function(){			
 			
 		    $("#comment").on("click",".like", function(e){
 		    	let MEMBER_ID1 = $('#thisMemId').text();

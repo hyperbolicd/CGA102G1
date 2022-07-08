@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import com.cnm_inf.model.*;
+import com.google.gson.Gson;
 
 
 @WebServlet("/cnm_inf/cnm_inf.do")
@@ -33,31 +34,7 @@ public class Cnm_inf_Servlet  extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				String str = req.getParameter("CNM_INF_ID");
-				if (str == null || (str.trim()).length() == 0) {
-					errorMsgs.add("請輸入影城資訊編號");
-				}
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back/select_page_cnm_inf.jsp");
-					failureView.forward(req, res);
-					return;//程式中斷
-				}
-				
-				Integer CNM_INF_ID = null;
-				try {
-					CNM_INF_ID = Integer.valueOf(str);
-				} catch (Exception e) {
-					errorMsgs.add("影城資訊編號格式不正確");
-				}
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back/select_page_cnm_inf.jsp");
-					failureView.forward(req, res);
-					return;//程式中斷
-				}
+				Integer CNM_INF_ID = Integer.valueOf(req.getParameter("CNM_INF_ID"));
 				
 				/***************************2.開始查詢資料*****************************************/
 				Cnm_infService cnm_infSvc = new Cnm_infService();
@@ -65,19 +42,14 @@ public class Cnm_inf_Servlet  extends HttpServlet {
 				if (cnm_infVO == null) {
 					errorMsgs.add("查無資料");
 				}
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back/select_page_cnm_inf.jsp");
-					failureView.forward(req, res);
-					return;//程式中斷
-				}
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("cnm_infVO", cnm_infVO); // 資料庫取出的cnm_infVO物件,存入req
-				String url = "/back/listOneEmp.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
-				successView.forward(req, res);
+				res.setContentType("application/json; charset=UTF-8");
+				req.setAttribute("cnm_infVO", cnm_infVO); // 資料庫取出的showingVO物件,存入req
+				PrintWriter out = res.getWriter();
+				Gson gson = new Gson();
+				out.print(gson.toJson(cnm_infVO));
+				
 		}
 		
 		
