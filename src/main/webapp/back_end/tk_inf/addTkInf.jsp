@@ -38,26 +38,26 @@
 					<div class="guide1">
 						<div>新增票種</div>
 					</div>
-				</div><FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/tk_inf/tk_inf.do" name="form1">
+				</div><FORM METHOD="post" ACTION="<%=request.getContextPath()%>/tk_inf/tk_inf.do" name="form1">
 				<div class="TKouter">
 					
 						<table class="TKinner">
 							<tr>
-								<td></td>
-								<td>輸入</td>
-								<td></td>
+								<th></th>
+								<th>輸入</th>
+								<th></th>
 							</tr>
 							<tr>
 								<td>票種名稱:</td>
 								<td><input type="text" name="tkType" size="45"
 									value="${param.tkType}"></td>
-								<td>${errorMsgs.tkType}</td>
+								<td style="color:red;">${errorMsgs.tkType}</td>
 							</tr>
 							<tr>
 								<td>定價:</td>
 								<td><input type="text" name="tkPrice" size="45"
 									value="${param.tkPrice}"></td>
-								<td>${errorMsgs.tkPrice}</td>
+								<td style="color:red;">${errorMsgs.tkPrice}</td>
 							</tr>
 							<tr>
 								<td>播放種類:</td>
@@ -71,7 +71,7 @@
 								<td>備註:</td>
 								<td><input type="text" name="tkTypeDT" size="45"
 									value="${param.tkTypeDT}" /></td>
-								<td>${errorMsgs.tkTypeDT}</td>
+								<td style="color:red;">${errorMsgs.tkTypeDT}</td>
 							</tr>
 
 						</table>

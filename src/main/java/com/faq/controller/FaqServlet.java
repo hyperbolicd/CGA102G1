@@ -15,6 +15,11 @@ import com.faq.model.*;
 
 public class FaqServlet extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
 	}
@@ -23,6 +28,7 @@ public class FaqServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+
 
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -116,10 +122,12 @@ public class FaqServlet extends HttpServlet {
 				errorMsgs.add("標題請勿空白");
 			}
 			
-			String faq_content = req.getParameter("faq_content").trim();
-			if (faq_content == null || faq_content.trim().length() == 0) {
-				errorMsgs.add("內容請勿空白");
-			}
+//			String faq_content = req.getParameter("faq_content").trim();
+//			if (faq_content == null || faq_content.trim().length() == 0) {
+//				errorMsgs.add("內容請勿空白");
+//			}
+			
+			String faq_content = req.getParameter("editor1").trim();
 
 			FaqVO faqVO = new FaqVO();
 			faqVO.setFaq_no(faq_no);
@@ -166,10 +174,12 @@ public class FaqServlet extends HttpServlet {
 			}
 			
 			
-			String faq_content = req.getParameter("faq_content").trim();
-			if (faq_content == null || faq_content.trim().length() == 0) {
-				errorMsgs.add("內容請勿空白");
-			}
+//			String faq_content = req.getParameter("faq_content").trim();
+//			if (faq_content == null || faq_content.trim().length() == 0) {
+//				errorMsgs.add("內容請勿空白");
+//			}
+			
+			String faq_content = req.getParameter("editor1").trim();
 			
 			
 			FaqVO faqVO = new FaqVO();

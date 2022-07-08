@@ -541,8 +541,6 @@ public class TkOrdJDBCDAO implements TkOrdDAO_interface {
 
 		TkOrdDtVO empYY = new TkOrdDtVO(); // 員工POJO2
 		empYY.setTkTypeID(1);
-		
-
 		empYY.setActID(1);
 		empYY.setState(Byte.valueOf("0"));
 		empYY.setSeat("02032");

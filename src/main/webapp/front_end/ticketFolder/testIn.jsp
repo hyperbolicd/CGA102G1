@@ -37,12 +37,8 @@
 <%@ include file="/front_end/header_css.jsp"%>
 
 </header>
-
-      <form action="${pageContext.request.contextPath}//TkFolderServlet.do" METHOD="post">
-      <input type="hidden" name="member_ID" value="1" >
-      <input type="hidden" name="action" value="listAllOrdInf" >
-      <button type="submit">進入我的票夾</button>
-      </form>
+<a href="${pageContext.request.contextPath}/TkFolderServlet.do?member_ID=${session.memberVO.member_ID}&action=listAllOrdInf"
+>這是進入點</a>
       
 
   <!--客服圖 請自行加連結-->

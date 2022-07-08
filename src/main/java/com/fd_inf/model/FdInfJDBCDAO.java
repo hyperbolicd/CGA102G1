@@ -18,7 +18,7 @@ public class FdInfJDBCDAO implements FdInfDAO_interface{
 	private static final String INSERT_STMT = 
 			"INSERT INTO fd_inf (FD_TYPE,FD_NAME,FD_PRICE,FD_DT,FD_PICTURE,FD_STATE) VALUES (?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
-			"SELECT FD_ID,FD_TYPE,FD_NAME,FD_PRICE,FD_DT,FD_PICTURE,FD_STATE FROM fd_inf order by FD_ID";
+			"SELECT FD_ID,FD_TYPE,FD_NAME,FD_PRICE,FD_DT,FD_PICTURE,FD_STATE FROM fd_inf order by FD_ID desc";
 	private static final String GET_ONE_STMT = 
 			"SELECT FD_ID,FD_TYPE,FD_NAME,FD_PRICE,FD_DT,FD_PICTURE,FD_STATE FROM fd_inf where FD_ID = ?";
 	private static final String DELETE = 

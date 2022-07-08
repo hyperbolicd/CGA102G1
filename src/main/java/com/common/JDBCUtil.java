@@ -18,7 +18,7 @@ public class JDBCUtil {
 	
 	static Connection con;
 	
-	static boolean useConnectionPool = true;
+	static boolean useConnectionPool = false;
 	
 	public static Connection getConnection() throws SQLException, NamingException, ClassNotFoundException {
 		if(useConnectionPool) {

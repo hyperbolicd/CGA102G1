@@ -63,7 +63,7 @@ public class TkOrdService {
 	
 	public void insertWithTkOrdDtsAndFdOrdDts(TkOrdVO tkOrdVO , List<TkOrdDtVO> list , List<FdOrdDtVO> list2) {
 
-		
+		dao.insertWithTkOrdDtsAndFdOrdDts(tkOrdVO , list , list2);
 	}
 
 }

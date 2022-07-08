@@ -9,7 +9,7 @@ public interface RefundTicket_interface {
 	public List<TkOrdDtVO> getDtByOrd(Long tkOrdID);
 	
 	// 對單一DT 進行UPDATE
-	public void updateOneDt(Long tkDtID);
+	public void updateOneDt(Integer seatState,Long tkDtID);
 	
 	// 獲取單一票種的票名
 	public String getTicketName(Integer tkTypeID);

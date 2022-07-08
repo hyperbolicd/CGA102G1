@@ -2,7 +2,7 @@ package com.member.model;
 
 import java.util.List;
 
-import MemberSendEmail.MailService;
+//import MemberSendEmail.MailService;
 
 public class MemberService {
 	
@@ -94,18 +94,18 @@ public class MemberService {
 	}
 	
 //寄送 email
-	public void sendMail() {
-		String to = "wanlly1993@gmail.com";
-		String subject = "密碼通知";
-
-		String ch_name = "JIA";
-		String passRandom = "111";
-		String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" + " (已經啟用)";
-		
-		
-		MailService	mailService = new MailService();
-		mailService.sendMail(to, subject, messageText);
-	}
+//	public void sendMail() {
+//		String to = "wanlly1993@gmail.com";
+//		String subject = "密碼通知";
+//
+//		String ch_name = "JIA";
+//		String passRandom = "111";
+//		String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" + " (已經啟用)";
+//		
+//		
+//		MailService	mailService = new MailService();
+//		mailService.sendMail(to, subject, messageText);
+//	}
 	
 	// wish
 	public void updateWishTicket(Integer member_id, Integer wish_ticket) {

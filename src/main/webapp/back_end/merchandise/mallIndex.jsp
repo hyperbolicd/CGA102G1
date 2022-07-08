@@ -10,11 +10,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_all.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_all.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_main.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_main.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_footer.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_footer.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/back_end/merchandise/css/merchandise.css">
 </head>
@@ -117,7 +117,6 @@
 <!-- 									<td><button class="tablebt" type="submit" name="action" value="getMerchInfo">確認</button> -->
 <!-- 								</form> -->
 							</td>
-							
 						</tr>
 						<tr>
 							<td>顯示商品詳情:</td>

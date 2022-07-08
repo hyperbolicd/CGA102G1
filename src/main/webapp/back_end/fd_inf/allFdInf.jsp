@@ -17,15 +17,16 @@ pageContext.setAttribute("list", list);
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>飲食資料管理</title>
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_all.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_all.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_main.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_main.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_footer.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_footer.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/fd_inf/styles/FDINFBack.css">
 
-
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 
@@ -33,7 +34,7 @@ pageContext.setAttribute("list", list);
 	<header>
 		<%@ include file="/back_end/header_html.jsp"%>
 	</header>
-	
+
 	<aside id="aside"></aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
@@ -53,15 +54,15 @@ pageContext.setAttribute("list", list);
 
 					<table class="TKinner">
 						<tr>
-							<td>編號</td>
-							<td>種類</td>
-							<td>餐飲名稱</td>
-							<td>價格</td>
-							<td>備註</td>
-							<td>圖片</td>
-							<td>狀態</td>
-							<td>修改</td>
-							<td>刪除</td>
+							<th>編號</th>
+							<th>種類</th>
+							<th>餐飲名稱</th>
+							<th>價格</th>
+							<th>備註</th>
+							<th>圖片</th>
+							<th>狀態</th>
+							<th>修改</th>
+							<th>刪除</th>
 
 						</tr>
 						<%@ include file="page1.file"%>
@@ -80,23 +81,22 @@ pageContext.setAttribute("list", list);
 								<td>${fdinfVO.fdName}</td>
 								<td>$ ${fdinfVO.fdprice}</td>
 								<td>${fdinfVO.fdDT}</td>
-								<td><img src="<%=request.getContextPath()%>/back_end/fd_inf/fd_inf.do?action=getPic&fdID=${fdinfVO.fdID}"
+								<td><img
+									src="<%=request.getContextPath()%>/fd_inf/fd_inf.do?action=getPic&fdID=${fdinfVO.fdID}"
 									style="width: 100px; height: 120px;"></td>
-								<td id="status-${fdinfVO.fdID}">${fdinfVO.fdState == 0 ? "下架" : "上架"}</td>
+								<td id="state${fdinfVO.fdID}" >${fdinfVO.fdState == 0 ? "下架" : "上架"}</td>
 								<td><FORM METHOD="post"
-										ACTION="<%=request.getContextPath()%>/back_end/fd_inf/fd_inf.do"
+										ACTION="<%=request.getContextPath()%>/fd_inf/fd_inf.do"
 										style="margin-bottom: 0px;">
 										<input class="tablebt" type="submit" value="修改"> <input
 											type="hidden" name="fdID" value="${fdinfVO.fdID}"> <input
 											type="hidden" name="action" value="getOne_For_Update">
 									</FORM></td>
-								<td><FORM METHOD="post"
-										ACTION="<%=request.getContextPath()%>/back_end/fd_inf/fd_inf.do"
-										style="margin-bottom: 0px;">
-										<input class="tablebt" type="submit" value="刪除"> <input
-											type="hidden" name="fdID" value="${fdinfVO.fdID}"> <input
-											type="hidden" name="action" value="delete">
-									</FORM></td>
+								<td>
+									<div class="btBlock">
+										<a id="${fdinfVO.fdID}" class="tablebt updateState">${fdinfVO.fdState== 1 ? "下架" : "上架"}</a>
+									</div>
+								</td>
 							</tr>
 
 						</c:forEach>
@@ -106,7 +106,7 @@ pageContext.setAttribute("list", list);
 				</div>
 				<div class="btBlock">
 
-						<%@ include file="page2.file"%>
+					<%@ include file="page2.file"%>
 
 				</div>
 
@@ -123,6 +123,45 @@ pageContext.setAttribute("list", list);
 	<aside id="aside">
 		<%@ include file="/back_end/aside_html.jsp"%>
 	</aside>
+	<script>
+// 	$('.updateState').click(function(){
+		$('.updateState').click(function(){
+			
+		let fdID = $(this).attr('id');
+		console.log(fdID);
+		
+		let url = "${pageContext.request.contextPath}/fd_inf/fd_inf.do?action=updateStatus&fdID="+fdID;
 
+		
+		$.ajax({
+				url: url,
+		        type: 'post',
+		        dataType: 'json',
+		        async: false,
+		        timeout: 15000,
+		        success: function (data) {
+				        
+				let newStatus = data.newStatus;
+
+				let s = '';
+				let t = '';
+				if(newStatus == "1"){
+					s = "上架";
+					t = "下架";
+
+				}else{
+					s = "下架";
+					t = "上架";
+				}
+				$("#state"+ fdID).text(s);
+				$("#"+ fdID).text(t);
+				
+
+
+			}
+		 });
+	});
+
+	</script>
 </body>
 </html>

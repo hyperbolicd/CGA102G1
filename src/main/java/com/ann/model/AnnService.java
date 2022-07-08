@@ -2,6 +2,8 @@ package com.ann.model;
 
 import java.util.List;
 
+import com.movie.model.MovieVO;
+
 public class AnnService {
 
 	private AnnDAO_interface dao;
@@ -10,27 +12,40 @@ public class AnnService {
 		dao = new AnnJDBCDAO();
 	}
 
-	public AnnVO addAnn(java.sql.Date ann_date, String ann_title, String editor1, byte[] ann_picture) {
+//	public AnnVO addAnn(java.sql.Date ann_date, String ann_title, String editor1, byte[] ann_picture) {
+//
+//		AnnVO annVO = new AnnVO();
+//
+//		annVO.setAnn_date(ann_date);
+//		annVO.setAnn_title(ann_title);
+//		annVO.setAnn_content(editor1);
+//		annVO.setAnn_picture(ann_picture);
+//		dao.insert(annVO);
+//
+//		return annVO;
+//	}
+	
+	public AnnVO addAnn(java.sql.Date ann_date, String ann_title, String ann_content) {
 
 		AnnVO annVO = new AnnVO();
 
 		annVO.setAnn_date(ann_date);
 		annVO.setAnn_title(ann_title);
-		annVO.setAnn_content(editor1);
-		annVO.setAnn_picture(ann_picture);
+		annVO.setAnn_content(ann_content);
 		dao.insert(annVO);
 
 		return annVO;
 	}
+	
 
-	public AnnVO updateAnn(Integer ann_no, java.sql.Date ann_date, String ann_title, String editor1, byte[] ann_picture) {
+	public AnnVO updateAnn(Integer ann_no, java.sql.Date ann_date, String ann_title, String ann_content, byte[] ann_picture) {
 
 		AnnVO annVO = new AnnVO();
 
 		annVO.setAnn_no(ann_no);
 		annVO.setAnn_date(ann_date);
 		annVO.setAnn_title(ann_title);
-		annVO.setAnn_content(editor1);
+		annVO.setAnn_content(ann_content);
 		annVO.setAnn_picture(ann_picture);
 		dao.update(annVO);
 
@@ -48,4 +63,10 @@ public class AnnService {
 	public List<AnnVO> getAll() {
 		return dao.getAll();
 	}
+	
+	public List<AnnVO> getAnnfront(){
+		
+		return dao.getAnnfront();
+	}
+
 }

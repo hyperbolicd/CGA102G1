@@ -54,11 +54,11 @@ pageContext.setAttribute("list2", list2);
 
 				<div class="showingInf">
 					<div class="showmain">
-						<div class="showname">電影名</div>
+						<div class="showname">${movieVO.mvName}</div>
 					</div>
 					<div class="showside">
-						<div class="showtime">時間</div>
-						<div class="hellname">廳名</div>
+						<div class="showtime"></div>
+						<div class="hellname">${hallVO.hlName}</div>
 					</div>
 				</div>
 
@@ -75,26 +75,19 @@ pageContext.setAttribute("list2", list2);
 							<td>數量</td>
 						</tr>
 						<c:forEach var="tkinfVO" items="${list}">
-							<c:choose>
-								<c:when test="${(0 == tkinfVO.tkDI) && (tkinfVO.tkTypeID < 4)}">
-									<tr class="TKh">
-										<td>${tkinfVO.tkType}</td>
-										<td>$ ${tkinfVO.tkPrice}</td>
-										<td><input class="TK${tkinfVO.tkTypeID}" type="number"
-											onkeydown="return false;" min="0" max="5" step="1" value="0" />
-										</td>
-									</tr>
-								</c:when>
-								<c:when test="${(0 == tkinfVO.tkDI) && (tkinfVO.tkTypeID > 4)}">
-									<tr class="TKh">
-										<td>${tkinfVO.tkType}</td>
-										<td>$ ${tkinfVO.tkPrice}</td>
-										<td><input class="TK${tkinfVO.tkTypeID}" type="number"
-											onkeydown="return false;" min="0" max="5" step="1" value="0" />
-										</td>
-									</tr>
-								</c:when>
-							</c:choose>
+
+							<c:if test="${(showingVO.SH_TYPE == tkinfVO.tkDI)}">
+
+								<tr class="TKh">
+									<td>${tkinfVO.tkType}</td>
+									<td>$ ${tkinfVO.tkPrice}</td>
+									<td><input class="TK${tkinfVO.tkTypeID}" type="number"
+										onkeydown="return false;" min="0" max="5" step="1" value="0" />
+									</td>
+								</tr>
+
+							</c:if>
+
 
 						</c:forEach>
 					</table>
@@ -115,7 +108,7 @@ pageContext.setAttribute("list2", list2);
 								<div class="item">
 									<div class="img_block">
 										<img
-											src="<%=request.getContextPath()%>/back_end/fd_inf/fd_inf.do?action=getPic&fdID=${fdinfVO.fdID}"
+											src="<%=request.getContextPath()%>/fd_inf/fd_inf.do?action=getPic&fdID=${fdinfVO.fdID}"
 											style="width: 100px; height: 120px;">
 									</div>
 									<div class="iteminner">
@@ -177,23 +170,33 @@ pageContext.setAttribute("list2", list2);
 
 	<script>
 	
-
+// 	處理場次時間==================================
+	let showtime = '';
+	showtime = '${showingVO.SH_TIME}';
+	
+	$('.showtime').text(showtime.slice(0, 16));
 
 	
-let order = []; 
-let TKCount = [];
+
+let TKorder = []; 
+let FDorder = [];
+// let TKCount = [];
 
 // 點擊單一票種	
 <c:forEach var="tkinfVO" items="${list}">					
 	
-	let TKCount${tkinfVO.tkTypeID} = { 'name' : [], 
-			'count' : [],
-	}
+// 	let TKCount${tkinfVO.tkTypeID} = { 'name' : [], 
+// 			'count' : [],
+// 	}
 	
-	let TK${tkinfVO.tkTypeID} = { 'id' : [],
-			 'name' : [], 
-			 'unitPrice' : [],
-			 'count' : [] };
+	let TK${tkinfVO.tkTypeID} = { 'id' : '',
+			 'name' : '', 
+			 'unitPrice' : '',
+			 'count' : '',
+			 'actId' : '',
+			 'saleName' : '',
+			 'salePrice' : '',
+			};
 	$(".TK${tkinfVO.tkTypeID}").change((e) => {
 // 		覆蓋之前的
 	 TK${tkinfVO.tkTypeID}.id=("${tkinfVO.tkTypeID}");
@@ -201,8 +204,8 @@ let TKCount = [];
 	 TK${tkinfVO.tkTypeID}.unitPrice=("${tkinfVO.tkPrice}");
 	 TK${tkinfVO.tkTypeID}.count=(e.target.value);
 	 
-	 TKCount${tkinfVO.tkTypeID}.name=("${tkinfVO.tkType}");
-	 TKCount${tkinfVO.tkTypeID}.count=(e.target.value);
+// 	 TKCount${tkinfVO.tkTypeID}.name=("${tkinfVO.tkType}");
+// 	 TKCount${tkinfVO.tkTypeID}.count=(e.target.value);
 	 
 	    
 		$(".trTK${tkinfVO.tkTypeID}").remove();
@@ -218,11 +221,44 @@ let TKCount = [];
 		if(TK${tkinfVO.tkTypeID}.count.length === 0 ) {	
 			
 		}else{
-		order.push(TK${tkinfVO.tkTypeID});
-        sessionStorage.setItem('order', JSON.stringify(order));
+		
+		
+		
+		let url = "${pageContext.request.contextPath}/tkOrd/tkOrd.do?action=findDiscountPrice&tkTypeID=" + TK${tkinfVO.tkTypeID}.id;
+
+		
+		$.ajax({
+			url: url,
+            type: 'post',
+            dataType: 'json',
+            async: false,
+            timeout: 15000,
+            success: function (data) {
+				
+
+            	
+            	let discount = data.act_discount;
+            	let minus = data.act_coupon;
+            	
+
+            	
+            	TK${tkinfVO.tkTypeID}.salePrice = Math.round((TK${tkinfVO.tkTypeID}.unitPrice * discount) + minus);
+            	
+            	TK${tkinfVO.tkTypeID}.actId = data.act_id;
+            	TK${tkinfVO.tkTypeID}.saleName = data.act_title;
+		    
+            }
+		       
+			 
+		})	
+			
+		
+			
+		TKorder.push(TK${tkinfVO.tkTypeID});		
+        sessionStorage.setItem('TKorder', JSON.stringify(TKorder));
         
-        TKCount.push(TKCount${tkinfVO.tkTypeID});
-        sessionStorage.setItem('TKCount', JSON.stringify(TKCount));
+//         TKCount.push(TKCount${tkinfVO.tkTypeID});
+//         sessionStorage.setItem('TKCount', JSON.stringify(TKCount));
         
 		}
     });   
@@ -234,10 +270,10 @@ let TKCount = [];
 //點擊單一餐飲	
 <c:forEach var="fdinfVO" items="${list2}">				
 	
-	let FD${fdinfVO.fdID} = { 'id' : [],
-			 'name' : [], 
-			 'unitPrice' : [],
-			 'count' : [] };
+	let FD${fdinfVO.fdID} = { 'id' : '',
+			 'name' : '', 
+			 'unitPrice' :'',
+			 'count' : '' };
 	$(".FD${fdinfVO.fdID}").change((e) => {
 // 		覆蓋之前的
 	 FD${fdinfVO.fdID}.id=("${fdinfVO.fdID}");
@@ -259,14 +295,15 @@ let TKCount = [];
 		if(FD${fdinfVO.fdID}.count.length === 0 ) {	
 			
 		}else{
-        order.push(FD${fdinfVO.fdID});
-        sessionStorage.setItem('order', JSON.stringify(order));
+        FDorder.push(FD${fdinfVO.fdID});
+        sessionStorage.setItem('FDorder', JSON.stringify(FDorder));
+		
 		}
     });   
 </c:forEach>
 
-	
-	
+
+
 	</script>
 </body>
 </html>
