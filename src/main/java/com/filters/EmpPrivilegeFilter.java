@@ -49,7 +49,7 @@ public class EmpPrivilegeFilter extends HttpFilter {
 			for(EmpPrivilegeVO pri: priList) {
 				canAccess.add(pri.getFc_no());
 			}
-			System.out.println(canAccess);
+//			System.out.println(canAccess);
 			// 與既有權限 1~21 的差異加入"無授權"
 			List<Integer> canNotAccess = new ArrayList<Integer>();
 			for(int i = 1; i <= 21; i++) {
@@ -63,17 +63,17 @@ public class EmpPrivilegeFilter extends HttpFilter {
 				EmpFunctionService empFcSvc = new EmpFunctionService();
 				String accessUri = request.getContextPath() + empFcSvc.getOneFunc(numNot).getFc_description();
 				priUri.add(accessUri);
-				System.out.println(accessUri);
+//				System.out.println(accessUri);
 			}
 		} else {
 			System.out.println("尚未登入");
 		}
 		
-		// 判斷可前往的頁面是否包含自己
-		if(!priUri.contains(uri)) { // 有包含，導回首頁 
-			chain.doFilter(request, response);	
-		} else { // 未包含，放行
+		// 判斷不可前往的頁面是否包含自己
+		if(priUri.contains(uri)) { // 有包含，導回首頁 
 			response.sendRedirect(request.getContextPath() + "/back_end/empIndex.jsp");
+		} else { // 未包含，放行
+			chain.doFilter(request, response);	
 		}
 	}
 

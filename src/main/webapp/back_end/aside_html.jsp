@@ -5,7 +5,7 @@
 	<li id="index"><span><a href="${pageContext.request.contextPath}/back_end/empIndex.jsp">首頁</a></span></li>
 	<li><span>資訊管理</span>
 		<ul>
-			<li>影城資訊管理</li>
+			<li><a href="${pageContext.request.contextPath}/back_end/notFinishedYet.jsp">影城資訊管理</a></li>
 			<li><a href="${pageContext.request.contextPath}/back_end/ManageMV/manageMV.jsp">電影資訊管理</a></li>
 			<li><a href="${pageContext.request.contextPath}/back_end/tk_inf/allTkInf.jsp">票價資訊管理</a></li>
 			<li><a href="${pageContext.request.contextPath}/back_end/fd_inf/allFdInf.jsp">餐飲資訊管理</a></li>
@@ -17,7 +17,7 @@
 		<ul>
 			<li><a href="${pageContext.request.contextPath}/back_end/tk_ord/sellTK.jsp">現場購票/購餐</a></li>
 			<li><a href="${pageContext.request.contextPath}/back_end/refundTicket/refundIndex.jsp">票務訂單管理</a></li>
-			<li>驗票驗證碼</li>
+			<li><a href="${pageContext.request.contextPath}/back_end/notFinishedYet.jsp">驗票驗證碼</a></li>
 		</ul></li>
 	<li><span>評論相關</span>
 		<ul>
@@ -30,14 +30,14 @@
 		</ul></li>
 	<li><span>活動相關</span>
 		<ul>
-			<li>促銷活動管理</li>
+			<li><a href="${pageContext.request.contextPath}/back_end/faq/allAct.jsp">促銷活動管理</a></li>
 			<li><a href="${pageContext.request.contextPath}/back_end/wish/wishPond.jsp">許願池管理</a></li>
 		</ul></li>
 	<li><span>公告客服</span>
 		<ul>
-			<li>公告管理</li>
-			<li>Q&A文字管理</li>
-			<li>線上客服</li>
+			<li><a href="${pageContext.request.contextPath}/back_end/ann/allAnn.jsp">公告管理</a></li>
+			<li><a href="${pageContext.request.contextPath}/back_end/faq/allFaq.jsp">常見問題管理</a></li>
+			<li><a href="${pageContext.request.contextPath}/back_end/notFinishedYet.jsp">線上客服</a></li>
 		</ul></li>
 	<li><span>員工管理</span>
 		<ul>

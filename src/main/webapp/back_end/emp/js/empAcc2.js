@@ -13,13 +13,16 @@ function windowClose(){
 	const divNew = document.querySelector('#newAccount');
     // 新增帳戶的視窗
     const divInput = document.querySelector('#dataInput');
+    const statusInput = document.querySelector('#statusInput');
+   	statusInput.style.display = "none";
    	divInput.style.display = "none";
    	divNew.style.display = "none";
 }
 
+// 選擇顯示 所有人/在職/離職/留職停薪
 const statuss = document.querySelectorAll('#empStatus');
 document.querySelector('#showStatus').addEventListener('change', function(){
-	console.log(this.value);
+//	console.log(this.value);
 	switch(this.value){
 		case '-1':
 			for(let status of statuss){
@@ -68,80 +71,8 @@ document.querySelector('#showStatus').addEventListener('change', function(){
 			showTables[i].classList.add('evenTr');
 		}
 	}
-	console.log(document.querySelectorAll('#empStatus')[0].innerText);
+//	console.log(document.querySelectorAll('#empStatus')[0].innerText);
 });
-
-// 新增員工
-function addEmp(){
-//    const number = parseInt(document.querySelector('#number').value);
-//    const password = document.querySelector('#password').value;
-//    const ename = document.querySelector('#ename').value;
-//    const status = document.querySelector('#status').value;
-//    const newEmp = {
-//        'id': number,
-//        'name': ename,
-//        'status': status,
-//        'password': password
-//    }
-//    empList.push(newEmp);
-//    close();
-}
-
-// 刪除員工
-function deleteEmp(id){
-	alert('刪除: ' + id);
-//    let result = confirm('刪除後無法復原，確認刪除該員工?');
-//    if(!result){
-//        return;
-//    }
-//    empList = empList.filter(emp => emp.id !== id);
-//    showEmp();
-}
-
-// 修改密碼
-function resetPw(id){
-	alert('修改密碼: ' + id);
-//    const newAccount = document.querySelector('#newAccount');
-//    if(newAccount){
-//        newAccount.remove();
-//    }
-//    // 區分前後區域
-//    const divNew = document.createElement('div');
-//    divNew.id = 'newAccount';
-//    divNew.onclick = close;
-//    // 新增帳戶的視窗
-//    const divInput = document.createElement('div');
-//    divInput.id = 'dataInput';
-//    // 輸入名稱
-//    let inner = `
-//    <h1>重設密碼</h1>
-//    <label for="empNumber">編號：</label>
-//    <input value="${id}" id="empNumber" readonly>
-//    <br>
-//    <label for="password">密碼：</label>
-//    <input type="password" id="newPassword">
-//    <div>`;
-//
-//    inner += `</div><div>
-//        <button id="cancel">取消</button>
-//        <button id="reset">重設</button>
-//    </div>
-//    `;
-//    divInput.innerHTML = inner;
-//    main.append(divNew);
-//    main.append(divInput);
-//    document.querySelector('#newPassword').focus();
-//    const cancel = document.querySelector('#cancel');
-//    const reset = document.querySelector('#reset');
-//    cancel.onclick = close;
-//    reset.addEventListener('click', function(){
-//        const emp = empList.filter(emp => emp.id === id)[0];
-//        const newPw = document.querySelector('#newPassword').value;
-//        emp.password = newPw;
-//        close();
-//        showEmp();
-//    });
-}
 
 // 權限連動選取
 function chooseAll(category){
@@ -157,7 +88,36 @@ function chooseAll(category){
 //        console.log(fun.checked);
     }
 }
-
-//function check(id){
-//    alert('查看： ' +　id);
-//}
+const buttonInStatus = document.querySelectorAll('#statusInput>form>button');
+// 修改員工狀態
+function reviseStatus(e){
+	const memberStatus = e.parentElement.parentElement.firstElementChild.nextElementSibling.nextElementSibling.innerText;
+	for(let btn of buttonInStatus){
+		console.log(btn.innerText);
+		console.log(memberStatus);
+		if(btn.innerText === memberStatus){
+			btn.style.display = 'none';
+		} else {
+			btn.style.display = 'inline-block';
+		}
+	}
+	const memberId = e.parentElement.parentElement.firstElementChild.innerText;
+    // 區分前後區域
+    const divNew = document.querySelector('#newAccount');
+    // 新增帳戶的視窗
+    const statusInput = document.querySelector('#statusInput');
+   	statusInput.style.display = "block";
+   	divNew.style.display = "block";
+   	// 將員工編號傳進 input
+   	document.querySelector('#statusInputEmpNo').value = memberId;
+}
+// 將員工編號狀態傳進 input
+function setStatus(e){
+	let status;
+	switch(e.innerText){
+		case '離職':status = 0;break;
+		case '在職':status = 1;break;
+		case '留職停薪':status = 2;break;
+	}
+	document.querySelector('#statusInputEmpStatus').value = status;
+}

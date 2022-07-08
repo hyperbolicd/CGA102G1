@@ -158,7 +158,7 @@
 			
 			ws.onerr = function(){}
 		}
-		function sendMessage(){	ws.send('');}
+		function sendMessage(){	ws.send('refresh');}
 						
 		function disconnect(){ ws.close();}
 		

@@ -128,8 +128,10 @@
 			
 			ws.onopen = function() {}
 			
-			ws.onmessage = function(){
-				window.setTimeout(( () => location.reload() ), 500);
+			ws.onmessage = function(e.data){
+				if('refresh' == e.data){
+					window.setTimeout(( () => location.reload() ), 500); // 收到推播後刷新頁面
+				}
 			}
 			
 			ws.onclose = function(){}
