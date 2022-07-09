@@ -61,15 +61,15 @@ public class OrderCompleteServlet extends HttpServlet {
 		if ("completeOrder".equals(action)) { // 來自allFdInf.jsp的請求
 
 			Gson gson = new Gson();
-			System.out.print(req.getParameter("order"));
+			System.out.println(req.getParameter("order"));
 			Order order = gson.fromJson(req.getParameter("order"), Order.class);
-			
+
 			/*************************** 1.接收請求參數 ****************************************/
-			
+			System.out.println("order====="+order);
 			Integer MemberID = order.getMemberID();
 			Integer SH_ID = order.getSH_ID();
 			
-	
+			System.out.println("MemberID====="+MemberID);
 			/*************************** 2.開始新增資料 ***************************************/
 			TkOrdVO tkOrdVO = new TkOrdVO();
 			tkOrdVO.setMemberID(MemberID);
@@ -77,21 +77,35 @@ public class OrderCompleteServlet extends HttpServlet {
 
 			List<TkOrdDtVO> tkOrdDtList = new ArrayList<TkOrdDtVO>();
 			 // 員工POJO1
-			TKorder[] tKorder = order.getTKorder();
+			TKorder[] tKorders = order.getTKorders();
 			String[] seat = order.getSeatindex();
-			for (int i = 0 ; i<tKorder.length; i++ ) {			
-				TkOrdDtVO tkOrdDt = new TkOrdDtVO();
-				tkOrdDt.setTkTypeID(tKorder[i].getId());
-				tkOrdDt.setActID(tKorder[i].getActId());
-				tkOrdDt.setState(Byte.valueOf("0"));
-				tkOrdDt.setSeat(seat[i]);
-				tkOrdDt.setSellPrice(tKorder[i].getSalePrice());
-				tkOrdDtList.add(tkOrdDt);
+			
+			System.out.println(order.getTKorders());
+			System.out.println("order.getTKorders()====="+order.getTKorders());
+			int totalTicket = 0;
+			
+			for (int tKorderindex = 0; tKorderindex<tKorders.length;tKorderindex++) {
+				totalTicket = totalTicket + tKorders[tKorderindex].getCount();
+				for( int count = 0; count<tKorders[tKorderindex].getCount(); count++) {
+					int seatIndex = 0;
+					TkOrdDtVO tkOrdDt = new TkOrdDtVO();
+					
+					tkOrdDt.setTkTypeID(tKorders[tKorderindex].getId());
+					tkOrdDt.setActID(tKorders[tKorderindex].getActId());
+					tkOrdDt.setState(Byte.valueOf("0"));
+					tkOrdDt.setSeat(seat[seatIndex]);
+					tkOrdDt.setSellPrice(tKorders[tKorderindex].getSalePrice());
+					tkOrdDtList.add(tkOrdDt);
+					
+					seatIndex++;
+				}
+				
 			}
+						
 				
 			List<FdOrdDtVO> fdOrdDtList = new ArrayList<FdOrdDtVO>(); 
 			
-			for(FDorder fdorder : order.getFDorder()) {
+			for(FDorder fdorder : order.getFDorders()) {
 				
 				FdOrdDtVO fdOrdDt = new FdOrdDtVO(); 
 				
@@ -104,14 +118,18 @@ public class OrderCompleteServlet extends HttpServlet {
 				
 			}
 			
+			
+			
+			TkOrdService tkOrdSvc = new TkOrdService();
+			tkOrdSvc.insertWithTkOrdDtsAndFdOrdDts(tkOrdVO, tkOrdDtList, fdOrdDtList);
+			
+			
+			
 //			增加許願票數
 			MemberService memberService = new MemberService();
 			MemberVO memberVO = memberService.getOneMem(MemberID);
 			Integer wishTicket = memberVO.getWish_Ticket();
-			wishTicket = wishTicket + tKorder.length;
-			TkOrdService tkOrdSvc = new TkOrdService();
-			
-			tkOrdSvc.insertWithTkOrdDtsAndFdOrdDts(tkOrdVO, tkOrdDtList, fdOrdDtList);
+			wishTicket = wishTicket + totalTicket;
 			memberService.updateWishTicket(MemberID, wishTicket);
 		}
 		

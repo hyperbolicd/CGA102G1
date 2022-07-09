@@ -2,9 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.ann.model.*"%>
+<%@ page import="java.util.*"%>
 
 <%
 AnnService annSvc = new AnnService();
+List<AnnVO> list = annSvc.getAll();
+pageContext.setAttribute("list", list);
 %>
 
 <!-- <!DOCTYPE html> -->
@@ -18,21 +21,47 @@ AnnService annSvc = new AnnService();
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+<!-- Ann_公告_css -->
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/front_end/act/css/main.css">
+	href="${pageContext.request.contextPath}/front_end/ann/css/annfront.css">
 
 
-<!-- 活動標題 -->
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<!-- Bootstrap v4.3.1 CSS -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/front_end/ann/lib/bootstrap/css/bootstrap.min.css">
+<!-- Custom CSS -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/front_end/ann/css/normalize.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/front_end/ann/css/theme.css">
+<!-- Slick CSS -->
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/front_end/act/css/acttitle.css">
+	href="${pageContext.request.contextPath}/front_end/ann/lib/slick/slick/slick.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/front_end/act/js/acttitle.js">
+	href="${pageContext.request.contextPath}/front_end/ann/lib/slick/slick/slick-theme.css">
+<!-- Magnific Popup core CSS file -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/front_end/ann/lib/Magnific-Popup-master/dist/magnific-popup.css">
+<!-- Font Awesome Free 5.10.2 CSS JS -->
+<link
+	href="${pageContext.request.contextPath}/front_end/ann/lib/fontawesome-free-5.10.2-web/css/all.css"
+	rel="stylesheet">
+<script defer
+	src="${pageContext.request.contextPath}/front_end/ann/lib/fontawesome-free-5.10.2-web/js/brands.min.js"></script>
+<script defer
+	src="${pageContext.request.contextPath}/front_end/ann/lib/fontawesome-free-5.10.2-web/js/solid.min.js"></script>
+<script defer
+	src="${pageContext.request.contextPath}/front_end/ann/lib/fontawesome-free-5.10.2-web/js/regular.min.js"></script>
+<script defer
+	src="${pageContext.request.contextPath}/front_end/ann/lib/fontawesome-free-5.10.2-web/js/fontawesome.min.js"></script>
+<!-- Date picker -->
+<link
+	href="${pageContext.request.contextPath}/front_end/ann/lib/gijgo/css/gijgo.min.css"
+	rel="stylesheet" type="text/css" />
 
-<!-- 活動列表 -->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/front_end/act/css/actlist.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/front_end/act/js/actlist.js">
+
+
 
 
 
@@ -68,167 +97,101 @@ AnnService annSvc = new AnnService();
 
 	<!--各自的內容--------------------->
 
-	<div class="content">
-
-		<!-- 	<div class="mainacttitle" style='padding: 10px 20px; background-color: #ECECEC;'> -->
-		<!--將內容存-->
-
-		<!-- 		<div style="padding: 500px 100px;"> -->
-
-		<!-- 活動標題 -->
-		<div class="container">
-			<div class="slide-bar" id="slidebar">
-				<div class="bar" id="bar"></div>
+	<!-- Content -->
+	<div id="content">
+		<div class="content-wrap page-news-list">
+			<div class="subsite-banner">
+				<img src="img/subsite-banner-5.jpg">
 			</div>
-			<div class="text-block" id="textone">
-				<h1>影 城 活 動</h1>
-			</div>
-			<div class="text-block" id="texttwo">
-				<h1>Activity</h1>
+			<div class="subsite subsite-with-banner">
+				<div class="row">
+					<div class="col-md-12">
+						<div style="font-size:30px" class="subsite-heading" >影 城 公 告</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="search-form search-content">
+							<div class="search-wrapper ">
+<%-- 							<form action="${pageContext.request.contextPath}/ann/ann.do" method="post"> --%>
+<!-- 								<input id="search" placeholder="Search..."> -->
+<!-- 								<button class="ssubmit" type="submit" name="search_submit"> -->
+<!-- 									<i class="fas fa-search"></i> -->
+<!-- 								</button> -->
+<!-- 								</form> -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<c:forEach var="annVO" items="${list}">
+					<div class="row news-row">
+						<div class="col-md-12">
+							<div class="news-card">
+								<div class="nc-top">
+									<div class="nc-left">
+										<div class="ncl-image">
+										<td><img src="<%=request.getContextPath()%>${annVO.ann_picture}"></td>
+										</div>
+									</div>
+									<div class="nc-right">
+										<div style="font-size:15px" class="ncr-row-a">${annVO.ann_title}</div>
+										<div style="font-size:15px" class="ncr-row-b">${annVO.ann_content}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+
+
+				<div class="row car-row pagination-row">
+					<div class="col-md-12">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination justify-content-center">
+								<li class="page-item"><a class="page-link" href="#"
+									aria-label="Previous"><span aria-hidden="true">&laquo;</span><span
+										class="sr-only">Previous</span></a></li>
+								<li class="page-item active"><a class="page-link" href="#">1</a></li>
+								<li class="page-item"><a class="page-link" href="#">2</a></li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item"><a class="page-link" href="#">4</a></li>
+								<li class="page-item"><a class="page-link" href="#">5</a></li>
+								<li class="page-item"><a class="page-link" href="#"
+									aria-label="Next"><span aria-hidden="true">&raquo;</span><span
+										class="sr-only">Next</span></a></li>
+	
+							</ul>
+						</nav>
+					</div>
+				</div>
 			</div>
 		</div>
-		<button id="changeBtn">&nbsp;</button>
-		<!-- 	</div> -->
-
-
-		<!-- 活動列表 -->
-		<section id="cd-timeline" class="cd-container">
-			<div class="cd-timeline-block">
-				<div class="cd-timeline-img cd-picture">
-					<img
-						alt="Picture">
-				</div>
-				<!-- cd-timeline-img -->
-
-				<div class="cd-timeline-content">
-					<h2>Title of section 1</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						Iusto, optio, dolorum provident rerum aut hic quasi placeat iure
-						tempora laudantium ipsa ad debitis unde? Iste voluptatibus minus
-						veritatis qui ut.</p>
-					<a href="#0" class="cd-read-more">Read more</a> <span
-						class="cd-date">Jan 14</span>
-				</div>
-				<!-- cd-timeline-content -->
-			</div>
-			<!-- cd-timeline-block -->
-
-			<div class="cd-timeline-block">
-				<div class="cd-timeline-img cd-movie">
-					<img
-						src="https://codyhouse.co/demo/vertical-timeline/img/cd-icon-movie.svg"
-						alt="Movie">
-				</div>
-				<!-- cd-timeline-img -->
-
-				<div class="cd-timeline-content">
-					<h2>Title of section 2</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						Iusto, optio, dolorum provident rerum aut hic quasi placeat iure
-						tempora laudantium ipsa ad debitis unde?</p>
-					<a href="#0" class="cd-read-more">Read more</a> <span
-						class="cd-date">Jan 18</span>
-				</div>
-				<!-- cd-timeline-content -->
-			</div>
-			<!-- cd-timeline-block -->
-
-			<div class="cd-timeline-block">
-				<div class="cd-timeline-img cd-picture">
-					<img
-						src="https://codyhouse.co/demo/vertical-timeline/img/cd-icon-picture.svg"
-						alt="Picture">
-				</div>
-				<!-- cd-timeline-img -->
-
-				<div class="cd-timeline-content">
-					<h2>Title of section 3</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						Excepturi, obcaecati, quisquam id molestias eaque asperiores
-						voluptatibus cupiditate error assumenda delectus odit similique
-						earum voluptatem doloremque dolorem ipsam quae rerum quis. Odit,
-						itaque, deserunt corporis vero ipsum nisi eius odio natus ullam
-						provident pariatur temporibus quia eos repellat consequuntur
-						perferendis enim amet quae quasi repudiandae sed quod veniam
-						dolore possimus rem voluptatum eveniet eligendi quis fugiat
-						aliquam sunt similique aut adipisci.</p>
-					<a href="#0" class="cd-read-more">Read more</a> <span
-						class="cd-date">Jan 24</span>
-				</div>
-				<!-- cd-timeline-content -->
-			</div>
-			<!-- cd-timeline-block -->
-
-			<div class="cd-timeline-block">
-				<div class="cd-timeline-img cd-location">
-					<img
-						src="https://codyhouse.co/demo/vertical-timeline/img/cd-icon-location.svg"
-						alt="Location">
-				</div>
-				<!-- cd-timeline-img -->
-
-				<div class="cd-timeline-content">
-					<h2>Title of section 4</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						Iusto, optio, dolorum provident rerum aut hic quasi placeat iure
-						tempora laudantium ipsa ad debitis unde? Iste voluptatibus minus
-						veritatis qui ut.</p>
-					<a href="#0" class="cd-read-more">Read more</a> <span
-						class="cd-date">Feb 14</span>
-				</div>
-				<!-- cd-timeline-content -->
-			</div>
-			<!-- cd-timeline-block -->
-
-			<div class="cd-timeline-block">
-				<div class="cd-timeline-img cd-location">
-					<img
-						src="https://codyhouse.co/demo/vertical-timeline/img/cd-icon-location.svg"
-						alt="Location">
-				</div>
-				<!-- cd-timeline-img -->
-
-				<div class="cd-timeline-content">
-					<h2>Title of section 5</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						Iusto, optio, dolorum provident rerum.</p>
-					<a href="#0" class="cd-read-more">Read more</a> <span
-						class="cd-date">Feb 18</span>
-				</div>
-				<!-- cd-timeline-content -->
-			</div>
-			<!-- cd-timeline-block -->
-
-			<div class="cd-timeline-block">
-				<div class="cd-timeline-img cd-movie">
-					<img
-						src="https://codyhouse.co/demo/vertical-timeline/img/cd-icon-movie.svg"
-						alt="Movie">
-				</div>
-				<!-- cd-timeline-img -->
-
-				<div class="cd-timeline-content">
-					<h2>Final Section</h2>
-					<p>This is the content of the last section</p>
-					<span class="cd-date">Feb 26</span>
-				</div>
-				<!-- cd-timeline-content -->
-			</div>
-			<!-- cd-timeline-block -->
-		</section>
-		<!-- cd-timeline -->
-
-
-
-
-
-
-
-
-
-		<!-- </div> -->
 	</div>
-	<!--   <!--客服圖 請自行加連結-->
+	<!-- .Content -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!--   客服圖 請自行加連結-->
 	<!--   <img class="cs" src="images/demo/cs.png" height="50px;" width="60px;" href="#"></img> -->
 
 	<!-- Copyright -->

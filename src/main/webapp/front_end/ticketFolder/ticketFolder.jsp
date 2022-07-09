@@ -64,6 +64,11 @@
         <input type="radio" id="show" name="mytabs" checked="checked">
         <label for="show">查看票卷</label>
         <div class="container">
+        	<c:if test="${OrdVOList.size() == 0}">
+        	<div >
+        	<img style="width:500px;height:500px" src="${pageContext.request.contextPath}/front_end/ticketFolder/noOrder.png">
+        	</div>
+        	</c:if>
         	<c:forEach items="${OrdVOList}" var="OrdVO" varStatus="loop">
             <div class="content">
                 <div class="cover">

@@ -1,5 +1,0 @@
-*.class
-!.gitignore
-!.classpath
-!.project
-.settings/*

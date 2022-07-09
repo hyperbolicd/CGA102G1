@@ -68,33 +68,25 @@ pageContext.setAttribute("list", list);
 					<div class="TKouter">
 						<table class="TKinner">
 							<tr>
-
+							
 								<td>
 									<FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/MovieServlet.do">
 										<select size="1" name="MV_ID" class="MV_ID">
-												<option value=0>請選擇電影
-											<c:forEach var="MovieVO" items="${list}">
-												<option value="${MovieVO.mvId}">${MovieVO.mvName}
-											</c:forEach>
+											<option value=0>請選擇電影
+												<c:forEach var="MovieVO" items="${list}">
+													<option value="${MovieVO.mvId}">${MovieVO.mvName}
+												</c:forEach>
 										</select>
 									</FORM>
 								</td>
 
-
-
-
 								<td>
-
-									<div id="selectByDate" class="selectBy">
-										<div id="selectByDate_input">
-											<input name="SH_TIME" id="f_date1" type="text" value="請選擇日期"
-												autocomplete="off" onkeydown="return false;"><input
-												type="hidden" name="action"
-												value="listShowings_ByCompositeQuery">
-										</div>
+									<div id="date">
+										<select name="" id="dateSelector" class="picker toRed">
+											<option>選擇日期</option>
+										</select>
 									</div>
-
 								</td>
 
 								<td><select class="showTimeSelect">
@@ -105,12 +97,12 @@ pageContext.setAttribute("list", list);
 								<td><FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/tkOrd/tkOrd.do"
 										style="margin-bottom: 0px;">
-								<input class="tablebt checkIn" type="submit" value="購票">
-								 <input type="hidden" name="MV_ID" class="inputMV_ID"> 
-								 <input type="hidden" name="SH_ID" class="inputSH_ID">
-								 <input type="hidden" name="HL_ID" class="inputHL_ID">  
-								 <input type="hidden" name="action" value="go_To_TicketSelect"></FORM>
-								</td>
+										<input class="tablebt checkIn" type="submit" value="購票">
+										<input type="hidden" name="MV_ID" class="inputMV_ID">
+										<input type="hidden" name="SH_ID" class="inputSH_ID">
+										<input type="hidden" name="HL_ID" class="inputHL_ID">
+										<input type="hidden" name="action" value="go_To_TicketSelect">
+									</FORM></td>
 							</tr>
 						</table>
 					</div>
@@ -146,17 +138,55 @@ pageContext.setAttribute("list", list);
 	<aside id="aside">
 		<%@ include file="/back_end/aside_html.jsp"%>
 	</aside>
-	<script>
+	<script>	
+	// 	Add Days
+	Date.prototype.addDays = function (days) {
+    const date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+	};
+	
+	// ingect date
+	let today = new Date();
+	const formatDate = (current_datetime)=>{
+    	let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds();
+    	return formatted_date;
+	}
+
+	for(let i = 0; i < 7; i++){
+    	let date = today.addDays(i).toLocaleDateString('sv');
+    	let day = today.addDays(i).getDay();
+    	let week;
+    	switch (day){
+        	case 1:
+            	week = "星期一";
+            	break;
+        	case 2:
+            	week = "星期二";
+            	break;
+        	case 3:
+            	week = "星期三";
+            	break;
+        	case 4:
+            	week = "星期四";
+            	break;
+        	case 5:
+            	week = "星期五";
+            	break;
+        	case 6:
+            	week = "星期六";
+            	break;
+        	case 0:
+            	week = "星期日";
+            	break;
+    	}
+    	$("#dateSelector").append('<option value='+date+'>'+date + ' '+ week +'</option>');
+	}
+	
 	$('.checkout').click(function() {
-// 		if($('.SeatOuter').css("opacity") == 0 ){
-				
-			$('.SeatOuter').fadeTo("fast",1);
-		});
-// 		else{
-// 			$('.SeatOuter').fadeTo("fast",0);
-// 			}
-// 		}
-			
+		$('.SeatOuter').fadeTo("fast",1);
+	});
+		
 	let col = '';
 	let row = '';
 	let seat = '';
@@ -164,8 +194,7 @@ pageContext.setAttribute("list", list);
 	let SH_SEAT_STATE = '';
 	let HL_ID = 0;
 	let hallName = '';
-	let movieTime ='';
-	let movieName ='';
+
 	$('.MV_ID').change((e) => {
 		MV_ID = e.target.value;
 		$('.inputMV_ID').val(MV_ID);
@@ -173,14 +202,13 @@ pageContext.setAttribute("list", list);
 	})
 	
 	
-	$('#f_date1').change((e) => {
-		SH_TIME = e.target.value;
+	$('#dateSelector').change((e) => {
+		SH_TIME = e.target.value + " 09:00:00"; ;
 		let url = "${pageContext.request.contextPath}/tkOrd/tkOrd.do?action=listShowings_ByCompositeQuery&MV_ID=" + MV_ID +"&SH_TIME=" + SH_TIME;
 		
-
 		$('.showTimeSelect').empty();
 		$('.showTimeSelect').append('<option value=0>請選擇場次' );
-		 $.ajax({
+		$.ajax({
 	            url: url,
 	            type: 'post',
 	            dataType: 'json',
@@ -197,10 +225,11 @@ pageContext.setAttribute("list", list);
 	            			$('.showTimeSelect').append('<option value='+ show.SH_ID + '>'+showTime+"  (IMAX)");
 	            		}
 	            	}
-	            }
-		 
-		 
+	            	
+	            }	
+		
 		})
+		
 	})
 
 	$('.showTimeSelect').blur((e) => {
@@ -209,25 +238,22 @@ pageContext.setAttribute("list", list);
 		
 		let url = "${pageContext.request.contextPath}/tkOrd/tkOrd.do?action=listShowings_ByCompositeQuery&MV_ID=" + MV_ID +"&SH_ID=" + SH_ID;
 		
-		 $.ajax({
-	            url: url,
-	            type: 'post',
-	            dataType: 'json',
-	            async: false,
-	            timeout: 15000,
-	            success: function (data) {
-	            	for(let show of data){
-	            		HL_ID = show.HL_ID;
-	            		seat = show.SH_SEAT_STATE;
-	            		let showTimeStr = show.SH_TIME + " "; 
-	            		
-	            	
-	            		
-	            		
+		$.ajax({
+	    	url: url,
+	        type: 'post',
+	        dataType: 'json',
+	    	async: false,
+	        timeout: 15000,
+	        success: function (data) {
+	        	for(let show of data){
+	            	HL_ID = show.HL_ID;
+	            	seat = show.SH_SEAT_STATE;
+	            	let showTimeStr = show.SH_TIME + " ";         		
 	            	}
-	            } 
-		 
-			})
+	        	
+	        }
+		
+		})
 		
 		let url2 = "${pageContext.request.contextPath}/tkOrd/tkOrd.do?action=findHallByhlId&hlId=" + HL_ID;
 		$('.inputHL_ID').val(HL_ID);
@@ -246,6 +272,8 @@ pageContext.setAttribute("list", list);
 	 
 		})
 		
+		
+		// 長出位置資訊
 		let rowname = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 			const body = document.getElementsByClassName('seatsChart')[0];
 			$('.seatsChart').empty();
@@ -257,7 +285,7 @@ pageContext.setAttribute("list", list);
 				const rowtitle = document.createElement('div');
 				rowtitle.className = 'seatRowNumber';
 				singeRow.append(rowtitle)
-				// rowtitle.innerHTML = rowname[j] 已放棄加字因為會跑版
+				
 
 				for (let i = 4 + (j * 5 * col); i < seat.length; i += 5) {
 					const input = document.createElement("div");
@@ -291,96 +319,13 @@ pageContext.setAttribute("list", list);
 					}
 
 				}
-
-			};
-		
-		
-	})
-	
-	
-	let showSelected = [];
-	
-	let showInf = {'movieName' : [],
-			 'hallName' : [], 
-			 'movieTime' : []
-	};
-	$('.checkIn').click(function() {
-		movieName = $('.MV_ID option:selected').text();
-		
-		showInf.movieName= movieName;
-		showInf.hallName= hallName;
-		showInf.movieTime= movieTime;
-		
-		showSelected.push(showInf);
-        sessionStorage.setItem('showSelected', JSON.stringify(showSelected));
-		
-
+				
+			};	
+			
 	})
 	
 	
 	</script>
-	<script>
-	
-// 	let today = new Date();
-		
-		$.datetimepicker.setLocale('zh');
-        $('#f_date1').datetimepicker({
- 	       theme: '',              //theme: 'dark',
-	       timepicker:false,       //timepicker:true,
-	       step: 30,                //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format:'Y-m-d 09:00:00',         //format:'Y-m-d H:i:s',
-		   value: '',              // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           minDate: '-1970-01-01', // 去除今日(不含)之前
-           maxDate: '+1970-01-08'  // 去除今日(不含)之後
-        });
 
-		// ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
-
-		//      1.以下為某一天之前的日期無法選擇
-		//      var somedate1 = new Date('2017-06-15');
-		//      $('#f_date1').datetimepicker({
-		//          beforeShowDay: function(date) {
-		//        	  if (  date.getYear() <  somedate1.getYear() || 
-		//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-		//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-		//              ) {
-		//                   return [false, ""]
-		//              }
-		//              return [true, ""];
-		//      }});
-
-		//      2.以下為某一天之後的日期無法選擇
-		//      var somedate2 = new Date('2017-06-15');
-		//      $('#f_date1').datetimepicker({
-		//          beforeShowDay: function(date) {
-		//        	  if (  date.getYear() >  somedate2.getYear() || 
-		//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-		//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-		//              ) {
-		//                   return [false, ""]
-		//              }
-		//              return [true, ""];
-		//      }});
-
-		//      3.以下為兩個日期之外的日期無法選擇 (也可按需要換成其他日期)
-		//      var somedate1 = new Date('2017-06-15');
-		//      var somedate2 = new Date('2017-06-25');
-		//      $('#f_date1').datetimepicker({
-		//          beforeShowDay: function(date) {
-		//        	  if (  date.getYear() <  somedate1.getYear() || 
-		//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-		//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-		//		             ||
-		//		            date.getYear() >  somedate2.getYear() || 
-		//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-		//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-		//              ) {
-		//                   return [false, ""]
-		//              }
-		//              return [true, ""];
-		//      }});
-	</script>
 </body>
 </html>
