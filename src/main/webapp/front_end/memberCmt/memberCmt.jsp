@@ -23,6 +23,8 @@ Integer item = 1;
 <title>Document</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/memberCmt/css/memberCmt.css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/css/layout.css" type="text/css">
+<link rel="stylesheet" href="https://fontawesome.com/v5/icons/edit?s=solid">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/membercentre/css/membercentre.css" />
 </head>
 <body>
 
@@ -47,9 +49,25 @@ Integer item = 1;
 	 </div>
 
 
+<main>
+<div id="mainDiv">
+
+		<div class="side-menu">
+			<nav>
+				<a
+					href="${pageContext.request.contextPath}/front_end/membercentre/membermod.jsp">
+					<i class="fa fa-edit" aria-hidden="true"></i> 會員修改資料
+				</a> <a href="${pageContext.request.contextPath}/front_end/wish/wishPage.jsp"> <i class="fa fa-object-group" aria-hidden="true"></i>
+					許願池
+				</a> <a href="${pageContext.request.contextPath}/front_end/memberCmt/memberCmt.jsp"> <i class="fa fa-clone" aria-hidden="true"></i> 評論區
+				</a>
+				 <a href="#"> <i class="fa fa-gavel" aria-hidden="true"></i> 訂單明細</a>
+			</nav>
+		</div>
+		
 
 	<div id="cartMain">
-		<hr class="line" />
+<!-- 		<hr class="line" /> -->
 		<div id="cartTitle">
 			<div id="titleCheck" class="check">
 				<input type="checkbox" name="" id="checkAll" />
@@ -60,8 +78,8 @@ Integer item = 1;
 			<div id="titleStatus" class="status">狀態</div>
 			<div id="titleEdit" class="edit">編輯</div>
 		</div>
+<!-- 		<hr class="line" /> -->
 
-		<hr class="line" />
 		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cmt/cmt.do" id="form1">
 									<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 									<input type="hidden" name="action" value="selectedDelete">
@@ -101,7 +119,7 @@ Integer item = 1;
 
 		<hr class="line" style="margin-top: 20px" />
 		<div id="cartArea">
-			<div id="total">已選擇: 999 筆評論</div>
+			<div id="total">已選擇: 0 筆評論</div>
 			<div id="cartBtn">
 				<button class="button" form="form1" type="submit">
 					<span>刪除</span>
@@ -111,6 +129,9 @@ Integer item = 1;
 
 
 	</div>
+
+</div>	
+</main>
 
 	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="<%=request.getContextPath()%>/front_end/memberCmt/js/memberCmt.js"></script>
