@@ -164,3 +164,16 @@ aside a:link,
 aside a:visited {
     color: white;
 }
+
+/* nav 的 a 標籤*/
+nav>ul>li>a{
+	color: white;
+	text-decoration: none;
+}
+nav>ul>li>a:active {
+    color: rgb(190, 191, 216);
+}
+nav>ul>li>a:link,
+nav>ul>li>a:visited {
+    color: white;
+}

@@ -51,24 +51,25 @@ public class FaqService {
 		return dao.getAll();
 	}
 	
+	
 	public List<FaqVO> getFaqClass1(){ //會員相關問題
 		
-		return dao.getFaqClass1(null);
+		return dao.getFaqClass1();
 	};
 	
 	public List<FaqVO> getFaqClass2(){ //影城相關問題
 		
-		return dao.getFaqClass2(null);
+		return dao.getFaqClass2();
 	};
 	
 	public List<FaqVO> getFaqClass3(){ //電影上映相關問題
 		
-		return dao.getFaqClass3(null);
+		return dao.getFaqClass3();
 	};
 	
 	public List<FaqVO> getFaqClass4(){ //其他問題
 		
-		return dao.getFaqClass4(null);
+		return dao.getFaqClass4();
 	};
 }
 

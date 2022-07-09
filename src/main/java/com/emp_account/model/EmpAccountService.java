@@ -64,6 +64,14 @@ public class EmpAccountService {
 		dao.update(empAccountVO);
 	}
 	
+	public void resetPassword(Integer empAccountNo) {
+		dao.updatePassword(empAccountNo, "0000");
+	}
+	
+	public void updateStatus(Integer empAccountNo, Integer empStatus) {
+		dao.updateStatus(empAccountNo, empStatus);
+	}
+	
 	public void deleteEmp(Integer emp_no) {
 		dao.delete(emp_no);
 	}
@@ -87,4 +95,5 @@ public class EmpAccountService {
 	public String getPassword(Integer emp_no) {
 		return dao.getPassword(emp_no);
 	}
+	
 }

@@ -34,6 +34,10 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 			"update emp_account set "
 			+ "EMP_EMAIL = ?, EMP_PASSWORD = ?, EMP_NAME = ?, EMP_PHONE = ?, EMP_ADDRESS = ?, EMP_PHOTO = ?, EMP_STATUS = ? "
 			+ "where (EMP_NO = ?)";
+	private static final String UPDATE_PW =
+			"update emp_account set EMP_PASSWORD = ? where (EMP_NO = ?)";
+	private static final String UPDATE_STATUS =
+			"update emp_account set EMP_STATUS = ? where (EMP_NO = ?)";
 	private static final String DELETE =
 			"delete from emp_account where (EMP_NO = ?)";
 	private static final String GET_NEXT_ID =
@@ -145,6 +149,80 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 			ps.setBytes(6, empAccountVO.getEmp_photo());
 			ps.setInt(7, empAccountVO.getEmp_status());
 			ps.setInt(8, empAccountVO.getEmp_no());
+			
+			ps.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}finally {
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void updatePassword(Integer empAccountNo, String newPassword) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = JDBCUtil.getConnection();
+			ps = con.prepareStatement(UPDATE_PW);
+			
+			ps.setString(1, newPassword);
+			ps.setInt(2, empAccountNo);
+			
+			ps.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}finally {
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void updateStatus(Integer empAccountNo, Integer empStatus) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = JDBCUtil.getConnection();
+			ps = con.prepareStatement(UPDATE_STATUS);
+			
+			ps.setInt(1, empStatus);
+			ps.setInt(2, empAccountNo);
 			
 			ps.executeUpdate();
 			

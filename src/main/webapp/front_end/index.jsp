@@ -39,86 +39,103 @@ pageContext.setAttribute("SellTkMVlist", SellTkMVlist);
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<link rel="stylesheet"href="${pageContext.request.contextPath}/front_end/css/sellTK.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/front_end/css/sellTK.css">
 <script
 	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <%@ include file="/front_end/header.jsp"%>
 <!-- 輪播圖片 css -->
-  <style type="text/css">
-  div,ul,li,a,span,img{margin:0;padding:0;}
-  #banner { 
-      overflow:hidden; 
-      width:100%; 
-      height:400px; 
-      position:relative; 
-      float:left;
-      padding-bottom: 10px;
-  }
-  #tab>img:not(:first-child){ 
-      display:none; 
-  }
-  .lunbo_btn {
-      height: 15px;
-      width: 100%;
-      margin: 0px auto;
-      margin-top: -40px;
-      position: absolute;
-      z-index: 3;
-      text-align: center;
-  }
-  .lunbo_btn span {
-      width:14px;
-      height:14px;
-      display:inline-block;
-      background-color:#b4b5b7;
-      border-radius:50%;
-      margin:0px 2px;
-      cursor:pointer;
-  }
-  .lunbo_btn span.hover {
-      background-color:#ffb23c;
-  }
-  .arrow {
-      display: none;
-      width: 30px;
-      height: 60px;
-      background-color: rgba(0,0,0,0.4);
-      position: absolute;
-      top: 50%;
-      margin-top: -30px;
-      z-index:999;
-  }
-  .arrow span {
-      display: block;
-      width: 10px;&cross;
-      height: 10px;
-      border-bottom: 2px solid #fff;
-      border-left: 2px solid #fff;
-  }
-  .slider_left {
-      margin: 25px 0 0 10px;
-      transform: rotate(45deg);
-  }
-  .prve {
-      left: 0;
-  }
-  .next {
-      right: 0;
-  }
-  .slider_right {
-      margin: 25px 0 0 5px;
-      transform: rotate(-135deg);
-  }
-  .arrow:hover{background:#444;}
-  #banner:hover .arrow{display:block;}
-  
-
-
-
-<!-- 輪播圖片 css -->
 <style type="text/css">
 div, ul, li, a, span, img {
+	margin: 0;
+	padding: 0;
+}
+
+#banner {
+	overflow: hidden;
+	width: 100%;
+	height: 400px;
+	position: relative;
+	float: left;
+	padding-bottom: 10px;
+}
+
+#tab>img:not(:first-child) {
+	display: none;
+}
+
+.lunbo_btn {
+	height: 15px;
+	width: 100%;
+	margin: 0px auto;
+	margin-top: -40px;
+	position: absolute;
+	z-index: 3;
+	text-align: center;
+}
+
+.lunbo_btn span {
+	width: 14px;
+	height: 14px;
+	display: inline-block;
+	background-color: #b4b5b7;
+	border-radius: 50%;
+	margin: 0px 2px;
+	cursor: pointer;
+}
+
+.lunbo_btn span.hover {
+	background-color: #ffb23c;
+}
+
+.arrow {
+	display: none;
+	width: 30px;
+	height: 60px;
+	background-color: rgba(0, 0, 0, 0.4);
+	position: absolute;
+	top: 50%;
+	margin-top: -30px;
+	z-index: 999;
+}
+
+.arrow span {
+	display: block;
+	width: 10px; & cross;
+	height: 10px;
+	border-bottom: 2px solid #fff;
+	border-left: 2px solid #fff;
+}
+
+.slider_left {
+	margin: 25px 0 0 10px;
+	transform: rotate(45deg);
+}
+
+.prve {
+	left: 0;
+}
+
+.next {
+	right: 0;
+}
+
+.slider_right {
+	margin: 25px 0 0 5px;
+	transform: rotate(-135deg);
+}
+
+.arrow:hover {
+	background: #444;
+}
+
+#banner:hover .arrow {
+	display: block;
+}
+
+<!--
+輪播圖片 css --> <style type ="text /css ">div, ul, li, a, span, img {
 	margin: 0;
 	padding: 0;
 }
@@ -353,35 +370,31 @@ div, ul, li, a, span, img {
 							</td>
 
 							<td>
-
-								<div id="selectByDate" class="selectBy">
-									<div id="selectByDate_input">
-										<input name="SH_TIME" id="f_date1" type="text" value="請選擇日期"
-											autocomplete="off" onkeydown="return false;"><input
-											type="hidden" name="action"
-											value="listShowings_ByCompositeQuery">
-									</div>
+								<div id="date">
+									<select name="" id="dateSelector" class="picker toRed">
+										<option>選擇日期</option>
+									</select>
 								</div>
-
 							</td>
 
-							<td><select class="showTimeSelect">
+							<td>
+								<select class="showTimeSelect">
 									<option value=0>請選擇場次
-							</select></td>
+								</select>
+							</td>
 
-							<td><FORM METHOD="post" class="checkInForm"
-									ACTION="<%=request.getContextPath()%>/front/tkOrd.do"
+							<td>
+								<FORM METHOD="post" class="checkInForm"	ACTION="<%=request.getContextPath()%>/front/tkOrd.do"
 									style="margin-bottom: 0px;">
-									<div class="tablebtBlock">
-										<a class="tablebt checkIn"
-											style="font-size: 18; width: 150px;">BOOKING!</a>
-
-									</div>
-									<input type="hidden" name="MV_ID" class="inputMV_ID"> <input
-										type="hidden" name="SH_ID" class="inputSH_ID"> <input
-										type="hidden" name="HL_ID" class="inputHL_ID"> <input
-										type="hidden" name="action" value="go_To_TicketSelect">
-								</FORM></td>
+								<div class="tablebtBlock">
+									<a class="tablebt checkIn"style="font-size: 18; width: 150px;">BOOKING!</a>
+								</div>
+								<input type="hidden" name="MV_ID" class="inputMV_ID"> 
+								<input type="hidden" name="SH_ID" class="inputSH_ID"> 
+								<input type="hidden" name="HL_ID" class="inputHL_ID"> 
+								<input type="hidden" name="action" value="go_To_TicketSelect">
+								</FORM>
+							</td>
 						</tr>
 					</table>
 				</div>
@@ -507,12 +520,62 @@ div, ul, li, a, span, img {
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<script>
 	
-	let SH_ID = '';
+	Date.prototype.addDays = function (days) {
+    const date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+	};
+	
+	// ingect date
+	let today = new Date();
+	const formatDate = (current_datetime)=>{
+    	let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds();
+    	return formatted_date;
+	}
+
+	for(let i = 0; i < 7; i++){
+    	let date = today.addDays(i).toLocaleDateString('sv');
+    	let day = today.addDays(i).getDay();
+    	let week;
+    	switch (day){
+        	case 1:
+            	week = "星期一";
+            	break;
+        	case 2:
+            	week = "星期二";
+            	break;
+        	case 3:
+            	week = "星期三";
+            	break;
+        	case 4:
+            	week = "星期四";
+            	break;
+        	case 5:
+            	week = "星期五";
+            	break;
+        	case 6:
+            	week = "星期六";
+            	break;
+        	case 0:
+            	week = "星期日";
+            	break;
+    	}
+    	$("#dateSelector").append('<option value='+date+'>'+date + ' '+ week +'</option>');
+	}
+	
+	$('.checkout').click(function() {
+		$('.SeatOuter').fadeTo("fast",1);
+	});
+		
+	let col = '';
+	let row = '';
+	let seat = '';
 	let MV_ID = '';
+	let SH_SEAT_STATE = '';
 	let HL_ID = 0;
 	let hallName = '';
-	let movieTime ='';
-	let movieName ='';
+	let SH_ID = '';
+
 	$('.MV_ID').change((e) => {
 		MV_ID = e.target.value;
 		$('.inputMV_ID').val(MV_ID);
@@ -520,14 +583,13 @@ div, ul, li, a, span, img {
 	})
 	
 	
-	$('#f_date1').change((e) => {
-		SH_TIME = e.target.value;
-		let url = "${pageContext.request.contextPath}/front/tkOrd.do?action=listShowings_ByCompositeQuery&MV_ID=" + MV_ID +"&SH_TIME=" + SH_TIME;
+	$('#dateSelector').change((e) => {
+		SH_TIME = e.target.value + " 09:00:00"; ;
+		let url = "${pageContext.request.contextPath}/tkOrd/tkOrd.do?action=listShowings_ByCompositeQuery&MV_ID=" + MV_ID +"&SH_TIME=" + SH_TIME;
 		
-
 		$('.showTimeSelect').empty();
 		$('.showTimeSelect').append('<option value=0>請選擇場次' );
-		 $.ajax({
+		$.ajax({
 	            url: url,
 	            type: 'post',
 	            dataType: 'json',
@@ -544,35 +606,37 @@ div, ul, li, a, span, img {
 	            			$('.showTimeSelect').append('<option value='+ show.SH_ID + '>'+showTime+"  (IMAX)");
 	            		}
 	            	}
-	            }
-		 
-		 
+	            	
+	            }	
+		
 		})
+		
 	})
 
 	$('.showTimeSelect').blur((e) => {
 		SH_ID = e.target.value;
 		$('.inputSH_ID').val(SH_ID);
 		
-		let url = "${pageContext.request.contextPath}/front/tkOrd.do?action=listShowings_ByCompositeQuery&MV_ID=" + MV_ID +"&SH_ID=" + SH_ID;
+		let url = "${pageContext.request.contextPath}/tkOrd/tkOrd.do?action=listShowings_ByCompositeQuery&MV_ID=" + MV_ID +"&SH_ID=" + SH_ID;
 		
-		 $.ajax({
-	            url: url,
-	            type: 'post',
-	            dataType: 'json',
-	            async: false,
-	            timeout: 15000,
-	            success: function (data) {
-	            	for(let show of data){
-	            		HL_ID = show.HL_ID;
-	            		let showTimeStr = show.SH_TIME + " "; 
-	            			            		
+		$.ajax({
+	    	url: url,
+	        type: 'post',
+	        dataType: 'json',
+	    	async: false,
+	        timeout: 15000,
+	        success: function (data) {
+	        	for(let show of data){
+	            	HL_ID = show.HL_ID;
+	            	seat = show.SH_SEAT_STATE;
+	            	let showTimeStr = show.SH_TIME + " ";         		
 	            	}
-	            } 
-		 
-			})
+	        	
+	        }
 		
-		let url2 = "${pageContext.request.contextPath}/front/tkOrd.do?action=findHallByhlId&hlId=" + HL_ID;
+		})
+		
+		let url2 = "${pageContext.request.contextPath}/tkOrd/tkOrd.do?action=findHallByhlId&hlId=" + HL_ID;
 		$('.inputHL_ID').val(HL_ID);
 		$.ajax({
             url: url2,
@@ -582,18 +646,15 @@ div, ul, li, a, span, img {
             timeout: 15000,
             success: function (data2) {
             	hallName = data2.hlName;
+            	row = data2.hlRow;
+            	col = data2.hlCol;
 
             } 
 	 
 		})
 	})	
 	
-	let showSelected = [];
 	
-	let showInf = {'movieName' : [],
-			 'hallName' : [], 
-			 'movieTime' : []
-	};
 	$('.checkIn').click(function() {
 		movieName = $('.MV_ID option:selected').text();
 		if('' === MV_ID){
@@ -611,37 +672,15 @@ div, ul, li, a, span, img {
                 footer: ''
             })
 		}else{
-			
-		showInf.movieName= movieName;
-		showInf.hallName= hallName;
-		showInf.movieTime= movieTime;
-		
-		showSelected.push(showInf);
-        sessionStorage.setItem('showSelected', JSON.stringify(showSelected));
         
         $(".checkInForm").submit();
 		}
-
 		
-
 	})
 	
 	
 	</script>
-	<script>
-		
-		$.datetimepicker.setLocale('zh');
-        $('#f_date1').datetimepicker({
- 	       theme: '',              //theme: 'dark',
-	       timepicker:false,       //timepicker:true,
-	       step: 30,                //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format:'Y-m-d 09:00:00',         //format:'Y-m-d H:i:s',
-		   value: '',              // value:   new Date(),
-           minDate: '-1970-01-01', // 去除今日(不含)之前
-           maxDate: '+1970-01-08'  // 去除今日(不含)之後
-        });
 
-	</script>
 </body>
 
 </html>

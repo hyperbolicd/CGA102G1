@@ -24,8 +24,7 @@ public class EmpFilter extends HttpFilter {
 		Object empAccount = request.getSession().getAttribute("empAccount");
 		
 		// login 頁面 & css pass
-		if(uri.endsWith("empLogin.jsp") || uri.endsWith(".css") || uri.endsWith(".js") || uri.endsWith("logo2noline.jpg")) {
-			
+		if(uri.endsWith("empLogin.jsp") || uri.endsWith(".css") || uri.endsWith(".js") || uri.endsWith(".jpg") || uri.endsWith(".png")) {
 			chain.doFilter(request, response);	
 			
 		// 判斷是否登入過?

@@ -73,7 +73,8 @@
 			<div style="display:flex">
 			 
                 <button id="cart_btn">
-                    <img class="cart" src="<%=request.getContextPath()%>/front_end/images/mall.png" height="25" width="25"></img>
+				<a href="${pageContext.request.contextPath}/ShoppingCartServlet?action=checkout">
+                    <img class="cart" src="<%=request.getContextPath()%>/front_end/images/mall.png" height="25" width="25" ></img>
                 </button>
 			
 				<p style="margin-right:20px">${memberVO.member_Name}&nbsp;&nbsp;Hello</p>

@@ -91,8 +91,11 @@
 							<button type="submit" class="edit" name="action" value="seeEmpPrivilege">查看/修改權限</button>
 							<input type="hidden" name="emp_no" value="${e.emp_no}">
 						</form>
-						<button class="resetPw" onclick="resetPw(${e.emp_no})">重設密碼</button>
-						<button class="resetPw" onclick="resetPw(${e.emp_no})">修改狀態</button>
+						<form method="post" action="${pageContext.request.contextPath}/emp/EmpAccount.do" >
+							<button type="submit" class="resetPw" name="action" value="resetPassword">重設密碼</button>
+							<input type="hidden" name="emp_no" value="${e.emp_no}">
+						</form>
+						<button class="resetPw" onclick="reviseStatus(this)">修改狀態</button>
 <%-- 						<form method="post" action="${pageContext.request.contextPath}/emp/EmpAccount.do" > --%>
 <!-- 							<button type="submit" class="delete" name="action" value="deleteEmp">刪除</button> -->
 <%-- 							<input type="hidden" name="emp_no" value="${e.emp_no}"> --%>
@@ -137,6 +140,13 @@
 <!-- 			        從BD抓所有權限 -->
 			    	<jsp:useBean id="listF" scope="page" class="com.emp_function.model.EmpFunctionService"/>
 			    	<div class="fc_block">
+				    	<c:forEach var="function" items="${listF.all}" begin="0" step="3">
+				    		<input type="checkbox" name="fc_nos" value="${function.fc_no}" class="funcs${function.fc_category}" id="func${function.fc_no}">
+	           				<label for="func${function.fc_no}">${function.fc_name}</label>
+	           				<br>
+				    	</c:forEach>
+			    	</div>
+			    	<div class="fc_block">
 				    	<c:forEach var="function" items="${listF.all}" begin="1" step="3">
 				    		<input type="checkbox" name="fc_nos" value="${function.fc_no}" class="funcs${function.fc_category}" id="func${function.fc_no}">
 	           				<label for="func${function.fc_no}">${function.fc_name}</label>
@@ -150,18 +160,23 @@
 	           				<br>
 				    	</c:forEach>
 			    	</div>
-			    	<div class="fc_block">
-				    	<c:forEach var="function" items="${listF.all}" begin="3" step="3">
-				    		<input type="checkbox" name="fc_nos" value="${function.fc_no}" class="funcs${function.fc_category}" id="func${function.fc_no}">
-	           				<label for="func${function.fc_no}">${function.fc_name}</label>
-	           				<br>
-				    	</c:forEach>
-			    	</div>
 			    </div>
 				<div>
 			        <button class="cancel" type="button" onclick="windowClose()">取消</button>
 			        <button class="enter" type="submit" name="action" value="addEmp">確認</button>
 			    </div>
+			 </form>	
+		</div>
+		<div id="newAccount" onclick="windowClose()" style="display: none;"></div>
+		<div id="statusInput" style="display: none;">
+			<h1>修改員工狀態</h1>
+			<form action="${pageContext.request.contextPath}/emp/EmpAccount.do" method="post">
+		        <input id="statusInputEmpStatus" type="hidden" name="emp_status">
+		        <input id="statusInputEmpNo" type="hidden" name="emp_no">
+		        <br>
+		        <button class="edit" type="submit" name="action" value="updateStatus" onclick="setStatus(this)">在職</button>
+		        <button class="edit" type="submit" name="action" value="updateStatus" onclick="setStatus(this)">離職</button>
+		        <button class="edit" type="submit" name="action" value="updateStatus" onclick="setStatus(this)">留職停薪</button>
 			 </form>	
 		</div>
 	</main>

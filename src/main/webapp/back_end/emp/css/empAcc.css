@@ -247,3 +247,28 @@ div#search{
 	top: -28px;
     left: 650px;
 }
+
+#listOrder{
+	background-color: rgb(86, 92, 141);
+    color: white;
+    font-size: 20px;
+    border: 0px;
+}
+
+#listOrder:hover{
+	cursor: pointer;
+}
+
+/* 修改狀態欄位 */
+#statusInput{
+	position: fixed;
+    top: 35vh;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid rgb(131, 146, 188);
+    box-shadow: 0 0 10px gray;
+}
