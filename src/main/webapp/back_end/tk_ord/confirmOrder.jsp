@@ -84,7 +84,9 @@
 							<a class="bt"href="<%=request.getContextPath()%>/back_end/tk_ord/creditCard.jsp">信用卡付款</a>
 						</div>
 						<div class="btBlock">
-							<a class="bt" href="<%=request.getContextPath()%>/back_end/tk_ord/completeOrder.jsp">現場付款</a>
+							<a class="bt" 
+<%-- 							href="<%=request.getContextPath()%>/back_end/tk_ord/completeOrder.jsp" --%>
+							>現場付款</a>
 						</div>
 
 					</div>
