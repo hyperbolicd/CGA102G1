@@ -109,7 +109,7 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 			
 			rs.close();
 			
-			// 同時新增項次
+//			 同時新增項次
 			WishingListJDBCDAO dao = new WishingListJDBCDAO();
 			for(WishingListVO wishingListVO: list) {
 				wishingListVO.setWish_no(wish_no);

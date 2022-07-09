@@ -12,56 +12,10 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/front_end/membercentre/css/membercentre.css" />
 	<!-- 許願池 -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/front_end/wish/css/wishPage.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/front_end/wish/css/wishNotify.css">
 </head>
-<<<<<<< HEAD
-<body>
-	<div class="wrapper row1" style="height: 60px;">
-		<header id="header" class="clear">
-			<div id="hgroup">
-				<img src="${pageContext.request.contextPath}/front_end/images/demo/logo6.png" width="200" height="60" alt="">
-			</div>
-			<div class="dropdown" style="margin: 0; padding: 0; list-style: none;">
-				<button class="dropbtn">會員專區</button>
-				<div class="dropdown-content">
-					<a href="#">會員登入</a> <a href="#">會員中心</a>
-				</div>
-			</div>
-			<div class="dropdown">
-				<button class="dropbtn">活動公告</button>
-				<div class="dropdown-content">
-					<a href="#">影城公告</a> <a href="#">影城好康</a>
-				</div>
-			</div>
-			<div class="dropdown">
-				<button class="dropbtn">Q & A專區</button>
-				<div class="dropdown-content">
-					<a href="#">常見問題</a> <a href="#">客服信箱</a>
-				</div>
-			</div>
-			<div class="dropdown">
-				<button class="dropbtn">影城專區</button>
-				<div class="dropdown-content">
-					<a href="#">影城介紹</a> <a href="#">影城地點</a> <a href="#">票價資訊</a> <a
-						href="#">餐飲資訊</a>
-				</div>
-			</div>
-			<div class="dropdown">
-				<button class="dropbtn">電影資訊</button>
-				<div class="dropdown-content"></div>
-			</div>
-			<div class="dropdown">
-				<button class="dropbtn">商城購物</button>
-				<div class="dropdown-content">
-					<a href="#">商品瀏覽</a> <a href="#">購買退貨</a>
-				</div>
-			</div>
-			<button class="logout">會員登出</button>
-		</header>
-	</div>
-=======
 <body onload="connect();" onunload="disconnect();">
 	<%@ include file="/front_end/header.jsp"%>
->>>>>>> Liu
 
 	<div id="mainDiv">
 		<div class="side-menu">
@@ -123,6 +77,18 @@
 				</c:forEach>
             </table>
         </div>
+        <div id="notifyBlock">
+        	<img src="${pageContext.request.contextPath}/front_end/wish/icons8-message-64.png" >
+        	<ul id="notifyUl" style="display: none;">
+        		<li>通知</li>
+        		<li>ssssssssss</li>
+        		<li>ssssssssss</li>
+        		<li>ssssssssss</li>
+        		<li>ssssssssss</li>
+        		<li>ssssssssss</li>
+        		<li>ssssssssss</li>
+        	</ul>
+        </div>
 	</div>
 	<!-- 許願池 -->
 	</div>
@@ -135,6 +101,71 @@
 			</p>
 		</footer>
 	</div>
-
+	
+	<script>
+		const notifyUl = document.querySelector('#notifyUl');
+		const notifyImg = document.querySelector('#notifyBlock>img');
+		// web socket
+		let ws;
+		const self = 'memberId${memberVO.member_ID}';
+		const MyPoint = "/FreshWhenVote/" + self;
+		const host = window.location.host; // localhost:8081
+		const path = window.location.pathname; // path of this page
+		const webCtx = path.substring(0, path.indexOf('/', 1)); // get project name
+		const endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+			 			// ws://    localhost:8081         /Project /endpoint/${param}
+						// ws 通訊協定
+		function connect(){
+			ws = new WebSocket(endPointURL);
+			
+			ws.onopen = function(){
+				ws.send('giveme${memberVO.member_ID}');
+			}
+			
+			ws.onmessage = function(e){
+				if('refresh' == e.data){
+					return;
+				}
+				// 刷新通知介面
+				notifyUl.innerHTML = '<li>通知</li>';
+				const jsonStrsObj = JSON.parse(e.data);
+				let UnreadCount = 0;
+				for(let jsonStr of jsonStrsObj){
+					let jsonObj = JSON.parse(jsonStr);
+					console.log(jsonObj.message);
+					const li = document.createElement('li');
+					li.innerText = jsonObj.message;
+					if(jsonObj.status === 0){
+						UnreadCount++;
+					}
+					notifyUl.append(li);
+				}
+				if(UnreadCount !== 0){
+					notifyImg.className = 'unread';
+				}
+// 				const jsonObj = JSON.parse(jsonStr);
+// 				console.log(jsonObj);
+			}
+			
+			ws.onclose = function(){}
+			
+			ws.onerr = function(){}
+			
+			notifyImg.addEventListener('click', function(){
+				ws.send('update${memberVO.member_ID}');
+				notifyImg.classList.remove('unread');
+				if(notifyUl.style.display === "none"){
+					notifyUl.style.display = "block";
+				}else{
+					notifyUl.style.display = "none";
+				}
+			});
+			
+		}
+		function sendMessage(){}
+						
+		function disconnect(){ ws.close();}
+		
+	</script>
 </body>
 </html>

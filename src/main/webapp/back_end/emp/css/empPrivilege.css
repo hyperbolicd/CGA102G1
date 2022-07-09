@@ -29,6 +29,16 @@ button#back{
     top: -35px;
     left: 500px;
 }
+button>a{
+	color: white;
+	text-decoration: none;
+}
+button>a:active{
+	color: rgb(190, 191, 216);
+}
+button>a:link{
+	color: white;
+}
 
 /* 資料區塊 */
 #emp_detail{

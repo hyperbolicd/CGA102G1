@@ -25,7 +25,9 @@ $(function(){
 	    maxDate:$('#end_date').val()?$('#end_date').val():false
 	   })
 	  },
-	  timepicker:false
+	  timepicker:false,
+	  scrollMonth : false,
+	  scrollInput : false,
 	 });
 	 
 	 $('#end_date').datetimepicker({
@@ -35,7 +37,9 @@ $(function(){
 	    minDate:$('#start_date').val()?$('#start_date').val():false
 	   })
 	  },
-	  timepicker:false
+	  timepicker:false,
+	  scrollMonth : false,
+	  scrollInput : false,
 	 });
 });
 </script>

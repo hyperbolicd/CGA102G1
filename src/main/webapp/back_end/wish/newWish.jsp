@@ -38,7 +38,7 @@
                     <input type="text" id="eventName" name="wish_name" value="${wishVO.wish_name}" placeholder='${errMsg.wish_name == null ? "字數限制不超過5" : errMsg.wish_name}' maxlength="5">
                     <br>
                     <label for="startDate">活動日期: </label>
-                    <input name="start_date" id="start_date" autocomplete="off" value="${wishVO.wish_start}" placeholder="${errMsg.start_date}"> ~ <input name="end_date" id="end_date" autocomplete="off" value="${wishVO.wish_end}" placeholder="${errMsg.end_date}">
+                    <input name="start_date" id="start_date" autocomplete="off" onkeydown="return false" value="${wishVO.wish_start}" placeholder="${errMsg.start_date}"> ~ <input name="end_date" id="end_date" autocomplete="off" onkeydown="return false" value="${wishVO.wish_end}" placeholder="${errMsg.end_date}">
                 </div>
                 <h2>選擇電影(請選擇2~6個)</h2>
                 <div id="multiSearch">

@@ -131,8 +131,8 @@ public class WishingVoteServlet extends HttpServlet {
 				request.getRequestDispatcher("/front_end/wish/voteWish.jsp").forward(request, response);
 				return;
 			}
-			// 判斷投票日期是否在活動區間內
-			if(new Date().getTime() > new WishingPondService().getOneWishingPond(wish_no).getWish_end().getTime()) {
+			// 判斷投票日期是否在活動區間內                                                       結束日                     +  一天
+			if(new Date().getTime() > new WishingPondService().getOneWishingPond(wish_no).getWish_end().getTime() + 1 * 24 * 60 * 60 * 1000) {
 				errMsg.put("isSuccess", "該票選活動已超時!");
 				
 				request.getRequestDispatcher("/front_end/wish/wishPage.jsp").forward(request, response);
