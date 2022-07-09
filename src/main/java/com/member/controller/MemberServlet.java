@@ -16,6 +16,8 @@ import javax.servlet.http.*;
 import javax.servlet.http.Part;
 
 import com.member.model.*;
+import com.sc_detail.model.SCDetailService;
+import com.sc_detail.model.SCDetailVO;
 
 import MemberSendEmail.MailService;
 
@@ -91,7 +93,7 @@ public class MemberServlet extends HttpServlet {
 		if ("update".equals(action)) { // 來自membermod.jsp的請求 成功修改完成頁面
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+/*---------------- 更新會員資料時會員資料跳出修改成功 ---------------------------*/			
 			Map<String, String> situation = new LinkedHashMap<String, String>();
 			req.setAttribute("situation", situation);
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
@@ -198,10 +200,7 @@ public class MemberServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
-			
-			
-			
+			req.setAttribute("errorMsgs", errorMsgs);			
 			/*************************** 1.接收請求參數 ***************************************/
 			Integer member_Status = Integer.valueOf(req.getParameter("member_Status"));
 			Integer member_Id = Integer.valueOf(req.getParameter("member_Id"));
@@ -237,6 +236,10 @@ public class MemberServlet extends HttpServlet {
 //會員登入	控制器	
 		if ("login".equals(action)) {
 			System.out.println("start");
+			
+/*------------------ 會員登入權限如果以停權  ----------------------------*/	
+			Map<String, String> situation = new LinkedHashMap<String, String>();
+			req.setAttribute("situation", situation);		
 			/*************************** 1.接收請求參數 ***************************************/
 			String member_Email = String.valueOf(req.getParameter("email"));       // 請輸入email
 			String member_Password = String.valueOf(req.getParameter("password")); // 請輸入密碼
@@ -251,20 +254,28 @@ public class MemberServlet extends HttpServlet {
 			String location = (String) session.getAttribute("location");   
 			// =========================
 			memberVo = memberSvc.loginMember(memberVo);  
-			Integer memberId = memberVo.getMember_ID();  
-			memberVo = memberSvc.getOneMember(memberId); 
-			session.setAttribute("account", memberVo.getMember_ID()); // 在session內設定屬性 Attribte，指已登入過的標示與值
+			Integer memberId = memberVo.getMember_ID(); 
+			if (memberId != null) {				
+				memberVo = memberSvc.getOneMember(memberId); 
+			}
+//			System.out.println("會員狀態 : "+memberVo.getMember_Status());
+//			System.out.println("會員是否被停權 : " + memberVo.getMember_Status().equals(2));
 			String url = "";
 			System.out.println(memberId);
-			if (memberId == null) {                      
+			if (memberId == null) {                      //如果號密碼有可能輸入錯誤
 				url = "/front_end/login/login.jsp";		 
-			} else if(session.getAttribute("location") != null){  
-				res.sendRedirect((String) session.getAttribute("location"));
+			}else if(memberVo.getMember_Status().equals(2)) {     //如果會員狀態 帳號被停權
+				situation.put("login", "您被停權了");
+				url = "/front_end/login/login.jsp";	
 			}else{
-				url = "/front_end/index.jsp";            
+				url = "/front_end/index.jsp";   //登入成功
+				session.setAttribute("account", memberVo.getMember_ID()); // 在session內設定屬性 Attribte，指已登入過的標示與值
 				session.setAttribute("memberVO", memberVo);	//在session內設定屬性(Attribute)註冊的Email.password	
 			}
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+			if(session.getAttribute("location") != null){  
+				res.sendRedirect((String) session.getAttribute("location"));}
+			  //跳出您被停權了
 			System.out.println("account");
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listAllMember.jsp
 			successView.forward(req, res); // 轉送
@@ -273,7 +284,15 @@ public class MemberServlet extends HttpServlet {
 
 //會員登出	控制器			
 		if ("logout".equals(action)) {
-			req.getSession().invalidate();
+			HttpSession session = req.getSession();
+			SCDetailService scDetailSvc = new SCDetailService();
+		     List<SCDetailVO> buylist = (Vector<SCDetailVO>) session.getAttribute("shoppingcart");
+		     if(buylist != null) {
+		    	 for(SCDetailVO scdVO : buylist) {
+		    		 scDetailSvc.addSCDetail(scdVO);
+		    	 }
+		     }
+		    session.invalidate();
 			String location = req.getContextPath() + "/front_end/index.jsp";
 			res.sendRedirect(location);
 			return;
@@ -353,7 +372,6 @@ public class MemberServlet extends HttpServlet {
 				failureView.forward(req, res);
 				return;
 			}
-
 			/*************************** 2.開始新增資料 ***************************************/
 			MemberService memberSvc = new MemberService();
 			memberVO = memberSvc.addMember("C", member_Email, member_Password, member_Name, member_Phone,
@@ -387,6 +405,9 @@ public class MemberServlet extends HttpServlet {
 		}
 		
 		
+		
+		
 
 	}
 }
+

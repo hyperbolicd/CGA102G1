@@ -36,12 +36,7 @@ public class MemberService {
 		
 		
 		return memberVO;
-		
-/*-----------------------當會員註冊時會寄送信件更改會員權限--------------------------------*/		
-//		memberVO.setMember_ID(member_Status);
-//		return member_Status;
-
-		
+				
 	}
 
 //預留給 Struts 2 或 Spring MVC 用

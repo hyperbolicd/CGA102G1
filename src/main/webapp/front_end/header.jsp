@@ -54,10 +54,11 @@
         </div>
       </div>
 
-      <div class="dropdown">
+      <div class="dropdown"> 
+      	<a href="${pageContext.request.contextPath}/front_end/merchandise/mall_index.jsp">
         <button class="dropbtn">商城購物</button>
-        <div class="dropdown-content">
-          <a href="#">商品瀏覽</a>
+         </a>
+         <div class="dropdown-content">
         </div>
       </div>
       
@@ -73,7 +74,9 @@
 			<div style="display:flex">
 			 
                 <button id="cart_btn">
+                <a href="${pageContext.request.contextPath}/ShoppingCartServlet?action=checkout">
                     <img class="cart" src="<%=request.getContextPath()%>/front_end/images/mall.png" height="25" width="25"></img>
+                    </a>
                 </button>
 			
 				<p style="margin-right:20px">${memberVO.member_Name}&nbsp;&nbsp;Hello</p>

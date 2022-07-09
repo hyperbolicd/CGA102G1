@@ -16,14 +16,37 @@
     <res-auth>Container</res-auth>
   </resource-ref>
   
-<!--   <filter-mapping> -->
-<!--   <filter-name>MyFilter</filter-name> -->
-<!--   <url-pattern>/*</url-pattern> 給大家看那些要經過登入登出的頁面 -->
+  <filter>
+  <filter-name>xxx</filter-name>  <!-- 可以自己取名 -->
+  <filter-class>com.filters.MemberFilter</filter-class>
+<!--   <init-param> -->
+<!--   <param-name>初始參數</param-name> -->
+<!--   <param-value>初始參數的值</param-value> -->
+<!--   </init-param> -->
+  </filter> 
+    
+  <filter-mapping>
+  <filter-name>xxx</filter-name> <!-- 可以自己取名 -->
+  
+  <!-- url-pattern 放要濾掉的 jsp-->
+  <url-pattern>/front_end/membercentre/membercentre.jsp</url-pattern> 
+  <url-pattern>/front_end/membercentre/membermod.jsp</url-pattern>
+  <url-pattern>/front_end/ticketFolder/*</url-pattern> 
+  <url-pattern>/front_end/tk_ord/chooseSeat.jsp</url-pattern>
+   <url-pattern>/front_end/tk_ord/chooseTk.jsp</url-pattern>
+   <url-pattern>/front_end/tk_ord/completeOrder.jsp</url-pattern>
+   <url-pattern>/front_end/tk_ord/confirmOrder.jsp</url-pattern>
+   <url-pattern>/front_end/tk_ord/creditCard.jsp</url-pattern>
+   <url-pattern>/front_end/tk_ord/sellTK.jsp</url-pattern>
+   
+   
+   
+   
 <!--   <servlet-name>*</servlet-name> -->
-<!--   <dispatcher>REQUEST</dispatcher> -->
-<!--   <dispatcher>FORWARD</dispatcher> -->
-<!--   <dispatcher>INCLUDE</dispatcher> -->
-<!--   <dispatcher>ERROR</dispatcher> -->
-<!--   <dispatcher>ASYNC</dispatcher> -->
-<!--   </filter-mapping> -->
+  <dispatcher>REQUEST</dispatcher>
+  <dispatcher>FORWARD</dispatcher>
+  <dispatcher>INCLUDE</dispatcher>
+  <dispatcher>ERROR</dispatcher>
+  <dispatcher>ASYNC</dispatcher>
+  </filter-mapping>
 </web-app>
