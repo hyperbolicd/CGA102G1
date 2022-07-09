@@ -10,6 +10,7 @@ public interface SCDetailDAO_interface {
 	public void delete(Integer memberID, Integer merchID);
 	public SCDetailVO findByPrimaryKey(Integer memberID, Integer merchID);
 	public List<SCDetailVO> getAll();
+	public List<SCDetailVO> getAll(Integer memberID);
 	//複合查詢
 	//public List<MerchVO> getAll(Map<String, String[]> map);
 }

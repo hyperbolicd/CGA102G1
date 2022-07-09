@@ -258,14 +258,16 @@ public class MemberServlet extends HttpServlet {
 			System.out.println(memberId);
 			if (memberId == null) {                      
 				url = "/front_end/login/login.jsp";		 
-			} else if(session.getAttribute("location") != null){  
-				res.sendRedirect((String) session.getAttribute("location"));
 			}else{
 				url = "/front_end/index.jsp";            
 				session.setAttribute("memberVO", memberVo);	//在session內設定屬性(Attribute)註冊的Email.password	
 			}
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-			System.out.println("account");
+			 if(session.getAttribute("location") != null){  
+					res.sendRedirect((String) session.getAttribute("location"));
+					return;
+				}
+			System.out.println("account"+url);
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listAllMember.jsp
 			successView.forward(req, res); // 轉送
 			return;
