@@ -13,6 +13,7 @@
 	<!-- 許願池 -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/front_end/wish/css/voteWish.css">
 </head>
+<<<<<<< HEAD
 <body>
 	<div class="wrapper row1" style="height: 60px;">
 		<header id="header" class="clear">
@@ -58,13 +59,22 @@
 		</header>
 	</div>
 
+=======
+<body onload="connect();" onunload="disconnect();">
+	<%@ include file="/front_end/header.jsp"%>
+	
+>>>>>>> Liu
 	<div id="mainDiv">
 		<div class="side-menu">
 			<nav>
-				<a href="#"><i class="fa fa-edit" aria-hidden="true"></i>會員修改資料</a> 
-				<a href="#"><i class="fa fa-gavel" aria-hidden="true"></i>票卷匣</a> 
-				<a href="#"><i class="fa fa-object-group" aria-hidden="true"></i>許願池</a> 
-				<a href="#"><i class="fa fa-clone" aria-hidden="true"></i>評論區</a>
+				<a
+					href="${pageContext.request.contextPath}/front_end/membercentre/membermod.jsp">
+					<i class="fa fa-edit" aria-hidden="true"></i> 會員修改資料
+				</a> <a href="${pageContext.request.contextPath}/front_end/wish/wishPage.jsp"> <i class="fa fa-object-group" aria-hidden="true"></i>
+					許願池
+				</a> <a href="${pageContext.request.contextPath}/front_end/memberCmt/memberCmt.jsp"> <i class="fa fa-clone" aria-hidden="true"></i> 評論區
+				</a>
+				 <a href="#"> <i class="fa fa-gavel" aria-hidden="true"></i> 訂單明細</a>
 			</nav>
 		</div>
 		<!-- <div id="content">
