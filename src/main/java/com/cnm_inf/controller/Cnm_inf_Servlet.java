@@ -27,7 +27,6 @@ public class Cnm_inf_Servlet  extends HttpServlet {
 		
 		
 		if ("getOne_For_Display".equals(action)) { // 來自select_page_cnm_inf.jsp的請求
-
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -127,13 +126,13 @@ public class Cnm_inf_Servlet  extends HttpServlet {
 				
 				/***************************2.開始修改資料*****************************************/
 				Cnm_infService cnm_infSvc = new Cnm_infService();
-				cnm_infVO = cnm_infSvc.updateCnm_inf(CNM_DT, CNM_TEL, CNM_EM, CNM_LC,CNM_TRP);
+				cnm_infVO = cnm_infSvc.updateCnm_inf(CNM_DT, CNM_TEL, CNM_EM, CNM_LC,CNM_TRP,CNM_INF_ID);
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("cnm_infVO", cnm_infVO); // 資料庫update成功後,正確的的cnm_infVO物件,存入req
-				String url = "/back/listOneCnm_inf.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
-				successView.forward(req, res);
+				req.setAttribute("cnm_infVO", cnm_infVO); // 資料庫取出的showingVO物件,存入req
+				PrintWriter out = res.getWriter();
+				Gson gson = new Gson();
+				out.print(gson.toJson(cnm_infVO));
 		}
 
         if ("insert".equals(action)) { // 來自addCnm_inf.jsp的請求  

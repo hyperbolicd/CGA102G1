@@ -18,6 +18,12 @@ $(document).ready(function(){
         console.log($(this).val())
 
     });
+    
+    
+    $('input[type="checkbox"]').click(function(){
+	console.log($('.checkOne:checked').length)
+		$("#total").html("已選擇: " + $('.checkOne:checked').length + " 筆評論");
+})
 
 
 });

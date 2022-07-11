@@ -152,10 +152,10 @@
 
 /* ------------- */
 #comment{
-/*     border: 2px solid violet; */
+    border: 2px solid violet;
 }
 #cmt_info{
-/*     border: 2px solid green; */
+    border: 2px solid green;
     display: flex;
     /* justify-content: space-between; */
     background-color: #750000;
@@ -169,7 +169,7 @@
     transition: 0.3s;
 }
 #cmt_title{
-/*     border: 2px solid blue; */
+    border: 2px solid blue;
     font-size: 30px;
     color: white;
     display: flex;
@@ -179,7 +179,7 @@
     font-family: Gill Sans MT;
 }
 #cmt_avg{
-/*     border: 2px solid red; */
+    border: 2px solid red;
     display: flex;
     align-items: center;
     text-align: center;
@@ -190,7 +190,7 @@
     float: right;
 }
 #cmt_ttcmt{
-/* 	border: 2px solid pink; */
+	border: 2px solid pink;
 	color: white;
 	text-align: center;
 	align-items: center;
@@ -202,14 +202,14 @@
 /*     margin-left: 10px; */
 /* } */
 #cmt_open{
-/*     border: 2px solid fuchsia; */
+    border: 2px solid fuchsia;
     position: absolute;
     right: 10px;
     font-size: 30px;
     color: #FFF;
 }
 .cmt{
-/*     border: 2px solid orange; */
+    border: 2px solid orange;
     display: flex;
     margin-bottom: 20px;
     margin-top: 10px;
@@ -230,25 +230,25 @@
 /*     top: 100%; 從<div>區塊左上角起算，與上方距離為100%時才開始產生這個長方形，因此長方形會在整塊<div>區塊的下方 */
 /* } */
 .member{
-/*     border: 2px solid gray; */
+    border: 2px solid gray;
     justify-items: center;
     align-items: center;
     /* padding-top: 5px; */
 }
 .member_pic{
-/*     border: 2px solid green; */
+    border: 2px solid green;
     width: 150px;
     height: 150px;
     margin: auto;
 }
 .member_pic img{
-/*     border: 2px solid red; */
+    border: 2px solid red;
     width: 100%;
     height: 100%;
     border-radius: 5px;
 }
 .member_name{
-/*     border: 2px solid rebeccapurple; */
+    border: 2px solid rebeccapurple;
     /* display: flex; */
     text-align: center;
 }
@@ -261,7 +261,7 @@
     letter-spacing: 0.5px;
 }
 .cmt_detail{
-/*     border: 2px solid violet; */
+    border: 2px solid violet;
     width: 70%;
     position: relative;
     justify-content: space-between;
@@ -269,7 +269,7 @@
     /* background-color: #750000; */
 }
 .cmt_text{
-/*     border: 2px solid yellow; */
+    border: 2px solid yellow;
     color: white;
     padding: 10px;
     padding-left: 10px;
@@ -279,23 +279,45 @@
     word-wrap:break-word;
     overflow:hidden;
 }
+.cmt_right{
+	border: 2px solid purple;
+	position: relative;
+}
 
 .cmt_star{
-/*     border: 2px solid blue; */
+    border: 2px solid blue;
     text-align: center;
     padding-left: 5px;
     padding-right: 5px;
     width: 150px;
 }
 .cmt_like{
-/*     border: 2px solid green; */
+    border: 2px solid green;
     float: left;
     color: rgb(255, 38, 89);
     letter-spacing: 2px;
     margin-left: 5px;
 }
+.cmt_report{
+	border: 2px solid green;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 100%;
+/* 	position: absolute; */
+/* 	bottom: 0; */
+/* 	right: 0; */
+}
+.cmt_report button{
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background: #750000;
+	color: white;
+}
 .cmt_date{
-/*     border: 2px solid red; */
+    border: 2px solid red;
     text-align: right;
     color: rgba(255, 255, 255, 0.7);
     font-size: smaller;

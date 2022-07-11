@@ -68,12 +68,9 @@ input[name="SH_SEAT_STATE"] {
 }
 </style>
 
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/showing/emp_all.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/showing/emp_main.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/showing/emp_footer.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back_end/css/emp_all.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back_end/css/emp_main.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back_end/css/emp_footer.css">
 
 </head>
 <body bgcolor='white'>
@@ -187,8 +184,7 @@ input[name="SH_SEAT_STATE"] {
 	</main>
 	<!-- <div id="tree"></div> -->
 	<footer> 嗨邇覓影城 &copy; HIREME CINEMA 2022 </footer>
-	<script
-		src="<%=request.getContextPath()%>/back_end/showing/emp_aside.js"></script>
+	<script src="<%=request.getContextPath()%>/back_end/showing/emp_aside.js"></script>
 	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 
@@ -196,11 +192,9 @@ input[name="SH_SEAT_STATE"] {
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script
-	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <style>
 .xdsoft_datetimepicker .xdsoft_datepicker {
@@ -219,12 +213,12 @@ input[name="SH_SEAT_STATE"] {
  	       timepicker:true,       //timepicker:true,
  	       step: 30,                //step: 60 (這是timepicker的預設間隔60分鐘)
  	       format:'Y-m-d H:i:00',         //format:'Y-m-d H:i:s',
- 		   value: '<%=showingVO.getSH_TIME()%>
-	', // value:   new Date(),
-	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-	//startDate:	            '2017/07/10',  // 起始日
-	//minDate:               '-1970-01-01', // 去除今日(不含)之前
-	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+ 		   value: '<%=showingVO.getSH_TIME()%>',
+
+			//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+			//startDate:	            '2017/07/10',  // 起始日
+			//minDate:               '-1970-01-01', // 去除今日(不含)之前
+			//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
 	});
 
 	// ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------

@@ -26,7 +26,7 @@ public class Cnm_infService {
 	}
 	
 	public Cnm_infVO updateCnm_inf(String CNM_DT, String CNM_TEL, String CNM_EM,
-			String CNM_LC, String CNM_TRP) {
+			String CNM_LC, String CNM_TRP, Integer CNM_INF_ID) {
 		
 		Cnm_infVO cnm_infVO = new Cnm_infVO();
 		
@@ -35,6 +35,8 @@ public class Cnm_infService {
 		cnm_infVO.setCNM_EM(CNM_EM);
 		cnm_infVO.setCNM_LC(CNM_LC);
 		cnm_infVO.setCNM_TRP(CNM_TRP);
+		cnm_infVO.setCNM_TRP(CNM_TRP);
+		cnm_infVO.setCNM_INF_ID(CNM_INF_ID);
 		dao.update(cnm_infVO);
 		
 		return cnm_infVO;

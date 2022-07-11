@@ -26,10 +26,21 @@ for (CmtVO lis : list) {
 	System.out.println(ttstar);
 pageContext.setAttribute("ttstar", ttstar);
 //該電影的評論數
-int ttcmt = list.size();
+int ttcmt = 0;
+if(list.size() == 0){
+	ttcmt = 0;
+}else{
+    ttcmt = list.size();
+	
+}
 pageContext.setAttribute("ttcmt", ttcmt);
 //該電影的平均星數
-int avgstar = ttstar / ttcmt;
+int avgstar = 0;
+if(ttstar == 0 || ttcmt == 0){
+	avgstar = 0;
+}else{
+avgstar = ttstar / ttcmt;	
+}
 pageContext.setAttribute("avgstar", avgstar);
 //點讚的部分
 
@@ -174,7 +185,10 @@ pageContext.setAttribute("avgstar", avgstar);
 									pattern="yyyy-MM-dd HH:mm:ss" /></span>
 						</div>
 					</div>
-					<div class="cmt_star" value="${cmtVO.CM_STAR}"></div>
+					<div class="cmt_right">
+						<div class="cmt_star" value="${cmtVO.CM_STAR}"></div>
+						<div class="cmt_report"><button>檢舉</button></div>
+					</div>
 				</div>
 			</c:forEach>
 		</div>
@@ -286,8 +300,10 @@ pageContext.setAttribute("avgstar", avgstar);
 		$("#dateSelector").change(function(){
 			$("#showingTime").html("");
 			let SH_TIME1 = $("#dateSelector").val() + " 09:00:00";
+			let mvId1 = ${movieVO.mvId};
 			console.log(SH_TIME1);
-			let url = "${pageContext.request.contextPath}/showing/showing.do?action=getShowingByDate&SH_TIME=" + SH_TIME1;
+			console.log(mvId1);
+			let url = "${pageContext.request.contextPath}/showing/showing.do?action=getShowingByDate&SH_TIME=" + SH_TIME1 + "&mvId=" + mvId1;
 			console.log(url);
 			$.ajax({
 			      type: "POST", //指定http參數傳輸格式為POST

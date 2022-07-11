@@ -80,12 +80,12 @@ public class Cnm_infJDBCDAO implements Cnm_infDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setInt(1, cnm_infVO.getCNM_INF_ID());
-			pstmt.setString(2, cnm_infVO.getCNM_DT());
-			pstmt.setString(3, cnm_infVO.getCNM_TEL());
-			pstmt.setString(4, cnm_infVO.getCNM_EM());
-			pstmt.setString(5, cnm_infVO.getCNM_LC());
-			pstmt.setString(6, cnm_infVO.getCNM_TRP());
+			pstmt.setString(1, cnm_infVO.getCNM_DT());
+			pstmt.setString(2, cnm_infVO.getCNM_TEL());
+			pstmt.setString(3, cnm_infVO.getCNM_EM());
+			pstmt.setString(4, cnm_infVO.getCNM_LC());
+			pstmt.setString(5, cnm_infVO.getCNM_TRP());
+			pstmt.setInt(6, cnm_infVO.getCNM_INF_ID());
 
 
 			pstmt.executeUpdate();
