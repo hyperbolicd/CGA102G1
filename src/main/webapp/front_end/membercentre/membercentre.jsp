@@ -132,13 +132,14 @@ body {
 					許願池
 				</a> <a href="${pageContext.request.contextPath}/front_end/memberCmt/memberCmt.jsp"> <i class="fa fa-clone" aria-hidden="true"></i> 評論區
 				</a>
-				 <a href="#"> <i class="fa fa-gavel" aria-hidden="true"></i> 訂單明細</a>
+				 <a href="${pageContext.request.contextPath}/front_end/merchandise/merchOrd_index.jsp"> <i class="fa fa-gavel" aria-hidden="true"></i> 訂單明細</a>
 			</nav>
 		</div>
 		<!-- <div id="content">
     <iframe src="" width="100%" height="100%" frameborder="0"></iframe>
   </div> -->
 		<div id="memInfo">
+			<div class="text-block" id="textone"><h1>會員中心</h1></div>
 			<div class="rg_center">
 				<div class="rg_form">
 					<!--定義表單 form-->
