@@ -64,10 +64,32 @@ public class TkOrdServlet extends HttpServlet{
 			 List<ShowingVO> list  = showingSvc.getAll(map);
 			   
 			 
-			   PrintWriter out = res.getWriter();
-			   Gson gson = new Gson();
-			   out.print(gson.toJson(list));
-			  }
+			  PrintWriter out = res.getWriter();
+			  Gson gson = new Gson();
+			  out.print(gson.toJson(list));
+		}
+		
+		if ("getShowingByDate".equals(action)) { // 來自listAllShowing.jsp 或  /movie/listEmps_ByDeptno.jsp 的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			/***************************1.接收請求參數****************************************/
+			String SH_TIME = String.valueOf(req.getParameter("SH_TIME"));
+				
+			/***************************2.開始查詢資料****************************************/
+			ShowingService showingSvc = new ShowingService();
+			List<ShowingVO> list = showingSvc.getShowingByDate(SH_TIME);
+
+								
+			/***************************3.查詢完成,準備轉交(Send the Success view)************/
+			req.setAttribute("list", list); // 資料庫取出的showingVO物件,存入req
+			PrintWriter out = res.getWriter();
+			Gson gson = new Gson();
+			out.print(gson.toJson(list));
+		}
 		
 			
 		if ("findHallByhlId".equals(action)) { // 來自select_page.jsp的複合查詢請求

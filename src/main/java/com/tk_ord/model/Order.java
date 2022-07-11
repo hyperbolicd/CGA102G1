@@ -8,13 +8,13 @@ public class Order {
 		private String[] seatindex;
 		private Integer MemberID;
 		private Integer SH_ID;
-		public TKorder[] getTKorder() {
+		public TKorder[] getTKorders() {
 			return TKorder;
 		}
 		public void setTKorder(TKorder[] tKorder) {
 			TKorder = tKorder;
 		}
-		public FDorder[] getFDorder() {
+		public FDorder[] getFDorders() {
 			return FDorder;
 		}
 		public void setFDorder(FDorder[] fDorder) {

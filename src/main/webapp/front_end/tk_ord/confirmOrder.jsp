@@ -43,7 +43,7 @@
 
 	</header>
 
-	<div style="padding: 30px 30px;">
+	<div style="padding: 30px 30px; background-color: black;">
 
 
 		<!--各自的內容--------------------->
