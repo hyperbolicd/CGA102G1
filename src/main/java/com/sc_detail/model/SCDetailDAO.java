@@ -17,10 +17,10 @@ public class SCDetailDAO implements SCDetailDAO_interface {
 	String passwd = "password";
 	private static final String INSERT_STMT = "INSERT INTO sc_detail (MEMBER_ID, MERCH_ID, SC_COUNT) Values (?, ?, ?);";
 	private static final String GET_ALL_STMT = "SELECT MEMBER_ID, MERCH_ID, SC_COUNT FROM sc_detail order by MEMBER_ID ,MERCH_ID;";
-	private static final String GET_ALL_STMT_BY_MEMBERID = "SELECT MEMBER_ID, MERCH_ID, SC_COUNT FROM sc_detail WHERE MEMBER_ID = ? order by MEMBER_ID ,MERCH_ID;";
-	private static final String GET_ONE_STMT = "SELECT MEMBER_ID, MERCH_ID, SC_COUNT FROM sc_detail where MEMBER_ID = ?, MERCH_ID = ?;";
-	private static final String DELETE = "DELETE FROM sc_detail WHERE MEMBER_ID = ?, MERCH_ID = ?;";
-	private static final String UPDATE = "UPDATE sc_detail set SC_COUNT=? WHERE MEMBER_ID = ?, MERCH_ID = ?;";
+	private static final String GET_ALL_STMT_BY_MEMBERID = "SELECT MEMBER_ID, MERCH_ID, SC_COUNT FROM sc_detail WHERE MEMBER_ID=? order by MEMBER_ID ,MERCH_ID;";
+	private static final String GET_ONE_STMT = "SELECT MEMBER_ID, MERCH_ID, SC_COUNT FROM sc_detail where MEMBER_ID=? and MERCH_ID=?;";
+	private static final String DELETE = "DELETE FROM sc_detail WHERE MEMBER_ID=? and MERCH_ID=?;";
+	private static final String UPDATE = "UPDATE sc_detail set SC_COUNT=? WHERE MEMBER_ID=? and MERCH_ID=?;";
 
 	@Override
 	public void insert(SCDetailVO scDetailVo) {
