@@ -23,28 +23,26 @@ for (CmtVO lis : list) {
 	ttstar += lis.getCM_STAR();
 	System.out.println(lis.getCM_ID() + " , " + lis.getCM_STAR());
 }
-	System.out.println(ttstar);
+System.out.println(ttstar);
 pageContext.setAttribute("ttstar", ttstar);
 //該電影的評論數
 int ttcmt = 0;
-if(list.size() == 0){
+if (list.size() == 0) {
 	ttcmt = 0;
-}else{
-    ttcmt = list.size();
-	
+} else {
+	ttcmt = list.size();
+
 }
 pageContext.setAttribute("ttcmt", ttcmt);
 //該電影的平均星數
 int avgstar = 0;
-if(ttstar == 0 || ttcmt == 0){
+if (ttstar == 0 || ttcmt == 0) {
 	avgstar = 0;
-}else{
-avgstar = ttstar / ttcmt;	
+} else {
+	avgstar = ttstar / ttcmt;
 }
 pageContext.setAttribute("avgstar", avgstar);
 //點讚的部分
-
-
 %>
 
 <!DOCTYPE html>
@@ -77,7 +75,7 @@ pageContext.setAttribute("avgstar", avgstar);
 
 	<!-- 置頂按鈕 -->
 	<button type="button" id="BackTop" class="toTop-arrow"></button>
-	 <script>
+	<script>
 	    $(function () {
 	      $('#BackTop').click(function () {
 	        $('html,body').animate({ scrollTop: 0 }, 333);
@@ -91,17 +89,19 @@ pageContext.setAttribute("avgstar", avgstar);
 	      }).scroll();
 	    });
 	  </script>
-	 <div class="wrapper row1" style="height: 60px;">
-	  <jsp:include page="/front_end/header.jsp" />
-	  <jsp:include page="/front_end/header_css.jsp" />
-	 </div>
+	<div class="wrapper row1" style="height: 60px;">
+		<jsp:include page="/front_end/header.jsp" />
+		<jsp:include page="/front_end/header_css.jsp" />
+	</div>
 
 
 
 	<!-- 內容 -->
-	<jsp:useBean id="movieSvc" scope="page" class="com.movie.model.MovieService" />
+	<jsp:useBean id="movieSvc" scope="page"
+		class="com.movie.model.MovieService" />
 
-	<div id="movie_detail_main" style='padding: 50px 100px; color: #979797; background-color: black;'>
+	<div id="movie_detail_main"
+		style='padding: 50px 100px; color: #979797; background-color: black;'>
 		<div id="movie">
 			<div id="movie_img">
 				<div id="pic">
@@ -125,17 +125,26 @@ pageContext.setAttribute("avgstar", avgstar);
 		<div id="booking">
 			<div id="date">
 				<select name="" id="dateSelector" class="picker toRed">
-				<option>選擇日期</option>
+					<option>選擇日期</option>
 					<!-- inject date -->
 				</select>
 			</div>
 			<div id="time">
 				<select name="" id="showingTime" class="picker toRed">
+				<option value=0>請選擇場次</option>
 					<!-- inject showing time -->
 				</select>
 			</div>
 			<div id="book">
-				<button id="bookBtn">BOOKING!</button>
+					<button id="bookBtn" class="checkIn">BOOKING!</button>
+				<FORM METHOD="post" class="checkInForm"
+					ACTION="<%=request.getContextPath()%>/front/tkOrd.do"
+					style="margin-bottom: 0px;">
+					<input type="hidden" name="MV_ID" class="inputMV_ID"> 
+					<input type="hidden" name="SH_ID" class="inputSH_ID"> 
+					<input type="hidden" name="HL_ID" class="inputHL_ID"> 
+					<input type="hidden" name="action" value="go_To_TicketSelect">
+				</FORM>
 			</div>
 		</div>
 
@@ -144,9 +153,7 @@ pageContext.setAttribute("avgstar", avgstar);
 				<div id="cmt_title">
 					<span>COMMENTS</span>
 				</div>
-				<div id="cmt_avg" value="${avgstar}" class="cmt_star">
-					
-				</div>
+				<div id="cmt_avg" value="${avgstar}" class="cmt_star"></div>
 				<div id="cmt_ttcmt">
 					<span>【${ttcmt}則評論】</span>
 				</div>
@@ -161,7 +168,9 @@ pageContext.setAttribute("avgstar", avgstar);
 				<div class="cmt">
 					<div class="member">
 						<div class="member_pic">
-							<img src="<%=request.getContextPath()%>${cmtVO.memberVO.member_Pic}" alt="">
+							<img
+								src="<%=request.getContextPath()%>${cmtVO.memberVO.member_Pic}"
+								alt="">
 						</div>
 						<div class="member_name">
 							<div class="member_nickname">
@@ -177,8 +186,8 @@ pageContext.setAttribute("avgstar", avgstar);
 							${cmtVO.CM_TEXT}</div>
 						<hr class="hr_cmt">
 						<div class="cmt_like">
-							<span class="fa fa-heart like">${cmtVO.CM_LIKE}</span>
-							<input type="hidden" name="CM_ID" value="${cmtVO.CM_ID}">
+							<span class="fa fa-heart like">${cmtVO.CM_LIKE}</span> <input
+								type="hidden" name="CM_ID" value="${cmtVO.CM_ID}">
 						</div>
 						<div class="cmt_date">
 							<span><fmt:formatDate value="${cmtVO.CM_DATE}"
@@ -187,7 +196,9 @@ pageContext.setAttribute("avgstar", avgstar);
 					</div>
 					<div class="cmt_right">
 						<div class="cmt_star" value="${cmtVO.CM_STAR}"></div>
-						<div class="cmt_report"><button>檢舉</button></div>
+						<div class="cmt_report">
+							<button>檢舉</button>
+						</div>
 					</div>
 				</div>
 			</c:forEach>
@@ -195,65 +206,65 @@ pageContext.setAttribute("avgstar", avgstar);
 
 
 		<!--     新評論 -->
-<hr class="hr-shadow">
+		<hr class="hr-shadow">
 
 
-		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cmt/cmt.do" name="form1">
-		<div id="newCmt">
-			<div class="member">
-				<div class="member_pic">
-					<img id="thisMemPic" src="<%=request.getContextPath()%>${memberVO.member_Pic}" alt="">
-				</div>
-				<div class="member_name">
-					<div class="member_nickname">
-						<span id="thisMemNickname">${memberVO.member_Name}</span>
+		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cmt/cmt.do"
+			name="form1">
+			<div id="newCmt">
+				<div class="member">
+					<div class="member_pic">
+						<img id="thisMemPic"
+							src="<%=request.getContextPath()%>${memberVO.member_Pic}" alt="">
 					</div>
-					<div class="member_id">
-						<span id="thisMemId">${memberVO.member_ID}</span>
+					<div class="member_name">
+						<div class="member_nickname">
+							<span id="thisMemNickname">${memberVO.member_Name}</span>
+						</div>
+						<div class="member_id">
+							<span id="thisMemId">${memberVO.member_ID}</span>
+						</div>
+					</div>
+				</div>
+				<div class="cmt_detail">
+					<div class="cmt_text">
+						<textarea name="CM_TEXT" id="" maxlength="500"></textarea>
+					</div>
+					<hr>
+					<div id="conf">
+						<div class="cmtBtnArea">
+							<input type="submit" value="comment">
+							<!-- 					<p>comment</p> -->
+						</div>
+						<div id="netaArea">
+							<div>評論是否劇透</div>
+							<input type="checkbox" name="" id="netabare">
+						</div>
+					</div>
+				</div>
+				<div class="cmt_star">
+					<div class="rating-box">
+						<span class="rating-boxH1">Rating</span>
+						<div class="rating">
+							<span class="fa fa-star-o"></span> <span class="fa fa-star-o"></span>
+							<span class="fa fa-star-o"></span> <span class="fa fa-star-o"></span>
+							<span class="fa fa-star-o"></span>
+						</div>
+						<!-- <h4 id="rating-value"></h1> -->
 					</div>
 				</div>
 			</div>
-			<div class="cmt_detail">
-				<div class="cmt_text">
-					<textarea name="CM_TEXT" id="" maxlength="500"></textarea>
-				</div>
-				<hr>
-				<div id="conf">
-					<div class="cmtBtnArea">
-						<input type="submit" value="comment">
-<!-- 					<p>comment</p> -->
-					</div>
-					<div id="netaArea">
-						<div>評論是否劇透</div>
-						<input type="checkbox" name="" id="netabare">
-					</div>
-				</div>
-			</div>
-			<div class="cmt_star">
-				<div class="rating-box">
-					<span class="rating-boxH1">Rating</span>
-					<div class="rating">
-						<span class="fa fa-star-o"></span> <span class="fa fa-star-o"></span>
-						<span class="fa fa-star-o"></span> <span class="fa fa-star-o"></span>
-						<span class="fa fa-star-o"></span>
-					</div>
-					<!-- <h4 id="rating-value"></h1> -->
-				</div>
-			</div>
-		</div>
-		<input type="hidden" name="MEMBER_ID" value="${memberVO.member_ID}">
-		<input type="hidden" name="MV_ID" value="${movieVO.mvId}">
-		<input type="hidden" name="CM_LIKE" value="0">
-		<input type="hidden" name="CM_STAR" value="">
-		<input type="hidden" name="CM_STATE" value="0">
-		<input type="hidden" name="CM_DATE" value="">
-		
-		<input type="hidden" name="ttcmt" value="${ttcmt}">
-		<input type="hidden" name="ttstar" value="${ttstar}">
-		
-		<input type="hidden" name="action" value="insert">
-<!-- 		<input type="submit" value="送出新增"> -->
-	</FORM>
+			<input type="hidden" name="MEMBER_ID" value="${memberVO.member_ID}">
+			<input type="hidden" name="MV_ID" value="${movieVO.mvId}"> <input
+				type="hidden" name="CM_LIKE" value="0"> <input type="hidden"
+				name="CM_STAR" value=""> <input type="hidden"
+				name="CM_STATE" value="0"> <input type="hidden"
+				name="CM_DATE" value=""> <input type="hidden" name="ttcmt"
+				value="${ttcmt}"> <input type="hidden" name="ttstar"
+				value="${ttstar}"> <input type="hidden" name="action"
+				value="insert">
+			<!-- 		<input type="submit" value="送出新增"> -->
+		</FORM>
 
 
 
@@ -297,32 +308,32 @@ pageContext.setAttribute("avgstar", avgstar);
 	<!-- Ajax的測試Script -->
 	<script>
 		//日期對應時段的Ajax
-		$("#dateSelector").change(function(){
-			$("#showingTime").html("");
-			let SH_TIME1 = $("#dateSelector").val() + " 09:00:00";
-			let mvId1 = ${movieVO.mvId};
-			console.log(SH_TIME1);
-			console.log(mvId1);
-			let url = "${pageContext.request.contextPath}/showing/showing.do?action=getShowingByDate&SH_TIME=" + SH_TIME1 + "&mvId=" + mvId1;
-			console.log(url);
-			$.ajax({
-			      type: "POST", //指定http參數傳輸格式為POST
-			      url: url, //請求目標的url，可在url內加上GET參數，如 www.xxxx.com?xx=yy&xxx=yyy
-			      dataType: "json",
-			      async: false,
-			      success: function (response) {
-			    	  for(let res of response){
-				        $("#showingTime").append("<option>" + res.SH_TIME + "</option>");  
-				        console.log(res.SH_TIME);
-			    	  }
-			      },
-			      //Ajax失敗後要執行的function，此例為印出錯誤訊息
-			      error: function (xhr, ajaxOptions, thrownError) {
-// 			        alert(xhr.status + "\n" + thrownError);
-			        alert("沒場ㄛ換一天ㄅ");
-			      }
-		    });
-		});
+// 		$("#dateSelector").change(function(){
+// 			$("#showingTime").html("");
+// 			let SH_TIME1 = $("#dateSelector").val() + " 09:00:00";
+// 			let mvId1 = ${movieVO.mvId};
+// 			console.log(SH_TIME1);
+// 			console.log(mvId1);
+// 			let url = "${pageContext.request.contextPath}/showing/showing.do?action=getShowingByDate&SH_TIME=" + SH_TIME1 + "&mvId=" + mvId1;
+// 			console.log(url);
+// 			$.ajax({
+// 			      type: "POST", //指定http參數傳輸格式為POST
+// 			      url: url, //請求目標的url，可在url內加上GET參數，如 www.xxxx.com?xx=yy&xxx=yyy
+// 			      dataType: "json",
+// 			      async: false,
+// 			      success: function (response) {
+// 			    	  for(let res of response){
+// 				        $("#showingTime").append("<option value="+ res.SH_ID + ">" + res.SH_TIME + "</option>");  
+// 				        console.log(res.SH_TIME);
+// 			    	  }
+// 			      },
+// 			      //Ajax失敗後要執行的function，此例為印出錯誤訊息
+// 			      error: function (xhr, ajaxOptions, thrownError) {
+// // 			        alert(xhr.status + "\n" + thrownError);
+// 			        alert("沒場ㄛ換一天ㄅ");
+// 			      }
+// 		    });
+// 		});
 		
 
 		//評論點讚的Ajax
@@ -357,7 +368,103 @@ pageContext.setAttribute("avgstar", avgstar);
 
 	
 	</script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script>
+	// 串接到訂票=====================
+		
+		let MV_ID = ${movieVO.mvId};
+		$('.inputMV_ID').val(MV_ID);
+		let SH_ID = '';
+		let HL_ID = 0;
+		
+		
+		
+		
+		$('#dateSelector').change((e) => {
+			SH_TIME = e.target.value + " 09:00:00"; ;
+			let url = "${pageContext.request.contextPath}/tkOrd/tkOrd.do?action=listShowings_ByCompositeQuery&MV_ID=" + MV_ID +"&SH_TIME=" + SH_TIME;
+			$('#showingTime').removeAttr("disabled");
+			$('#showingTime').empty();
+			$('#showingTime').append('<option value=0>請選擇場次' );
+			$.ajax({
+		            url: url,
+		            type: 'post',
+		            dataType: 'json',
+		            async: false,
+		            timeout: 15000,
+		            success: function (data) {
+		            	for(let show of data){
+		            		let showTimeStr = show.SH_TIME + " "; 
+							let showTime = showTimeStr.slice(-12, -7) + showTimeStr.slice(-3, -1);	
+							
+		            		
+		            		if((show.SH_TYPE === 0) && (show.mvId === parseInt(MV_ID))){
+		            			if((parseInt(showTimeStr.slice(-12, -10))< 6) && (showTimeStr.slice(-3, -1) === 'AM')){
+		            				$('#showingTime').append('<option value='+ show.SH_ID + '>跨夜'+showTime+'  (數位)');
+		            			}else{
+		            				$('#showingTime').append('<option value='+ show.SH_ID + '>'+showTime+'  (數位)');          				
+		            			} 		
+		            		}else if ((show.SH_TYPE === 1) && (show.mvId === parseInt(MV_ID))){
+		            			if((parseInt(showTimeStr.slice(-12, -10))< 6) && (showTimeStr.slice(-3, -1) === 'AM')){
+		            				$('#showingTime').append('<option value='+ show.SH_ID + '>跨夜'+showTime+'  (IMAX)');
+		            			}else{
+			            			$('#showingTime').append('<option value='+ show.SH_ID + '>'+showTime+'  (IMAX)');
+		            			}		
+		            		}
+		            	
+		            	}	
+		            }
+			})
+			
+		})
+		
+		
+		
+		
+		
+		$('#showingTime').blur((e) => {
+			SH_ID = e.target.value;
+			$('.inputSH_ID').val(SH_ID);
+			
+			let url = "${pageContext.request.contextPath}/tkOrd/tkOrd.do?action=listShowings_ByCompositeQuery&MV_ID=" + MV_ID +"&SH_ID=" + SH_ID;
+			
+			$.ajax({
+		    	url: url,
+		        type: 'post',
+		        dataType: 'json',
+		    	async: false,
+		        timeout: 15000,
+		        success: function (data) {
+		        	for(let show of data){
+		            	HL_ID = show.HL_ID;       		
+		            	}
+		        	
+		        }
+			
+			})
+					
+			$('.inputHL_ID').val(HL_ID);
 
+		})	
+		
+		
+		$('.checkIn').click(function() {
+			movieName = $('.MV_ID option:selected').text();
+			if ('' === SH_ID || '0' === SH_ID ){
+				Swal.fire({
+	                icon: 'error',
+	                title: '很抱歉',
+	                text: '請確認您欲觀看的場次',
+	                footer: ''
+	            })
+			}else{
+	        
+	        $(".checkInForm").submit();
+			}
+			
+		})
+	
+	</script>
 </body>
 
 </html>
