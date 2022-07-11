@@ -187,7 +187,7 @@
     	   order.TKorder= TKorder;
     	   order.seatindex = seatindex;
     	   order.FDorder = FDorder;
-    	   order.MemberID = "1";
+    	   order.MemberID = ${memberVO.member_ID};
     	   order.SH_ID = ${OrderShowingVO.SH_ID};	   
     	  
     	   let url = "${pageContext.request.contextPath}/OrderCompleteServlet";

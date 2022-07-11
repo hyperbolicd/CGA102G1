@@ -332,7 +332,7 @@ $('.bt').click(function () {
        })
 	}else{	
 	
-		document.location.href="<%=request.getContextPath()%>/back_end/tk_ord/chooseSeat.jsp";
+		document.location.href="<%=request.getContextPath()%>/front_end/tk_ord/chooseSeat.jsp";
 
 	}
 });   
