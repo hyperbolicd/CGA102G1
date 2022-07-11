@@ -192,7 +192,7 @@ pageContext.setAttribute("list2", list2);
 	</div>
 	
 	<script>
-	
+	sessionStorage.clear();
 // 	處理場次時間==================================
 	let showtime = '';
 	showtime = '${showingVO.SH_TIME}';

@@ -149,16 +149,21 @@
        const FDorderStr = sessionStorage.getItem('FDorder');
        const FDorder = JSON.parse(FDorderStr);
        
-       for (let FD of FDorder) {
-    	   if (FD.count === '' || FD.count === '0') {	
-    		   
-    	   }else{
-           total += (FD.unitPrice * FD.count);
-           
-           tbody.insertAdjacentHTML('beforeend','<tr><td>'+ FD.name+ '</td><td>' + FD.count +'</td><td style="text-decoration:line-through;">$' + FD.unitPrice + '</td><td>$'+FD.unitPrice+'</td><td>未符合</td><td>$'+(FD.unitPrice * FD.count)+'</td></tr>');        
+       if (FDorder !== null){
+    	   
+      		for (let FD of FDorder) {
+   	   		if (FD.count === '' || FD.count === '0') {	
+   		   
+   	   		}else{
+          		total += (FD.unitPrice * FD.count);
+          
+          		tbody.insertAdjacentHTML('beforeend','<tr><td>'+ FD.name+ '</td><td>' + FD.count +'</td><td style="text-decoration:line-through;">$' + FD.unitPrice + '</td><td>$'+FD.unitPrice+'</td><td>未符合</td><td>$'+(FD.unitPrice * FD.count)+'</td></tr>');        
 	   
-    	   }
-       }
+   	   		}
+      		}
+      }else{
+   	   
+      }
               
        let showTotal = document.getElementById('total');
        showTotal.innerText ="$" + total;

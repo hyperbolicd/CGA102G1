@@ -215,3 +215,17 @@ $(document).ready(function(){
 	}
 });
 
+// 未登入時無法檢舉
+$(document).ready(function(){
+	if($('input[name="MEMBER_ID"]').prop('value') == ''){
+		$(".reportBtn").remove();
+	}
+});
+
+
+
+//檢舉後轉跳最上
+$(".reportBtn").click(function(){
+	$('html,body').animate({ scrollTop: 0 }, 333);
+})
+
