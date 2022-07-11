@@ -36,6 +36,7 @@ pageContext.setAttribute("list2", list2);
 	href="<%=request.getContextPath()%>/back_end/tk_ord/styles/chooseTK.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 
 <body>
@@ -127,7 +128,6 @@ pageContext.setAttribute("list2", list2);
 				<!-- 				</FORM> -->
 				<div class="btBlock">
 					<a class="bt"
-						href="<%=request.getContextPath()%>/back_end/tk_ord/chooseSeat.jsp"
 						style="text-decoration: none;">繼續</a>
 				</div>
 			</div>
@@ -169,10 +169,11 @@ pageContext.setAttribute("list2", list2);
 	</aside>
 
 	<script>
-	
+	sessionStorage.clear();
 // 	處理場次時間==================================
 	let showtime = '';
 	showtime = '${showingVO.SH_TIME}';
+	let TotalCount = 0;
 	
 	$('.showtime').text(showtime.slice(0, 16));
 
@@ -180,14 +181,12 @@ pageContext.setAttribute("list2", list2);
 
 let TKorder = []; 
 let FDorder = [];
-// let TKCount = [];
+
 
 // 點擊單一票種	
 <c:forEach var="tkinfVO" items="${list}">					
 	
-// 	let TKCount${tkinfVO.tkTypeID} = { 'name' : [], 
-// 			'count' : [],
-// 	}
+
 	
 	let TK${tkinfVO.tkTypeID} = { 'id' : '',
 			 'name' : '', 
@@ -204,8 +203,6 @@ let FDorder = [];
 	 TK${tkinfVO.tkTypeID}.unitPrice=("${tkinfVO.tkPrice}");
 	 TK${tkinfVO.tkTypeID}.count=(e.target.value);
 	 
-// 	 TKCount${tkinfVO.tkTypeID}.name=("${tkinfVO.tkType}");
-// 	 TKCount${tkinfVO.tkTypeID}.count=(e.target.value);
 	 
 	    
 		$(".trTK${tkinfVO.tkTypeID}").remove();
@@ -256,9 +253,8 @@ let FDorder = [];
 			
 		TKorder.push(TK${tkinfVO.tkTypeID});		
         sessionStorage.setItem('TKorder', JSON.stringify(TKorder));
-        
-//         TKCount.push(TKCount${tkinfVO.tkTypeID});
-//         sessionStorage.setItem('TKCount', JSON.stringify(TKCount));
+        TotalCount += TK${tkinfVO.tkTypeID}.count;
+
         
 		}
     });   
@@ -302,7 +298,22 @@ let FDorder = [];
     });   
 </c:forEach>
 
+$('.bt').click(function () {
+	
+	
+	if (TotalCount < 1 ) {
+       Swal.fire({
+           icon: 'error',
+           title: '很抱歉',
+           text: '至少需要選購一張電影票',
+           footer: '請繼續選擇您的票種與數量'
+       })
+	}else{	
 
+		document.location.href="<%=request.getContextPath()%>/back_end/tk_ord/chooseSeat.jsp";
+
+	}
+});   
 
 	</script>
 </body>

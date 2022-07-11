@@ -154,7 +154,7 @@
             Swal.fire({
                 icon: 'error',
                 title: '很抱歉',
-                text: '您還有座位未選擇!',
+                text: '您還有'+(TotalCount - $(".seatSelected").length)+'個座位未選擇!',
                 footer: '請繼續選擇您的座位'
             })
 		}else{	
@@ -215,8 +215,6 @@
 					input.className = 'seatNumber seatReserved';
 				} else if (state === '4') {
 					input.className = 'seatNumber seatConstruction';
-				} else if (state === '5') {
-					input.className = 'seatNumber seatSelected';	
 				} else {
 					input.className = 'seatNumber seatUnavailable';
 				}
@@ -242,13 +240,13 @@
 		for (let TK of TKorder){
 			TotalCount += parseInt(TK.count);
 		}
-		console.log(TotalCount);
+
 		// 點擊單一座位=========================================================
 		$(".seatNumber")
 				.click(
 						function() {
 							// 去除不可選座位
-							if (!$(this).hasClass("seatUnavailable")) {
+							if (!$(this).hasClass("seatUnavailable") && !$(this).hasClass("seatConstruction") && !$(this).hasClass("seatReserved")) {
 								// 如果座位已選過
 								if ($(this).hasClass("seatSelected")) {
 									
@@ -322,7 +320,7 @@
 									$(this).addClass("seatSelected");
 									
 									let index = $(this).attr("seatIndex");
-                                    seat = changeSeat(seat, index, '5');
+                                    seat = changeSeat(seat, index, '2');
 							        
 							        
 // 							        更新資料庫座位=============================================================

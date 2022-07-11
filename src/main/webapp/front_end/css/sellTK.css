@@ -62,13 +62,6 @@ tr {
 	height: 50px;
 }
 
-td {
-/* 	width: 200px; */
-}
-
-
-
-
 
 .tablebt:active {
 	transform: scale(0.95);
@@ -96,16 +89,14 @@ td {
     position: relative;
     transition: all .3s linear;
     margin-left: 50px;
-    /* border-radius: 10px; */
+
 }
 .tablebtBlock > a{
-/* 	border:2px solid yellow; */
 	padding-left: 20px;
 	padding-right: 20px;
     letter-spacing: 2px;
     position: relative;
     z-index: 1;
-/*     border: none; */
     color: white;
     background-color: transparent;
 }
@@ -115,9 +106,6 @@ td {
     height: 20px;
     display: block;
     box-sizing: border-box;
-    /* border-top: 4px solid #FFF; */
-    /* border-left: 4px solid #FFF; */
-    /* opacity: 0.5; */
     position: absolute;
     top: 0;
     left: 0;
@@ -130,14 +118,10 @@ td {
     height: 20px;
     display: block;
     box-sizing: border-box;
-    /* border-bottom: 4px solid #FFF; */
-    /* border-right: 4px solid #FFF; */
-    /* opacity: 0.5; */
     position: absolute;
     bottom: 0;
     right: 0;
     transition: all .3s ease;
-    /* border-radius: 10px; */
 }
 .tablebtBlock:hover::before{
     width: 100%;

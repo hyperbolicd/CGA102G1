@@ -290,7 +290,7 @@ div, ul, li, a, span, img {
 							<td>
 								<div id="time">
 									<select class="showTimeSelect" disabled="disabled" style="width: 250px;">
-										<option value=0>請選擇場次
+										<option value=0>請選擇場次</option>
 									</select>
 								</div>
 							</td>
@@ -487,7 +487,6 @@ div, ul, li, a, span, img {
 	let MV_ID = '';
 	let SH_SEAT_STATE = '';
 	let HL_ID = 0;
-	let hallName = '';
 	let SH_ID = '';
 
 	$('.MV_ID').change((e) => {
@@ -550,36 +549,20 @@ div, ul, li, a, span, img {
 	        timeout: 15000,
 	        success: function (data) {
 	        	for(let show of data){
-	            	HL_ID = show.HL_ID;
-	            	seat = show.SH_SEAT_STATE;
-	            	let showTimeStr = show.SH_TIME + " ";         		
+	            	HL_ID = show.HL_ID;       		
 	            	}
 	        	
 	        }
 		
 		})
-		
-		let url2 = "${pageContext.request.contextPath}/tkOrd/tkOrd.do?action=findHallByhlId&hlId=" + HL_ID;
+				
 		$('.inputHL_ID').val(HL_ID);
-		$.ajax({
-            url: url2,
-            type: 'post',
-            dataType: 'json',
-            async: false,
-            timeout: 15000,
-            success: function (data2) {
-            	hallName = data2.hlName;
-            	row = data2.hlRow;
-            	col = data2.hlCol;
 
-            } 
-	 
-		})
 	})	
 	
 	
 	$('.checkIn').click(function() {
-		movieName = $('.MV_ID option:selected').text();
+
 		if('' === MV_ID){
 			Swal.fire({
                 icon: 'error',

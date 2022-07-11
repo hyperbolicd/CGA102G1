@@ -31,13 +31,13 @@
   <!-- url-pattern 放要濾掉的 jsp-->
   <url-pattern>/front_end/membercentre/membercentre.jsp</url-pattern> 
   <url-pattern>/front_end/membercentre/membermod.jsp</url-pattern>
-  <url-pattern>/front_end/ticketFolder/*</url-pattern> 
   <url-pattern>/front_end/tk_ord/chooseSeat.jsp</url-pattern>
    <url-pattern>/front_end/tk_ord/chooseTk.jsp</url-pattern>
    <url-pattern>/front_end/tk_ord/completeOrder.jsp</url-pattern>
    <url-pattern>/front_end/tk_ord/confirmOrder.jsp</url-pattern>
    <url-pattern>/front_end/tk_ord/creditCard.jsp</url-pattern>
    <url-pattern>/front_end/tk_ord/sellTK.jsp</url-pattern>
+   <url-pattern>/front_end/merchandise/merchOrd_index.jsp</url-pattern>
    
    
    

@@ -39,22 +39,22 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 	/* 會員相關問題單一查詢 */
 	private static final String GET_FaqClass1 = 
 			"select faq_class, faq_title, faq_content"
-			+ " from faq order by faq_class = 1";
+			+ " from faq where faq_class=1";
 	
 	/* 影城相關問題單一查詢 */
 	private static final String GET_FaqClass2 = 
 			"select faq_class, faq_title, faq_content"
-			+ " from faq order by faq_class = 2";
+					+ " from faq where faq_class=2";
 	
 	/* 電影上映相關問題單一查詢 */
 	private static final String GET_FaqClass3 = 
 			"select faq_class, faq_title, faq_content"
-			+ " from faq order by faq_class = 3";
+					+ " from faq where faq_class=3";
 	
 	/* 其他問題單一查詢 */
 	private static final String GET_FaqClass4 = 
 			"select faq_class, faq_title, faq_content"
-			+ " from faq order by faq_class = 4";
+					+ " from faq where faq_class=4";
 	
 	@Override /* 新增 */
 	public void insert(FaqVO faqVO) {
@@ -309,7 +309,7 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 	
 	
 	@Override
-	public List<FaqVO> getFaqClass1(Byte faq_class) {
+	public List<FaqVO> getFaqClass1() {
 		
 		List<FaqVO> list = new ArrayList<FaqVO>();
 		FaqVO faqVO = null;
@@ -320,8 +320,7 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 		
 		try {
 			conn = JDBCUtil.getConnection();
-			pstmt = conn.prepareStatement(GET_FaqClass4);
-			pstmt.setByte(1, faq_class);
+			pstmt = conn.prepareStatement(GET_FaqClass1);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -367,7 +366,7 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 	}
 	
 	@Override
-	public List<FaqVO> getFaqClass2(Byte faq_class) {
+	public List<FaqVO> getFaqClass2() {
 		
 		List<FaqVO> list = new ArrayList<FaqVO>();
 		FaqVO faqVO = null;
@@ -378,8 +377,7 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 		
 		try {
 			conn = JDBCUtil.getConnection();
-			pstmt = conn.prepareStatement(GET_FaqClass4);
-			pstmt.setByte(2, faq_class);
+			pstmt = conn.prepareStatement(GET_FaqClass2);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -425,7 +423,7 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 	}
 	
 	@Override
-	public List<FaqVO> getFaqClass3(Byte faq_class) {
+	public List<FaqVO> getFaqClass3() {
 		
 		List<FaqVO> list = new ArrayList<FaqVO>();
 		FaqVO faqVO = null;
@@ -436,8 +434,7 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 		
 		try {
 			conn = JDBCUtil.getConnection();
-			pstmt = conn.prepareStatement(GET_FaqClass4);
-			pstmt.setByte(3, faq_class);
+			pstmt = conn.prepareStatement(GET_FaqClass3);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -483,7 +480,7 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 	}
 	
 	@Override
-	public List<FaqVO> getFaqClass4(Byte faq_class) {
+	public List<FaqVO> getFaqClass4() {
 		
 		List<FaqVO> list = new ArrayList<FaqVO>();
 		FaqVO faqVO = null;
@@ -495,7 +492,6 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 		try {
 			conn = JDBCUtil.getConnection();
 			pstmt = conn.prepareStatement(GET_FaqClass4);
-			pstmt.setByte(4, faq_class);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {

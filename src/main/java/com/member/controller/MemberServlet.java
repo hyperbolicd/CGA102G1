@@ -274,7 +274,10 @@ public class MemberServlet extends HttpServlet {
 			}
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			if(session.getAttribute("location") != null){  
-				res.sendRedirect((String) session.getAttribute("location"));}
+				res.sendRedirect((String) session.getAttribute("location"));
+				return;
+			}
+			
 			System.out.println("account");
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listAllMember.jsp
 			successView.forward(req, res); // 轉送

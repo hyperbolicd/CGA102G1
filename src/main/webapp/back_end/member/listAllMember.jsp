@@ -83,20 +83,26 @@ pageContext.setAttribute("list", list);
 								<td>${memberVO.member_Phone}</td>
 								<td><img src="<%=request.getContextPath()%>${memberVO.member_Pic}"></td>
 								<%-- 			${pageContext.request.contextPath}<img src="\HireMe\image"> --%>
-								<td>${memberVO.member_Status}</td>
+								<td>
+									${memberVO.member_Status==0?'未啟用':''}
+									${memberVO.member_Status==1?'啟用':''}
+									${memberVO.member_Status==2?'停權':''}
+								</td>
 								<td>${memberVO.wish_Ticket}</td>
 								<td>${memberVO.bonus_Points}</td>
 								<td>${memberVO.sum_Count}</td>
 									<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member.do" style="margin-bottom: 0px;">
 								<td>
+								
+								 <!--  selected是代表當下表格 -->
 										<select name="member_Status">
-											
-											<option value="0" >未啟用</option>  <!-- selected是代表當下表格 --> 
+											<option value="0" >未啟用</option> 
 											<option value="1" >啟用</option> 
-											<option value="2" >停權</option>   
-											
-											
+											<option value="2" >停權</option> 
+																		
 										</select> 
+
+
 
 								</td>
 								<td>

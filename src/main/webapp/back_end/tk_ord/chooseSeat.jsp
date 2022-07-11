@@ -92,16 +92,7 @@
 
 			<div>
 				<div class="temporaryInf">
-					<!-- 					<div class="timer"> -->
-					<!-- 						<table class="sidetable"> -->
-					<!-- 							<tr> -->
-					<!-- 								<td>剩下時間</td> -->
-					<!-- 							</tr> -->
-					<!-- 							<tr> -->
-					<!-- 								<td>01:00</td> -->
-					<!-- 							</tr> -->
-					<!-- 						</table> -->
-					<!-- 					</div> -->
+
 					<div class="receiptouter">
 						<div class="seatsReceipt">
 							<p>
@@ -196,9 +187,7 @@
 			} else if (state === '3') {
 				input.className = 'seatNumber seatReserved';
 			} else if (state === '4') {
-				input.className = 'seatNumber seatConstruction';
-// 			} else if (state === '5') {
-// 				input.className = 'seatNumber seatSelected';	
+				input.className = 'seatNumber seatConstruction';	
 			} else {
 				input.className = 'seatNumber seatUnavailable';
 			}
@@ -233,7 +222,7 @@
 			
 // 		}
 //      去除不可選座位
-		if (!$(this).hasClass("seatUnavailable") && !$(this).hasClass("seatConstruction") && !$(this).hasClass("seatReserved")) {
+		if (!$(this).hasClass("seatUnavailable") && !$(this).hasClass("seatConstruction")) {
 			
 			// 如果座位已選過
 			if ($(this).hasClass("seatSelected")) {									
