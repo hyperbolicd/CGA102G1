@@ -99,7 +99,7 @@
 #book > button{
     letter-spacing: 2px;
     position: relative;
-/*     z-index: 1; */
+    z-index: 1;
     border: none;
     color: white;
     background-color: transparent;
@@ -406,7 +406,7 @@
 .cmtBtnArea > input{
     letter-spacing: 2px;
     position: relative;
-/*     z-index: 1; */
+    z-index: 1;
     margin: 0;
     background-color: transparent;
     border: 0px;
@@ -527,7 +527,7 @@
 /*     color:rgb(56, 58, 69); */
     font-weight: bold;
     background: #000000CC;
-/*         z-index: 2; */
+        z-index: 1;
 }
 
 #newInfo {

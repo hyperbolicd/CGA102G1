@@ -136,7 +136,7 @@ pageContext.setAttribute("avgstar", avgstar);
 				</select>
 			</div>
 			<div id="book">
-				<button id="bookBtn" class="checkIn">BOOKING!</button>
+				<button id="bookBtn" class="checkIn" type="button">BOOKING!</button>
 				<FORM METHOD="post" class="checkInForm"
 					ACTION="<%=request.getContextPath()%>/front/tkOrd.do"
 					style="margin-bottom: 0px;">
@@ -309,32 +309,32 @@ pageContext.setAttribute("avgstar", avgstar);
 	<!-- Ajax的測試Script -->
 	<script>
 		//日期對應時段的Ajax
-		$("#dateSelector").change(function(){
-			$("#showingTime").html("");
-			let SH_TIME1 = $("#dateSelector").val() + " 09:00:00";
-			let mvId1 = ${movieVO.mvId};
-			console.log(SH_TIME1);
-			console.log(mvId1);
-			let url = "${pageContext.request.contextPath}/showing/showing.do?action=getShowingByDate&SH_TIME=" + SH_TIME1 + "&mvId=" + mvId1;
-			console.log(url);
-			$.ajax({
-			      type: "POST", //指定http參數傳輸格式為POST
-			      url: url, //請求目標的url，可在url內加上GET參數，如 www.xxxx.com?xx=yy&xxx=yyy
-			      dataType: "json",
-			      async: false,
-			      success: function (response) {
-			    	  for(let res of response){
-				        $("#showingTime").append("<option>" + res.SH_TIME + "</option>");  
-				        console.log(res.SH_TIME);
-			    	  }
-			      },
-			      //Ajax失敗後要執行的function，此例為印出錯誤訊息
-			      error: function (xhr, ajaxOptions, thrownError) {
-// 			        alert(xhr.status + "\n" + thrownError);
-			        alert("沒場ㄛ換一天ㄅ");
-			      }
-		    });
-		});
+// 		$("#dateSelector").change(function(){
+// 			$("#showingTime").html("");
+// 			let SH_TIME1 = $("#dateSelector").val() + " 09:00:00";
+// 			let mvId1 = ${movieVO.mvId};
+// 			console.log(SH_TIME1);
+// 			console.log(mvId1);
+// 			let url = "${pageContext.request.contextPath}/showing/showing.do?action=getShowingByDate&SH_TIME=" + SH_TIME1 + "&mvId=" + mvId1;
+// 			console.log(url);
+// 			$.ajax({
+// 			      type: "POST", //指定http參數傳輸格式為POST
+// 			      url: url, //請求目標的url，可在url內加上GET參數，如 www.xxxx.com?xx=yy&xxx=yyy
+// 			      dataType: "json",
+// 			      async: false,
+// 			      success: function (response) {
+// 			    	  for(let res of response){
+// 				        $("#showingTime").append("<option>" + res.SH_TIME + "</option>");  
+// 				        console.log(res.SH_TIME);
+// 			    	  }
+// 			      },
+// 			      //Ajax失敗後要執行的function，此例為印出錯誤訊息
+// 			      error: function (xhr, ajaxOptions, thrownError) {
+// // 			        alert(xhr.status + "\n" + thrownError);
+// 			        alert("沒場ㄛ換一天ㄅ");
+// 			      }
+// 		    });
+// 		});
 		
 
 		//評論點讚的Ajax
@@ -545,7 +545,8 @@ function close(){
 		})	
 		
 		
-		$('.checkIn').click(function() {
+		$('#bookBtn').click(function() {
+			console.log("checkinnnnnnn")
 			movieName = $('.MV_ID option:selected').text();
 			if ('' === SH_ID || '0' === SH_ID ){
 				Swal.fire({
