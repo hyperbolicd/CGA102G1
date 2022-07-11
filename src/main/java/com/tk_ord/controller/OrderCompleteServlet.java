@@ -61,7 +61,7 @@ public class OrderCompleteServlet extends HttpServlet {
 		if ("completeOrder".equals(action)) { // 來自allFdInf.jsp的請求
 
 			Gson gson = new Gson();
-			System.out.println(req.getParameter("order"));
+
 			Order order = gson.fromJson(req.getParameter("order"), Order.class);
 
 			/*************************** 1.接收請求參數 ****************************************/
@@ -69,25 +69,24 @@ public class OrderCompleteServlet extends HttpServlet {
 			Integer MemberID = order.getMemberID();
 			Integer SH_ID = order.getSH_ID();
 			
-			System.out.println("MemberID====="+MemberID);
+
 			/*************************** 2.開始新增資料 ***************************************/
 			TkOrdVO tkOrdVO = new TkOrdVO();
 			tkOrdVO.setMemberID(MemberID);
 			tkOrdVO.setShID(SH_ID);
 
 			List<TkOrdDtVO> tkOrdDtList = new ArrayList<TkOrdDtVO>();
-			 // 員工POJO1
+
 			TKorder[] tKorders = order.getTKorders();
 			String[] seat = order.getSeatindex();
 			
-			System.out.println(seat);
-			System.out.println("order.getTKorders()====="+order.getTKorders());
+
 			int totalTicket = 0;
-			
+			int seatIndex = 0;
 			for (int tKorderindex = 0; tKorderindex<tKorders.length;tKorderindex++) {
 				totalTicket = totalTicket + tKorders[tKorderindex].getCount();
 				for( int count = 0; count<tKorders[tKorderindex].getCount(); count++) {
-					int seatIndex = 0;
+					
 					TkOrdDtVO tkOrdDt = new TkOrdDtVO();
 					
 					tkOrdDt.setTkTypeID(tKorders[tKorderindex].getId());
