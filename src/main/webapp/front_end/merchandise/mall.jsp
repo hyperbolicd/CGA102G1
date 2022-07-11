@@ -20,7 +20,11 @@
 <!--Plugin JavaScript file-->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+<!-- SweetAlert -->
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-default/default.css">
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 <link rel="stylesheet"
@@ -28,8 +32,11 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/front_end/merchandise/css/mall.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/front_end/css/layout.css" type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/front_end/merchandise/css/mall.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/front_end/css/layout.css"
+	type="text/css">
 
 </head>
 
@@ -43,12 +50,14 @@
             <button><i class="fas fa-search"></i></button>
         </form> -->
 		<nav>
-			<a href="#" class="home"><i class="fas"></i>首頁</a> <a href="#"
-				class="pages" id="pg1-home"><i class="fas"></i>模型</a> <a href="#"
-				class="pages" id="pg2-home"><i class="fas"></i>抱枕</a> <a href="#"
-				class="pages" id="pg3-home"><i class="fas"></i>生活用品</a> <a href="#"
-				class="pages" id="pg4-home"><i class="fas"></i>服飾</a> <a href="#"
-				class="pages" id="pg5-home"><i class="fas"></i>文具</a>
+			<a
+				href="${pageContext.request.contextPath}/front_end/merchandise/mall_index.jsp"
+				class="home"><i class="fas"></i>商城首頁</a> <a href="#" class="pages"
+				id="pg1-home"><i class="fas"></i>模型</a> <a href="#" class="pages"
+				id="pg2-home"><i class="fas"></i>抱枕</a> <a href="#" class="pages"
+				id="pg3-home"><i class="fas"></i>生活用品</a> <a href="#" class="pages"
+				id="pg4-home"><i class="fas"></i>服飾</a> <a href="#" class="pages"
+				id="pg5-home"><i class="fas"></i>文具</a>
 		</nav>
 		<label for="sideMenu-active"> <i class="fas fa-angle-right"></i>
 		</label>
@@ -61,42 +70,52 @@
 
 		<div class="searchBox">
 			<form action="" id="form1">
-				<input type="text" placeholder="請輸入搜尋名稱" name="search">
-				<input type="hidden" name="min" value="0" id="inputmin">
-				<input type="hidden" name="max" value="100000" id="inputmax">
-				<input type="hidden" name="action" value="getSearchList">
+				<input type="text" placeholder="請輸入搜尋名稱" name="search"
+					id="SearchInput"> <input type="hidden" name="min" value="0"
+					id="inputmin"> <input type="hidden" name="max"
+					value="100000" id="inputmax"> <input type="hidden"
+					name="action" value="getSearchList">
 				<button id="searchbutton" type="button">
 					<i class="fas fa-search"></i>
 				</button>
+				<jsp:useBean id="merchSvc"
+					class="com.merchandise_inf.model.MerchService" />
 			</form>
 			<div class="topSearch">
-				<span>模型</span> <span>公仔公仔公仔公仔</span> <span>模型模型</span> <span>轉蛋轉蛋轉蛋轉蛋轉蛋轉蛋轉蛋轉蛋</span>
-				<span>模型</span>
+				<c:forEach var="serachName" items="${merchSvc.getSearchName()}"
+					varStatus="status">
+					<span class="searchName">${serachName}</span>
+				</c:forEach>
 			</div>
 			<div class="filter">
 				<input type="text" class="js-range-slider" name="my_range" value=""
 					form="form1" />
 			</div>
 		</div>
+		<form action="" id="addCart">
+			<input type="hidden" name="action" value="add">
 
+		</form>
 		<!-- 主頁熱門商品的div(有分頁) -->
 		<div class="mytabs">
 			<input type="radio" name="mytabs" id="tab1" checked="checked">
 			<label for="tab1">主打商品</label>
 			<div class="tab">
 				<div class="gallery gallery1">
-				 <jsp:useBean id="merchSvc" class="com.merchandise_inf.model.MerchService"/>
 					<c:forEach var="merchVo" items="${merchSvc.hotSell}">
-					<div class="content">
-						<a href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}"> <img
-							src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-							<h3>${merchVo.merchName}</h3>
-							<p>${merchVo.merchDT}</p>
-							<h6>$${merchVo.merchPrice}</h6></a> <a href="https://www.google.com.tw"><button
-								class="buy-1">buy now</button></a>
-					</div>
+						<div class="content">
+							<a
+								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
+								<img
+								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
+								<h3>${merchVo.merchName}</h3>
+								<p>${merchVo.merchDT}</p>
+								<h6>$${merchVo.merchPrice}</h6>
+							</a> <button
+									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
+						</div>
 					</c:forEach>
-					
+
 
 				</div>
 			</div>
@@ -107,14 +126,17 @@
 				<div class="gallery gallery1">
 
 					<c:forEach var="merchVo" items="${merchSvc.newest}">
-					<div class="content">
-						<a href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}"> <img
-							src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-							<h3>${merchVo.merchName}</h3>
-							<p>${merchVo.merchDT}</p>
-							<h6>$${merchVo.merchPrice}</h6></a> <a href="https://www.google.com.tw"><button
-								class="buy-1">buy now</button></a>
-					</div>
+						<div class="content">
+							<a
+								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
+								<img
+								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
+								<h3>${merchVo.merchName}</h3>
+								<p>${merchVo.merchDT}</p>
+								<h6>$${merchVo.merchPrice}</h6>
+							</a> <button
+									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
+						</div>
 					</c:forEach>
 				</div>
 			</div>
@@ -125,16 +147,19 @@
 				<div class="gallery gallery1">
 
 					<c:forEach var="merchVo" items="${merchSvc.mostSold}">
-					<div class="content">
-						<a href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}"> <img
-							src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-							<h3>${merchVo.merchName}</h3>
-							<p>${merchVo.merchDT}</p>
-							<h6>$${merchVo.merchPrice}</h6></a> <a href="https://www.google.com.tw"><button
-								class="buy-1">buy now</button></a>
-					</div>
+						<div class="content">
+							<a
+								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
+								<img
+								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
+								<h3>${merchVo.merchName}</h3>
+								<p>${merchVo.merchDT}</p>
+								<h6>$${merchVo.merchPrice}</h6>
+							</a> <button
+									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
+						</div>
 					</c:forEach>
-					</div>
+				</div>
 			</div>
 
 		</div>
@@ -146,14 +171,17 @@
 				<div class="gallery">
 
 					<c:forEach var="merchVo" items="${merchSvc.getByClass('模型')}">
-					<div class="content merchpricediv">
-						<a href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}"> <img
-							src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-							<h3>${merchVo.merchName}</h3>
-							<p>${merchVo.merchDT}</p>
-							<h6 class="merchprice">$${merchVo.merchPrice}</h6></a> <a href="https://www.google.com.tw"><button
-								class="buy-1">buy now</button></a>
-					</div>
+						<div class="content merchpricediv">
+							<a
+								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
+								<img
+								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
+								<h3>${merchVo.merchName}</h3>
+								<p>${merchVo.merchDT}</p>
+								<h6 class="merchprice">$${merchVo.merchPrice}</h6>
+							</a> <button
+									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
+						</div>
 					</c:forEach>
 
 				</div>
@@ -166,14 +194,17 @@
 				<div class="gallery">
 
 					<c:forEach var="merchVo" items="${merchSvc.getByClass('抱枕')}">
-					<div class="content merchpricediv">
-						<a href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}"> <img
-							src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-							<h3>${merchVo.merchName}</h3>
-							<p>${merchVo.merchDT}</p>
-							<h6 class="merchprice">$${merchVo.merchPrice}</h6></a> <a href="https://www.google.com.tw"><button
-								class="buy-1">buy now</button></a>
-					</div>
+						<div class="content merchpricediv">
+							<a
+								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
+								<img
+								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
+								<h3>${merchVo.merchName}</h3>
+								<p>${merchVo.merchDT}</p>
+								<h6 class="merchprice">$${merchVo.merchPrice}</h6>
+							</a> <button
+									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
+						</div>
 					</c:forEach>
 				</div>
 			</div>
@@ -185,14 +216,17 @@
 				<div class="gallery">
 
 					<c:forEach var="merchVo" items="${merchSvc.getByClass('生活用品')}">
-					<div class="content merchpricediv">
-						<a href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}"> <img
-							src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-							<h3>${merchVo.merchName}</h3>
-							<p>${merchVo.merchDT}</p>
-							<h6 class="merchprice">$${merchVo.merchPrice}</h6></a> <a href="https://www.google.com.tw"><button
-								class="buy-1">buy now</button></a>
-					</div>
+						<div class="content merchpricediv">
+							<a
+								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
+								<img
+								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
+								<h3>${merchVo.merchName}</h3>
+								<p>${merchVo.merchDT}</p>
+								<h6 class="merchprice">$${merchVo.merchPrice}</h6>
+							</a> <button
+									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
+						</div>
 					</c:forEach>
 				</div>
 			</div>
@@ -204,14 +238,17 @@
 				<div class="gallery">
 
 					<c:forEach var="merchVo" items="${merchSvc.getByClass('服飾')}">
-					<div class="content merchpricediv">
-						<a href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}"> <img
-							src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-							<h3>${merchVo.merchName}</h3>
-							<p>${merchVo.merchDT}</p>
-							<h6 class="merchprice">$${merchVo.merchPrice}</h6></a> <a href="https://www.google.com.tw"><button
-								class="buy-1">buy now</button></a>
-					</div>
+						<div class="content merchpricediv">
+							<a
+								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
+								<img
+								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
+								<h3>${merchVo.merchName}</h3>
+								<p>${merchVo.merchDT}</p>
+								<h6 class="merchprice">$${merchVo.merchPrice}</h6>
+							</a> <button
+									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
+						</div>
 					</c:forEach>
 				</div>
 			</div>
@@ -223,14 +260,17 @@
 				<div class="gallery">
 
 					<c:forEach var="merchVo" items="${merchSvc.getByClass('文具')}">
-					<div class="content merchpricediv">
-						<a href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}"> <img
-							src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-							<h3>${merchVo.merchName}</h3>
-							<p>${merchVo.merchDT}</p>
-							<h6 class="merchprice">$${merchVo.merchPrice}</h6></a> <a href="https://www.google.com.tw"><button
-								class="buy-1">buy now</button></a>
-					</div>
+						<div class="content merchpricediv">
+							<a
+								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
+								<img
+								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
+								<h3>${merchVo.merchName}</h3>
+								<p>${merchVo.merchDT}</p>
+								<h6 class="merchprice">$${merchVo.merchPrice}</h6>
+							</a> <button
+									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
+						</div>
 					</c:forEach>
 				</div>
 			</div>
@@ -239,9 +279,7 @@
 		<div class="pg" id="pg6">
 			<!-- 點側邊欄顯示全商品卡片 -->
 			<div class="tab">
-				<div class="gallery" id="searchdiv">
-				
-				</div>
+				<div class="gallery" id="searchdiv"></div>
 			</div>
 
 		</div>
@@ -292,6 +330,8 @@
 		let inputmax = document.getElementById('inputmax');
 		//搜尋DIV
 		let searchdiv = document.getElementById('searchdiv');
+		//購物車標籤
+		let addCartButtons = document.getElementsByClassName('buy-1');
         $(".js-range-slider").ionRangeSlider({
             onFinish: function (price) {
             	//最大最小值轉數字
@@ -340,18 +380,17 @@
                                 a1.append(h3);
                                 a1.append(p);
                                 a1.append(h6);
-                                let a2 = document.createElement('a');
-                                a2.href = "https://www.google.com.tw";
                                 let button = document.createElement('button');
                                 button.className = "buy-1";
+                                button.setAttribute('name','merchID');
+                                button.value = item.merchID
                                 button.textContent="加入購物車"
-                                a2.append(button);
+                                button.addEventListener('click',addCartFunction);
                                 content.append(a1);
-                                content.append(a2);
+                                content.append(button);
                                 gallery.append(content);
                                 tab[i].append(gallery);
                             }
-
                         },
                     })
                 }
@@ -364,6 +403,8 @@
             grid: true,
             step: 100,
         });
+        
+       
         //監聽表單送出按鈕
         let searchbutton = document.getElementById('searchbutton');
         searchbutton.addEventListener('click',function(){
@@ -398,14 +439,14 @@
                          a1.append(h3);
                          a1.append(p);
                          a1.append(h6);
-                         let a2 = document.createElement('a');
-                         a2.href = "https://www.google.com.tw";
                          let button = document.createElement('button');
+                         button.setAttribute('name','merchID');
+                         button.value = item.merchID;
                          button.className = "buy-1";
                          button.textContent="加入購物車"
-                         a2.append(button);
+                         button.addEventListener('click',addCartFunction);
                          content.append(a1);
-                         content.append(a2);
+                         content.append(button);
                          searchdiv.append(content);
                      }
 
@@ -419,6 +460,45 @@
              $(".pg").hide();
              $("#pg6").show(500);
         })
+        
+         //熱門搜尋送出
+        let searchNames = document.getElementsByClassName('searchName');
+        let SearchInput = document.getElementById('SearchInput');
+        for(let searchName of searchNames){
+        	searchName.addEventListener('click',function(){
+        		SearchInput.value = searchName.textContent;
+        		searchbutton.click();
+        	})
+        }
+        
+        //加入購物車
+        
+        let path = "${pageContext.request.contextPath}";
+        for(let addCartButton of addCartButtons){
+        	addCartButton.addEventListener('click',addCartFunction)
+        	}
+        
+        //加入購物車
+        function addCartFunction(e){
+        	let merchID = e.target.value;
+        	let url = path + "/ShoppingCartServlet?action=add&merchID=" + merchID;
+        	$.ajax({
+  	            url: url,
+  	            type: 'post',
+  	            dataType: 'text',
+  	            async: false,
+  	            timeout: 15000,
+  	            success: function (data) {
+  	            	Swal.fire({
+  	            	  position: 'center',
+  	            	  icon: 'success',
+  	            	  title: '您的商品已存入購物車',
+  	            	  showConfirmButton: false,
+  	            	  timer: 1500
+  	            	})
+  	            	}
+        	})
+        	}
         
 	</script>
 </body>

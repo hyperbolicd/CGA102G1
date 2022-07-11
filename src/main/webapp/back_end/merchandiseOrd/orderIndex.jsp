@@ -59,7 +59,7 @@
 						<form action="${pageContext.request.contextPath}/merchOrd/merchOrd.do">
 							<td>顯示會員訂單列表:</td>
 							<td><input type="number" placeholder="請輸入會員編號"
-								name="memberID"></td>
+								name="memberID" min=1></td>
 							<td><button class="tablebt" type="submit" name="action"
 									value="get_Member_Ordlist">確認</button></td>
 						</form>
@@ -67,7 +67,7 @@
 							<tr>
 						<form action="${pageContext.request.contextPath}/OrderDetail/OrderDetail.do">
 								<td>顯示訂單編號詳情:</td>
-								<td><input type="number" name="merchOrdID" placeholder="請輸入訂單編號"></td>
+								<td><input type="number" name="merchOrdID" placeholder="請輸入訂單編號" min=1></td>
 								<td><button class="tablebt" type="submit" name="action"
 										value="getOrder_For_Display" >確認</button></td>
 						</form>

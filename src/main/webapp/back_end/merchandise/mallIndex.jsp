@@ -110,42 +110,9 @@
 										style="width: 250px">
 									<td><button class="tablebt" type="submit" name="action" value="getOne_For_Display">確認</button>
 								</form>
-<!-- 								<form -->
-<%-- 									action="${pageContext.request.contextPath}/merch/controller"> --%>
-<!-- 									<input class="input" type="text" name="merchID" placeholder="請輸入商品編號或關鍵字查詢" -->
-<!-- 										style="width: 250px"> -->
-<!-- 									<td><button class="tablebt" type="submit" name="action" value="getMerchInfo">確認</button> -->
-<!-- 								</form> -->
+
 							</td>
 						</tr>
-						<tr>
-							<td>顯示商品詳情:</td>
-							<td>
-<!-- 							<form -->
-<%-- 									action="${pageContext.request.contextPath}/merch/controller"> --%>
-<!-- 									<input class="input" type="text" name="merchID" placeholder="請輸入商品編號或關鍵字查詢" -->
-<!-- 										style="width: 250px"> -->
-<!-- 									<td><button class="tablebt" type="submit" name="action" value="getOne_For_Display">確認</button> -->
-<!-- 								</form> -->
-								<form
-									action="${pageContext.request.contextPath}/merch/controller">
-									<input class="input" type="text" name="merchID" placeholder="請輸入商品編號或關鍵字查詢"
-										style="width: 250px">
-									<td><button class="tablebt" type="submit" name="action" value="getMerchInfo">確認</button>
-								</form>
-							</td>
-							
-						</tr>
-						
-
-<!--                         目前為三欄式表格 要增加得自己放在下面並複製 -->
-<!-- 						<tr> -->
-<!-- 							<td></td> -->
-<!-- 							<td></td> -->
-<!-- 							<td></td> -->
-<!-- 						</tr> -->
-
-
 					</table>
 				</div>
 			</div>

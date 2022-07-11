@@ -30,10 +30,10 @@ public class ShoppingCartListener implements HttpSessionBindingListener {
          HttpSession session = event.getSession();
         System.out.println("session:" + session);
          List<SCDetailVO> buylist = (Vector<SCDetailVO>) session.getAttribute("shoppingcart");
+         Integer memberID = (Integer)session.getAttribute("account");
          if(buylist==null) {
         	 buylist = new Vector<SCDetailVO>();
          }
-         Integer memberID = (Integer)session.getAttribute("account");
          for(SCDetailVO scdVo : buylist) {
         	 if(scdVo.getMemberID() == null) {
         		 scdVo.setMemberID(memberID);

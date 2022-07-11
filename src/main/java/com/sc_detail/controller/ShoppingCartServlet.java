@@ -224,7 +224,12 @@ public class ShoppingCartServlet extends HttpServlet {
 		memberID = (Integer)session.getAttribute("account");
 		}
 		Integer merchID = Integer.valueOf(req.getParameter("merchID"));
-		Integer scCount = Integer.valueOf(req.getParameter("scCount"));
+		Integer scCount = null;
+		if(req.getParameter("scCount")!=null) {
+			scCount = Integer.valueOf(req.getParameter("scCount"));}
+		else {
+			scCount = 1;
+		}
 		if(memberID != null) {
 		scDetailVo.setMemberID(memberID);
 		}

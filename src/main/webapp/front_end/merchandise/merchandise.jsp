@@ -41,7 +41,7 @@
 		<jsp:include page="/front_end/header.jsp" />
 	</div>
 	<main>
-		<div id="product-aside" style="border: 1px solid red;">
+		<div id="product-aside">
 			<img
 				class="product-img <c:if test="${merchVo.merchPic1==null}">nullimg</c:if>"
 				src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
@@ -63,7 +63,7 @@
 
 		<img id="photo"
 			src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1"
-			style="border: 1px solid red;">
+			>
 
 	</main>
 	<div class="product-title-all">
@@ -178,7 +178,6 @@ function decreaseCount(a, b) {
  
  		let payMerch = document.getElementsByClassName('payMerch')[0];
  		payMerch.addEventListener('click',function(){
- 			console.log("1.${memberVO}");
  			if(${memberVO==null?true:false}){
  				<%
  				session.setAttribute("location","http://localhost:8081/CGA102G1/merch/controller?action=getMerchInfo&merchID="+((MerchVO)request.getAttribute("merchVo")).getMerchID().toString());

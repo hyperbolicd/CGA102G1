@@ -64,11 +64,9 @@ List<MerchVO> list = (List<MerchVO>) session.getAttribute("merchlist");
 						<tbody>
 							<c:forEach var="merch" items="${merchlist}"
 								begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-								<%-- 						<c:forEach var="merch" items="${list}" > --%>
 								<tr>
 									<td>${merch.merchID}</td>
-									<td><a class="tablebt"
-										href="${pageContext.request.contextPath}/merch/controller?action=getOne_For_Display&merchID=${merch.merchID}">${merch.merchName}</td>
+									<td>${merch.merchName}</td>
 									<td>${merch.merchStatus == 1? '下架':''} ${merch.merchStatus == 2? '上架':''}
 										${merch.merchStatus == 3? '主打':''}</td>
 									<td>

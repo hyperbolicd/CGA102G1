@@ -15,6 +15,11 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/front_end/merchandise/css/cart.css"
 	type="text/css">
+	
+<!-- SweetAlert -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-default/default.css">
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.min.js"></script>
 </head>
 
 <body>
@@ -91,7 +96,7 @@
 		<div id="cartArea">
 			<div id="total">總金額:${amount}</div>
 			<div id="cartBtn">
-				<button class="button" type="submit" form="forPay">
+				<button class="button" type="button" form="forPay" id="payButton">
 					<span>結帳唷</span>
 				</button>
 			</div>
@@ -108,7 +113,37 @@
 	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/front_end/merchandise/javascript/cart.js"></script>
-	
+	<script>
+	let forPay = document.getElementById('forPay')
+	let payButton = document.getElementById('payButton');
+	payButton.addEventListener('click',function(){
+ 			if(${memberVO==null?true:false}){
+ 				<%
+ 				session.setAttribute("location","http://localhost:8081/CGA102G1/ShoppingCartServlet?action=checkout");
+ 				%>
+ 				window.location.href="${pageContext.request.contextPath}/front_end/login/login.jsp";
+ 				return;
+ 			}
+        	Swal.fire({
+        		  title: '你確定嗎?',
+        		  text: "按下確認後即生成訂單!",
+        		  icon: 'warning',
+        		  showCancelButton: true,
+        		  confirmButtonColor: '#3085d6',
+        		  cancelButtonColor: '#d33',
+        		  confirmButtonText: '是的!我要購買'
+        		}).then((result) => {
+        		  if (result.isConfirmed) {
+        			  forPay.submit();
+        			  Swal.fire(
+    	          		      '成功購買!',
+    	          		      '您的訂單已生成.',
+    	          		      'success'
+    	          		    )
+        		  }
+	})
+	})
+	</script>
 </body>
 
 </html>

@@ -56,6 +56,7 @@ List<MerchOrdVO> list = (List<MerchOrdVO>) session.getAttribute("merchOrdlist");
 							<tr>
 								<td>會員編號</td>
 								<td>訂單編號</td>
+								<td>訂單狀態</td>
 								<td>查詢</td>
 								<td>刪除</td>
 							</tr>
@@ -69,6 +70,12 @@ List<MerchOrdVO> list = (List<MerchOrdVO>) session.getAttribute("merchOrdlist");
 									<td><a class="tablebt"
 										href="${pageContext.request.contextPath}/merchOrd/merchOrd.do?action=get_Member_Ordlist&memberID=${merchOrd.memberID}">${merchOrd.memberID}</td>
 									<td>${merchOrd.merchOrdID}</td>
+									<td>
+									${merchOrd.merchOrdStatus==0?'備貨中':''}
+									${merchOrd.merchOrdStatus==1?'可取貨':''}
+									${merchOrd.merchOrdStatus==2?'已完成':''}
+									${merchOrd.merchOrdStatus==3?'已取消':''}
+									</td>
 									<td>
 										<form
 											action="${pageContext.request.contextPath}/OrderDetail/OrderDetail.do">

@@ -67,7 +67,7 @@
 										</c:forEach>
 								</select>
 								</td>
-								<td>商品數量:<input type="number" name="merchCount" class="totalCount"
+								<td>商品數量:<input type="number" name="merchCount" class="totalCount" min=0
 									placeholder="請輸入需要的商品數量" value="${orderDetailVo.ordCount}"
 									required>
 								</td>
@@ -84,7 +84,7 @@
 					</div>
 				</FORM>
 				<form
-					action="${pageContext.request.contextPath}/back_end/merchandise/mallIndex.jsp"
+					action="${pageContext.request.contextPath}/back_end/merchandiseOrd/orderIndex.jsp"
 					id="1234"></form>
 			</div>
 

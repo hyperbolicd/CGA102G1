@@ -35,7 +35,7 @@ public class MerchOrdDAO implements MerchOrdDAO_interface {
 	
 	private static final String INSERT_STMT = "INSERT INTO merchandise_order (MEMBER_ID, MERCH_OR_COUNT, MERCH_OR_STATUS) VALUES (?,?,?);";
 	private static final String GET_ALL_STMT = "SELECT MERCH_OR_ID, MEMBER_ID, MERCH_OR_DATE, MERCH_OR_COUNT, MERCH_OR_STATUS FROM merchandise_order ORDER BY MERCH_OR_ID;";
-	private static final String GET_MEMBER_STMT = "SELECT MERCH_OR_ID, MEMBER_ID, MERCH_OR_DATE, MERCH_OR_COUNT, MERCH_OR_STATUS FROM merchandise_order WHERE MEMBER_ID = ? ORDER BY MERCH_OR_ID;";
+	private static final String GET_MEMBER_STMT = "SELECT MERCH_OR_ID, MEMBER_ID, MERCH_OR_DATE, MERCH_OR_COUNT, MERCH_OR_STATUS FROM merchandise_order WHERE MEMBER_ID = ? ORDER BY MERCH_OR_ID desc;";
 	private static final String GET_ONE_STMT = "SELECT MERCH_OR_ID, MEMBER_ID, MERCH_OR_DATE, MERCH_OR_COUNT, MERCH_OR_STATUS FROM merchandise_order WHERE MERCH_OR_ID = ?;";
 	private static final String DELETE = "DELETE FROM merchandise_order WHERE MERCH_OR_ID = ?;";
 	private static final String UPDATE = "UPDATE merchandise_order set MERCH_OR_COUNT = ?, MERCH_OR_STATUS = ? WHERE MERCH_OR_ID = ?;";
