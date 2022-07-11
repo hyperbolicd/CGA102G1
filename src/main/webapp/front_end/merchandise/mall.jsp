@@ -52,11 +52,11 @@
 		<nav>
 			<a
 				href="${pageContext.request.contextPath}/front_end/merchandise/mall_index.jsp"
-				class="home"><i class="fas"></i>商城首頁</a> <a href="#" class="pages"
-				id="pg1-home"><i class="fas"></i>模型</a> <a href="#" class="pages"
-				id="pg2-home"><i class="fas"></i>抱枕</a> <a href="#" class="pages"
-				id="pg3-home"><i class="fas"></i>生活用品</a> <a href="#" class="pages"
-				id="pg4-home"><i class="fas"></i>服飾</a> <a href="#" class="pages"
+				class="home"><i class="fas"></i>商城首頁</a> <a href="javascript:void(0)" class="pages"
+				id="pg1-home"><i class="fas"></i>模型</a> <a href="javascript:void(0)" class="pages"
+				id="pg2-home"><i class="fas"></i>抱枕</a> <a href="javascript:void(0)" class="pages"
+				id="pg3-home"><i class="fas"></i>生活用品</a> <a href="javascript:void(0)" class="pages"
+				id="pg4-home"><i class="fas"></i>服飾</a> <a href="javascript:void(0)" class="pages"
 				id="pg5-home"><i class="fas"></i>文具</a>
 		</nav>
 		<label for="sideMenu-active"> <i class="fas fa-angle-right"></i>
