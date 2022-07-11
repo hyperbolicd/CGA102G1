@@ -1,8 +1,8 @@
+<%@page import="com.merchandise_inf.model.MerchVO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <title>HireMe</title>
 <meta charset="UTF-8">
@@ -14,7 +14,9 @@
 	type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-default/default.css">
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.min.js"></script>
 </head>
 
 
@@ -88,19 +90,18 @@
 					name="totalCount" readonly> 元整
 			</div>
 			<div class="purchase-area">
-				<input class="purchase-btn" type="submit" value="前往購買" id="payit"
-					form="pay"> <input type="hidden" name="action" value="add">
-				<input type="hidden" name="merchID" value="${merchVo.merchID}">
-				<input type="hidden" name="memberID" value="2${memberVo.memberID}">
-				<input class="addcar-btn" type="submit" value="加入購物車">
+				<!-- 				<input class="purchase-btn" type="submit" value="前往購買" id="payit" -->
+				<!-- 					form="pay">  -->
+				<input class="addCartaction" type="hidden" name="action" value="add"> 
+				<input	type="hidden" name="merchID" value="${merchVo.merchID}"> <input
+					type="hidden" name="memberID" value="${memberVO.member_ID}">
+				<input class="addcar-btn addCartButton" type="button" value="加入購物車">
+				<input class="purchase-btn payMerch" type="button" value="前往購買">
 			</div>
 		</form>
-		<form action="${pageContext.request.contextPath}/ShoppingCartServlet"
-			id="pay">
-			<input type="hidden" name="action" value="payForOneMerch"> <input
-				type="hidden" name="merchID" value="${merchVo.merchID}"> <input
-				type="hidden" name="memberID" value="1${memberVo.memberID}">
-			<input type="hidden" name="scCount" value="1" id="paySCCount">
+		<form action="${pageContext.request.contextPath}/ShoppingCartServlet" id="pay">
+			<input class="payMerchaction" type="hidden" name="action" value="payForOneMerch">
+			<input class="payMerchscCount" type="hidden" name="scCount" value="1" id="paySCCount">
 		</form>
 	</div>
 	<!--  客服圖 請自行加連結-->
@@ -172,7 +173,6 @@ function decreaseCount(a, b) {
     console.log(input.value);
   }
 }
-<<<<<<< HEAD
 
 /*商品頁購物*/
  
@@ -246,8 +246,6 @@ function decreaseCount(a, b) {
       		    
       		  })
         
-=======
->>>>>>> 7a68708c2c739fb3883a3375af17df4b892806e5
 </script>
 </body>
 
