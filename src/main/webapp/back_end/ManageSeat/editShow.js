@@ -94,6 +94,8 @@
 				let showSeatVO = response.showSeatVO;
 				
 				let seat=showSeatVO.SH_SEAT_STATE;
+				// 先給予頁面上隱藏的input值 好讓USER可以計算初始的座位數
+				document.getElementById("showSeatSource").value =showSeatVO.SH_SEAT_STATE;
 				generateSeat(seat);
 			}// 成功後要執行的函數
 		});
