@@ -10,11 +10,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_all.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_all.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_main.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_main.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_footer.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_footer.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/back_end/merchandise/css/merchandise.css">
 </head>
@@ -110,43 +110,9 @@
 										style="width: 250px">
 									<td><button class="tablebt" type="submit" name="action" value="getOne_For_Display">確認</button>
 								</form>
-<!-- 								<form -->
-<%-- 									action="${pageContext.request.contextPath}/merch/controller"> --%>
-<!-- 									<input class="input" type="text" name="merchID" placeholder="請輸入商品編號或關鍵字查詢" -->
-<!-- 										style="width: 250px"> -->
-<!-- 									<td><button class="tablebt" type="submit" name="action" value="getMerchInfo">確認</button> -->
-<!-- 								</form> -->
+
 							</td>
-							
 						</tr>
-						<tr>
-							<td>顯示商品詳情:</td>
-							<td>
-<!-- 							<form -->
-<%-- 									action="${pageContext.request.contextPath}/merch/controller"> --%>
-<!-- 									<input class="input" type="text" name="merchID" placeholder="請輸入商品編號或關鍵字查詢" -->
-<!-- 										style="width: 250px"> -->
-<!-- 									<td><button class="tablebt" type="submit" name="action" value="getOne_For_Display">確認</button> -->
-<!-- 								</form> -->
-								<form
-									action="${pageContext.request.contextPath}/merch/controller">
-									<input class="input" type="text" name="merchID" placeholder="請輸入商品編號或關鍵字查詢"
-										style="width: 250px">
-									<td><button class="tablebt" type="submit" name="action" value="getMerchInfo">確認</button>
-								</form>
-							</td>
-							
-						</tr>
-						
-
-<!--                         目前為三欄式表格 要增加得自己放在下面並複製 -->
-<!-- 						<tr> -->
-<!-- 							<td></td> -->
-<!-- 							<td></td> -->
-<!-- 							<td></td> -->
-<!-- 						</tr> -->
-
-
 					</table>
 				</div>
 			</div>

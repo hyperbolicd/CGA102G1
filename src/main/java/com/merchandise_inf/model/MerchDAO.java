@@ -32,6 +32,12 @@ public class MerchDAO implements MerchDAO_interface {
 	private static final String DELETE = "DELETE FROM merchandise_inf WHERE MERCH_ID = ?;";
 	private static final String UPDATE = "UPDATE merchandise_inf set MERCH_NAME=?, MERCH_DT=?, MERCH_PIC1=?, MERCH_PIC2=?, MERCH_PIC3=?, MERCH_PIC4=?, MERCH_PIC5=?, MERCH_PRICE=?, MERCH_CLASS=?, SOLD_TOTAL=?, MERCH_STATUS=?, MERCH_STOCK=? WHERE MERCH_ID = ?;";
 	private static final String GET_FROM_SEARCH = "SELECT MERCH_ID, MERCH_NAME, MERCH_DT, MERCH_PIC1, MERCH_PIC2, MERCH_PIC3, MERCH_PIC4, MERCH_PIC5, MERCH_DATE, MERCH_PRICE, MERCH_CLASS, SOLD_TOTAL, MERCH_STATUS, MERCH_STOCK FROM merchandise_inf where MERCH_NAME LIKE ?;";
+	private static final String GET_FROM_INDEX_SEARCH = "SELECT MERCH_ID, MERCH_NAME, MERCH_DT, MERCH_PIC1, MERCH_PIC2, MERCH_PIC3, MERCH_PIC4, MERCH_PIC5, MERCH_DATE, MERCH_PRICE, MERCH_CLASS, SOLD_TOTAL, MERCH_STATUS, MERCH_STOCK FROM merchandise_inf where MERCH_NAME LIKE ?;";
+	private static final String GET_FROM_HOTSELL = "SELECT MERCH_ID, MERCH_NAME, MERCH_DT, MERCH_PIC1, MERCH_PIC2, MERCH_PIC3, MERCH_PIC4, MERCH_PIC5, MERCH_DATE, MERCH_PRICE, MERCH_CLASS, SOLD_TOTAL, MERCH_STATUS, MERCH_STOCK FROM merchandise_inf where MERCH_STATUS = 2 AND (MERCH_PRICE BETWEEN ? AND ?) order by merch_date desc limit 8;";
+	private static final String GET_FROM_NEWEST = "SELECT MERCH_ID, MERCH_NAME, MERCH_DT, MERCH_PIC1, MERCH_PIC2, MERCH_PIC3, MERCH_PIC4, MERCH_PIC5, MERCH_DATE, MERCH_PRICE, MERCH_CLASS, SOLD_TOTAL, MERCH_STATUS, MERCH_STOCK FROM merchandise_inf where (MERCH_STATUS = 1 OR MERCH_STATUS = 2) AND (MERCH_PRICE BETWEEN ? AND ?) order by merch_date desc limit 8;";
+	private static final String GET_FROM_MOSTSOLD = "SELECT MERCH_ID, MERCH_NAME, MERCH_DT, MERCH_PIC1, MERCH_PIC2, MERCH_PIC3, MERCH_PIC4, MERCH_PIC5, MERCH_DATE, MERCH_PRICE, MERCH_CLASS, SOLD_TOTAL, MERCH_STATUS, MERCH_STOCK FROM merchandise_inf where (MERCH_STATUS = 1 OR MERCH_STATUS = 2) AND (MERCH_PRICE BETWEEN ? AND ?) order by SOLD_TOTAL desc limit 8;";
+	private static final String GET_FROM_CLASS = "SELECT MERCH_ID, MERCH_NAME, MERCH_DT, MERCH_PIC1, MERCH_PIC2, MERCH_PIC3, MERCH_PIC4, MERCH_PIC5, MERCH_DATE, MERCH_PRICE, MERCH_CLASS, SOLD_TOTAL, MERCH_STATUS, MERCH_STOCK FROM merchandise_inf where (MERCH_STATUS = 2 OR MERCH_STATUS = 1) and MERCH_CLASS =? order by MERCH_STATUS desc, MERCH_DATE desc;";
+	
 	@Override
 	public void insert(MerchVO merchVo) {
 		Connection con = null;
@@ -254,6 +260,7 @@ public class MerchDAO implements MerchDAO_interface {
 			}
 		return merchVo;
 	}
+	
 
 	@Override
 	public List<MerchVO> getAll() {
@@ -316,6 +323,257 @@ public class MerchDAO implements MerchDAO_interface {
 			}
 		return list;
 	}
+	@Override
+	public List<MerchVO> getAll(Double minPrice, Double maxPrice) {
+		List<MerchVO> list = new ArrayList<MerchVO>();
+		MerchVO merchVo = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+//			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_FROM_HOTSELL);
+			pstmt.setDouble(1, minPrice);
+			pstmt.setDouble(2, maxPrice);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				merchVo = new MerchVO();
+				merchVo.setMerchID(rs.getInt("MERCH_ID"));
+				merchVo.setMerchName(rs.getString("MERCH_NAME"));
+				merchVo.setMerchDT(rs.getString("MERCH_DT"));
+				merchVo.setMerchPic1(rs.getBlob("MERCH_PIC1"));
+				merchVo.setMerchPic2(rs.getBlob("MERCH_PIC2"));
+				merchVo.setMerchPic3(rs.getBlob("MERCH_PIC3"));
+				merchVo.setMerchPic4(rs.getBlob("MERCH_PIC4"));
+				merchVo.setMerchPic5(rs.getBlob("MERCH_PIC5"));
+				merchVo.setMerchDate(rs.getTimestamp("MERCH_DATE"));
+				merchVo.setMerchPrice(rs.getDouble("MERCH_PRICE"));
+				merchVo.setMerchClass(rs.getString("MERCH_CLASS"));
+				merchVo.setSoldTotal(rs.getInt("SOLD_TOTAL"));
+				merchVo.setMerchStatus(rs.getByte("MERCH_STATUS"));
+				merchVo.setMerchStock(rs.getInt("MERCH_STOCK"));
+				list.add(merchVo);
+			}
+			
+			
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	@Override
+	public List<MerchVO> getMostSell(Double minPrice, Double maxPrice) {
+		List<MerchVO> list = new ArrayList<MerchVO>();
+		MerchVO merchVo = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+//			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_FROM_MOSTSOLD);
+			pstmt.setDouble(1, minPrice);
+			pstmt.setDouble(2, maxPrice);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				merchVo = new MerchVO();
+				merchVo.setMerchID(rs.getInt("MERCH_ID"));
+				merchVo.setMerchName(rs.getString("MERCH_NAME"));
+				merchVo.setMerchDT(rs.getString("MERCH_DT"));
+				merchVo.setMerchPic1(rs.getBlob("MERCH_PIC1"));
+				merchVo.setMerchPic2(rs.getBlob("MERCH_PIC2"));
+				merchVo.setMerchPic3(rs.getBlob("MERCH_PIC3"));
+				merchVo.setMerchPic4(rs.getBlob("MERCH_PIC4"));
+				merchVo.setMerchPic5(rs.getBlob("MERCH_PIC5"));
+				merchVo.setMerchDate(rs.getTimestamp("MERCH_DATE"));
+				merchVo.setMerchPrice(rs.getDouble("MERCH_PRICE"));
+				merchVo.setMerchClass(rs.getString("MERCH_CLASS"));
+				merchVo.setSoldTotal(rs.getInt("SOLD_TOTAL"));
+				merchVo.setMerchStatus(rs.getByte("MERCH_STATUS"));
+				merchVo.setMerchStock(rs.getInt("MERCH_STOCK"));
+				list.add(merchVo);
+			}
+			
+			
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	public List<MerchVO> getByclass(String merchClass) {
+		List<MerchVO> list = new ArrayList<MerchVO>();
+		MerchVO merchVo = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+//			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_FROM_CLASS);
+			pstmt.setString(1, merchClass);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				merchVo = new MerchVO();
+				merchVo.setMerchID(rs.getInt("MERCH_ID"));
+				merchVo.setMerchName(rs.getString("MERCH_NAME"));
+				merchVo.setMerchDT(rs.getString("MERCH_DT"));
+				merchVo.setMerchPic1(rs.getBlob("MERCH_PIC1"));
+				merchVo.setMerchPic2(rs.getBlob("MERCH_PIC2"));
+				merchVo.setMerchPic3(rs.getBlob("MERCH_PIC3"));
+				merchVo.setMerchPic4(rs.getBlob("MERCH_PIC4"));
+				merchVo.setMerchPic5(rs.getBlob("MERCH_PIC5"));
+				merchVo.setMerchDate(rs.getTimestamp("MERCH_DATE"));
+				merchVo.setMerchPrice(rs.getDouble("MERCH_PRICE"));
+				merchVo.setMerchClass(rs.getString("MERCH_CLASS"));
+				merchVo.setSoldTotal(rs.getInt("SOLD_TOTAL"));
+				merchVo.setMerchStatus(rs.getByte("MERCH_STATUS"));
+				merchVo.setMerchStock(rs.getInt("MERCH_STOCK"));
+				list.add(merchVo);
+			}
+			
+			
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	@Override
+	public List<MerchVO> getNewest(Double minPrice, Double maxPrice) {
+		List<MerchVO> list = new ArrayList<MerchVO>();
+		MerchVO merchVo = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+//			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_FROM_NEWEST);
+			pstmt.setDouble(1, minPrice);
+			pstmt.setDouble(2, maxPrice);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				merchVo = new MerchVO();
+				merchVo.setMerchID(rs.getInt("MERCH_ID"));
+				merchVo.setMerchName(rs.getString("MERCH_NAME"));
+				merchVo.setMerchDT(rs.getString("MERCH_DT"));
+				merchVo.setMerchPic1(rs.getBlob("MERCH_PIC1"));
+				merchVo.setMerchPic2(rs.getBlob("MERCH_PIC2"));
+				merchVo.setMerchPic3(rs.getBlob("MERCH_PIC3"));
+				merchVo.setMerchPic4(rs.getBlob("MERCH_PIC4"));
+				merchVo.setMerchPic5(rs.getBlob("MERCH_PIC5"));
+				merchVo.setMerchDate(rs.getTimestamp("MERCH_DATE"));
+				merchVo.setMerchPrice(rs.getDouble("MERCH_PRICE"));
+				merchVo.setMerchClass(rs.getString("MERCH_CLASS"));
+				merchVo.setSoldTotal(rs.getInt("SOLD_TOTAL"));
+				merchVo.setMerchStatus(rs.getByte("MERCH_STATUS"));
+				merchVo.setMerchStock(rs.getInt("MERCH_STOCK"));
+				list.add(merchVo);
+			}
+			
+			
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
 	public List<MerchVO> getByName(String merchName) {
 		List<MerchVO> list = new ArrayList<MerchVO>();
 		MerchVO merchVo = null;
@@ -328,6 +586,80 @@ public class MerchDAO implements MerchDAO_interface {
 			pstmt = con.prepareStatement(GET_FROM_SEARCH);
 			String Name1 = "%" + merchName + "%";
 			pstmt.setString(1, Name1);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				merchVo = new MerchVO();
+				merchVo.setMerchID(rs.getInt("MERCH_ID"));
+				merchVo.setMerchName(rs.getString("MERCH_NAME"));
+				merchVo.setMerchDT(rs.getString("MERCH_DT"));
+				merchVo.setMerchPic1(rs.getBlob("MERCH_PIC1"));
+				merchVo.setMerchPic2(rs.getBlob("MERCH_PIC2"));
+				merchVo.setMerchPic3(rs.getBlob("MERCH_PIC3"));
+				merchVo.setMerchPic4(rs.getBlob("MERCH_PIC4"));
+				merchVo.setMerchPic5(rs.getBlob("MERCH_PIC5"));
+				merchVo.setMerchDate(rs.getTimestamp("MERCH_DATE"));
+				merchVo.setMerchPrice(rs.getDouble("MERCH_PRICE"));
+				merchVo.setMerchClass(rs.getString("MERCH_CLASS"));
+				merchVo.setSoldTotal(rs.getInt("SOLD_TOTAL"));
+				merchVo.setMerchStatus(rs.getByte("MERCH_STATUS"));
+				merchVo.setMerchStock(rs.getInt("MERCH_STOCK"));
+				list.add(merchVo);
+			}
+			
+			
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	public List<MerchVO> getBySearch(String merchName, Double min, Double max) {
+		List<MerchVO> list = new ArrayList<MerchVO>();
+		MerchVO merchVo = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			String totalSearch = "select a.* from (SELECT MERCH_ID, MERCH_NAME, MERCH_DT, MERCH_PIC1, MERCH_PIC2, MERCH_PIC3, MERCH_PIC4, MERCH_PIC5, MERCH_DATE, MERCH_PRICE, MERCH_CLASS, SOLD_TOTAL, MERCH_STATUS, MERCH_STOCK FROM merchandise_inf where MERCH_NAME LIKE '%";
+			String union = "%' union SELECT MERCH_ID, MERCH_NAME, MERCH_DT, MERCH_PIC1, MERCH_PIC2, MERCH_PIC3, MERCH_PIC4, MERCH_PIC5, MERCH_DATE, MERCH_PRICE, MERCH_CLASS, SOLD_TOTAL, MERCH_STATUS, MERCH_STOCK FROM merchandise_inf where MERCH_NAME LIKE '%";
+			String finalsearch = "一二三四五六七八九%') as a where a.MERCH_PRICE between ? and ?";
+			for (int m = merchName.length(); m > 0; m--) {
+				for (int i = 0; i < merchName.length(); i++) {
+					if( i + m <= merchName.length()) {
+					totalSearch += merchName.substring(i, m + i) + union;
+					}
+				}
+			}
+			String Searchstmt = totalSearch + finalsearch;
+			System.out.println(Searchstmt);
+			con = ds.getConnection();
+//			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(Searchstmt);;
+			pstmt.setDouble(1, min);
+			pstmt.setDouble(2, max);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				merchVo = new MerchVO();

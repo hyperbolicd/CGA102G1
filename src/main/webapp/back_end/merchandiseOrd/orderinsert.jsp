@@ -10,11 +10,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_all.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_all.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_main.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_main.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_footer.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_footer.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/back_end/merchandise/css/merchandise.css">
 </head>
@@ -67,7 +67,7 @@
 										</c:forEach>
 								</select>
 								</td>
-								<td>商品數量:<input type="number" name="merchCount" class="totalCount"
+								<td>商品數量:<input type="number" name="merchCount" class="totalCount" min=0
 									placeholder="請輸入需要的商品數量" value="${orderDetailVo.ordCount}"
 									required>
 								</td>
@@ -84,7 +84,7 @@
 					</div>
 				</FORM>
 				<form
-					action="${pageContext.request.contextPath}/back_end/merchandise/mallIndex.jsp"
+					action="${pageContext.request.contextPath}/back_end/merchandiseOrd/orderIndex.jsp"
 					id="1234"></form>
 			</div>
 

@@ -16,11 +16,11 @@ List<MerchVO> insertlist = (List<MerchVO>) session.getAttribute("insertlist");
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_all.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_all.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_main.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_main.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_footer.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_footer.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/back_end/OrderDetail/css/merchandise.css">
 </head>
@@ -62,6 +62,7 @@ List<MerchVO> insertlist = (List<MerchVO>) session.getAttribute("insertlist");
 								<td>產品狀態</td>
 								<td>價格(單價)</td>
 								<td>修改</td>
+								<td>查看</td>
 								<td>刪除</td>
 							</tr>
 						</thead>
@@ -76,8 +77,7 @@ List<MerchVO> insertlist = (List<MerchVO>) session.getAttribute("insertlist");
 									<td><input type="checkbox" form="checkbox"
 											class="forcheckbox forcheckbox1" name="item" value="${orderDetail.item}"></td>
 									<td>    ${orderDetail.item}    </td>
-									<td><a class="tablebt"
-										href="${pageContext.request.contextPath}/merch/controller?action=getOne_For_Display&merchID=${orderDetail.merchID}">${orderDetail.merchVO.merchName}</td>
+									<td>${orderDetail.merchVO.merchName}</td>
 									<td><input type="number" name="ordCount"
 										value="${orderDetail.ordCount}"></td>
 									<td>
@@ -99,6 +99,10 @@ List<MerchVO> insertlist = (List<MerchVO>) session.getAttribute("insertlist");
 										<button class="tablebt" type="submit" name="action"
 											value="getOne_For_Update">修改</button></td>
 									</form>
+									<td>
+									<a 
+										href="${pageContext.request.contextPath}/merch/controller?action=getOne_For_Display&merchID=${orderDetail.merchID}"><button class="tablebt">查看</button></a>
+									</td>
 									<td>
 										<form
 											action="${pageContext.request.contextPath}/OrderDetail/OrderDetail.do">

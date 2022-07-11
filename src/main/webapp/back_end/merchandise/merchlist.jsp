@@ -14,11 +14,11 @@ List<MerchVO> list = (List<MerchVO>) session.getAttribute("merchlist");
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_all.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_all.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_main.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_main.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_footer.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_footer.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/back_end/merchandise/css/merchlist.css">
 </head>
@@ -64,11 +64,9 @@ List<MerchVO> list = (List<MerchVO>) session.getAttribute("merchlist");
 						<tbody>
 							<c:forEach var="merch" items="${merchlist}"
 								begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-								<%-- 						<c:forEach var="merch" items="${list}" > --%>
 								<tr>
 									<td>${merch.merchID}</td>
-									<td><a class="tablebt"
-										href="${pageContext.request.contextPath}/merch/controller?action=getOne_For_Display&merchID=${merch.merchID}">${merch.merchName}</td>
+									<td>${merch.merchName}</td>
 									<td>${merch.merchStatus == 1? '下架':''} ${merch.merchStatus == 2? '上架':''}
 										${merch.merchStatus == 3? '主打':''}</td>
 									<td>

@@ -1,8 +1,8 @@
+<%@page import="com.merchandise_inf.model.MerchVO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <title>HireMe</title>
 <meta charset="UTF-8">
@@ -14,7 +14,9 @@
 	type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-default/default.css">
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.min.js"></script>
 </head>
 
 
@@ -39,7 +41,7 @@
 		<jsp:include page="/front_end/header.jsp" />
 	</div>
 	<main>
-		<div id="product-aside" style="border: 1px solid red;">
+		<div id="product-aside">
 			<img
 				class="product-img <c:if test="${merchVo.merchPic1==null}">nullimg</c:if>"
 				src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
@@ -61,7 +63,7 @@
 
 		<img id="photo"
 			src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1"
-			style="border: 1px solid red;">
+			>
 
 	</main>
 	<div class="product-title-all">
@@ -88,19 +90,18 @@
 					name="totalCount" readonly> 元整
 			</div>
 			<div class="purchase-area">
-				<input class="purchase-btn" type="submit" value="前往購買" id="payit"
-					form="pay"> <input type="hidden" name="action" value="add">
-				<input type="hidden" name="merchID" value="${merchVo.merchID}">
-				<input type="hidden" name="memberID" value="2${memberVo.memberID}">
-				<input class="addcar-btn" type="submit" value="加入購物車">
+				<!-- 				<input class="purchase-btn" type="submit" value="前往購買" id="payit" -->
+				<!-- 					form="pay">  -->
+				<input class="addCartaction" type="hidden" name="action" value="add"> 
+				<input	type="hidden" name="merchID" value="${merchVo.merchID}"> <input
+					type="hidden" name="memberID" value="${memberVO.member_ID}">
+				<input class="addcar-btn addCartButton" type="button" value="加入購物車">
+				<input class="purchase-btn payMerch" type="button" value="前往購買">
 			</div>
 		</form>
-		<form action="${pageContext.request.contextPath}/ShoppingCartServlet"
-			id="pay">
-			<input type="hidden" name="action" value="payForOneMerch"> <input
-				type="hidden" name="merchID" value="${merchVo.merchID}"> <input
-				type="hidden" name="memberID" value="1${memberVo.memberID}">
-			<input type="hidden" name="scCount" value="1" id="paySCCount">
+		<form action="${pageContext.request.contextPath}/ShoppingCartServlet" id="pay">
+			<input class="payMerchaction" type="hidden" name="action" value="payForOneMerch">
+			<input class="payMerchscCount" type="hidden" name="scCount" value="1" id="paySCCount">
 		</form>
 	</div>
 	<!--  客服圖 請自行加連結-->
@@ -172,6 +173,79 @@ function decreaseCount(a, b) {
     console.log(input.value);
   }
 }
+
+/*商品頁購物*/
+ 
+ 		let payMerch = document.getElementsByClassName('payMerch')[0];
+ 		payMerch.addEventListener('click',function(){
+ 			if(${memberVO==null?true:false}){
+ 				<%
+ 				session.setAttribute("location","http://localhost:8081/CGA102G1/merch/controller?action=getMerchInfo&merchID="+((MerchVO)request.getAttribute("merchVo")).getMerchID().toString());
+ 				%>
+ 				window.location.href="${pageContext.request.contextPath}/front_end/login/login.jsp";
+ 				return;
+ 			}
+        	Swal.fire({
+        		  title: '你確定嗎?',
+        		  text: "按下確認後即生成訂單!",
+        		  icon: 'warning',
+        		  showCancelButton: true,
+        		  confirmButtonColor: '#3085d6',
+        		  cancelButtonColor: '#d33',
+        		  confirmButtonText: '是的!我要購買'
+        		}).then((result) => {
+        		  if (result.isConfirmed) {
+        			  let payMerchaction = document.getElementsByClassName('payMerchaction')[0];
+        	            let addCartscCount = document.getElementsByClassName('payMerchscCount')[0];
+        	            let url = "${pageContext.request.contextPath}/ShoppingCartServlet?"+"action=" + payMerchaction.value + "&merchID=" + ${merchVo.merchID} + "&memberID=${memberVO.member_ID}" + "&scCount=" + addCartscCount.value;
+        	            $.ajax({
+        	            url: url,
+        	            type: 'post',
+        	            dataType: 'text',
+        	            async: false,
+        	            timeout: 15000,
+        	            success: function (data) {
+        	            	console.log(data)
+        	            	Swal.fire(
+        	          		      '成功購買!',
+        	          		      '您的訂單已生成.',
+        	          		      'success'
+        	          		    )
+        	               }
+        	        })
+        		    
+        		  }
+        		})
+           
+        })
+/*加入購物車*/
+ 
+ let addCartButton = document.getElementsByClassName('addCartButton')[0];
+ 		addCartButton.addEventListener('click',function(){
+ 		
+      			let addCartaction = document.getElementsByClassName('addCartaction')[0];
+                let addCartscCount = document.getElementsByClassName('payMerchscCount')[0];
+      	            let url = "${pageContext.request.contextPath}/ShoppingCartServlet?action=" + addCartaction.value + "&merchID=" + ${merchVo.merchID} + "&memberID=${memberVO.member_ID}"+"&scCount=" + addCartscCount.value;
+      	            $.ajax({
+      	            url: url,
+      	            type: 'post',
+      	            dataType: 'text',
+      	            async: false,
+      	            timeout: 15000,
+      	            success: function (data) {
+      	            	Swal.fire({
+      	            	  position: 'center',
+      	            	  icon: 'success',
+      	            	  title: '您的商品已存入購物車',
+      	            	  showConfirmButton: false,
+      	            	  timer: 1500
+      	            	})
+      	          		
+      	               }
+      	        })
+      		    
+      		  })
+        
 </script>
 </body>
 

@@ -1,7 +1,10 @@
 package com.merchandise_inf.model;
 
 import java.sql.Blob;
-import java.util.List;
+import java.util.*;
+
+
+import redis.clients.jedis.Jedis;
 
 public class MerchService {
 	private MerchDAO_interface dao;
@@ -77,4 +80,67 @@ public class MerchService {
 	public void deleteMerch(Integer merchID) {
 		dao.delete(merchID);
 	}
+	public List<MerchVO> getHotSell(){
+		Double minPrice = 0.0;
+		Double maxPrice = 100000.0;
+		return dao.getAll(minPrice,maxPrice);
+	}
+	public List<MerchVO> getHotSell(Double minPrice, Double maxPrice){
+		return dao.getAll(minPrice, maxPrice);
+	}
+	public List<MerchVO> getNewest(){
+		Double minPrice = 0.0;
+		Double maxPrice = 100000.0;
+		return dao.getNewest(minPrice, maxPrice);
+	}
+	public List<MerchVO> getNewest(Double minPrice, Double maxPrice ){
+		return dao.getNewest(minPrice, maxPrice);
+	}
+	public List<MerchVO> getMostSold(){
+		Double minPrice = 0.0;
+		Double maxPrice = 100000.0;
+		return dao.getMostSell(minPrice, maxPrice);
+	}
+	public List<MerchVO> getMostSold(Double minPrice, Double maxPrice){
+		return dao.getMostSell(minPrice, maxPrice);
+	}
+	public List<MerchVO> getByClass(String merchClass){
+		return dao.getByclass(merchClass);
+	}
+	public List<MerchVO> getBySearch(String merchName, Double min, Double max){
+		Jedis jedis = new Jedis("localhost", 6379);
+		jedis.incr("merchandise:search:"+merchName);
+		jedis.close();
+		return dao.getBySearch(merchName, min, max);
+	}
+	/*回傳熱門搜尋*/
+	public List<String> getSearchName(){
+		Jedis jedis = new Jedis("localhost", 6379);
+		Set<String> aa= jedis.keys("merchandise:search:*");
+		Map<String,Integer> map = new HashMap<>();
+		for(String str : aa) {
+			map.put(str, Integer.valueOf(jedis.get(str)));
+			
+		}
+		List<Map.Entry<String, Integer>> list = new ArrayList<Map.Entry<String,Integer>>(map.entrySet());
+		Collections.sort(list, new Comparator<Map.Entry<String,Integer>>() {	
+			@Override
+			public int compare(Map.Entry<String, Integer> o2, Map.Entry<String, Integer> o1) {
+				return o1.getValue()-o2.getValue();
+			}
+		});
+		int i = 0;
+		List<String> returnList = new LinkedList<String>();
+		for(Map.Entry<String, Integer> rr : list) {			
+			System.out.println(rr.getKey().substring(rr.getKey().indexOf(":",12)+1));
+			returnList.add(rr.getKey().substring(rr.getKey().indexOf(":",12)+1));
+			if(i++ == 4) {
+				break;
+			}
+		}
+		
+		jedis.close();
+		return returnList;
+	}
+
 }

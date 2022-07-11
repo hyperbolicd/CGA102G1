@@ -14,11 +14,11 @@ List<MerchOrdVO> list = (List<MerchOrdVO>) session.getAttribute("merchOrdlist");
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_all.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_all.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_main.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_main.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_footer.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_footer.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/back_end/merchandise/css/merchlist.css">
 </head>
@@ -54,6 +54,7 @@ List<MerchOrdVO> list = (List<MerchOrdVO>) session.getAttribute("merchOrdlist");
 						<thead>
 							<tr>
 								<td>訂單編號</td>
+								<td>訂單狀態</td>
 								<td>查詢</td>
 								<td>刪除</td>
 							</tr>
@@ -65,6 +66,12 @@ List<MerchOrdVO> list = (List<MerchOrdVO>) session.getAttribute("merchOrdlist");
 								<%-- 						<c:forEach var="merch" items="${list}" > --%>
 								<tr>
 									<td>${merchOrd.merchOrdID}</td>
+									<td>
+									${merchOrd.merchOrdStatus==0?'備貨中':''}
+									${merchOrd.merchOrdStatus==1?'可取貨':''}
+									${merchOrd.merchOrdStatus==2?'已完成':''}
+									${merchOrd.merchOrdStatus==3?'已取消':''}
+									</td>
 									<td>
 										<form
 											action="${pageContext.request.contextPath}/OrderDetail/OrderDetail.do">

@@ -10,11 +10,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_all.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_all.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_main.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_main.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/emp/css/emp_footer.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_footer.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/back_end/merchandise/css/merchandise.css">
 </head>
@@ -64,7 +64,7 @@
 							<tr>
 								<td>商品價格:</td>
 								<td><input type="number" name="merchPrice"
-									placeholder="請輸入商品價格編號" value="${merchVo.merchPrice}" required></td>
+									placeholder="請輸入商品價格編號" value="${merchVo.merchPrice}" required min=0></td>
 								<td>${errorMsgs.merchPrice}</td>
 							</tr>
 							<tr>
@@ -81,13 +81,13 @@
 							<tr>
 								<td>商品銷售總數:</td>
 								<td><input type="number" name="soldTotal"
-									placeholder="不輸入則默認為0" value="${merchVo.soldTotal}"></td>
+									placeholder="不輸入則默認為0" value="${merchVo.soldTotal}" min=0></td>
 								<td>${errorMsgs.soldTotal}</td>
 							</tr>
 							<tr>
 								<td>商品庫存:</td>
 								<td><input type="number" name="merchStock"
-									placeholder="請輸入庫存數" value="${merchVo.merchStock}" required></td>
+									placeholder="請輸入庫存數" value="${merchVo.merchStock}" required min=0></td>
 								<td>${errorMsgs.merchStock}</td>
 							</tr>
 							<tr>

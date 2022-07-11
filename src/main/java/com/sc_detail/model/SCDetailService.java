@@ -39,6 +39,9 @@ public class SCDetailService {
 	public List<SCDetailVO> getAll(){
 		return dao.getAll();
 	}
+	public List<SCDetailVO> getAll(Integer memberID){
+		return dao.getAll(memberID);
+	}
 	
 	public SCDetailVO getOneSCDetail(Integer memberID, Integer merchID) {
 		

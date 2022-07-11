@@ -24,6 +24,7 @@ function f1(e) {
     input.type = "number";
     input.name = "merchCount";
     input.className = "totalCount";
+    input.setAttribute('min',0);
     input.placeholder = "請輸入需要的商品數量";
     input.value = "${orderDetailVo.ordCount}";
     let selectes = document.createElement('select');
