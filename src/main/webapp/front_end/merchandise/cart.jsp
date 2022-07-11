@@ -134,12 +134,13 @@
         		  confirmButtonText: '是的!我要購買'
         		}).then((result) => {
         		  if (result.isConfirmed) {
-        			  forPay.submit();
         			  Swal.fire(
     	          		      '成功購買!',
     	          		      '您的訂單已生成.',
     	          		      'success'
     	          		    )
+        			  setTimeout(function(){
+        				  forPay.submit()},2000);
         		  }
 	})
 	})

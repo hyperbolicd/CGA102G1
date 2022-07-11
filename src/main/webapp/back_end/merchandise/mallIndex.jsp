@@ -90,7 +90,7 @@
 						<form action="${pageContext.request.contextPath}/merch/controller">
 							<td>選擇商品名稱:</td>
 							<td>
-							<select size="1" name="merchID">
+							<select size="1" name="merchID" style="width: 250px">
          					<c:forEach var="merchVo" items="${merchSvc.all}" > 
           					<option value="${merchVo.merchID}">${merchVo.merchName}
          					</c:forEach>   
@@ -113,6 +113,7 @@
 
 							</td>
 						</tr>
+						
 					</table>
 				</div>
 			</div>

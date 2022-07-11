@@ -63,7 +63,7 @@ public class ShoppingCartListener implements HttpSessionBindingListener {
     }
 
     public void valueUnbound(HttpSessionBindingEvent event)  { 
-    	System.out.println();
+    	System.out.println("valueunbind");
     }
 	
 }

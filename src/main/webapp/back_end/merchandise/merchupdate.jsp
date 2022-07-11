@@ -69,7 +69,7 @@
 							<tr>
 								<td>商品價格:</td>
 								<td><input type="number" name="merchPrice"
-									placeholder="請輸入商品價格編號" value="${param.merchPrice}" required></td>
+									placeholder="請輸入商品價格編號" value="${param.merchPrice}" required min=0></td>
 								<td>${errorMsgs.merchPrice}</td>
 							</tr>
 							<tr>
@@ -98,9 +98,9 @@
 							<tr>
 								<td>商品狀態:</td>
 								<td><select name="merchStatus">
-										<option value="1" ${(param.merchStatus=="1")? 'selected':''}>下架</option>
-										<option value="2" ${(param.merchStatus=="2")? 'selected':''}>上架</option>
-										<option value="3" ${(param.merchStatus=="3")? 'selected':''}>主打</option>
+										<option value="1" ${(param.merchStatus=="0")? 'selected':''}>下架</option>
+										<option value="2" ${(param.merchStatus=="1")? 'selected':''}>上架</option>
+										<option value="3" ${(param.merchStatus=="2")? 'selected':''}>主打</option>
 								</select></td>
 								<td></td>
 							</tr>
