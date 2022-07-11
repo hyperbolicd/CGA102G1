@@ -105,7 +105,7 @@ public class FreshWhenVote {
 				}
 	    	};
 	    	// 指定日期
-	    	Calendar cal = new GregorianCalendar(2022, Calendar.JULY, 5, 14, 39, 0);
+	    	Calendar cal = new GregorianCalendar(2022, Calendar.JULY, 5, 14, 39, 1);
 	    	timer.scheduleAtFixedRate(task, cal.getTime(), 10 * 1000);
 		}
 	}

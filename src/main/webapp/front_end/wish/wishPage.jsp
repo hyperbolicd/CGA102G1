@@ -81,12 +81,12 @@
         	<img src="${pageContext.request.contextPath}/front_end/wish/icons8-message-64.png" >
         	<ul id="notifyUl" style="display: none;">
         		<li>通知</li>
-        		<li>ssssssssss</li>
-        		<li>ssssssssss</li>
-        		<li>ssssssssss</li>
-        		<li>ssssssssss</li>
-        		<li>ssssssssss</li>
-        		<li>ssssssssss</li>
+        		<li>登入已逾時，請重新登入</li>
+        		<li>登入已逾時，請重新登入</li>
+        		<li>登入已逾時，請重新登入</li>
+        		<li>登入已逾時，請重新登入</li>
+        		<li>登入已逾時，請重新登入</li>
+        		<li>登入已逾時，請重新登入</li>
         	</ul>
         </div>
 	</div>
@@ -130,11 +130,28 @@
 				notifyUl.innerHTML = '<li>通知</li>';
 				const jsonStrsObj = JSON.parse(e.data);
 				let UnreadCount = 0;
-				for(let jsonStr of jsonStrsObj){
-					let jsonObj = JSON.parse(jsonStr);
+				// 逆向取出
+				for(let i = jsonStrsObj.length - 1; i >= 0; i--){
+					let jsonObj = JSON.parse(jsonStrsObj[i]);
 					console.log(jsonObj.message);
 					const li = document.createElement('li');
-					li.innerText = jsonObj.message;
+					const spanText = document.createElement('span');
+					const br = document.createElement('br');
+					const spanTime = document.createElement('span');
+					spanText.innerText = jsonObj.message;
+					// 算出與現在的時間差
+					const minuteDiff = new Date().getTime()/1000/60 - jsonObj.minute;
+					if(parseInt(minuteDiff / 60) === 0){
+						spanTime.innerText = '---' + parseInt(minuteDiff) + '分前';
+					} else if(parseInt(minuteDiff / 60) < 24){
+						spanTime.innerText = '---' + parseInt(minuteDiff / 60) + '小時前';
+					} else if((parseInt(minuteDiff / 60) >= 24)){
+						spanTime.innerText = '---' + parseInt(minuteDiff / 60 / 24) + '天前';
+					}
+					spanTime.style.color = 'gray';
+					li.append(spanText);
+					li.append(br);
+					li.append(spanTime);
 					if(jsonObj.status === 0){
 						UnreadCount++;
 					}

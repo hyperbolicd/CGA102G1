@@ -30,7 +30,7 @@ public class WishingPondJDBCDAO implements WishingPondDAO_interface{
 	private static final String READ_ALL =
 			"select WISH_NO, WISH_NAME, WISH_START, WISH_END, TOP_ONE from wishing_pond";
 	private static final String READ_AVALIABLE =
-			"select WISH_NO, WISH_NAME, WISH_START, WISH_END, TOP_ONE from wishing_pond where WISH_START <= NOW() and WISH_END >= NOW() ";
+			"select * from wishing_pond where DATEDIFF( NOW(), WISH_START) >= 0 and DATEDIFF( NOW(), WISH_END) <= 0; ";
 	private static final String UPDATE =
 			"update wishing_pond set WISH_NAME = ?, WISH_START = ?, WISH_END = ?  "
 			+ "where WISH_NO = ?";

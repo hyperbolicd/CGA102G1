@@ -49,7 +49,7 @@ public class WishingListener implements ServletContextListener {
 						// 將活動開始通知存進 Redis
 						List<MemberVO> memList = memSvc.getAll();
 						for(MemberVO mem: memList) {
-							WishingNotifyPOJO msgPOJO = new WishingNotifyPOJO("notify", mem.getMember_ID(), "票選活動'" + wish.getWish_name() + "'已開始!", System.currentTimeMillis()/1000/60, 0);
+							WishingNotifyPOJO msgPOJO = new WishingNotifyPOJO("notify", mem.getMember_ID(), "票選活動'" + wish.getWish_name() + "'已開始!", scheduledExecutionTime()/1000/60, 0);
 							String msg = gson.toJson(msgPOJO, WishingNotifyPOJO.class);
 							jedis.rpush("msg:member:" + mem.getMember_ID(), msg);
 							while(jedis.llen("msg:member:" + mem.getMember_ID()) > 10) {
@@ -68,7 +68,7 @@ public class WishingListener implements ServletContextListener {
 						// 將活動結束通知存進 Redis
 						List<MemberVO> memList = memSvc.getAll();
 						for(MemberVO mem: memList) {
-							WishingNotifyPOJO msgPOJO = new WishingNotifyPOJO("notify", mem.getMember_ID(), "票選活動'" + wish.getWish_name() + "'已結束!", System.currentTimeMillis()/1000/60, 0);
+							WishingNotifyPOJO msgPOJO = new WishingNotifyPOJO("notify", mem.getMember_ID(), "票選活動'" + wish.getWish_name() + "'已結束!", scheduledExecutionTime()/1000/60, 0);
 							String msg = gson.toJson(msgPOJO, WishingNotifyPOJO.class);
 							jedis.rpush("msg:member:" + mem.getMember_ID(), msg);
 							while(jedis.llen("msg:member:" + mem.getMember_ID()) > 10) {
@@ -112,7 +112,7 @@ public class WishingListener implements ServletContextListener {
 							wishSvc.updateTopOne(wish.getWish_no(), topMovie);
 							// 將投票結果存進 Redis
 							for(MemberVO mem: memList) {
-								WishingNotifyPOJO msgPOJO = new WishingNotifyPOJO("notify", mem.getMember_ID(), "恭喜'"+ mvSvc.findByPrimaryKey(topMovie).getMvName() + "'於票選活動中'" + wish.getWish_name() + "'拿到冠軍!", System.currentTimeMillis()/1000/60, 0);
+								WishingNotifyPOJO msgPOJO = new WishingNotifyPOJO("notify", mem.getMember_ID(), "恭喜'"+ mvSvc.findByPrimaryKey(topMovie).getMvName() + "'於票選活動中'" + wish.getWish_name() + "'拿到冠軍!", scheduledExecutionTime()/1000/60, 0);
 								String msg = gson.toJson(msgPOJO, WishingNotifyPOJO.class);
 								jedis.rpush("msg:member:" + mem.getMember_ID(), msg);
 								while(jedis.llen("msg:member:" + mem.getMember_ID()) > 10) {

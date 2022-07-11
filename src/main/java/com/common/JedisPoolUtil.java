@@ -2,7 +2,8 @@ package com.common;
 
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
-
+// Jedis 共用資源
+// 使用方式: Jedis jedis = JedisPoolUtil.getJedisPool().getResource(); 就可以使用 jedis 操做，記得要歸還連線 jedis.close();
 public class JedisPoolUtil {
 	private static JedisPool pool = null;
 
