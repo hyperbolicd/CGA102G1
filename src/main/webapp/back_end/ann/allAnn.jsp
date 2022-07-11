@@ -16,6 +16,7 @@ pageContext.setAttribute("list", list);
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>公告管理</title>
+
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/back_end/css/emp_all.css">
 <link rel="stylesheet" type="text/css"
@@ -32,23 +33,11 @@ pageContext.setAttribute("list", list);
 
 <body>
 	<header>
-		<nav>
-			<div id="logo">
-				<img
-					src="${pageContext.request.contextPath}/back_end/logo2noline.jpg">
-			</div>
-			<h2>員工後台操作系統</h2>
-			<ul>
-				<li>登出</li>
-			</ul>
-		</nav>
-	</header>
-
-	<!-- 	<header> -->
-	<%--         <%@ include file="/back_end/header_html.jsp"%>    --%>
-	<!--     </header> -->
-
-	<aside id="aside"></aside>
+        <%@ include file="/back_end/header_html.jsp"%>   
+    </header>
+	<aside id="aside">     
+     <%@ include file="/back_end/aside_html.jsp"%>   
+    </aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
 		<div class="all">
@@ -71,7 +60,7 @@ pageContext.setAttribute("list", list);
 							<td style="width: 15%">發布日期</td>
 							<td style="width: 30%">標題</td>
 							<td style="width: 20%">內容</td>
-<!-- 							<td style="width: 8%">圖片</td> -->
+							<td style="width: 8%">圖片</td>
 							<td style="width: 10%">修改</td>
 							<td style="width: 10%">刪除</td>
 
@@ -84,9 +73,7 @@ pageContext.setAttribute("list", list);
 								<td>${annVO.ann_date}</td>
 								<td>${annVO.ann_title}</td>
 								<td>${annVO.ann_content}</td>
-<!-- 								<td><img -->
-<%-- 									src="<%=request.getContextPath()%>/ann/ShowAnnBlob?ann_no=${annVO.ann_no}" --%>
-<!-- 									style="width: 100px; height: 120px;"></td> -->
+								<td><img src="<%=request.getContextPath()%>${annVO.ann_picture}" style="width: 80px; height: 70px;"></td>
 								<td><FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/ann/ann.do"
 										style="margin-bottom: 0px;">
@@ -122,10 +109,6 @@ pageContext.setAttribute("list", list);
 	</main>
 	<!-- <div id="tree"></div> -->
 	<footer> 嗨邇覓影城 &copy; HIREME CINEMA 2022 </footer>
-
-	<aside id="aside">
-		<%@ include file="/back_end/aside_html.jsp"%>
-	</aside>
 
 </body>
 </html>

@@ -35,6 +35,8 @@ public class AnnServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		res.setHeader("Content-Type", "text/html;charset=UTF-8"); // 靠19行通知瀏覽器
+		PrintWriter out = res.getWriter();
 
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -92,7 +94,7 @@ public class AnnServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*************************** 1.接收請求參數 ****************************************/
-			Integer ann_no = Integer.valueOf(req.getParameter("ann_no"));
+			Integer ann_no = Integer.valueOf(req.getParameter("ann_no").trim());
 
 			/*************************** 2.開始查詢資料 ****************************************/
 			AnnService annSvc = new AnnService();
@@ -105,31 +107,11 @@ public class AnnServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 		
-//		if ("getPic".equals(action)) {
-//			System.out.println("抓");
-//			Integer ann_no = Integer.valueOf(req.getParameter("ann_no").trim());
-//			System.out.println(ann_no);
-//			AnnService annSvc = new AnnService();
-//			AnnVO annVO = annSvc.getOneAnn(ann_no);
-//			byte[] ann_picture = null; 
-//					
-//			if (annVO.getAnn_picture()!= null) {
-//				ann_picture = annVO.getAnn_picture();
-//				res.getOutputStream().write(ann_picture);
-//			}else {
-//				InputStream in = getServletContext().getResourceAsStream("/back_end/ann/images");
-//			    byte[] b = new byte[in.available()];
-//			    in.read(b);
-//			    res.getOutputStream().write(b);
-//			    in.close();
-//			}
-//		}
-		
 
 		if ("update".equals(action)) { // 來自updateTkInf.jsp的請求
 
-			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
-			//List<String> errorMsgs = new LinkedList<String>();
+			//Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
@@ -144,23 +126,38 @@ public class AnnServlet extends HttpServlet {
 
 			String ann_title = req.getParameter("ann_title");
 			if (ann_title == null || ann_title.trim().length() == 0) {
-				errorMsgs.put("ann_title", "公告標題: 請勿空白");
+				errorMsgs.add("公告標題: 請勿空白");
 			}
 
 			String ann_content = req.getParameter("ann_content").trim();
-
-			Part part = req.getPart("ann_picture");
-			byte[] ann_picture = null;
-			InputStream in = null;
-			if(part.getSize() == 0) {
-				AnnService annSvc = new AnnService();
-				ann_picture = annSvc.getOneAnn(ann_no).getAnn_picture();
+			
+			
+			
+//			   Part part = req.getPart("ann_picture");
+//			   InputStream in = part.getInputStream();
+//			   BufferedInputStream buff = new BufferedInputStream(in);
+//			   byte [] pic = new byte[in.available()];
+//			   buff.read(pic);
+//			   buff.close();
+//			   if(part.getSize() == 0) {
+//			    pic = annSvc.getOneAnn(ann_no).getAnn_picture();
+//			   }
+			
+			String ann_picture=null;
+			Part photo = req.getPart("ann_picture");
+			
+			if (photo.getSize() != 0) { // 如果照片不為空
+				String fileName = photo.getSubmittedFileName(); // 先宣告一個檔案變數 並取得照片
+				
+				// 利用File物件,寫入目地目錄,上傳成功
+				String saveDirectory = "/ann_pic";
+				String realPath = getServletContext().getRealPath(saveDirectory);
+				photo.write(realPath + "\\" + fileName); // 是寫入硬碟的程式指令P.116 寫出照片路徑
+				ann_picture = "/ann_pic/" + photo.getSubmittedFileName();
 			} else {
-				in = part.getInputStream();
-				ann_picture = new byte[in.available()];
-				in.read(ann_picture);
-				in.close();
+				ann_picture = req.getParameter("noUpload");
 			}
+			System.out.println("photoName: "+ann_picture);
 			
 			AnnVO annVO = new AnnVO();
 			annVO.setAnn_no(ann_no);
@@ -171,6 +168,8 @@ public class AnnServlet extends HttpServlet {
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
+				req.setAttribute("annVO", annVO); // 含有輸入格式錯誤的newspostVO物件,也存入req
+				req.setAttribute("errorMsgs", errorMsgs);
 				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/ann/updateAnn.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
@@ -182,41 +181,65 @@ public class AnnServlet extends HttpServlet {
 			annVO = annSvc.updateAnn(ann_no, ann_date, ann_title, ann_content, ann_picture);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-			req.setAttribute("annVO", annVO); // 資料庫update成功後,正確的的tkTypeVO物件,存入req
+			//req.setAttribute("annVO", annVO); // 資料庫update成功後,正確的的tkTypeVO物件,存入req
+			req.setAttribute("annVO", annSvc.getOneAnn(ann_no)); // 資料庫取出的empVO物件,存入req
 			String url = "/back_end/ann/allAnn.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交allTkInf.jsp
 			successView.forward(req, res);
+			return;
 		}
 
 		if ("insert".equals(action)) { // 來自addTkInf.jsp的請求
 
-			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			//List<String> errorMsgs = new LinkedList<String>();
+			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 			//Integer ann_no = Integer.valueOf(req.getParameter("ann_no").trim());
+			//AnnService annSvc = new AnnService();
 
 			java.sql.Date ann_date = null;
 			try {
 				ann_date = java.sql.Date.valueOf(req.getParameter("ann_date").trim());
 			} catch (IllegalArgumentException e) {
 				ann_date = new java.sql.Date(System.currentTimeMillis());
-				errorMsgs.put("ann_date", "請輸入日期!!");
+				errorMsgs.put("ann_date","請輸入日期!!");
 			}
 
 			String ann_title = req.getParameter("ann_title");
 			if (ann_title == null || ann_title.trim().length() == 0) {
-				errorMsgs.put("ann_title", "公告標題: 請勿空白");
+				errorMsgs.put("ann_title","公告標題: 請勿空白");
 			}
 
 			String ann_content = req.getParameter("ann_content").trim();
 			
-			Part part = req.getPart("ann_picture");
-			InputStream in = part.getInputStream();
-			byte[] ann_picture = new byte[in.available()];
-			in.read(ann_picture);
-			in.close();
+			
+//			   String ann_picture = req.getParameter("ann_picture");
+//			   Part part = req.getPart("ann_picture");
+//			   InputStream in = part.getInputStream();
+//			   byte [] pic = new byte[in.available()];
+//			   in.read(pic);
+//			   in.close();
+			
+			
+			
+			
+			// String photoName = "";
+			Part photo = req.getPart("myUpfile");
+			String ann_picture = "/ann_pic/" + photo.getSubmittedFileName(); //
+			System.out.println(ann_picture);
+			if (photo.getSubmittedFileName() == null || photo.getSubmittedFileName().trim().length() == 0) {
+				errorMsgs.put("myUpfile","ann_picture 公告圖片請上傳");
+				
+			}
+			
+			String fileName = photo.getSubmittedFileName(); // 先宣告一個檔案變數 並取得照片
+			// 利用File物件,寫入目地目錄,上傳成功
+			String saveDirectory = "/ann_pic";
+			String realPath = getServletContext().getRealPath(saveDirectory);
+			
+			InputStream in = getServletContext().getResourceAsStream("/ann_pic/123.jpg"); //輸入流獲取
 
 			AnnVO annVO = new AnnVO();
 			//annVO.setAnn_no(ann_no);
@@ -228,6 +251,7 @@ public class AnnServlet extends HttpServlet {
 			
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
+				req.setAttribute("annVO", annVO); // 含有輸入格式錯誤的newspostVO物件,也存入req
 				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/ann/addAnn.jsp");
 				failureView.forward(req, res);
 				return;
@@ -235,7 +259,7 @@ public class AnnServlet extends HttpServlet {
 
 			/*************************** 2.開始新增資料 ***************************************/
 			AnnService annSvc = new AnnService();
-			annSvc.addAnn(ann_date, ann_title, ann_content);
+			annSvc.addAnn(ann_date, ann_title, ann_content, ann_picture);
 			//annSvc.addAnn(ann_date, ann_title, ann_content, ann_picture);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/

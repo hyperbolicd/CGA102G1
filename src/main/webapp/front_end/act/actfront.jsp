@@ -1,45 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.act.model.*"%>
+<%@ page import="com.actdt.model.*"%>
 <!-- List cannot be resolved to a type表示List不能被定義為一個類型，這個錯誤要導入java.util.*包。 -->
 <!-- 在jsp中使用List前加上java.util.*就可以解決問題。 -->
 <%@ page import="java.util.*"%>
 
 <%
-ActService actSvc = new ActService();
-List<ActVO> list = actSvc.getAll();
+ActdtService actSvc = new ActdtService();
+List<ActdtVO> list = actSvc.getOnlyAct();
+System.out.println(list);
 pageContext.setAttribute("list", list);
 %>
 
-<!-- <!DOCTYPE html> -->
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
 <title>HireMe</title>
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/front_end/css/layout.css"
 	type="text/css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/front_end/act/css/main.css">
+	href="<%=request.getContextPath()%>/front_end/act/css/main.css" />
 
 
-<!-- 活動標題 -->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/front_end/act/css/acttitle.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/front_end/act/js/acttitle.js">
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 
-<!-- 活動列表 -->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/front_end/act/css/actlist.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/front_end/act/js/actlist.js">
-
-
+<!-- Bootstrap CSS only -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+	crossorigin="anonymous">
 
 
 </head>
@@ -71,154 +66,50 @@ pageContext.setAttribute("list", list);
 
 	</header>
 
-	<!--各自的內容--------------------->
-
-	<div class="content">
-
-		<!-- 	<div class="mainacttitle" style='padding: 10px 20px; background-color: #ECECEC;'> -->
-		<!--將內容存-->
-
-		<!-- 		<div style="padding: 500px 100px;"> -->
-
-		<!-- 活動標題 -->
-		<div class="container">
-			<div class="slide-bar" id="slidebar">
-				<div class="bar" id="bar"></div>
-			</div>
-			<div class="text-block" id="textone">
-				<h1>活 動 好 康</h1>
-			</div>
-			<div class="text-block" id="texttwo">
-				<h1>Activity</h1>
-			</div>
-		</div>
-		<button id="changeBtn">&nbsp;</button>
-		<!-- 	</div> -->
-
-
-		<!-- 活動列表 -->
-		<section id="cd-timeline" class="cd-container">
-			<div class="cd-timeline-block">
-				<div class="cd-timeline-img cd-picture">
-				</div>
-				<!-- cd-timeline-img -->
-				<c:forEach var="actVO" items="${list}">
-					<div class="cd-timeline-content">
-						<h2>${actVO.act_subtitle}</h2>
-						<p>${actVO.act_content}</p>
-						<a href="#0" class="cd-read-more">Read more</a> <span
-							class="cd-date">${actVO.act_date_start}</span>
-					</div>
-					<!-- cd-timeline-content -->
-				</c:forEach>
-			</div>
-			<!-- cd-timeline-block -->
-
-			<div class="cd-timeline-block">
-				<div class="cd-timeline-img cd-movie">
-				</div>
-				<!-- cd-timeline-img -->
-
-				<div class="cd-timeline-content">
-					<h2>Title of section 2</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						Iusto, optio, dolorum provident rerum aut hic quasi placeat iure
-						tempora laudantium ipsa ad debitis unde?</p>
-					<a href="#0" class="cd-read-more">Read more</a> <span
-						class="cd-date">Jan 18</span>
-				</div>
-				<!-- cd-timeline-content -->
-			</div>
-			<!-- cd-timeline-block -->
-
-			<div class="cd-timeline-block">
-				<div class="cd-timeline-img cd-picture">
-				</div>
-				<!-- cd-timeline-img -->
-
-				<div class="cd-timeline-content">
-					<h2>Title of section 3</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						Excepturi, obcaecati, quisquam id molestias eaque asperiores
-						voluptatibus cupiditate error assumenda delectus odit similique
-						earum voluptatem doloremque dolorem ipsam quae rerum quis. Odit,
-						itaque, deserunt corporis vero ipsum nisi eius odio natus ullam
-						provident pariatur temporibus quia eos repellat consequuntur
-						perferendis enim amet quae quasi repudiandae sed quod veniam
-						dolore possimus rem voluptatum eveniet eligendi quis fugiat
-						aliquam sunt similique aut adipisci.</p>
-					<a href="#0" class="cd-read-more">Read more</a> <span
-						class="cd-date">Jan 24</span>
-				</div>
-				<!-- cd-timeline-content -->
-			</div>
-			<!-- cd-timeline-block -->
-
-			<div class="cd-timeline-block">
-				<div class="cd-timeline-img cd-location">
-				</div>
-				<!-- cd-timeline-img -->
-
-				<div class="cd-timeline-content">
-					<h2>Title of section 4</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						Iusto, optio, dolorum provident rerum aut hic quasi placeat iure
-						tempora laudantium ipsa ad debitis unde? Iste voluptatibus minus
-						veritatis qui ut.</p>
-					<a href="#0" class="cd-read-more">Read more</a> <span
-						class="cd-date">Feb 14</span>
-				</div>
-				<!-- cd-timeline-content -->
-			</div>
-			<!-- cd-timeline-block -->
-
-			<div class="cd-timeline-block">
-				<div class="cd-timeline-img cd-location">
-				</div>
-				<!-- cd-timeline-img -->
-
-				<div class="cd-timeline-content">
-					<h2>Title of section 5</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						Iusto, optio, dolorum provident rerum.</p>
-					<a href="#0" class="cd-read-more">Read more</a> <span
-						class="cd-date">Feb 18</span>
-				</div>
-				<!-- cd-timeline-content -->
-			</div>
-			<!-- cd-timeline-block -->
-
-			<div class="cd-timeline-block">
-				<!-- 					<div class="cd-timeline-img cd-movie"> -->
-				<!-- 						<img -->
-				<!-- 							src="https://codyhouse.co/demo/vertical-timeline/img/cd-icon-movie.svg" -->
-				<!-- 							alt="Movie"> -->
-				<!-- 					</div> -->
-				<!-- cd-timeline-img -->
-
-				<div class="cd-timeline-content">
-					<h2>Final Section</h2>
-					<p>This is the content of the last section</p>
-					<span class="cd-date">Feb 26</span>
-				</div>
-				<!-- cd-timeline-content -->
-			</div>
-			<!-- cd-timeline-block -->
-		</section>
-		<!-- cd-timeline -->
-
-
-
-
-
-
-
-
-		<!-- </div> -->
+	<!-- 	<======================================main===============================================> -->
+	<div class="actpost1">
+		<img class="actpost"
+			src="${pageContext.request.contextPath}/act_pic/actpost.jpg"
+			height="100%" width="100%"  >
+<!-- 		<div class="slide-down"> -->
+<!-- 			<p>影城&nbsp; &nbsp; &nbsp;活動</p> -->
+<!-- 		</div> -->
 	</div>
-	<!--   <!--客服圖 請自行加連結-->
+
+
+	<div class="title h1 text-center"></div>
+
+
+	<!-- Card Start -->
+	<section>
+		<c:forEach var="actdtVO" items="${list}">
+			<div class="container py-3">
+				<div class="card">
+					<div class="row ">
+						<div class="col-md-4">
+							<img src="<%=request.getContextPath()%>${actdtVO.act_picture}"
+								class="w-100" width="100" height="300">
+						</div>
+						<div class="col-md-8 px-3">
+							<div class="card-block px-3">
+								<h4 class="card-title">${actdtVO.act_subtitle}</h4>
+								<p class="card-text">${actdtVO.act_content}</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</c:forEach>
+	</section>
+
+
+
+
+	<!--   客服圖 請自行加連結-->
 	<!--   <img class="cs" src="images/demo/cs.png" height="50px;" width="60px;" href="#"></img> -->
 
+	<!-- <====================================footer=====================================> -->
 	<!-- Copyright -->
 	<div class="wrapper row2">
 		<footer id="copyright" class="clear">
