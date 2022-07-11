@@ -262,10 +262,10 @@ public class MemberServlet extends HttpServlet {
 //			System.out.println("會員是否被停權 : " + memberVo.getMember_Status().equals(2));
 			String url = "";
 			System.out.println(memberId);
-			if (memberId == null) {                      //如果號密碼有可能輸入錯誤
+			if (memberId == null) {                               //如果號密碼有可能輸入錯誤
 				url = "/front_end/login/login.jsp";		 
 			}else if(memberVo.getMember_Status().equals(2)) {     //如果會員狀態 帳號被停權
-				situation.put("login", "您被停權了");
+				situation.put("login", "您被停權了");                //跳出您被停權了
 				url = "/front_end/login/login.jsp";	
 			}else{
 				url = "/front_end/index.jsp";   //登入成功
@@ -275,7 +275,6 @@ public class MemberServlet extends HttpServlet {
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			if(session.getAttribute("location") != null){  
 				res.sendRedirect((String) session.getAttribute("location"));}
-			  //跳出您被停權了
 			System.out.println("account");
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listAllMember.jsp
 			successView.forward(req, res); // 轉送
@@ -303,6 +302,10 @@ public class MemberServlet extends HttpServlet {
 
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+			
+/*---------------- 會員註冊時會跳出註冊成功 ---------------------------*/			
+			Map<String, String> situation = new LinkedHashMap<String, String>();
+			req.setAttribute("situation", situation);
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 			String member_Name = req.getParameter("member_Name");
 			if (member_Name == null || member_Name.trim().length() == 0) {
@@ -316,6 +319,17 @@ public class MemberServlet extends HttpServlet {
 			} else if (!member_Email.trim().matches(memeber_EmailReg)) { // 以下練習正則(規)表示式(regular-expression)
 				errorMsgs.put("member_Email", "電子信箱: (英文 大小寫皆可)@後面是「英文 or 數字」 + 「.」 ");
 			}
+			
+			
+			String member_Password = req.getParameter("member_Password");
+			System.out.println(member_Password);
+			String member_PasswordReg = "^(?![a-zA-Z]+$)(?![0-9]+$)[0-9A-Za-z]{2,8}$"; // 至少八個字符，至少一個字母和一個數字：
+			if (member_Password == null || member_Password.trim().length() == 0) {
+				errorMsgs.put("member_Password", "：請勿空白");
+			} else if (!member_Password.trim().matches(member_PasswordReg)) { // 以下練習正則(規)表示式(regular-expression)
+				errorMsgs.put("member_Password", "會員密碼: 至少八個字符，至少一個字母和一個數字, 且長度必需2到8之間");
+			}
+
 
 			String member_Phone = req.getParameter("member_Phone");
 			String member_PhoneReg = "09[0-9]{8}"; // 字串裡面必須全是 0~9 的數字，字串長度必須是 10
@@ -328,19 +342,12 @@ public class MemberServlet extends HttpServlet {
 				errorMsgs.put("member_Phone", "會員電話: 字串裡面必須全是 0~9 的數字，字串長度必須是 10");
 			}
 
-			String member_Password = req.getParameter("member_Password");
-			System.out.println(member_Password);
-			String member_PasswordReg = "^(?![a-zA-Z]+$)(?![0-9]+$)[0-9A-Za-z]{2,8}$"; // 至少八個字符，至少一個字母和一個數字：
-			if (member_Password == null || member_Password.trim().length() == 0) {
-				errorMsgs.put("member_Password", "：請勿空白");
-			} else if (!member_Password.trim().matches(member_PasswordReg)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.put("member_Password", "會員密碼: 至少八個字符，至少一個字母和一個數字, 且長度必需2到8之間");
-			}
-
+			
 			String member_Address = req.getParameter("member_Address");
 			if (member_Address == null || member_Phone.trim().length() == 0) {
 				errorMsgs.put("member_Address", "：請勿空白");
 			}
+			
 			// String photoName = "";
 			Part photo = req.getPart("myUpfile");
 			String photoName = "/member_pic/" + photo.getSubmittedFileName(); //
@@ -383,6 +390,7 @@ public class MemberServlet extends HttpServlet {
 					req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/member.do?member_ID="+ memberVO.getMember_ID()+"&action=register");
 //					"http://localhost:8081/CGA102G1/member.do?member_ID="+ memberVO.getMember_ID()+"&action=register ");
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+			situation.put("join", "註冊成功");      //// 會員註冊成功
 			String url = "/front_end/login/login.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交login.jsp
 			successView.forward(req, res);

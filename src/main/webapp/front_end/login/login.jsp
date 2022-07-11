@@ -85,7 +85,19 @@
           <% request.removeAttribute("login"); %>  
       </c:if>
 	
- 	</script>  
+ 	</script> 
+ 	
+ 	<script>
+	<c:if test="${not empty situation.join}">
+    Swal.fire(
+               'OK',
+               '註冊成功!請到電子信箱收取驗證信!!',
+               'success'
+           )
+         <% request.removeAttribute("join"); %>
+    </c:if>
+	
+	</script> 
 
 		
 		

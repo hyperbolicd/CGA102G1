@@ -118,11 +118,11 @@ body {
 
 		<div class="side-menu">
 			<nav>
-				<a href="#"> <i class="fa fa-edit" aria-hidden="true"></i>
+				<a href="${pageContext.request.contextPath}/front_end/membercentre/membermod.jsp"> <i class="fa fa-edit" aria-hidden="true"></i>
 					會員修改資料
-				</a> <a href="#"> <i class="fa fa-object-group" aria-hidden="true"></i>
+				</a> <a href="${pageContext.request.contextPath}/front_end/wish/wishPage.jsp"> <i class="fa fa-object-group" aria-hidden="true"></i>
 					許願池
-				</a> <a href="#"> <i class="fa fa-clone" aria-hidden="true"></i> 評論區
+				</a> <a href="${pageContext.request.contextPath}/front_end/memberCmt/memberCmt.jsp"> <i class="fa fa-clone" aria-hidden="true"></i> 評論區
 				</a>
 				 <a href="#"> <i class="fa fa-gavel" aria-hidden="true"></i> 訂單明細</a>
 			</nav>

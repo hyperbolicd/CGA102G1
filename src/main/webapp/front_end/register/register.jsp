@@ -13,6 +13,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery-twzipcode@1.7.14/jquery.twzipcode.min.js"></script>
+	
+
 
 
 <script type="text/javascript">
@@ -112,7 +114,7 @@
 
 					<div class="input-box">
 						<span class="address">會員地址</span>
-						<div class="errMsgs" style="color: red">${errorMsgs.member_Phone}</div>
+						<div class="errMsgs" style="color: red">${errorMsgs.member_Address}</div>
 						<div id="twzipcode" name="address"></div>
 						<div style="display: flex">
 							<input type="text" placeholder="請輸入您的會員地址" id="member_Address1"
@@ -162,6 +164,10 @@
 		})
 		
 	</script>
+	
+	
+	
+	
 
 
 
