@@ -29,20 +29,15 @@ pageContext.setAttribute("SellTkMVlist", SellTkMVlist);
 	type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/front_end/css/allMovie.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/front_end/css/allMovie.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 <!-- DatePicker.css -->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/showing/css/daterangepicker.css" />
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back_end/showing/css/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/front_end/css/sellTK.css">
-<script
-	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/front_end/css/sellTK.css">
+<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <%@ include file="/front_end/header.jsp"%>
 <!-- 輪播圖片 css -->
@@ -347,7 +342,7 @@ div, ul, li, a, span, img {
 
 	<div id="mainDiv">
 
-		<hr id="hr1">
+		<hr style="border-color: black">
 
 		<div id="testDiv">
 
@@ -404,7 +399,9 @@ div, ul, li, a, span, img {
 
 
 		</div>
-		<hr id="hr1">
+		
+<!-- 		<hr class="hr1"> -->
+		
 		<div class="fm1" style='padding: 10px 20px;'>
 			<!--將內容存-->
 			<div class="mytabs">

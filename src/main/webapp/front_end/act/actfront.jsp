@@ -1,21 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.actdt.model.*"%>
+<%@ page import="com.act.model.*"%>
 <!-- List cannot be resolved to a type表示List不能被定義為一個類型，這個錯誤要導入java.util.*包。 -->
 <!-- 在jsp中使用List前加上java.util.*就可以解決問題。 -->
 <%@ page import="java.util.*"%>
 
 <%
-ActdtService actSvc = new ActdtService();
-List<ActdtVO> list = actSvc.getOnlyAct();
-System.out.println(list);
+ActService actSvc = new ActService();
+List<ActVO> list = actSvc.getAll();
 pageContext.setAttribute("list", list);
 %>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html lang="en" dir="ltr">
-
 <head>
 <title>HireMe</title>
 <meta charset="UTF-8">
@@ -24,8 +22,10 @@ pageContext.setAttribute("list", list);
 	type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/front_end/act/css/main.css">
+
 
 <!-- 活動標題 -->
 <link rel="stylesheet" type="text/css"
@@ -38,6 +38,9 @@ pageContext.setAttribute("list", list);
 	href="${pageContext.request.contextPath}/front_end/act/css/actlist.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/front_end/act/js/actlist.js">
+
+
+
 
 </head>
 
@@ -96,15 +99,15 @@ pageContext.setAttribute("list", list);
 		<!-- 活動列表 -->
 		<section id="cd-timeline" class="cd-container">
 			<div class="cd-timeline-block">
-				<c:forEach var="actVO" items="${list}">
-				<div class="cd-timeline-img cd-picture"></div>
+				<div class="cd-timeline-img cd-picture">
+				</div>
 				<!-- cd-timeline-img -->
+				<c:forEach var="actVO" items="${list}">
 					<div class="cd-timeline-content">
 						<h2>${actVO.act_subtitle}</h2>
 						<p>${actVO.act_content}</p>
 						<a href="#0" class="cd-read-more">Read more</a> <span
 							class="cd-date">${actVO.act_date_start}</span>
-							<p></p>
 					</div>
 					<!-- cd-timeline-content -->
 				</c:forEach>
@@ -213,7 +216,7 @@ pageContext.setAttribute("list", list);
 
 		<!-- </div> -->
 	</div>
-	<!--   客服圖 請自行加連結-->
+	<!--   <!--客服圖 請自行加連結-->
 	<!--   <img class="cs" src="images/demo/cs.png" height="50px;" width="60px;" href="#"></img> -->
 
 	<!-- Copyright -->

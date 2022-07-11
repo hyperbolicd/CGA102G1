@@ -1,212 +1,224 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
+<%@ page import="com.act.model.*"%>
 <%@ page import="com.actdt.model.*"%>
 
 <%
-ActdtVO actdtVO = (ActdtVO) request.getAttribute("actdtVO"); //EmpServlet.java (Concroller) å­˜å…¥reqçš„empVOç‰©ä»¶ (åŒ…æ‹¬å¹«å¿™å–å‡ºçš„empVO, ä¹ŸåŒ…æ‹¬è¼¸å…¥è³‡æ–™éŒ¯èª¤æ™‚çš„empVOç‰©ä»¶)
+ActVO actVO = (ActVO) request.getAttribute("actVO");
+ActdtVO actdtVO = (ActdtVO) request.getAttribute("actdtVO");//EmpServlet.java (Concroller) ¦s¤JreqªºempVOª«¥ó (¥]¬AÀ°¦£¨ú¥XªºempVO, ¤]¥]¬A¿é¤J¸ê®Æ¿ù»~®ÉªºempVOª«¥ó)
 %>
 
 <%
-response.setHeader("Cache-Control", "no-store");
-response.setHeader("Pragma", "no-cache");
-response.setDateHeader("Expires", 0);
+ActService actSvc = new ActService();
+List<ActVO> list = actSvc.getAll();
+pageContext.setAttribute("list", list);
 %>
 
-<%= actdtVO==null %>
+
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>æ´»å‹•ç®¡ç†</title>
+<title>¬¡°Ê¤è®×ºŞ²z</title>
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/back_end/css/emp_all.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_all.css">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/back_end/css/emp_main.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_main.css">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/back_end/css/emp_footer.css">
+	href="<%=request.getContextPath()%>/back_end/css/emp_footer.css">
 
-<!-- æ´»å‹•æ–¹æ¡ˆæ–°å¢_css -->
+
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/act/css/actback_add.css">
 
 
-<!-- æ–‡æœ¬ç·¨è¼¯å™¨ï¼Œç›®å‰åˆªæ‰ä¸ç”¨ -->
+<!-- ¤º®e¤å¥» -->
 <script src="https://cdn.ckeditor.com/4.7.3/basic/ckeditor.js"></script>
 
-<link rel="stylesheet"
-	href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
-<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<!-- ¤é´Á½d³ò -->
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back_end/act/daterangepicker/daterangepicker.css">
+
+
+<script type="text/javascript">
+	function tk_type_id() {
+		for (var i = 0; i < document.form1.tk_type_id.length; i++) {
+			if (!document.f.tk_type_id[i].checked) {
+				alert("Please Select Your options");
+				return false;
+			} else {
+				alert("Click Submit to Know your choices");
+				return true;
+			}
+		}
+	}
+</script>
 
 
 
 </head>
 
-
 <body>
 	<header>
 		<%@ include file="/back_end/header_html.jsp"%>
 	</header>
-	<aside id="aside">
-		<%@ include file="/back_end/aside_html.jsp"%>
-	</aside>
-	<!-- ä½ å€‘çš„å…§å®¹è«‹æ”¾åœ¨ <main> æ¨™ç±¤å…§ï¼Œå…¶ä»–éƒ¨åˆ†å‹¿å‹•! -->
+
+	<aside id="aside"></aside>
+	<!-- §A­Ìªº¤º®e½Ğ©ñ¦b <main> ¼ĞÅÒ¤º¡A¨ä¥L³¡¤À¤Å°Ê! -->
 	<main>
 		<div class="all">
 			<div class="main">
 
 				<div class="guide1outer">
 					<div class="guide1">
-						<div>æ–°å¢æ´»å‹•</div>
+						<div>·s¼W¬¡°Ê¤è®×</div>
 					</div>
 				</div>
 
 				<FORM METHOD="post" enctype="multipart/form-data"
 					ACTION="<%=request.getContextPath()%>/act/act.do" name="form1">
-
 					<div class="TKouter">
 
 						<table class="TKinner">
 							<tr>
 								<td></td>
-								<td>è¼¸å…¥</td>
+								<td>¿é¤J</td>
 								<td></td>
 							</tr>
 							<tr>
-								<td>ç·¨è™Ÿ:</td>
-								<td><input type="text" name="act_id" size="90"
-									value="${param.act_id}"></td>
-								<td>${errorMsgs.act_id}</td>
-							</tr>
-							<tr>
-								<td>ç™¼ä½ˆæ—¥æœŸ:</td>
-								<td><input style="text-align: center;" type="text"
-									id="act_date1" name="act_date_start" size="95"
-									value="${param.act_date_start}"></td>
-								<td>${errorMsgs.act_date_start}</td>
-							</tr>
-							<tr>
-								<td>æ¨™é¡Œ:</td>
-								<td><input type="text" name="act_title"
-									placeholder="è«‹è¼¸å…¥æ¨™é¡Œï¼Œç‚ºäº†æ›´å¥½çš„å±•ç¤ºæ•ˆæœï¼Œæ¨™é¡Œå­—æ•¸åœ¨20å­—ä»¥å…§"
-									onkeyUp="textLimitCheck(this, 20);" size="90"
-									value="${param.act_title}"><span id="messageCount">0</span>/20</td>
+								<td>¼ĞÃD:</td>
+								<td><input type="text" name="act_title" size="45"
+									value="${param.act_title}"></td>
 								<td>${errorMsgs.act_title}</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 							<tr>
-								<td>å‰¯æ¨™é¡Œ:</td>
-								<td><input type="text" name="act_subtitle"
-									placeholder="è«‹è¼¸å…¥å‰¯æ¨™é¡Œï¼Œç‚ºäº†æ›´å¥½çš„å±•ç¤ºæ•ˆæœï¼Œæ¨™é¡Œå­—æ•¸åœ¨40å­—ä»¥å…§"
-									onkeyUp="textLimitCheck2(this, 40);" size="90"
-									value="${param.act_subtitle}"><span id="messageCount2">0</span>/40</td>
+								<td>°Æ¼ĞÃD:</td>
+								<td><input type="text" name="act_subtitle" size="45"
+									value="${param.act_subtitle}"></td>
 								<td>${errorMsgs.act_subtitle}</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 
+
 							<tr>
-								<td>é©ç”¨ç¥¨ç¨®:</td>
-								<td><input type="checkbox" name="TkTypeID" VALUE="1">å…¨ç¥¨/æ•¸ä½
-									<input type="checkbox" name="TkTypeID" VALUE="2">å…¨ç¥¨/IMAX
-									<input type="checkbox" name="TkTypeID" VALUE="3">å„ªå¾…ç¥¨/æ•¸ä½
-									<input type="checkbox" name="TkTypeID" VALUE="4">å„ªå¾…ç¥¨/IMAX
-									<input type="checkbox" name="TkTypeID" VALUE="5">æ—©å ´ç¥¨/æ•¸ä½
-									<input type="checkbox" name="TkTypeID" VALUE="6">æ—©å ´ç¥¨/IMAX</td>
+								<td>¾A¥Î²¼ºØ:</td>
+								<td><input type="checkbox" name="tk_type_id" VALUE="1">¥ş²¼/¼Æ¦ì
+									<input type="checkbox" name="tk_type_id" VALUE="2">¥ş²¼/IMAX
+									<input type="checkbox" name="tk_type_id" VALUE="3">Àu«İ²¼/¼Æ¦ì
+									<input type="checkbox" name="tk_type_id" VALUE="4">Àu«İ²¼/IMAX
+									<input type="checkbox" name="tk_type_id" VALUE="5">¦­³õ²¼/¼Æ¦ì
+									<input type="checkbox" name="tk_type_id" VALUE="6">¦­³õ²¼/IMAX</td>
 								<td></td>
 							</tr>
-							
+
+
 							<tr>
-								<td>æŠ˜æ‰£:</td>
+								<td>¬¡°Ê§é¦©:</td>
 								<td><input type="text" name="act_discount" size="45"
-									value="${param.act_discount}">ä¾‹å¦‚ï¼š0.9</td>
-								<td>${errorMsgs.act_discount}</td>
+									value="${param.act_discount}"></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
-							
 							<tr>
-								<td>æŠ˜åƒ¹:</td>
+								<td>¬¡°Ê§é»ù:</td>
 								<td><input type="text" name="act_coupon" size="45"
-									value="-${param.act_coupon}">ä¾‹å¦‚ï¼š-20</td>
-								<td>${errorMsgs.act_coupon}</td>
+									value="${param.act_coupon}"></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
-							
 							<tr>
-								<td>ç‹€æ…‹:</td>
+								<td>¤é´Á:</td>
+								<td><input style="text-align: center;" type="text"
+									id="act_date1" name="act_date" size="95"
+									value="${param.act_date_start}"></td>
+									<td>${errorMsgs.act_date_start}</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>¬¡°Ê¤è®×ª¬ºA:</td>
 								<td><select name="act_status">
-										<option value="0">æœªä¸Šæ¶</option>
-										<option value="1">å·²ä¸Šæ¶</option>
-										<option value="2">å·²ä¸‹æ¶</option>
+										<option value="0" ${param.act_status=='0'? "selected" : ""}>¥¼¤W¬[</option>
+										<option value="1" ${param.act_status=='1'? "selected" : ""}>¤w¤W¬[</option>
+										<option value="2" ${param.act_status=='2'? "selected" : ""}>¤w¤U¬[</option>
 								</select></td>
 								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
-
 							<tr>
-								<td>å…§å®¹:</td>
-								<td><textarea style="resize: none; margin: 20px;"
-										id="act_content" name="act_content" cols="90" rows="30">${param.act_content}</textarea></td>
+								<td>¤º®e:</td>
+								<td><textarea id="act_content" name="editor1" cols="50"
+										rows="10">${actVO.act_content}</textarea> <script>
+											CKEDITOR.replace('editor1');
+										</script></td>
 								<td>${errorMsgs.act_content}</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 							<tr>
-								<td>åœ–ç‰‡:</td>
-								<td><input id="act_picture" type="file" name="act_picture"
-									value="${param.act_picture}"></td>
+								<td>¹Ï¤ù:</td>
+								<td><input id="act_picture"	type="file" name="ann_picture" value="${param.act_picture}"></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 								<td></td>
 							</tr>
 						</table>
 					</div>
-
-
 					<div class="btBlock">
 						<input type="hidden" name="action" value="insert"> <input
-							type="submit" class="bt" value="é€å‡ºæ–°å¢">
+							type="submit" class="bt" value="°e¥X·s¼W">
+
+
 					</div>
 				</FORM>
-
 			</div>
 
 		</div>
 
 	</main>
 	<!-- <div id="tree"></div> -->
-	<footer> å—¨é‚‡è¦“å½±åŸ &copy; HIREME CINEMA 2022 </footer>
-
-	
-	<!-- æ¨™é¡Œè¼¸å…¥æ¡†å­—æ•¸é™åˆ¶ -->
-	<script type="text/javascript">
-		function textLimitCheck(thisArea, maxLength) {
-			if (thisArea.value.length > maxLength) {
-				alert(maxLength + ' å€‹å­—é™åˆ¶ã€‚ \r è¶…å‡ºçš„å°‡è‡ªå‹•æ¸…é™¤');
-				thisArea.value = thisArea.value.substring(0, 20);
-				thisArea.focus();
-			}
-			messageCount.innerText = thisArea.value.length;
-		}
-	</script>
-	
-	<!-- å‰¯æ¨™é¡Œè¼¸å…¥æ¡†å­—æ•¸é™åˆ¶ -->
-	<script type="text/javascript">
-		function textLimitCheck2(thisArea, maxLength) {
-			if (thisArea.value.length > maxLength) {
-				alert(maxLength + ' å€‹å­—é™åˆ¶ã€‚ \r è¶…å‡ºçš„å°‡è‡ªå‹•æ¸…é™¤');
-				thisArea.value = thisArea.value.substring(0, 40);
-				thisArea.focus();
-			}
-			messageCount2.innerText = thisArea.value.length;
-		}
-	</script>
-	
-	
-	
-</body>
+	<footer> ¶ÙÂâ³V¼v«° &copy; HIREME CINEMA 2022 </footer>
 
 
-<!-- =========================================ä»¥ä¸‹ç‚º datetimepicker ä¹‹ç›¸é—œè¨­å®š========================================== -->
+
+	<aside id="aside">
+		<%@ include file="/back_end/aside_html.jsp"%>
+	</aside>
+
+<!-- =========================================¥H¤U¬° datetimepicker ¤§¬ÛÃö³]©w========================================== -->
 
 <%
 java.sql.Date act_date_start = null;
 try {
-	act_date_start = actdtVO.getAct_date_start();
+	act_date_start = actVO.getAct_date_start();
 } catch (Exception e) {
 	act_date_start = new java.sql.Date(System.currentTimeMillis());
 }
@@ -233,18 +245,16 @@ try {
         $('#act_date1').datetimepicker({
 	       theme: '',              //theme: 'dark',
 	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (é€™æ˜¯timepickerçš„é è¨­é–“éš”60åˆ†é˜)
+	       step: 1,                //step: 60 (³o¬Otimepickerªº¹w³]¶¡¹j60¤ÀÄÁ)
 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
 		   value: '<%=act_date_start%>'
 	// value:   new Date(),
-	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // å»é™¤ç‰¹å®šä¸å«
-	//startDate:	            '2017/07/10',  // èµ·å§‹æ—¥
-	//minDate:               '-1970-01-01', // å»é™¤ä»Šæ—¥(ä¸å«)ä¹‹å‰
-	//maxDate:               '+1970-01-01'  // å»é™¤ä»Šæ—¥(ä¸å«)ä¹‹å¾Œ
+	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // ¥h°£¯S©w¤£§t
+	//startDate:	            '2017/07/10',  // °_©l¤é
+	//minDate:               '-1970-01-01', // ¥h°£¤µ¤é(¤£§t)¤§«e
+	//maxDate:               '+1970-01-01'  // ¥h°£¤µ¤é(¤£§t)¤§«á
 	});
 </script>
-
-
 
 
 </html>

@@ -3,22 +3,22 @@ package com.tk_ord.model;
 
 
 public class Order {
-		private TKorder[] TKorders;
-		private FDorder[] FDorders;
+		private TKorder[] TKorder;
+		private FDorder[] FDorder;
 		private String[] seatindex;
 		private Integer MemberID;
 		private Integer SH_ID;
-		public TKorder[] getTKorders() {
-			return TKorders;
+		public TKorder[] getTKorder() {
+			return TKorder;
 		}
-		public void setTKorder(TKorder[] tKorders) {
-			TKorders = tKorders;
+		public void setTKorder(TKorder[] tKorder) {
+			TKorder = tKorder;
 		}
-		public FDorder[] getFDorders() {
-			return FDorders;
+		public FDorder[] getFDorder() {
+			return FDorder;
 		}
-		public void setFDorder(FDorder[] fDorders) {
-			FDorders = fDorders;
+		public void setFDorder(FDorder[] fDorder) {
+			FDorder = fDorder;
 		}
 		public String[] getSeatindex() {
 			return seatindex;

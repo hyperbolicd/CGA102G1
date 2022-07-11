@@ -37,8 +37,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	
 	private static final String Register =           //會員註冊時會傳送信件，並修改會員狀態(藉由Email搜尋會員ID)
 			"select MEMBER_ID " + "from member where (MEMBER_EMAIL = ? );";
-	
-
+		
 
 //新增資料	
 	public void insert(MemberVO memberVO) {

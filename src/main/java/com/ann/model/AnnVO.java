@@ -7,8 +7,8 @@ public class AnnVO implements java.io.Serializable{
 	private Date ann_date;        //公告日期
 	private String ann_title;     //公告標題
 	private String ann_content;   //公告內容
-//	private byte[] ann_picture;   //公告圖片
-	private String ann_picture;   //公告圖片
+	private byte[] ann_picture;   //公告圖片
+	
 	public Integer getAnn_no() {
 		return ann_no;
 	}
@@ -30,15 +30,15 @@ public class AnnVO implements java.io.Serializable{
 	public String getAnn_content() {
 		return ann_content;
 	}
-	public void setAnn_content(String ann_content) {
-		this.ann_content = ann_content;
+	public void setAnn_content(String editor1) {
+		this.ann_content = editor1;
 	}
-	public String getAnn_picture() {
+	public byte[] getAnn_picture() {
 		return ann_picture;
 	}
-	public void setAnn_picture(String ann_picture) {
+	public void setAnn_picture(byte[] ann_picture) {
 		this.ann_picture = ann_picture;
 	}
-
+	
 	
 }

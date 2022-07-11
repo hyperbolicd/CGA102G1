@@ -34,14 +34,18 @@ public class WishingVoteServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		if("seeOneEvent".equals(action)) {
+			
 			// 存放錯誤訊息
 			Map<String, String> errMsg = new LinkedHashMap<String, String>();
 			request.setAttribute("errMsg", errMsg);
+			
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			// 由按鈕點選，無錯誤處理
 			Integer wish_no = Integer.valueOf(request.getParameter("wish_no"));
 			String wish_name = request.getParameter("wish_name");
 			String wish_start = request.getParameter("wish_start");
 			String wish_end = request.getParameter("wish_end");
+			
 			/***************************2.開始查詢資料*****************************************/
 			// 到 redis 查詢明細
 			String eventJedisKey = new StringBuilder("wish:").append(wish_no).toString();
@@ -84,10 +88,13 @@ public class WishingVoteServlet extends HttpServlet {
 		}
 		
 		if("voteOneEvent".equals(action)) {
+			
 			// 存放錯誤訊息
 			Map<String, String> errMsg = new LinkedHashMap<String, String>();
 			request.setAttribute("errMsg", errMsg);
+			
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			// 由按鈕點選，無錯誤處理
 			Integer wish_no = Integer.valueOf(request.getParameter("wish_no"));
 			Integer member_id = Integer.valueOf(request.getParameter("member_id"));
 
@@ -99,6 +106,7 @@ public class WishingVoteServlet extends HttpServlet {
 				request.getRequestDispatcher("/frond_end/wish/wishPage.jsp").forward(request, response);
 			}
 			MemberVO memberVO = new MemberService().getOneMem(member_id);
+			
 			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 			request.setAttribute("wish_ticket", memberVO.getWish_Ticket());
 			request.setAttribute("wishListVOs", wishListVOs);
@@ -106,8 +114,11 @@ public class WishingVoteServlet extends HttpServlet {
 		}
 		
 		if("voteMovie".equals(action)) {
+			
+			// 存放錯誤訊息
 			Map<String, String> errMsg = new LinkedHashMap<String, String>();
 			request.setAttribute("errMsg", errMsg);
+			
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 			// 會員登入後才可使用，從session抓會員編號	，未登入會導回登入頁面，故無作錯誤處理
 			Integer member_id = Integer.valueOf(request.getParameter("member_id"));
@@ -154,9 +165,11 @@ public class WishingVoteServlet extends HttpServlet {
 				new WishReplyService().addWishReply(wish_no, member_id, wish_msg);
 			}
 			
+			// 由按鈕點選，無錯誤處理
 			String wish_name = request.getParameter("wish_name");
 			String wish_start = request.getParameter("wish_start");
 			String wish_end = request.getParameter("wish_end");
+			
 			/***************************2.開始查詢資料*****************************************/
 			// 到 redis 查詢明細
 			String eventJedisKey = new StringBuilder("wish:").append(wish_no).toString();

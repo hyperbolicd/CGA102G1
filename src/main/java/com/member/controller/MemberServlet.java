@@ -16,6 +16,8 @@ import javax.servlet.http.*;
 import javax.servlet.http.Part;
 
 import com.member.model.*;
+import com.sc_detail.model.SCDetailService;
+import com.sc_detail.model.SCDetailVO;
 
 import MemberSendEmail.MailService;
 
@@ -91,7 +93,7 @@ public class MemberServlet extends HttpServlet {
 		if ("update".equals(action)) { // 來自membermod.jsp的請求 成功修改完成頁面
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+/*---------------- 更新會員資料時會員資料跳出修改成功 ---------------------------*/			
 			Map<String, String> situation = new LinkedHashMap<String, String>();
 			req.setAttribute("situation", situation);
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
@@ -198,10 +200,7 @@ public class MemberServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
-			
-			
-			
+			req.setAttribute("errorMsgs", errorMsgs);			
 			/*************************** 1.接收請求參數 ***************************************/
 			Integer member_Status = Integer.valueOf(req.getParameter("member_Status"));
 			Integer member_Id = Integer.valueOf(req.getParameter("member_Id"));
@@ -237,6 +236,10 @@ public class MemberServlet extends HttpServlet {
 //會員登入	控制器	
 		if ("login".equals(action)) {
 			System.out.println("start");
+			
+/*------------------ 會員登入權限如果以停權  ----------------------------*/	
+			Map<String, String> situation = new LinkedHashMap<String, String>();
+			req.setAttribute("situation", situation);		
 			/*************************** 1.接收請求參數 ***************************************/
 			String member_Email = String.valueOf(req.getParameter("email"));       // 請輸入email
 			String member_Password = String.valueOf(req.getParameter("password")); // 請輸入密碼
@@ -251,23 +254,39 @@ public class MemberServlet extends HttpServlet {
 			String location = (String) session.getAttribute("location");   
 			// =========================
 			memberVo = memberSvc.loginMember(memberVo);  
-			Integer memberId = memberVo.getMember_ID();  
-			memberVo = memberSvc.getOneMember(memberId); 
-			session.setAttribute("account", memberVo.getMember_ID()); // 在session內設定屬性 Attribte，指已登入過的標示與值
+			Integer memberId = memberVo.getMember_ID(); 
+			if (memberId != null) {				
+				memberVo = memberSvc.getOneMember(memberId); 
+			}
+//			System.out.println("會員狀態 : "+memberVo.getMember_Status());
+//			System.out.println("會員是否被停權 : " + memberVo.getMember_Status().equals(2));
 			String url = "";
 			System.out.println(memberId);
-			if (memberId == null) {                      
+			if (memberId == null) {                               //如果號密碼有可能輸入錯誤
 				url = "/front_end/login/login.jsp";		 
+<<<<<<< HEAD
+=======
+			}else if(memberVo.getMember_Status().equals(2)) {     //如果會員狀態 帳號被停權
+				situation.put("login", "您被停權了");                //跳出您被停權了
+				url = "/front_end/login/login.jsp";	
+>>>>>>> 7a68708c2c739fb3883a3375af17df4b892806e5
 			}else{
-				url = "/front_end/index.jsp";            
+				url = "/front_end/index.jsp";   //登入成功
+				session.setAttribute("account", memberVo.getMember_ID()); // 在session內設定屬性 Attribte，指已登入過的標示與值
 				session.setAttribute("memberVO", memberVo);	//在session內設定屬性(Attribute)註冊的Email.password	
 			}
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+<<<<<<< HEAD
 			 if(session.getAttribute("location") != null){  
 					res.sendRedirect((String) session.getAttribute("location"));
 					return;
 				}
 			System.out.println("account"+url);
+=======
+			if(session.getAttribute("location") != null){  
+				res.sendRedirect((String) session.getAttribute("location"));}
+			System.out.println("account");
+>>>>>>> 7a68708c2c739fb3883a3375af17df4b892806e5
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listAllMember.jsp
 			successView.forward(req, res); // 轉送
 			return;
@@ -275,7 +294,15 @@ public class MemberServlet extends HttpServlet {
 
 //會員登出	控制器			
 		if ("logout".equals(action)) {
-			req.getSession().invalidate();
+			HttpSession session = req.getSession();
+			SCDetailService scDetailSvc = new SCDetailService();
+		     List<SCDetailVO> buylist = (Vector<SCDetailVO>) session.getAttribute("shoppingcart");
+		     if(buylist != null) {
+		    	 for(SCDetailVO scdVO : buylist) {
+		    		 scDetailSvc.addSCDetail(scdVO);
+		    	 }
+		     }
+		    session.invalidate();
 			String location = req.getContextPath() + "/front_end/index.jsp";
 			res.sendRedirect(location);
 			return;
@@ -286,6 +313,10 @@ public class MemberServlet extends HttpServlet {
 
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+			
+/*---------------- 會員註冊時會跳出註冊成功 ---------------------------*/			
+			Map<String, String> situation = new LinkedHashMap<String, String>();
+			req.setAttribute("situation", situation);
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 			String member_Name = req.getParameter("member_Name");
 			if (member_Name == null || member_Name.trim().length() == 0) {
@@ -299,6 +330,17 @@ public class MemberServlet extends HttpServlet {
 			} else if (!member_Email.trim().matches(memeber_EmailReg)) { // 以下練習正則(規)表示式(regular-expression)
 				errorMsgs.put("member_Email", "電子信箱: (英文 大小寫皆可)@後面是「英文 or 數字」 + 「.」 ");
 			}
+			
+			
+			String member_Password = req.getParameter("member_Password");
+			System.out.println(member_Password);
+			String member_PasswordReg = "^(?![a-zA-Z]+$)(?![0-9]+$)[0-9A-Za-z]{2,8}$"; // 至少八個字符，至少一個字母和一個數字：
+			if (member_Password == null || member_Password.trim().length() == 0) {
+				errorMsgs.put("member_Password", "：請勿空白");
+			} else if (!member_Password.trim().matches(member_PasswordReg)) { // 以下練習正則(規)表示式(regular-expression)
+				errorMsgs.put("member_Password", "會員密碼: 至少八個字符，至少一個字母和一個數字, 且長度必需2到8之間");
+			}
+
 
 			String member_Phone = req.getParameter("member_Phone");
 			String member_PhoneReg = "09[0-9]{8}"; // 字串裡面必須全是 0~9 的數字，字串長度必須是 10
@@ -311,19 +353,12 @@ public class MemberServlet extends HttpServlet {
 				errorMsgs.put("member_Phone", "會員電話: 字串裡面必須全是 0~9 的數字，字串長度必須是 10");
 			}
 
-			String member_Password = req.getParameter("member_Password");
-			System.out.println(member_Password);
-			String member_PasswordReg = "^(?![a-zA-Z]+$)(?![0-9]+$)[0-9A-Za-z]{2,8}$"; // 至少八個字符，至少一個字母和一個數字：
-			if (member_Password == null || member_Password.trim().length() == 0) {
-				errorMsgs.put("member_Password", "：請勿空白");
-			} else if (!member_Password.trim().matches(member_PasswordReg)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.put("member_Password", "會員密碼: 至少八個字符，至少一個字母和一個數字, 且長度必需2到8之間");
-			}
-
+			
 			String member_Address = req.getParameter("member_Address");
 			if (member_Address == null || member_Phone.trim().length() == 0) {
 				errorMsgs.put("member_Address", "：請勿空白");
 			}
+			
 			// String photoName = "";
 			Part photo = req.getPart("myUpfile");
 			String photoName = "/member_pic/" + photo.getSubmittedFileName(); //
@@ -355,7 +390,6 @@ public class MemberServlet extends HttpServlet {
 				failureView.forward(req, res);
 				return;
 			}
-
 			/*************************** 2.開始新增資料 ***************************************/
 			MemberService memberSvc = new MemberService();
 			memberVO = memberSvc.addMember("C", member_Email, member_Password, member_Name, member_Phone,
@@ -367,6 +401,7 @@ public class MemberServlet extends HttpServlet {
 					req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/member.do?member_ID="+ memberVO.getMember_ID()+"&action=register");
 //					"http://localhost:8081/CGA102G1/member.do?member_ID="+ memberVO.getMember_ID()+"&action=register ");
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+			situation.put("join", "註冊成功");      //// 會員註冊成功
 			String url = "/front_end/login/login.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交login.jsp
 			successView.forward(req, res);
@@ -389,6 +424,9 @@ public class MemberServlet extends HttpServlet {
 		}
 		
 		
+		
+		
 
 	}
 }
+

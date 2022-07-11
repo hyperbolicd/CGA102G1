@@ -57,7 +57,7 @@
 			<div id="titleInfo" class="info">商品描述</div>
 			<div id="titlePrice" class="price">價格</div>
 			<div id="titleCount" class="count">數量</div>
-			<div id="titleEdit" class="edit">刪除</div>
+			<div id="titleEdit" class="edit">編輯</div>
 		</div>
 		<hr class="line" />
 		<div id="cartBody">

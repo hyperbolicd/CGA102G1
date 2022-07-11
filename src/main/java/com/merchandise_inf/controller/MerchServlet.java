@@ -3,10 +3,8 @@ package com.merchandise_inf.controller;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.sql.Blob;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +19,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import javax.sql.rowset.serial.SerialBlob;
 
-import com.google.gson.Gson;
 import com.merchandise_inf.model.MerchService;
 import com.merchandise_inf.model.MerchVO;
 
@@ -43,8 +40,7 @@ public class MerchServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("text/html;charset=UTF-8");
 		String action = req.getParameter("action");
-//		System.out.println(req.getParameter("action"));
-//		System.out.println(req.getReader().readLine());
+
 //		res.getWriter().println(action); 測試是否有收到
 //		res.getWriter().println("測試是否有進此畫面");
 
@@ -401,56 +397,6 @@ public class MerchServlet extends HttpServlet {
 			String url = "/front_end/merchandise/merchandise.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
-		}
-		if("changePrice".equals(action)) {
-			if("0".equals(req.getParameter("index"))){
-				Double min = Double.valueOf(req.getParameter("min"));
-				Double max = Double.valueOf(req.getParameter("max"));
-				MerchService merchSvc = new MerchService();
-				List<MerchVO> list = merchSvc.getHotSell(min, max);
-				Gson gson = new Gson();
-				String str = gson.toJson(list);
-				res.setContentType("application/json; charset=UTF-8");
-				PrintWriter out = res.getWriter();
-				out.print(str);
-			}
-			if("1".equals(req.getParameter("index"))){
-				Double min = Double.valueOf(req.getParameter("min"));
-				Double max = Double.valueOf(req.getParameter("max"));
-				MerchService merchSvc = new MerchService();
-				List<MerchVO> list = merchSvc.getNewest(min, max);
-				Gson gson = new Gson();
-				String str = gson.toJson(list);
-				res.setContentType("application/json; charset=UTF-8");
-				PrintWriter out = res.getWriter();
-				out.print(str);
-			}
-			if("2".equals(req.getParameter("index"))){
-				Double min = Double.valueOf(req.getParameter("min"));
-				Double max = Double.valueOf(req.getParameter("max"));
-				MerchService merchSvc = new MerchService();
-				List<MerchVO> list = merchSvc.getMostSold(min, max);
-				Gson gson = new Gson();
-				String str = gson.toJson(list);
-				res.setContentType("application/json; charset=UTF-8");
-				PrintWriter out = res.getWriter();
-				out.print(str);
-			}
-			
-		}
-		if("getSearchList".equals(action)) {
-			
-			Double min = Double.valueOf(req.getParameter("min"));
-			Double max = Double.valueOf(req.getParameter("max"));
-			String search = req.getParameter("search");
-			MerchService merchSvc = new MerchService();
-			List<MerchVO> list = merchSvc.getBySearch(search, min, max);
-			Gson gson = new Gson();
-			String str = gson.toJson(list);
-			res.setContentType("application/json; charset=UTF-8");
-			PrintWriter out = res.getWriter();
-			out.print(str);
-			
 		}
 		
 

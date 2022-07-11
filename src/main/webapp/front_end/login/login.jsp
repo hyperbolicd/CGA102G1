@@ -11,6 +11,8 @@
   <title>HireMe</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/css/layout.css" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
  
 <%@ include file="/front_end/header.jsp"%>
 <%@ include file="/front_end/header_css.jsp"%>
@@ -67,5 +69,38 @@
 		        });
 		});
 		</script>
+		
+		
+		  	
+		  	<script> 
+		  	
+		console.log('xxx'+'${situation.login}');  //測試前台有沒有拿到值
+		
+ 	<c:if test="${not empty situation.login}"> //如果situation裡面 login不為空的話會執行以下程式
+      Swal.fire(
+				'erron',    		  
+                '您被停權了!!',
+                 'error'
+             )
+          <% request.removeAttribute("login"); %>  
+      </c:if>
+	
+ 	</script> 
+ 	
+ 	<script>
+	<c:if test="${not empty situation.join}">
+    Swal.fire(
+               'OK',
+               '註冊成功!請到電子信箱收取驗證信!!',
+               'success'
+           )
+         <% request.removeAttribute("join"); %>
+    </c:if>
+	
+	</script> 
+
+		
+		
+		
     </body>
 </html>

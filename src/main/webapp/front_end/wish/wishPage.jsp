@@ -15,57 +15,19 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/front_end/wish/css/wishNotify.css">
 </head>
 <body onload="connect();" onunload="disconnect();">
-	<div class="wrapper row1" style="height: 60px;">
-		<header id="header" class="clear">
-			<div id="hgroup">
-				<img src="${pageContext.request.contextPath}/front_end/images/demo/logo6.png" width="200" height="60" alt="">
-			</div>
-			<div class="dropdown" style="margin: 0; padding: 0; list-style: none;">
-				<button class="dropbtn">會員專區</button>
-				<div class="dropdown-content">
-					<a href="#">會員登入</a> <a href="#">會員中心</a>
-				</div>
-			</div>
-			<div class="dropdown">
-				<button class="dropbtn">活動公告</button>
-				<div class="dropdown-content">
-					<a href="#">影城公告</a> <a href="#">影城好康</a>
-				</div>
-			</div>
-			<div class="dropdown">
-				<button class="dropbtn">Q & A專區</button>
-				<div class="dropdown-content">
-					<a href="#">常見問題</a> <a href="#">客服信箱</a>
-				</div>
-			</div>
-			<div class="dropdown">
-				<button class="dropbtn">影城專區</button>
-				<div class="dropdown-content">
-					<a href="#">影城介紹</a> <a href="#">影城地點</a> <a href="#">票價資訊</a> <a
-						href="#">餐飲資訊</a>
-				</div>
-			</div>
-			<div class="dropdown">
-				<button class="dropbtn">電影資訊</button>
-				<div class="dropdown-content"></div>
-			</div>
-			<div class="dropdown">
-				<button class="dropbtn">商城購物</button>
-				<div class="dropdown-content">
-					<a href="#">商品瀏覽</a> <a href="#">購買退貨</a>
-				</div>
-			</div>
-			<button class="logout">會員登出</button>
-		</header>
-	</div>
+	<%@ include file="/front_end/header.jsp"%>
 
 	<div id="mainDiv">
 		<div class="side-menu">
 			<nav>
-				<a href="#"><i class="fa fa-edit" aria-hidden="true"></i>會員修改資料</a> 
-				<a href="#"><i class="fa fa-gavel" aria-hidden="true"></i>票卷匣</a> 
-				<a href="#"><i class="fa fa-object-group" aria-hidden="true"></i>許願池</a> 
-				<a href="#"><i class="fa fa-clone" aria-hidden="true"></i>評論區</a>
+				<a
+					href="${pageContext.request.contextPath}/front_end/membercentre/membermod.jsp">
+					<i class="fa fa-edit" aria-hidden="true"></i> 會員修改資料
+				</a> <a href="${pageContext.request.contextPath}/front_end/wish/wishPage.jsp"> <i class="fa fa-object-group" aria-hidden="true"></i>
+					許願池
+				</a> <a href="${pageContext.request.contextPath}/front_end/memberCmt/memberCmt.jsp"> <i class="fa fa-clone" aria-hidden="true"></i> 評論區
+				</a>
+				 <a href="#"> <i class="fa fa-gavel" aria-hidden="true"></i> 訂單明細</a>
 			</nav>
 		</div>
 		<!-- <div id="content">
@@ -119,12 +81,12 @@
         	<img src="${pageContext.request.contextPath}/front_end/wish/icons8-message-64.png" >
         	<ul id="notifyUl" style="display: none;">
         		<li>通知</li>
-        		<li>ssssssssss</li>
-        		<li>ssssssssss</li>
-        		<li>ssssssssss</li>
-        		<li>ssssssssss</li>
-        		<li>ssssssssss</li>
-        		<li>ssssssssss</li>
+        		<li>登入已逾時，請重新登入</li>
+        		<li>登入已逾時，請重新登入</li>
+        		<li>登入已逾時，請重新登入</li>
+        		<li>登入已逾時，請重新登入</li>
+        		<li>登入已逾時，請重新登入</li>
+        		<li>登入已逾時，請重新登入</li>
         	</ul>
         </div>
 	</div>
@@ -168,11 +130,28 @@
 				notifyUl.innerHTML = '<li>通知</li>';
 				const jsonStrsObj = JSON.parse(e.data);
 				let UnreadCount = 0;
-				for(let jsonStr of jsonStrsObj){
-					let jsonObj = JSON.parse(jsonStr);
+				// 逆向取出
+				for(let i = jsonStrsObj.length - 1; i >= 0; i--){
+					let jsonObj = JSON.parse(jsonStrsObj[i]);
 					console.log(jsonObj.message);
 					const li = document.createElement('li');
-					li.innerText = jsonObj.message;
+					const spanText = document.createElement('span');
+					const br = document.createElement('br');
+					const spanTime = document.createElement('span');
+					spanText.innerText = jsonObj.message;
+					// 算出與現在的時間差
+					const minuteDiff = new Date().getTime()/1000/60 - jsonObj.minute;
+					if(parseInt(minuteDiff / 60) === 0){
+						spanTime.innerText = '---' + parseInt(minuteDiff) + '分前';
+					} else if(parseInt(minuteDiff / 60) < 24){
+						spanTime.innerText = '---' + parseInt(minuteDiff / 60) + '小時前';
+					} else if((parseInt(minuteDiff / 60) >= 24)){
+						spanTime.innerText = '---' + parseInt(minuteDiff / 60 / 24) + '天前';
+					}
+					spanTime.style.color = 'gray';
+					li.append(spanText);
+					li.append(br);
+					li.append(spanTime);
 					if(jsonObj.status === 0){
 						UnreadCount++;
 					}

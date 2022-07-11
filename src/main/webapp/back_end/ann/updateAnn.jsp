@@ -8,12 +8,10 @@ AnnVO annVO = (AnnVO) request.getAttribute("annVO"); //EmpServlet.java (Concroll
 %>
 
 <%
-response.setHeader("Cache-Control", "no-store");
-response.setHeader("Pragma", "no-cache");
-response.setDateHeader("Expires", 0);
+	response.setHeader("Cache-Control", "no-store");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0);
 %>
-
-<%= annVO==null %>
 
 
 <!DOCTYPE html>
@@ -43,11 +41,23 @@ response.setDateHeader("Expires", 0);
 
 <body>
 	<header>
-		<%@ include file="/back_end/header_html.jsp"%>
+		<nav>
+			<div id="logo">
+				<img
+					src="${pageContext.request.contextPath}/back_end/logo2noline.jpg">
+			</div>
+			<h2>員工後台操作系統</h2>
+			<ul>
+				<li>登出</li>
+			</ul>
+		</nav>
 	</header>
-	<aside id="aside">
-		<%@ include file="/back_end/aside_html.jsp"%>
-	</aside>
+
+	<!-- 	<header> -->
+	<%--         <%@ include file="/back_end/header_html.jsp"%>    --%>
+	<!--     </header> -->
+
+	<aside id="aside"></aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
 		<div class="all">
@@ -58,16 +68,6 @@ response.setDateHeader("Expires", 0);
 						<div>修改公告</div>
 					</div>
 				</div>
-				
-				<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
 
 				<FORM METHOD="post" name="form1" enctype="multipart/form-data"
 					ACTION="<%=request.getContextPath()%>/ann/ann.do" name="form1">
@@ -89,7 +89,7 @@ response.setDateHeader("Expires", 0);
 								<td><input style="text-align: center;" type="text"
 									id="ann_date1" name="ann_date" size="95"
 									value="${annVO.ann_date}"></td>
-								<td>${errorMsgs.ann_date}</td>
+									<td>${errorMsgs.ann_date}</td>
 							</tr>
 							<tr>
 								<td>標題:</td>
@@ -97,17 +97,20 @@ response.setDateHeader("Expires", 0);
 									placeholder="請輸入標題，為了更好的展示效果，標題字數在50字以內"
 									onkeyUp="textLimitCheck(this, 50);" size="90"
 									value="${annVO.ann_title}"><span id="messageCount">0</span>/50</td>
-								<td>${errorMsgs.ann_title}</td>
+									<td>${errorMsgs.ann_title}</td>
 							</tr>
 							<tr>
 								<td>內容:</td>
-								<td><textarea style="margin: 20px;" id="ann_content"
-										name="ann_content" cols="90" rows="25">${annVO.ann_content}</textarea></td>
+								<td><textarea style="margin: 20px;" id="ann_content" name="ann_content" cols="90" rows="25">${annVO.ann_content}</textarea></td>
 								<td>${errorMsgs.ann_content}</td>
 							</tr>
 							<tr>
 								<td>圖片:</td>
-								<td><input type="file" name="ann_picture" size="45" value="<%=annVO.getAnn_picture()%>" /></td>
+								<td><img
+									src="${pageContext.request.contextPath}/ann/ShowAnnBlob?ann_no=${annVO.ann_no}"
+									alt="" style="margin: 20px;" height="150px" id="ann_picture">
+									<input style="margin: 20px;" id="ann_picture" type="file" name="ann_picture"> 
+									</td>
 							</tr>
 
 						</table>
@@ -127,6 +130,10 @@ response.setDateHeader("Expires", 0);
 	</main>
 	<!-- <div id="tree"></div> -->
 	<footer> 嗨邇覓影城 &copy; HIREME CINEMA 2022 </footer>
+
+	<aside id="aside">
+		<%@ include file="/back_end/aside_html.jsp"%>
+	</aside>
 
 	<script type="text/javascript">
 		function textLimitCheck(thisArea, maxLength) {
@@ -148,8 +155,6 @@ response.setDateHeader("Expires", 0);
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
-
-
 <%
 java.sql.Date ann_date = null;
 try {
@@ -158,7 +163,6 @@ try {
 	ann_date = new java.sql.Date(System.currentTimeMillis());
 }
 %>
-
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script

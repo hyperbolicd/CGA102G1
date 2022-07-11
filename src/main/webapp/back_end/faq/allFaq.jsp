@@ -16,7 +16,6 @@ pageContext.setAttribute("list", list);
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>常見問題管理</title>
-
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/back_end/css/emp_all.css">
 <link rel="stylesheet" type="text/css"
@@ -31,11 +30,23 @@ pageContext.setAttribute("list", list);
 
 <body>
 	<header>
-        <%@ include file="/back_end/header_html.jsp"%>   
-    </header>
-	<aside id="aside">     
-     <%@ include file="/back_end/aside_html.jsp"%>   
-    </aside>
+		<nav>
+			<div id="logo">
+				<img
+					src="${pageContext.request.contextPath}/back_end/logo2noline.jpg">
+			</div>
+			<h2>員工後台操作系統</h2>
+			<ul>
+				<li>登出</li>
+			</ul>
+		</nav>
+	</header>
+
+	<!-- 	<header> -->
+	<%--         <%@ include file="/back_end/header_html.jsp"%>    --%>
+	<!--     </header> -->
+
+	<aside id="aside"></aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
 		<div class="all">
@@ -132,6 +143,10 @@ pageContext.setAttribute("list", list);
 	</main>
 	<!-- <div id="tree"></div> -->
 	<footer> 嗨邇覓影城 &copy; HIREME CINEMA 2022 </footer>
+
+	<aside id="aside">
+		<%@ include file="/back_end/aside_html.jsp"%>
+	</aside>
 
 </body>
 </html>

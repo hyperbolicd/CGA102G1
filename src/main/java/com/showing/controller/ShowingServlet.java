@@ -455,10 +455,12 @@ public class ShowingServlet extends HttpServlet {
 			
 				/***************************1.接收請求參數****************************************/
 			String SH_TIME = String.valueOf(req.getParameter("SH_TIME"));
+			Integer mvId = Integer.valueOf(req.getParameter("mvId"));
 				
 				/***************************2.開始查詢資料****************************************/
 				ShowingService showingSvc = new ShowingService();
 				List<ShowingVO> list = showingSvc.getShowingByDate(SH_TIME);
+				list.removeIf(e -> e.getmvId() != mvId);
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("list", list); // 資料庫取出的showingVO物件,存入req

@@ -13,7 +13,7 @@ pageContext.setAttribute("cnmVO", cnmVO);
 <head>
 <title>影城資訊</title>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/cinemaInfo/styles/layout.css" type="text/css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/css/layout.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href="<%=request.getContextPath()%>/front_end/cinemaInfo/css/bootstrap.css" rel='stylesheet' type='text/css' />
 <script src="<%=request.getContextPath()%>/front_end/cinemaInfo/js/bootstrap.js"></script>

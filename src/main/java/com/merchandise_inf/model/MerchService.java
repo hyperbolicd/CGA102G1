@@ -80,6 +80,7 @@ public class MerchService {
 	public void deleteMerch(Integer merchID) {
 		dao.delete(merchID);
 	}
+<<<<<<< HEAD
 	public List<MerchVO> getHotSell(){
 		Double minPrice = 0.0;
 		Double maxPrice = 100000.0;
@@ -143,4 +144,6 @@ public class MerchService {
 		return returnList;
 	}
 
+=======
+>>>>>>> 7a68708c2c739fb3883a3375af17df4b892806e5
 }

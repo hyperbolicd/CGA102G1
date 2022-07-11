@@ -4,10 +4,7 @@
 <%@ page import="com.ann.model.*"%>
 
 <%
-AnnVO annVO = (AnnVO) request.getAttribute("annVO");//EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
-AnnService annSvc = new AnnService();
-List<AnnVO> list = annSvc.getAll();
-pageContext.setAttribute("list",list);
+AnnVO annVO = (AnnVO) request.getAttribute("annVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 %>
 
 <!DOCTYPE html>
@@ -23,7 +20,7 @@ pageContext.setAttribute("list",list);
 	href="${pageContext.request.contextPath}/back_end/css/emp_main.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/back_end/css/emp_footer.css">
-
+	
 <!-- AddAnn_css -->
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/ann/css/annback_add.css">
@@ -44,11 +41,23 @@ pageContext.setAttribute("list",list);
 
 <body>
 	<header>
-		<%@ include file="/back_end/header_html.jsp"%>
+		<nav>
+			<div id="logo">
+				<img
+					src="${pageContext.request.contextPath}/back_end/logo2noline.jpg">
+			</div>
+			<h2>員工後台操作系統</h2>
+			<ul>
+				<li>登出</li>
+			</ul>
+		</nav>
 	</header>
-	<aside id="aside">
-		<%@ include file="/back_end/aside_html.jsp"%>
-	</aside>
+
+	<!-- 	<header> -->
+	<%--         <%@ include file="/back_end/header_html.jsp"%>    --%>
+	<!--     </header> -->
+
+	<aside id="aside"></aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
 		<div class="all">
@@ -59,16 +68,6 @@ pageContext.setAttribute("list",list);
 						<div>新增公告</div>
 					</div>
 				</div>
-
-				<c:if test="${not empty errorMsgs}">
-					<font style="color: red">請修正以下錯誤:</font>
-					<ul>
-						<c:forEach var="message" items="${errorMsgs}">
-							<li style="color: red">${message}</li>
-						</c:forEach>
-					</ul>
-				</c:if>
-
 
 				<FORM METHOD="post" enctype="multipart/form-data"
 					ACTION="<%=request.getContextPath()%>/ann/ann.do" name="form1">
@@ -86,7 +85,7 @@ pageContext.setAttribute("list",list);
 								<td><input style="text-align: center;" type="text"
 									id="ann_date1" name="ann_date" size="95"
 									value="${param.ann_date}"></td>
-								<td>${errorMsgs.ann_date}</td>
+									<td>${errorMsgs.ann_date}</td>
 							</tr>
 							<tr>
 								<td>標題:</td>
@@ -94,17 +93,16 @@ pageContext.setAttribute("list",list);
 									placeholder="請輸入標題，為了更好的展示效果，標題字數在50字以內"
 									onkeyUp="textLimitCheck(this, 50);" size="90"
 									value="${param.ann_title}"><span id="messageCount">0</span>/50</td>
-								<td>${errorMsgs.ann_title}</td>
+									<td>${errorMsgs.ann_title}</td>
 							</tr>
 							<tr>
 								<td>內容:</td>
-								<td><textarea style="resize: none; margin: 20px;"
-										id="ann_content" name="ann_content" cols="90" rows="30">${param.ann_content}</textarea></td>
+								<td><textarea style="resize:none; margin: 20px;" id="ann_content" name="ann_content" cols="90" rows="30">${param.ann_content}</textarea></td>
 								<td>${errorMsgs.ann_content}</td>
 							</tr>
 							<tr>
 								<td>圖片:</td>
-									<td> <input type="file"  name="myUpfile"></td>
+								<td><input id="ann_picture"	type="file" name="ann_picture" value="${param.ann_picture}"></td>
 								<td></td>
 							</tr>
 						</table>
@@ -124,6 +122,13 @@ pageContext.setAttribute("list",list);
 	</main>
 	<!-- <div id="tree"></div> -->
 	<footer> 嗨邇覓影城 &copy; HIREME CINEMA 2022 </footer>
+
+	<aside id="aside">
+		<%@ include file="/back_end/aside_html.jsp"%>
+	</aside>
+
+
+
 
 	<script type="text/javascript">
 		function textLimitCheck(thisArea, maxLength) {

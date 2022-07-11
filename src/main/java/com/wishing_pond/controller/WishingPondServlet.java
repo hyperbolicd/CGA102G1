@@ -37,12 +37,16 @@ public class WishingPondServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		if("seeOneEvent".equals(action)) {
+			
 			// 存放錯誤訊息
 			Map<String, String> errMsg = new LinkedHashMap<String, String>();
 			request.setAttribute("errMsg", errMsg);
+			
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			// 由按鈕點選，無錯誤處理
 			Integer wish_no = Integer.valueOf(request.getParameter("wish_no"));
 			Integer top_one = Integer.valueOf(request.getParameter("top_one"));
+			
 			/***************************2.開始查詢資料*****************************************/
 			WishingListService wishListSvc = new WishingListService();
 			List<WishingListVO> wishListVOs =  wishListSvc.getOneWishingPond(wish_no);
@@ -52,6 +56,7 @@ public class WishingPondServlet extends HttpServlet {
 			}
 			WishReplyService wishReplySvc = new WishReplyService();
 			List<WishReplyVO> wishReplyVOs = wishReplySvc.getOneWishEvent(wish_no);
+			
 			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 			request.setAttribute("wishListVOs", wishListVOs);
 			request.setAttribute("wishReplyVOs", wishReplyVOs);
@@ -60,11 +65,15 @@ public class WishingPondServlet extends HttpServlet {
 		}
 		
 		if("multiSearch".equals(action)) {
+			
 			// 存放錯誤訊息
 			Map<String, String> errMsg = new LinkedHashMap<String, String>();
 			request.setAttribute("errMsg", errMsg);
+			
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			// 由按鈕點選，無錯誤處理
 			Map<String, String[]> map = request.getParameterMap();
+			
 			/***************************2.開始查詢資料*****************************************/
 			WishingPondService wishSvc = new WishingPondService();
 			List<WishingPondVO> wishVOs =  wishSvc.getAll(map);
@@ -73,6 +82,7 @@ public class WishingPondServlet extends HttpServlet {
 				request.getRequestDispatcher("/back_end/wish/wishPond.jsp").forward(request, response);
 				return;
 			}
+			
 			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 			request.setAttribute("list", wishVOs);
 			request.setAttribute("listSize", wishVOs.size());
@@ -80,9 +90,11 @@ public class WishingPondServlet extends HttpServlet {
 		}
 		
 		if("showAll".equals(action)) {
+			
 			// 存放錯誤訊息
 			Map<String, String> errMsg = new LinkedHashMap<String, String>();
 			request.setAttribute("errMsg", errMsg);
+			
 			/***************************2.開始查詢資料*****************************************/
 			WishingPondService wishSvc = new WishingPondService();
 			List<WishingPondVO> wishVOs =  wishSvc.getAll();
@@ -90,6 +102,7 @@ public class WishingPondServlet extends HttpServlet {
 				errMsg.put("notFound", "查無資料");
 				request.getRequestDispatcher("/back_end/wish/wishPond.jsp").forward(request, response);
 			}
+			
 			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 			request.setAttribute("list", wishVOs);
 			request.setAttribute("listSize", wishVOs.size());
@@ -97,9 +110,11 @@ public class WishingPondServlet extends HttpServlet {
 		}
 		
 		if("addWish".equals(action)) {
+			
 			// 存放錯誤訊息
 			Map<String, String> errMsg = new LinkedHashMap<String, String>();
 			request.setAttribute("errMsg", errMsg);
+			
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 			String wish_name = request.getParameter("wish_name");
 			if(wish_name == null || wish_name.length() == 0) {
@@ -148,20 +163,26 @@ public class WishingPondServlet extends HttpServlet {
 				wishListVO.setMv_id(Integer.valueOf(movie));
 				list.add(wishListVO);
 			}
+			
 			/***************************2.開始新增資料*****************************************/
 			WishingPondService wishSvc = new WishingPondService();
 			wishVO = wishSvc.addWishingPondWithOption(wishVO, list);
+			
 			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 			request.setAttribute("wishVO", wishVO);
 			request.getRequestDispatcher("/back_end/wish/wishPond.jsp").forward(request, response);
 		}
 		
 		if("updateEvent".equals(action)) {
+			
 			// 存放錯誤訊息
 			Map<String, String> errMsg = new LinkedHashMap<String, String>();
 			request.setAttribute("errMsg", errMsg);
+			
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			// 由按鈕點選，無錯誤處理
 			Integer wish_no = Integer.valueOf(request.getParameter("wish_no"));
+			
 			/***************************2.開始查詢資料*****************************************/
 			WishingPondService wishSvc = new WishingPondService();
 			WishingPondVO wishVO = wishSvc.getOneWishingPond(wish_no);
@@ -179,10 +200,13 @@ public class WishingPondServlet extends HttpServlet {
 		}
 		
 		if("updateWish".equals(action)) {
+			
 			// 存放錯誤訊息
 			Map<String, String> errMsg = new LinkedHashMap<String, String>();
 			request.setAttribute("errMsg", errMsg);
+			
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			// 由按鈕點選，無錯誤處理
 			Integer wish_no = Integer.valueOf(request.getParameter("wish_no"));
 			
 			String wish_name = request.getParameter("wish_name");
@@ -230,9 +254,11 @@ public class WishingPondServlet extends HttpServlet {
 				wishListVO.setMv_id(Integer.valueOf(movie));
 				list.add(wishListVO);
 			}
+			
 			/***************************2.開始新增資料*****************************************/
 			WishingPondService wishSvc = new WishingPondService();
 			Integer lastUpdate = wishSvc.updateWishingPondWithOption(wishVO, list);
+			
 			/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 			request.setAttribute("lastUpdate", lastUpdate);
 			request.getRequestDispatcher("/back_end/wish/wishPond.jsp").forward(request, response);

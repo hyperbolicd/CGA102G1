@@ -32,11 +32,22 @@ FaqVO faqVO = (FaqVO) request.getAttribute("faqVO"); //EmpServlet.java (Concroll
 
 <body>
 	<header>
-        <%@ include file="/back_end/header_html.jsp"%>   
-    </header>
-	<aside id="aside">     
-     <%@ include file="/back_end/aside_html.jsp"%>   
-    </aside>
+		<nav>
+			<div id="logo">
+				<img src="${pageContext.request.contextPath}/back_end/logo2noline.jpg">
+			</div>
+			<h2>員工後台操作系統</h2>
+			<ul>
+				<li>登出</li>
+			</ul>
+		</nav>
+	</header>
+	
+<!-- 	<header> -->
+<%--         <%@ include file="/back_end/header_html.jsp"%>    --%>
+<!--     </header> -->
+	
+	<aside id="aside"></aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
 		<div class="all">
@@ -101,6 +112,9 @@ FaqVO faqVO = (FaqVO) request.getAttribute("faqVO"); //EmpServlet.java (Concroll
 	<!-- <div id="tree"></div> -->
 	<footer> 嗨邇覓影城 &copy; HIREME CINEMA 2022 </footer>
 
+<aside id="aside">     
+     <%@ include file="/back_end/aside_html.jsp"%>   
+    </aside>
 
 </body>
 

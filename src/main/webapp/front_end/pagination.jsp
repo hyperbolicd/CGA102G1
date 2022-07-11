@@ -33,15 +33,15 @@
  <jsp:include page="/front_end/header.jsp" />
     
 
- <div>
+ <div style="padding:500px 100px;">
+
 內容放在這裡
 
 
 
 
-
   </div>
-<!--客服圖 請自行加連結-->
+<!--   <!--客服圖 請自行加連結--> -->
 <!--   <img class="cs" src="images/demo/cs.png" height="50px;" width="60px;" href="#"></img> -->
 
   <!-- Copyright -->
