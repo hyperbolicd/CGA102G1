@@ -5,7 +5,7 @@
 	<li id="index"><span><a href="${pageContext.request.contextPath}/back_end/empIndex.jsp">首頁</a></span></li>
 	<li><span>資訊管理</span>
 		<ul>
-			<li><a href="${pageContext.request.contextPath}/back_end/notFinishedYet.jsp">影城資訊管理</a></li>
+			<li><a href="${pageContext.request.contextPath}/back_end/cinemaInfoManege/cinemaInfoManege.jsp">影城資訊管理</a></li>
 			<li><a href="${pageContext.request.contextPath}/back_end/ManageMV/manageMV.jsp">電影資訊管理</a></li>
 			<li><a href="${pageContext.request.contextPath}/back_end/tk_inf/allTkInf.jsp">票價資訊管理</a></li>
 			<li><a href="${pageContext.request.contextPath}/back_end/fd_inf/allFdInf.jsp">餐飲資訊管理</a></li>
@@ -17,7 +17,6 @@
 		<ul>
 			<li><a href="${pageContext.request.contextPath}/back_end/tk_ord/sellTK.jsp">現場購票/購餐</a></li>
 			<li><a href="${pageContext.request.contextPath}/back_end/refundTicket/refundIndex.jsp">票務訂單管理</a></li>
-			<li><a href="${pageContext.request.contextPath}/back_end/notFinishedYet.jsp">驗票驗證碼</a></li>
 		</ul></li>
 	<li><span>評論相關</span>
 		<ul>
