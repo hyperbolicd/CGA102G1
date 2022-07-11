@@ -246,7 +246,7 @@
 				.click(
 						function() {
 							// 去除不可選座位
-							if (!$(this).hasClass("seatUnavailable")) {
+							if (!$(this).hasClass("seatUnavailable") && !$(this).hasClass("seatConstruction") && !$(this).hasClass("seatReserved")) {
 								// 如果座位已選過
 								if ($(this).hasClass("seatSelected")) {
 									
