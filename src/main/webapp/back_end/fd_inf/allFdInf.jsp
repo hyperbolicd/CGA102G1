@@ -62,7 +62,7 @@ pageContext.setAttribute("list", list);
 							<th>圖片</th>
 							<th>狀態</th>
 							<th>修改</th>
-							<th>刪除</th>
+							<th>狀態更動</th>
 
 						</tr>
 						<%@ include file="page1.file"%>

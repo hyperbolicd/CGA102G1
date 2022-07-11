@@ -66,25 +66,7 @@ td {
 /* 	width: 200px; */
 }
 
-.tablebt {
-/* 	border: 1px solid white; */
-	text-decoration: none;
-	padding: 4px 4px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	margin-left: 20px;
-	/* 按鈕大小 */
-	text-align: center;
-	text-transform: uppercase;
-	transition: 0.5s;
-	background-size: 250% auto;
-	color: white;
-/* 	border-radius: 10px; */
-	font-weight: 700;
-/* 	background-image: linear-gradient(45deg, #000000 0%, #7c7c7c 51%, #000000 100%); */
-	background: #750000;
-	cursor: pointer;
-}
+
 
 
 
@@ -92,14 +74,7 @@ td {
 	transform: scale(0.95);
 }
 
-.tablebtBlock {
-	border-color: white;
-	border-width:0.1px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-wrap: wrap;
-}
+
 
 #f_date1 {
 	width: 110px;
@@ -109,7 +84,7 @@ td {
 
 
 .tablebtBlock{
-    width: 250px;
+    width: 150px;
     height: 40px;
     display: flex;
     justify-content: center;
@@ -120,13 +95,17 @@ td {
     background-color: #750000;
     position: relative;
     transition: all .3s linear;
+    margin-left: 50px;
     /* border-radius: 10px; */
 }
 .tablebtBlock > a{
+/* 	border:2px solid yellow; */
+	padding-left: 20px;
+	padding-right: 20px;
     letter-spacing: 2px;
     position: relative;
     z-index: 1;
-    border: none;
+/*     border: none; */
     color: white;
     background-color: transparent;
 }

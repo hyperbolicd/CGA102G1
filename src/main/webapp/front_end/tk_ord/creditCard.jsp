@@ -11,9 +11,10 @@
     <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
     <style>
         body {
+        
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
+            background-color: black;
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
@@ -409,7 +410,7 @@
 
 <body>
     <div class="payment-title">
-        <h1>信用卡</h1>
+        <h1 style="color: white;">信用卡</h1>
     </div>
     <div class="container preload">
         <div class="creditcard">

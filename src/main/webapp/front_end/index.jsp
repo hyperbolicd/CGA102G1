@@ -231,7 +231,7 @@ div, ul, li, a, span, img {
         
         //切換banner圖片 和 按鈕樣式
         function slideTo(index){
-            console.log(index)
+            
             var index = parseInt(index);//轉int類型
             var images = document.getElementsByClassName('tabImg');
             for(var i=0;i<images.length;i++){//遍歷每個圖片
@@ -270,7 +270,7 @@ div, ul, li, a, span, img {
 							<td>
 								<FORM METHOD="post"
 									ACTION="<%=request.getContextPath()%>/MovieServlet.do">
-									<select size="1" name="MV_ID" class="MV_ID">
+									<select size="1" name="MV_ID" class="MV_ID" style="width: 250px;">
 										<option value=0>請選擇電影
 											<c:forEach var="SellMovieVO" items="${SellTkMVlist}">
 												<option value="${SellMovieVO.mvId}">${SellMovieVO.mvName}
@@ -279,9 +279,9 @@ div, ul, li, a, span, img {
 								</FORM>
 							</td>
 
-							<td>
+							<td >
 								<div id="date">
-									<select name="" id="dateSelector" class="picker toRed">
+									<select name="" id="dateSelector" class="picker toRed" disabled="disabled" style="width: 250px;">
 										<option>選擇日期</option>
 									</select>
 								</div>
@@ -289,7 +289,7 @@ div, ul, li, a, span, img {
 
 							<td>
 								<div id="time">
-									<select class="showTimeSelect">
+									<select class="showTimeSelect" disabled="disabled" style="width: 250px;">
 										<option value=0>請選擇場次
 									</select>
 								</div>
@@ -299,7 +299,7 @@ div, ul, li, a, span, img {
 								<FORM METHOD="post" class="checkInForm"	ACTION="<%=request.getContextPath()%>/front/tkOrd.do"
 									style="margin-bottom: 0px;">
 								<div class="tablebtBlock">
-									<a class="tablebt checkIn"style="font-size: 18; width: 150px;">BOOKING!</a>
+									<a class="tablebt checkIn"style="font-size: 18;">BOOKING!</a>
 								</div>
 								<input type="hidden" name="MV_ID" class="inputMV_ID"> 
 								<input type="hidden" name="SH_ID" class="inputSH_ID"> 
@@ -493,6 +493,7 @@ div, ul, li, a, span, img {
 	$('.MV_ID').change((e) => {
 		MV_ID = e.target.value;
 		$('.inputMV_ID').val(MV_ID);
+		$('#dateSelector').removeAttr("disabled");
 		
 	})
 	
@@ -500,7 +501,7 @@ div, ul, li, a, span, img {
 	$('#dateSelector').change((e) => {
 		SH_TIME = e.target.value + " 09:00:00"; ;
 		let url = "${pageContext.request.contextPath}/tkOrd/tkOrd.do?action=listShowings_ByCompositeQuery&MV_ID=" + MV_ID +"&SH_TIME=" + SH_TIME;
-		
+		$('.showTimeSelect').removeAttr("disabled");
 		$('.showTimeSelect').empty();
 		$('.showTimeSelect').append('<option value=0>請選擇場次' );
 		$.ajax({
@@ -512,17 +513,25 @@ div, ul, li, a, span, img {
 	            success: function (data) {
 	            	for(let show of data){
 	            		let showTimeStr = show.SH_TIME + " "; 
-	            		let showTime = showTimeStr.slice(-11, -7) + showTimeStr.slice(-3, -1);	
+						let showTime = showTimeStr.slice(-12, -7) + showTimeStr.slice(-3, -1);	
+						
 	            		
-	            		if(show.SH_TYPE === 0){
-	            			$('.showTimeSelect').append('<option value='+ show.SH_ID + '>'+showTime+"  (數位)");
-	            		}else if (show.SH_TYPE === 1){
-	            			$('.showTimeSelect').append('<option value='+ show.SH_ID + '>'+showTime+"  (IMAX)");
+	            		if((show.SH_TYPE === 0) && (show.mvId === parseInt(MV_ID))){
+	            			if((parseInt(showTimeStr.slice(-12, -10))< 6) && (showTimeStr.slice(-3, -1) === 'AM')){
+	            				$('.showTimeSelect').append('<option value='+ show.SH_ID + '>跨夜'+showTime+'  (數位)');
+	            			}else{
+	            				$('.showTimeSelect').append('<option value='+ show.SH_ID + '>'+showTime+'  (數位)');          				
+	            			} 		
+	            		}else if ((show.SH_TYPE === 1) && (show.mvId === parseInt(MV_ID))){
+	            			if((parseInt(showTimeStr.slice(-12, -10))< 6) && (showTimeStr.slice(-3, -1) === 'AM')){
+	            				$('.showTimeSelect').append('<option value='+ show.SH_ID + '>跨夜'+showTime+'  (IMAX)');
+	            			}else{
+		            			$('.showTimeSelect').append('<option value='+ show.SH_ID + '>'+showTime+'  (IMAX)');
+	            			}		
 	            		}
-	            	}
 	            	
-	            }	
-		
+	            	}	
+	            }
 		})
 		
 	})
