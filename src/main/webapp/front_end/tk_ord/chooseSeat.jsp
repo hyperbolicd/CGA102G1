@@ -240,7 +240,7 @@
 		for (let TK of TKorder){
 			TotalCount += parseInt(TK.count);
 		}
-		console.log(TotalCount);
+
 		// 點擊單一座位=========================================================
 		$(".seatNumber")
 				.click(

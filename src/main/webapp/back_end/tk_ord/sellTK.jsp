@@ -199,6 +199,7 @@ pageContext.setAttribute("list", list);
 	let SH_SEAT_STATE = '';
 	let HL_ID = 0;
 	let hallName = '';
+	let SH_ID= '';
 
 	$('.MV_ID').change((e) => {
 		MV_ID = e.target.value;
@@ -250,7 +251,7 @@ pageContext.setAttribute("list", list);
 	})
 
 	$('.showTimeSelect').blur((e) => {
-		let SH_ID = e.target.value;
+		SH_ID = e.target.value;
 		$('.inputSH_ID').val(SH_ID);
 		
 		let url = "${pageContext.request.contextPath}/tkOrd/tkOrd.do?action=listShowings_ByCompositeQuery&MV_ID=" + MV_ID +"&SH_ID=" + SH_ID;

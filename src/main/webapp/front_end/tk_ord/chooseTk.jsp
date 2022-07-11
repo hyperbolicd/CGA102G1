@@ -34,6 +34,7 @@ pageContext.setAttribute("list2", list2);
 	href="<%=request.getContextPath()%>/front_end/tk_ord/styles/chooseTK.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 
 <body>
@@ -145,9 +146,7 @@ pageContext.setAttribute("list2", list2);
 				</div>
 				<!-- 				</FORM> -->
 				<div class="btBlock">
-					<a class="bt"
-						href="<%=request.getContextPath()%>/front_end/tk_ord/chooseSeat.jsp"
-						style="text-decoration: none;">繼續</a>
+					<a class="bt"style="text-decoration: none;">繼續</a>
 				</div>
 			</div>
 			<div>
@@ -191,15 +190,16 @@ pageContext.setAttribute("list2", list2);
 			</p>
 		</footer>
 	</div>
-
+	
 	<script>
 	
 // 	處理場次時間==================================
 	let showtime = '';
 	showtime = '${showingVO.SH_TIME}';
+	let TotalCount = 0;
 	
 	$('.showtime').text(showtime.slice(0, 16));
-
+	
 	
 
 let TKorder = []; 
@@ -276,7 +276,7 @@ let FDorder = [];
 			
 		TKorder.push(TK${tkinfVO.tkTypeID});		
         sessionStorage.setItem('TKorder', JSON.stringify(TKorder));
-        
+        TotalCount += TK${tkinfVO.tkTypeID}.count;
         
 		}
     });   
@@ -320,8 +320,22 @@ let FDorder = [];
     });   
 </c:forEach>
 
+$('.bt').click(function () {
+	
+	
+	if (TotalCount < 1 ) {
+       Swal.fire({
+           icon: 'error',
+           title: '很抱歉',
+           text: '至少需要選購一張電影票',
+           footer: '請繼續選擇您的票種與數量'
+       })
+	}else{	
+	
+		document.location.href="<%=request.getContextPath()%>/back_end/tk_ord/chooseSeat.jsp";
 
-
+	}
+});   
 	</script>
 </body>
 </html>

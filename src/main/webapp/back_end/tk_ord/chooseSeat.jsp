@@ -222,7 +222,7 @@
 			
 // 		}
 //      去除不可選座位
-		if (!$(this).hasClass("seatUnavailable") && !$(this).hasClass("seatConstruction"))) {
+		if (!$(this).hasClass("seatUnavailable") && !$(this).hasClass("seatConstruction")) {
 			
 			// 如果座位已選過
 			if ($(this).hasClass("seatSelected")) {									
