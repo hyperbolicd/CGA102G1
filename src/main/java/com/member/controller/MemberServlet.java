@@ -264,29 +264,18 @@ public class MemberServlet extends HttpServlet {
 			System.out.println(memberId);
 			if (memberId == null) {                               //如果號密碼有可能輸入錯誤
 				url = "/front_end/login/login.jsp";		 
-<<<<<<< HEAD
-=======
 			}else if(memberVo.getMember_Status().equals(2)) {     //如果會員狀態 帳號被停權
 				situation.put("login", "您被停權了");                //跳出您被停權了
 				url = "/front_end/login/login.jsp";	
->>>>>>> 7a68708c2c739fb3883a3375af17df4b892806e5
 			}else{
 				url = "/front_end/index.jsp";   //登入成功
 				session.setAttribute("account", memberVo.getMember_ID()); // 在session內設定屬性 Attribte，指已登入過的標示與值
 				session.setAttribute("memberVO", memberVo);	//在session內設定屬性(Attribute)註冊的Email.password	
 			}
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-<<<<<<< HEAD
-			 if(session.getAttribute("location") != null){  
-					res.sendRedirect((String) session.getAttribute("location"));
-					return;
-				}
-			System.out.println("account"+url);
-=======
 			if(session.getAttribute("location") != null){  
 				res.sendRedirect((String) session.getAttribute("location"));}
 			System.out.println("account");
->>>>>>> 7a68708c2c739fb3883a3375af17df4b892806e5
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listAllMember.jsp
 			successView.forward(req, res); // 轉送
 			return;
