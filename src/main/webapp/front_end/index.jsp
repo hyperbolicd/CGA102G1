@@ -299,7 +299,7 @@ div, ul, li, a, span, img {
 								<FORM METHOD="post" class="checkInForm"	ACTION="<%=request.getContextPath()%>/front/tkOrd.do"
 									style="margin-bottom: 0px;">
 								<div class="tablebtBlock">
-									<a class="tablebt checkIn"style="font-size: 18; width: 150px;">BOOKING!</a>
+									<a class="tablebt checkIn"style="font-size: 18;">BOOKING!</a>
 								</div>
 								<input type="hidden" name="MV_ID" class="inputMV_ID"> 
 								<input type="hidden" name="SH_ID" class="inputSH_ID"> 
