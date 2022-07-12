@@ -79,7 +79,7 @@ List<MerchVO> insertlist = (List<MerchVO>) session.getAttribute("insertlist");
 									<td>    ${orderDetail.item}    </td>
 									<td>${orderDetail.merchVO.merchName}</td>
 									<td><input type="number" name="ordCount"
-										value="${orderDetail.ordCount}"></td>
+										value="${orderDetail.ordCount}" min=1></td>
 									<td>
 									<select name="ordStatus">
 									<option value="0"${orderDetail.ordStatus == 0? 'selected':''}>備貨中</option>
@@ -89,7 +89,7 @@ List<MerchVO> insertlist = (List<MerchVO>) session.getAttribute("insertlist");
 									</select>
 									</td>
 									<td><input type="number" name="ordPrice"
-										value="${orderDetail.ordPrice}"></td>
+										value="${orderDetail.ordPrice}" min=1></td>
 									<td>
 										<input class="tablebt" type="hidden" name="merchID" value="${orderDetail.merchID}">
 										<input class="tablebt" type="hidden" name="item"
