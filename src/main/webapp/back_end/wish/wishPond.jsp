@@ -46,24 +46,24 @@
             <button id="newWish"><a href="${pageContext.request.contextPath}/back_end/wish/newWish.jsp">新增</a></button>
     		<span style="color: red;">${errMsg.notFound}</span>
             <div id="multiSearch">
-                <form action="${pageContext.request.contextPath}/wish/WishingPond.do" method="post">
-                	資料總筆數: ${listSize} 筆
-	                <label for="perPage">每頁顯示: </label>
-                    <select name="" id="perPage">
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                    </select>
-                    <label for="page">頁數: </label>
-                    <select name="" id="whichPage">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                    </select>
-                    <button>第一頁</button>
-                    <button>上一頁</button>
-                    <button>下一頁</button>
-                    <button>最末頁</button>
-                </form>
-                    <br>
+<%--                 <form action="${pageContext.request.contextPath}/wish/WishingPond.do" method="post"> --%>
+<%--                 	資料總筆數: ${listSize} 筆 --%>
+<!-- 	                <label for="perPage">每頁顯示: </label> -->
+<!--                     <select name="" id="perPage"> -->
+<!--                         <option value="10">10</option> -->
+<!--                         <option value="20">20</option> -->
+<!--                     </select> -->
+<!--                     <label for="page">頁數: </label> -->
+<!--                     <select name="" id="whichPage"> -->
+<!--                         <option value="1">1</option> -->
+<!--                         <option value="2">2</option> -->
+<!--                     </select> -->
+<!--                     <button>第一頁</button> -->
+<!--                     <button>上一頁</button> -->
+<!--                     <button>下一頁</button> -->
+<!--                     <button>最末頁</button> -->
+<!--                 </form> -->
+<!--                     <br> -->
                 <form action="${pageContext.request.contextPath}/wish/WishingPond.do" method="post">
                     <label for="searchPeriod">時間: </label>
                     <select name="searchPeriod" id="searchPeriod">

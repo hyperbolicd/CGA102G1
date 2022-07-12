@@ -73,6 +73,10 @@ div#multiSearch option {
     margin-left: 5px;
 }
 
+div#multiSearch input{
+	width: 135px;
+	height: 18px;
+}
 
 /* 許願池活動清單 */
 
