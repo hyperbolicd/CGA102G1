@@ -44,12 +44,12 @@ public class ActdtServlet extends HttpServlet {
 				errorMsgs.put("act_id", "活動方案編號格式不正確");
 			}
 			
-			Integer tkTypeID = null;
-			try {
-				tkTypeID = Integer.valueOf(tkTypeID);
-			} catch (Exception e) {
-				errorMsgs.put("act_id", "票種編號格式不正確");
-			}
+//			Integer tkTypeID = null;
+//			try {
+//				tkTypeID = Integer.valueOf(tkTypeID);
+//			} catch (Exception e) {
+//				errorMsgs.put("act_id", "票種編號格式不正確");
+//			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/act/allAct.jsp");
@@ -59,7 +59,7 @@ public class ActdtServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢資料 *****************************************/
 			ActdtService actdtSvc = new ActdtService();
-			ActdtVO actdtVO = actdtSvc.findByPrimaryKey(act_id, tkTypeID);
+			ActdtVO actdtVO = actdtSvc.findOneActdt(act_id);
 			if (actdtVO == null) {
 				errorMsgs.put("act_id", "查無資料");
 			}
@@ -238,7 +238,9 @@ public class ActdtServlet extends HttpServlet {
 			/*************************** 2.開始修改資料 *****************************************/
 			ActdtService actdtSvc = new ActdtService();
 			//actdtVO = actdtSvc.update(act_id,act_date_start, act_title, act_subtitle, tkTypeID, act_discount, act_coupon, act_status, act_content, act_picture);
+			//actdtVO = actdtSvc.update(act_id,act_date_start, act_title, act_subtitle, act_discount, act_coupon, act_status, act_content, act_picture);
 
+			
 		
 			String[] TkTypeIDStr = req.getParameterValues("TkTypeID");  //input type以陣列的方式取回,所以可以宣告一個String的陣列來承接
 			if ( TkTypeIDStr != null) { 

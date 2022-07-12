@@ -84,6 +84,27 @@ public class ActdtService {
 
 		return actdtVO;
 	}
+	
+//	public ActdtVO update (Integer act_id,Date act_date_start, String act_title, String act_subtitle, Double act_discount, Integer act_coupon, Byte act_status, String act_content, String act_picture) {
+//
+//		ActdtVO actdtVO = new ActdtVO();
+//		
+//		actdtVO.setAct_id(act_id);
+//		actdtVO.setAct_date_start(act_date_start);
+//		actdtVO.setAct_title(act_title);
+//		actdtVO.setAct_subtitle(act_subtitle);
+////		actdtVO.setTkTypeID(tkTypeID);
+//		actdtVO.setAct_discount(act_discount);
+//		actdtVO.setAct_coupon(act_coupon);
+//		actdtVO.setAct_status(act_status);
+//		actdtVO.setAct_content(act_content);
+//		actdtVO.setAct_picture(act_picture);
+//		dao.update(actdtVO);
+//
+//		return actdtVO;
+//	}
+//	
+	
 
 //	public void delete(Integer act_id, Integer tkTypeID) {
 //		dao.delete(act_id, tkTypeID);
