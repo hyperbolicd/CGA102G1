@@ -239,6 +239,8 @@ public class AnnServlet extends HttpServlet {
 			String saveDirectory = "/ann_pic";
 			String realPath = getServletContext().getRealPath(saveDirectory);
 			
+			
+			//待維修
 			InputStream in = getServletContext().getResourceAsStream("/ann_pic/123.jpg"); //輸入流獲取
 
 			AnnVO annVO = new AnnVO();

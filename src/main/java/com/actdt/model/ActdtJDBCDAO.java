@@ -42,9 +42,14 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 			+ " from movietheater.activity_detail order by act_id";
 	/* 修改 */
 	private static final String UPDATE = 
-			"update movietheater.activity_detail set"
-			+ " act_date_start=?, act_title=?, act_subtitle=?, act_discount=?, act_coupon=?, act_status=?, act_content=?,act_picture=?"
-			+ " where act_id = ? and tk_type_id = ?" ;
+//			"update movietheater.activity_detail set"
+//			+ " act_date_start=?, act_title=?, act_subtitle=?, act_discount=?, act_coupon=?, act_status=?, act_content=?,act_picture=?"
+//			+ " where act_id = ? and tk_type_id = ?" ;
+	
+	"update movietheater.activity_detail set"
+	+ " act_date_start=?, act_title=?, act_subtitle=?, act_discount=?, act_coupon=?, act_status=?, act_content=?,act_picture=?"
+	+ " where act_id = ?" ;
+	
 	/* 刪除 */
 //	private static final String DELETE = 
 //			"delete from movietheater.activity_detail where act_id = ? and tk_type_id = ?";
@@ -54,12 +59,14 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 	/* 單一活動查詢，不顯示重複值 後台 */ 
 	private static final String GET_ONLYACT_STMT = 
 			"select act_id, act_date_start, act_title, act_subtitle, tk_type_id, act_discount, act_coupon, act_status, act_content,act_picture"
-			+ " from movietheater.activity_detail where act_id = ? limit 1";
+			+ " from movietheater.activity_detail where act_id = ?";
 	
 	/* 顯示單一活動清單，不顯示重複值 前台畫面列表 */
 	private static final String GET_ACT_STMT = 
-			"select act_id, act_date_start, act_title, act_subtitle, tk_type_id, act_discount, act_coupon, act_status, act_content,act_picture"
-			+ "  from activity_detail where TK_TYPE_ID in (SELECT MAX(TK_TYPE_ID) FROM activity_detail GROUP BY ACT_SUBTITLE) and ACT_TITLE not like '未符合' ";
+			"select *"
+			+ "from activity_detail where act_id <>1 group by act_id order by act_id";
+//			"select act_id, act_date_start, act_title, act_subtitle, tk_type_id, act_discount, act_coupon, act_status, act_content,act_picture"
+//			+ "  from activity_detail where TK_TYPE_ID in (SELECT MAX(TK_TYPE_ID) FROM activity_detail GROUP BY ACT_SUBTITLE) and ACT_TITLE not like '未符合' ";
 //	select * from activity_detail where TK_TYPE_ID in (SELECT MAX(TK_TYPE_ID) FROM activity_detail GROUP BY ACT_SUBTITLE);
 	
 	
@@ -116,6 +123,58 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 	}
 
 	@Override //修改
+//	public void update(ActdtVO actdtVO) {
+//
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//
+//		try {
+//
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
+//			pstmt = con.prepareStatement(UPDATE);
+//			
+//			
+//			pstmt.setDate(1, actdtVO.getAct_date_start());
+//			pstmt.setString(2, actdtVO.getAct_title());
+//			pstmt.setString(3, actdtVO.getAct_subtitle());
+//			pstmt.setDouble(4, actdtVO.getAct_discount());
+//			pstmt.setInt(5, actdtVO.getAct_coupon());
+//			pstmt.setByte(6, actdtVO.getAct_status());
+//			pstmt.setString(7, actdtVO.getAct_content());
+//			pstmt.setString(8, actdtVO.getAct_picture());
+//			pstmt.setInt(9, actdtVO.getAct_id());
+//			pstmt.setInt(10, actdtVO.getTkTypeID());
+//
+//
+//			pstmt.executeUpdate();
+//
+//			// Handle any driver errors
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//			// Handle any SQL errors
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			// Clean up JDBC resources
+//		} finally {
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//
+//	}
+	
 	public void update(ActdtVO actdtVO) {
 
 		Connection con = null;
@@ -137,7 +196,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 			pstmt.setString(7, actdtVO.getAct_content());
 			pstmt.setString(8, actdtVO.getAct_picture());
 			pstmt.setInt(9, actdtVO.getAct_id());
-			pstmt.setInt(10, actdtVO.getTkTypeID());
+		
 
 
 			pstmt.executeUpdate();

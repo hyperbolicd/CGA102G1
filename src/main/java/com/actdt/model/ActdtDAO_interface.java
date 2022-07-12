@@ -20,7 +20,7 @@ public interface ActdtDAO_interface {
           public List<ActdtVO> getAll();
           
           //萬用複合查詢(傳入參數型態Map)(回傳 List)
-          //  public List<TkOrdVO> getAll(Map<String, String[]> map);
+          //public List<ActdtVO> getAll(Map<String, String[]> map);
           
           //查詢某狀態的員工(一對多)(回傳 Set)
           public List<ActdtVO> getActdtStatus();

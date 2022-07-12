@@ -99,13 +99,13 @@ ActdtVO actdtVO = (ActdtVO) request.getAttribute("actdtVO"); //EmpServlet.java (
 
 							<tr>
 								<td>適用票種:</td>
-								<td>${actdtVO.tkTypeID}</td>
-<%-- 								<td><input type="checkbox" name="TkTypeID" VALUE="1" ${actdtVO.tkTypeID=='1'? "selected" : ""}>全票/數位 --%>
-<%-- 									<input type="checkbox" name="TkTypeID" VALUE="2" ${actdtVO.tkTypeID=='2'? "selected" : ""}>全票/IMAX --%>
-<%-- 									<input type="checkbox" name="TkTypeID" VALUE="3" ${actdtVO.tkTypeID=='3'? "selected" : ""}>優待票/數位 --%>
-<%-- 									<input type="checkbox" name="TkTypeID" VALUE="4" ${actdtVO.tkTypeID=='4'? "selected" : ""}>優待票/IMAX --%>
-<%-- 									<input type="checkbox" name="TkTypeID" VALUE="5" ${actdtVO.tkTypeID=='5'? "selected" : ""}>早場票/數位 --%>
-<%-- 									<input type="checkbox" name="TkTypeID" VALUE="6" ${actdtVO.tkTypeID=='6'? "selected" : ""}>早場票/IMAX</td> --%>
+<%-- 								<td>${actdtVO.tkTypeID}</td> --%>
+								<td><input type="checkbox" name="TkTypeID" VALUE="1" ${actdtVO.tkTypeID=='1'? "selected" : ""}>全票/數位
+									<input type="checkbox" name="TkTypeID" VALUE="2" ${actdtVO.tkTypeID=='2'? "selected" : ""}>全票/IMAX
+									<input type="checkbox" name="TkTypeID" VALUE="3" ${actdtVO.tkTypeID=='3'? "selected" : ""}>優待票/數位
+									<input type="checkbox" name="TkTypeID" VALUE="4" ${actdtVO.tkTypeID=='4'? "selected" : ""}>優待票/IMAX
+									<input type="checkbox" name="TkTypeID" VALUE="5" ${actdtVO.tkTypeID=='5'? "selected" : ""}>早場票/數位
+									<input type="checkbox" name="TkTypeID" VALUE="6" ${actdtVO.tkTypeID=='6'? "selected" : ""}>早場票/IMAX</td>
 								<td></td>
 							</tr>
 							
