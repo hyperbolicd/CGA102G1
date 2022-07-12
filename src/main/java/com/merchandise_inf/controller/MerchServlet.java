@@ -51,14 +51,15 @@ public class MerchServlet extends HttpServlet {
 //		res.getWriter().println("測試是否有進此畫面");
 		if ("addphoto".equals(action)) {
 			for (int x = 1; x < 999; x++) {
-				String dir = "C:\\Users\\Jason\\Desktop\\photo\\" + x;
+				String dir = "/C:\\CGA102_MOVIE\\CGA102G1\\src\\main\\webapp\\merch_pic\\photo\\" + x;
 				File dirs = new File(dir);
 				if (!dirs.exists()) {
 					break;
 				}
 				for (int i = 1; i < 6; i++) {
-					String url = "C:\\Users\\Jason\\Desktop\\photo\\" + x + "\\" + i + ".png";
+					String url = "/C:\\CGA102_MOVIE\\CGA102G1\\src\\main\\webapp\\merch_pic\\photo\\" + x + "\\" + i + ".png";
 					File photo = new File(url);
+					System.out.println(photo.getAbsolutePath());
 					if (!photo.exists()) {
 						break;
 					}
