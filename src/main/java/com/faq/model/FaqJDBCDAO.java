@@ -39,22 +39,22 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 	/* 會員相關問題單一查詢 */
 	private static final String GET_FaqClass1 = 
 			"select faq_class, faq_title, faq_content"
-			+ " from faq where faq_class=1";
+			+ " from faq where faq_class=0";
 	
 	/* 影城相關問題單一查詢 */
 	private static final String GET_FaqClass2 = 
 			"select faq_class, faq_title, faq_content"
-					+ " from faq where faq_class=2";
+					+ " from faq where faq_class=1";
 	
 	/* 電影上映相關問題單一查詢 */
 	private static final String GET_FaqClass3 = 
 			"select faq_class, faq_title, faq_content"
-					+ " from faq where faq_class=3";
+					+ " from faq where faq_class=2";
 	
 	/* 其他問題單一查詢 */
 	private static final String GET_FaqClass4 = 
 			"select faq_class, faq_title, faq_content"
-					+ " from faq where faq_class=4";
+					+ " from faq where faq_class=3";
 	
 	@Override /* 新增 */
 	public void insert(FaqVO faqVO) {

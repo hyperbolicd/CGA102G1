@@ -5,7 +5,7 @@ import java.util.Set;
 //POJO
 
 public class State {
-	private String type; //type = 0201版的 action
+	private String type; //type = 大吳老師0201版的 action
 	// the user changing the state ， 跟資料庫沒有關聯
 	
 	private String user; //誰上線了
