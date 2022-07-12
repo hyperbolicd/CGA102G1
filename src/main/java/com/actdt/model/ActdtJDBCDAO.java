@@ -474,8 +474,75 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 	}
 	
 	/* 活動單一查詢 */
+//	@Override
+//	public ActdtVO findOneActdt(Integer act_id) {
+//		ActdtVO actdtVO = null;
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//
+//		try {
+//
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
+//			pstmt = con.prepareStatement(GET_ONLYACT_STMT);
+//
+//			pstmt.setInt(1 , act_id);
+//
+//			rs = pstmt.executeQuery();
+//
+//			while (rs.next()) {
+//				// ActdtVo 也稱為 Domain objects
+//				actdtVO = new ActdtVO();
+//				actdtVO.setAct_id(rs.getInt("act_id"));
+//				actdtVO.setAct_date_start(rs.getDate("act_date_start"));
+//				actdtVO.setAct_title(rs.getString("act_title"));
+//				actdtVO.setAct_subtitle(rs.getString("act_subtitle"));
+//				actdtVO.setTkTypeID(rs.getInt("TK_TYPE_ID"));
+//				actdtVO.setAct_discount(rs.getDouble("act_discount"));
+//				actdtVO.setAct_coupon(rs.getInt("act_coupon"));
+//				actdtVO.setAct_status(rs.getByte("act_status"));
+//				actdtVO.setAct_content(rs.getString("act_content"));
+//				actdtVO.setAct_picture(rs.getString("act_picture"));
+//			}
+//
+//			// Handle any driver errors
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//			// Handle any SQL errors
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			// Clean up JDBC resources
+//		} finally {
+//			if (rs != null) {
+//				try {
+//					rs.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//		return actdtVO;
+//	}
+	
+	/* 活動單一查詢 */
 	@Override
-	public ActdtVO findOneActdt(Integer act_id) {
+	public List<ActdtVO> findOneActdt(Integer act_id) {
+		List<ActdtVO> list = new ArrayList<ActdtVO>();
 		ActdtVO actdtVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -486,10 +553,12 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONLYACT_STMT);
+			pstmt.setInt(1, act_id);
 
-			pstmt.setInt(1 , act_id);
+			//pstmt.setInt(1 , act_id);
 
 			rs = pstmt.executeQuery();
+
 
 			while (rs.next()) {
 				// ActdtVo 也稱為 Domain objects
@@ -504,13 +573,18 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 				actdtVO.setAct_status(rs.getByte("act_status"));
 				actdtVO.setAct_content(rs.getString("act_content"));
 				actdtVO.setAct_picture(rs.getString("act_picture"));
+				list.add(actdtVO); // Store the row in the list
 			}
 
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. "
+//					+ e.getMessage());
 			e.printStackTrace();
 			// Handle any SQL errors
 		} catch (SQLException e) {
+//			throw new RuntimeException("A database error occured. "
+//					+ e.getMessage());
 			e.printStackTrace();
 			// Clean up JDBC resources
 		} finally {
@@ -536,7 +610,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 				}
 			}
 		}
-		return actdtVO;
+		return list;
 	}
 	
 	

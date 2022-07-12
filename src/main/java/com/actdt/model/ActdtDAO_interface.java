@@ -14,7 +14,9 @@ public interface ActdtDAO_interface {
           
   		  public ActdtVO findByPrimaryKey(Integer act_id, Integer tkTypeID);//查詢
   		  
-  		  public ActdtVO findOneActdt(Integer act_id);//查詢單一活動(不重複)
+//  		  public ActdtVO findOneActdt(Integer act_id);//查詢單一活動(不重複)
+  		  
+  		  public List<ActdtVO> findOneActdt(Integer act_id);//查詢活動列表(不重複)
   		  
   		  
           public List<ActdtVO> getAll();
@@ -26,6 +28,6 @@ public interface ActdtDAO_interface {
           public List<ActdtVO> getActdtStatus();
           
           //查詢不重複資料的活動
-          List<ActdtVO> getOnlyAct();
+          public List<ActdtVO> getOnlyAct();
 	       
 }

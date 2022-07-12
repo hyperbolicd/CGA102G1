@@ -110,10 +110,10 @@ response.setDateHeader("Expires", 0);
 								<td>適用票種:</td>
 								<td><input type="checkbox" name="TkTypeID" VALUE="1">全票/數位
 									<input type="checkbox" name="TkTypeID" VALUE="2">全票/IMAX
-									<input type="checkbox" name="TkTypeID" VALUE="3">優待票/數位
-									<input type="checkbox" name="TkTypeID" VALUE="4">優待票/IMAX
-									<input type="checkbox" name="TkTypeID" VALUE="5">早場票/數位
-									<input type="checkbox" name="TkTypeID" VALUE="6">早場票/IMAX</td>
+									<input type="checkbox" name="TkTypeID" VALUE="3">學生票/數位
+									<input type="checkbox" name="TkTypeID" VALUE="4">學生票/IMAX
+									<input type="checkbox" name="TkTypeID" VALUE="5">敬老票/數位
+									<input type="checkbox" name="TkTypeID" VALUE="6">敬老票/IMAX</td>
 								<td></td>
 							</tr>
 							

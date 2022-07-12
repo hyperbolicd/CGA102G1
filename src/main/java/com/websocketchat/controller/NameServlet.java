@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class NameServlet extends HttpServlet {
 	
+	private static final long serialVersionUID = 1L;
+	
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -24,7 +26,7 @@ public class NameServlet extends HttpServlet {
 		
 		req.setAttribute("userName", userName);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/chat.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("front_end/chat/chat.jsp");
 		dispatcher.forward(req, res);
 	}
 }

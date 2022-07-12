@@ -122,7 +122,11 @@ public class ActdtService {
 		return dao.findByPrimaryKey(act_id, tkTypeID);
 	}
 	
-	public ActdtVO findOneActdt(Integer act_id) {
+//	public ActdtVO findOneActdt(Integer act_id) {
+//		return dao.findOneActdt(act_id);
+//	}
+	
+	public List<ActdtVO> findOneActdt(Integer act_id) {
 		return dao.findOneActdt(act_id);
 	}
 	

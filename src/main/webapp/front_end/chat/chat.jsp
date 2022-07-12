@@ -8,7 +8,7 @@
 <style type="text/css">
 
 </style>
-<title>最大私人聊天室</title>
+<title>HireME 客服</title>
 </head>
 <body onload="connect();" onunload="disconnect();">
 	<h3 id="statusOutput" class="statusOutput"></h3>
@@ -22,7 +22,8 @@
 	</div>
 </body>
 <script>
-	var MyPoint = "/FriendWS/customerservice"; //客服名稱寫死，使用者只會對應客服，不會分辨客服1、客服2
+	var MyPoint = "/FriendWS/${userName}";
+// 	var MyPoint = "/FriendWS/customerservice"; //客服名稱寫死，使用者只會對應客服，不會分辨客服1、客服2
 	var host = window.location.host;
 	var path = window.location.pathname;
 	var webCtx = path.substring(0, path.indexOf('/', 1));
@@ -112,11 +113,14 @@
 		var row = document.getElementById("row");
 		row.innerHTML = '';
 		for (var i = 0; i < friends.length; i++) {
+			
+			//如果 friends[i] === self (=自己)則繼續
 			if (friends[i] === self) { continue; }
 			row.innerHTML +='<div id=' + i + ' class="column" name="friendName" value=' + friends[i] + ' ><h2>' + friends[i] + '</h2></div>';
 		}
 		addListener();
 	}
+	
 	// 註冊列表點擊事件並抓取好友名字以取得歷史訊息
 	// 不需要，看要不要註解掉
 	function addListener() {

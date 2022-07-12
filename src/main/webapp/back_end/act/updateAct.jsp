@@ -3,9 +3,12 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.actdt.model.*"%>
 
-<%
-ActdtVO actdtVO = (ActdtVO) request.getAttribute("actdtVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
-%>
+<%-- <% --%>
+// List<ActdtVO> list = (List<ActdtVO>)request.getAttribute("actdtList"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+// ActdtVO actdtVO = (ActdtVO) request.getAttribute("ActdtVO");
+<%-- %> --%>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -100,12 +103,30 @@ ActdtVO actdtVO = (ActdtVO) request.getAttribute("actdtVO"); //EmpServlet.java (
 							<tr>
 								<td>適用票種:</td>
 <%-- 								<td>${actdtVO.tkTypeID}</td> --%>
-								<td><input type="checkbox" name="TkTypeID" VALUE="1" ${actdtVO.tkTypeID=='1'? "selected" : ""}>全票/數位
-									<input type="checkbox" name="TkTypeID" VALUE="2" ${actdtVO.tkTypeID=='2'? "selected" : ""}>全票/IMAX
-									<input type="checkbox" name="TkTypeID" VALUE="3" ${actdtVO.tkTypeID=='3'? "selected" : ""}>優待票/數位
-									<input type="checkbox" name="TkTypeID" VALUE="4" ${actdtVO.tkTypeID=='4'? "selected" : ""}>優待票/IMAX
-									<input type="checkbox" name="TkTypeID" VALUE="5" ${actdtVO.tkTypeID=='5'? "selected" : ""}>早場票/數位
-									<input type="checkbox" name="TkTypeID" VALUE="6" ${actdtVO.tkTypeID=='6'? "selected" : ""}>早場票/IMAX</td>
+								<td><input type="checkbox" name="TkTypeID" VALUE="1"
+								<c:forEach var="actdtVO" items="${list}">
+								 ${actdtVO.tkTypeID==1? "checked" : ""}
+								</c:forEach>>全票/數位
+									<input type="checkbox" name="TkTypeID" VALUE="2" 
+									<c:forEach var="actdtVO" items="${list}">
+									${actdtVO.tkTypeID==2? "checked" : ""}
+									</c:forEach>>全票/IMAX
+									<input type="checkbox" name="TkTypeID" VALUE="3" 
+									<c:forEach var="actdtVO" items="${list}">
+									${actdtVO.tkTypeID==3? "checked" : ""}
+									</c:forEach>>學生票/數位
+									<input type="checkbox" name="TkTypeID" VALUE="4" 
+									<c:forEach var="actdtVO" items="${list}">
+									${actdtVO.tkTypeID==4? "checked" : ""}
+									</c:forEach>>學生票/IMAX
+									<input type="checkbox" name="TkTypeID" VALUE="5" 
+									<c:forEach var="actdtVO" items="${list}">
+									${actdtVO.tkTypeID==5? "checked" : ""}
+									</c:forEach>>敬老票/數位
+									<input type="checkbox" name="TkTypeID" VALUE="6" 
+									<c:forEach var="actdtVO" items="${list}">
+									${actdtVO.tkTypeID==6? "checked" : ""}
+									</c:forEach>>敬老票/IMAX</td>
 								<td></td>
 							</tr>
 							
@@ -199,6 +220,7 @@ ActdtVO actdtVO = (ActdtVO) request.getAttribute("actdtVO"); //EmpServlet.java (
 <%
 java.sql.Date act_date_start = null;
 try {
+	ActdtVO actdtVO = (ActdtVO)request.getAttribute("actdtVO");
 	act_date_start = actdtVO.getAct_date_start();
 } catch (Exception e) {
 	act_date_start = new java.sql.Date(System.currentTimeMillis());
