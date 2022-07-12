@@ -103,6 +103,7 @@
 			<div class="tab">
 				<div class="gallery gallery1">
 					<c:forEach var="merchVo" items="${merchSvc.hotSell}">
+					<c:if test="${merchVo.merchStatus!=0}">
 						<div class="content">
 							<a
 								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
@@ -114,6 +115,7 @@
 							</a> <button
 									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
 						</div>
+					</c:if>
 					</c:forEach>
 
 
@@ -126,6 +128,7 @@
 				<div class="gallery gallery1">
 
 					<c:forEach var="merchVo" items="${merchSvc.newest}">
+					<c:if test="${merchVo.merchStatus!=0}">
 						<div class="content">
 							<a
 								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
@@ -137,6 +140,7 @@
 							</a> <button
 									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
 						</div>
+					</c:if>
 					</c:forEach>
 				</div>
 			</div>
@@ -147,6 +151,7 @@
 				<div class="gallery gallery1">
 
 					<c:forEach var="merchVo" items="${merchSvc.mostSold}">
+					<c:if test="${merchVo.merchStatus!=0}">
 						<div class="content">
 							<a
 								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
@@ -158,6 +163,7 @@
 							</a> <button
 									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
 						</div>
+					</c:if>
 					</c:forEach>
 				</div>
 			</div>
@@ -171,6 +177,7 @@
 				<div class="gallery">
 
 					<c:forEach var="merchVo" items="${merchSvc.getByClass('模型')}">
+					<c:if test="${merchVo.merchStatus!=0}">
 						<div class="content merchpricediv">
 							<a
 								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
@@ -182,6 +189,7 @@
 							</a> <button
 									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
 						</div>
+					</c:if>
 					</c:forEach>
 
 				</div>
@@ -194,6 +202,7 @@
 				<div class="gallery">
 
 					<c:forEach var="merchVo" items="${merchSvc.getByClass('抱枕')}">
+					<c:if test="${merchVo.merchStatus!=0}">
 						<div class="content merchpricediv">
 							<a
 								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
@@ -205,6 +214,7 @@
 							</a> <button
 									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
 						</div>
+					</c:if>
 					</c:forEach>
 				</div>
 			</div>
@@ -216,6 +226,7 @@
 				<div class="gallery">
 
 					<c:forEach var="merchVo" items="${merchSvc.getByClass('生活用品')}">
+					<c:if test="${merchVo.merchStatus!=0}">
 						<div class="content merchpricediv">
 							<a
 								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
@@ -227,6 +238,7 @@
 							</a> <button
 									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
 						</div>
+					</c:if>
 					</c:forEach>
 				</div>
 			</div>
@@ -238,6 +250,7 @@
 				<div class="gallery">
 
 					<c:forEach var="merchVo" items="${merchSvc.getByClass('服飾')}">
+					<c:if test="${merchVo.merchStatus!=0}">
 						<div class="content merchpricediv">
 							<a
 								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
@@ -249,6 +262,7 @@
 							</a> <button
 									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
 						</div>
+					</c:if>
 					</c:forEach>
 				</div>
 			</div>
@@ -260,6 +274,7 @@
 				<div class="gallery">
 
 					<c:forEach var="merchVo" items="${merchSvc.getByClass('文具')}">
+					<c:if test="${merchVo.merchStatus!=0}">
 						<div class="content merchpricediv">
 							<a
 								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
@@ -271,6 +286,7 @@
 							</a> <button
 									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
 						</div>
+					</c:if>
 					</c:forEach>
 				</div>
 			</div>
@@ -364,6 +380,9 @@
                         success: function (res) {
                         	console.log(res);
                             for(let item of res){
+                            	if(item.merchStatus == 0){
+                            		continue;
+                            	}
                                 let content = document.createElement('div');
                                 content.className = "content";
                                 let a1 = document.createElement('a');
@@ -422,6 +441,9 @@
                  success: function (res) {
                     	 searchdiv.innerHTML = "";
                      for(let item of res){
+                    	 if(item.merchStatus == 0){
+                    		 continue;
+                    	 }
                          let content = document.createElement('div');
                          content.classList.add('content','merchpricediv');
                          let a1 = document.createElement('a');

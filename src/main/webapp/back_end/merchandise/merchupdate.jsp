@@ -98,9 +98,9 @@
 							<tr>
 								<td>商品狀態:</td>
 								<td><select name="merchStatus">
-										<option value="1" ${(param.merchStatus=="0")? 'selected':''}>下架</option>
-										<option value="2" ${(param.merchStatus=="1")? 'selected':''}>上架</option>
-										<option value="3" ${(param.merchStatus=="2")? 'selected':''}>主打</option>
+										<option value="0" ${(param.merchStatus=="0")? 'selected':''}>下架</option>
+										<option value="1" ${(param.merchStatus=="1")? 'selected':''}>上架</option>
+										<option value="2" ${(param.merchStatus=="2")? 'selected':''}>主打</option>
 								</select></td>
 								<td></td>
 							</tr>
