@@ -270,8 +270,19 @@ function tkChecking(){
 			},
 			success: function(response){
 				
-				// 顯示 入場modal
-				$('#exampleModal').modal('show');
+				if(response===1){
+					// 顯示 入場modal
+					$('#exampleModal').modal('show');
+					
+				}else{
+					Swal.fire(
+	                "驗證碼錯誤!", //標題 
+	                "",
+	                "error"
+	                //圖示(可省略) success/info/warning/error/question
+	                //圖示範例：https://sweetalert2.github.io/#icons
+            	);
+				}
 			}
 			
 			})    
