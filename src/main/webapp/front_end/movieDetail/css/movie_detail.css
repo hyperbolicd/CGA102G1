@@ -67,12 +67,13 @@
 	display:flex;
 	justify-content: center;
 	align-items:center;
-	margin-top: 20px;
 	background: #FFFFFF33;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	border-radius: 10px;
+/* 	background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(./logo2.jpg) repeat center/8%; */
 }
+
 
 /* ------------- */
 #booking{
