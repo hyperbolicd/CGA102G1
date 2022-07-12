@@ -40,7 +40,7 @@
         <form METHOD="post" action="${pageContext.request.contextPath}/ReportServlet.do">
         <div class="custom-control custom-switch" style="margin-left: 10px">
 				<input type="checkbox" class="custom-control-input" id="updateSameRP" name="updateSameRP"> 
-				<label class="custom-control-label" for="updateSameRP">一次處理相同檢舉</label>
+				<label class="custom-control-label" for="updateSameRP">一次處理同則評論</label>
 		</div>
         <hr size="8px" align="center" width="100%">
             <div class="statusBox">

@@ -13,13 +13,13 @@ mvName.addEventListener("blur",()=>{
         }else
         mvName.setAttribute('class',"form-control is-valid")
     })
-/***********************片名英文數字驗證******************************/
+/***********************英文片名不可空驗證******************************/
 const mvEName = document.getElementById('mvEName');
 mvEName.addEventListener("blur",()=>{
-    let regex = new RegExp("^[a-zA-Z0-9 ]+$");
+    let regex = new RegExp("^[A-Za-z0-9\u4e00-\u9fa5] $");
     
     if(mvEName.value.length===0){
-            mvEName.setAttribute('class',"form-control is-invalid")
+            mvEName.setAttribute('class',"form-control is-invalid");
             Swal.fire(
                 "此欄位不可為空", //標題 
                 "",
@@ -27,27 +27,31 @@ mvEName.addEventListener("blur",()=>{
                 //圖示(可省略) success/info/warning/error/question
                 //圖示範例：https://sweetalert2.github.io/#icons
             );
-        }else if (regex.test(mvEName.value)){
-        mvEName.setAttribute('class',"form-control is-valid");
-    }
-    else{
-        Swal.fire(
-                "只接受輸入英文或數字", //標題 
+        }else if(/[\u4E00-\u9FA5]/g.test(mvEName.value)){
+			mvEName.setAttribute('class',"form-control is-invalid");
+			mvEName.value="";
+			 Swal.fire(
+                "此欄位不可填入中文", //標題 
                 "",
                 "warning"
                 //圖示(可省略) success/info/warning/error/question
                 //圖示範例：https://sweetalert2.github.io/#icons
             );
-        mvEName.value="";
-        mvEName.setAttribute('class',"form-control is-invalid");
-    }
+    	}else {
+	
+        	mvEName.setAttribute('class',"form-control is-valid");
+		}
+
+   
     })
 /*******************上映日驗證:上映日只能大於等於當天******************************/
 const stDate = document.getElementById('stDate');
+
 stDate.addEventListener('change',()=>{
 	let nowDate= new Date().toISOString().split('T')[0];
 	if(stDate.value >= nowDate){
 		stDate.setAttribute('class',"form-control is-valid");
+		document.getElementById('edDate').removeAttribute('disabled');
 	}else{
 		stDate.setAttribute('class',"form-control is-invalid");
 		Swal.fire(
@@ -116,21 +120,22 @@ function checkNum(num){
 }
 
 /***********************網址驗證******************************* */
-/* 
+
 const mvTler = document.getElementById('mvTler');
 mvTler.addEventListener('blur',()=>{
-	if(isValidUrl(mvTler.value)){
+	
+	if(mvTler.value.getBytes().length != mvTler.value.length()){
 		console.log('yes')
 	}else{
 		console.log('no')
 		
 	}
 })
-function isValidUrl(string) {
-  const pattern = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/gm;
-  return pattern.test(string);
-}
-*/
+//function isValidUrl(string) {
+//  const pattern = ;
+//  return (pattern.test(string));
+//}
+
 /***********************上傳圖片預覽******************************/
 document.getElementById('mvPc').addEventListener('change',uploadListner);
 function uploadListner({target}){

@@ -314,15 +314,6 @@ $(document).ready(function(){
 
     // 暫時綁定送出 -> 測試可以抓到最後修改完的字串
     document.getElementById("submitBtn").addEventListener('click',seatCounter);
-    document.getElementById("submitBtn").addEventListener('click',submitFinal);
-    function submitFinal(){
-        // console.log('最終字串:'+seat);
-        seatDBStr.value = seat;
-        
-        // console.log('DB座位數:'+seatDBCount.value);
-        // console.log('DB字串:'+seatDBStr.value);
-    }
-    // 暫時綁定送出 -> 可以計算最終可販售位置數量
 
     function seatCounter(){
         let seatArr =seat.split("",seat.length);
@@ -337,13 +328,8 @@ $(document).ready(function(){
             }
             index += 5;
         }
-        console.log('座位數:'+seatCount);
-        if(seatCount===0){
-            alert("沒有位置可以賣囉!");
-            return;
-        }
         seatDBCount.value = seatCount;
-        return seatCount;
+        seatDBStr.value = seat;
     }
 })
 

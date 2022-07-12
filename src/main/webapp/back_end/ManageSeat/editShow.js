@@ -9,7 +9,6 @@
             // 利用bootstrap樣式改變 達到選取效果
             this.setAttribute('class','btn btn-outline-danger');
             selectedSeat.push(this);  
-            console.log("加入已選:"+this);
         }
     	}
 
@@ -195,10 +194,8 @@
 				let showSeatVO = response.showSeatVO;
 				// 將場次VO拉上來的座位字串指定給回seat變數
 				seat=showSeatVO.SH_SEAT_STATE;
-		console.log("檢查AJAX回傳給input字串1:"+seat);
 			}
 		});
-		console.log("檢查AJAX回傳給input字串2:"+seat);
 		
 		
         // 驗證是否已出售
@@ -259,7 +256,6 @@
 			}// 成功後要執行的函數
 		});
 		
-		
 		Swal.fire(
                 "修改成功!", //標題 
                 "",
@@ -296,7 +292,7 @@
         }
         if(seatCount===0){
 			Swal.fire(
-                "請先選擇場次", //標題 
+                "現在沒有可賣位置!", //標題 
                 "",
                 "error"
                 //圖示(可省略) success/info/warning/error/question

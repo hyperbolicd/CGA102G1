@@ -18,7 +18,8 @@ import com.tk_ord_dt.model.TkOrdDtVO;
 
 public class TkFolderDAO implements TkFolder_interface {
 	public static final String GET_ALL_TKORD=
-			"Select * FROM tk_ord WHERE MEMBER_ID = ?";
+			"SELECT t.TK_ORD_ID,t.MEMBER_ID,t.SH_ID,t.ORD_TIME FROM tk_ord t INNER JOIN showing s on t.SH_ID = s.SH_ID "
+			+ "WHERE MEMBER_ID =? order by s.SH_TIME";
 	
 	public static final String GET_DT_COUNT =
 			"SELECT count(TK_DT_ID)as DT_COUNT FROM tk_ord_dt WHERE TK_ORD_ID = ?";
@@ -36,7 +37,7 @@ public class TkFolderDAO implements TkFolder_interface {
 			"update fd_ord_dt SET FD_STATE =? WHERE TK_ORD_ID = ?";
 	
 	public static final String VERIFY_EMP_CODE=
-			"select * FROM CODE WHERE CODE = ?;";
+			"select * FROM CODE WHERE CODE = ?";
 	
 	@Override
 	public List<TkOrdVO> getAllTkOrd(Integer member_ID) {

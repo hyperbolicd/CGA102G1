@@ -59,7 +59,7 @@ MovieService mvSvc = new MovieService();
                           <td>${movieVO.mvId}</td>
                           <td>${movieVO.mvName}</td>
                           <td>${movieVO.mvEName}</td>
-                          <td>${movieVO.mvLong}</td>
+                          <td>${movieVO.mvLong}分鐘</td>
                       	<c:if test="${movieVO.mvLevel==0}">
                           <td>普遍級</td>
                       	</c:if> 
