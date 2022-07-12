@@ -122,6 +122,7 @@ pageContext.setAttribute("avgstar", avgstar);
 				</div>
 			</div>
 		</div>
+		<div id="movie_tler">${movieVO.mvTler}</div>
 		<div id="booking">
 			<div id="date">
 				<select name="" id="dateSelector" class="picker toRed">
