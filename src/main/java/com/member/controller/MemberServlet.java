@@ -262,10 +262,13 @@ public class MemberServlet extends HttpServlet {
 //			System.out.println("會員是否被停權 : " + memberVo.getMember_Status().equals(2));
 			String url = "";
 			System.out.println(memberId);
-			if (memberId == null) {                               //如果號密碼有可能輸入錯誤
+			if (memberId == null) {                               //如果帳號密碼有可能輸入錯誤
 				url = "/front_end/login/login.jsp";		 
-			}else if(memberVo.getMember_Status().equals(2)) {     //如果會員狀態 帳號被停權
+			}else if(memberVo.getMember_Status().equals(2)) {     //如果會員狀態 帳號已被停權
 				situation.put("login", "您被停權了");                //跳出您被停權了
+				url = "/front_end/login/login.jsp";	
+			}else if(memberVo.getMember_Status().equals(0)) {     //如果會員狀態 帳號未啟用
+				situation.put("enabled", "您帳號未被啟用，煩請收信!");    //您帳號未被啟用，煩請收信!
 				url = "/front_end/login/login.jsp";	
 			}else{
 				url = "/front_end/index.jsp";   //登入成功
@@ -356,7 +359,7 @@ public class MemberServlet extends HttpServlet {
 			String photoName = "/member_pic/" + photo.getSubmittedFileName(); //
 			System.out.println(photoName);
 			if (photo.getSubmittedFileName() == null || photo.getSubmittedFileName().trim().length() == 0) {
-				errorMsgs.put("myUpfile", "photoName 會員照片請上傳");
+				errorMsgs.put("myUpfile", "會員請上傳照片");
 
 			}
 			String fileName = photo.getSubmittedFileName(); // 先宣告一個檔案變數 並取得照片
@@ -414,6 +417,9 @@ public class MemberServlet extends HttpServlet {
 			successView.forward(req, res);
 			return;
 		}
+		
+		
+		
 		
 		
 		

@@ -29,7 +29,7 @@
 		</ul></li>
 	<li><span>活動相關</span>
 		<ul>
-			<li><a href="${pageContext.request.contextPath}/back_end/faq/allAct.jsp">促銷活動管理</a></li>
+			<li><a href="${pageContext.request.contextPath}/back_end/act/allAct.jsp">促銷活動管理</a></li>
 			<li><a href="${pageContext.request.contextPath}/back_end/wish/wishPond.jsp">許願池管理</a></li>
 		</ul></li>
 	<li><span>公告客服</span>

@@ -161,7 +161,8 @@ function refund(target){
 			error: function(xhr) { },    
 			success: function(response) {
 				
-				$(target).parent().prev().text("已退款");
+				$(target).parent().prev().text("已退票");
+				$(target).attr('disabled','true');
 				Swal.fire(
                 "訂單狀態已更新!", //標題 
                 "",

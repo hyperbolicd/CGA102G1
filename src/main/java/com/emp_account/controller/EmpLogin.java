@@ -54,7 +54,8 @@ public class EmpLogin extends HttpServlet {
 			EmpAccountService empSvc = new EmpAccountService();
 			String correctPassword = empSvc.getPassword(Integer.valueOf(loginId));
 			
-			if(empSvc.getOneEmp(Integer.valueOf(loginId)).getEmp_status() != 1) { // 確認員工在職狀態
+			EmpAccountVO empVO = empSvc.getOneEmp(Integer.valueOf(loginId));
+			if(empVO != null && empVO.getEmp_status() != 1) { // 確認員工在職狀態
 				errMsg.put("loginId", "您非在職員工");
 				request.getRequestDispatcher("/back_end/empLogin.jsp").forward(request, response);
 				return;
@@ -67,7 +68,6 @@ public class EmpLogin extends HttpServlet {
 				return;
 			}
 			
-			EmpAccountVO empVO = empSvc.getOneEmp(Integer.valueOf(loginId));
 			
 			/***************************3.新增完成,準備轉交(Send the Success view)*************/
 			// 將會員資料存入 session

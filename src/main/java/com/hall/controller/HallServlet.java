@@ -42,7 +42,12 @@ public class HallServlet extends HttpServlet {
 			Integer hlCol = Integer.valueOf(req.getParameter("hlCol")) ;
 			Integer hlRow = Integer.valueOf(req.getParameter("hlRow")) ;
 			String hlSeat = req.getParameter("hlSeat");
-			Integer hlSeatCount = Integer.valueOf(req.getParameter("hlSeatCount")) ;
+			Integer hlSeatCount = null;
+			if(req.getParameter("hlSeatCount").isEmpty()) {
+				hlSeatCount = 0;
+			}else {
+				hlSeatCount = Integer.valueOf(req.getParameter("hlSeatCount")) ;
+			}
 			
 			HallVO hallVO = new HallVO();
 			hallVO.setHlName(hlName);
@@ -51,13 +56,6 @@ public class HallServlet extends HttpServlet {
 			hallVO.setHlRow(hlRow);
 			hallVO.setHlSeat(hlSeat);
 			hallVO.setHlSeatCount(hlSeatCount);
-			/* **************************************************************** */
-			if (!errorMsgs.isEmpty()) {
-				String url =req.getContextPath()+"/back_end/ManageHall/createHall.jsp";
-				RequestDispatcher rd = req.getRequestDispatcher(url);
-				rd.forward(req, res);
-				return;
-			}
 			/* **************************************************************** */
 			HallService hlSvc = new HallService();
 			hallVO = hlSvc.insert(hlName, hlSeat, hlRow, hlCol, hlType, hlSeatCount);

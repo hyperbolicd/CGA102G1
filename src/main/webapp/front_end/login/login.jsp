@@ -35,12 +35,14 @@
                 <span></span>
                 <label>Password</label>
             </div>
-            <div class="pass" id="forgetBtn">Forgot Password?</div>
+
+            <div class="pass" id="forgetBtn">Forgot Password?<span id="hint"></span></div>
             <input type="submit" value="Login">
+            
             <div class="signup_link" id=forget>
                 沒有帳號?<a href="${pageContext.request.contextPath}/front_end/register/register.jsp">註冊</a>
-
             </div>
+            
             <input type="hidden" name="action" value="login">
             </form>
 
@@ -48,12 +50,16 @@
  <!-- Jquery -->
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>	
 <!-- <script src="/CGA102G1/front_end/login/js/forget.jsp"></script> -->
+		
 		<script>
 
         let forgetBtn = document.getElementById('forgetBtn');
-		forgetBtn.addEventListener('click', () => {
+		forgetBtn.addEventListener('click', function(){
+			
 			//取得用戶輸入Email
 			let usrEmail = document.getElementById("usrEmail").value;
+			
+			
 			$.ajax({
 		            type: 'GET',
 		            url: '/CGA102G1/member/password/forget',
@@ -61,12 +67,25 @@
 		            dataType: 'json',
 		            async: false,
 		            success: function (response) {
+		            	const {stat} = response;
+		            	if (stat === "success") {
+		            		document.getElementById("hint").textContent = "寄送驗證信成功";
+		            		alert("寄送驗證信成功");
+		            	} else if (stat === "fail"){
+		            		// 
+		            		document.getElementById("hint").textContent = "查無此email";
+		            		alert("查無此email");
+		            	}
 						
 		            },
+		                   
 		            error: function (thrownError) {
 		                console.log(thrownError);
 		            }
 		        });
+		
+		
+		
 		});
 		</script>
 		
@@ -74,11 +93,11 @@
 		  	
 		  	<script> 
 		  	
-		console.log('xxx'+'${situation.login}');  //測試前台有沒有拿到值
+//		console.log('xxx'+'${situation.login}');  //測試前台有沒有拿到值
 		
  	<c:if test="${not empty situation.login}"> //如果situation裡面 login不為空的話會執行以下程式
       Swal.fire(
-				'erron',    		  
+				'error',    		  
                 '您被停權了!!',
                  'error'
              )
@@ -93,6 +112,19 @@
                'OK',
                '註冊成功!請到電子信箱收取驗證信!!',
                'success'
+           )
+         <% request.removeAttribute("join"); %>
+    </c:if>
+	
+	</script> 
+	
+	
+	<script>
+	<c:if test="${not empty situation.enabled}">
+    Swal.fire(
+    		'error',    		  
+            '您帳號未被啟用，煩請收信!!',
+             'error'
            )
          <% request.removeAttribute("join"); %>
     </c:if>

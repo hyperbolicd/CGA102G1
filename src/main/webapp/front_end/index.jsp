@@ -270,7 +270,7 @@ div, ul, li, a, span, img {
 							<td>
 								<FORM METHOD="post"
 									ACTION="<%=request.getContextPath()%>/MovieServlet.do">
-									<select size="1" name="MV_ID" class="MV_ID" style="width: 250px;">
+									<select size="1" name="MV_ID" class="MV_ID" style="width: 300px;">
 										<option value=0>請選擇電影
 											<c:forEach var="SellMovieVO" items="${SellTkMVlist}">
 												<option value="${SellMovieVO.mvId}">${SellMovieVO.mvName}
@@ -281,7 +281,7 @@ div, ul, li, a, span, img {
 
 							<td >
 								<div id="date">
-									<select name="" id="dateSelector" class="picker toRed" disabled="disabled" style="width: 250px;">
+									<select name="" id="dateSelector" class="picker toRed" disabled="disabled" style="width: 300px;">
 										<option>選擇日期</option>
 									</select>
 								</div>
@@ -289,7 +289,7 @@ div, ul, li, a, span, img {
 
 							<td>
 								<div id="time">
-									<select class="showTimeSelect" disabled="disabled" style="width: 250px;">
+									<select class="showTimeSelect" disabled="disabled" style="width: 300px;">
 										<option value=0>請選擇場次</option>
 									</select>
 								</div>

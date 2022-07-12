@@ -19,6 +19,9 @@ public interface MemberDAO_interface {
 // 會員註冊時會傳送信件，並修改會員狀態(藉由Email搜尋會員ID)
  	public MemberVO register(MemberVO memberVO);
  	
+//會員忘記密碼 	
+	public Integer verifyEmail(String usrEmail) ;
+ 	
  	
 
  	

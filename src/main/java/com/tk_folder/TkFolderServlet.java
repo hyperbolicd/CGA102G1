@@ -31,14 +31,25 @@ public class TkFolderServlet extends HttpServlet {
 		
 		if("listAllOrdInf".equals(action)) {
 			
-			Integer member_ID = Integer.valueOf(req.getParameter("member_ID"));
-			Map<String,Object> map = new TkFolderService().listAllOrdInf(member_ID);
+			Integer member_ID = null;
 			
-			req.setAttribute("map", map);
-			req.setAttribute("member_ID", member_ID);
-			String url = "/front_end/ticketFolder/ticketFolder.jsp";
-			RequestDispatcher rd = req.getRequestDispatcher(url);
-			rd.forward(req, res);
+			if(req.getParameter("member_ID").isEmpty()) {
+				String url = "/front_end/login/login.jsp";
+				RequestDispatcher rd = req.getRequestDispatcher(url);
+				rd.forward(req, res);
+				
+			}else {
+				
+				member_ID = Integer.valueOf(req.getParameter("member_ID"));
+				Map<String,Object> map = new TkFolderService().listAllOrdInf(member_ID);
+				
+				req.setAttribute("map", map);
+				req.setAttribute("member_ID", member_ID);
+				String url = "/front_end/ticketFolder/ticketFolder.jsp";
+				RequestDispatcher rd = req.getRequestDispatcher(url);
+				rd.forward(req, res);
+			};
+			
 		}
 		
 		if("getOneDetail".equals(action)) {

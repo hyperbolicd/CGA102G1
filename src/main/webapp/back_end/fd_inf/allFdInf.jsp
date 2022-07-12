@@ -83,7 +83,7 @@ pageContext.setAttribute("list", list);
 								<td>${fdinfVO.fdDT}</td>
 								<td><img
 									src="<%=request.getContextPath()%>/fd_inf/fd_inf.do?action=getPic&fdID=${fdinfVO.fdID}"
-									style="width: 100px; height: 120px;"></td>
+									></td>
 								<td id="state${fdinfVO.fdID}" >${fdinfVO.fdState == 0 ? "下架" : "上架"}</td>
 								<td><FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/fd_inf/fd_inf.do"

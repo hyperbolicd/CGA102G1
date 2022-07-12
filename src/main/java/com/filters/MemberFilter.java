@@ -29,6 +29,7 @@ public class MemberFilter extends HttpFilter implements Filter {
 		String uri = req.getRequestURI();
 		Object account = req.getSession().getAttribute("account");
 		
+		
 		// login 頁面 & css pass
 		if(uri.endsWith("Login.jsp") || uri.endsWith(".css") || uri.endsWith(".js")) {
 			
@@ -37,6 +38,7 @@ public class MemberFilter extends HttpFilter implements Filter {
 		// 判斷是否登入過?
 		} else if(account == null) {  
 			
+		
 //			System.out.println("2");
 
 			req.getSession().setAttribute("lastPage", req.getRequestURI());

@@ -39,8 +39,8 @@
                     <div class="mvDate">
                         <label class="col-sm-2 col-form-label">上映日:</label>
                         <input class="form-control" id="stDate" type="date" name="mvStDate" required>
-                        <label class="col-sm-2 col-form-label">預計下檔日:</label>
-                        <input class="form-control" id="edDate" type="date" name="mvEdDate" required>
+                        <label class="col-sm-2 col-form-label" >預計下檔日:</label>
+                        <input class="form-control" id="edDate" type="date" name="mvEdDate" disabled required>
                     </div>
                     <hr>
                     <div class="mvCast">
@@ -81,14 +81,14 @@
                     <hr>
                     <div class="mvInfo">
                         <label class="col-sm-2 col-form-label">預告片連結:</label>
-                        <input class="form-control" id="mvTler" type="text" name="mvTler"placeholder="請填入嵌入式鏈結" >
+                        <input class="form-control" id="mvTler" type="text" name="mvTler"placeholder="請填入嵌入式鏈結" required>
                         <label class="col-sm-2 col-form-label">詳細資訊:</label>
-                        <textarea class="form-control" id="mvDt" rows="3" name="mvDt" placeholder="請填入電影詳情" ></textarea>
+                        <textarea class="form-control" id="mvDt" rows="3" name="mvDt" placeholder="請填入電影詳情" required></textarea>
                     </div>
                     <hr>
                     <div class="mvPc">
                             <label for="exampleFormControlFile1">請選擇電影封面:</label>
-                            <input type="file" class="form-control-file"accept="image/*" id="mvPc" name="mvPicture"	>
+                            <input type="file" class="form-control-file"accept="image/*" id="mvPc" name="mvPicture"	required>
                             <label for="exampleFormControlFile1">預覽:</label>
                             <img id="pvImg" src="">
                     </div>

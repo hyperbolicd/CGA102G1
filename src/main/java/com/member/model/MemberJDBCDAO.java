@@ -37,6 +37,9 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	
 	private static final String Register =           //會員註冊時會傳送信件，並修改會員狀態(藉由Email搜尋會員ID)
 			"select MEMBER_ID " + "from member where (MEMBER_EMAIL = ? );";
+	
+	private static final String verifyEmail =     //會員忘記密碼
+			"SELECT MEMBER_EMAIL FROM MEMBER WHERE MEMBER_EMAIL =?";
 		
 
 //新增資料	
@@ -495,6 +498,67 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			}
 			return memberVO;
 		}
+		
+		
+//會員忘記密碼
+		public Integer verifyEmail(String usrEmail) {
+
+			Integer verifyResult = null;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			try {
+
+				Class.forName(driver);
+				con = DriverManager.getConnection(url, userid, passwd);
+				pstmt = con.prepareStatement(verifyEmail);
+
+				pstmt.setString(1, usrEmail);
+
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					verifyResult = 1;
+				}else {
+					verifyResult = 0;
+				}
+
+				// Handle any driver errors
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. " + se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return verifyResult;
+		}
+
+		
+		
 	
 	
 	

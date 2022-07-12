@@ -104,16 +104,22 @@ public class MemberService {
 
 //寄送 email
 
-	public void sendMail(String Email) {
+	public boolean sendMail(String Email) {
 		String to = Email;
 		List<MemberVO> list = dao.getAll();
 		Integer memberID = 0;
-		for (MemberVO memberVO : list) {
+		int k = 0;
+		for (; k < list.size(); k++) {
+			MemberVO memberVO = list.get(k);
 			if (memberVO.getMember_Email().equals(Email)) {
 				memberID = memberVO.getMember_ID();
-
+				break;
 			}
 		}
+		if (k == list.size()) {
+			return false;
+		}
+		
 		MemberVO memberVO = dao.findByPrimaryKey(memberID);
 //		String passRandom = "qwe222";
 		String subject = "密碼通知";
@@ -136,6 +142,7 @@ public class MemberService {
 
 		MailService mailService = new MailService();     
 		mailService.sendMail(to, subject, messageText);       //發送忘記密碼信件
+		return true;
 	}
 
 	// wish
@@ -149,5 +156,10 @@ public class MemberService {
 		return dao.register(memberVO);
 		
 	}
+	
+	//會員忘記密碼 	
+		public Integer verifyEmail(String usrEmail) {
+			return dao.verifyEmail(usrEmail);
+		}
 
 }

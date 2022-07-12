@@ -141,10 +141,10 @@ body {
 						<input type="hidden" name="member_ID" value="${memberVO.member_ID}">
 						<table>
 							<tr>
-								<td class="td_left"><label for="member_Password">會員密碼</label></td>
+								<td class="td_left"><label for="member_Password" >會員密碼</label></td>
 								<td class="td_right"><input type="text"
 									id="member_Password"
-									value="${memberVO.member_Password}"></td>
+									value="${memberVO.member_Password}" disabled></td>
 									<div class="errMsgs">${errorMsgs}</div>
 							</tr>
 							

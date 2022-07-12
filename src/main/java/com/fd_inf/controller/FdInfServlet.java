@@ -201,7 +201,7 @@ public class FdInfServlet extends HttpServlet {
 
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
+		
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 			java.lang.Byte fdType = java.lang.Byte.valueOf(req.getParameter("fdType"));
 
@@ -237,9 +237,9 @@ public class FdInfServlet extends HttpServlet {
 			fdInfVO.setFdDT(fdDT);
 			fdInfVO.setFdPicture(fdPicture);
 			fdInfVO.setFdState(fdState);
-
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
+				req.setAttribute("fdInfVO", fdInfVO); // 含有輸入格式錯誤的VO物件,也存入req
 				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/fd_inf/addFdInf.jsp");
 				failureView.forward(req, res);
 				return;
@@ -253,6 +253,9 @@ public class FdInfServlet extends HttpServlet {
 			String url = "/back_end/fd_inf/allFdInf.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交allFdInf.jsp
 			successView.forward(req, res);
+			
+
+		
 		}
 
 		if ("delete".equals(action)) { // 來自allFdInf.jsp

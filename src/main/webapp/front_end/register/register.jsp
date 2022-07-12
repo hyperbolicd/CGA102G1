@@ -1,5 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.member.model.*"%>
+
+<%
+MemberVO memberVO = (MemberVO) request.getAttribute("memberVO"); //存入req的memberVO物件
+%>
+
 <html lang="en" dir="ltr">
 
 <head>
@@ -62,7 +68,7 @@
 							<div style="color: red">${errorMsgs.member_Name}</div>
 						</div>
 						<input type="text" placeholder="請輸入您的使用者名稱" id="member_Name"
-							name="member_Name">
+							name="member_Name"  value="<%=(memberVO == null) ? "" : memberVO.getMember_Name()%>">
 
 					</div>
 
@@ -72,7 +78,7 @@
 							<div style="color: red">${errorMsgs.member_Email}</div>
 						</div>
 						<input type="text" placeholder="請輸入您的電子信箱" id="member_Email"
-							name="member_Email">
+							name="member_Email" value="<%=(memberVO == null) ? "" : memberVO.getMember_Email()%>">
 					</div>
 
 					<div class="input-box">
@@ -94,14 +100,7 @@
 					</div>
 
 
-					<!-- 					<div class="input-box"> -->
-					<!-- 						<div style="display: flex"> -->
-					<!-- 							<span class="address">會員地址</span> -->
-					<%-- 							<div style="color: red">${errorMsgs.member_Address}</div> --%>
-					<!-- 						</div> -->
-					<!-- 						<input type="text" placeholder="請輸入您的會員地址" id="member_Address" -->
-					<!-- 							name="member_Address"> -->
-					<!-- 					</div> -->
+				
 					<div class="input-box">
 						<div style="display: flex; margin-top: 20px">
 							<span>會員電話</span>
@@ -119,7 +118,7 @@
 						<div style="display: flex">
 							<input type="text" placeholder="請輸入您的會員地址" id="member_Address1"
 								name="member_Address1">
-								<input type="hidden" name="member_Address" id="member_Address" value="">
+								<input type="hidden" name="member_Address" id="member_Address" value=""  value="<%=(memberVO == null) ? "" : memberVO.getMember_Address()%>">
 						</div>
 
 
@@ -132,6 +131,7 @@
 
 					<div class="input">
 						<span class="details">會員照片</span>
+						<div class="errMsgs" style="color: red">${errorMsgs.myUpfile}</div>
 						<div class="errMsgs"></div>
 						<input type="file" id="file-uploader" name="myUpfile">
 					</div>

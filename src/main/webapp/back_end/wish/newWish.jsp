@@ -41,29 +41,29 @@
                     <input name="start_date" id="start_date" autocomplete="off" onkeydown="return false" value="${wishVO.wish_start}" placeholder="${errMsg.start_date}"> ~ <input name="end_date" id="end_date" autocomplete="off" onkeydown="return false" value="${wishVO.wish_end}" placeholder="${errMsg.end_date}">
                 </div>
                 <h2>選擇電影(請選擇2~6個)</h2>
-                <div id="multiSearch">
-                    <label for="level">分級:</label>
-                    <select name="level" id="level">
-                        <option value="0">請選擇</option>
-                        <option value="1">普遍級</option>
-                        <option value="2">保護級</option>
-                        <option value="3">輔導級</option>
-                        <option value="4">限制級</option>
-                    </select>
-                    <label for="type">類型:</label>
-                    <select name="type" id="type">
-                        <option value="0">請選擇</option>
-                        <option value="動畫">動畫</option>
-                        <option value="奇幻">奇幻</option>
-                        <option value="動作">動作</option>
-                        <option value="科幻">科幻</option>
-                        <option value="劇情">劇情</option>
-                    </select>
-                    <label for="keyword">關鍵字:</label>
-                    <input id="keyword">
-<!--                     <button id="select">篩選</button> -->
-                    <button id="selectAll">顯示全部</button>
-                </div>
+<!--                 <div id="multiSearch"> -->
+<!--                     <label for="level">分級:</label> -->
+<!--                     <select name="level" id="level"> -->
+<!--                         <option value="0">請選擇</option> -->
+<!--                         <option value="1">普遍級</option> -->
+<!--                         <option value="2">保護級</option> -->
+<!--                         <option value="3">輔導級</option> -->
+<!--                         <option value="4">限制級</option> -->
+<!--                     </select> -->
+<!--                     <label for="type">類型:</label> -->
+<!--                     <select name="type" id="type"> -->
+<!--                         <option value="0">請選擇</option> -->
+<!--                         <option value="動畫">動畫</option> -->
+<!--                         <option value="奇幻">奇幻</option> -->
+<!--                         <option value="動作">動作</option> -->
+<!--                         <option value="科幻">科幻</option> -->
+<!--                         <option value="劇情">劇情</option> -->
+<!--                     </select> -->
+<!--                     <label for="keyword">關鍵字:</label> -->
+<!--                     <input id="keyword"> -->
+<!-- <!--                     <button id="select">篩選</button> --> 
+<!--                     <button id="selectAll">顯示全部</button> -->
+<!--                 </div> -->
                 <div id="movies">
                 	<jsp:useBean id="movieSvc" class="com.movie.model.MovieService"/>
                 	<c:forEach var="movieVO" items="${movieSvc.all}">

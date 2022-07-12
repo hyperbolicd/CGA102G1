@@ -223,11 +223,11 @@ function refund(target){
 			success: function(response) {
 				
 				// 改變前端欄位狀態 鎖定退票按鈕
-				$(target).parent().prev().text("已退款");
+				$(target).parent().prev().text("已退票");
 				$(target).attr('disabled','true');
 				// 改變modal內的狀態和 鎖定入場按鈕
 				$(`#getin${tkDtID}`).attr('disabled','true');
-				$(`#getin${tkDtID}`).parent().prev().text("已退款");
+				$(`#getin${tkDtID}`).parent().prev().text("已退票");
 				
 				// 通知USER已完成
 				Swal.fire(
@@ -270,8 +270,19 @@ function tkChecking(){
 			},
 			success: function(response){
 				
-				// 顯示 入場modal
-				$('#exampleModal').modal('show');
+				if(response===1){
+					// 顯示 入場modal
+					$('#exampleModal').modal('show');
+					
+				}else{
+					Swal.fire(
+	                "驗證碼錯誤!", //標題 
+	                "",
+	                "error"
+	                //圖示(可省略) success/info/warning/error/question
+	                //圖示範例：https://sweetalert2.github.io/#icons
+            	);
+				}
 			}
 			
 			})    

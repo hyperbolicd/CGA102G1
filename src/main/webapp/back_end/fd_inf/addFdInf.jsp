@@ -93,12 +93,19 @@ FdInfVO fdInfVO = (FdInfVO) request.getAttribute("fdInfVO"); //EmpServlet.java (
 							</tr>
 							<tr>
 								<td></td>
-								<td><img id="preview_img"
-									src="<%=request.getContextPath()%>/fd_inf/fd_inf.do?action=getPic&fdID=${fdInfVO.fdID}"><br>
-									<input type="file" name="fdPicture" size="45" accept="image/*"
+								<td>
+
+								
+								
+								<img id="preview_img"
+									src="<%=request.getContextPath()%>/back_end/fd_inf/imges/123.jpg" style="width: 100px; height: 120px;"><br>
+									<input type="file" name="fdPicture" accept="image/*"
 									onchange="readURL(this)" targetID="preview_img"
-									value="${fdInfVO.fdPicture}" />
-								<td></td>
+									value="${fdInfVO==null?'':fdInfVO.getFdPicture()}" />
+								</td>
+								<td>
+								
+								</td>
 							</tr>
 
 							<tr>

@@ -75,7 +75,7 @@
                         <div class="hlName">${hlList[loop.index].hlName}</div>
                         <div class="shDate">
                         場次:
-                        <fmt:formatDate pattern="yyyy-MM-dd hh點mm分" value="${showList[loop.index].SH_TIME}"/>
+                        <fmt:formatDate pattern="yyyy-MM-dd H點m分" value="${showList[loop.index].SH_TIME}"/>
                         </div>
                         <div class="icon_container">
 	                    	<div class="ticket_icon">
