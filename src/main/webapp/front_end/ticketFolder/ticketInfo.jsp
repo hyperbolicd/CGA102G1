@@ -93,7 +93,7 @@
 		<div class="card" style="margin-left:10px;font-weight: bolder ">
 		  <div class="card-body">
 		    場次時間: 
-		    <fmt:formatDate pattern="yyyy年MM月dd日 hh點mm分" value="${showSeatVO.SH_TIME}"/>
+		    <fmt:formatDate pattern="yyyy年MM月dd日 H點m分" value="${showSeatVO.SH_TIME}"/>
 		  </div>
 		</div>
     </div>
