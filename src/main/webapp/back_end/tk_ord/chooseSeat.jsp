@@ -82,7 +82,10 @@
 						<div class="seatsChart"></div>
 
 					</div>
-
+					
+				</div>
+				<div class="btBlock">
+					<a class="bt">繼續</a>
 				</div>
 			</div>
 
@@ -104,9 +107,6 @@
 					</div>
 				</div>
 
-				<div class="btBlock">
-					<a class="bt">繼續</a>
-				</div>
 
 			</div>
 		</div>

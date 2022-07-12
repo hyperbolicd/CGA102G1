@@ -14,7 +14,7 @@
     border-radius: 5px;
     background: rgba(198, 155, 123,0.2);
 /*     border: 5px solid #000; */
-    height: 950px;
+
     width: 900px;
 }
 
@@ -228,19 +228,6 @@
 }
 
 
-tr:nth-child(odd) {
-    background: #d9d9d9;
-}
-
-tr:nth-child(even) {
-    background: rgb(255, 255, 255);
-}
-
-tr:nth-child(1) {
-    background: rgb(58, 58, 58);
-    color: white;
-}
-
 
 .sidetable {
     width: 150px;
@@ -251,8 +238,11 @@ tr:nth-child(1) {
 
 
 
-.timer,
+
 .receiptouter {
+	position: fixed;
+	right: 10%;
+	top: 23%;
     height: 50%;
     display: flex;
     justify-content: center;
@@ -304,7 +294,7 @@ button {
 
 .btBlock {
     height: 300px;
-    width: 200px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-content: center;
