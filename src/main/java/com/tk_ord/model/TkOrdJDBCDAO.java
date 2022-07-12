@@ -434,14 +434,27 @@ public class TkOrdJDBCDAO implements TkOrdDAO_interface {
 				aTkOrdDt.setTkOrdID(new Long(next_tkOrdID));
 				dao.insert2(aTkOrdDt, con);
 			}
-
+			
+			
 			// 再同時新增餐飲明細
-			FdOrdDtJDBCDAO dao2 = new FdOrdDtJDBCDAO();
-			System.out.println("list.size()-A=" + list2.size());
-			for (FdOrdDtVO aFdOrdDt : list2) {
-				aFdOrdDt.setTkOrdID(new Long(next_tkOrdID));
-				dao2.insert2(aFdOrdDt, con);
+			if (list2 != null) {
+				FdOrdDtJDBCDAO dao2 = new FdOrdDtJDBCDAO();
+				System.out.println("list.size()-A=" + list2.size());
+				for (FdOrdDtVO aFdOrdDt : list2) {
+					aFdOrdDt.setTkOrdID(new Long(next_tkOrdID));
+					dao2.insert2(aFdOrdDt, con);
+				}
+				
+			}else {
+				
+				System.out.println("沒有新增餐飲");
 			}
+			
+			
+			
+			
+			
+
 
 			// 2●設定於 pstm.executeUpdate()之後
 			con.commit();

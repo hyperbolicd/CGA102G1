@@ -68,46 +68,54 @@ pageContext.setAttribute("list", list);
 					<div class="TKouter">
 						<table class="TKinner">
 							<tr>
-							
+
 								<td>
 									<FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/MovieServlet.do">
-										<select size="1" name="MV_ID" class="MV_ID">
-											<option value=0>請選擇電影
-												<c:forEach var="MovieVO" items="${list}">
-													<option value="${MovieVO.mvId}">${MovieVO.mvName}
-												</c:forEach>
+										<select size="1" name="MV_ID" class="MV_ID"
+											style="width: 250px;">
+											<option value=0>請選擇電影</option>
+											<c:forEach var="MovieVO" items="${list}">
+												<option value="${MovieVO.mvId}">${MovieVO.mvName}
+											</c:forEach>
 										</select>
 									</FORM>
 								</td>
 
 								<td>
 									<div id="date">
-										<select name="" id="dateSelector" class="picker toRed" disabled="disabled">
+										<select name="" id="dateSelector" class="picker toRed"
+											disabled="disabled" style="width: 250px;">
 											<option>選擇日期</option>
 										</select>
 									</div>
 								</td>
 
-								<td><select class="showTimeSelect" disabled="disabled">
-										<option value=0>請選擇場次
+								<td><select class="showTimeSelect" disabled="disabled"
+									style="width: 250px;">
+										<option value=0>請選擇場次</option>
 								</select></td>
 
-								<td><a class="tablebt checkout">查看</a></td>
 								<td>
-								
-								<FORM METHOD="post" class="checkInForm"	ACTION="<%=request.getContextPath()%>/tkOrd/tkOrd.do"
-									style="margin-bottom: 0px;">
-								<div class="tablebtBlock">
-									<a class="tablebt checkIn"style="font-size: 18;">BOOKING!</a>
-								</div>
-								<input type="hidden" name="MV_ID" class="inputMV_ID"> 
-								<input type="hidden" name="SH_ID" class="inputSH_ID"> 
-								<input type="hidden" name="HL_ID" class="inputHL_ID"> 
-								<input type="hidden" name="action" value="go_To_TicketSelect">
-								</FORM>
-									
-									</td>
+									<div class="tablebtBlock">
+										<a class="tablebt checkout">查看</a>
+									</div>
+								</td>
+								<td>
+
+									<FORM METHOD="post" class="checkInForm"
+										ACTION="<%=request.getContextPath()%>/tkOrd/tkOrd.do"
+										style="margin-bottom: 0px;">
+										<div class="tablebtBlock">
+											<a class="tablebt checkIn" style="font-size: 18;">購票</a>
+										</div>
+										<input type="hidden" name="MV_ID" class="inputMV_ID">
+										<input type="hidden" name="SH_ID" class="inputSH_ID">
+										<input type="hidden" name="HL_ID" class="inputHL_ID">
+										<input type="hidden" name="action" value="go_To_TicketSelect">
+									</FORM>
+
+								</td>
 							</tr>
 						</table>
 					</div>

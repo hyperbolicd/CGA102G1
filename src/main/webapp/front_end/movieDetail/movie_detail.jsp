@@ -23,26 +23,28 @@ for (CmtVO lis : list) {
 	ttstar += lis.getCM_STAR();
 	System.out.println(lis.getCM_ID() + " , " + lis.getCM_STAR());
 }
-System.out.println(ttstar);
+	System.out.println(ttstar);
 pageContext.setAttribute("ttstar", ttstar);
 //該電影的評論數
 int ttcmt = 0;
-if (list.size() == 0) {
+if(list.size() == 0){
 	ttcmt = 0;
-} else {
-	ttcmt = list.size();
-
+}else{
+    ttcmt = list.size();
+	
 }
 pageContext.setAttribute("ttcmt", ttcmt);
 //該電影的平均星數
 int avgstar = 0;
-if (ttstar == 0 || ttcmt == 0) {
+if(ttstar == 0 || ttcmt == 0){
 	avgstar = 0;
-} else {
-	avgstar = ttstar / ttcmt;
+}else{
+avgstar = ttstar / ttcmt;	
 }
 pageContext.setAttribute("avgstar", avgstar);
 //點讚的部分
+
+
 %>
 
 <!DOCTYPE html>
@@ -75,7 +77,7 @@ pageContext.setAttribute("avgstar", avgstar);
 
 	<!-- 置頂按鈕 -->
 	<button type="button" id="BackTop" class="toTop-arrow"></button>
-	<script>
+	 <script>
 	    $(function () {
 	      $('#BackTop').click(function () {
 	        $('html,body').animate({ scrollTop: 0 }, 333);
@@ -89,19 +91,17 @@ pageContext.setAttribute("avgstar", avgstar);
 	      }).scroll();
 	    });
 	  </script>
-	<div class="wrapper row1" style="height: 60px;">
-		<jsp:include page="/front_end/header.jsp" />
-		<jsp:include page="/front_end/header_css.jsp" />
-	</div>
+	 <div class="wrapper row1" style="height: 60px;">
+	  <jsp:include page="/front_end/header.jsp" />
+	  <jsp:include page="/front_end/header_css.jsp" />
+	 </div>
 
 
 
 	<!-- 內容 -->
-	<jsp:useBean id="movieSvc" scope="page"
-		class="com.movie.model.MovieService" />
-
-	<div id="movie_detail_main"
-		style='padding: 50px 100px; color: #979797; background-color: black;'>
+	<jsp:useBean id="movieSvc" scope="page" class="com.movie.model.MovieService" />
+<div class="main">
+	<div id="movie_detail_main" style='padding: 50px 100px; color: #979797; background-color: black;'>
 		<div id="movie">
 			<div id="movie_img">
 				<div id="pic">
@@ -125,7 +125,7 @@ pageContext.setAttribute("avgstar", avgstar);
 		<div id="booking">
 			<div id="date">
 				<select name="" id="dateSelector" class="picker toRed">
-					<option>選擇日期</option>
+				<option>選擇日期</option>
 					<!-- inject date -->
 				</select>
 			</div>
@@ -136,7 +136,7 @@ pageContext.setAttribute("avgstar", avgstar);
 				</select>
 			</div>
 			<div id="book">
-					<button id="bookBtn" class="checkIn">BOOKING!</button>
+				<button id="bookBtn" class="checkIn" type="button">BOOKING!</button>
 				<FORM METHOD="post" class="checkInForm"
 					ACTION="<%=request.getContextPath()%>/front/tkOrd.do"
 					style="margin-bottom: 0px;">
@@ -153,7 +153,9 @@ pageContext.setAttribute("avgstar", avgstar);
 				<div id="cmt_title">
 					<span>COMMENTS</span>
 				</div>
-				<div id="cmt_avg" value="${avgstar}" class="cmt_star"></div>
+				<div id="cmt_avg" value="${avgstar}" class="cmt_star">
+					
+				</div>
 				<div id="cmt_ttcmt">
 					<span>【${ttcmt}則評論】</span>
 				</div>
@@ -168,9 +170,7 @@ pageContext.setAttribute("avgstar", avgstar);
 				<div class="cmt">
 					<div class="member">
 						<div class="member_pic">
-							<img
-								src="<%=request.getContextPath()%>${cmtVO.memberVO.member_Pic}"
-								alt="">
+							<img src="<%=request.getContextPath()%>${cmtVO.memberVO.member_Pic}" alt="">
 						</div>
 						<div class="member_name">
 							<div class="member_nickname">
@@ -186,8 +186,8 @@ pageContext.setAttribute("avgstar", avgstar);
 							${cmtVO.CM_TEXT}</div>
 						<hr class="hr_cmt">
 						<div class="cmt_like">
-							<span class="fa fa-heart like">${cmtVO.CM_LIKE}</span> <input
-								type="hidden" name="CM_ID" value="${cmtVO.CM_ID}">
+							<span class="fa fa-heart like">${cmtVO.CM_LIKE}</span>
+							<input type="hidden" name="CM_ID" value="${cmtVO.CM_ID}">
 						</div>
 						<div class="cmt_date">
 							<span><fmt:formatDate value="${cmtVO.CM_DATE}"
@@ -197,7 +197,8 @@ pageContext.setAttribute("avgstar", avgstar);
 					<div class="cmt_right">
 						<div class="cmt_star" value="${cmtVO.CM_STAR}"></div>
 						<div class="cmt_report">
-							<button>檢舉</button>
+							<button class="reportBtn">檢舉</button>
+							<input type="hidden" name="CM_ID" value="${cmtVO.CM_ID}">
 						</div>
 					</div>
 				</div>
@@ -206,71 +207,71 @@ pageContext.setAttribute("avgstar", avgstar);
 
 
 		<!--     新評論 -->
-		<hr class="hr-shadow">
+<hr class="hr-shadow">
 
 
-		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cmt/cmt.do"
-			name="form1">
-			<div id="newCmt">
-				<div class="member">
-					<div class="member_pic">
-						<img id="thisMemPic"
-							src="<%=request.getContextPath()%>${memberVO.member_Pic}" alt="">
-					</div>
-					<div class="member_name">
-						<div class="member_nickname">
-							<span id="thisMemNickname">${memberVO.member_Name}</span>
-						</div>
-						<div class="member_id">
-							<span id="thisMemId">${memberVO.member_ID}</span>
-						</div>
-					</div>
+		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cmt/cmt.do" name="form1">
+		<div id="newCmt">
+			<div class="member">
+				<div class="member_pic">
+					<img id="thisMemPic" src="<%=request.getContextPath()%>${memberVO.member_Pic}" alt="">
 				</div>
-				<div class="cmt_detail">
-					<div class="cmt_text">
-						<textarea name="CM_TEXT" id="" maxlength="500"></textarea>
+				<div class="member_name">
+					<div class="member_nickname">
+						<span id="thisMemNickname">${memberVO.member_Name}</span>
 					</div>
-					<hr>
-					<div id="conf">
-						<div class="cmtBtnArea">
-							<input type="submit" value="comment">
-							<!-- 					<p>comment</p> -->
-						</div>
-						<div id="netaArea">
-							<div>評論是否劇透</div>
-							<input type="checkbox" name="" id="netabare">
-						</div>
-					</div>
-				</div>
-				<div class="cmt_star">
-					<div class="rating-box">
-						<span class="rating-boxH1">Rating</span>
-						<div class="rating">
-							<span class="fa fa-star-o"></span> <span class="fa fa-star-o"></span>
-							<span class="fa fa-star-o"></span> <span class="fa fa-star-o"></span>
-							<span class="fa fa-star-o"></span>
-						</div>
-						<!-- <h4 id="rating-value"></h1> -->
+					<div class="member_id">
+						<span id="thisMemId">${memberVO.member_ID}</span>
 					</div>
 				</div>
 			</div>
-			<input type="hidden" name="MEMBER_ID" value="${memberVO.member_ID}">
-			<input type="hidden" name="MV_ID" value="${movieVO.mvId}"> <input
-				type="hidden" name="CM_LIKE" value="0"> <input type="hidden"
-				name="CM_STAR" value=""> <input type="hidden"
-				name="CM_STATE" value="0"> <input type="hidden"
-				name="CM_DATE" value=""> <input type="hidden" name="ttcmt"
-				value="${ttcmt}"> <input type="hidden" name="ttstar"
-				value="${ttstar}"> <input type="hidden" name="action"
-				value="insert">
-			<!-- 		<input type="submit" value="送出新增"> -->
-		</FORM>
+			<div class="cmt_detail">
+				<div class="cmt_text">
+					<textarea name="CM_TEXT" id="" maxlength="500"></textarea>
+				</div>
+				<hr>
+				<div id="conf">
+					<div class="cmtBtnArea">
+						<input type="submit" value="comment">
+<!-- 					<p>comment</p> -->
+					</div>
+					<div id="netaArea">
+						<div>評論是否劇透</div>
+						<input type="checkbox" name="" id="netabare">
+					</div>
+				</div>
+			</div>
+			<div class="cmt_star">
+				<div class="rating-box">
+					<span class="rating-boxH1">Rating</span>
+					<div class="rating">
+						<span class="fa fa-star-o"></span> <span class="fa fa-star-o"></span>
+						<span class="fa fa-star-o"></span> <span class="fa fa-star-o"></span>
+						<span class="fa fa-star-o"></span>
+					</div>
+					<!-- <h4 id="rating-value"></h1> -->
+				</div>
+			</div>
+		</div>
+		<input type="hidden" name="MEMBER_ID" value="${memberVO.member_ID}">
+		<input type="hidden" name="MV_ID" value="${movieVO.mvId}">
+		<input type="hidden" name="CM_LIKE" value="0">
+		<input type="hidden" name="CM_STAR" value="">
+		<input type="hidden" name="CM_STATE" value="0">
+		<input type="hidden" name="CM_DATE" value="">
+		
+		<input type="hidden" name="ttcmt" value="${ttcmt}">
+		<input type="hidden" name="ttstar" value="${ttstar}">
+		
+		<input type="hidden" name="action" value="insert">
+<!-- 		<input type="submit" value="送出新增"> -->
+	</FORM>
 
 
 
 	</div>
 
-
+</div>
 	<!--客服圖 請自行加連結-->
 	<img class="cs"
 		src="<%=request.getContextPath()%>/front_end/movieDetail/images/demo/cs.png"
@@ -323,7 +324,7 @@ pageContext.setAttribute("avgstar", avgstar);
 // 			      async: false,
 // 			      success: function (response) {
 // 			    	  for(let res of response){
-// 				        $("#showingTime").append("<option value="+ res.SH_ID + ">" + res.SH_TIME + "</option>");  
+// 				        $("#showingTime").append("<option>" + res.SH_TIME + "</option>");  
 // 				        console.log(res.SH_TIME);
 // 			    	  }
 // 			      },
@@ -365,7 +366,103 @@ pageContext.setAttribute("avgstar", avgstar);
 		    	
 		    })
 		});
+// 檢舉ajax按鈕
+//新增視窗
+let main = document.getElementsByClassName('main')[0];
+let adds =  document.getElementsByClassName('reportBtn');
+for(let add of adds){
+add.onclick = addAccount;}	// 點擊後執行addAccount function
 
+function addAccount(){
+	console.log($(this).next().val())
+	let cmId = $(this).next().val();
+    const newAccount = document.querySelector('#reportDiv');
+    if(newAccount){
+        newAccount.remove();
+    }
+    // 區分前後區域
+    const divNew = document.createElement('div');
+    divNew.id = 'reportDiv';
+    divNew.onclick = close;
+    // 新增帳戶的視窗
+    const divInput = document.createElement('div');
+    divInput.id = 'dataInput';
+    // 輸入名稱
+    let inner = `
+    <div id="reportDiv">
+    <form action="${pageContext.request.contextPath}/ReportServlet.do">
+    <table>
+    <input type="hidden" name="mvId" value="${movieVO.mvId}">
+        <tr>
+            <td>評論編號</td>
+            <td >` + cmId +`</td>
+            <input type="hidden" name="cmId" value=` + cmId + `>
+        </tr>
+
+        <tr>
+            <td>檢舉人</td>
+            <td>${memberVO.member_ID} （${memberVO.member_Name}）</td>
+            <input type="hidden" name="memberId" value="${memberVO.member_ID}">
+        </tr>
+
+        <tr>
+            <td>檢舉類型</td>
+            <td>
+                <select name="rpType" id="">
+                    <option value="其他">其他</option>
+                    <option value="惡意暴雷">惡意暴雷</option>
+                    <option value="謾罵">謾罵</option>
+                    <option value="散佈廣告">散佈廣告</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>檢舉內容</td>
+            <td><textarea name="rpText" id="" cols="30" rows="10" maxlength="50"></textarea></td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+            	<button name="action" value="insert" type="submit" >送出</button>
+            	<button id="cancel" class="tablebt">取消</button>
+            </td>
+
+            <input type="hidden" name="rpState" value="0">
+        </tr>
+    </table>
+</form>
+</div>
+`;
+//    inner += `<div>
+//        <button id="cancel" class="tablebt">取消</button>
+//        <button id="enter" name="action" value="insert" type="submit" class="tablebt">確認</button>
+//    </div></form>`;
+    divInput.innerHTML = inner;
+    main.append(divNew);
+    main.append(divInput);
+    const cancel = document.querySelector('#cancel');
+    const cancel2 = document.querySelector('#dataInput');
+    const enter = document.querySelector('#enter');
+    cancel.onclick = close;
+//     cancel2.onclick = close;
+	$("#comment").hide();
+	$("#copyright").hide();
+    
+};
+
+//關閉新增帳戶的視窗
+function close(){
+    const newAccount = document.querySelector('#reportDiv');
+    const dataInput = document.querySelector('#dataInput');
+    if(newAccount !== null){
+        newAccount.remove();
+        dataInput.remove();
+        $("#comment").show();
+        $("#copyright").show();
+    }
+}
+			
 	
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -448,7 +545,8 @@ pageContext.setAttribute("avgstar", avgstar);
 		})	
 		
 		
-		$('.checkIn').click(function() {
+		$('#bookBtn').click(function() {
+			console.log("checkinnnnnnn")
 			movieName = $('.MV_ID option:selected').text();
 			if ('' === SH_ID || '0' === SH_ID ){
 				Swal.fire({

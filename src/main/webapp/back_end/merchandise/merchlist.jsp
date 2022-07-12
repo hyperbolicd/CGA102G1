@@ -67,8 +67,8 @@ List<MerchVO> list = (List<MerchVO>) session.getAttribute("merchlist");
 								<tr>
 									<td>${merch.merchID}</td>
 									<td>${merch.merchName}</td>
-									<td>${merch.merchStatus == 1? '下架':''} ${merch.merchStatus == 2? '上架':''}
-										${merch.merchStatus == 3? '主打':''}</td>
+									<td>${merch.merchStatus == 0? '下架':''} ${merch.merchStatus == 1? '上架':''}
+										${merch.merchStatus == 2? '主打':''}</td>
 									<td>
 										<form
 											action="${pageContext.request.contextPath}/merch/controller">

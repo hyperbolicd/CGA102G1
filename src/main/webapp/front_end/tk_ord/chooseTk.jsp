@@ -136,7 +136,7 @@ pageContext.setAttribute("list2", list2);
 										<div class="item_text2">$ ${fdinfVO.fdprice}</div>
 										<div>
 											<input class="FD${fdinfVO.fdID}" type="number" min="0"
-												max="5" step="1" value="0" />
+												onkeydown="return false;" max="5" step="1" value="0" />
 										</div>
 									</div>
 								</div>
@@ -192,7 +192,7 @@ pageContext.setAttribute("list2", list2);
 	</div>
 	
 	<script>
-	
+	sessionStorage.clear();
 // 	處理場次時間==================================
 	let showtime = '';
 	showtime = '${showingVO.SH_TIME}';
@@ -332,7 +332,7 @@ $('.bt').click(function () {
        })
 	}else{	
 	
-		document.location.href="<%=request.getContextPath()%>/back_end/tk_ord/chooseSeat.jsp";
+		document.location.href="<%=request.getContextPath()%>/front_end/tk_ord/chooseSeat.jsp";
 
 	}
 });   

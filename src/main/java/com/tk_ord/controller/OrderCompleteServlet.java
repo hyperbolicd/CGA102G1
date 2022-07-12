@@ -100,22 +100,28 @@ public class OrderCompleteServlet extends HttpServlet {
 				}
 				
 			}
-						
-				
-			List<FdOrdDtVO> fdOrdDtList = new ArrayList<FdOrdDtVO>(); 
 			
-			for(FDorder fdorder : order.getFDorders()) {
+			List<FdOrdDtVO> fdOrdDtList = new ArrayList<FdOrdDtVO>(); 
+			if (order.getFDorders() != null) {
 				
-				FdOrdDtVO fdOrdDt = new FdOrdDtVO(); 
 				
-				fdOrdDt.setFdID(fdorder.getId());
-				fdOrdDt.setFdCount(fdorder.getCount());
-				fdOrdDt.setFdState(Byte.valueOf("0"));
-				fdOrdDt.setSellPrice(fdorder.getUnitPrice() * fdorder.getCount());
+				for(FDorder fdorder : order.getFDorders()) {
+					
+					FdOrdDtVO fdOrdDt = new FdOrdDtVO(); 
+					
+					fdOrdDt.setFdID(fdorder.getId());
+					fdOrdDt.setFdCount(fdorder.getCount());
+					fdOrdDt.setFdState(Byte.valueOf("0"));
+					fdOrdDt.setSellPrice(fdorder.getUnitPrice() * fdorder.getCount());
+					
+					fdOrdDtList.add(fdOrdDt);
+					
+				}
+			}else {
 				
-				fdOrdDtList.add(fdOrdDt);
-				
+				fdOrdDtList = null;
 			}
+				
 			
 			
 			

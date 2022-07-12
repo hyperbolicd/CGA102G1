@@ -87,13 +87,13 @@
 								<td>商品狀態:</td>
 								<td>
 								<c:choose>
-    								<c:when test="${merchVo.merchStatus == '1'}">
+    								<c:when test="${merchVo.merchStatus == '0'}">
        									下架
     								</c:when>
-    								<c:when test="${merchVo.merchStatus == '2'}">
+    								<c:when test="${merchVo.merchStatus == '1'}">
        									上架
     								</c:when>
-    								<c:when test="${merchVo.merchStatus == '3'}">
+    								<c:when test="${merchVo.merchStatus == '2'}">
        									主打
     								</c:when>
     							</c:choose>
