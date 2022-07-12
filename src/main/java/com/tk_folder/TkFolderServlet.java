@@ -85,7 +85,8 @@ public class TkFolderServlet extends HttpServlet {
 			
 			Integer verifyEmpCode = null;
 			Integer verifyResult = null;
-			if(!req.getParameter("code").isEmpty()) {
+			if(!req.getParameter("code").isEmpty() && req.getParameter("code").matches("[+-]?\\d*(\\.\\d+)?")) {
+				
 				verifyEmpCode =Integer.valueOf(req.getParameter("code"));
 				verifyResult = new TkFolderService().verifyCode(verifyEmpCode);
 				

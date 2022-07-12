@@ -68,7 +68,8 @@
                         	這部電影尚未有人評分
                             </c:if>
                         	<c:if test="${!(showingVO.mvTtStar/showingVO.mvTtCm).isNaN()}">
-                        	<fmt:formatNumber value="${showingVO.mvTtStar/showingVO.mvTtCm}" maxFractionDigits="1"/>
+                        	<fmt:formatNumber value="${showingVO.mvTtStar/showingVO.mvTtCm}"
+                        	minFractionDigits="1" maxFractionDigits="1"/>
                         	
                             <img src="/CGA102G1/front_end/showAllMovie/MV_ICON/star.png" alt="">
                             </c:if>

@@ -38,6 +38,19 @@ $(document).ready(function(){
         const br = document.createElement("br");
         prBox.append(br);
     }
+        // 驗證影廳名稱不可為空白
+    const nameId = document.getElementById('nameId');
+    nameId.addEventListener('blur',()=>{
+		if(nameId.value.trim().length === 0){
+			Swal.fire(
+		  '請輸入影廳名稱',
+		  '',
+		  'warning'
+		)
+			nameId.value ="";
+		}
+	
+})
 })
 
 

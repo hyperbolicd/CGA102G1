@@ -1,14 +1,13 @@
 /***********************片名英文數字驗證******************************/
 const mvEName = document.getElementById('mvEName');
 mvEName.addEventListener("blur",()=>{
-    let regex = new RegExp("^[a-zA-Z0-9 ]+$");
+    let regex = new RegExp("^[A-Za-z0-9\u4e00-\u9fa5] $");
     
      if (regex.test(mvEName.value)){
-        mvEName.setAttribute('class',"form-control is-valid");
     }
     else{
         Swal.fire(
-                "只接受輸入英文或數字", //標題 
+                "請勿輸入中文", //標題 
                 "",
                 "warning"
                 //圖示(可省略) success/info/warning/error/question
