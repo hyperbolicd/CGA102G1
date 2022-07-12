@@ -101,8 +101,8 @@
 								<td></td>
 								
 								<td>
-								<img id="preview_img" src="<%=request.getContextPath()%>/fd_inf/fd_inf.do?action=getPic&fdID=${fdInfVO.fdID}"><br>
- 													<input type="file" name="fdPicture" size="45" accept="image/*" onchange="readURL(this)" targetID="preview_img" 
+								<img id="preview_img" src="<%=request.getContextPath()%>/fd_inf/fd_inf.do?action=getPic&fdID=${fdInfVO.fdID}" style="width: 100px; height: 120px;"><br>
+ 													<input type="file" name="fdPicture"  accept="image/*" onchange="readURL(this)" targetID="preview_img" 
  													value="${fdInfVO.fdPicture}" />
 									
 									</td>

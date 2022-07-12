@@ -10,8 +10,9 @@
 }
 
 .main {
-    border-radius: 15px;
-    border: 5px solid #000;
+    border-radius: 5px;
+/*     border: 5px solid #000; */
+    background: rgba(198, 155, 123, 0.2);
     width: 900px;
 }
 
@@ -29,7 +30,7 @@
 
 .showmain {
     width: 400px;
-    font-size: 20px;
+    font-size: 25px;
     font-weight: bold;
 }
 
@@ -68,12 +69,12 @@
 }
 
 .guide1 {
-    border-radius: 15px;
-    color: white;
-    background-color: #1b1b1b;
-    width: 800px;
-    height: 100px;
-    font-size: 35px;
+    border-radius: 5px;
+	color: white;
+	background-color: rgba(130, 111, 102, 0.9);
+    width: 250px;
+    height: 50px;
+    font-size: 20px;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -92,12 +93,21 @@
 
 .TKinner {
     border-collapse: collapse;
-    border: 2px solid #000;
+/*     border: 2px solid #000; */
     text-align: center;
     height: 100%;
     width: 90%;
 }
-
+th{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background: rgba(130, 111, 102, 0.9);
+    color: white;
+}
+td{
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
 tr:nth-child(odd) {
     background: #d9d9d9;
 }
@@ -107,10 +117,6 @@ tr:nth-child(even) {
 }
 
 
-th {
-    background: rgb(58, 58, 58);
-    color: white;
-}
 
 
 
@@ -174,9 +180,10 @@ th {
     transition: 0.5s;
     background-size: 200% auto;
     color: white;
-    border-radius: 10px;
-    font-weight: 700;
-    background-image: linear-gradient(45deg, #000000 0%, #7c7c7c 51%, #000000 100%);
+    border-radius: 5px;
+    font-weight: bold;
+/*     background-image: linear-gradient(45deg, #000000 0%, #7c7c7c 51%, #000000 100%); */
+	background: rgb(198, 155, 123);
     cursor: pointer;
 }
 
