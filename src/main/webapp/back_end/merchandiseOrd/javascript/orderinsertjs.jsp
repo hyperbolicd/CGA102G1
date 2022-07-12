@@ -25,10 +25,11 @@ function f1(e) {
     input.name = "merchCount";
     input.className = "totalCount";
     input.setAttribute('min',0);
-    input.placeholder = "請輸入需要的商品數量";
-    input.value = "${orderDetailVo.ordCount}";
+    input.placeholder = "0";
+    input.value = "${orderDetailVo.ordCount==''?0:orderDetailVo.ordCount}";
     let selectes = document.createElement('select');
     selectes.name = "merchID";
+    selectes.style.width = "300px";
     let tr1 = document.createElement('tr');
     let td4 = document.createElement('td');
     let td5 = document.createElement('td');
@@ -38,9 +39,9 @@ function f1(e) {
     tr1.append(td4);
     tr1.append(td5);
     tr1.append(td6);
-    td4.textContent = '商品名稱:';
+//     td4.textContent = '商品名稱:';
     td4.append(selectes);
-    td5.textContent = "商品數量:";
+//     td5.textContent = "商品數量:";
     td5.append(input);
     /*第一個選單*/
     let option1 = document.createElement('option');

@@ -17,6 +17,8 @@ for(let i = 0; i < checkbox.length; i++){
     checkbox2.setAttribute("form","checkbox2");
     checkbox1.name = "item";
     checkbox2.name = "item";
+    checkbox1.style.display = "none";
+    checkbox2.style.display = "none";
     checkbox1.type = "checkbox";
     checkbox2.type = "checkbox";
     checkbox1.className = "checkbox1 forcheckbox1";

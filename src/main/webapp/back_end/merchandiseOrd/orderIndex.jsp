@@ -47,13 +47,13 @@
 				<div class="TKouter">
 					<table class="TKinner">
 						<tr>
-							<td></td>
-							<td>
+							<th></th>
+							<th>
 									<a class="tablebt" href="${pageContext.request.contextPath}/merchOrd/merchOrd.do?action=getAll_For_Display">全部訂單</a>
-							</td>
-							<td>	
+							</th>
+							<th>	
 									<a class="tablebt" href="${pageContext.request.contextPath}/back_end/merchandiseOrd/orderinsert.jsp">新增訂單</a>
-							</td>
+							</th>
 						</tr>
 						<tr>
 						<form action="${pageContext.request.contextPath}/merchOrd/merchOrd.do">
@@ -73,6 +73,8 @@
 						</form>
 							</tr>
 					</table>
+				</div>
+				<div class="btBlock">
 				</div>
 			</div>
 		</div>

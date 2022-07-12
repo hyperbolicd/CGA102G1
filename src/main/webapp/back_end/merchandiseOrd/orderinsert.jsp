@@ -18,9 +18,11 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/back_end/merchandise/css/merchandise.css">
 </head>
-<jsp:useBean id="merchSvc" scope="page" class="com.merchandise_inf.model.MerchService" />
+<jsp:useBean id="merchSvc" scope="page"
+	class="com.merchandise_inf.model.MerchService" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
+	
 <body>
 	<header>
 		<nav>
@@ -53,34 +55,42 @@
 					method="post">
 					<div class="TKouter">
 						<table class="TKinner" id="table">
+
 							<tr>
-								<td>會員編號:</td>
-								<td><input type="text" placeholder="請輸入會員編號"
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+
+							<tr>
+								<td>會員編號: </td><td>
+								<input type="text" placeholder="請輸入會員編號"
 									name="memberID" value="${merchOrdVo.memberID}" required></td>
-								<td>商品價格:</td>
+									<td style="color:red">${errorMsgs.memberID}</td>
 							</tr>
 							<tr>
-								<td>商品名稱: <select name="merchID" id="select">
+								<td style="width: 300px;">商品名稱</td>
+								<td>商品數量</td>
+								<td>商品價格</td>
+							</tr>
+							<tr>
+								<td ><select name="merchID" id="select" style="width: 300px;">
 										<option value="0">請選擇</option>
 										<c:forEach var="merchVo" items="${merchSvc.all}">
 											<option value="${merchVo.merchID}">${merchVo.merchName}</option>
 										</c:forEach>
-								</select>
-								</td>
-								<td>商品數量:<input type="number" name="merchCount" class="totalCount" min=0
-									placeholder="請輸入需要的商品數量" value="${orderDetailVo.ordCount}"
-									required>
-								</td>
+								</select></td>
+								<td><input type="number" name="merchCount"
+									class="totalCount" min=0 placeholder="0"
+									value="${orderDetailVo.ordCount}" required></td>
 								<td class="merchPrice"></td>
-							</tr>
-
 						</table>
 					</div>
 					<div class="btBlock">
 						<input type="hidden" name="totalCount" value="0" id="totalCount">
-						<input type="hidden" name="action" value="insert1"> 
-						<input type="submit" class="bt" value="送出新增">
-						<input class="tablebt" form="1234" type="submit" value="放棄新增">
+						<input type="hidden" name="action" value="insert1"> <input
+							type="submit" class="bt" value="送出新增"> <input
+							class="tablebt" form="1234" type="submit" value="放棄新增">
 					</div>
 				</FORM>
 				<form
@@ -96,7 +106,8 @@
 	<aside id="aside">
 		<%@ include file="/back_end/aside_html.jsp"%>
 	</aside>
-<%@ include file="/back_end/merchandiseOrd/javascript/orderinsertjs.jsp"%>
+	<%@ include
+		file="/back_end/merchandiseOrd/javascript/orderinsertjs.jsp"%>
 
 </body>
 

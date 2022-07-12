@@ -49,9 +49,9 @@
 
 						<table class="TKinner tablesorter" id="myTable">
 							<tr>
-								<td></td>
-								<td>輸入</td>
-								<td></td>
+								<th></th>
+								<th>輸入</th>
+								<th></th>
 							</tr>
 							<tr>
 								<td>商品編號:</td>

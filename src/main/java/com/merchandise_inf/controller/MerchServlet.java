@@ -193,7 +193,7 @@ public class MerchServlet extends HttpServlet {
 				blob = merchVo.getMerchPic4();
 				break;
 			case "5":
-				blob = merchVo.getMerchPic1();
+				blob = merchVo.getMerchPic5();
 				break;
 			default:
 				System.out.println("無圖片");

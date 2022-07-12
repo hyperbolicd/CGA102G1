@@ -51,9 +51,9 @@
 
 						<table class="TKinner">
 							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
+								<th></th>
+								<th>輸入</th>
+								<th></th>
 							</tr>
 							<tr>
 								<td>商品名稱:</td>

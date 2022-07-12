@@ -1,22 +1,29 @@
-.all *{
- box-sizing: border-box;
- text-decoration:none
-}
-
 .all {
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
-    color: #000;
+    
 
 }
 
 .main {
-    border-radius: 15px;
-    border: 5px solid #000;
-/*     height: 1100px; */
-    width: 900px;
+    border-radius: 5px;
+/*     border: 5px solid #000; */
+    background: rgba(198, 155, 123, 0.2);
+    width: 1000px;
+    
 }
-
+img{
+	height: 100%;
+	width: 90%;
+}
+select{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+	border-radius:5px;
+}
 
 
 /* 導覽開始====================================== */
@@ -31,12 +38,12 @@
 }
 
 .guide1 {
-    border-radius: 15px;
-    color: white;
-    background-color: #1b1b1b;
-    width: 800px;
-    height: 100px;
-    font-size: 35px;
+    border-radius: 5px;
+	color: white;
+	background-color: rgba(130, 111, 102, 0.9);
+    width: 250px;
+    height: 50px;
+    font-size: 20px;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -57,7 +64,7 @@
 
 .TKinner {
     border-collapse: collapse;
-    border: 2px solid #000;
+/*     border: 2px solid #000; */
     text-align: center;
     height: 100%;
     width: 90%;
@@ -79,8 +86,21 @@ tr:nth-child(even) {
     background: rgb(255, 255, 255);
 }
 
+th {
+    background: rgba(130, 111, 102, 0.9);
+    color: white;
+}
+
+tr:hover{
+
+background-color: #9d9d9d;
+
+color: #000000;
+
+}
+
 thead > tr > td{
-    background: rgb(58, 58, 58);
+    background-color: rgb(79, 93, 1);
     color: white;
 }
 /* tr:nth-child(1) { */
@@ -90,8 +110,8 @@ thead > tr > td{
 
 /* 按鈕開始====================================== */
 
-
 .bt {
+
     text-decoration: none;
     padding: 15px 20px;
     /* 按鈕大小 */
@@ -100,9 +120,10 @@ thead > tr > td{
     transition: 0.5s;
     background-size: 200% auto;
     color: white;
-    border-radius: 10px;
-    font-weight: 700;
-    background-image: linear-gradient(45deg, #000000 0%, #7c7c7c 51%, #000000 100%);
+    border-radius: 5px;
+    font-weight: blod;
+/*     background-image: linear-gradient(45deg, #000000 0%, #7c7c7c 51%, #000000 100%); */
+	background: rgb(198, 155, 123);
     cursor: pointer;
 }
 
@@ -135,10 +156,13 @@ thead > tr > td{
     transition: 0.5s;
     background-size: 200% auto;
     color: white;
-    border-radius: 10px;
-    font-weight: 700;
-    background-image: linear-gradient(45deg, #000000 0%, #7c7c7c 51%, #000000 100%);
+    border-radius: 5px;
+    font-weight: bold;
+/*     background-image: linear-gradient(45deg, #000000 0%, #7c7c7c 51%, #000000 100%); */
+	background: rgb(198, 155, 123);
     cursor: pointer;
+    border:none;
+    font-size: 15px;
 }
 
 .tablebt:hover {

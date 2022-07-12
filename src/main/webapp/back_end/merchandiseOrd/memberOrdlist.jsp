@@ -53,10 +53,10 @@ List<MerchOrdVO> list = (List<MerchOrdVO>) session.getAttribute("merchOrdlist");
 					<table class="TKinner tablesorter" id="myTable">
 						<thead>
 							<tr>
-								<td>訂單編號</td>
-								<td>訂單狀態</td>
-								<td>查詢</td>
-								<td>刪除</td>
+								<th>訂單編號</th>
+								<th>訂單狀態</th>
+								<th>查詢</th>
+								<th>刪除</th>
 							</tr>
 						</thead>
 						<%@ include file="page1.file"%>

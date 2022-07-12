@@ -79,7 +79,7 @@
 				<span class="down" onclick='decreaseCount(event, this)'><img
 					class="arrow-pic"
 					src="${pageContext.request.contextPath}/front_end/merchandise/images/LeftArrow.png"></span>
-				<input id="input-amount" type="number" value="1" name="scCount">
+				<input id="input-amount" type="number" value="1" name="scCount" min=1>
 				<span class="up" onclick='increaseCount(event, this)'><img
 					class="arrow-pic"
 					src="${pageContext.request.contextPath}/front_end/merchandise/images/RightArrow.png"></span>

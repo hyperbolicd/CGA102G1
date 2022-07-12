@@ -53,21 +53,21 @@
 					<table class="TKinner">
 
 						<tr>
-							<td>
+							<th>
 							<a class="tablebt"
 								href="${pageContext.request.contextPath}/back_end/merchandise/mallIndex.jsp">首頁</a>
-							</td>
+							</th>
 
-							<td>
+							<th>
 							<a class="tablebt"
-								href="${pageContext.request.contextPath}/back_end/merchandise/merchinsert.jsp">新增</a></td>
-							<td>
+								href="${pageContext.request.contextPath}/back_end/merchandise/merchinsert.jsp">新增</a></th>
+							<th>
 							<form
 									action="${pageContext.request.contextPath}/merch/controller">
 									<button class="tablebt" type="submit" name="action"
 										value="getAll_For_Display">查詢所有商品</button>
 							</form>
-							</td>
+							</th>
 
 						</tr>
 						<tr>
@@ -115,6 +115,8 @@
 						</tr>
 						
 					</table>
+				</div>
+				<div class="btBlock">
 				</div>
 			</div>
 		</div>

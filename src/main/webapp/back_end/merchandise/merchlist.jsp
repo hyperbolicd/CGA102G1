@@ -53,11 +53,12 @@ List<MerchVO> list = (List<MerchVO>) session.getAttribute("merchlist");
 					<table class="TKinner tablesorter" id="myTable">
 						<thead>
 							<tr>
-								<td>商品編號</td>
-								<td>商品名稱</td>
-								<td>商品狀態</td>
-								<td>查詢</td>
-								<td>刪除</td>
+								<th>商品編號</th>
+								<th>商品名稱</th>
+								<th>商品狀態</th>
+								<th>修改</th>
+								<th>查詢</th>
+								<th>刪除</th>
 							</tr>
 						</thead>
 						<%@ include file="page1.file"%>
@@ -76,6 +77,15 @@ List<MerchVO> list = (List<MerchVO>) session.getAttribute("merchlist");
 												value="${merch.merchID}">
 											<button class="tablebt" type="submit" name="action"
 												value="getOne_For_Update">修改</button>
+										</form>
+									</td>
+									<td>
+										<form
+											action="${pageContext.request.contextPath}/merch/controller">
+											<input class="tablebt" type="hidden" name="merchID"
+												value="${merch.merchID}">
+											<button class="tablebt" type="submit" name="action"
+												value="getOne_For_Display">查詢</button>
 										</form>
 									</td>
 									<td>

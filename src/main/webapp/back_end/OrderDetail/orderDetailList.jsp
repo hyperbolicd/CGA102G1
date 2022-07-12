@@ -55,15 +55,15 @@ List<MerchVO> insertlist = (List<MerchVO>) session.getAttribute("insertlist");
 					<table class="TKinner tablesorter" id="myTable">
 						<thead>
 							<tr>
-								<td><input type="checkbox" id="allcheckbox" form="checkbox checkbox1 checkbox2">全選</td>
-								<td>訂單項次</td>
-								<td>商品名稱</td>
-								<td>購買數量</td>
-								<td>產品狀態</td>
-								<td>價格(單價)</td>
-								<td>修改</td>
-								<td>查看</td>
-								<td>刪除</td>
+								<th><input type="checkbox" id="allcheckbox" form="checkbox checkbox1 checkbox2">全選</th>
+								<th>訂單項次</th>
+								<th>商品名稱</th>
+								<th>購買數量</th>
+								<th>產品狀態</th>
+								<th>價格(單價)</th>
+								<th>修改</th>
+								<th>查看</th>
+								<th>刪除</th>
 							</tr>
 						</thead>
 						<%@ include file="page1.file"%>
