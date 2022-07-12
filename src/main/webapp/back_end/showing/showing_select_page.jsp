@@ -9,11 +9,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>場次查詢</title>
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/showing/emp_all.css" />
+	href="<%=request.getContextPath()%>/back_end/css/emp_all.css" />
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/showing/emp_main.css" />
+	href="<%=request.getContextPath()%>/back_end/css/emp_main.css" />
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back_end/showing/emp_footer.css" />
+	href="<%=request.getContextPath()%>/back_end/css/emp_footer.css" />
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/showing/css/showing_select_page.css" />
 
@@ -131,7 +131,7 @@
 	<!-- <div id="tree"></div> -->
 	<footer>嗨邇覓影城 &copy; HIREME CINEMA 2022</footer>
 	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="<%=request.getContextPath()%>/back_end/showing/emp_aside.js"></script>
+<%-- 	<script src="<%=request.getContextPath()%>/back_end/showing/emp_aside.js"></script> --%>
 
 	<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 

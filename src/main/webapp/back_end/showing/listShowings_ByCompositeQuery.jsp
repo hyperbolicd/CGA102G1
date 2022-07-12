@@ -101,7 +101,7 @@
 	</main>
 	<!-- <div id="tree"></div> -->
 	<footer> 嗨邇覓影城 &copy; HIREME CINEMA 2022 </footer>
-	<script src="<%=request.getContextPath()%>/back_end/showing/emp_aside.js"></script>
+<%-- 	<script src="<%=request.getContextPath()%>/back_end/showing/emp_aside.js"></script> --%>
 
 	<!-- 表格排序 -->
 	<script
