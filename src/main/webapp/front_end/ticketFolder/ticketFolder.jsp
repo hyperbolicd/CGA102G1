@@ -104,11 +104,6 @@
       </div>
  </div>
       
-      
-
-  <!--客服圖 請自行加連結-->
-  <img class="cs" src="images/demo/cs.png" height="50px;" width="60px;" href="#"></img>
-
   <!-- Copyright -->
   <div class="wrapper row2">
     <footer id="copyright" class="clear">
