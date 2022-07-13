@@ -66,7 +66,7 @@
 					</div>
 					<div class="guide1outer">
 						<div class="guide1">
-							<div>請確認訂單內容</div>
+							<div>完成訂單</div>
 						</div>
 					</div>
 					<div class="TKouter">

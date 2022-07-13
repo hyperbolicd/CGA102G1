@@ -218,10 +218,7 @@
 	let memberLevel = 'A';
 //      點擊單一座位
 	$(".seatNumber").click(function() {
-// 		if (memberLevel = 'C'){
-			
-// 		}
-//      去除不可選座位
+		// 去除不可選座位
 		if (!$(this).hasClass("seatUnavailable") && !$(this).hasClass("seatConstruction")) {
 			
 			// 如果座位已選過
@@ -286,8 +283,10 @@
             			success: function (data) {
             				seat = data.SH_SEAT_STATE;
 							sendMessage(index);
-            			} 
-	 				})		        
+            			}
+					
+	 				})
+	 				
 					addToCheckout(price);
 					refreshCounter();
 				}

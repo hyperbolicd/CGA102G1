@@ -194,7 +194,7 @@
 .temporaryInf {
 	height: 700px;
 	width: 300px;
-	color: white;
+	color: gray;
 	border-radius: 15px;
 	border: 5px solid #000;
 	display: flex;
@@ -212,7 +212,7 @@
 }
 
 .receiptouter {
-	color: white;
+	color: gray;
 	position: fixed;
 	right: 10%;
 	top: 23%;
@@ -265,9 +265,7 @@ button {
 }
 
 .btBlock {
-
 	border-radius: 15px;
-
     height: 300px;
     width: 100%;
 	display: flex;
