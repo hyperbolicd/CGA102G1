@@ -268,7 +268,7 @@ public class MemberServlet extends HttpServlet {
 				situation.put("login", "您被停權了");                //跳出您被停權了
 				url = "/front_end/login/login.jsp";	
 			}else if(memberVo.getMember_Status().equals(0)) {     //如果會員狀態 帳號未啟用
-				situation.put("enabled", "您帳號未被啟用，煩請收信!");    //您帳號未被啟用，煩請收信!
+				situation.put("enabled", "您帳號未被啟用，煩請收信!");    //跳出您帳號未被啟用，煩請收信!
 				url = "/front_end/login/login.jsp";	
 			}else{
 				url = "/front_end/index.jsp";   //登入成功
@@ -362,12 +362,20 @@ public class MemberServlet extends HttpServlet {
 				errorMsgs.put("myUpfile", "會員請上傳照片");
 
 			}
-			String fileName = photo.getSubmittedFileName(); // 先宣告一個檔案變數 並取得照片
-			// 利用File物件,寫入目地目錄,上傳成功
-			String saveDirectory = "/member_pic";
-			String realPath = getServletContext().getRealPath(saveDirectory);
 
-			InputStream in = getServletContext().getResourceAsStream("/member_pic/6月課表.jpg"); // 輸入流獲取照片路徑
+//			InputStream in = getServletContext().getResourceAsStream("/member_pic/6月課表.jpg"); // 輸入流獲取照片路徑
+
+			if (photo.getSize() != 0) { // 如果照片不為空
+				String fileName = photo.getSubmittedFileName(); // 先宣告一個檔案變數 並取得照片
+
+				// 利用File物件,寫入目地目錄,上傳成功
+				String saveDirectory = "/member_pic";
+				String realPath = getServletContext().getRealPath(saveDirectory);
+				photo.write(realPath + "\\" + fileName); // 是寫入硬碟的程式指令P.116 寫出照片路徑
+				photoName = "/member_pic/" + photo.getSubmittedFileName();
+			} else {
+				photoName = req.getParameter("noUpload");
+			}
 
 			MemberVO memberVO = new MemberVO();
 			memberVO.setMember_Email(member_Email);

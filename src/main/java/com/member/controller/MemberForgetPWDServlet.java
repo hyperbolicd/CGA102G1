@@ -64,7 +64,7 @@ public class MemberForgetPWDServlet extends HttpServlet {
 		
 //		System.out.println("123");
 		MemberService memberservice = new MemberService();
-		boolean res = memberservice.sendMail(usrEmail);
+		boolean res = memberservice.sendMail(usrEmail, request.getServerName(), String.valueOf(request.getServerPort()));
 		
 		if (res) {
 			map.put("stat", "success");
