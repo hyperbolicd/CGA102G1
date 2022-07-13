@@ -45,7 +45,6 @@
                             <div class="form-group">
                               <label for="nameId" >影廳名稱:</label>
                               <input type="text" class="form-control" id="nameId"  placeholder="請輸入名稱" name="hlName" value="" required>
-                            	<div>${errorMsgs.hlName}</div>
                             </div>
                             <div class="form-group">
                               <label for="exampleFormControlSelect1">影廳類型:</label>

@@ -93,7 +93,7 @@
 		<div class="card" style="margin-left:10px;font-weight: bolder ">
 		  <div class="card-body">
 		    場次時間: 
-		    <fmt:formatDate pattern="yyyy年MM月dd日 hh點mm分" value="${showSeatVO.SH_TIME}"/>
+		    <fmt:formatDate pattern="yyyy年MM月dd日 H點m分" value="${showSeatVO.SH_TIME}"/>
 		  </div>
 		</div>
     </div>
@@ -237,9 +237,6 @@
   </div>
 
   </div>
-  <!--客服圖 請自行加連結-->
-  <img class="cs" src="images/demo/cs.png" height="50px;" width="60px;" href="#"></img>
-
   <!-- Copyright -->
   <div class="wrapper row2">
     <footer id="copyright" class="clear">

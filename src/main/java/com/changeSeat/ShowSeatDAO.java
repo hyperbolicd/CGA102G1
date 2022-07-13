@@ -14,9 +14,8 @@ import com.hall.model.HallVO;
 
 public class ShowSeatDAO implements ShowSeatDAO_interface {
 
-	// 此SQL 配合測試資料 SH_TIME 暫時 小於 NOW() ----------------------------------------------------↓↓↓↓↓要改↓↓↓↓↓↓-------
 	private static final String GET_DATE=
-			"select date_format(SH_TIME,'%Y-%m-%d')as ShowingDay from showing where HL_ID=? and SH_TIME <= NOW() group by date_format(SH_TIME,'%Y-%m-%d')";
+			"select date_format(SH_TIME,'%Y-%m-%d')as ShowingDay from showing where HL_ID=? and SH_TIME >= NOW() group by date_format(SH_TIME,'%Y-%m-%d')";
 	
 	private static final String GET_TIME_BY_DATE=
 			"SELECT * FROM showing where HL_ID=? and SH_TIME >= ? and SH_TIME <= ? order by SH_TIME";

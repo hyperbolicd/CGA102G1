@@ -238,13 +238,13 @@ pageContext.setAttribute("list", list);
 						
 	            		
 	            		if((show.SH_TYPE === 0) && (show.mvId === parseInt(MV_ID))){
-	            			if((parseInt(showTimeStr.slice(-12, -10))< 6) && (showTimeStr.slice(-3, -1) === 'AM')){
+	            			if((parseInt(showTimeStr.slice(-12, -10))< 6 || (parseInt(showTimeStr.slice(-12, -10)) === 12)) && (showTimeStr.slice(-3, -1) === 'AM')){
 	            				$('.showTimeSelect').append('<option value='+ show.SH_ID + '>跨夜'+showTime+'  (數位)');
 	            			}else{
 	            				$('.showTimeSelect').append('<option value='+ show.SH_ID + '>'+showTime+'  (數位)');          				
 	            			} 		
 	            		}else if ((show.SH_TYPE === 1) && (show.mvId === parseInt(MV_ID))){
-	            			if((parseInt(showTimeStr.slice(-12, -10))< 6) && (showTimeStr.slice(-3, -1) === 'AM')){
+	            			if((parseInt(showTimeStr.slice(-12, -10))< 6 || (parseInt(showTimeStr.slice(-12, -10)) === 12)) && (showTimeStr.slice(-3, -1) === 'AM')){
 	            				$('.showTimeSelect').append('<option value='+ show.SH_ID + '>跨夜'+showTime+'  (IMAX)');
 	            			}else{
 		            			$('.showTimeSelect').append('<option value='+ show.SH_ID + '>'+showTime+'  (IMAX)');

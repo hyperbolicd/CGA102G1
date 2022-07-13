@@ -177,70 +177,89 @@ function takeMeal(){
 
 // 監聽退票按鈕
 function refund(target){
-	let tkDtID = target.id;
-	let seatIndex = document.getElementById(`seatIndex${tkDtID}`).value;
-	let tkOrdID = document.getElementById('tkOrdID').value;
-	// 取回DB內最新的座位字串
-	let seatStr;
-	$.ajax({
-			url: '/CGA102G1//RefundTicketServlet.do',
-			type: 'post',                
-			dataType:'json',
-			async:false,
-			data: {
-				"action": "getUpdatedDt",
-				"tkOrdID": tkOrdID,
-			},      
-			error: function(xhr) { },    
-			success: function(response) {
-				
-			seatStr = response.SH_SEAT_STATE;
-			}
-		})
 	
-	// 將字串切割成陣列
-    let seatArr = seatStr.split("",seatStr.length);
-    // 更改狀態
-    seatArr[seatIndex]=1;
-    seatStr="";
-    for (const newStr of seatArr){
-            seatStr += newStr ;
-        };
-		// 將改好的字串送回控制器
-		$.ajax({
-			url: '/CGA102G1//RefundTicketServlet.do',
-			type: 'post',                
-			dataType:'json',
-			async:false,
-			data: {
-				"action": "updateOneDt",
-				"tkDtID": tkDtID,
-				"tkOrdID": tkOrdID,
-				"seatStr": seatStr,
-				"seatState" : 2
-			},      
-			error: function(xhr) { },    
-			success: function(response) {
-				
-				// 改變前端欄位狀態 鎖定退票按鈕
-				$(target).parent().prev().text("已退票");
-				$(target).attr('disabled','true');
-				// 改變modal內的狀態和 鎖定入場按鈕
-				$(`#getin${tkDtID}`).attr('disabled','true');
-				$(`#getin${tkDtID}`).parent().prev().text("已退票");
-				
-				// 通知USER已完成
-				Swal.fire(
-                "訂單狀態已更新!", //標題 
-                "",
-                "success"
-                //圖示(可省略) success/info/warning/error/question
-                //圖示範例：https://sweetalert2.github.io/#icons
-            	);
-				
-			}
-		})
-		
+	Swal.fire({
+		title: '您確定要退票嗎?',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		cancelButtonText: '取消',
+		confirmButtonText: '是的，我確定要退票'
+	}).then((result) => {
+		if (result.isConfirmed) {
+			
+			let tkDtID = target.id;
+			let seatIndex = document.getElementById(`seatIndex${tkDtID}`).value;
+			let tkOrdID = document.getElementById('tkOrdID').value;
+			// 取回DB內最新的座位字串
+			let seatStr;
+			$.ajax({
+				url: '/CGA102G1//RefundTicketServlet.do',
+				type: 'post',
+				dataType: 'json',
+				async: false,
+				data: {
+					"action": "getUpdatedDt",
+					"tkOrdID": tkOrdID,
+				},
+				error: function(xhr) { },
+				success: function(response) {
+
+					seatStr = response.SH_SEAT_STATE;
+				}
+			})
+
+			// 將字串切割成陣列
+			let seatArr = seatStr.split("", seatStr.length);
+			// 更改狀態
+			seatArr[seatIndex] = 1;
+			seatStr = "";
+			for (const newStr of seatArr) {
+				seatStr += newStr;
+			};
+			// 將改好的字串送回控制器
+			$.ajax({
+				url: '/CGA102G1//RefundTicketServlet.do',
+				type: 'post',
+				dataType: 'json',
+				async: false,
+				data: {
+					"action": "updateOneDt",
+					"tkDtID": tkDtID,
+					"tkOrdID": tkOrdID,
+					"seatStr": seatStr,
+					"seatState": 2
+				},
+				error: function(xhr) { },
+				success: function(response) {
+
+					// 改變前端欄位狀態 鎖定退票按鈕
+					$(target).parent().prev().text("已退票");
+					$(target).attr('disabled', 'true');
+					// 改變modal內的狀態和 鎖定入場按鈕
+					$(`#getin${tkDtID}`).attr('disabled', 'true');
+					$(`#getin${tkDtID}`).parent().prev().text("已退票");
+
+					// 通知USER已完成
+					Swal.fire(
+						"訂單狀態已更新!", //標題 
+						"",
+						"success"
+						//圖示(可省略) success/info/warning/error/question
+						//圖示範例：https://sweetalert2.github.io/#icons
+					);
+
+				}
+			})
+
+
+
+
+
+		}
+	})
+	
 }
 // 驗票
 function tkChecking(){
