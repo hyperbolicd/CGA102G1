@@ -400,8 +400,10 @@ public class MemberServlet extends HttpServlet {
 			memberVO = memberSvc.Register(memberVO);//回傳包含 member_ID 的 memberVO
 			/*************************** 寄送給會員驗證信 ***************************************/
 			MailService mailService = new MailService(); // 寄送給會員驗證信物件
-			mailService.sendMail(member_Email, "會員認證信",
-					req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/member.do?member_ID="+ memberVO.getMember_ID()+"&action=register");
+			String emailAddress = req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/member.do?member_ID="+ memberVO.getMember_ID()+"&action=register";
+			mailService.sendMail(member_Email, "會員認證信", "<a href='" + emailAddress + "'>點我啟用</a>");
+//			mailService.sendMail(member_Email, "會員認證信",
+//					req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/member.do?member_ID="+ memberVO.getMember_ID()+"&action=register");
 //					"http://localhost:8081/CGA102G1/member.do?member_ID="+ memberVO.getMember_ID()+"&action=register ");
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			situation.put("join", "註冊成功");      //// 會員註冊成功

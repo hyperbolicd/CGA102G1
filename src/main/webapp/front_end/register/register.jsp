@@ -107,7 +107,7 @@ MemberVO memberVO = (MemberVO) request.getAttribute("memberVO"); //存入req的m
 							<div class="errMsgs" style="color: red">${errorMsgs.member_Phone}</div>
 						</div>
 						<input type="text" placeholder="請輸入您的會員電話" id="member_Phone"
-							name="member_Phone" style="width: 300px">
+							name="member_Phone" style="width: 300px" value="<%=(memberVO == null) ? "" : memberVO.getMember_Phone()%>">
 					</div>
 
 
@@ -118,7 +118,7 @@ MemberVO memberVO = (MemberVO) request.getAttribute("memberVO"); //存入req的m
 						<div style="display: flex">
 							<input type="text" placeholder="請輸入您的會員地址" id="member_Address1"
 								name="member_Address1">
-								<input type="hidden" name="member_Address" id="member_Address" value=""  value="<%=(memberVO == null) ? "" : memberVO.getMember_Address()%>">
+								<input type="hidden" name="member_Address" id="member_Address" value="<%=(memberVO == null) ? "" : memberVO.getMember_Address()%>">
 						</div>
 
 
