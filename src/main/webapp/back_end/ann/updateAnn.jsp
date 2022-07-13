@@ -187,7 +187,6 @@ try {
 .xdsoft_datetimepicker .xdsoft_datepicker {
 	width: 300px; /* width:  300px; */
 }
-
 .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
 	height: 151px; /* height:  151px; */
 }

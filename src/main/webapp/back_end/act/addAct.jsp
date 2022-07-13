@@ -147,9 +147,11 @@ ActdtVO actdtVO = (ActdtVO) request.getAttribute("actdtVO"); //EmpServlet.java (
 							</tr>
 							<tr>
 								<td>圖片:</td>
-								<td><input id="act_picture" type="file" name="act_picture"
+								<td>
+								<img id="img" src="<%=request.getContextPath()%>/back_end/act/annNoPhoto.jpg" style="width: 300px; height: 250px;">
+								<input id="act_picture" type="file" name="act_picture"
 									value="${param.act_picture}"></td>
-								<td><img id="img" src="<%=request.getContextPath()%>/back_end/act/annNoPhoto.jpg" style="width: 300px; height: 250px;"></td>
+								<td></td>
 							</tr>
 						</table>
 					</div>

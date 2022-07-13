@@ -231,7 +231,9 @@
 			document.getElementById("button").addEventListener("click",
 					function() {
 						swal("送出成功!", "", "success");
+						setTimeout(function(){
 						window.location.reload();
+						}, 2000);
 					});
 		</script>
 </body>
