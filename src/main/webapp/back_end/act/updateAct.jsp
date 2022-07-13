@@ -261,7 +261,15 @@ try {
 	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
 	});
 </script>
+<script>
+let updateFile = document.getElementById('act_picture');
+let updateImg = document.getElementById('img');
 
+  updateFile.addEventListener('change', function(e){
+    updateImg.src = URL.createObjectURL(e.target.files[0]);
+  })
+
+</script>
 
 
 

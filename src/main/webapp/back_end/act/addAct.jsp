@@ -149,7 +149,7 @@ ActdtVO actdtVO = (ActdtVO) request.getAttribute("actdtVO"); //EmpServlet.java (
 								<td>圖片:</td>
 								<td><input id="act_picture" type="file" name="act_picture"
 									value="${param.act_picture}"></td>
-								<td></td>
+								<td><img id="img" src="<%=request.getContextPath()%>/back_end/act/annNoPhoto.jpg" style="width: 300px; height: 250px;"></td>
 							</tr>
 						</table>
 					</div>
@@ -240,6 +240,15 @@ try {
 	//minDate:               '-1970-01-01', // 去除今日(不含)之前
 	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
 	});
+</script>
+<script>
+let updateFile = document.getElementById('act_picture');
+let updateImg = document.getElementById('img');
+
+  updateFile.addEventListener('change', function(e){
+    updateImg.src = URL.createObjectURL(e.target.files[0]);
+  })
+
 </script>
 
 

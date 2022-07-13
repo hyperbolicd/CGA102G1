@@ -105,7 +105,7 @@ pageContext.setAttribute("list",list);
 							<tr>
 								<td>圖片:</td>
 								<td><input id="ann_picture" type="file" name="ann_picture"
-									value="${param.ann_picture}" ></td>
+									value="${param.ann_picture}"><img id="img" src="<%=request.getContextPath()%>/back_end/act/annNoPhoto.jpg" style="width: 300px; height: 250px;"></td>
 								<td>${errorMsgs.ann_picture}</td>
 							</tr>
 						</table>
@@ -185,7 +185,15 @@ try {
 	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
 	});
 </script>
+<script>
+let updateFile = document.getElementById('ann_picture');
+let updateImg = document.getElementById('img');
 
+  updateFile.addEventListener('change', function(e){
+    updateImg.src = URL.createObjectURL(e.target.files[0]);
+  })
+
+</script>
 
 
 

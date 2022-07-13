@@ -108,7 +108,7 @@ response.setDateHeader("Expires", 0);
 							<tr>
 								<td>圖片:</td>
 								<td class="ann_picture"><img id="img" src=<%=request.getContextPath()%>${annVO.ann_picture} style="width: 300px; height: 250px;"> 
-								<input type="file" name="ann_picture" size="45" value="<%=annVO.getAnn_picture()%>" onclick="show()"/></td>
+								<input id="ann_picture" type="file" name="ann_picture" size="45" value="<%=annVO.getAnn_picture()%>" onclick="show()"/></td>
 								<td>${errorMsgs.ann_picture}</td>
 							</tr>
 
@@ -203,7 +203,15 @@ try {
 		   value: '<%=ann_date%>',
 	});
 </script>
+<script>
+let updateFile = document.getElementById('ann_picture');
+let updateImg = document.getElementById('img');
 
+  updateFile.addEventListener('change', function(e){
+    updateImg.src = URL.createObjectURL(e.target.files[0]);
+  })
+
+</script>
 
 
 
