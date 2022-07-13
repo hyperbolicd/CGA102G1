@@ -3,6 +3,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.member.model.*"%>
 <%@ page import="com.movie.model.*"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en" dir="ltr">
 <%
 MemberVO memberVO = (MemberVO) session.getAttribute("memberVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
@@ -342,7 +343,8 @@ div, ul, li, a, span, img {
                         	這部電影尚未有人評分
                             </c:if>
 										<c:if test="${!(showingVO.mvTtStar/showingVO.mvTtCm).isNaN()}">
-                        	${showingVO.mvTtStar/showingVO.mvTtCm}
+                        	<fmt:formatNumber value="${showingVO.mvTtStar/showingVO.mvTtCm}"
+                        	minFractionDigits="1" maxFractionDigits="1"/>
                             <img
 												src="/CGA102G1/front_end/showAllMovie/MV_ICON/star.png"
 												alt="">
