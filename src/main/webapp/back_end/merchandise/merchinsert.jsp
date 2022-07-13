@@ -106,28 +106,28 @@
 							</tr>
 							<tr>
 								<td>上傳商品圖一:</td>
-								<td><input type="file" name="merchPic1" accept="image/*"></td>
-								<td></td>
+								<td><input class="updatefile" type="file" name="merchPic1" accept="image/*"></td>
+								<td><img alt="" src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=6&pic=5" style="width:200px;height:240px" class="updateimg"></td>
 							</tr>
 							<tr>
 								<td>上傳商品圖二:</td>
-								<td><input type="file" name="merchPic2" accept="image/*"></td>
-								<td></td>
+								<td><input class="updatefile" type="file" name="merchPic2" accept="image/*"></td>
+								<td><img alt="" src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=6&pic=5" style="width:200px;height:240px" class="updateimg"></td>
 							</tr>
 							<tr>
 								<td>上傳商品圖三:</td>
-								<td><input type="file" name="merchPic3" accept="image/*"></td>
-								<td></td>
+								<td><input class="updatefile" type="file" name="merchPic3" accept="image/*"></td>
+								<td><img alt="" src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=6&pic=5" style="width:200px;height:240px" class="updateimg"></td>
 							</tr>
 							<tr>
 								<td>上傳商品圖四:</td>
-								<td><input type="file" name="merchPic4" accept="image/*"></td>
-								<td></td>
+								<td><input class="updatefile" type="file" name="merchPic4" accept="image/*"></td>
+								<td><img alt="" src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=6&pic=5" style="width:200px;height:240px" class="updateimg"></td>
 							</tr>
 							<tr>
 								<td>上傳商品圖五:</td>
-								<td><input type="file" name="merchPic5" accept="image/*"></td>
-								<td></td>
+								<td><input class="updatefile" type="file" name="merchPic5" accept="image/*"></td>
+								<td><img alt="" src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=6&pic=5" style="width:200px;height:240px" class="updateimg"></td>
 							</tr>
 
 
@@ -152,6 +152,15 @@
     </aside>
 	<script>
 		let abc = URL.createObjectURL(blob);
+	</script>
+	<script>
+	let updateFiles = document.getElementsByClassName('updatefile');
+		let updateImgs = document.getElementsByClassName('updateimg');
+		for(let i = 0; i < updateFiles.length; i++){
+		  updateFiles[i].addEventListener('change', function(e){
+		    updateImgs[i].src = URL.createObjectURL(e.target.files[0]);
+		  })
+		} 
 	</script>
 </body>
 
