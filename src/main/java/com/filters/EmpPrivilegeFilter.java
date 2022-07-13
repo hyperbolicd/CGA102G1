@@ -19,7 +19,7 @@ import com.emp_function.model.EmpFunctionService;
 import com.emp_privilege.model.EmpPrivilegeService;
 import com.emp_privilege.model.EmpPrivilegeVO;
 
-@WebFilter("/back_end/*")
+//@WebFilter("/back_end/*")
 public class EmpPrivilegeFilter extends HttpFilter {
 	
 	private static final long serialVersionUID = 1L;
@@ -52,7 +52,7 @@ public class EmpPrivilegeFilter extends HttpFilter {
 //			System.out.println(canAccess);
 			// 與既有權限 1~21 的差異加入"無授權"
 			List<Integer> canNotAccess = new ArrayList<Integer>();
-			for(int i = 1; i <= 20; i++) {
+			for(int i = 1; i <= 19; i++) {
 				if(!canAccess.contains(i)) {
 					canNotAccess.add(i);
 				}

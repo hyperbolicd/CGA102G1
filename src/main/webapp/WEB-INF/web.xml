@@ -38,11 +38,39 @@
    <url-pattern>/front_end/tk_ord/creditCard.jsp</url-pattern>
    <url-pattern>/front_end/tk_ord/sellTK.jsp</url-pattern>
    <url-pattern>/front_end/merchandise/merchOrd_index.jsp</url-pattern>
-   
-   
-   
+   <url-pattern>/front_end/wish/wishPage.jsp</url-pattern>
+   <url-pattern>/front_end/wish/wishDetail.jsp</url-pattern>
+   <url-pattern>/front_end/wish/voteWish.jsp</url-pattern>
    
 <!--   <servlet-name>*</servlet-name> -->
+  <dispatcher>REQUEST</dispatcher>
+  <dispatcher>FORWARD</dispatcher>
+  <dispatcher>INCLUDE</dispatcher>
+  <dispatcher>ERROR</dispatcher>
+  <dispatcher>ASYNC</dispatcher>
+  </filter-mapping>
+  
+  <filter>
+  <filter-name>EmpFilter</filter-name>  <!-- 可以自己取名 -->
+  <filter-class>com.filters.EmpFilter</filter-class>
+  </filter> 
+  <filter-mapping>
+  <filter-name>EmpFilter</filter-name> <!-- 可以自己取名 -->
+  <url-pattern>/back_end/*</url-pattern> 
+  <dispatcher>REQUEST</dispatcher>
+  <dispatcher>FORWARD</dispatcher>
+  <dispatcher>INCLUDE</dispatcher>
+  <dispatcher>ERROR</dispatcher>
+  <dispatcher>ASYNC</dispatcher>
+  </filter-mapping>
+  
+  <filter>
+  <filter-name>EmpPrivilegeFilter</filter-name>  <!-- 可以自己取名 -->
+  <filter-class>com.filters.EmpPrivilegeFilter</filter-class>
+  </filter> 
+  <filter-mapping>
+  <filter-name>EmpPrivilegeFilter</filter-name> <!-- 可以自己取名 -->
+  <url-pattern>/back_end/*</url-pattern> 
   <dispatcher>REQUEST</dispatcher>
   <dispatcher>FORWARD</dispatcher>
   <dispatcher>INCLUDE</dispatcher>

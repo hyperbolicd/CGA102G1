@@ -36,7 +36,6 @@
 		<ul>
 			<li><a href="${pageContext.request.contextPath}/back_end/ann/allAnn.jsp">公告管理</a></li>
 			<li><a href="${pageContext.request.contextPath}/back_end/faq/allFaq.jsp">常見問題管理</a></li>
-			<li><a href="${pageContext.request.contextPath}/back_end/notFinishedYet.jsp">線上客服</a></li>
 		</ul></li>
 	<li><span>員工管理</span>
 		<ul>
