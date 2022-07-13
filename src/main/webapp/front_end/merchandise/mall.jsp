@@ -109,8 +109,8 @@
 								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
 								<img
 								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-								<h3>${merchVo.merchName}</h3>
-								<p>${merchVo.merchDT}</p>
+								<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
+								<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
 								<h6>$${merchVo.merchPrice}</h6>
 							</a> <button
 									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
@@ -134,8 +134,8 @@
 								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
 								<img
 								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-								<h3>${merchVo.merchName}</h3>
-								<p>${merchVo.merchDT}</p>
+								<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
+								<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
 								<h6>$${merchVo.merchPrice}</h6>
 							</a> <button
 									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
@@ -157,8 +157,8 @@
 								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
 								<img
 								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-								<h3>${merchVo.merchName}</h3>
-								<p>${merchVo.merchDT}</p>
+								<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
+								<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
 								<h6>$${merchVo.merchPrice}</h6>
 							</a> <button
 									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
@@ -183,8 +183,8 @@
 								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
 								<img
 								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-								<h3>${merchVo.merchName}</h3>
-								<p>${merchVo.merchDT}</p>
+								<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
+								<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
 								<h6 class="merchprice">$${merchVo.merchPrice}</h6>
 							</a> <button
 									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
@@ -208,8 +208,8 @@
 								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
 								<img
 								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-								<h3>${merchVo.merchName}</h3>
-								<p>${merchVo.merchDT}</p>
+								<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
+								<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
 								<h6 class="merchprice">$${merchVo.merchPrice}</h6>
 							</a> <button
 									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
@@ -232,8 +232,8 @@
 								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
 								<img
 								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-								<h3>${merchVo.merchName}</h3>
-								<p>${merchVo.merchDT}</p>
+								<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
+								<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
 								<h6 class="merchprice">$${merchVo.merchPrice}</h6>
 							</a> <button
 									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
@@ -256,8 +256,8 @@
 								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
 								<img
 								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-								<h3>${merchVo.merchName}</h3>
-								<p>${merchVo.merchDT}</p>
+								<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
+								<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
 								<h6 class="merchprice">$${merchVo.merchPrice}</h6>
 							</a> <button
 									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
@@ -280,8 +280,8 @@
 								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
 								<img
 								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-								<h3>${merchVo.merchName}</h3>
-								<p>${merchVo.merchDT}</p>
+								<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
+								<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
 								<h6 class="merchprice">$${merchVo.merchPrice}</h6>
 							</a> <button
 									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
@@ -389,10 +389,12 @@
                                 a1.href = "${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=" + item.merchID;
                                 let img = document.createElement('img');
                                 img.src = "${pageContext.request.contextPath}/merch/controller?action=getPic&merchID="+item.merchID+"&pic=1";
-                                let h3 = document.createElement('A3');
+                                let h3 = document.createElement('h3');
+                                h3.title = item.merchName;
                                 h3.textContent = item.merchName;
                                 let p = document.createElement('p');
                                 p.innerHTML = item.merchDT;
+                                p.title = item.merchDT;
                                 let h6 = document.createElement('h6');
                                 h6.textContent = '$' + item.merchPrice;
                                 a1.append(img);
@@ -450,10 +452,12 @@
                          a1.href = "${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=" + item.merchID;
                          let img = document.createElement('img');
                          img.src = "${pageContext.request.contextPath}/merch/controller?action=getPic&merchID="+item.merchID+"&pic=1";
-                         let h3 = document.createElement('A3');
+                         let h3 = document.createElement('h3');
+                         h3.title = item.merchName;
                          h3.textContent = item.merchName;
                          let p = document.createElement('p');
                          p.innerHTML = item.merchDT;
+                         p.title = item.merchDT;
                          let h6 = document.createElement('h6');
                          h6.className = 'merchprice';
                          h6.textContent = '$' + item.merchPrice;

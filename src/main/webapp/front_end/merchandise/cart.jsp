@@ -94,7 +94,7 @@
 
 		<hr class="line" style="margin-top: 20px;" />
 		<div id="cartArea">
-			<div id="total">總金額:${amount}</div>
+			<div id="total">總金額:</div>
 			<div id="cartBtn">
 				<button class="button" type="button" form="forPay" id="payButton">
 					<span>結帳唷</span>

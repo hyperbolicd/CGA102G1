@@ -52,7 +52,7 @@
 						<table class="TKinner">
 							<tr>
 								<th></th>
-								<th>輸入</th>
+								<th></th>
 								<th></th>
 							</tr>
 							<tr>
