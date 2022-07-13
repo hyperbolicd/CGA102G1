@@ -1,9 +1,8 @@
 /***********************片名英文數字驗證******************************/
 const mvEName = document.getElementById('mvEName');
 mvEName.addEventListener("blur",()=>{
-    let regex = new RegExp("^[A-Za-z0-9\u4e00-\u9fa5] $");
     
-     if (regex.test(mvEName.value)){
+     if (mvEName.value.replace(/\p{sc=Han}/gu,'')){
     }
     else{
         Swal.fire(

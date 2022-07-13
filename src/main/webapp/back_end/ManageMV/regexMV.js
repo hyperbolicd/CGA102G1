@@ -131,10 +131,6 @@ mvTler.addEventListener('blur',()=>{
 		
 	}
 })
-//function isValidUrl(string) {
-//  const pattern = ;
-//  return (pattern.test(string));
-//}
 
 /***********************上傳圖片預覽******************************/
 document.getElementById('mvPc').addEventListener('change',uploadListner);

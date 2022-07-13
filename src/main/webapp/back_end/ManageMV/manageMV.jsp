@@ -83,7 +83,7 @@ MovieService mvSvc = new MovieService();
 			     				<input type="submit" value="查看/修改"  class="btn btn-primary">
 			     				<input type="hidden" name="mvId"  value="${movieVO.mvId}">
 			     				<input type="hidden" name="action"	value="getOne_For_Update">
-			     			</FORM>
+			     		  </FORM>
                           </td>
                         </tr>
                         </c:forEach>
