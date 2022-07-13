@@ -119,18 +119,6 @@ function checkNum(num){
     return regex.test(num);
 }
 
-/***********************網址驗證******************************* */
-
-const mvTler = document.getElementById('mvTler');
-mvTler.addEventListener('blur',()=>{
-	
-	if(mvTler.value.getBytes().length != mvTler.value.length()){
-		console.log('yes')
-	}else{
-		console.log('no')
-		
-	}
-})
 
 /***********************上傳圖片預覽******************************/
 document.getElementById('mvPc').addEventListener('change',uploadListner);

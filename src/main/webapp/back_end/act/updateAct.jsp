@@ -127,9 +127,6 @@
 									<c:forEach var="actdtVO" items="${list}">
 									${actdtVO.tkTypeID==6? "checked" : ""}
 									</c:forEach>>敬老票/IMAX</td>
-									<c:forEach var="actdtVO" items="${list}">
-									${actdtVO.tkTypeID==7? "checked" : ""}
-									</c:forEach>>軍警票/數位</td>
 								<td></td>
 							</tr>
 							

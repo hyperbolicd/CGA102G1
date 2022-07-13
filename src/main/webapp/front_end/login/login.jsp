@@ -131,6 +131,20 @@
 	
 	</script> 
 
+		<script>
+	<c:if test="${not empty situation.error}">
+    Swal.fire(
+    		'error',    		  
+            '帳號或密碼錯誤!!',
+             'error'
+           )
+         <% request.removeAttribute("error"); %>
+    </c:if>
+	
+	</script> 
+		
+		
+		
 		
 		
 		

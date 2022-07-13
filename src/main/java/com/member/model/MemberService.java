@@ -138,7 +138,7 @@ public class MemberService {
 		memberVO.setMember_Password(passRandom);
 		dao.update(memberVO);
 		String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" + " (已經啟用)"
-				+ "http://"+serverName+":"+serverPort+"/CGA102G1/front_end/login/login.jsp";
+				+ "<a href='"+ "http://"+serverName+":"+serverPort+"/CGA102G1/front_end/login/login.jsp"+"'>忘記密碼認證</a>";
 
 		MailService mailService = new MailService();     
 		mailService.sendMail(to, subject, messageText);       //發送忘記密碼信件

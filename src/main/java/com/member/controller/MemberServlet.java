@@ -263,7 +263,8 @@ public class MemberServlet extends HttpServlet {
 			String url = "";
 			System.out.println(memberId);
 			if (memberId == null) {                               //如果帳號密碼有可能輸入錯誤
-				url = "/front_end/login/login.jsp";		 
+				situation.put("error", "帳號或密碼錯誤");             //如果會員輸入 帳號密碼錯誤
+				url = "/front_end/login/login.jsp";	
 			}else if(memberVo.getMember_Status().equals(2)) {     //如果會員狀態 帳號已被停權
 				situation.put("login", "您被停權了");                //跳出您被停權了
 				url = "/front_end/login/login.jsp";	
@@ -400,8 +401,10 @@ public class MemberServlet extends HttpServlet {
 			memberVO = memberSvc.Register(memberVO);//回傳包含 member_ID 的 memberVO
 			/*************************** 寄送給會員驗證信 ***************************************/
 			MailService mailService = new MailService(); // 寄送給會員驗證信物件
-			mailService.sendMail(member_Email, "會員認證信",
-					req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/member.do?member_ID="+ memberVO.getMember_ID()+"&action=register");
+			String emailAddress = req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/member.do?member_ID="+ memberVO.getMember_ID()+"&action=register";
+			mailService.sendMail(member_Email, "會員認證信", "<a href='" + emailAddress + "'>點我啟用</a>");
+//			mailService.sendMail(member_Email, "會員認證信",
+//					req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+req.getContextPath()+"/member.do?member_ID="+ memberVO.getMember_ID()+"&action=register");
 //					"http://localhost:8081/CGA102G1/member.do?member_ID="+ memberVO.getMember_ID()+"&action=register ");
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			situation.put("join", "註冊成功");      //// 會員註冊成功

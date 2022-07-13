@@ -211,7 +211,7 @@
             	 <div class="food_btn" style="display:flex;justify-content: space-between;">
             	 	  <input type="hidden" id="tkOrdID" value="${tkOrdID}">
             	 	  
-            	 	  <c:forEach items="${foodOrdList}" var="foodOrdDt" varStatus="loop" begin="1" end="1">
+            	 	  <c:forEach items="${foodOrdList}" var="foodOrdDt" varStatus="loop" begin="0" end="0">
             	 	  
             	 	  <c:if test="${foodOrdDt.fdState==0}">
 			          

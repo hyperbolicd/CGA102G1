@@ -87,7 +87,7 @@
 						</div>
 						<div class="btBlock">
 							<a class="bt" 
-<%-- 							href="<%=request.getContextPath()%>/back_end/tk_ord/completeOrder.jsp" --%>
+							href="<%=request.getContextPath()%>/back_end/tk_ord/completeOrder.jsp"
 							>²{³õ¥I´Ú</a>
 						</div>
 

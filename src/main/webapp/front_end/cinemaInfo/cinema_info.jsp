@@ -2,8 +2,12 @@
 <%@ page import="com.cnm_inf.model.*"%>
 
 <%
+Integer i =(Integer)application.getAttribute("theater");
+if(i == null){
+	i = 1;
+}
 Cnm_infService cnmSvc = new Cnm_infService();
-Cnm_infVO cnmVO = cnmSvc.getOneCnm_inf(1);
+Cnm_infVO cnmVO = cnmSvc.getOneCnm_inf(i);
 pageContext.setAttribute("cnmVO", cnmVO);
 %>
 
@@ -64,7 +68,7 @@ pageContext.setAttribute("cnmVO", cnmVO);
 				loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 		</div>
 		<div id="tpr_title" class="title">
-			<span>How to go to CINAMA</span>
+			<span>How to go to CINEMA</span>
 		</div>
 		<div id="cmn_tpr" class="detail">
 			<span>🚎</span> <span>${cnmVO.CNM_TRP}</span>

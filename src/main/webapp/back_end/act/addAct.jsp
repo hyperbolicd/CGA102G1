@@ -110,8 +110,7 @@ ActdtVO actdtVO = (ActdtVO) request.getAttribute("actdtVO"); //EmpServlet.java (
 									<input type="checkbox" name="TkTypeID" VALUE="3">學生票/數位
 									<input type="checkbox" name="TkTypeID" VALUE="4">學生票/IMAX
 									<input type="checkbox" name="TkTypeID" VALUE="5">敬老票/數位
-									<input type="checkbox" name="TkTypeID" VALUE="6">敬老票/IMAX
-									<input type="checkbox" name="TkTypeID" VALUE="6">軍警票/數位</td>
+									<input type="checkbox" name="TkTypeID" VALUE="6">敬老票/IMAX</td>
 								<td></td>
 							</tr>
 							
@@ -147,9 +146,11 @@ ActdtVO actdtVO = (ActdtVO) request.getAttribute("actdtVO"); //EmpServlet.java (
 							</tr>
 							<tr>
 								<td>圖片:</td>
-								<td><input id="act_picture" type="file" name="act_picture"
+								<td>
+								<img id="img" src="<%=request.getContextPath()%>/back_end/act/annNoPhoto.jpg" style="width: 300px; height: 250px;">
+								<input id="act_picture" type="file" name="act_picture"
 									value="${param.act_picture}"></td>
-								<td><img id="img" src="<%=request.getContextPath()%>/back_end/act/annNoPhoto.jpg" style="width: 300px; height: 250px;"></td>
+								<td></td>
 							</tr>
 						</table>
 					</div>

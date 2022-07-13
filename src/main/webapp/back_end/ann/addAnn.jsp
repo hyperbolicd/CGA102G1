@@ -104,8 +104,9 @@ pageContext.setAttribute("list",list);
 							</tr>
 							<tr>
 								<td>圖片:</td>
-								<td><input id="ann_picture" type="file" name="ann_picture"
-									value="${param.ann_picture}"><img id="img" src="<%=request.getContextPath()%>/back_end/act/annNoPhoto.jpg" style="width: 300px; height: 250px;"></td>
+								<td><img id="img" src="<%=request.getContextPath()%>/back_end/act/annNoPhoto.jpg" style="width: 300px; height: 250px;">
+								<input id="ann_picture" type="file" name="ann_picture"
+									value="${param.ann_picture}"></td>
 								<td>${errorMsgs.ann_picture}</td>
 							</tr>
 						</table>
