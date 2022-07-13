@@ -71,7 +71,9 @@
 				</div>
 
 				<div class="send">
-					<button id="submit">submit</button>
+					<button id="submit">修改</button>
+					<button id="insert">新增</button>
+					<button id="set">設定</button>
 				</div>
 
 			</div>
@@ -97,7 +99,7 @@
 		  console.log(url);
 		  if($("#infoId").val() == ''){
 			  $(".cnmID input").val("");
-		      $(".cnmDT textarea").text("");
+		      $(".cnmDT textarea").val("");
 		      $(".cnmTEL input").val("");
 		      $(".cnmEM input").val("");
 		      $(".cnmLC input").val("");
@@ -111,7 +113,7 @@
 			    success: function (response) {
 			      console.log(response.CNM_INF_ID);
 			      $(".cnmID input").val(response.CNM_INF_ID);
-			      $(".cnmDT textarea").text(response.CNM_DT);
+			      $(".cnmDT textarea").val(response.CNM_DT);
 			      $(".cnmTEL input").val(response.CNM_TEL);
 			      $(".cnmEM input").val(response.CNM_EM);
 			      $(".cnmLC input").val(response.CNM_LC);
@@ -128,7 +130,7 @@
 
 		$("#submit").click(function () {
 		  let CNM_INF_ID = $(".cnmID input").val();
-		  let CNM_DT = $(".cnmDT textarea").text();
+		  let CNM_DT = $(".cnmDT textarea").val();
 		  let CNM_TEL = $(".cnmTEL input").val();
 		  let CNM_EM = $(".cnmEM input").val();
 		  let CNM_LC = $(".cnmLC input").val();
@@ -153,6 +155,69 @@
 		    async: false,
 		    success: function (response) {
 		      if (confirm("更新成功")) {
+		        location =
+		          "${pageContext.request.contextPath}/back_end/cinemaInfoManege/cinemaInfoManege.jsp";
+		      }
+		    },
+		    //Ajax失敗後要執行的function，此例為印出錯誤訊息
+		    error: function (xhr, ajaxOptions, thrownError) {
+		      alert(xhr.status + "\n" + thrownError);
+		    },
+		  });
+		});
+		
+		
+		$("#insert").click(function () {
+// 		  let CNM_INF_ID = $(".cnmID input").val();
+		  let CNM_DT = $(".cnmDT textarea").val();
+		  let CNM_TEL = $(".cnmTEL input").val();
+		  let CNM_EM = $(".cnmEM input").val();
+		  let CNM_LC = $(".cnmLC input").val();
+		  let CNM_TRP = $(".cnmTRP input").val();
+		  let url =
+		    "${pageContext.request.contextPath}/cnm_inf/cnm_inf.do?action=insert&CNM_DT=" + CNM_DT +
+		    "&CNM_TEL=" +
+		    CNM_TEL +
+		    "&CNM_EM=" +
+		    CNM_EM +
+		    "&CNM_LC=" +
+		    CNM_LC +
+		    "&CNM_TRP=" +
+		    CNM_TRP;
+		  $.ajax({
+		    type: "POST", //指定http參數傳輸格式為POST
+		    url: url, //請求目標的url，可在url內加上GET參數，如 www.xxxx.com?xx=yy&xxx=yyy
+		    dataType: "json",
+		    async: false,
+		    success: function (response) {
+		      if (confirm("新增成功")) {
+		        location =
+		          "${pageContext.request.contextPath}/back_end/cinemaInfoManege/cinemaInfoManege.jsp";
+		      }
+		    },
+		    //Ajax失敗後要執行的function，此例為印出錯誤訊息
+		    error: function (xhr, ajaxOptions, thrownError) {
+		      alert(xhr.status + "\n" + thrownError);
+		    },
+		  });
+		});
+		
+		$("#set").click(function () {
+		  let CNM_INF_ID = $(".cnmID input").val();
+		  let CNM_DT = $(".cnmDT textarea").val();
+		  let CNM_TEL = $(".cnmTEL input").val();
+		  let CNM_EM = $(".cnmEM input").val();
+		  let CNM_LC = $(".cnmLC input").val();
+		  let CNM_TRP = $(".cnmTRP input").val();
+		  let url =
+		    "${pageContext.request.contextPath}/cnm_inf/cnm_inf.do?action=set&CNM_INF_ID=" + CNM_INF_ID;
+		  $.ajax({
+		    type: "POST", //指定http參數傳輸格式為POST
+		    url: url, //請求目標的url，可在url內加上GET參數，如 www.xxxx.com?xx=yy&xxx=yyy
+		    dataType: "json",
+		    async: false,
+		    success: function (response) {
+		      if (confirm("設定成功")) {
 		        location =
 		          "${pageContext.request.contextPath}/back_end/cinemaInfoManege/cinemaInfoManege.jsp";
 		      }

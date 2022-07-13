@@ -6,6 +6,7 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+import javax.swing.RepaintManager;
 
 import com.cnm_inf.model.*;
 import com.google.gson.Gson;
@@ -187,9 +188,10 @@ public class Cnm_inf_Servlet  extends HttpServlet {
 				cnm_infVO = cnm_infSvc.addCnm_inf(CNM_DT, CNM_TEL, CNM_EM, CNM_LC, CNM_TRP);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/back/listAllCnm_inf.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllCnm_inf.jsp
-				successView.forward(req, res);				
+				req.setAttribute("cnm_infVO", cnm_infVO); // 資料庫取出的showingVO物件,存入req
+				PrintWriter out = res.getWriter();
+				Gson gson = new Gson();
+				out.print(gson.toJson(cnm_infVO));			
 		}
 		
 		
@@ -212,5 +214,24 @@ public class Cnm_inf_Servlet  extends HttpServlet {
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 		}
+		
+		if ("set".equals(action)) { // 來自select_page_cnm_inf.jsp的請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				Integer CNM_INF_ID = Integer.valueOf(req.getParameter("CNM_INF_ID"));
+				if(CNM_INF_ID == null) {
+					req.getServletContext().setAttribute("theater", 1);
+				}else {
+					req.getServletContext().setAttribute("theater", CNM_INF_ID);
+				}
+				
+				
+				
+		}
+		
 	}
 }
