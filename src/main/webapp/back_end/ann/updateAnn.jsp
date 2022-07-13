@@ -20,8 +20,8 @@ response.setDateHeader("Expires", 0);
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
 <title>公告管理</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/back_end/css/emp_all.css">
@@ -108,7 +108,8 @@ response.setDateHeader("Expires", 0);
 							<tr>
 								<td>圖片:</td>
 								<td class="ann_picture"><img id="img" src=<%=request.getContextPath()%>${annVO.ann_picture} style="width: 300px; height: 250px;"> 
-								<input type="file" name="ann_picture" size="45" value="<%=annVO.getAnn_picture()%>" /></td>
+								<input type="file" name="ann_picture" size="45" value="<%=annVO.getAnn_picture()%>" onclick="show()"/></td>
+								<td>${errorMsgs.ann_picture}</td>
 							</tr>
 
 						</table>
@@ -141,6 +142,24 @@ response.setDateHeader("Expires", 0);
 // 			messageCount2.innerText = thisArea.value.length;
 		}//標題輸入框字數限制
 	</script>
+	
+	<script type="text/javascript" src="jquery-3.2.1.js"></script>
+<script type="text/javascript">
+		function show() {
+        var fileTag = document.getElementById('file');
+        fileTag.onchange = function () {
+            var file = fileTag.files[0];
+            var fileReader = new FileReader();
+            fileReader.onloadend = function () {
+                if (fileReader.readyState == fileReader.DONE) {
+                    document.getElementById('img').setAttribute('src', fileReader.result);
+                }
+            };
+            fileReader.readAsDataURL(file);
+        };
+    };
+</script>
+
 
 
 </body>
@@ -148,8 +167,6 @@ response.setDateHeader("Expires", 0);
 
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
-
-
 
 <%
 java.sql.Date ann_date = null;
@@ -159,13 +176,12 @@ try {
 	ann_date = new java.sql.Date(System.currentTimeMillis());
 }
 %>
-
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script
-	src="<%=request.getContextPath()%>/back_end/ann/datetimepicker/jquery.js"></script>
+	src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script
-	src="<%=request.getContextPath()%>/back_end/ann/datetimepicker/jquery.datetimepicker.full.js"></script>
+	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <style>
 .xdsoft_datetimepicker .xdsoft_datepicker {
@@ -178,15 +194,17 @@ try {
 </style>
 
 <script>
-	$.datetimepicker.setLocale('zh');
-	$('#ann_date1').datetimepicker({
-		theme : '', //theme: 'dark',
-		timepicker : false, //timepicker:true,
-		step : 1, //step: 60 (這是timepicker的預設間隔60分鐘)
-		format : 'Y-m-d', //format:'Y-m-d H:i:s',
-		value : '<%=ann_date%>'
+        $.datetimepicker.setLocale('zh');
+        $('#ann_date1').datetimepicker({
+	       theme: '',              //theme: 'dark',
+	       timepicker:false,       //timepicker:true,
+	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+		   value: '<%=ann_date%>',
 	});
 </script>
+
+
 
 
 </html>

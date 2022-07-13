@@ -4459,39 +4459,39 @@ Single Content CSS End
 /*==================================
 Back To Top Button 
 =====================================*/
-#toTop {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  cursor: pointer;
-  display: none;
-  z-index: 99;
-}
+/* #toTop { */
+/*   position: fixed; */
+/*   bottom: 20px; */
+/*   right: 20px; */
+/*   cursor: pointer; */
+/*   display: none; */
+/*   z-index: 99; */
+/* } */
 
-.top-btn {
-  background-color: #4356d6;
-  color: #fff;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  -webkit-box-shadow: 0 0 15px #4356d6;
-          box-shadow: 0 0 15px #4356d6;
-  font-size: 24px;
-  display: inline-block;
-  text-align: center;
-  line-height: 50px;
-  transition: .9s;
-  -webkit-transition: .9s;
-}
+/* .top-btn { */
+/*   background-color: #4356d6; */
+/*   color: #fff; */
+/*   width: 50px; */
+/*   height: 50px; */
+/*   border-radius: 50%; */
+/*   -webkit-box-shadow: 0 0 15px #4356d6; */
+/*           box-shadow: 0 0 15px #4356d6; */
+/*   font-size: 24px; */
+/*   display: inline-block; */
+/*   text-align: center; */
+/*   line-height: 50px; */
+/*   transition: .9s; */
+/*   -webkit-transition: .9s; */
+/* } */
 
-.top-btn:hover {
-  background: #ff4a35;
-  -webkit-box-shadow: 0 0 15px #ff4a35;
-          box-shadow: 0 0 15px #ff4a35;
-  color: #fff;
-  -webkit-animation: none;
-          animation: none;
-}
+/* .top-btn:hover { */
+/*   background: #ff4a35; */
+/*   -webkit-box-shadow: 0 0 15px #ff4a35; */
+/*           box-shadow: 0 0 15px #ff4a35; */
+/*   color: #fff; */
+/*   -webkit-animation: none; */
+/*           animation: none; */
+/* } */
 
 /*==============================
 Back To Top Button 

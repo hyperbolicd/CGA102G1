@@ -50,7 +50,7 @@ html, body {
 <body>
 	<div id="outPopUp">
 		<h1 align="center">HireMe 客服</h1>
-		<form id="myForm" action="<%=request.getContextPath() %>/front_end/chat/chat.do" method="POST">
+		<form id="myForm" action="<%=request.getContextPath() %>/chat/chat.do" method="POST">
 			<input id="userName" name="userName" class="text-field" type="text" placeholder="Input user name" /> 
 			<input type="submit" id="send" class="button" value="送出" onclick="sendName();" />
 		</form>

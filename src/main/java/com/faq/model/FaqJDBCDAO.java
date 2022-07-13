@@ -38,22 +38,22 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 	
 	/* 會員相關問題單一查詢 */
 	private static final String GET_FaqClass1 = 
-			"select faq_class, faq_title, faq_content"
+			"select faq_no, faq_class, faq_title, faq_content"
 			+ " from faq where faq_class=0";
 	
 	/* 影城相關問題單一查詢 */
 	private static final String GET_FaqClass2 = 
-			"select faq_class, faq_title, faq_content"
+			"select faq_no, faq_class, faq_title, faq_content"
 					+ " from faq where faq_class=1";
 	
 	/* 電影上映相關問題單一查詢 */
 	private static final String GET_FaqClass3 = 
-			"select faq_class, faq_title, faq_content"
+			"select faq_no, faq_class, faq_title, faq_content"
 					+ " from faq where faq_class=2";
 	
 	/* 其他問題單一查詢 */
 	private static final String GET_FaqClass4 = 
-			"select faq_class, faq_title, faq_content"
+			"select faq_no, faq_class, faq_title, faq_content"
 					+ " from faq where faq_class=3";
 	
 	@Override /* 新增 */
@@ -325,6 +325,7 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 			
 			while(rs.next()) {
 				faqVO = new FaqVO();
+				faqVO.setFaq_no(rs.getInt("faq_no"));
 				faqVO.setFaq_class(rs.getByte("faq_class"));
 				faqVO.setFaq_title(rs.getString("faq_title"));
 				faqVO.setFaq_content(rs.getString("faq_content"));
@@ -382,6 +383,7 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 			
 			while(rs.next()) {
 				faqVO = new FaqVO();
+				faqVO.setFaq_no(rs.getInt("faq_no"));
 				faqVO.setFaq_class(rs.getByte("faq_class"));
 				faqVO.setFaq_title(rs.getString("faq_title"));
 				faqVO.setFaq_content(rs.getString("faq_content"));
@@ -439,6 +441,7 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 			
 			while(rs.next()) {
 				faqVO = new FaqVO();
+				faqVO.setFaq_no(rs.getInt("faq_no"));
 				faqVO.setFaq_class(rs.getByte("faq_class"));
 				faqVO.setFaq_title(rs.getString("faq_title"));
 				faqVO.setFaq_content(rs.getString("faq_content"));
@@ -496,6 +499,7 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 			
 			while(rs.next()) {
 				faqVO = new FaqVO();
+				faqVO.setFaq_no(rs.getInt("faq_no"));
 				faqVO.setFaq_class(rs.getByte("faq_class"));
 				faqVO.setFaq_title(rs.getString("faq_title"));
 				faqVO.setFaq_content(rs.getString("faq_content"));

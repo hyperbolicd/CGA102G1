@@ -767,20 +767,20 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 //			}
 		
 		// 單一活動不重複 OK
-//		List<ActdtVO> list = dao.getOnlyAct();
-//		for (ActdtVO aActdt : list) {
-//			System.out.print(aActdt.getAct_id() + ",");
-//			System.out.print(aActdt.getAct_date_start() + ",");
-//			System.out.print(aActdt.getAct_title() + ",");
-//			System.out.println(aActdt.getAct_subtitle());
-//			System.out.print(aActdt.getTkTypeID() + ",");
-//			System.out.print(aActdt.getAct_discount() + ",");
-//			System.out.print(aActdt.getAct_coupon() + ",");
-//		    System.out.print(aActdt.getAct_status() + ",");
-//		    System.out.println(aActdt.getAct_content() + ",");
-//		    System.out.println(aActdt.getAct_picture() + ",");
-//			System.out.println();
-//			}
+		List<ActdtVO> list = dao.getOnlyAct();
+		for (ActdtVO aActdt : list) {
+			System.out.print(aActdt.getAct_id() + ",");
+			System.out.print(aActdt.getAct_date_start() + ",");
+			System.out.print(aActdt.getAct_title() + ",");
+			System.out.println(aActdt.getAct_subtitle());
+			System.out.print(aActdt.getTkTypeID() + ",");
+			System.out.print(aActdt.getAct_discount() + ",");
+			System.out.print(aActdt.getAct_coupon() + ",");
+		    System.out.print(aActdt.getAct_status() + ",");
+		    System.out.println(aActdt.getAct_content() + ",");
+		    System.out.println(aActdt.getAct_picture() + ",");
+			System.out.println();
+			}
 			
 		// 刪除
 //		dao.delete(5);

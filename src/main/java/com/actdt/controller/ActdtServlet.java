@@ -216,14 +216,14 @@ public class ActdtServlet extends HttpServlet {
 				String fileName = photo.getSubmittedFileName(); // 先宣告一個檔案變數 並取得照片
 				
 				// 利用File物件,寫入目地目錄,上傳成功
-				String saveDirectory = "/act_pic";
+				String saveDirectory = "/act_pic/";
 				String realPath = getServletContext().getRealPath(saveDirectory);
 				photo.write(realPath + "\\" + fileName); // 是寫入硬碟的程式指令P.116 寫出照片路徑
 				act_picture = "/act_pic/" + photo.getSubmittedFileName();
 			} else {
 				act_picture = req.getParameter("noUpload");
 			}
-			System.out.println("photoName: "+act_picture);
+			//System.out.println("photoName: "+act_picture);
 			
 			ActdtVO actdtVO = new ActdtVO();
 			actdtVO.setAct_id(act_id);
@@ -377,7 +377,7 @@ public class ActdtServlet extends HttpServlet {
 			String act_picture = "/act_pic/" + photo.getSubmittedFileName(); //
 			System.out.println(act_picture);
 			if (photo.getSubmittedFileName() == null || photo.getSubmittedFileName().trim().length() == 0) {
-				errorMsgs.put("act_picture","act_picture 公告圖片請上傳");
+				errorMsgs.put("act_picture","act_picture 活動圖片請上傳");
 				
 			}
 			
