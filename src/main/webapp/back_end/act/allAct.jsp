@@ -16,7 +16,7 @@ pageContext.setAttribute("list", list);
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>活動管理</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/back_end/css/emp_all.css">
@@ -105,9 +105,10 @@ pageContext.setAttribute("list", list);
 						<tr>
 							<td style="width: 7%">編號</td>
 							<td style="width: 15%">發布日期</td>
-							<td style="width: 8%">適用票種</td>
+<!-- 							<td style="width: 8%">適用票種</td> -->
 							<td style="width: 30%">標題</td>
 							<td style="width: 20%">內容</td>
+							<td style="width:  8%">圖片</td>
 							<td style="width: 10%">修改</td>
 							<td style="width: 10%">刪除</td>
 
@@ -118,10 +119,10 @@ pageContext.setAttribute("list", list);
 							<tr>
 								<td>${actdtVO.act_id}</td>
 								<td>${actdtVO.act_date_start}</td>
-								<td>${actdtVO.tkTypeID}</td>
+<%-- 								<td>${actdtVO.tkTypeID}</td> --%>
 								<td>${actdtVO.act_subtitle}</td>
 								<td>${actdtVO.act_content}</td>
-								<%-- 								<td><img src="<%=request.getContextPath()%>${actdtVO.act_picture}" style="width: 80px; height: 70px;"></td> --%>
+								<td><img src="<%=request.getContextPath()%>${actdtVO.act_picture}" style="width: 80px; height: 70px;"></td>
 								<td><FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/act/act.do"
 										style="margin-bottom: 0px;">

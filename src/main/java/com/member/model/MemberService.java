@@ -104,7 +104,7 @@ public class MemberService {
 
 //寄送 email
 
-	public boolean sendMail(String Email) {
+	public boolean sendMail(String Email, String serverName, String serverPort) {
 		String to = Email;
 		List<MemberVO> list = dao.getAll();
 		Integer memberID = 0;
@@ -138,7 +138,7 @@ public class MemberService {
 		memberVO.setMember_Password(passRandom);
 		dao.update(memberVO);
 		String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" + " (已經啟用)"
-				+ "http://localhost:8081/CGA102G1/front_end/login/login.jsp";
+				+ "http://"+serverName+":"+serverPort+"/CGA102G1/front_end/login/login.jsp";
 
 		MailService mailService = new MailService();     
 		mailService.sendMail(to, subject, messageText);       //發送忘記密碼信件

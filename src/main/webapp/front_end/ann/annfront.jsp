@@ -13,7 +13,7 @@ pageContext.setAttribute("list", list);
 <!-- <!DOCTYPE html> -->
 <html lang="en" dir="ltr">
 <head>
-<title>HireMe</title>
+<title>HireMe - 影城公告</title>
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/front_end/css/layout.css"
@@ -22,43 +22,34 @@ pageContext.setAttribute("list", list);
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <!-- Ann_公告_css -->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/front_end/ann/css/annfront.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/front_end/ann/static/css/bootstrap.min.css">
 
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/front_end/ann/static/css/owl.theme.default.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/front_end/ann/static/css/owl.carousel.min.css">
 
-<link rel="icon" href="favicon.ico" type="image/x-icon">
-<!-- Bootstrap v4.3.1 CSS -->
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/front_end/ann/lib/bootstrap/css/bootstrap.min.css">
-<!-- Custom CSS -->
+	href="${pageContext.request.contextPath}/front_end/ann/static/css/magnific-popup.min.css">
+
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/front_end/ann/css/normalize.css">
+	href="${pageContext.request.contextPath}/front_end/ann/static/css/animate.min.css">
+
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/front_end/ann/css/theme.css">
-<!-- Slick CSS -->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/front_end/ann/lib/slick/slick/slick.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/front_end/ann/lib/slick/slick/slick-theme.css">
-<!-- Magnific Popup core CSS file -->
+	href="${pageContext.request.contextPath}/front_end/ann/static/css/boxicons.min.css">
+
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/front_end/ann/lib/Magnific-Popup-master/dist/magnific-popup.css">
-<!-- Font Awesome Free 5.10.2 CSS JS -->
-<link
-	href="${pageContext.request.contextPath}/front_end/ann/lib/fontawesome-free-5.10.2-web/css/all.css"
-	rel="stylesheet">
-<script defer
-	src="${pageContext.request.contextPath}/front_end/ann/lib/fontawesome-free-5.10.2-web/js/brands.min.js"></script>
-<script defer
-	src="${pageContext.request.contextPath}/front_end/ann/lib/fontawesome-free-5.10.2-web/js/solid.min.js"></script>
-<script defer
-	src="${pageContext.request.contextPath}/front_end/ann/lib/fontawesome-free-5.10.2-web/js/regular.min.js"></script>
-<script defer
-	src="${pageContext.request.contextPath}/front_end/ann/lib/fontawesome-free-5.10.2-web/js/fontawesome.min.js"></script>
-<!-- Date picker -->
-<link
-	href="${pageContext.request.contextPath}/front_end/ann/lib/gijgo/css/gijgo.min.css"
-	rel="stylesheet" type="text/css" />
+	href="${pageContext.request.contextPath}/front_end/ann/static/css/flaticon.css">
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/front_end/ann/static/css/meanmenu.min.css">
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/front_end/ann/static/css/style.css">
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/front_end/ann/static/css/responsive.css">
 
 
 
@@ -97,99 +88,80 @@ pageContext.setAttribute("list", list);
 
 	<!--各自的內容--------------------->
 
-	<!-- Content -->
-	<div id="content">
-		<div class="content-wrap page-news-list">
-			<div class="subsite-banner">
-				<img src="img/subsite-banner-5.jpg">
-			</div>
-			<div class="subsite subsite-with-banner">
-				<div class="row">
-					<div class="col-md-12">
-						<div style="font-size:30px" class="subsite-heading" >影 城 公 告</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="search-form search-content">
-							<div class="search-wrapper ">
-<%-- 							<form action="${pageContext.request.contextPath}/ann/ann.do" method="post"> --%>
-<!-- 								<input id="search" placeholder="Search..."> -->
-<!-- 								<button class="ssubmit" type="submit" name="search_submit"> -->
-<!-- 									<i class="fas fa-search"></i> -->
-<!-- 								</button> -->
-<!-- 								</form> -->
-							</div>
-						</div>
-					</div>
-				</div>
-				<c:forEach var="annVO" items="${list}">
-					<div class="row news-row">
-						<div class="col-md-12">
-							<div class="news-card">
-								<div class="nc-top">
-									<div class="nc-left">
-										<div class="ncl-image">
-										<td><img src="<%=request.getContextPath()%>${annVO.ann_picture}"></td>
-										</div>
-									</div>
-									<div class="nc-right">
-										<div style="font-size:15px" class="ncr-row-a">${annVO.ann_title}</div>
-										<div style="font-size:15px" class="ncr-row-b">${annVO.ann_content}</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
-
-
-<!-- 				<div class="row car-row pagination-row"> -->
-<!-- 					<div class="col-md-12"> -->
-<!-- 						<nav aria-label="Page navigation example"> -->
-<!-- 							<ul class="pagination justify-content-center"> -->
-<!-- 								<li class="page-item"><a class="page-link" href="#" -->
-<!-- 									aria-label="Previous"><span aria-hidden="true">&laquo;</span><span -->
-<!-- 										class="sr-only">Previous</span></a></li> -->
-<!-- 								<li class="page-item active"><a class="page-link" href="#">1</a></li> -->
-<!-- 								<li class="page-item"><a class="page-link" href="#">2</a></li> -->
-<!-- 								<li class="page-item"><a class="page-link" href="#">3</a></li> -->
-<!-- 								<li class="page-item"><a class="page-link" href="#">4</a></li> -->
-<!-- 								<li class="page-item"><a class="page-link" href="#">5</a></li> -->
-<!-- 								<li class="page-item"><a class="page-link" href="#" -->
-<!-- 									aria-label="Next"><span aria-hidden="true">&raquo;</span><span -->
-<!-- 										class="sr-only">Next</span></a></li> -->
-	
-<!-- 							</ul> -->
-<!-- 						</nav> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
+	<div class="inner-banner inner-bg4">
+		<div class="container">
+			<div class="inner-title text-center">
+				<h3>Hire Me 影城公告</h3>
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><i class='bx bxs-chevrons-right'></i></li>
+					<li>影城公告</li>
+				</ul>
 			</div>
 		</div>
 	</div>
+
+
+	<div class="blog-area pt-100 pb-70">
+		<div class="container">
+			<div class="section-title text-center">
+<!-- 				<span>公告</span> -->
+				<h2>Our Announcement</h2>
+<!-- 				<p>It is a long established fact that a reader will be -->
+<!-- 					distracted by the readable content of a page when looking at its -->
+<!-- 					layout.</p> -->
+			</div>
+			
+				<div class="row pt-45">
+						<c:forEach var="annVO" items="${list}">
+					<div class="col-lg-4 col-md-6">
+						<div class="blog-card">
+							<div class="blog-img">
+								<a href="blog-details.html"> <img
+									src="<%=request.getContextPath()%>${annVO.ann_picture}" >
+								</a>
+							</div>
+							<div class="blog-content">
+								<div class="blog-tag" style="top: 0px;">
+									<a href="#"><span style="font-size:medium;" >${annVO.ann_title}</span></a>
+								</div>
+								<div>
+									<h3 style="font-size:medium;">${annVO.ann_content}</h3>
+								</div>
+<!-- 								<a href="blog-details.html" class="read-btn">Read More</a> -->
+							</div>
+						</div>
+					</div>
+							</c:forEach>
+				</div>
+			
+		</div>
+
+
+
+
+
+		<div class="col-lg-12">
+			<div class="pagination-area">
+				<nav aria-label="Page navigation example text-center">
+					<ul class="pagination">
+						<li class="page-item"><a class="page-link page-links"
+							href="#"> <i class='bx bx-chevrons-left'></i>
+						</a></li>
+						<li class="page-item current"><a class="page-link" href="#">1</a>
+						</li>
+<!-- 						<li class="page-item"><a class="page-link" href="#">2</a></li> -->
+<!-- 						<li class="page-item"><a class="page-link" href="#">3</a></li> -->
+						<li class="page-item"><a class="page-link" href="#"> <i
+								class='bx bx-chevrons-right'></i>
+						</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+
 	<!-- .Content -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	<!--   客服圖 請自行加連結-->
 	<!--   <img class="cs" src="images/demo/cs.png" height="50px;" width="60px;" href="#"></img> -->
@@ -202,6 +174,40 @@ pageContext.setAttribute("list", list);
 			</p>
 		</footer>
 	</div>
+
+	<script data-cfasync="false"
+		src="${pageContext.request.contextPath}/front_end/ann/static/js/email-decode.min.js"></script>
+
+	<script
+		src="${pageContext.request.contextPath}/front_end/ann/static/js/jquery-3.5.0.min.js"></script>
+
+	<script
+		src="${pageContext.request.contextPath}/front_end/ann/static/js/bootstrap.bundle.min.js"></script>
+
+	<script
+		src="${pageContext.request.contextPath}/front_end/ann/static/js/meanmenu.min.js"></script>
+
+	<script
+		src="${pageContext.request.contextPath}/front_end/ann/static/js/owl.carousel.min.js"></script>
+
+	<script
+		src="${pageContext.request.contextPath}/front_end/ann/static/js/jquery.magnific-popup.min.js"></script>
+
+	<script
+		src="${pageContext.request.contextPath}/front_end/ann/static/js/wow.min.js"></script>
+
+	<script
+		src="${pageContext.request.contextPath}/front_end/ann/static/js/jquery.ajaxchimp.min.js"></script>
+
+	<script
+		src="${pageContext.request.contextPath}/front_end/ann/static/js/form-validator.min.js"></script>
+
+	<script
+		src="${pageContext.request.contextPath}/front_end/ann/static/js/contact-form-script.js"></script>
+
+	<script
+		src="${pageContext.request.contextPath}/front_end/ann/static/js/custom.js"></script>
+
 </body>
 
 </html>

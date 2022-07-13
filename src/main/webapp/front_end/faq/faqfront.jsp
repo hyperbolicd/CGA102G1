@@ -22,7 +22,7 @@ pageContext.setAttribute("FaqClass4", FaqClass4);
 <html lang="en" dir="ltr">
 
 <head>
-<title>HireMe</title>
+<title>HireMe - 常見問題</title>
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/front_end/css/layout.css"
@@ -80,7 +80,7 @@ pageContext.setAttribute("FaqClass4", FaqClass4);
 		<!-- Page Content-->
 		<div style="padding: 100px 100px;">
 
-			<div class="text-center mb-5">
+			<div class="text-center mb-5" >
 				<h1 class="fw-bolder">常見問題</h1>
 				<p class="lead fw-normal text-muted mb-0">F A Q</p>
 			</div>
@@ -98,11 +98,11 @@ pageContext.setAttribute("FaqClass4", FaqClass4);
 						<c:forEach var="faqVO" items="${FaqClass1}">
 								<h3 class="accordion-header" id="headingOne">
 									<button class="accordion-button" type="button"
-										data-bs-toggle="collapse" data-bs-target="#collapseOne"
+										data-bs-toggle="collapse" data-bs-target="#collapseOne_${faqVO.faq_title}"
 										aria-expanded="true" aria-controls="collapseOne">${faqVO.faq_title}</button>
 								</h3>
 					
-								<div class="accordion-collapse collapse show" id="collapseOne"
+								<div class="accordion-collapse collapse" id="collapseOne_${faqVO.faq_title}"
 									aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 									<div class="accordion-body">
 										<strong>${faqVO.faq_content}</strong>
@@ -122,10 +122,10 @@ pageContext.setAttribute("FaqClass4", FaqClass4);
 							<c:forEach var="faqVO" items="${FaqClass2}">
 								<h3 class="accordion-header" id="headingOne">
 									<button class="accordion-button" type="button"
-										data-bs-toggle="collapse" data-bs-target="#collapseOne"
+										data-bs-toggle="collapse" data-bs-target="#collapseOne_${faqVO.faq_title}"
 										aria-expanded="true" aria-controls="collapseOne">${faqVO.faq_title}</button>
 								</h3>
-								<div class="accordion-collapse collapse show" id="collapseOne"
+								<div class="accordion-collapse collapse" id="collapseOne_${faqVO.faq_title}"
 									aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 									<div class="accordion-body">
 										<strong>${faqVO.faq_content}</strong>
@@ -142,10 +142,10 @@ pageContext.setAttribute("FaqClass4", FaqClass4);
 							<c:forEach var="faqVO" items="${FaqClass3}">
 								<h3 class="accordion-header" id="headingOne">
 									<button class="accordion-button" type="button"
-										data-bs-toggle="collapse" data-bs-target="#collapseOne"
+										data-bs-toggle="collapse" data-bs-target="#collapseOne_${faqVO.faq_title}"
 										aria-expanded="true" aria-controls="collapseOne">${faqVO.faq_title}</button>
 								</h3>
-								<div class="accordion-collapse collapse show" id="collapseOne"
+								<div class="accordion-collapse collapse" id="collapseOne_${faqVO.faq_title}"
 									aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 									<div class="accordion-body">
 										<strong>${faqVO.faq_content}</strong>
@@ -162,10 +162,10 @@ pageContext.setAttribute("FaqClass4", FaqClass4);
 							<c:forEach var="faqVO" items="${FaqClass4}">
 								<h3 class="accordion-header" id="headingOne">
 									<button class="accordion-button" type="button"
-										data-bs-toggle="collapse" data-bs-target="#collapseOne"
+										data-bs-toggle="collapse" data-bs-target="#collapseOne_${faqVO.faq_title}"
 										aria-expanded="true" aria-controls="collapseOne">${faqVO.faq_title}</button>
 								</h3>
-								<div class="accordion-collapse collapse show" id="collapseOne"
+								<div class="accordion-collapse collapse" id="collapseOne_${faqVO.faq_title}"
 									aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 									<div class="accordion-body">
 										<strong>${faqVO.faq_content}</strong>

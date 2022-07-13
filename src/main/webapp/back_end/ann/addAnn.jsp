@@ -15,7 +15,7 @@ pageContext.setAttribute("list",list);
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>公告管理</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/back_end/css/emp_all.css">
@@ -60,14 +60,14 @@ pageContext.setAttribute("list",list);
 					</div>
 				</div>
 
-				<c:if test="${not empty errorMsgs}">
-					<font style="color: red">請修正以下錯誤:</font>
-					<ul>
-						<c:forEach var="message" items="${errorMsgs}">
-							<li style="color: red">${message}</li>
-						</c:forEach>
-					</ul>
-				</c:if>
+<%-- 				<c:if test="${not empty errorMsgs}"> --%>
+<!-- 					<font style="color: red">請修正以下錯誤:</font> -->
+<!-- 					<ul> -->
+<%-- 						<c:forEach var="message" items="${errorMsgs}"> --%>
+<%-- 							<li style="color: red">${message}</li> --%>
+<%-- 						</c:forEach> --%>
+<!-- 					</ul> -->
+<%-- 				</c:if> --%>
 
 
 				<FORM METHOD="post" enctype="multipart/form-data"
@@ -104,9 +104,9 @@ pageContext.setAttribute("list",list);
 							</tr>
 							<tr>
 								<td>圖片:</td>
-									<td class="ann_picture"><img id="img" src=<%=request.getContextPath()%>${actdtVO.act_picture} style="width: 300px; height: 250px;">  
-									<input type="file"  name="myUpfile"></td>
-								<td></td>
+								<td><input id="ann_picture" type="file" name="ann_picture"
+									value="${param.ann_picture}" ></td>
+								<td>${errorMsgs.ann_picture}</td>
 							</tr>
 						</table>
 					</div>

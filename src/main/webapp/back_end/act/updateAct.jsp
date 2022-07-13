@@ -15,7 +15,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>活動管理</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/back_end/css/emp_all.css">
@@ -127,6 +127,9 @@
 									<c:forEach var="actdtVO" items="${list}">
 									${actdtVO.tkTypeID==6? "checked" : ""}
 									</c:forEach>>敬老票/IMAX</td>
+									<c:forEach var="actdtVO" items="${list}">
+									${actdtVO.tkTypeID==7? "checked" : ""}
+									</c:forEach>>軍警票/數位</td>
 								<td></td>
 							</tr>
 							

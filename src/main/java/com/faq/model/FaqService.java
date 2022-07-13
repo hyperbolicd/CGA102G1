@@ -1,9 +1,7 @@
 package com.faq.model;
 
-import java.sql.Date;
 import java.util.List;
 
-import com.movie.model.MovieVO;
 
 public class FaqService {
 

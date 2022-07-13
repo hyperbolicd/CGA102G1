@@ -7,20 +7,20 @@
 ActdtVO actdtVO = (ActdtVO) request.getAttribute("actdtVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 %>
 
-<%
-response.setHeader("Cache-Control", "no-store");
-response.setHeader("Pragma", "no-cache");
-response.setDateHeader("Expires", 0);
-%>
+<%-- <% --%>
+// response.setHeader("Cache-Control", "no-store");
+// response.setHeader("Pragma", "no-cache");
+// response.setDateHeader("Expires", 0);
+<%-- %> --%>
 
-<%= actdtVO==null %>
+<%-- <%= actdtVO==null %> --%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>活動管理</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/back_end/css/emp_all.css">
@@ -33,9 +33,6 @@ response.setDateHeader("Expires", 0);
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/act/css/actback_add.css">
 
-
-<!-- 文本編輯器，目前刪掉不用 -->
-<script src="https://cdn.ckeditor.com/4.7.3/basic/ckeditor.js"></script>
 
 <link rel="stylesheet"
 	href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
@@ -113,7 +110,8 @@ response.setDateHeader("Expires", 0);
 									<input type="checkbox" name="TkTypeID" VALUE="3">學生票/數位
 									<input type="checkbox" name="TkTypeID" VALUE="4">學生票/IMAX
 									<input type="checkbox" name="TkTypeID" VALUE="5">敬老票/數位
-									<input type="checkbox" name="TkTypeID" VALUE="6">敬老票/IMAX</td>
+									<input type="checkbox" name="TkTypeID" VALUE="6">敬老票/IMAX
+									<input type="checkbox" name="TkTypeID" VALUE="6">軍警票/數位</td>
 								<td></td>
 							</tr>
 							

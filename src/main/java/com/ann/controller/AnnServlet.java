@@ -132,17 +132,6 @@ public class AnnServlet extends HttpServlet {
 			String ann_content = req.getParameter("ann_content").trim();
 			
 			
-			
-//			   Part part = req.getPart("ann_picture");
-//			   InputStream in = part.getInputStream();
-//			   BufferedInputStream buff = new BufferedInputStream(in);
-//			   byte [] pic = new byte[in.available()];
-//			   buff.read(pic);
-//			   buff.close();
-//			   if(part.getSize() == 0) {
-//			    pic = annSvc.getOneAnn(ann_no).getAnn_picture();
-//			   }
-			
 			String ann_picture=null;
 			Part photo = req.getPart("ann_picture");
 			
@@ -226,11 +215,27 @@ public class AnnServlet extends HttpServlet {
 			
 			
 			// String photoName = "";
-			Part photo = req.getPart("myUpfile");
+//			Part photo = req.getPart("myUpfile");
+//			String ann_picture = "/ann_pic/" + photo.getSubmittedFileName(); //
+//			//System.out.println(ann_picture);
+//			if (photo.getSubmittedFileName() == null || photo.getSubmittedFileName().trim().length() == 0) {
+//				errorMsgs.put("myUpfile","ann_picture 公告圖片請上傳");
+//				
+//			}
+//			
+//			String fileName = photo.getSubmittedFileName(); // 先宣告一個檔案變數 並取得照片
+//			// 利用File物件,寫入目地目錄,上傳成功
+//			String saveDirectory = "/ann_pic";
+//			String realPath = getServletContext().getRealPath(saveDirectory);
+//			
+//			InputStream in = getServletContext().getResourceAsStream("/ann_pic/123.jpg"); //輸入流獲取
+			
+			// String photoName = "";
+			Part photo = req.getPart("ann_picture");
 			String ann_picture = "/ann_pic/" + photo.getSubmittedFileName(); //
 			System.out.println(ann_picture);
 			if (photo.getSubmittedFileName() == null || photo.getSubmittedFileName().trim().length() == 0) {
-				errorMsgs.put("myUpfile","ann_picture 公告圖片請上傳");
+				errorMsgs.put("ann_picture","活動圖片請上傳");
 				
 			}
 			
@@ -239,9 +244,9 @@ public class AnnServlet extends HttpServlet {
 			String saveDirectory = "/ann_pic";
 			String realPath = getServletContext().getRealPath(saveDirectory);
 			
+			InputStream in = getServletContext().getResourceAsStream("/ann_pic/annNoPhoto.jpg"); //輸入流獲取
 			
-			//待維修
-			InputStream in = getServletContext().getResourceAsStream("/ann_pic/123.jpg"); //輸入流獲取
+			
 
 			AnnVO annVO = new AnnVO();
 			//annVO.setAnn_no(ann_no);
