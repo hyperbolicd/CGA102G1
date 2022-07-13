@@ -222,7 +222,10 @@ public class MerchOrdServlet extends HttpServlet {
 			if(memberID != null)
 			memberlist = merchOrdSvc.getAll(memberID);
 			req.setAttribute("list", list);
+			HttpSession session = req.getSession();
+			session.setAttribute("list", list);
 			req.setAttribute("merchOrdlist", memberlist);
+			session.setAttribute("merchOrdlist", memberlist);
 			req.setAttribute("memberID", memberID);
 			String url = null;
 			/*從會員列表刪除 || 從訂單列表刪除*/

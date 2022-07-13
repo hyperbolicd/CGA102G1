@@ -20,17 +20,11 @@
 </head>
 
 <body>
+
 	<header>
-		<nav>
-			<div id="logo">
-				<img src="${pageContext.request.contextPath}/back_end/logo2noline.jpg">
-			</div>
-			<h2>員工後台操作系統</h2>
-			<ul>
-				<li>登出</li>
-			</ul>
-		</nav>
-	</header>
+        <%@ include file="/back_end/header_html.jsp"%>   
+    </header>
+
 	<aside id="aside">     
      <%@ include file="/back_end/aside_html.jsp"%>   
     </aside>

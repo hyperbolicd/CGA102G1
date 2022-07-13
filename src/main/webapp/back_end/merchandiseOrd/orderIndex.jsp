@@ -20,17 +20,9 @@
 </head>
 
 <body>
-	<header>
-		<nav>
-			<div id="logo">
-				<img src="logo2noline.jpg">
-			</div>
-			<h2>員工後台操作系統</h2>
-			<ul>
-				<li>登出</li>
-			</ul>
-		</nav>
-	</header>
+		<header>
+        <%@ include file="/back_end/header_html.jsp"%>   
+    </header>
 	<aside id="aside"></aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
@@ -59,7 +51,7 @@
 						<form action="${pageContext.request.contextPath}/merchOrd/merchOrd.do">
 							<td>顯示會員訂單列表:</td>
 							<td><input type="number" placeholder="請輸入會員編號"
-								name="memberID" min=1></td>
+								name="memberID" min=1 required></td>
 							<td><button class="tablebt" type="submit" name="action"
 									value="get_Member_Ordlist">確認</button></td>
 						</form>
@@ -67,7 +59,7 @@
 							<tr>
 						<form action="${pageContext.request.contextPath}/OrderDetail/OrderDetail.do">
 								<td>顯示訂單編號詳情:</td>
-								<td><input type="number" name="merchOrdID" placeholder="請輸入訂單編號" min=1></td>
+								<td><input type="number" name="merchOrdID" placeholder="請輸入訂單編號" min=1 required></td>
 								<td><button class="tablebt" type="submit" name="action"
 										value="getOrder_For_Display" >確認</button></td>
 						</form>
