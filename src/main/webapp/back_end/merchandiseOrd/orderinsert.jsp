@@ -57,7 +57,7 @@
 						<table class="TKinner" id="table">
 
 							<tr>
-								<th></th>
+								<th style="color:red">${errorMsgs.orderDetail}</th>
 								<th></th>
 								<th></th>
 							</tr>

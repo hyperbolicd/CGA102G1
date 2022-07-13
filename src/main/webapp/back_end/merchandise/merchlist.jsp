@@ -107,6 +107,9 @@ List<MerchVO> list = (List<MerchVO>) session.getAttribute("merchlist");
 
 					<%@ include file="page2.file"%>
 
+						<a
+								href="${pageContext.request.contextPath}/back_end/merchandise/mallIndex.jsp"><button class="tablebt" style="margin-left:6px; margin-top:2px">返回</button></a>
+
 				</div>
 			</div>
 

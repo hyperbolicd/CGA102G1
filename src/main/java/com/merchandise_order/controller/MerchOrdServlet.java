@@ -248,6 +248,9 @@ public class MerchOrdServlet extends HttpServlet {
 			for(int i = 0; i > -1; i++) {
 				/*訂單明細結束*/
 				if("0".equals(map.get("merchID")[i])) {
+					if(list.size()==0) {
+						errorMsgs.put("orderDetail", "最少選擇一項商品明細!");
+					}
 					break;
 				}
 				/*選擇的訂單明細商品名稱數量不為零則進入增加*/

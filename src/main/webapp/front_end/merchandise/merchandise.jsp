@@ -40,7 +40,14 @@
 	<div class="wrapper row1" style="height: 60px;">
 		<jsp:include page="/front_end/header.jsp" />
 	</div>
+	
 	<main>
+<div class="outer">	
+
+	<div class="leftDiv">
+	<img id="photo"
+			src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1"
+			>
 		<div id="product-aside">
 			<img
 				class="product-img <c:if test="${merchVo.merchPic1==null}">nullimg</c:if>"
@@ -61,11 +68,9 @@
 
 
 
-		<img id="photo"
-			src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1"
-			>
+		
+</div>
 
-	</main>
 	<div class="product-title-all">
 		<h1>${merchVo.merchName}</h1>
 		<div class="product-content">
@@ -104,6 +109,8 @@
 			<input class="payMerchscCount" type="hidden" name="scCount" value="1" id="paySCCount">
 		</form>
 	</div>
+</div>
+	</main>
 	<!--  客服圖 請自行加連結-->
 	<!--   <img class="cs" src="images/demo/cs.png" height="50px;" width="60px;" href="#"></img> -->
 

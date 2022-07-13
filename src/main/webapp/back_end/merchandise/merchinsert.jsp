@@ -64,7 +64,7 @@
 							<tr>
 								<td>商品價格:</td>
 								<td><input type="number" name="merchPrice"
-									placeholder="請輸入商品價格編號" value="${merchVo.merchPrice}" required min=0></td>
+									placeholder="請輸入商品價格" value="${merchVo.merchPrice}" required min=0></td>
 								<td>${errorMsgs.merchPrice}</td>
 							</tr>
 							<tr>

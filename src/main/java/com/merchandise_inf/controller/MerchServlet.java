@@ -441,7 +441,9 @@ public class MerchServlet extends HttpServlet {
 			/* ==============刪除完成,準備轉交============================================= */
 			merchSvc = new MerchService();
 			List<MerchVO> list = merchSvc.getAll();
+			HttpSession session = req.getSession();
 			req.setAttribute("list", list);
+			session.setAttribute("merchlist", list);
 			String url = "/back_end/merchandise/merchlist.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
