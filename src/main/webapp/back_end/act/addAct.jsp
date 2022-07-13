@@ -110,8 +110,7 @@ ActdtVO actdtVO = (ActdtVO) request.getAttribute("actdtVO"); //EmpServlet.java (
 									<input type="checkbox" name="TkTypeID" VALUE="3">學生票/數位
 									<input type="checkbox" name="TkTypeID" VALUE="4">學生票/IMAX
 									<input type="checkbox" name="TkTypeID" VALUE="5">敬老票/數位
-									<input type="checkbox" name="TkTypeID" VALUE="6">敬老票/IMAX
-									<input type="checkbox" name="TkTypeID" VALUE="7">軍警票/數位</td>
+									<input type="checkbox" name="TkTypeID" VALUE="6">敬老票/IMAX</td>
 								<td></td>
 							</tr>
 							
