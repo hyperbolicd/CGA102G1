@@ -37,7 +37,7 @@ public class WebSocket_Order {
 					// 使用非同步的方法送出user的訊息到前端
 					session.getAsyncRemote().sendText(message);
 			}
-			System.out.println("Message received: " + message);
+//			System.out.println("Message received: " + message);
 		}
 	}
 
@@ -46,7 +46,7 @@ public class WebSocket_Order {
 		connectedSessions.remove(userSession);
 		String text = String.format("session ID = %s, disconnected; close code = %d; reason phrase = %s",
 				userSession.getId(), reason.getCloseCode().getCode(), reason.getReasonPhrase());
-		System.out.println(text);
+//		System.out.println(text);
 	}
 
 	@OnError

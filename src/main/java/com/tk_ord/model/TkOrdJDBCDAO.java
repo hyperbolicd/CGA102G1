@@ -422,14 +422,14 @@ public class TkOrdJDBCDAO implements TkOrdDAO_interface {
 			if (rs.next()) {
 				next_tkOrdID = rs.getLong(1);
 
-				System.out.println("自增主鍵值= " + next_tkOrdID + "(剛新增成功的訂單編號)");
+//				System.out.println("自增主鍵值= " + next_tkOrdID + "(剛新增成功的訂單編號)");
 			} else {
-				System.out.println("未取得自增主鍵值");
+//				System.out.println("未取得自增主鍵值");
 			}
 			rs.close();
 			// 再同時新增票明細
 			TkOrdDtJDBCDAO dao = new TkOrdDtJDBCDAO();
-			System.out.println("list.size()-A=" + list.size());
+//			System.out.println("list.size()-A=" + list.size());
 			for (TkOrdDtVO aTkOrdDt : list) {
 				aTkOrdDt.setTkOrdID(new Long(next_tkOrdID));
 				dao.insert2(aTkOrdDt, con);
@@ -439,7 +439,7 @@ public class TkOrdJDBCDAO implements TkOrdDAO_interface {
 			// 再同時新增餐飲明細
 			if (list2 != null) {
 				FdOrdDtJDBCDAO dao2 = new FdOrdDtJDBCDAO();
-				System.out.println("list.size()-A=" + list2.size());
+//				System.out.println("list.size()-A=" + list2.size());
 				for (FdOrdDtVO aFdOrdDt : list2) {
 					aFdOrdDt.setTkOrdID(new Long(next_tkOrdID));
 					dao2.insert2(aFdOrdDt, con);
@@ -447,7 +447,7 @@ public class TkOrdJDBCDAO implements TkOrdDAO_interface {
 				
 			}else {
 				
-				System.out.println("沒有新增餐飲");
+//				System.out.println("沒有新增餐飲");
 			}
 			
 			
