@@ -151,13 +151,22 @@ public class FrontTkOrdServlet extends HttpServlet{
 		
 		if ("go_To_TicketSelect".equals(action)) { // 來自allFdInf.jsp的請求
 
-			
-
 			/*************************** 1.接收請求參數 ****************************************/
+			Integer memberID1 = (Integer) session.getAttribute("account");
 			Integer MV_ID = Integer.valueOf(req.getParameter("MV_ID"));
 			Integer SH_ID = Integer.valueOf(req.getParameter("SH_ID"));
 			
 			Integer HL_ID = Integer.valueOf(req.getParameter("HL_ID"));
+			
+			
+//			如果沒登入，登入後可以跳轉回當初要近的頁面
+			if(memberID1 == null) {
+				String url = req.getContextPath()+"/front/tkOrd.do?action=go_To_TicketSelect&MV_ID="+MV_ID+"&SH_ID="+SH_ID+"&HL_ID="+HL_ID;
+			    session.setAttribute("location", url);
+			    res.sendRedirect(req.getContextPath()+"/front_end/login/login.jsp");
+			    return;
+			}
+			
 			
 			
 			/*************************** 2.開始查詢資料 ****************************************/
