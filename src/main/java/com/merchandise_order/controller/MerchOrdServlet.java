@@ -66,7 +66,7 @@ public class MerchOrdServlet extends HttpServlet {
 			MerchOrdService merchOrdSvc = new MerchOrdService();
 			List<MerchOrdVO> list = merchOrdSvc.getAll();
 			HttpSession session = req.getSession();
-			session.setAttribute("merchOrdlist", list);
+			session.setAttribute("list", list);
 			String url = "/back_end/merchandiseOrd/merchOrdlist.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);

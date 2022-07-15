@@ -192,7 +192,7 @@ public class ShoppingCartServlet extends HttpServlet {
 			Integer memberID1 = (Integer) session.getAttribute("account");
 			System.out.println("1."+ memberID1);
 			if(memberID1 == null) {
-				session.setAttribute("location", req.getRequestURI());
+				session.setAttribute("location", req.getContextPath()+"/front_end/merchandise/cart.jsp");
 				res.sendRedirect(req.getContextPath()+"/front_end/login/login.jsp");
 				return;
 			}else {

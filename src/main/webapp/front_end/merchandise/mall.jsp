@@ -84,7 +84,7 @@
 			<div class="topSearch">
 				<c:forEach var="serachName" items="${merchSvc.getSearchName()}"
 					varStatus="status">
-					<span class="searchName">${serachName}</span>
+					<span class="searchName" title="${serachName}">${serachName}</span>
 				</c:forEach>
 			</div>
 			<div class="filter">

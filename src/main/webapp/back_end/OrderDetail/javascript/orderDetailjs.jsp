@@ -94,7 +94,7 @@ function addAccount(){
             </td>
         <tr>
             <td><label for="ename">數量：</label></td>
-            <td><input id="ename" type="number" name="ordCount" required></td>
+            <td><input id="ename" type="number" name="ordCount" min=1 required></td>
             <td><label for="status">產品狀態：</label></td>
             <td>
             <select name="ordStatus" id="status">

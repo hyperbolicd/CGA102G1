@@ -4,7 +4,9 @@
 <%@ page import="com.merchandise_inf.model.*"%>
 <%@ page import="com.merchandise_order.model.*"%>
 <%
-List<MerchOrdVO> list = (List<MerchOrdVO>) session.getAttribute("merchOrdlist");
+List<MerchOrdVO> list = (List<MerchOrdVO>) session.getAttribute("list");
+if(list == null){
+ list = (List<MerchOrdVO>) session.getAttribute("merchOrdlist");}
 %>
 
 <!DOCTYPE html>
@@ -55,7 +57,7 @@ List<MerchOrdVO> list = (List<MerchOrdVO>) session.getAttribute("merchOrdlist");
 						</thead>
 						<%@ include file="page1.file"%>
 						<tbody>
-							<c:forEach var="merchOrd" items="${merchOrdlist}"
+							<c:forEach var="merchOrd" items="${list}"
 								begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 								<%-- 						<c:forEach var="merch" items="${list}" > --%>
 								<tr>
