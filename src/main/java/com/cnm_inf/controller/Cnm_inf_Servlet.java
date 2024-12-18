@@ -6,8 +6,6 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import javax.swing.RepaintManager;
-
 import com.cnm_inf.model.*;
 import com.google.gson.Gson;
 

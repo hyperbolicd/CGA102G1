@@ -8,6 +8,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.common.JDBCUtil;
 
 import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_showing;
 
@@ -23,13 +24,6 @@ public class ShowingDAO implements ShowingDAO_interface {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	//JDBC
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/movietheater?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
 	
 	
 
@@ -430,8 +424,7 @@ public class ShowingDAO implements ShowingDAO_interface {
 		
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_SHOWING_BY_DATE_STMT);
 			
 			pstmt.setString(1, SH_TIME);
@@ -452,10 +445,6 @@ public class ShowingDAO implements ShowingDAO_interface {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());

@@ -1,7 +1,5 @@
 package com.level.model;
 
-import java.util.List;
-
 public class LevelService {
 	
 	private LevelDAO_interface dao;

@@ -1,7 +1,5 @@
 package com.member.model;
 
-import java.sql.Date;
-
 public class MemberVO implements java.io.Serializable {
 	private Integer member_ID; // Int MEMBER_ID x
 	private String member_Level; // Char MEMBER_LEVEL x

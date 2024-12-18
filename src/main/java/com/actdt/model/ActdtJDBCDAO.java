@@ -3,20 +3,12 @@ package com.actdt.model;
 import java.sql.*;
 import java.util.*;
 
-import javax.servlet.*;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import com.common.JDBCUtil;
 
-import oracle.net.aso.a;
 
 
 
 public class ActdtJDBCDAO implements ActdtDAO_interface {
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/movietheater?serverTimezone=Asia/Taipei"; //連結的MySQL路徑
-	String userid = "root"; // MySQL 帳號
-	String passwd = "password"; // MySQL 密碼
 
 	/* 新增 */
 	private static final String INSERT_STMT = // 宣告變數INSERT_STMT
@@ -77,8 +69,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			
@@ -97,9 +88,6 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			// Handle any SQL errors
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// Clean up JDBC resources
@@ -182,8 +170,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 			
 			
@@ -202,9 +189,6 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			// Handle any SQL errors
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// Clean up JDBC resources
@@ -236,8 +220,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setInt(1, Actdt_id);
@@ -246,9 +229,6 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			// Handle any SQL errors
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// Clean up JDBC resources
@@ -280,8 +260,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setInt(1, act_id);
@@ -305,9 +284,6 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			// Handle any SQL errors
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// Clean up JDBC resources
@@ -347,8 +323,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -369,11 +344,6 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-//			throw new RuntimeException("Couldn't load database driver. "
-//					+ e.getMessage());
-			e.printStackTrace();
-			// Handle any SQL errors
 		} catch (SQLException e) {
 //			throw new RuntimeException("A database error occured. "
 //					+ e.getMessage());
@@ -415,8 +385,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_STATUS_STMT);
 			rs = pstmt.executeQuery();
 
@@ -437,11 +406,6 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-//			throw new RuntimeException("Couldn't load database driver. "
-//					+ e.getMessage());
-			e.printStackTrace();
-			// Handle any SQL errors
 		} catch (SQLException e) {
 //			throw new RuntimeException("A database error occured. "
 //					+ e.getMessage());
@@ -550,8 +514,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ONLYACT_STMT);
 			pstmt.setInt(1, act_id);
 
@@ -577,11 +540,6 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-//			throw new RuntimeException("Couldn't load database driver. "
-//					+ e.getMessage());
-			e.printStackTrace();
-			// Handle any SQL errors
 		} catch (SQLException e) {
 //			throw new RuntimeException("A database error occured. "
 //					+ e.getMessage());
@@ -625,8 +583,7 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ACT_STMT);
 						
 			rs = pstmt.executeQuery();
@@ -648,11 +605,6 @@ public class ActdtJDBCDAO implements ActdtDAO_interface {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-//			throw new RuntimeException("Couldn't load database driver. "
-//					+ e.getMessage());
-			e.printStackTrace();
-			// Handle any SQL errors
 		} catch (SQLException e) {
 //			throw new RuntimeException("A database error occured. "
 //					+ e.getMessage());

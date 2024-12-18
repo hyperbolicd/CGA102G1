@@ -1,60 +1,71 @@
 .mainBox {
-    width: 800px;
-    background-color: #f2efef4e;
+	width: 800px;
+	background-color: #f2efef4e;
 	border: solid 1px lightgray;
 }
-.statusBox{
-    /* border: solid 1px lightgray; */
-    width: 800px;
-    display: flex;
-    font-weight: bolder;
+
+.statusBox {
+	/* border: solid 1px lightgray; */
+	width: 800px;
+	display: flex;
+	font-weight: bolder;
 }
-.selectBox{
+
+.selectBox {
 	margin-left: 10px;
 }
+
 .badBox {
-    /* border: solid 1px lightgray; */
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 5px;
-    padding: 5px;
+	/* border: solid 1px lightgray; */
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 5px;
+	padding: 5px;
 }
+
 .editBox {
-    /* border: solid 1px green; */
-    display: flex;
-    justify-content: flex-start;
+	/* border: solid 1px green; */
+	display: flex;
+	justify-content: flex-start;
 }
-.editBox button{
-    margin: 10px;
+
+.editBox button {
+	margin: 10px;
 }
+
 .pic {
 	text-align: center;
 }
-.pic img{
-    width: 120px;
-    height: 120px;
-    padding: 5px;
+
+.pic img {
+	width: 120px;
+	height: 120px;
+	padding: 5px;
 }
+
 .comm {
-    margin: 10px;
-    
+	margin: 10px;
 }
+
 .commInfo {
-    margin: 35px;
+	margin: 35px;
 }
-.commInfo span{
-    padding: 10px;
-    margin-right: 10px;
+
+.commInfo span {
+	padding: 10px;
+	margin-right: 10px;
 }
-.commInfo div{
-    font-size: 20px;
-    width: 500px;
+
+.commInfo div {
+	font-size: 20px;
+	width: 500px;
 }
+
 .speech-bubble {
 	position: relative;
 	background: #eaecec;
 	border-radius: .4em;
-    padding: 20px;
+	padding: 20px;
 }
 
 .speech-bubble:after {
@@ -71,11 +82,12 @@
 	margin-top: -17px;
 	margin-left: -34px;
 }
+
 .speech-bubble2 {
 	position: relative;
 	background: #c8eeee;
 	border-radius: .4em;
-    padding: 20px;
+	padding: 20px;
 }
 
 .speech-bubble2:after {

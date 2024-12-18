@@ -33,11 +33,11 @@ pageContext.setAttribute("list", list);
 
 <body>
 	<header>
-        <%@ include file="/back_end/header_html.jsp"%>   
-    </header>
-	<aside id="aside">     
-     <%@ include file="/back_end/aside_html.jsp"%>   
-    </aside>
+		<%@ include file="/back_end/header_html.jsp"%>
+	</header>
+	<aside id="aside">
+		<%@ include file="/back_end/aside_html.jsp"%>
+	</aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
 		<div class="all">
@@ -73,7 +73,9 @@ pageContext.setAttribute("list", list);
 								<td>${annVO.ann_date}</td>
 								<td>${annVO.ann_title}</td>
 								<td>${annVO.ann_content}</td>
-								<td><img src="<%=request.getContextPath()%>${annVO.ann_picture}" style="width: 80px; height: 70px;"></td>
+								<td><img
+									src="<%=request.getContextPath()%>${annVO.ann_picture}"
+									style="width: 80px; height: 70px;"></td>
 								<td><FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/ann/ann.do"
 										style="margin-bottom: 0px;">

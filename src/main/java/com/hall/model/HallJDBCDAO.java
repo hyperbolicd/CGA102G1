@@ -2,15 +2,11 @@ package com.hall.model;
 
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
-import javax.naming.NamingException;
 
 import com.common.JDBCUtil;
 
@@ -53,15 +49,9 @@ public class HallJDBCDAO implements HallDAO_interface {
 			pstmt.setInt(6, hallVO.getHlSeatCount());
 			
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured."
 					+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}finally {
 			if (pstmt != null) {
 				try {
@@ -99,15 +89,9 @@ public class HallJDBCDAO implements HallDAO_interface {
 			pstmt.setInt(7, hallVO.getHlId());
 			
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured."
 					+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}finally {
 			if (pstmt != null) {
 				try {
@@ -139,15 +123,9 @@ public class HallJDBCDAO implements HallDAO_interface {
 		
 			
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured."
 					+e.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}finally {
 			if (pstmt != null) {
 				try {
@@ -191,15 +169,9 @@ public class HallJDBCDAO implements HallDAO_interface {
 				hallVO.setHlSeatCount(rs.getInt("HL_SEATCOUNT"));
 			}
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured."
 					+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}finally {
 			if (rs != null) {
 				try {
@@ -254,15 +226,9 @@ public class HallJDBCDAO implements HallDAO_interface {
 				list.add(hallVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured."
 					+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}finally {
 			if (rs != null) {
 				try {

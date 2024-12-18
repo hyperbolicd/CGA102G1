@@ -128,18 +128,25 @@ body {
 				<a
 					href="${pageContext.request.contextPath}/front_end/membercentre/membermod.jsp">
 					<i class="fa fa-edit" aria-hidden="true"></i> 會員修改資料
-				</a> <a href="${pageContext.request.contextPath}/front_end/wish/wishPage.jsp"> <i class="fa fa-object-group" aria-hidden="true"></i>
-					許願池
-				</a> <a href="${pageContext.request.contextPath}/front_end/memberCmt/memberCmt.jsp"> <i class="fa fa-clone" aria-hidden="true"></i> 評論區
+				</a> <a
+					href="${pageContext.request.contextPath}/front_end/wish/wishPage.jsp">
+					<i class="fa fa-object-group" aria-hidden="true"></i> 許願池
+				</a> <a
+					href="${pageContext.request.contextPath}/front_end/memberCmt/memberCmt.jsp">
+					<i class="fa fa-clone" aria-hidden="true"></i> 評論區
+				</a> <a
+					href="${pageContext.request.contextPath}/front_end/merchandise/merchOrd_index.jsp">
+					<i class="fa fa-gavel" aria-hidden="true"></i> 訂單明細
 				</a>
-				 <a href="${pageContext.request.contextPath}/front_end/merchandise/merchOrd_index.jsp"> <i class="fa fa-gavel" aria-hidden="true"></i> 訂單明細</a>
 			</nav>
 		</div>
 		<!-- <div id="content">
     <iframe src="" width="100%" height="100%" frameborder="0"></iframe>
   </div> -->
 		<div id="memInfo">
-			<div class="text-block" id="textone"><h1>會員中心</h1></div>
+			<div class="text-block" id="textone">
+				<h1>會員中心</h1>
+			</div>
 			<div class="rg_center">
 				<div class="rg_form">
 					<!--定義表單 form-->
@@ -177,10 +184,11 @@ body {
 							</tr>
 
 							<tr>
-                  <td class="td_left"><label for="MEMBER_PIC">會員照片</label></td>
-                   <td class="td_right"><img src=<%=request.getContextPath()%>${memberVO.member_Pic}></td>
-                  
-              </tr>
+								<td class="td_left"><label for="MEMBER_PIC">會員照片</label></td>
+								<td class="td_right"><img src=<%=request.getContextPath()%>
+									${memberVO.member_Pic}></td>
+
+							</tr>
 
 
 							<tr>
@@ -225,7 +233,7 @@ body {
 			</p>
 		</footer>
 	</div>
-	
+
 	<script>
 	<c:if test="${not empty situation.update}">
     Swal.fire(

@@ -3,8 +3,6 @@ package com.emp_function.model;
 import java.sql.*;
 import java.util.*;
 
-import javax.naming.NamingException;
-
 import com.common.JDBCUtil;
 
 public class EmpFunctionJDBCDAO implements EmpFunctionDAO_interface{
@@ -36,11 +34,7 @@ public class EmpFunctionJDBCDAO implements EmpFunctionDAO_interface{
 				empFunctionVO.setFc_description(rs.getString("FC_DESCRIPTION"));
 				empFunctionVO.setFc_category(rs.getInt("FC_CATEGORY"));
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(rs != null) {
@@ -89,11 +83,7 @@ public class EmpFunctionJDBCDAO implements EmpFunctionDAO_interface{
 				empFunctionVO.setFc_category(rs.getInt("FC_CATEGORY"));
 				list.add(empFunctionVO);
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(rs != null) {

@@ -7,10 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.NamingException;
-
 import com.common.JDBCUtil;
-import com.tk_inf.model.TkInfVO;
 import com.tk_ord_dt.model.TkOrdDtVO;
 
 public class RefundTicketDAO implements RefundTicket_interface {
@@ -53,15 +50,9 @@ public class RefundTicketDAO implements RefundTicket_interface {
 				list.add(tkOrdDtVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("Couldn't load database driver."
 					+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -106,15 +97,9 @@ public class RefundTicketDAO implements RefundTicket_interface {
 				tkType=rs.getString("TK_TYPE");
 			}
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("Couldn't load database driver."
 					+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -159,15 +144,9 @@ public class RefundTicketDAO implements RefundTicket_interface {
 				act_title=rs.getString("ACT_SUBTITLE");
 			}
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("Couldn't load database driver."
 					+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -210,15 +189,9 @@ public class RefundTicketDAO implements RefundTicket_interface {
 			pstmt.executeUpdate();
 			
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("Couldn't load database driver."
 					+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {

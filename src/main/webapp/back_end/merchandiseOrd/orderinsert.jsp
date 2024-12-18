@@ -22,11 +22,11 @@
 	class="com.merchandise_inf.model.MerchService" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
-	
+
 <body>
-		<header>
-        <%@ include file="/back_end/header_html.jsp"%>   
-    </header>
+	<header>
+		<%@ include file="/back_end/header_html.jsp"%>
+	</header>
 	<aside id="aside"></aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
@@ -48,16 +48,16 @@
 						<table class="TKinner" id="table">
 
 							<tr>
-								<th style="color:red">${errorMsgs.orderDetail}</th>
+								<th style="color: red">${errorMsgs.orderDetail}</th>
 								<th></th>
 								<th></th>
 							</tr>
 
 							<tr>
-								<td>會員編號: </td><td>
-								<input type="text" placeholder="請輸入會員編號"
+								<td>會員編號:</td>
+								<td><input type="text" placeholder="請輸入會員編號"
 									name="memberID" value="${merchOrdVo.memberID}" required></td>
-									<td style="color:red">${errorMsgs.memberID}</td>
+								<td style="color: red">${errorMsgs.memberID}</td>
 							</tr>
 							<tr>
 								<td style="width: 300px;">商品名稱</td>
@@ -65,7 +65,8 @@
 								<td>商品價格</td>
 							</tr>
 							<tr>
-								<td ><select name="merchID" id="select" style="width: 300px;">
+								<td><select name="merchID" id="select"
+									style="width: 300px;">
 										<option value="0">請選擇</option>
 										<c:forEach var="merchVo" items="${merchSvc.all}">
 											<option value="${merchVo.merchID}">${merchVo.merchName}</option>

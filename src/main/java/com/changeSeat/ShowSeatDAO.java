@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.NamingException;
-
 import com.common.JDBCUtil;
 import com.hall.model.HallVO;
 
@@ -58,13 +56,7 @@ public class ShowSeatDAO implements ShowSeatDAO_interface {
 				
 			}
 			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
@@ -120,13 +112,7 @@ public class ShowSeatDAO implements ShowSeatDAO_interface {
 			}
 			
 			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
@@ -177,13 +163,7 @@ public class ShowSeatDAO implements ShowSeatDAO_interface {
 				list.add(dateOption); 
 			}
 			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
@@ -248,13 +228,7 @@ public class ShowSeatDAO implements ShowSeatDAO_interface {
 				
 			}
 			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
@@ -296,15 +270,9 @@ public class ShowSeatDAO implements ShowSeatDAO_interface {
 			pstmt.setInt(2,SH_ID);
 			
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured."
 					+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}finally {
 			if (pstmt != null) {
 				try {

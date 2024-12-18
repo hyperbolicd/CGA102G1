@@ -13,12 +13,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/back_end/cinemaInfoManege/css/cinemaInfoManege.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/back_end/cinemaInfoManege/css/cinemaInfoManege.css">
 
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back_end/css/emp_all.css" />
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back_end/css/emp_main.css" />
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back_end/css/emp_footer.css" />
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back_end/showing/css/showing_select_page.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back_end/css/emp_all.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back_end/css/emp_main.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back_end/css/emp_footer.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back_end/showing/css/showing_select_page.css" />
 
 </head>
 <body>
@@ -32,7 +37,8 @@
 
 		<div class="mainDiv">
 
-			<jsp:useBean id="cnm_infSvc" scope="page" class="com.cnm_inf.model.Cnm_infService" />
+			<jsp:useBean id="cnm_infSvc" scope="page"
+				class="com.cnm_inf.model.Cnm_infService" />
 
 			<div class="selectDiv">
 				<select name="" id="infoId">
@@ -86,8 +92,9 @@
 
 	<footer>嗨邇覓影城 &copy; HIREME CINEMA 2022</footer>
 	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
-<%-- 	<script src="<%=request.getContextPath()%>/back_end/showing/emp_aside.js"></script> --%>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+	<%-- 	<script src="<%=request.getContextPath()%>/back_end/showing/emp_aside.js"></script> --%>
+	<script
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 
 
 	<script type="text/javascript">

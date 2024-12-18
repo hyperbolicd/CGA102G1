@@ -26,9 +26,9 @@ List<MerchVO> insertlist = (List<MerchVO>) session.getAttribute("insertlist");
 </head>
 
 <body>
-		<header>
-        <%@ include file="/back_end/header_html.jsp"%>   
-    </header>
+	<header>
+		<%@ include file="/back_end/header_html.jsp"%>
+	</header>
 	<aside id="aside"></aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
@@ -47,7 +47,8 @@ List<MerchVO> insertlist = (List<MerchVO>) session.getAttribute("insertlist");
 					<table class="TKinner tablesorter" id="myTable">
 						<thead>
 							<tr>
-								<th><input type="checkbox" id="allcheckbox" form="checkbox checkbox1 checkbox2">全選</th>
+								<th><input type="checkbox" id="allcheckbox"
+									form="checkbox checkbox1 checkbox2">全選</th>
 								<th>訂單項次</th>
 								<th>商品名稱</th>
 								<th>購買數量</th>
@@ -66,45 +67,48 @@ List<MerchVO> insertlist = (List<MerchVO>) session.getAttribute("insertlist");
 								<tr>
 									<form
 										action="${pageContext.request.contextPath}/OrderDetail/OrderDetail.do">
-									<td><input type="checkbox" form="checkbox"
-											class="forcheckbox forcheckbox1" name="item" value="${orderDetail.item}"></td>
-									<td>    ${orderDetail.item}    </td>
-									<td>${orderDetail.merchVO.merchName}</td>
-									<td><input type="number" name="ordCount"
-										value="${orderDetail.ordCount}" min=1></td>
-									<td>
-									<select name="ordStatus">
-									<option value="0"${orderDetail.ordStatus == 0? 'selected':''}>備貨中</option>
-									<option value="1"${orderDetail.ordStatus == 1? 'selected':''}>可取貨</option>
-									<option value="2"${orderDetail.ordStatus == 2? 'selected':''}>已取貨</option>
-									<option value="3"${orderDetail.ordStatus == 3? 'selected':''}>已取消</option>
-									</select>
-									</td>
-									<td><input type="number" name="ordPrice"
-										value="${orderDetail.ordPrice}" min=1></td>
-									<td>
-										<input class="tablebt" type="hidden" name="merchID" value="${orderDetail.merchID}">
-										<input class="tablebt" type="hidden" name="item"
-										value="${orderDetail.item}">
-										<input class="tablebt" type="hidden" name="merchOrdID"
-										value="${orderDetail.merchOrdID}">
-										<button class="tablebt" type="submit" name="action"
-											value="getOne_For_Update">修改</button></td>
+										<td><input type="checkbox" form="checkbox"
+											class="forcheckbox forcheckbox1" name="item"
+											value="${orderDetail.item}"></td>
+										<td>${orderDetail.item}</td>
+										<td>${orderDetail.merchVO.merchName}</td>
+										<td><input type="number" name="ordCount"
+											value="${orderDetail.ordCount}" min=1></td>
+										<td><select name="ordStatus">
+												<option value="0"
+													${orderDetail.ordStatus == 0? 'selected':''}>備貨中</option>
+												<option value="1"
+													${orderDetail.ordStatus == 1? 'selected':''}>可取貨</option>
+												<option value="2"
+													${orderDetail.ordStatus == 2? 'selected':''}>已取貨</option>
+												<option value="3"
+													${orderDetail.ordStatus == 3? 'selected':''}>已取消</option>
+										</select></td>
+										<td><input type="number" name="ordPrice"
+											value="${orderDetail.ordPrice}" min=1></td>
+										<td><input class="tablebt" type="hidden" name="merchID"
+											value="${orderDetail.merchID}"> <input
+											class="tablebt" type="hidden" name="item"
+											value="${orderDetail.item}"> <input class="tablebt"
+											type="hidden" name="merchOrdID"
+											value="${orderDetail.merchOrdID}">
+											<button class="tablebt" type="submit" name="action"
+												value="getOne_For_Update">修改</button></td>
 									</form>
-									<td>
-									<a 
-										href="${pageContext.request.contextPath}/merch/controller?action=getOne_For_Display&merchID=${orderDetail.merchID}"><button class="tablebt">查看</button></a>
-									</td>
+									<td><a
+										href="${pageContext.request.contextPath}/merch/controller?action=getOne_For_Display&merchID=${orderDetail.merchID}"><button
+												class="tablebt">查看</button></a></td>
 									<td>
 										<form
 											action="${pageContext.request.contextPath}/OrderDetail/OrderDetail.do">
 											<input class="tablebt" type="hidden" name="item"
-											value="${orderDetail.item}">
-											<input class="tablebt" type="hidden" name="merchOrdID"
-											value="${orderDetail.merchOrdID}">
+												value="${orderDetail.item}"> <input class="tablebt"
+												type="hidden" name="merchOrdID"
+												value="${orderDetail.merchOrdID}">
 											<button class="tablebt" type="submit" name="action"
-												value="getOne_For_Delete">刪除</button></td>
-										</form>
+												value="getOne_For_Delete">刪除</button>
+									</td>
+									</form>
 									</td>
 								</tr>
 							</c:forEach>
@@ -113,32 +117,43 @@ List<MerchVO> insertlist = (List<MerchVO>) session.getAttribute("insertlist");
 
 				</div>
 				<div class="btBlock">
-				<h1>總價:${merchOrdVo.merchOrdCount}元</h1>
-						<input type="hidden" name="merchOrdID" value="${merchOrdVo.merchOrdID}" form="checkbox">
-						<input type="hidden" name="merchOrdID" value="${merchOrdVo.merchOrdID}" form="checkbox1">
-						<input type="hidden" name="merchOrdID" value="${merchOrdVo.merchOrdID}" form="checkbox2">
-						<input type="hidden" name="action" value="getItem_For_Update" form="checkbox">
-						<input type="hidden" name="action" value="getItem_For_Update" form="checkbox1">
-						<input type="hidden" name="action" value="getItem_For_Update" form="checkbox2">
-						<form action="${pageContext.request.contextPath}/OrderDetail/OrderDetail.do" id="checkbox">
-						<input type="hidden" name="ordStatus" value="1">
-						<input type="submit" class="tablebt" value="可取貨"></form>
-						<form action="${pageContext.request.contextPath}/OrderDetail/OrderDetail.do" id="checkbox1">
-						<input type="hidden" name="ordStatus" value="2"> 
-						<input type="submit" class="tablebt" value="已取貨"></form>
-						<form action="${pageContext.request.contextPath}/OrderDetail/OrderDetail.do" id="checkbox2">
-						<input type="hidden" name="ordStatus" value="3"> 
-						<input type="submit" class="tablebt" value="已取消"></form>
-						<br>
-						<button class="tablebt" id="add">新增明細</button>
-						<input type="submit" class="tablebt" form="1234" value="訂單首頁">
+					<h1>總價:${merchOrdVo.merchOrdCount}元</h1>
+					<input type="hidden" name="merchOrdID"
+						value="${merchOrdVo.merchOrdID}" form="checkbox"> <input
+						type="hidden" name="merchOrdID" value="${merchOrdVo.merchOrdID}"
+						form="checkbox1"> <input type="hidden" name="merchOrdID"
+						value="${merchOrdVo.merchOrdID}" form="checkbox2"> <input
+						type="hidden" name="action" value="getItem_For_Update"
+						form="checkbox"> <input type="hidden" name="action"
+						value="getItem_For_Update" form="checkbox1"> <input
+						type="hidden" name="action" value="getItem_For_Update"
+						form="checkbox2">
+					<form
+						action="${pageContext.request.contextPath}/OrderDetail/OrderDetail.do"
+						id="checkbox">
+						<input type="hidden" name="ordStatus" value="1"> <input
+							type="submit" class="tablebt" value="可取貨">
+					</form>
+					<form
+						action="${pageContext.request.contextPath}/OrderDetail/OrderDetail.do"
+						id="checkbox1">
+						<input type="hidden" name="ordStatus" value="2"> <input
+							type="submit" class="tablebt" value="已取貨">
+					</form>
+					<form
+						action="${pageContext.request.contextPath}/OrderDetail/OrderDetail.do"
+						id="checkbox2">
+						<input type="hidden" name="ordStatus" value="3"> <input
+							type="submit" class="tablebt" value="已取消">
+					</form>
+					<br>
+					<button class="tablebt" id="add">新增明細</button>
+					<input type="submit" class="tablebt" form="1234" value="訂單首頁">
 				</div>
 				<form
 					action="${pageContext.request.contextPath}/back_end/merchandiseOrd/orderIndex.jsp"
 					id="1234"></form>
-				<div class="inputnone">
-				
-				</div>
+				<div class="inputnone"></div>
 				<div class="btBlock">
 					<%@ include file="page2.file"%>
 				</div>

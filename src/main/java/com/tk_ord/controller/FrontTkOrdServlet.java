@@ -11,9 +11,6 @@ import javax.servlet.http.*;
 
 import com.actdt.model.ActdtService;
 import com.actdt.model.ActdtVO;
-import com.fd_inf.model.FdInfService;
-import com.fd_inf.model.FdInfVO;
-import com.fd_ord_dt.model.FdOrdDtVO;
 import com.google.gson.Gson;
 import com.hall.model.HallService;
 import com.hall.model.HallVO;
@@ -22,11 +19,6 @@ import com.movie.model.MovieVO;
 import com.showing.model.*;
 import com.tk_inf.model.TkInfService;
 import com.tk_inf.model.TkInfVO;
-import com.tk_ord.model.TkOrdVO;
-import com.tk_ord_dt.model.TkOrdDtVO;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 
 @WebServlet("/front/tkOrd.do")

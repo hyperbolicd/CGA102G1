@@ -1,7 +1,6 @@
 package com.cmt.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,15 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cmt.model.CmtJDBCDAO;
-import com.cmt.model.CmtVO;
+import com.common.JDBCUtil;
 import com.movie.model.MovieVO;
 
 public class CmtJDBCDAO implements CmtDAO_interface{
 
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/movietheater?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
 
 	private static final String INSERT_STMT = 
 		"INSERT INTO cmt (MEMBER_ID, MV_ID, CM_TEXT, CM_LIKE, CM_STAR, CM_STATE, CM_DATE) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -47,9 +42,8 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 		PreparedStatement pstmt = null;
 
 		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setInt(1, cmtVO.getMEMBER_ID());
@@ -63,10 +57,6 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -98,8 +88,7 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setInt(1, cmtVO.getMEMBER_ID());
@@ -114,10 +103,6 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -149,8 +134,7 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setInt(1, CM_ID);
@@ -158,10 +142,6 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -195,8 +175,7 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setInt(1, CM_ID);
@@ -217,10 +196,6 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -262,8 +237,7 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -282,10 +256,6 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -322,8 +292,7 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(UPDATE_CMTSTATE);
 
 			pstmt.setInt(1, CM_STATE);
@@ -331,9 +300,6 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 			
 			pstmt.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -368,8 +334,7 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_CMTS_BY_MV_ID_STMT);
 			pstmt.setInt(1, MV_ID);
 			rs = pstmt.executeQuery();
@@ -389,10 +354,6 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -434,8 +395,7 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 		
 		try {
 			
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_CMTS_BY_member_ID_STMT);
 			pstmt.setInt(1, member_ID);
 			rs = pstmt.executeQuery();
@@ -455,10 +415,6 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 			}
 			
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -498,8 +454,7 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(UPDATE_MOVIE_TT_STMT);
 
 			pstmt.setInt(1, movieVO.getMvTtCm());
@@ -510,10 +465,6 @@ public class CmtJDBCDAO implements CmtDAO_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());

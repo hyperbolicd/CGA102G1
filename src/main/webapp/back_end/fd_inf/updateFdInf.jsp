@@ -42,7 +42,7 @@
 	<header>
 		<%@ include file="/back_end/header_html.jsp"%>
 	</header>
-	
+
 	<aside id="aside"></aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
@@ -73,7 +73,7 @@
 							</tr>
 							<tr>
 								<td>餐影種類:</td>
-								<td><select name="fdType">		
+								<td><select name="fdType">
 										<option value="0" ${fdInfVO.fdType=='0'? "selected" : ""}>飲料</option>
 										<option value="1" ${fdInfVO.fdType=='1'? "selected" : ""}>熟食</option>
 								</select></td>
@@ -83,29 +83,29 @@
 								<td>餐飲名稱:</td>
 								<td><input type="text" name="fdName" size="45"
 									value="${fdInfVO.fdName}"></td>
-								<td style="color:red;">${errorMsgs.fdName}</td>
+								<td style="color: red;">${errorMsgs.fdName}</td>
 							</tr>
 							<tr>
 								<td>定價:</td>
 								<td><input type="text" name="fdprice" size="45"
 									value="${fdInfVO.fdprice}"></td>
-								<td style="color:red;">${errorMsgs.fdprice}</td>
+								<td style="color: red;">${errorMsgs.fdprice}</td>
 							</tr>
 							<tr>
 								<td>備註:</td>
 								<td><input type="text" name="fdDT" size="45"
 									value="${fdInfVO.fdDT}" /></td>
-								<td style="color:red;">${errorMsgs.fdDT}</td>
+								<td style="color: red;">${errorMsgs.fdDT}</td>
 							</tr>
 							<tr>
 								<td></td>
-								
-								<td>
-								<img id="preview_img" src="<%=request.getContextPath()%>/fd_inf/fd_inf.do?action=getPic&fdID=${fdInfVO.fdID}" style="width: 100px; height: 120px;"><br>
- 													<input type="file" name="fdPicture"  accept="image/*" onchange="readURL(this)" targetID="preview_img" 
- 													value="${fdInfVO.fdPicture}" />
-									
-									</td>
+
+								<td><img id="preview_img"
+									src="<%=request.getContextPath()%>/fd_inf/fd_inf.do?action=getPic&fdID=${fdInfVO.fdID}"
+									style="width: 100px; height: 120px;"><br> <input
+									type="file" name="fdPicture" accept="image/*"
+									onchange="readURL(this)" targetID="preview_img"
+									value="${fdInfVO.fdPicture}" /></td>
 								<td></td>
 							</tr>
 
@@ -122,8 +122,8 @@
 					</div>
 					<div class="btBlock">
 						<input type="hidden" name="action" value="update"> <input
-							type="hidden" name="fdID" value="${fdInfVO.fdID}">
-						<input type="submit" class="bt" value="送出修改">
+							type="hidden" name="fdID" value="${fdInfVO.fdID}"> <input
+							type="submit" class="bt" value="送出修改">
 
 
 					</div>

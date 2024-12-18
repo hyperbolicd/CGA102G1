@@ -1,6 +1,5 @@
 package com.emp_privilege.model;
 
-import java.sql.Connection;
 import java.util.List;
 
 public class EmpPrivilegeService {

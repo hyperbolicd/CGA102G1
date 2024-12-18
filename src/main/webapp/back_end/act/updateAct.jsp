@@ -4,13 +4,11 @@
 <%@ page import="com.actdt.model.*"%>
 
 <%-- <% --%>
-// List<ActdtVO> list = (List<ActdtVO>)request.getAttribute("actdtList"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
-// ActdtVO actdtVO = (ActdtVO) request.getAttribute("ActdtVO");
-<%-- %> --%>
-
-
-
-<!DOCTYPE html>
+// List
+<ActdtVO> list = (List<ActdtVO>)request.getAttribute("actdtList");
+//EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO,
+也包括輸入資料錯誤時的empVO物件) // ActdtVO actdtVO = (ActdtVO)
+request.getAttribute("ActdtVO"); <%-- %> --%> <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -73,7 +71,8 @@
 							</tr>
 							<tr>
 								<td>編號:</td>
-								<td>${actdtVO.act_id}<input type="hidden" name="act_id" value="${actdtVO.act_id}"></td>
+								<td>${actdtVO.act_id}<input type="hidden" name="act_id"
+									value="${actdtVO.act_id}"></td>
 								<td></td>
 							</tr>
 							<tr>
@@ -96,54 +95,55 @@
 								<td><input type="text" name="act_subtitle"
 									placeholder="請輸入副標題，為了更好的展示效果，標題字數在40字以內"
 									onkeyUp="textLimitCheck2(this, 40);" size="90"
-									value="${actdtVO.act_subtitle}"><span id="messageCount2">0</span>/40</td>
+									value="${actdtVO.act_subtitle}"><span
+									id="messageCount2">0</span>/40</td>
 								<td>${errorMsgs.act_subtitle}</td>
 							</tr>
 
 							<tr>
 								<td>適用票種:</td>
-<%-- 								<td>${actdtVO.tkTypeID}</td> --%>
+								<%-- 								<td>${actdtVO.tkTypeID}</td> --%>
 								<td><input type="checkbox" name="TkTypeID" VALUE="1"
-								<c:forEach var="actdtVO" items="${list}">
+									<c:forEach var="actdtVO" items="${list}">
 								 ${actdtVO.tkTypeID==1? "checked" : ""}
 								</c:forEach>>全票/數位
-									<input type="checkbox" name="TkTypeID" VALUE="2" 
+									<input type="checkbox" name="TkTypeID" VALUE="2"
 									<c:forEach var="actdtVO" items="${list}">
 									${actdtVO.tkTypeID==2? "checked" : ""}
 									</c:forEach>>全票/IMAX
-									<input type="checkbox" name="TkTypeID" VALUE="3" 
+									<input type="checkbox" name="TkTypeID" VALUE="3"
 									<c:forEach var="actdtVO" items="${list}">
 									${actdtVO.tkTypeID==3? "checked" : ""}
 									</c:forEach>>學生票/數位
-									<input type="checkbox" name="TkTypeID" VALUE="4" 
+									<input type="checkbox" name="TkTypeID" VALUE="4"
 									<c:forEach var="actdtVO" items="${list}">
 									${actdtVO.tkTypeID==4? "checked" : ""}
 									</c:forEach>>學生票/IMAX
-									<input type="checkbox" name="TkTypeID" VALUE="5" 
+									<input type="checkbox" name="TkTypeID" VALUE="5"
 									<c:forEach var="actdtVO" items="${list}">
 									${actdtVO.tkTypeID==5? "checked" : ""}
 									</c:forEach>>敬老票/數位
-									<input type="checkbox" name="TkTypeID" VALUE="6" 
+									<input type="checkbox" name="TkTypeID" VALUE="6"
 									<c:forEach var="actdtVO" items="${list}">
 									${actdtVO.tkTypeID==6? "checked" : ""}
 									</c:forEach>>敬老票/IMAX</td>
 								<td></td>
 							</tr>
-							
+
 							<tr>
 								<td>折扣:</td>
 								<td><input type="text" name="act_discount" size="45"
 									value="${actdtVO.act_discount}">請輸入0~1中間的值，例如：0.9</td>
 								<td>${errorMsgs.act_discount}</td>
 							</tr>
-							
+
 							<tr>
 								<td>折價:</td>
 								<td><input type="text" name="act_coupon" size="45"
-									value="${actdtVO.act_coupon}">請輸入數字，例如：20　　　　</td>
+									value="${actdtVO.act_coupon}">請輸入數字，例如：20</td>
 								<td>${errorMsgs.act_coupon}</td>
 							</tr>
-							
+
 							<tr>
 								<td>狀態:</td>
 								<td><select name="act_status">
@@ -162,8 +162,10 @@
 							</tr>
 							<tr>
 								<td>圖片:</td>
-								<td class="act_picture"><img id="img" src=<%=request.getContextPath()%>${actdtVO.act_picture} style="width: 300px; height: 250px;"> 
-								<input id="act_picture" type="file" name="act_picture"
+								<td class="act_picture"><img id="img"
+									src=<%=request.getContextPath()%> ${actdtVO.act_picture}
+									style="width: 300px; height: 250px;"> <input
+									id="act_picture" type="file" name="act_picture"
 									value="${actdtVO.act_picture}"></td>
 								<td></td>
 							</tr>
@@ -185,7 +187,7 @@
 	<!-- <div id="tree"></div> -->
 	<footer> 嗨邇覓影城 &copy; HIREME CINEMA 2022 </footer>
 
-	
+
 	<!-- 標題輸入框字數限制 -->
 	<script type="text/javascript">
 		function textLimitCheck(thisArea, maxLength) {
@@ -197,7 +199,7 @@
 			messageCount.innerText = thisArea.value.length;
 		}
 	</script>
-	
+
 	<!-- 副標題輸入框字數限制 -->
 	<script type="text/javascript">
 		function textLimitCheck2(thisArea, maxLength) {
@@ -209,9 +211,9 @@
 			messageCount2.innerText = thisArea.value.length;
 		}
 	</script>
-	
-	
-	
+
+
+
 </body>
 
 

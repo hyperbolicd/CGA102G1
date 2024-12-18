@@ -80,7 +80,7 @@ pageContext.setAttribute("FaqClass4", FaqClass4);
 		<!-- Page Content-->
 		<div style="padding: 100px 100px;">
 
-			<div class="text-center mb-5" >
+			<div class="text-center mb-5">
 				<h1 class="fw-bolder">常見問題</h1>
 				<p class="lead fw-normal text-muted mb-0">F A Q</p>
 			</div>
@@ -91,41 +91,20 @@ pageContext.setAttribute("FaqClass4", FaqClass4);
 					<!-- FAQ Accordion 1-->
 
 					<h2 class="fw-bolder mb-3">會員相關問題</h2>
-					
-					<div class="accordion mb-5" id="accordionExample">
-					
-						<div class="accordion-item">
-						<c:forEach var="faqVO" items="${FaqClass1}">
-								<h3 class="accordion-header" id="headingOne">
-									<button class="accordion-button" type="button"
-										data-bs-toggle="collapse" data-bs-target="#collapseOne_${faqVO.faq_title}"
-										aria-expanded="true" aria-controls="collapseOne">${faqVO.faq_title}</button>
-								</h3>
-					
-								<div class="accordion-collapse collapse" id="collapseOne_${faqVO.faq_title}"
-									aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-									<div class="accordion-body">
-										<strong>${faqVO.faq_content}</strong>
-									</div>
-								</div>
-								</c:forEach>
-								</div>
-						</div>
-						</div>
-						
-					</div>
 
-					<!-- FAQ Accordion 2-->
-					<h2 class="fw-bolder mb-3">影城相關問題</h2>
 					<div class="accordion mb-5" id="accordionExample">
+
 						<div class="accordion-item">
-							<c:forEach var="faqVO" items="${FaqClass2}">
+							<c:forEach var="faqVO" items="${FaqClass1}">
 								<h3 class="accordion-header" id="headingOne">
 									<button class="accordion-button" type="button"
-										data-bs-toggle="collapse" data-bs-target="#collapseOne_${faqVO.faq_title}"
+										data-bs-toggle="collapse"
+										data-bs-target="#collapseOne_${faqVO.faq_title}"
 										aria-expanded="true" aria-controls="collapseOne">${faqVO.faq_title}</button>
 								</h3>
-								<div class="accordion-collapse collapse" id="collapseOne_${faqVO.faq_title}"
+
+								<div class="accordion-collapse collapse"
+									id="collapseOne_${faqVO.faq_title}"
 									aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 									<div class="accordion-body">
 										<strong>${faqVO.faq_content}</strong>
@@ -134,52 +113,81 @@ pageContext.setAttribute("FaqClass4", FaqClass4);
 							</c:forEach>
 						</div>
 					</div>
-					
-					<!-- FAQ Accordion 3-->
-					<h2 class="fw-bolder mb-3">電影上映相關問題</h2>
-					<div class="accordion mb-5" id="accordionExample">
-						<div class="accordion-item">
-							<c:forEach var="faqVO" items="${FaqClass3}">
-								<h3 class="accordion-header" id="headingOne">
-									<button class="accordion-button" type="button"
-										data-bs-toggle="collapse" data-bs-target="#collapseOne_${faqVO.faq_title}"
-										aria-expanded="true" aria-controls="collapseOne">${faqVO.faq_title}</button>
-								</h3>
-								<div class="accordion-collapse collapse" id="collapseOne_${faqVO.faq_title}"
-									aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-									<div class="accordion-body">
-										<strong>${faqVO.faq_content}</strong>
-									</div>
-								</div>
-							</c:forEach>
+				</div>
+
+			</div>
+
+			<!-- FAQ Accordion 2-->
+			<h2 class="fw-bolder mb-3">影城相關問題</h2>
+			<div class="accordion mb-5" id="accordionExample">
+				<div class="accordion-item">
+					<c:forEach var="faqVO" items="${FaqClass2}">
+						<h3 class="accordion-header" id="headingOne">
+							<button class="accordion-button" type="button"
+								data-bs-toggle="collapse"
+								data-bs-target="#collapseOne_${faqVO.faq_title}"
+								aria-expanded="true" aria-controls="collapseOne">${faqVO.faq_title}</button>
+						</h3>
+						<div class="accordion-collapse collapse"
+							id="collapseOne_${faqVO.faq_title}" aria-labelledby="headingOne"
+							data-bs-parent="#accordionExample">
+							<div class="accordion-body">
+								<strong>${faqVO.faq_content}</strong>
+							</div>
 						</div>
-					</div>
-					
-					<!-- FAQ Accordion 4-->
-					<h2 class="fw-bolder mb-3">其他問題</h2>
-					<div class="accordion mb-5" id="accordionExample">
-						<div class="accordion-item">
-							<c:forEach var="faqVO" items="${FaqClass4}">
-								<h3 class="accordion-header" id="headingOne">
-									<button class="accordion-button" type="button"
-										data-bs-toggle="collapse" data-bs-target="#collapseOne_${faqVO.faq_title}"
-										aria-expanded="true" aria-controls="collapseOne">${faqVO.faq_title}</button>
-								</h3>
-								<div class="accordion-collapse collapse" id="collapseOne_${faqVO.faq_title}"
-									aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-									<div class="accordion-body">
-										<strong>${faqVO.faq_content}</strong>
-									</div>
-								</div>
-							</c:forEach>
-						</div>
-					</div>
-					
-					
+					</c:forEach>
 				</div>
 			</div>
 
-	
+			<!-- FAQ Accordion 3-->
+			<h2 class="fw-bolder mb-3">電影上映相關問題</h2>
+			<div class="accordion mb-5" id="accordionExample">
+				<div class="accordion-item">
+					<c:forEach var="faqVO" items="${FaqClass3}">
+						<h3 class="accordion-header" id="headingOne">
+							<button class="accordion-button" type="button"
+								data-bs-toggle="collapse"
+								data-bs-target="#collapseOne_${faqVO.faq_title}"
+								aria-expanded="true" aria-controls="collapseOne">${faqVO.faq_title}</button>
+						</h3>
+						<div class="accordion-collapse collapse"
+							id="collapseOne_${faqVO.faq_title}" aria-labelledby="headingOne"
+							data-bs-parent="#accordionExample">
+							<div class="accordion-body">
+								<strong>${faqVO.faq_content}</strong>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+
+			<!-- FAQ Accordion 4-->
+			<h2 class="fw-bolder mb-3">其他問題</h2>
+			<div class="accordion mb-5" id="accordionExample">
+				<div class="accordion-item">
+					<c:forEach var="faqVO" items="${FaqClass4}">
+						<h3 class="accordion-header" id="headingOne">
+							<button class="accordion-button" type="button"
+								data-bs-toggle="collapse"
+								data-bs-target="#collapseOne_${faqVO.faq_title}"
+								aria-expanded="true" aria-controls="collapseOne">${faqVO.faq_title}</button>
+						</h3>
+						<div class="accordion-collapse collapse"
+							id="collapseOne_${faqVO.faq_title}" aria-labelledby="headingOne"
+							data-bs-parent="#accordionExample">
+							<div class="accordion-body">
+								<strong>${faqVO.faq_content}</strong>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+
 
 
 

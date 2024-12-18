@@ -28,7 +28,7 @@
 	<header>
 		<%@ include file="/back_end/header_html.jsp"%>
 	</header>
-	
+
 	<aside id="aside"></aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
@@ -60,13 +60,13 @@
 								<td>票種名稱:</td>
 								<td><input type="text" name="tkType" size="45"
 									value="${param.tkType}"></td>
-								<td style="color:red;">${errorMsgs.tkType}</td>
+								<td style="color: red;">${errorMsgs.tkType}</td>
 							</tr>
 							<tr>
 								<td>定價:</td>
 								<td><input type="text" name="tkPrice" size="45"
 									value="${param.tkPrice}"></td>
-								<td style="color:red;">${errorMsgs.tkPrice}</td>
+								<td style="color: red;">${errorMsgs.tkPrice}</td>
 							</tr>
 							<tr>
 								<td>播放種類:</td>
@@ -80,7 +80,7 @@
 								<td>備註:</td>
 								<td><input type="text" name="tkTypeDT" size="45"
 									value="${param.tkTypeDT}" /></td>
-								<td style="color:red;">${errorMsgs.tkTypeDT}</td>
+								<td style="color: red;">${errorMsgs.tkTypeDT}</td>
 							</tr>
 
 						</table>

@@ -19,7 +19,7 @@ MemberVO memberVO = (MemberVO) request.getAttribute("memberVO"); //存入req的m
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery-twzipcode@1.7.14/jquery.twzipcode.min.js"></script>
-	
+
 
 
 
@@ -68,7 +68,8 @@ MemberVO memberVO = (MemberVO) request.getAttribute("memberVO"); //存入req的m
 							<div style="color: red">${errorMsgs.member_Name}</div>
 						</div>
 						<input type="text" placeholder="請輸入您的使用者名稱" id="member_Name"
-							name="member_Name"  value="<%=(memberVO == null) ? "" : memberVO.getMember_Name()%>">
+							name="member_Name"
+							value="<%=(memberVO == null) ? "" : memberVO.getMember_Name()%>">
 
 					</div>
 
@@ -78,7 +79,8 @@ MemberVO memberVO = (MemberVO) request.getAttribute("memberVO"); //存入req的m
 							<div style="color: red">${errorMsgs.member_Email}</div>
 						</div>
 						<input type="text" placeholder="請輸入您的電子信箱" id="member_Email"
-							name="member_Email" value="<%=(memberVO == null) ? "" : memberVO.getMember_Email()%>">
+							name="member_Email"
+							value="<%=(memberVO == null) ? "" : memberVO.getMember_Email()%>">
 					</div>
 
 					<div class="input-box">
@@ -100,14 +102,15 @@ MemberVO memberVO = (MemberVO) request.getAttribute("memberVO"); //存入req的m
 					</div>
 
 
-				
+
 					<div class="input-box">
 						<div style="display: flex; margin-top: 20px">
 							<span>會員電話</span>
 							<div class="errMsgs" style="color: red">${errorMsgs.member_Phone}</div>
 						</div>
 						<input type="text" placeholder="請輸入您的會員電話" id="member_Phone"
-							name="member_Phone" style="width: 300px" value="<%=(memberVO == null) ? "" : memberVO.getMember_Phone()%>">
+							name="member_Phone" style="width: 300px"
+							value="<%=(memberVO == null) ? "" : memberVO.getMember_Phone()%>">
 					</div>
 
 
@@ -117,8 +120,9 @@ MemberVO memberVO = (MemberVO) request.getAttribute("memberVO"); //存入req的m
 						<div id="twzipcode" name="address"></div>
 						<div style="display: flex">
 							<input type="text" placeholder="請輸入您的會員地址" id="member_Address1"
-								name="member_Address1">
-								<input type="hidden" name="member_Address" id="member_Address" value="<%=(memberVO == null) ? "" : memberVO.getMember_Address()%>">
+								name="member_Address1"> <input type="hidden"
+								name="member_Address" id="member_Address"
+								value="<%=(memberVO == null) ? "" : memberVO.getMember_Address()%>">
 						</div>
 
 
@@ -164,10 +168,10 @@ MemberVO memberVO = (MemberVO) request.getAttribute("memberVO"); //存入req的m
 		})
 		
 	</script>
-	
-	
-	
-	
+
+
+
+
 
 
 

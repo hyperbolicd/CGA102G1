@@ -2,8 +2,6 @@ package com.sc_detail.model;
 
 import java.util.List;
 
-import com.merchandise_inf.model.MerchVO;
-
 public interface SCDetailDAO_interface {
 	public void insert(SCDetailVO scDetailVo);
 	public void update(SCDetailVO scDetailVo);

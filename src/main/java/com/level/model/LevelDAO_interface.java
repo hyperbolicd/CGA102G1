@@ -1,7 +1,5 @@
 package com.level.model;
 
-import java.util.*;
-
 public interface LevelDAO_interface {
     public void insert(LevelVO memberLevel);				    //新增
     public void update(LevelVO memberLevel);				    //修改

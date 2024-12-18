@@ -31,11 +31,11 @@ FaqVO faqVO = (FaqVO) request.getAttribute("faqVO"); //EmpServlet.java (Concroll
 
 <body>
 	<header>
-        <%@ include file="/back_end/header_html.jsp"%>   
-    </header>
-	<aside id="aside">     
-     <%@ include file="/back_end/aside_html.jsp"%>   
-    </aside>
+		<%@ include file="/back_end/header_html.jsp"%>
+	</header>
+	<aside id="aside">
+		<%@ include file="/back_end/aside_html.jsp"%>
+	</aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
 		<div class="all">

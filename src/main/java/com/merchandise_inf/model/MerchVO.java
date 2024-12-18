@@ -1,9 +1,6 @@
 package com.merchandise_inf.model;
-import java.io.FileInputStream;
 import java.sql.Blob;
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 public class MerchVO implements java.io.Serializable{
 	private Integer merchID;

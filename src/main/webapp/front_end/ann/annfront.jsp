@@ -105,36 +105,36 @@ pageContext.setAttribute("list", list);
 	<div class="blog-area pt-100 pb-70">
 		<div class="container">
 			<div class="section-title text-center">
-<!-- 				<span>公告</span> -->
+				<!-- 				<span>公告</span> -->
 				<h2>Our Announcement</h2>
-<!-- 				<p>It is a long established fact that a reader will be -->
-<!-- 					distracted by the readable content of a page when looking at its -->
-<!-- 					layout.</p> -->
+				<!-- 				<p>It is a long established fact that a reader will be -->
+				<!-- 					distracted by the readable content of a page when looking at its -->
+				<!-- 					layout.</p> -->
 			</div>
-			
-				<div class="row pt-45">
-						<c:forEach var="annVO" items="${list}">
+
+			<div class="row pt-45">
+				<c:forEach var="annVO" items="${list}">
 					<div class="col-lg-4 col-md-6">
 						<div class="blog-card">
 							<div class="blog-img">
 								<a href="blog-details.html"> <img
-									src="<%=request.getContextPath()%>${annVO.ann_picture}" >
+									src="<%=request.getContextPath()%>${annVO.ann_picture}">
 								</a>
 							</div>
 							<div class="blog-content">
 								<div class="blog-tag" style="top: 0px;">
-									<a href="#"><span style="font-size:medium;" >${annVO.ann_title}</span></a>
+									<a href="#"><span style="font-size: medium;">${annVO.ann_title}</span></a>
 								</div>
 								<div>
-									<h3 style="font-size:medium;">${annVO.ann_content}</h3>
+									<h3 style="font-size: medium;">${annVO.ann_content}</h3>
 								</div>
-<!-- 								<a href="blog-details.html" class="read-btn">Read More</a> -->
+								<!-- 								<a href="blog-details.html" class="read-btn">Read More</a> -->
 							</div>
 						</div>
 					</div>
-							</c:forEach>
-				</div>
-			
+				</c:forEach>
+			</div>
+
 		</div>
 
 
@@ -150,8 +150,8 @@ pageContext.setAttribute("list", list);
 						</a></li>
 						<li class="page-item current"><a class="page-link" href="#">1</a>
 						</li>
-<!-- 						<li class="page-item"><a class="page-link" href="#">2</a></li> -->
-<!-- 						<li class="page-item"><a class="page-link" href="#">3</a></li> -->
+						<!-- 						<li class="page-item"><a class="page-link" href="#">2</a></li> -->
+						<!-- 						<li class="page-item"><a class="page-link" href="#">3</a></li> -->
 						<li class="page-item"><a class="page-link" href="#"> <i
 								class='bx bx-chevrons-right'></i>
 						</a></li>

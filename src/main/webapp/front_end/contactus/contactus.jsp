@@ -12,7 +12,9 @@
 	href="${pageContext.request.contextPath}/front_end/css/layout.css"
 	type="text/css">
 
-<link href="${pageContext.request.contextPath}/front_end/contactus/css/style.css" rel='stylesheet' type='text/css' />
+<link
+	href="${pageContext.request.contextPath}/front_end/contactus/css/style.css"
+	rel='stylesheet' type='text/css' />
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -123,41 +125,46 @@
 					<div class="contact-grids">
 						<div class="col_1_of_bottom span_1_of_first1"
 							style="display: block; float: left; margin: 1% 0 1% 3.6%; width: 29.5%;">
-							<h5 style="font-size:1.2em;">地址</h5>
+							<h5 style="font-size: 1.2em;">地址</h5>
 							<p></p>
 							<ul class="list3">
 								<li><img
 									src="${pageContext.request.contextPath}/front_back/contactus/images/home.png"
 									alt="">
 									<div class="extra-wrap">
-										<p style="font-size:1.0em;"><i class="bi bi-house-door-fill"></i>台北市某某區提拔米路1號</p>
+										<p style="font-size: 1.0em;">
+											<i class="bi bi-house-door-fill"></i>台北市某某區提拔米路1號
+										</p>
 									</div></li>
 							</ul>
 						</div>
 						<div class="col_1_of_bottom span_1_of_first1"
 							style="display: block; float: left; margin: 1% 0 1% 3.6%; width: 29.5%;">
-							<h5 style="font-size:1.2em;">電話</h5>
+							<h5 style="font-size: 1.2em;">電話</h5>
 							<ul class="list3">
 								<p></p>
 								<li><img
 									src="${pageContext.request.contextPath}/front_back/contactus/images/phone.png"
 									alt="">
 									<div class="extra-wrap">
-										<p style="font-size:1.0em;"><i class="bi bi-telephone-fill"></i>02-2345678</p>
+										<p style="font-size: 1.0em;">
+											<i class="bi bi-telephone-fill"></i>02-2345678
+										</p>
 									</div></li>
 							</ul>
 						</div>
 						<div class="col_1_of_bottom span_1_of_first1"
 							style="display: block; float: left; margin: 1% 0 1% 3.6%; width: 29.5%;">
-							<h5 style="font-size:1.2em;">信箱</h5>
-								<p></p>
+							<h5 style="font-size: 1.2em;">信箱</h5>
+							<p></p>
 							<ul class="list3">
 								<li><i class="ri-home-line"></i><img
 									src="${pageContext.request.contextPath}/front_back/contactus/images/email.png"
 									alt="">
 									<div class="extra-wrap">
 										<p>
-											<span style="font-size:1.0em;"><i class="bi bi-envelope-fill"></i>staff@hireme.com</span>
+											<span style="font-size: 1.0em;"><i
+												class="bi bi-envelope-fill"></i>staff@hireme.com</span>
 										</p>
 									</div></li>
 							</ul>

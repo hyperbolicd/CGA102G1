@@ -1,14 +1,10 @@
 package com.movie.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-
-import javax.naming.NamingException;
-import javax.servlet.jsp.tagext.TryCatchFinally;
 
 import com.common.JDBCUtil;
 import com.showing.model.ShowingVO;
@@ -16,29 +12,29 @@ import com.showing.model.ShowingVO;
 public class MovieJDBCDAO implements MovieDAO_interface{
 	
 	private static final String INSERT_STMT =
-			"INSERT into Movie"
+			"INSERT into movie"
 			+ "(MV_NAME,MV_E_NAME,MV_LONG,MV_LEVEL,MV_PICTURE,MV_DT, "
 			+ "MV_ST_DATE,MV_ED_DATE,MV_TYPE,MV_CAST,MV_DRT,MV_TLER) "
 			+ "values(?,?,?,?,?,?,?,?,?,?,?,?)";
 	
 	private static final String UPDATE =
-			"UPDATE Movie set "
+			"UPDATE movie set "
 			+"MV_NAME=?, MV_E_NAME=?, MV_LONG=?, MV_LEVEL=?, MV_PICTURE=?, MV_DT=?, "
 			+"MV_ST_DATE=?, MV_ED_DATE=?, MV_TYPE=?, MV_CAST=?, MV_DRT=?, MV_TLER=? "
 			+"where MV_ID = ?";
 	
 	private static final String DELETE =
-			"DELETE FROM Movie where MV_ID = ?";
+			"DELETE FROM movie where MV_ID = ?";
 	
 	private static final String GET_ONE_STMT =
 			"SELECT MV_ID,MV_NAME,MV_E_NAME,MV_LONG,MV_LEVEL,MV_PICTURE,MV_DT, "
 			+"MV_ST_DATE,MV_ED_DATE,MV_TYPE,MV_CAST,MV_DRT,MV_TLER,MV_TT_CM,MV_TT_STAR "
-			+"FROM Movie where MV_ID = ?";
+			+"FROM movie where MV_ID = ?";
 	
 	private static final String GET_ALL_STMT=
 			"SELECT MV_ID,MV_NAME,MV_E_NAME,MV_LONG,MV_LEVEL,MV_PICTURE,MV_DT, "
 			+"MV_ST_DATE,MV_ED_DATE,MV_TYPE,MV_CAST,MV_DRT,MV_TLER,MV_TT_CM,MV_TT_STAR "
-			+"FROM Movie order by MV_ID";
+			+"FROM movie order by MV_ID";
 	
 	private static final String GET_SHOWING_MV=
 			"select MV_ID,MV_NAME,MV_E_NAME,MV_LEVEL,MV_PICTURE,MV_ST_DATE,MV_ED_DATE,MV_TT_CM,MV_TT_STAR from movie "
@@ -75,17 +71,10 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 			
 			pstmt.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			// Class.forname嚙賠出 ClassNotFound嚙課外
-			throw new RuntimeException("Couldn't load database driver."
-			+e.getMessage());
 		} catch (SQLException e) {
 			// DriverManager 嚙賠出 SQL嚙課外
 			throw new RuntimeException("A database error occured."
 			+e.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}finally {
 			if (pstmt != null) {
 				try {
@@ -130,17 +119,10 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 			
 			pstmt.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			// Class.forname嚙賠出 ClassNotFound嚙課外
-			throw new RuntimeException("Couldn't load database driver."
-			+e.getMessage());
 		} catch (SQLException e) {
 			// DriverManager 嚙賠出 SQL嚙課外
 			throw new RuntimeException("A database error occured."
 			+e.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}finally {
 			if (pstmt != null) {
 				try {
@@ -175,17 +157,10 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -239,17 +214,10 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 			}
 			
 			
-		} catch (ClassNotFoundException e) {
-			// Class.forname嚙賠出 ClassNotFound嚙課外
-			throw new RuntimeException("Couldn't load database driver."
-			+e.getMessage());
 		} catch (SQLException se) {
 			// DriverManager 嚙賠出 SQL嚙課外
 			throw new RuntimeException("A database error occured."
 			+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}finally {
 			if (rs != null) {
 				try {
@@ -311,17 +279,10 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 				list.add(movieVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			// Class.forname嚙賠出 ClassNotFound嚙課外
-			throw new RuntimeException("Couldn't load database driver."
-			+e.getMessage());
 		} catch (SQLException e) {
 			// DriverManager 嚙賠出 SQL嚙課外
 			throw new RuntimeException("A database error occured."
 			+e.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}finally {
 			if (rs != null) {
 				try {
@@ -377,17 +338,10 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 				list.add(movieVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			// Class.forname嚙賠出 ClassNotFound嚙課外
-			throw new RuntimeException("Couldn't load database driver."
-			+e.getMessage());
 		} catch (SQLException e) {
 			// DriverManager 嚙賠出 SQL嚙課外
 			throw new RuntimeException("A database error occured."
 			+e.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}finally {
 			if (rs != null) {
 				try {
@@ -440,17 +394,10 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 				list.add(movieVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			// Class.forname嚙賠出 ClassNotFound嚙課外
-			throw new RuntimeException("Couldn't load database driver."
-			+e.getMessage());
 		} catch (SQLException e) {
 			// DriverManager 嚙賠出 SQL嚙課外
 			throw new RuntimeException("A database error occured."
 			+e.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}finally {
 			if (rs != null) {
 				try {
@@ -510,12 +457,6 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -577,12 +518,6 @@ public class MovieJDBCDAO implements MovieDAO_interface{
 	  } catch (SQLException se) {
 	   throw new RuntimeException("A database error occured. "
 	     + se.getMessage());
-	  } catch (ClassNotFoundException e) {
-	   // TODO Auto-generated catch block
-	   e.printStackTrace();
-	  } catch (NamingException e) {
-	   // TODO Auto-generated catch block
-	   e.printStackTrace();
 	  } finally {
 	   if (rs != null) {
 	    try {

@@ -24,9 +24,9 @@ List<MerchVO> list = (List<MerchVO>) session.getAttribute("merchlist");
 </head>
 
 <body>
-		<header>
-        <%@ include file="/back_end/header_html.jsp"%>   
-    </header>
+	<header>
+		<%@ include file="/back_end/header_html.jsp"%>
+	</header>
 	<aside id="aside"></aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
@@ -60,7 +60,7 @@ List<MerchVO> list = (List<MerchVO>) session.getAttribute("merchlist");
 								<tr>
 									<td>${merch.merchID}</td>
 									<td>${merch.merchName}</td>
-									<td>${merch.merchStatus == 0? '下架':''} ${merch.merchStatus == 1? '上架':''}
+									<td>${merch.merchStatus == 0? '下架':''}${merch.merchStatus == 1? '上架':''}
 										${merch.merchStatus == 2? '主打':''}</td>
 									<td>
 										<form
@@ -99,8 +99,9 @@ List<MerchVO> list = (List<MerchVO>) session.getAttribute("merchlist");
 
 					<%@ include file="page2.file"%>
 
-						<a
-								href="${pageContext.request.contextPath}/back_end/merchandise/mallIndex.jsp"><button class="tablebt" style="margin-left:6px; margin-top:2px">返回</button></a>
+					<a
+						href="${pageContext.request.contextPath}/back_end/merchandise/mallIndex.jsp"><button
+							class="tablebt" style="margin-left: 6px; margin-top: 2px">返回</button></a>
 
 				</div>
 			</div>

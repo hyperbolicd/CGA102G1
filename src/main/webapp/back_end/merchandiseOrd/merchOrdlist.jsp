@@ -27,9 +27,9 @@ if(list == null){
 </head>
 
 <body>
-		<header>
-        <%@ include file="/back_end/header_html.jsp"%>   
-    </header>
+	<header>
+		<%@ include file="/back_end/header_html.jsp"%>
+	</header>
 	<aside id="aside"></aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
@@ -57,25 +57,23 @@ if(list == null){
 						</thead>
 						<%@ include file="page1.file"%>
 						<tbody>
-							<c:forEach var="merchOrd" items="${list}"
-								begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+							<c:forEach var="merchOrd" items="${list}" begin="<%=pageIndex%>"
+								end="<%=pageIndex+rowsPerPage-1%>">
 								<%-- 						<c:forEach var="merch" items="${list}" > --%>
 								<tr>
 									<td><a class="tablebt"
 										href="${pageContext.request.contextPath}/merchOrd/merchOrd.do?action=get_Member_Ordlist&memberID=${merchOrd.memberID}">${merchOrd.memberID}</td>
 									<td>${merchOrd.merchOrdID}</td>
-									<td>
-									${merchOrd.merchOrdStatus==0?'備貨中':''}
-									${merchOrd.merchOrdStatus==1?'可取貨':''}
-									${merchOrd.merchOrdStatus==2?'已完成':''}
-									${merchOrd.merchOrdStatus==3?'已取消':''}
-									</td>
+									<td>${merchOrd.merchOrdStatus==0?'備貨中':''}
+										${merchOrd.merchOrdStatus==1?'可取貨':''}
+										${merchOrd.merchOrdStatus==2?'已完成':''}
+										${merchOrd.merchOrdStatus==3?'已取消':''}</td>
 									<td>
 										<form
 											action="${pageContext.request.contextPath}/OrderDetail/OrderDetail.do">
 											<input class="tablebt" type="hidden" name="memberID"
-												value="${merchOrd.memberID}">
-											<input class="tablebt" type="hidden" name="merchOrdID"
+												value="${merchOrd.memberID}"> <input class="tablebt"
+												type="hidden" name="merchOrdID"
 												value="${merchOrd.merchOrdID}">
 											<button class="tablebt" type="submit" name="action"
 												value="getOrder_For_Display">查詢</button>
@@ -100,7 +98,8 @@ if(list == null){
 
 					<%@ include file="page2.file"%>
 					<a
-								href="${pageContext.request.contextPath}/back_end/merchandiseOrd/orderIndex.jsp"><button class="tablebt" style="margin-left:6px; margin-top:2px">返回</button></a>
+						href="${pageContext.request.contextPath}/back_end/merchandiseOrd/orderIndex.jsp"><button
+							class="tablebt" style="margin-left: 6px; margin-top: 2px">返回</button></a>
 				</div>
 			</div>
 

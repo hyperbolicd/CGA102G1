@@ -68,9 +68,12 @@ input[name="SH_SEAT_STATE"] {
 }
 </style>
 
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back_end/css/emp_all.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back_end/css/emp_main.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back_end/css/emp_footer.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back_end/css/emp_all.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back_end/css/emp_main.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back_end/css/emp_footer.css">
 
 </head>
 <body bgcolor='white'>
@@ -184,7 +187,8 @@ input[name="SH_SEAT_STATE"] {
 	</main>
 	<!-- <div id="tree"></div> -->
 	<footer> 嗨邇覓影城 &copy; HIREME CINEMA 2022 </footer>
-	<script src="<%=request.getContextPath()%>/back_end/showing/emp_aside.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/back_end/showing/emp_aside.js"></script>
 	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 
@@ -192,9 +196,11 @@ input[name="SH_SEAT_STATE"] {
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+<script
+	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <style>
 .xdsoft_datetimepicker .xdsoft_datepicker {

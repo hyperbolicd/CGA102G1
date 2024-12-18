@@ -1,15 +1,12 @@
 package com.emp_account.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import javax.naming.NamingException;
 
 import com.common.JDBCUtil;
 import com.emp_privilege.model.EmpPrivilegeJDBCDAO;
@@ -71,11 +68,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 				emp_no = rs.getInt(1); // 第一欄
 			}
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		}finally {
 			if(ps != null) {
@@ -108,11 +101,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 			
 			ps.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		}finally {
 			if(ps != null) {
@@ -152,11 +141,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 			
 			ps.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		}finally {
 			if(ps != null) {
@@ -189,11 +174,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 			
 			ps.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		}finally {
 			if(ps != null) {
@@ -226,11 +207,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 			
 			ps.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		}finally {
 			if(ps != null) {
@@ -276,11 +253,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 				empAccountVO.setEmp_status(rs.getInt("EMP_STATUS"));
 			}
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		}finally {
 			if(rs != null) {
@@ -334,11 +307,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 				list.add(empAccountVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		}finally {
 			if(rs != null) {
@@ -392,11 +361,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 				list.add(empAccountVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		}finally {
 			if(rs != null) {
@@ -484,11 +449,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 				list.add(empAccountVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		}finally {
 			if(rs != null) {
@@ -532,11 +493,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 				nextId = rs.getInt("AUTO_INCREMENT");
 			}
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		}finally {
 			if(rs != null) {
@@ -582,11 +539,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 				password = rs.getString("EMP_PASSWORD");
 			}
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		}finally {
 			if(rs != null) {
@@ -655,11 +608,7 @@ public class EmpAccountJDBCDAO implements EmpAccountDAO_interface{
 			con.commit();
 			con.setAutoCommit(true);
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			if(con != null) {
 				try {

@@ -3,16 +3,9 @@ package com.faq.model;
 import java.sql.*;
 import java.util.*;
 
-import javax.naming.NamingException;
-
 import com.common.JDBCUtil;
-import com.movie.model.MovieVO;
 
 public class FaqJDBCDAO implements FaqDAO_interface {
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/movietheater?serverTimezone=Asia/Taipei"; //連結的MySQL路徑
-	String userid = "root"; // MySQL 帳號
-	String passwd = "password"; // MySQL 密碼
 
 	/* 新增 */
 	private static final String INSERT_STMT = // 宣告變數INSERT_STMT，自動編號不用加：FAQ編號，因為自動生成
@@ -61,8 +54,7 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setByte(1, faqVO.getFaq_class());
@@ -72,9 +64,6 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			// Handle any SQL errors
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// Clean up JDBC resources
@@ -105,8 +94,7 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setByte(1, faqVO.getFaq_class());
@@ -119,9 +107,6 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			// Handle any SQL errors
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// Clean up JDBC resources
@@ -152,8 +137,7 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setInt(1, Faq_no);
@@ -161,9 +145,6 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			// Handle any SQL errors
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// Clean up JDBC resources
@@ -195,8 +176,7 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setInt(1, faq_no);
@@ -213,9 +193,6 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			// Handle any SQL errors
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// Clean up JDBC resources
@@ -255,8 +232,7 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -271,11 +247,6 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-//			throw new RuntimeException("Couldn't load database driver. "
-//					+ e.getMessage());
-			e.printStackTrace();
-			// Handle any SQL errors
 		} catch (SQLException e) {
 //			throw new RuntimeException("A database error occured. "
 //					+ e.getMessage());
@@ -332,14 +303,9 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 				list.add(faqVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-			+e.getMessage());
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured."
 			+e.getMessage());
-		} catch (NamingException e) {
-			e.printStackTrace();
 		}finally {
 			if (rs != null) {
 				try {
@@ -390,14 +356,9 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 				list.add(faqVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-			+e.getMessage());
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured."
 			+e.getMessage());
-		} catch (NamingException e) {
-			e.printStackTrace();
 		}finally {
 			if (rs != null) {
 				try {
@@ -448,14 +409,9 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 				list.add(faqVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-			+e.getMessage());
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured."
 			+e.getMessage());
-		} catch (NamingException e) {
-			e.printStackTrace();
 		}finally {
 			if (rs != null) {
 				try {
@@ -506,14 +462,9 @@ public class FaqJDBCDAO implements FaqDAO_interface {
 				list.add(faqVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-			+e.getMessage());
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured."
 			+e.getMessage());
-		} catch (NamingException e) {
-			e.printStackTrace();
 		}finally {
 			if (rs != null) {
 				try {

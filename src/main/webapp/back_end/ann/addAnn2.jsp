@@ -67,7 +67,7 @@ pageContext.setAttribute("list", list);
 			style="width: 90%; margin-left: 70px; margin-top: 20px;">
 			<div class="card">
 				<div class="card-body">
-<!-- 					<h4 class="card-title mb-4">公 告 管 理</h4> -->
+					<!-- 					<h4 class="card-title mb-4">公 告 管 理</h4> -->
 
 					<div id="progrss-wizard" class="twitter-bs-wizard">
 						<ul class="twitter-bs-wizard-nav nav-justified">
@@ -79,16 +79,16 @@ pageContext.setAttribute("list", list);
 								class="nav-link" data-toggle="tab"> <span
 									class="step-number">02</span> <span class="step-title">新增圖片</span>
 							</a></li>
-<!-- 							<li class="nav-item"><a href="#progress-bank-detail" -->
-<!-- 								class="nav-link" data-toggle="tab"> <span -->
-<!-- 									class="step-number">03</span> <span class="step-title">Bank -->
-<!-- 										Details</span> -->
-<!-- 							</a></li> -->
-<!-- 							<li class="nav-item"><a href="#progress-confirm-detail" -->
-<!-- 								class="nav-link" data-toggle="tab"> <span -->
-<!-- 									class="step-number">04</span> <span class="step-title">Confirm -->
-<!-- 										Detail</span> -->
-<!-- 							</a></li> -->
+							<!-- 							<li class="nav-item"><a href="#progress-bank-detail" -->
+							<!-- 								class="nav-link" data-toggle="tab"> <span -->
+							<!-- 									class="step-number">03</span> <span class="step-title">Bank -->
+							<!-- 										Details</span> -->
+							<!-- 							</a></li> -->
+							<!-- 							<li class="nav-item"><a href="#progress-confirm-detail" -->
+							<!-- 								class="nav-link" data-toggle="tab"> <span -->
+							<!-- 									class="step-number">04</span> <span class="step-title">Confirm -->
+							<!-- 										Detail</span> -->
+							<!-- 							</a></li> -->
 						</ul>
 
 						<div id="bar" class="progress mt-4">
@@ -106,7 +106,7 @@ pageContext.setAttribute("list", list);
 													for="progress-basicpill-firstname-input">公告日期</label> <input
 													style="text-align: center;" type="text" id="ann_date1"
 													name="ann_date" size="128" value="${param.ann_date}">
-													<p>${errorMsgs.ann_dadt}</p>
+												<p>${errorMsgs.ann_dadt}</p>
 											</div>
 										</div>
 										<!-- 										<div class="col-lg-6"> -->
@@ -126,7 +126,7 @@ pageContext.setAttribute("list", list);
 													for="progress-basicpill-phoneno-input">公告標題</label> <input
 													type="text" class="form-control"
 													id="progress-basicpill-phoneno-input">
-													<p>${errorMsgs.ann_title}</p>
+												<p>${errorMsgs.ann_title}</p>
 											</div>
 										</div>
 										<!-- 										<div class="col-lg-6"> -->
@@ -145,7 +145,7 @@ pageContext.setAttribute("list", list);
 													for="progress-basicpill-address-input">公告內容</label>
 												<textarea id="progress-basicpill-address-input"
 													class="form-control" rows="5"></textarea>
-													<p>${errorMsgs.ann_content}</p>
+												<p>${errorMsgs.ann_content}</p>
 											</div>
 										</div>
 									</div>
@@ -292,10 +292,14 @@ pageContext.setAttribute("list", list);
 							</div>
 						</div>
 						<ul class="pager wizard twitter-bs-wizard-pager-link">
-							<li class="previous" style="float:none;"><a href="javascript: void(0);">上一頁</a></li>
-							<li class="next" style="float:none;"><a href="javascript: void(0);">下一頁</a></li>
-							<li class="done" style="float:none;" name="action" value="insert"><a href="javascript: void(0);">送出新增</a></li>
-							<li type="hidden" name="action" value="insert"> <input type="submit" class="bt" value="送出新增">
+							<li class="previous" style="float: none;"><a
+								href="javascript: void(0);">上一頁</a></li>
+							<li class="next" style="float: none;"><a
+								href="javascript: void(0);">下一頁</a></li>
+							<li class="done" style="float: none;" name="action"
+								value="insert"><a href="javascript: void(0);">送出新增</a></li>
+							<li type="hidden" name="action" value="insert"><input
+								type="submit" class="bt" value="送出新增">
 						</ul>
 					</div>
 				</div>

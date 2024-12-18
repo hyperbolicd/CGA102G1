@@ -8,9 +8,9 @@ ActdtVO actdtVO = (ActdtVO) request.getAttribute("actdtVO"); //EmpServlet.java (
 %>
 
 <%-- <% --%>
-// response.setHeader("Cache-Control", "no-store");
-// response.setHeader("Pragma", "no-cache");
-// response.setDateHeader("Expires", 0);
+// response.setHeader("Cache-Control", "no-store"); //
+response.setHeader("Pragma", "no-cache"); //
+response.setDateHeader("Expires", 0);
 <%-- %> --%>
 
 <%-- <%= actdtVO==null %> --%>
@@ -113,21 +113,21 @@ ActdtVO actdtVO = (ActdtVO) request.getAttribute("actdtVO"); //EmpServlet.java (
 									<input type="checkbox" name="TkTypeID" VALUE="6">敬老票/IMAX</td>
 								<td></td>
 							</tr>
-							
+
 							<tr>
 								<td>折扣:</td>
 								<td><input type="text" name="act_discount" size="45"
 									value="${param.act_discount}">例如：0.9</td>
 								<td>${errorMsgs.act_discount}</td>
 							</tr>
-							
+
 							<tr>
 								<td>折價:</td>
 								<td><input type="text" name="act_coupon" size="45"
 									value="-${param.act_coupon}">例如：-20</td>
 								<td>${errorMsgs.act_coupon}</td>
 							</tr>
-							
+
 							<tr>
 								<td>狀態:</td>
 								<td><select name="act_status">
@@ -146,9 +146,10 @@ ActdtVO actdtVO = (ActdtVO) request.getAttribute("actdtVO"); //EmpServlet.java (
 							</tr>
 							<tr>
 								<td>圖片:</td>
-								<td>
-								<img id="img" src="<%=request.getContextPath()%>/back_end/act/annNoPhoto.jpg" style="width: 300px; height: 250px;">
-								<input id="act_picture" type="file" name="act_picture"
+								<td><img id="img"
+									src="<%=request.getContextPath()%>/back_end/act/annNoPhoto.jpg"
+									style="width: 300px; height: 250px;"> <input
+									id="act_picture" type="file" name="act_picture"
 									value="${param.act_picture}"></td>
 								<td></td>
 							</tr>
@@ -170,7 +171,7 @@ ActdtVO actdtVO = (ActdtVO) request.getAttribute("actdtVO"); //EmpServlet.java (
 	<!-- <div id="tree"></div> -->
 	<footer> 嗨邇覓影城 &copy; HIREME CINEMA 2022 </footer>
 
-	
+
 	<!-- 標題輸入框字數限制 -->
 	<script type="text/javascript">
 		function textLimitCheck(thisArea, maxLength) {
@@ -182,7 +183,7 @@ ActdtVO actdtVO = (ActdtVO) request.getAttribute("actdtVO"); //EmpServlet.java (
 			messageCount.innerText = thisArea.value.length;
 		}
 	</script>
-	
+
 	<!-- 副標題輸入框字數限制 -->
 	<script type="text/javascript">
 		function textLimitCheck2(thisArea, maxLength) {
@@ -194,9 +195,9 @@ ActdtVO actdtVO = (ActdtVO) request.getAttribute("actdtVO"); //EmpServlet.java (
 			messageCount2.innerText = thisArea.value.length;
 		}
 	</script>
-	
-	
-	
+
+
+
 </body>
 
 

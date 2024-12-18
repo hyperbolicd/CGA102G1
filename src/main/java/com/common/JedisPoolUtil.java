@@ -14,7 +14,9 @@ public class JedisPoolUtil {
 				config.setMaxTotal(8); // 最大連線數
 				config.setMaxIdle(8); // 設置空閒連線數
 				config.setMaxWaitMillis(10000); // 最大阻塞時間(毫秒)
-				pool = new JedisPool(config, "localhost", 6379);
+//				pool = new JedisPool(config, "localhost", 6379);
+				// docker
+				pool = new JedisPool(config, "dev-redis", 6379);
 			}
 		}
 		return pool;

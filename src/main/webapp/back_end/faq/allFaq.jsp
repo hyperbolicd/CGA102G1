@@ -31,11 +31,11 @@ pageContext.setAttribute("list", list);
 
 <body>
 	<header>
-        <%@ include file="/back_end/header_html.jsp"%>   
-    </header>
-	<aside id="aside">     
-     <%@ include file="/back_end/aside_html.jsp"%>   
-    </aside>
+		<%@ include file="/back_end/header_html.jsp"%>
+	</header>
+	<aside id="aside">
+		<%@ include file="/back_end/aside_html.jsp"%>
+	</aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
 		<div class="all">
@@ -51,18 +51,18 @@ pageContext.setAttribute("list", list);
 						href='<%=request.getContextPath()%>/back_end/faq/addFaq.jsp'>新增</a>
 				</div>
 
-<%-- 				<jsp:useBean id="faqSvc" scope="page" class="com.faq.model.FaqService" /> --%>
-<!-- 				<li> -->
-<!-- 					<FORM METHOD="post" -->
-<%-- 						ACTION="<%=request.getContextPath()%>/faq/faq.do"> --%>
-<!-- 						<b>選擇常見問題類別:</b> <select size="1" name="faq_class"> -->
-<%-- 							<c:forEach var="faqVO" items="${faqSvc.all}"> --%>
-<%-- 								<option value="${faqVO.faq_no}">${faqVO.faq_no} --%>
-<%-- 							</c:forEach> --%>
-<!-- 						</select> <input type="submit" value="送出"> <input type="hidden" -->
-<!-- 							name="action" value="getOne_For_Display"> -->
-<!-- 					</FORM> -->
-<!-- 				</li> -->
+				<%-- 				<jsp:useBean id="faqSvc" scope="page" class="com.faq.model.FaqService" /> --%>
+				<!-- 				<li> -->
+				<!-- 					<FORM METHOD="post" -->
+				<%-- 						ACTION="<%=request.getContextPath()%>/faq/faq.do"> --%>
+				<!-- 						<b>選擇常見問題類別:</b> <select size="1" name="faq_class"> -->
+				<%-- 							<c:forEach var="faqVO" items="${faqSvc.all}"> --%>
+				<%-- 								<option value="${faqVO.faq_no}">${faqVO.faq_no} --%>
+				<%-- 							</c:forEach> --%>
+				<!-- 						</select> <input type="submit" value="送出"> <input type="hidden" -->
+				<!-- 							name="action" value="getOne_For_Display"> -->
+				<!-- 					</FORM> -->
+				<!-- 				</li> -->
 
 				<div class="TKouter">
 

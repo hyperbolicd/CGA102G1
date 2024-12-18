@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.changeSeat.ShowSeatService;
 import com.changeSeat.ShowSeatVO;
 import com.google.gson.Gson;
-import com.tk_inf.model.TkInfService;
 import com.tk_ord.model.TkOrdService;
 import com.tk_ord.model.TkOrdVO;
 import com.tk_ord_dt.model.TkOrdDtVO;

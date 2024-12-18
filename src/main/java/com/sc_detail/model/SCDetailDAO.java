@@ -1,20 +1,16 @@
 package com.sc_detail.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.order_detail.model.OrderDetailVO;
+import com.common.JDBCUtil;
 
 public class SCDetailDAO implements SCDetailDAO_interface {
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/movietheater?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
+	
 	private static final String INSERT_STMT = "INSERT INTO sc_detail (MEMBER_ID, MERCH_ID, SC_COUNT) Values (?, ?, ?);";
 	private static final String GET_ALL_STMT = "SELECT MEMBER_ID, MERCH_ID, SC_COUNT FROM sc_detail order by MEMBER_ID ,MERCH_ID;";
 	private static final String GET_ALL_STMT_BY_MEMBERID = "SELECT MEMBER_ID, MERCH_ID, SC_COUNT FROM sc_detail WHERE MEMBER_ID=? order by MEMBER_ID ,MERCH_ID;";
@@ -28,7 +24,7 @@ public class SCDetailDAO implements SCDetailDAO_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setInt(1, scDetailVo.getMemberID());
 			pstmt.setInt(2, scDetailVo.getMerchID());
@@ -62,7 +58,7 @@ public class SCDetailDAO implements SCDetailDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 			pstmt.setInt(1, scDetailVo.getScCount());
 			pstmt.setInt(2, scDetailVo.getMemberID());
@@ -97,7 +93,7 @@ public class SCDetailDAO implements SCDetailDAO_interface {
 		try {
 
 //			con = ds.getConnection();
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 			pstmt.setInt(1, memberID);
 			pstmt.setInt(2, merchID);
@@ -134,7 +130,7 @@ public class SCDetailDAO implements SCDetailDAO_interface {
 		ResultSet rs = null;
 		try {
 //			con = ds.getConnection();
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setInt(1, memberID);
 			pstmt.setInt(2, merchID);
@@ -186,7 +182,7 @@ public class SCDetailDAO implements SCDetailDAO_interface {
 		ResultSet rs = null;
 		try {
 //			con = ds.getConnection();
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -236,7 +232,7 @@ public class SCDetailDAO implements SCDetailDAO_interface {
 		ResultSet rs = null;
 		try {
 //			con = ds.getConnection();
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT_BY_MEMBERID);
 			pstmt.setInt(1, memberID);
 			rs = pstmt.executeQuery();

@@ -3,13 +3,11 @@ package com.ann.model;
 import java.sql.*;
 import java.util.*;
 
+import com.common.JDBCUtil;
+
 
 
 public class AnnJDBCDAO implements AnnDAO_interface {
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/movietheater?serverTimezone=Asia/Taipei"; //連結的MySQL路徑
-	String userid = "root"; // MySQL 帳號
-	String passwd = "password"; // MySQL 密碼
 	
 	/* 新增 */
 	private static final String INSERT_STMT = // 宣告變數INSERT_STMT，自動編號不用加：Ann編號不用，因為自動生成
@@ -44,8 +42,7 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setDate(1, annVO.getAnn_date());
@@ -57,9 +54,6 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			// Handle any SQL errors
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// Clean up JDBC resources
@@ -90,8 +84,7 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setDate(1, annVO.getAnn_date());
@@ -103,9 +96,6 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			// Handle any SQL errors
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// Clean up JDBC resources
@@ -136,8 +126,7 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setInt(1, Ann_no);
@@ -145,9 +134,6 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			// Handle any SQL errors
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// Clean up JDBC resources
@@ -179,8 +165,7 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setInt(1, ann_no);
@@ -198,9 +183,6 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			// Handle any SQL errors
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// Clean up JDBC resources
@@ -240,8 +222,7 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -257,11 +238,6 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-//			throw new RuntimeException("Couldn't load database driver. "
-//					+ e.getMessage());
-			e.printStackTrace();
-			// Handle any SQL errors
 		} catch (SQLException e) {
 //			throw new RuntimeException("A database error occured. "
 //					+ e.getMessage());
@@ -303,8 +279,7 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_ANNFRONT);
 			rs = pstmt.executeQuery();
 
@@ -320,11 +295,6 @@ public class AnnJDBCDAO implements AnnDAO_interface {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-//			throw new RuntimeException("Couldn't load database driver. "
-//					+ e.getMessage());
-			e.printStackTrace();
-			// Handle any SQL errors
 		} catch (SQLException e) {
 //			throw new RuntimeException("A database error occured. "
 //					+ e.getMessage());

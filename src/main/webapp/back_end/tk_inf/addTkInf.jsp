@@ -27,7 +27,7 @@
 	<header>
 		<%@ include file="/back_end/header_html.jsp"%>
 	</header>
-	
+
 	<aside id="aside"></aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
@@ -38,9 +38,12 @@
 					<div class="guide1">
 						<div>新增票種</div>
 					</div>
-				</div><FORM METHOD="post" ACTION="<%=request.getContextPath()%>/tk_inf/tk_inf.do" name="form1">
-				<div class="TKouter">
-					
+				</div>
+				<FORM METHOD="post"
+					ACTION="<%=request.getContextPath()%>/tk_inf/tk_inf.do"
+					name="form1">
+					<div class="TKouter">
+
 						<table class="TKinner">
 							<tr>
 								<th></th>
@@ -51,13 +54,13 @@
 								<td>票種名稱:</td>
 								<td><input type="text" name="tkType" size="45"
 									value="${param.tkType}"></td>
-								<td style="color:red;">${errorMsgs.tkType}</td>
+								<td style="color: red;">${errorMsgs.tkType}</td>
 							</tr>
 							<tr>
 								<td>定價:</td>
 								<td><input type="text" name="tkPrice" size="45"
 									value="${param.tkPrice}"></td>
-								<td style="color:red;">${errorMsgs.tkPrice}</td>
+								<td style="color: red;">${errorMsgs.tkPrice}</td>
 							</tr>
 							<tr>
 								<td>播放種類:</td>
@@ -71,17 +74,18 @@
 								<td>備註:</td>
 								<td><input type="text" name="tkTypeDT" size="45"
 									value="${param.tkTypeDT}" /></td>
-								<td style="color:red;">${errorMsgs.tkTypeDT}</td>
+								<td style="color: red;">${errorMsgs.tkTypeDT}</td>
 							</tr>
 
 						</table>
-				</div>
-				<div class="btBlock">
-					<input type="hidden" name="action" value="insert"> <input
-						type="submit" class="bt" value="送出新增">
+					</div>
+					<div class="btBlock">
+						<input type="hidden" name="action" value="insert"> <input
+							type="submit" class="bt" value="送出新增">
 
-				
-			</div></FORM>
+
+					</div>
+				</FORM>
 			</div>
 
 		</div>
@@ -92,8 +96,8 @@
 
 
 
- <aside id="aside">
-  <%@ include file="/back_end/aside_html.jsp"%>
- </aside>
+	<aside id="aside">
+		<%@ include file="/back_end/aside_html.jsp"%>
+	</aside>
 </body>
 </html>

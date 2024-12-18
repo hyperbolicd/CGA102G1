@@ -20,9 +20,9 @@
 </head>
 
 <body>
-		<header>
-        <%@ include file="/back_end/header_html.jsp"%>   
-    </header>
+	<header>
+		<%@ include file="/back_end/header_html.jsp"%>
+	</header>
 	<aside id="aside"></aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
@@ -61,7 +61,8 @@
 							<tr>
 								<td>商品價格:</td>
 								<td><input type="number" name="merchPrice"
-									placeholder="請輸入商品價格編號" value="${param.merchPrice}" required min=0></td>
+									placeholder="請輸入商品價格編號" value="${param.merchPrice}" required
+									min=0></td>
 								<td>${errorMsgs.merchPrice}</td>
 							</tr>
 							<tr>
@@ -69,7 +70,8 @@
 								<td><select name="merchClass">
 										<option value="模型" ${(param.merchClass=="模型")? 'selected':''}>模型</option>
 										<option value="抱枕" ${(param.merchClass=="抱枕")? 'selected':''}>抱枕</option>
-										<option value="生活用品" ${(param.merchClass=="生活用品")? 'selected':''}>生活用品</option>
+										<option value="生活用品"
+											${(param.merchClass=="生活用品")? 'selected':''}>生活用品</option>
 										<option value="服飾" ${(param.merchClass=="服飾")? 'selected':''}>服飾</option>
 										<option value="文具" ${(param.merchClass=="文具")? 'selected':''}>文具</option>
 								</select></td>
@@ -98,33 +100,48 @@
 							</tr>
 							<tr>
 								<td>商品描述:</td>
-								<td><textarea name="merchDT" cols="30" rows="10"  required>${param.merchDT}</textarea></td>
+								<td><textarea name="merchDT" cols="30" rows="10" required>${param.merchDT}</textarea></td>
 								<td></td>
 							</tr>
 							<tr>
 								<td>上傳商品圖一:</td>
-								<td><input type="file" name="merchPic1" accept="image/*" class="updatefile"></td>
-								<td><img alt="" src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${param.merchID}&pic=1" style="width:200px;height:240px" class="updateimg"></td>
+								<td><input type="file" name="merchPic1" accept="image/*"
+									class="updatefile"></td>
+								<td><img alt=""
+									src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${param.merchID}&pic=1"
+									style="width: 200px; height: 240px" class="updateimg"></td>
 							</tr>
 							<tr>
 								<td>上傳商品圖二:</td>
-								<td><input type="file" name="merchPic2" accept="image/*" class="updatefile"></td>
-								<td><img alt="" src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${param.merchID}&pic=2" style="width:200px;height:240px" class="updateimg"></td>
+								<td><input type="file" name="merchPic2" accept="image/*"
+									class="updatefile"></td>
+								<td><img alt=""
+									src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${param.merchID}&pic=2"
+									style="width: 200px; height: 240px" class="updateimg"></td>
 							</tr>
 							<tr>
 								<td>上傳商品圖三:</td>
-								<td><input type="file" name="merchPic3" accept="image/*" class="updatefile"></td>
-								<td><img alt="" src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${param.merchID}&pic=3" style="width:200px;height:240px" class="updateimg"></td>
+								<td><input type="file" name="merchPic3" accept="image/*"
+									class="updatefile"></td>
+								<td><img alt=""
+									src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${param.merchID}&pic=3"
+									style="width: 200px; height: 240px" class="updateimg"></td>
 							</tr>
 							<tr>
 								<td>上傳商品圖四:</td>
-								<td><input type="file" name="merchPic4" accept="image/*" class="updatefile"></td>
-								<td><img alt="" src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${param.merchID}&pic=4" style="width:200px;height:240px" class="updateimg"></td>
+								<td><input type="file" name="merchPic4" accept="image/*"
+									class="updatefile"></td>
+								<td><img alt=""
+									src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${param.merchID}&pic=4"
+									style="width: 200px; height: 240px" class="updateimg"></td>
 							</tr>
 							<tr>
 								<td>上傳商品圖五:</td>
-								<td><input type="file" name="merchPic5" accept="image/*" class="updatefile"></td>
-								<td><img alt="" src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${param.merchID}&pic=5" style="width:200px;height:240px" class="updateimg"></td>
+								<td><input type="file" name="merchPic5" accept="image/*"
+									class="updatefile"></td>
+								<td><img alt=""
+									src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${param.merchID}&pic=5"
+									style="width: 200px; height: 240px" class="updateimg"></td>
 							</tr>
 
 
@@ -132,12 +149,14 @@
 					</div>
 					<div class="btBlock">
 						<input type="hidden" name="merchID" value="${param.merchID}">
-						<input type="hidden" name="action" value="update"> 
-						<input type="submit" class="bt" value="確定修改">
+						<input type="hidden" name="action" value="update"> <input
+							type="submit" class="bt" value="確定修改">
 						<button class="tablebt" form="1234">放棄修改</button>
 					</div>
 				</FORM>
-				<form action="${pageContext.request.contextPath}/back_end/merchandise/mallIndex.jsp" id="1234"></form>
+				<form
+					action="${pageContext.request.contextPath}/back_end/merchandise/mallIndex.jsp"
+					id="1234"></form>
 			</div>
 
 		</div>
@@ -145,10 +164,11 @@
 	</main>
 	<!-- <div id="tree"></div> -->
 	<footer> 嗨邇覓影城 &copy; HIREME CINEMA 2022 </footer>
-		<aside id="aside">     
-     <%@ include file="/back_end/aside_html.jsp"%>   
-    </aside>
-  <script src="${pageContext.request.contextPath}/back_end/merchandise/javascript/update.js"></script>
+	<aside id="aside">
+		<%@ include file="/back_end/aside_html.jsp"%>
+	</aside>
+	<script
+		src="${pageContext.request.contextPath}/back_end/merchandise/javascript/update.js"></script>
 </body>
 
 </html>

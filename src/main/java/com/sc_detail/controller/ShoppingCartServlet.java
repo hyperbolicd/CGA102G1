@@ -2,7 +2,6 @@ package com.sc_detail.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -16,21 +15,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
-
 import com.google.gson.Gson;
 import com.member.model.MemberService;
-import com.member.model.MemberVO;
 import com.merchandise_inf.model.MerchService;
 import com.merchandise_inf.model.MerchVO;
 import com.merchandise_order.model.MerchOrdService;
 import com.merchandise_order.model.MerchOrdVO;
-import com.mysql.cj.Session;
 import com.order_detail.model.OrderDetailVO;
-import com.sc_detail.model.SCDetailService;
 import com.sc_detail.model.SCDetailVO;
 
-import oracle.net.aso.i;
 
 @WebServlet("/ShoppingCartServlet")
 public class ShoppingCartServlet extends HttpServlet {

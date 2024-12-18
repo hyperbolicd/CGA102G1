@@ -1,5 +1,4 @@
 package com.faq.model;
-import java.sql.Date;
 
 public class FaqVO implements java.io.Serializable{
 	private Integer faq_no;       //FAQ編號

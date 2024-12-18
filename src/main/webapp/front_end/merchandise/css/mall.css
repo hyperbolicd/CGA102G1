@@ -147,14 +147,12 @@ nav a+a::before {
 	top: 0px;
 }
 
-
 /* main */
 .mainDiv {
-/* 	border: 2px solid yellow; */
+	/* 	border: 2px solid yellow; */
 	width: 100%;
 	overflow: auto;
 }
-
 
 /* search */
 .searchBox {
@@ -339,7 +337,8 @@ nav a+a::before {
 }
 
 .gallery p {
-	height: 80px; text-align : center;
+	height: 80px;
+	text-align: center;
 	color: #FFF;
 	margin: 10px;
 	padding-top: 0 8px;

@@ -1,6 +1,5 @@
 package com.merchandise_order.model;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class MerchOrdVO implements java.io.Serializable {

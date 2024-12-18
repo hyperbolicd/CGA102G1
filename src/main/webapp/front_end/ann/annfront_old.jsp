@@ -106,19 +106,20 @@ pageContext.setAttribute("list", list);
 			<div class="subsite subsite-with-banner">
 				<div class="row">
 					<div class="col-md-12">
-						<div style="font-size:30px" class="subsite-heading" >影 城 公 告</div>
+						<div style="font-size: 30px" class="subsite-heading">影 城 公
+							告</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="search-form search-content">
 							<div class="search-wrapper ">
-<%-- 							<form action="${pageContext.request.contextPath}/ann/ann.do" method="post"> --%>
-<!-- 								<input id="search" placeholder="Search..."> -->
-<!-- 								<button class="ssubmit" type="submit" name="search_submit"> -->
-<!-- 									<i class="fas fa-search"></i> -->
-<!-- 								</button> -->
-<!-- 								</form> -->
+								<%-- 							<form action="${pageContext.request.contextPath}/ann/ann.do" method="post"> --%>
+								<!-- 								<input id="search" placeholder="Search..."> -->
+								<!-- 								<button class="ssubmit" type="submit" name="search_submit"> -->
+								<!-- 									<i class="fas fa-search"></i> -->
+								<!-- 								</button> -->
+								<!-- 								</form> -->
 							</div>
 						</div>
 					</div>
@@ -130,12 +131,13 @@ pageContext.setAttribute("list", list);
 								<div class="nc-top">
 									<div class="nc-left">
 										<div class="ncl-image">
-										<td><img src="<%=request.getContextPath()%>${annVO.ann_picture}"></td>
+											<td><img
+												src="<%=request.getContextPath()%>${annVO.ann_picture}"></td>
 										</div>
 									</div>
 									<div class="nc-right">
-										<div style="font-size:15px" class="ncr-row-a">${annVO.ann_title}</div>
-										<div style="font-size:15px" class="ncr-row-b">${annVO.ann_content}</div>
+										<div style="font-size: 15px" class="ncr-row-a">${annVO.ann_title}</div>
+										<div style="font-size: 15px" class="ncr-row-b">${annVO.ann_content}</div>
 									</div>
 								</div>
 							</div>
@@ -144,26 +146,26 @@ pageContext.setAttribute("list", list);
 				</c:forEach>
 
 
-<!-- 				<div class="row car-row pagination-row"> -->
-<!-- 					<div class="col-md-12"> -->
-<!-- 						<nav aria-label="Page navigation example"> -->
-<!-- 							<ul class="pagination justify-content-center"> -->
-<!-- 								<li class="page-item"><a class="page-link" href="#" -->
-<!-- 									aria-label="Previous"><span aria-hidden="true">&laquo;</span><span -->
-<!-- 										class="sr-only">Previous</span></a></li> -->
-<!-- 								<li class="page-item active"><a class="page-link" href="#">1</a></li> -->
-<!-- 								<li class="page-item"><a class="page-link" href="#">2</a></li> -->
-<!-- 								<li class="page-item"><a class="page-link" href="#">3</a></li> -->
-<!-- 								<li class="page-item"><a class="page-link" href="#">4</a></li> -->
-<!-- 								<li class="page-item"><a class="page-link" href="#">5</a></li> -->
-<!-- 								<li class="page-item"><a class="page-link" href="#" -->
-<!-- 									aria-label="Next"><span aria-hidden="true">&raquo;</span><span -->
-<!-- 										class="sr-only">Next</span></a></li> -->
-	
-<!-- 							</ul> -->
-<!-- 						</nav> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
+				<!-- 				<div class="row car-row pagination-row"> -->
+				<!-- 					<div class="col-md-12"> -->
+				<!-- 						<nav aria-label="Page navigation example"> -->
+				<!-- 							<ul class="pagination justify-content-center"> -->
+				<!-- 								<li class="page-item"><a class="page-link" href="#" -->
+				<!-- 									aria-label="Previous"><span aria-hidden="true">&laquo;</span><span -->
+				<!-- 										class="sr-only">Previous</span></a></li> -->
+				<!-- 								<li class="page-item active"><a class="page-link" href="#">1</a></li> -->
+				<!-- 								<li class="page-item"><a class="page-link" href="#">2</a></li> -->
+				<!-- 								<li class="page-item"><a class="page-link" href="#">3</a></li> -->
+				<!-- 								<li class="page-item"><a class="page-link" href="#">4</a></li> -->
+				<!-- 								<li class="page-item"><a class="page-link" href="#">5</a></li> -->
+				<!-- 								<li class="page-item"><a class="page-link" href="#" -->
+				<!-- 									aria-label="Next"><span aria-hidden="true">&raquo;</span><span -->
+				<!-- 										class="sr-only">Next</span></a></li> -->
+
+				<!-- 							</ul> -->
+				<!-- 						</nav> -->
+				<!-- 					</div> -->
+				<!-- 				</div> -->
 			</div>
 		</div>
 	</div>

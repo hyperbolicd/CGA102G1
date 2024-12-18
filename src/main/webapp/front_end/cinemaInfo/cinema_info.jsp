@@ -17,20 +17,28 @@ pageContext.setAttribute("cnmVO", cnmVO);
 <head>
 <title>影城資訊</title>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/css/layout.css" type="text/css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link href="<%=request.getContextPath()%>/front_end/cinemaInfo/css/bootstrap.css" rel='stylesheet' type='text/css' />
-<script src="<%=request.getContextPath()%>/front_end/cinemaInfo/js/bootstrap.js"></script>
-<script src="<%=request.getContextPath()%>/front_end/cinemaInfo/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/front_end/css/layout.css"
+	type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link
+	href="<%=request.getContextPath()%>/front_end/cinemaInfo/css/bootstrap.css"
+	rel='stylesheet' type='text/css' />
+<script
+	src="<%=request.getContextPath()%>/front_end/cinemaInfo/js/bootstrap.js"></script>
+<script
+	src="<%=request.getContextPath()%>/front_end/cinemaInfo/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/cinemaInfo/css/cinema_info.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/front_end/cinemaInfo/css/cinema_info.css">
 </head>
 
 <body>
-	
-		<!-- 置頂按鈕 -->
+
+	<!-- 置頂按鈕 -->
 	<button type="button" id="BackTop" class="toTop-arrow"></button>
-	 <script>
+	<script>
 	    $(function () {
 	      $('#BackTop').click(function () {
 	        $('html,body').animate({ scrollTop: 0 }, 333);
@@ -44,13 +52,14 @@ pageContext.setAttribute("cnmVO", cnmVO);
 	      }).scroll();
 	    });
 	  </script>
-	 <div class="wrapper row1" style="height: 60px;">
-	  <jsp:include page="/front_end/header.jsp" />
-	 </div>
-	 
-	
+	<div class="wrapper row1" style="height: 60px;">
+		<jsp:include page="/front_end/header.jsp" />
+	</div>
 
-	<div style='padding: 50px 100px; color: #979797; background-color: black;'>
+
+
+	<div
+		style='padding: 50px 100px; color: #979797; background-color: black;'>
 		<div id="info_title" class="title">
 			<span>Infomation</span>
 		</div>
@@ -93,7 +102,9 @@ pageContext.setAttribute("cnmVO", cnmVO);
 	<!-- Copyright -->
 	<div class="wrapper row2">
 		<footer id="copyright" class="clear">
-			<p class="fl_left">Copyright &copy; 2022 - All Rights Reserved <a href="#"></a></p>
+			<p class="fl_left">
+				Copyright &copy; 2022 - All Rights Reserved <a href="#"></a>
+			</p>
 		</footer>
 	</div>
 </body>

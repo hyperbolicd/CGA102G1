@@ -1,17 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
-<link   rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/back_end/wish/datetimepicker/jquery.datetimepicker.css" />
-<script src="${pageContext.request.contextPath}/back_end/wish/datetimepicker/jquery.js"></script>
-<script src="${pageContext.request.contextPath}/back_end/wish/datetimepicker/jquery.datetimepicker.full.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/back_end/wish/datetimepicker/jquery.datetimepicker.css" />
+<script
+	src="${pageContext.request.contextPath}/back_end/wish/datetimepicker/jquery.js"></script>
+<script
+	src="${pageContext.request.contextPath}/back_end/wish/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <style>
-  .xdsoft_datetimepicker .xdsoft_datepicker {
-           width:  300px;   /* width:  300px; */
-  }
-  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-           height: 151px;   /* height:  151px; */
-  }
+.xdsoft_datetimepicker .xdsoft_datepicker {
+	width: 300px; /* width:  300px; */
+}
+
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+	height: 151px; /* height:  151px; */
+}
 </style>
 
 <script>
