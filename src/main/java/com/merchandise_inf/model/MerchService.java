@@ -3,6 +3,7 @@ package com.merchandise_inf.model;
 import java.sql.Blob;
 import java.util.*;
 
+import com.common.JedisPoolUtil;
 
 import redis.clients.jedis.Jedis;
 
@@ -108,14 +109,14 @@ public class MerchService {
 		return dao.getByclass(merchClass);
 	}
 	public List<MerchVO> getBySearch(String merchName, Double min, Double max){
-		Jedis jedis = new Jedis("localhost", 6379);
+		Jedis jedis = JedisPoolUtil.getJedisPool().getResource();
 		jedis.incr("merchandise:search:"+merchName);
 		jedis.close();
 		return dao.getBySearch(merchName, min, max);
 	}
 	/*回傳熱門搜尋*/
 	public List<String> getSearchName(){
-		Jedis jedis = new Jedis("localhost", 6379);
+		Jedis jedis = JedisPoolUtil.getJedisPool().getResource();
 		Set<String> aa= jedis.keys("merchandise:search:*");
 		Map<String,Integer> map = new HashMap<>();
 		for(String str : aa) {

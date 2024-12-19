@@ -14,6 +14,8 @@ import javax.naming.NamingException;
 
 import javax.sql.DataSource;
 
+import com.common.JDBCUtil;
+
 
 public class FdInfDAO implements FdInfDAO_interface{
 	
@@ -31,10 +33,7 @@ public class FdInfDAO implements FdInfDAO_interface{
 	
 	
 	
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/movietheater?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
+
 	
 	private static final String INSERT_STMT = 
 			"INSERT INTO fd_inf (FD_TYPE,FD_NAME,FD_PRICE,FD_DT,FD_PICTURE,FD_STATE) VALUES (?, ?, ?, ?, ?, ?)";
@@ -66,7 +65,7 @@ public class FdInfDAO implements FdInfDAO_interface{
 
 		try {
 
-			con = DriverManager.getConnection(url, userid, passwd);			
+			con = JDBCUtil.getConnection();
 
 			pstmt1 = con.prepareStatement(SELECT_ON_OR_OFF_STMT);	
 			pstmt1.setInt(1, FD_ID);
@@ -134,8 +133,7 @@ public class FdInfDAO implements FdInfDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 
@@ -149,10 +147,6 @@ public class FdInfDAO implements FdInfDAO_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -184,8 +178,7 @@ public class FdInfDAO implements FdInfDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 			
 			
@@ -201,10 +194,6 @@ public class FdInfDAO implements FdInfDAO_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -236,8 +225,7 @@ public class FdInfDAO implements FdInfDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setInt(1, fdID);
@@ -245,10 +233,6 @@ public class FdInfDAO implements FdInfDAO_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -282,8 +266,7 @@ public class FdInfDAO implements FdInfDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setInt(1, fdID);
@@ -303,10 +286,6 @@ public class FdInfDAO implements FdInfDAO_interface{
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -348,8 +327,7 @@ public class FdInfDAO implements FdInfDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -367,10 +345,6 @@ public class FdInfDAO implements FdInfDAO_interface{
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());

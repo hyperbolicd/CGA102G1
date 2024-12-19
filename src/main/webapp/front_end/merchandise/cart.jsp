@@ -126,7 +126,7 @@
 	payButton.addEventListener('click',function(){
  			if(${memberVO==null?true:false}){
  				<%
- 				session.setAttribute("location","http://localhost:8081/CGA102G1/ShoppingCartServlet?action=checkout");
+ 				session.setAttribute("location","${pageContext.request.contextPath}/ShoppingCartServlet?action=checkout");
  				%>
  				window.location.href="${pageContext.request.contextPath}/front_end/login/login.jsp";
  				return;
