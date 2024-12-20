@@ -26,16 +26,21 @@ pageContext.setAttribute("list", list);
 
 <!-- 公告_css -->
 <!-- twitter-bootstrap-wizard css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/back_end/act/static/css/prettify.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/back_end/act/static/css/prettify.css">
 
 <!-- Bootstrap Css -->
-<link href="${pageContext.request.contextPath}/back_end/act/static/css/bootstrap.min.css" id="bootstrap-style"
-	rel="stylesheet" type="text/css">
+<link
+	href="${pageContext.request.contextPath}/back_end/act/static/css/bootstrap.min.css"
+	id="bootstrap-style" rel="stylesheet" type="text/css">
 <!-- Icons Css -->
-<link href="${pageContext.request.contextPath}/back_end/act/static/css/icons.min.css" rel="stylesheet" type="text/css">
+<link
+	href="${pageContext.request.contextPath}/back_end/act/static/css/icons.min.css"
+	rel="stylesheet" type="text/css">
 <!-- App Css-->
-<link href="${pageContext.request.contextPath}/back_end/act/static/css/app.min.css" id="app-style" rel="stylesheet"
-	type="text/css">
+<link
+	href="${pageContext.request.contextPath}/back_end/act/static/css/app.min.css"
+	id="app-style" rel="stylesheet" type="text/css">
 </head>
 
 
@@ -48,8 +53,8 @@ pageContext.setAttribute("list", list);
 	</aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
-		<div class="col-lg-12" style="width: 90%;margin-left: 70px;margin-top: 20px;
-}">
+		<div class="col-lg-12"
+			style="width: 90%; margin-left: 70px; margin-top: 20px;">
 			<div class="card">
 				<div class="card-body">
 					<h4 class="card-title mb-4">Wizard with progressbar</h4>
@@ -67,11 +72,12 @@ pageContext.setAttribute("list", list);
 										Document</span>
 							</a></li>
 
-<!-- 							<li class="nav-item"><a href="#progress-bank-detail" -->
-<!-- 								class="nav-link" data-toggle="tab"> <span -->
-<!-- 									class="step-number">03</span> <span class="step-title">Bank -->
-<!-- 										Details</span> -->
-							</a></li>
+							<!-- 							<li class="nav-item"><a href="#progress-bank-detail" -->
+							<!-- 								class="nav-link" data-toggle="tab"> <span -->
+							<!-- 									class="step-number">03</span> <span class="step-title">Bank -->
+							<!-- 										Details</span> -->
+							</a>
+							</li>
 							<li class="nav-item"><a href="#progress-confirm-detail"
 								class="nav-link" data-toggle="tab"> <span
 									class="step-number">04</span> <span class="step-title">Confirm
@@ -293,21 +299,29 @@ pageContext.setAttribute("list", list);
 
 
 	<!-- JAVASCRIPT -->
-	<script src="${pageContext.request.contextPath}/back_end/act/static/js/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/back_end/act/static/js/bootstrap.bundle.min.js"></script>
-	<script src="${pageContext.request.contextPath}/back_end/act/static/js/metisMenu.min.js"></script>
-	<script src="${pageContext.request.contextPath}/back_end/act/static/js/simplebar.min.js"></script>
-<%-- 	<script src="${pageContext.request.contextPath}/back_end/act/static/js/waves.min.js"></script> --%>
+	<script
+		src="${pageContext.request.contextPath}/back_end/act/static/js/jquery.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/back_end/act/static/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/back_end/act/static/js/metisMenu.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/back_end/act/static/js/simplebar.min.js"></script>
+	<%-- 	<script src="${pageContext.request.contextPath}/back_end/act/static/js/waves.min.js"></script> --%>
 
 	<!-- twitter-bootstrap-wizard js -->
-	<script src="${pageContext.request.contextPath}/back_end/act/static/js/jquery.bootstrap.wizard.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/back_end/act/static/js/jquery.bootstrap.wizard.min.js"></script>
 
-	<script src="${pageContext.request.contextPath}/back_end/act/static/js/prettify.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/back_end/act/static/js/prettify.js"></script>
 
 	<!-- form wizard init -->
-	<script src="${pageContext.request.contextPath}/back_end/act/static/js/form-wizard.init.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/back_end/act/static/js/form-wizard.init.js"></script>
 
-	<script src="${pageContext.request.contextPath}/back_end/act/static/js/app.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/back_end/act/static/js/app.js"></script>
 
 </body>
 </html>

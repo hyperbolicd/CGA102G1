@@ -58,16 +58,16 @@ response.setDateHeader("Expires", 0);
 						<div>修改公告</div>
 					</div>
 				</div>
-				
+
 				<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
+				<c:if test="${not empty errorMsgs}">
+					<font style="color: red">請修正以下錯誤:</font>
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<li style="color: red">${message}</li>
+						</c:forEach>
+					</ul>
+				</c:if>
 
 				<FORM METHOD="post" name="form1" enctype="multipart/form-data"
 					ACTION="<%=request.getContextPath()%>/ann/ann.do" name="form1">
@@ -107,8 +107,11 @@ response.setDateHeader("Expires", 0);
 							</tr>
 							<tr>
 								<td>圖片:</td>
-								<td class="ann_picture"><img id="img" src=<%=request.getContextPath()%>${annVO.ann_picture} style="width: 300px; height: 250px;"> 
-								<input id="ann_picture" type="file" name="ann_picture" size="45" value="<%=annVO.getAnn_picture()%>" onclick="show()"/></td>
+								<td class="ann_picture"><img id="img"
+									src=<%=request.getContextPath()%> ${annVO.ann_picture}
+									style="width: 300px; height: 250px;"> <input
+									id="ann_picture" type="file" name="ann_picture" size="45"
+									value="<%=annVO.getAnn_picture()%>" onclick="show()" /></td>
 								<td>${errorMsgs.ann_picture}</td>
 							</tr>
 
@@ -142,9 +145,9 @@ response.setDateHeader("Expires", 0);
 // 			messageCount2.innerText = thisArea.value.length;
 		}//標題輸入框字數限制
 	</script>
-	
+
 	<script type="text/javascript" src="jquery-3.2.1.js"></script>
-<script type="text/javascript">
+	<script type="text/javascript">
 		function show() {
         var fileTag = document.getElementById('file');
         fileTag.onchange = function () {
@@ -178,8 +181,7 @@ try {
 %>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script
-	src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script
 	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
@@ -187,6 +189,7 @@ try {
 .xdsoft_datetimepicker .xdsoft_datepicker {
 	width: 300px; /* width:  300px; */
 }
+
 .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
 	height: 151px; /* height:  151px; */
 }

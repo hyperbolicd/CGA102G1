@@ -20,9 +20,9 @@
 </head>
 
 <body>
-		<header>
-        <%@ include file="/back_end/header_html.jsp"%>   
-    </header>
+	<header>
+		<%@ include file="/back_end/header_html.jsp"%>
+	</header>
 	<aside id="aside"></aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
@@ -56,17 +56,23 @@
 							<tr>
 								<td>商品價格:</td>
 								<td><input type="number" name="merchPrice"
-									placeholder="請輸入商品價格" value="${merchVo.merchPrice}" required min=0></td>
+									placeholder="請輸入商品價格" value="${merchVo.merchPrice}" required
+									min=0></td>
 								<td>${errorMsgs.merchPrice}</td>
 							</tr>
 							<tr>
 								<td>商品類別:</td>
 								<td><select name="merchClass">
-										<option value="模型" ${(merchVo.merchClass=="模型")? 'selected':''}>模型</option>
-										<option value="抱枕" ${(merchVo.merchClass=="抱枕")? 'selected':''}>抱枕</option>
-										<option value="生活用品" ${(merchVo.merchClass=="生活用品")? 'selected':''}>生活用品</option>
-										<option value="服飾" ${(merchVo.merchClass=="服飾")? 'selected':''}>服飾</option>
-										<option value="文具" ${(merchVo.merchClass=="文具")? 'selected':''}>文具</option>
+										<option value="模型"
+											${(merchVo.merchClass=="模型")? 'selected':''}>模型</option>
+										<option value="抱枕"
+											${(merchVo.merchClass=="抱枕")? 'selected':''}>抱枕</option>
+										<option value="生活用品"
+											${(merchVo.merchClass=="生活用品")? 'selected':''}>生活用品</option>
+										<option value="服飾"
+											${(merchVo.merchClass=="服飾")? 'selected':''}>服飾</option>
+										<option value="文具"
+											${(merchVo.merchClass=="文具")? 'selected':''}>文具</option>
 								</select></td>
 								<td></td>
 							</tr>
@@ -79,7 +85,8 @@
 							<tr>
 								<td>商品庫存:</td>
 								<td><input type="number" name="merchStock"
-									placeholder="請輸入庫存數" value="${merchVo.merchStock}" required min=0></td>
+									placeholder="請輸入庫存數" value="${merchVo.merchStock}" required
+									min=0></td>
 								<td>${errorMsgs.merchStock}</td>
 							</tr>
 							<tr>
@@ -98,40 +105,57 @@
 							</tr>
 							<tr>
 								<td>上傳商品圖一:</td>
-								<td><input class="updatefile" type="file" name="merchPic1" accept="image/*"></td>
-								<td><img alt="" src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=6&pic=5" style="width:200px;height:240px" class="updateimg"></td>
+								<td><input class="updatefile" type="file" name="merchPic1"
+									accept="image/*"></td>
+								<td><img alt=""
+									src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=6&pic=5"
+									style="width: 200px; height: 240px" class="updateimg"></td>
 							</tr>
 							<tr>
 								<td>上傳商品圖二:</td>
-								<td><input class="updatefile" type="file" name="merchPic2" accept="image/*"></td>
-								<td><img alt="" src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=6&pic=5" style="width:200px;height:240px" class="updateimg"></td>
+								<td><input class="updatefile" type="file" name="merchPic2"
+									accept="image/*"></td>
+								<td><img alt=""
+									src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=6&pic=5"
+									style="width: 200px; height: 240px" class="updateimg"></td>
 							</tr>
 							<tr>
 								<td>上傳商品圖三:</td>
-								<td><input class="updatefile" type="file" name="merchPic3" accept="image/*"></td>
-								<td><img alt="" src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=6&pic=5" style="width:200px;height:240px" class="updateimg"></td>
+								<td><input class="updatefile" type="file" name="merchPic3"
+									accept="image/*"></td>
+								<td><img alt=""
+									src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=6&pic=5"
+									style="width: 200px; height: 240px" class="updateimg"></td>
 							</tr>
 							<tr>
 								<td>上傳商品圖四:</td>
-								<td><input class="updatefile" type="file" name="merchPic4" accept="image/*"></td>
-								<td><img alt="" src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=6&pic=5" style="width:200px;height:240px" class="updateimg"></td>
+								<td><input class="updatefile" type="file" name="merchPic4"
+									accept="image/*"></td>
+								<td><img alt=""
+									src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=6&pic=5"
+									style="width: 200px; height: 240px" class="updateimg"></td>
 							</tr>
 							<tr>
 								<td>上傳商品圖五:</td>
-								<td><input class="updatefile" type="file" name="merchPic5" accept="image/*"></td>
-								<td><img alt="" src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=6&pic=5" style="width:200px;height:240px" class="updateimg"></td>
+								<td><input class="updatefile" type="file" name="merchPic5"
+									accept="image/*"></td>
+								<td><img alt=""
+									src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=6&pic=5"
+									style="width: 200px; height: 240px" class="updateimg"></td>
 							</tr>
 
 
 						</table>
 					</div>
 					<div class="btBlock">
-						<input type="hidden" name="action" value="insert"> 
-						<input type="submit" class="bt" value="送出新增">
-						<input class="tablebt" form="1234" type="submit" value="放棄新增">
+						<input type="hidden" name="action" value="insert"> <input
+							type="submit" class="bt" value="送出新增"> <input
+							class="tablebt" form="1234" type="submit" value="放棄新增">
 					</div>
 				</FORM>
-				<form action="${pageContext.request.contextPath}/back_end/merchandise/mallIndex.jsp" id="1234"></form>
+				<form
+					action="${pageContext.request.contextPath}/back_end/merchandise/mallIndex.jsp"
+					id="1234"></form>
 			</div>
 
 		</div>
@@ -139,9 +163,9 @@
 	</main>
 	<!-- <div id="tree"></div> -->
 	<footer> 嗨邇覓影城 &copy; HIREME CINEMA 2022 </footer>
-	<aside id="aside">     
-     <%@ include file="/back_end/aside_html.jsp"%>   
-    </aside>
+	<aside id="aside">
+		<%@ include file="/back_end/aside_html.jsp"%>
+	</aside>
 	<script>
 		let abc = URL.createObjectURL(blob);
 	</script>

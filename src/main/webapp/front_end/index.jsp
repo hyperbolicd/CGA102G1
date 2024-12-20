@@ -3,7 +3,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.member.model.*"%>
 <%@ page import="com.movie.model.*"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html lang="en" dir="ltr">
 <%
 MemberVO memberVO = (MemberVO) session.getAttribute("memberVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
@@ -30,15 +30,20 @@ pageContext.setAttribute("SellTkMVlist", SellTkMVlist);
 	type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/front_end/css/allMovie.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/front_end/css/allMovie.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 <!-- DatePicker.css -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back_end/showing/css/daterangepicker.css" />
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back_end/showing/css/daterangepicker.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/front_end/css/sellTK.css">
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/front_end/css/sellTK.css">
+<script
+	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <%@ include file="/front_end/header.jsp"%>
 <!-- 輪播圖片 css -->
@@ -54,8 +59,8 @@ div, ul, li, a, span, img {
 	height: 400px;
 	position: relative;
 	background: #000;
-/* 	float: left; */
-/* 	padding-bottom: 10px; */
+	/* 	float: left; */
+	/* 	padding-bottom: 10px; */
 }
 
 #tab>img:not(:first-child) {
@@ -130,8 +135,6 @@ div, ul, li, a, span, img {
 #banner:hover .arrow {
 	display: block;
 }
-
-
 </style>
 
 </head>
@@ -258,7 +261,7 @@ div, ul, li, a, span, img {
 
 	<div id="mainDiv">
 
-<!-- 		<hr style="border-color: black"> -->
+		<!-- 		<hr style="border-color: black"> -->
 
 		<div id="testDiv">
 
@@ -271,7 +274,8 @@ div, ul, li, a, span, img {
 							<td>
 								<FORM METHOD="post"
 									ACTION="<%=request.getContextPath()%>/MovieServlet.do">
-									<select size="1" name="MV_ID" class="MV_ID" style="width: 300px;">
+									<select size="1" name="MV_ID" class="MV_ID"
+										style="width: 300px;">
 										<option value=0>請選擇電影
 											<c:forEach var="SellMovieVO" items="${SellTkMVlist}">
 												<option value="${SellMovieVO.mvId}">${SellMovieVO.mvName}
@@ -280,9 +284,10 @@ div, ul, li, a, span, img {
 								</FORM>
 							</td>
 
-							<td >
+							<td>
 								<div id="date">
-									<select name="" id="dateSelector" class="picker toRed" disabled="disabled" style="width: 300px;">
+									<select name="" id="dateSelector" class="picker toRed"
+										disabled="disabled" style="width: 300px;">
 										<option>選擇日期</option>
 									</select>
 								</div>
@@ -290,22 +295,24 @@ div, ul, li, a, span, img {
 
 							<td>
 								<div id="time">
-									<select class="showTimeSelect" disabled="disabled" style="width: 300px;">
+									<select class="showTimeSelect" disabled="disabled"
+										style="width: 300px;">
 										<option value=0>請選擇場次</option>
 									</select>
 								</div>
 							</td>
 
 							<td>
-								<FORM METHOD="post" class="checkInForm"	ACTION="<%=request.getContextPath()%>/front/tkOrd.do"
+								<FORM METHOD="post" class="checkInForm"
+									ACTION="<%=request.getContextPath()%>/front/tkOrd.do"
 									style="margin-bottom: 0px;">
-								<div class="tablebtBlock">
-									<a class="tablebt checkIn"style="font-size: 18;">BOOKING!</a>
-								</div>
-								<input type="hidden" name="MV_ID" class="inputMV_ID"> 
-								<input type="hidden" name="SH_ID" class="inputSH_ID"> 
-								<input type="hidden" name="HL_ID" class="inputHL_ID"> 
-								<input type="hidden" name="action" value="go_To_TicketSelect">
+									<div class="tablebtBlock">
+										<a class="tablebt checkIn" style="font-size: 18;">BOOKING!</a>
+									</div>
+									<input type="hidden" name="MV_ID" class="inputMV_ID"> <input
+										type="hidden" name="SH_ID" class="inputSH_ID"> <input
+										type="hidden" name="HL_ID" class="inputHL_ID"> <input
+										type="hidden" name="action" value="go_To_TicketSelect">
 								</FORM>
 							</td>
 						</tr>
@@ -317,9 +324,9 @@ div, ul, li, a, span, img {
 
 
 		</div>
-		
-<!-- 		<hr class="hr1"> -->
-		
+
+		<!-- 		<hr class="hr1"> -->
+
 		<div class="fm1" style='padding: 10px 20px;'>
 			<!--將內容存-->
 			<div class="mytabs">
@@ -343,10 +350,10 @@ div, ul, li, a, span, img {
                         	這部電影尚未有人評分
                             </c:if>
 										<c:if test="${!(showingVO.mvTtStar/showingVO.mvTtCm).isNaN()}">
-                        	<fmt:formatNumber value="${showingVO.mvTtStar/showingVO.mvTtCm}"
-                        	minFractionDigits="1" maxFractionDigits="1"/>
-                            <img
-												src="/CGA102G1/front_end/showAllMovie/MV_ICON/star.png"
+											<fmt:formatNumber
+												value="${showingVO.mvTtStar/showingVO.mvTtCm}"
+												minFractionDigits="1" maxFractionDigits="1" />
+											<img src="/CGA102G1/front_end/showAllMovie/MV_ICON/star.png"
 												alt="">
 										</c:if>
 									</div>
@@ -416,9 +423,9 @@ div, ul, li, a, span, img {
 
 	</div>
 	<!--客服圖 請自行加連結-->
-<!-- 	<img class="cs" -->
-<%-- 		src="<%=request.getContextPath()%>/front_end/index/images/demo/cs.png" --%>
-<!-- 		height="50px;" width="60px;" href="#"></img> -->
+	<!-- 	<img class="cs" -->
+	<%-- 		src="<%=request.getContextPath()%>/front_end/index/images/demo/cs.png" --%>
+	<!-- 		height="50px;" width="60px;" href="#"></img> -->
 
 	<!-- Copyright -->
 	<div class="wrapper row2">

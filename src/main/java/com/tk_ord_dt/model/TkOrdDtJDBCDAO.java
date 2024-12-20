@@ -1,16 +1,13 @@
 package com.tk_ord_dt.model;
 
 import java.util.*;
+
 import java.sql.*;
 
-import com.fd_ord_dt.model.FdOrdDtVO;
+import com.common.JDBCUtil;
 
 
 public class TkOrdDtJDBCDAO implements TkOrdDtDAO_interface{
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/movietheater?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
 	
 	private static final String INSERT_STMT = 
 			"INSERT INTO tk_ord_dt (TK_ORD_ID,TK_TYPE_ID,ACT_ID,STATE,SEAT,SELL_PRICE) VALUES (?, ?, ?, ?, ?, ?)";
@@ -31,8 +28,7 @@ public class TkOrdDtJDBCDAO implements TkOrdDtDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setLong(1, tkOrdDtVO.getTkOrdID());
@@ -45,10 +41,6 @@ public class TkOrdDtJDBCDAO implements TkOrdDtDAO_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -80,8 +72,7 @@ public class TkOrdDtJDBCDAO implements TkOrdDtDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 			
 			pstmt.setLong(1, tkOrdDtVO.getTkOrdID());
@@ -96,10 +87,6 @@ public class TkOrdDtJDBCDAO implements TkOrdDtDAO_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -131,8 +118,7 @@ public class TkOrdDtJDBCDAO implements TkOrdDtDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 			
 
@@ -141,10 +127,6 @@ public class TkOrdDtJDBCDAO implements TkOrdDtDAO_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -178,8 +160,7 @@ public class TkOrdDtJDBCDAO implements TkOrdDtDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 
@@ -200,10 +181,6 @@ public class TkOrdDtJDBCDAO implements TkOrdDtDAO_interface{
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -245,8 +222,7 @@ public class TkOrdDtJDBCDAO implements TkOrdDtDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -264,10 +240,6 @@ public class TkOrdDtJDBCDAO implements TkOrdDtDAO_interface{
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());

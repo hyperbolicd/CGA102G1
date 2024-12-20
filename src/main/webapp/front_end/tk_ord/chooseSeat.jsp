@@ -23,7 +23,7 @@
 </head>
 
 <body>
-<!-- 置頂按鈕 -->
+	<!-- 置頂按鈕 -->
 	<button type="button" id="BackTop" class="toTop-arrow"></button>
 	<script>
 		$(function() {
@@ -95,8 +95,7 @@
 					</div>
 					<div>
 						<!-- 座位start -->
-						<div class="seatsChart">
-						</div>
+						<div class="seatsChart"></div>
 
 					</div>
 
@@ -422,6 +421,6 @@
 
 
 	</script>
-	
+
 </body>
 </html>

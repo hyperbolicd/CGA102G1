@@ -55,43 +55,43 @@ pageContext.setAttribute("list", list);
 				<div class="btBlock">
 					<a class="bt"
 						href='<%=request.getContextPath()%>/back_end/act/addAct.jsp'>新增</a>
-<!-- 					<div></div> -->
-<!-- 					<a class="bt" -->
-<%-- 						href='<%=request.getContextPath()%>/back_end/act/select_page.jsp'>查詢</a> --%>
+					<!-- 					<div></div> -->
+					<!-- 					<a class="bt" -->
+					<%-- 						href='<%=request.getContextPath()%>/back_end/act/select_page.jsp'>查詢</a> --%>
 
 
 
-<%-- 					<FORM METHOD="post" ACTION=""<%=request.getContextPath()%>/act/act.do"> --%>
-<!-- 						<b>選擇活動編號:</b> <select size="1" name="act_id"> -->
-<%-- 							<c:forEach var="actdtVO" items="${list}"> --%>
-<%-- 								<option value="${actdtVO.act_id}">${actdtVO.act_id} --%>
-<%-- 							</c:forEach> --%>
-<!-- 						</select> <input type="hidden" name="action" value="getOne_For_Display"> -->
-<!-- 						<input type="submit" value="送出"> -->
-<!-- 					</FORM> -->
+					<%-- 					<FORM METHOD="post" ACTION=""<%=request.getContextPath()%>/act/act.do"> --%>
+					<!-- 						<b>選擇活動編號:</b> <select size="1" name="act_id"> -->
+					<%-- 							<c:forEach var="actdtVO" items="${list}"> --%>
+					<%-- 								<option value="${actdtVO.act_id}">${actdtVO.act_id} --%>
+					<%-- 							</c:forEach> --%>
+					<!-- 						</select> <input type="hidden" name="action" value="getOne_For_Display"> -->
+					<!-- 						<input type="submit" value="送出"> -->
+					<!-- 					</FORM> -->
 
-<%-- 					<FORM METHOD="post" ACTION=""<%=request.getContextPath()%>/act/act.do"> --%>
-<!-- 						<b>輸入活動編號 (如1):</b> <input type="text" name="act_id" -->
-<%-- 							value="${param.act_id}"><font color=red>${errorMsgs.act_id}</font> --%>
-<!-- 						<input type="hidden" name="action" value="getOne_For_Display"> -->
-<!-- 						<input type="submit" value="送出"> -->
-<!-- 					</FORM> -->
+					<%-- 					<FORM METHOD="post" ACTION=""<%=request.getContextPath()%>/act/act.do"> --%>
+					<!-- 						<b>輸入活動編號 (如1):</b> <input type="text" name="act_id" -->
+					<%-- 							value="${param.act_id}"><font color=red>${errorMsgs.act_id}</font> --%>
+					<!-- 						<input type="hidden" name="action" value="getOne_For_Display"> -->
+					<!-- 						<input type="submit" value="送出"> -->
+					<!-- 					</FORM> -->
 
-<%-- 					<FORM METHOD="post" ACTION=""<%=request.getContextPath()%>/act/act.do"> --%>
-<!-- 						<b>選擇票種編號:</b> <select size="1" name="act_id"> -->
-<%-- 							<c:forEach var="actdtVO" items="${list}"> --%>
-<%-- 								<option value="${actdtVO.act_id}">${actdtVO.act_id} --%>
-<%-- 							</c:forEach> --%>
-<!-- 						</select> <input type="hidden" name="action" value="getOne_For_Display"> -->
-<!-- 						<input type="submit" value="送出"> -->
-<!-- 					</FORM> -->
-					
-<%-- 					<FORM METHOD="post" ACTION=""<%=request.getContextPath()%>/act/act.do"> --%>
-<!-- 						<b>輸入票種編號 (如1):</b> <input type="text" name="tkTypeID" -->
-<%-- 							value="${param.tkTypeID}"><font color=red>${errorMsgs.tkTypeID}</font> --%>
-<!-- 						<input type="hidden" name="action" value="getOne_For_Display"> -->
-<!-- 						<input type="submit" value="送出"> -->
-<!-- 					</FORM> -->
+					<%-- 					<FORM METHOD="post" ACTION=""<%=request.getContextPath()%>/act/act.do"> --%>
+					<!-- 						<b>選擇票種編號:</b> <select size="1" name="act_id"> -->
+					<%-- 							<c:forEach var="actdtVO" items="${list}"> --%>
+					<%-- 								<option value="${actdtVO.act_id}">${actdtVO.act_id} --%>
+					<%-- 							</c:forEach> --%>
+					<!-- 						</select> <input type="hidden" name="action" value="getOne_For_Display"> -->
+					<!-- 						<input type="submit" value="送出"> -->
+					<!-- 					</FORM> -->
+
+					<%-- 					<FORM METHOD="post" ACTION=""<%=request.getContextPath()%>/act/act.do"> --%>
+					<!-- 						<b>輸入票種編號 (如1):</b> <input type="text" name="tkTypeID" -->
+					<%-- 							value="${param.tkTypeID}"><font color=red>${errorMsgs.tkTypeID}</font> --%>
+					<!-- 						<input type="hidden" name="action" value="getOne_For_Display"> -->
+					<!-- 						<input type="submit" value="送出"> -->
+					<!-- 					</FORM> -->
 
 
 
@@ -105,10 +105,10 @@ pageContext.setAttribute("list", list);
 						<tr>
 							<td style="width: 7%">編號</td>
 							<td style="width: 15%">發布日期</td>
-<!-- 							<td style="width: 8%">適用票種</td> -->
+							<!-- 							<td style="width: 8%">適用票種</td> -->
 							<td style="width: 30%">標題</td>
 							<td style="width: 20%">內容</td>
-							<td style="width:  8%">圖片</td>
+							<td style="width: 8%">圖片</td>
 							<td style="width: 10%">修改</td>
 							<td style="width: 10%">刪除</td>
 
@@ -119,10 +119,12 @@ pageContext.setAttribute("list", list);
 							<tr>
 								<td>${actdtVO.act_id}</td>
 								<td>${actdtVO.act_date_start}</td>
-<%-- 								<td>${actdtVO.tkTypeID}</td> --%>
+								<%-- 								<td>${actdtVO.tkTypeID}</td> --%>
 								<td>${actdtVO.act_subtitle}</td>
 								<td>${actdtVO.act_content}</td>
-								<td><img src="<%=request.getContextPath()%>${actdtVO.act_picture}" style="width: 80px; height: 70px;"></td>
+								<td><img
+									src="<%=request.getContextPath()%>${actdtVO.act_picture}"
+									style="width: 80px; height: 70px;"></td>
 								<td><FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/act/act.do"
 										style="margin-bottom: 0px;">

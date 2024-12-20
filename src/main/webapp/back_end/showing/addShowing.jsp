@@ -217,7 +217,7 @@ input[name="SH_TYPE"] {
 	<!-- <div id="tree"></div> -->
 	<footer>嗨邇覓影城 &copy; HIREME CINEMA 2022</footer>
 	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
-<%-- 	<script	src="<%=request.getContextPath()%>/back_end/showing/emp_aside.js"></script> --%>
+	<%-- 	<script	src="<%=request.getContextPath()%>/back_end/showing/emp_aside.js"></script> --%>
 </body>
 
 <!-- jQuery -->

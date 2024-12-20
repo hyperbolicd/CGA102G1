@@ -15,9 +15,10 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/front_end/merchandise/css/cart.css"
 	type="text/css">
-	
+
 <!-- SweetAlert -->
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-default/default.css">
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-default/default.css">
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.min.js"></script>
 </head>
@@ -43,9 +44,9 @@
 	</div>
 	<form action="${pageContext.request.contextPath}/ShoppingCartServlet"
 		id="forPay">
-		<input type="hidden" name="action" value="insertfromcart">
-		<input type="hidden" name="totalCount" value="" id="totalCount">
-		</form>
+		<input type="hidden" name="action" value="insertfromcart"> <input
+			type="hidden" name="totalCount" value="" id="totalCount">
+	</form>
 	<div id="cartMain">
 		<hr class="line" />
 		<div id="cartTitle">
@@ -61,35 +62,41 @@
 		</div>
 		<hr class="line" />
 		<div id="cartBody">
-		<c:forEach var="scDetailVo" items="${shoppingcart}" varStatus="statusName">
-			<div class="eachItem">
-				<div class="check">
-					<input type="checkbox" name="pay" class="checkOne" value="${statusName.index}" form="forPay">
+			<c:forEach var="scDetailVo" items="${shoppingcart}"
+				varStatus="statusName">
+				<div class="eachItem">
+					<div class="check">
+						<input type="checkbox" name="pay" class="checkOne"
+							value="${statusName.index}" form="forPay">
+					</div>
+					<div class="vl"></div>
+					<div class="pic">
+						<img
+							src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${scDetailVo.merchVO.merchID}&pic=1"
+							alt="">
+					</div>
+					<div class="vl"></div>
+					<div class="name">${scDetailVo.merchVO.merchName}</div>
+					<div class="vl"></div>
+					<div class="info">${scDetailVo.merchVO.merchDT}</div>
+					<div class="vl"></div>
+					<div class="price inputprice">${scDetailVo.merchVO.merchPrice}</div>
+					<div class="vl"></div>
+					<div class="count">
+						<input class="inputcount" type="number" min="1" max="100"
+							value="${scDetailVo.scCount}" name="count" form="forPay">
+					</div>
+					<div class="vl"></div>
+					<div class="edit">
+						<form
+							action="${pageContext.request.contextPath}/ShoppingCartServlet">
+							<input type="hidden" name="del" value="${statusName.index}">
+							<button name="action" value="delete" type="submit">刪除</button>
+						</form>
+					</div>
 				</div>
-				<div class="vl"></div>
-				<div class="pic">
-					<img src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${scDetailVo.merchVO.merchID}&pic=1" alt="">
-				</div>
-				<div class="vl"></div>
-				<div class="name">${scDetailVo.merchVO.merchName}</div>
-				<div class="vl"></div>
-				<div class="info">${scDetailVo.merchVO.merchDT}</div>
-				<div class="vl"></div>
-				<div class="price inputprice">${scDetailVo.merchVO.merchPrice}</div>
-				<div class="vl"></div>
-				<div class="count">
-					<input class="inputcount" type="number" min="1" max="100" value="${scDetailVo.scCount}" name="count" form="forPay">
-				</div>
-				<div class="vl"></div>
-				<div class="edit">
-				<form action="${pageContext.request.contextPath}/ShoppingCartServlet">
-					<input type="hidden" name="del" value="${statusName.index}">
-					<button name="action" value="delete" type="submit">刪除</button>
-				</form>
-				</div>
-			</div>
 			</c:forEach>
-			
+
 		</div>
 
 		<hr class="line" style="margin-top: 20px;" />
@@ -119,7 +126,7 @@
 	payButton.addEventListener('click',function(){
  			if(${memberVO==null?true:false}){
  				<%
- 				session.setAttribute("location","http://localhost:8081/CGA102G1/ShoppingCartServlet?action=checkout");
+ 				session.setAttribute("location","${pageContext.request.contextPath}/ShoppingCartServlet?action=checkout");
  				%>
  				window.location.href="${pageContext.request.contextPath}/front_end/login/login.jsp";
  				return;

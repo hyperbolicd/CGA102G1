@@ -9,12 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.naming.NamingException;
-
 import com.common.JDBCUtil;
 import com.fd_ord_dt.model.FdOrdDtVO;
 import com.tk_ord.model.TkOrdVO;
-import com.tk_ord_dt.model.TkOrdDtVO;
 
 public class TkFolderDAO implements TkFolder_interface {
 	public static final String GET_ALL_TKORD=
@@ -62,15 +59,9 @@ public class TkFolderDAO implements TkFolder_interface {
 				list.add(tkOrdVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("Couldn't load database driver."
 					+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -116,15 +107,9 @@ public class TkFolderDAO implements TkFolder_interface {
 				dtCount = rs.getInt("DT_COUNT");
 			}
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("Couldn't load database driver."
 					+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -169,15 +154,9 @@ public class TkFolderDAO implements TkFolder_interface {
 				foodCount = rs.getInt("FD_TOTAL");
 			}
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("Couldn't load database driver."
 					+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -235,15 +214,9 @@ public class TkFolderDAO implements TkFolder_interface {
 			map.put("foodOrdList", foodOrdList);
 			map.put("foodNameList", foodNameList);
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("Couldn't load database driver."
 					+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -286,15 +259,9 @@ public class TkFolderDAO implements TkFolder_interface {
 			pstmt.executeUpdate();
 			
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("Couldn't load database driver."
 					+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -341,15 +308,9 @@ public class TkFolderDAO implements TkFolder_interface {
 				verifyResult = 0;
 			}
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("Couldn't load database driver."
 					+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {

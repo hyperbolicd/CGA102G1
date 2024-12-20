@@ -1,12 +1,13 @@
 package com.emp_privilege.model;
 
-import java.util.*;
-
-import javax.naming.NamingException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.common.JDBCUtil;
-
-import java.sql.*;
 
 public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 	
@@ -32,11 +33,7 @@ public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 			ps.setInt(2, empPrivilegeVO.getFc_no());
 			ps.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(ps != null) {
@@ -101,11 +98,7 @@ public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 			ps.setInt(2, empPrivilegeVO.getFc_no());
 			ps.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(ps != null) {
@@ -179,10 +172,6 @@ public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 			
 			con.commit();
 			con.setAutoCommit(true);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			try {
@@ -229,11 +218,7 @@ public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 				list.add(empPrivilegeVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(rs != null) {
@@ -281,11 +266,7 @@ public class EmpPrivilegeJDBCDAO implements EmpPrivilegeDAO_interface{
 				list.add(empPrivilegeVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(rs != null) {

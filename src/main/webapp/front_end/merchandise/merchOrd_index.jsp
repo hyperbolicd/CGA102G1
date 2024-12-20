@@ -21,16 +21,21 @@ Integer item = 1;
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/merchandise/css/merchOrd.css" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/css/layout.css" type="text/css">
-<link rel="stylesheet" href="https://fontawesome.com/v5/icons/edit?s=solid">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/front_end/merchandise/css/membercentre.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/front_end/merchandise/css/merchOrd.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/front_end/css/layout.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="https://fontawesome.com/v5/icons/edit?s=solid">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/front_end/merchandise/css/membercentre.css" />
 </head>
 <body>
 
-<!-- 置頂按鈕 -->
+	<!-- 置頂按鈕 -->
 	<button type="button" id="BackTop" class="toTop-arrow"></button>
-	 <script>
+	<script>
 	    $(function () {
 	      $('#BackTop').click(function () {
 	        $('html,body').animate({ scrollTop: 0 }, 333);
@@ -44,43 +49,50 @@ Integer item = 1;
 	      }).scroll();
 	    });
 	  </script>
-	 <div class="wrapper row1" style="height: 60px;">
-	  <jsp:include page="/front_end/header.jsp" />
-	 </div>
-
-
-<main>
-<div id="mainDiv">
-
-		<div class="side-menu">
-			<nav>
-				<a
-					href="${pageContext.request.contextPath}/front_end/membercentre/membermod.jsp">
-					<i class="fa fa-edit" aria-hidden="true"></i> 會員修改資料
-				</a> <a href="${pageContext.request.contextPath}/front_end/wish/wishPage.jsp"> <i class="fa fa-object-group" aria-hidden="true"></i>
-					許願池
-				</a> <a href="${pageContext.request.contextPath}/front_end/memberCmt/memberCmt.jsp"> <i class="fa fa-clone" aria-hidden="true"></i> 評論區
-				</a>
-				 <a href="#"> <i class="fa fa-gavel" aria-hidden="true"></i> 訂單明細</a>
-			</nav>
-		</div>
-		
-
-	<div id="cartMain">
-
-<iframe src="${pageContext.request.contextPath}/front_end/merchandise/merchOrd.jsp" frameborder="0" width="100%" height="100%"></iframe>
-
-
+	<div class="wrapper row1" style="height: 60px;">
+		<jsp:include page="/front_end/header.jsp" />
 	</div>
 
-</div>
+
+	<main>
+		<div id="mainDiv">
+
+			<div class="side-menu">
+				<nav>
+					<a
+						href="${pageContext.request.contextPath}/front_end/membercentre/membermod.jsp">
+						<i class="fa fa-edit" aria-hidden="true"></i> 會員修改資料
+					</a> <a
+						href="${pageContext.request.contextPath}/front_end/wish/wishPage.jsp">
+						<i class="fa fa-object-group" aria-hidden="true"></i> 許願池
+					</a> <a
+						href="${pageContext.request.contextPath}/front_end/memberCmt/memberCmt.jsp">
+						<i class="fa fa-clone" aria-hidden="true"></i> 評論區
+					</a> <a href="#"> <i class="fa fa-gavel" aria-hidden="true"></i>
+						訂單明細
+					</a>
+				</nav>
+			</div>
 
 
-	
-	
-</main>
+			<div id="cartMain">
+
+				<iframe
+					src="${pageContext.request.contextPath}/front_end/merchandise/merchOrd.jsp"
+					frameborder="0" width="100%" height="100%"></iframe>
+
+
+			</div>
+
+		</div>
+
+
+
+
+	</main>
 
 	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="<%=request.getContextPath()%>/front_end/memberCmt/js/memberCmt.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/front_end/memberCmt/js/memberCmt.js"></script>
 </body>
 </html>

@@ -1,9 +1,6 @@
 package com.merchandise_inf.model;
 
 import java.util.*;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.*;
 
 import javax.naming.Context;
@@ -22,10 +19,6 @@ public class MerchDAO implements MerchDAO_interface {
 		}
 	}
 	
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/movietheater?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
 	private static final String INSERT_STMT = "INSERT INTO merchandise_inf (MERCH_NAME, MERCH_DT, MERCH_PIC1, MERCH_PIC2, MERCH_PIC3, MERCH_PIC4, MERCH_PIC5, MERCH_PRICE, MERCH_CLASS, SOLD_TOTAL, MERCH_STATUS, MERCH_STOCK) Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 	private static final String GET_ALL_STMT = "SELECT MERCH_ID, MERCH_NAME, MERCH_DT, MERCH_PIC1, MERCH_PIC2, MERCH_PIC3, MERCH_PIC4, MERCH_PIC5, MERCH_DATE, MERCH_PRICE, MERCH_CLASS, SOLD_TOTAL, MERCH_STATUS, MERCH_STOCK FROM merchandise_inf order by MERCH_ID;";
 	private static final String GET_ONE_STMT = "SELECT MERCH_ID, MERCH_NAME, MERCH_DT, MERCH_PIC1, MERCH_PIC2, MERCH_PIC3, MERCH_PIC4, MERCH_PIC5, MERCH_DATE, MERCH_PRICE, MERCH_CLASS, SOLD_TOTAL, MERCH_STATUS, MERCH_STOCK FROM merchandise_inf where MERCH_ID = ?;";

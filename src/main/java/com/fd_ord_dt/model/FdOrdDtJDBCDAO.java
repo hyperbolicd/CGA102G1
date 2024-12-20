@@ -1,14 +1,13 @@
 package com.fd_ord_dt.model;
 
 import java.util.*;
+
+import com.common.JDBCUtil;
+
 import java.sql.*;
 
 
 public class FdOrdDtJDBCDAO implements FdOrdDtDAO_interface{
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/movietheater?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
 	
 	private static final String INSERT_STMT = 
 			"INSERT INTO fd_ord_dt (TK_ORD_ID,FD_ID,FD_COUNT,FD_STATE,SELL_PRICE) VALUES (?, ?, ?, ?, ?)";
@@ -29,8 +28,7 @@ public class FdOrdDtJDBCDAO implements FdOrdDtDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setLong(1, fdOrdDtVO.getTkOrdID());
@@ -42,10 +40,6 @@ public class FdOrdDtJDBCDAO implements FdOrdDtDAO_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -77,8 +71,7 @@ public class FdOrdDtJDBCDAO implements FdOrdDtDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 			
 			pstmt.setLong(1, fdOrdDtVO.getTkOrdID());	
@@ -91,10 +84,6 @@ public class FdOrdDtJDBCDAO implements FdOrdDtDAO_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -126,8 +115,7 @@ public class FdOrdDtJDBCDAO implements FdOrdDtDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setLong(1, fdDtID);
@@ -135,10 +123,6 @@ public class FdOrdDtJDBCDAO implements FdOrdDtDAO_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -172,8 +156,7 @@ public class FdOrdDtJDBCDAO implements FdOrdDtDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setLong(1, fdDtID);
@@ -192,10 +175,6 @@ public class FdOrdDtJDBCDAO implements FdOrdDtDAO_interface{
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -237,8 +216,7 @@ public class FdOrdDtJDBCDAO implements FdOrdDtDAO_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -255,10 +233,6 @@ public class FdOrdDtJDBCDAO implements FdOrdDtDAO_interface{
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());

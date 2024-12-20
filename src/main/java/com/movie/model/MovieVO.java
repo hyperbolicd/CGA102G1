@@ -1,7 +1,5 @@
 package com.movie.model;
 
-import java.util.*;
-import java.sql.*;
 import java.sql.Date;
 
 public class MovieVO implements java.io.Serializable{

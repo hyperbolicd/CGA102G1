@@ -70,10 +70,10 @@ pageContext.setAttribute("list", list);
 	<div class="actpost1">
 		<img class="actpost"
 			src="${pageContext.request.contextPath}/act_pic/actpost.jpg"
-			height="100%" width="100%"  >
-<!-- 		<div class="slide-down"> -->
-<!-- 			<p>影城&nbsp; &nbsp; &nbsp;活動</p> -->
-<!-- 		</div> -->
+			height="100%" width="100%">
+		<!-- 		<div class="slide-down"> -->
+		<!-- 			<p>影城&nbsp; &nbsp; &nbsp;活動</p> -->
+		<!-- 		</div> -->
 	</div>
 
 

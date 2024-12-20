@@ -127,8 +127,7 @@ pageContext.setAttribute("list2", list2);
 				</div>
 				<!-- 				</FORM> -->
 				<div class="btBlock">
-					<a class="bt"
-						style="text-decoration: none;">Ä~Äò</a>
+					<a class="bt" style="text-decoration: none;">Ä~Äò</a>
 				</div>
 			</div>
 			<div>

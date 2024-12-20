@@ -1,12 +1,5 @@
 package com.cmt.controller;
 
-import java.util.List;
-
-import com.cmt.model.*;
-import com.common.JedisPoolUtil;
-
-import redis.clients.jedis.Jedis;
-
 public class CmtLike {
 	public static void main(String args[]) {
 		

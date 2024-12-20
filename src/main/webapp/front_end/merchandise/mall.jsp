@@ -52,11 +52,13 @@
 		<nav>
 			<a
 				href="${pageContext.request.contextPath}/front_end/merchandise/mall_index.jsp"
-				class="home"><i class="fas"></i>商城首頁</a> <a href="javascript:void(0)" class="pages"
-				id="pg1-home"><i class="fas"></i>模型</a> <a href="javascript:void(0)" class="pages"
-				id="pg2-home"><i class="fas"></i>抱枕</a> <a href="javascript:void(0)" class="pages"
-				id="pg3-home"><i class="fas"></i>生活用品</a> <a href="javascript:void(0)" class="pages"
-				id="pg4-home"><i class="fas"></i>服飾</a> <a href="javascript:void(0)" class="pages"
+				class="home"><i class="fas"></i>商城首頁</a> <a
+				href="javascript:void(0)" class="pages" id="pg1-home"><i
+				class="fas"></i>模型</a> <a href="javascript:void(0)" class="pages"
+				id="pg2-home"><i class="fas"></i>抱枕</a> <a href="javascript:void(0)"
+				class="pages" id="pg3-home"><i class="fas"></i>生活用品</a> <a
+				href="javascript:void(0)" class="pages" id="pg4-home"><i
+				class="fas"></i>服飾</a> <a href="javascript:void(0)" class="pages"
 				id="pg5-home"><i class="fas"></i>文具</a>
 		</nav>
 		<label for="sideMenu-active"> <i class="fas fa-angle-right"></i>
@@ -103,19 +105,19 @@
 			<div class="tab">
 				<div class="gallery gallery1">
 					<c:forEach var="merchVo" items="${merchSvc.hotSell}">
-					<c:if test="${merchVo.merchStatus!=0}">
-						<div class="content">
-							<a
-								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
-								<img
-								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-								<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
-								<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
-								<h6>$${merchVo.merchPrice}</h6>
-							</a> <button
-									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
-						</div>
-					</c:if>
+						<c:if test="${merchVo.merchStatus!=0}">
+							<div class="content">
+								<a
+									href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
+									<img
+									src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
+									<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
+									<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
+									<h6>$${merchVo.merchPrice}</h6>
+								</a>
+								<button class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
+							</div>
+						</c:if>
 					</c:forEach>
 
 
@@ -128,19 +130,19 @@
 				<div class="gallery gallery1">
 
 					<c:forEach var="merchVo" items="${merchSvc.newest}">
-					<c:if test="${merchVo.merchStatus!=0}">
-						<div class="content">
-							<a
-								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
-								<img
-								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-								<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
-								<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
-								<h6>$${merchVo.merchPrice}</h6>
-							</a> <button
-									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
-						</div>
-					</c:if>
+						<c:if test="${merchVo.merchStatus!=0}">
+							<div class="content">
+								<a
+									href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
+									<img
+									src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
+									<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
+									<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
+									<h6>$${merchVo.merchPrice}</h6>
+								</a>
+								<button class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
+							</div>
+						</c:if>
 					</c:forEach>
 				</div>
 			</div>
@@ -151,19 +153,19 @@
 				<div class="gallery gallery1">
 
 					<c:forEach var="merchVo" items="${merchSvc.mostSold}">
-					<c:if test="${merchVo.merchStatus!=0}">
-						<div class="content">
-							<a
-								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
-								<img
-								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-								<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
-								<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
-								<h6>$${merchVo.merchPrice}</h6>
-							</a> <button
-									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
-						</div>
-					</c:if>
+						<c:if test="${merchVo.merchStatus!=0}">
+							<div class="content">
+								<a
+									href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
+									<img
+									src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
+									<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
+									<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
+									<h6>$${merchVo.merchPrice}</h6>
+								</a>
+								<button class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
+							</div>
+						</c:if>
 					</c:forEach>
 				</div>
 			</div>
@@ -177,19 +179,19 @@
 				<div class="gallery">
 
 					<c:forEach var="merchVo" items="${merchSvc.getByClass('模型')}">
-					<c:if test="${merchVo.merchStatus!=0}">
-						<div class="content merchpricediv">
-							<a
-								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
-								<img
-								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-								<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
-								<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
-								<h6 class="merchprice">$${merchVo.merchPrice}</h6>
-							</a> <button
-									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
-						</div>
-					</c:if>
+						<c:if test="${merchVo.merchStatus!=0}">
+							<div class="content merchpricediv">
+								<a
+									href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
+									<img
+									src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
+									<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
+									<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
+									<h6 class="merchprice">$${merchVo.merchPrice}</h6>
+								</a>
+								<button class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
+							</div>
+						</c:if>
 					</c:forEach>
 
 				</div>
@@ -202,19 +204,19 @@
 				<div class="gallery">
 
 					<c:forEach var="merchVo" items="${merchSvc.getByClass('抱枕')}">
-					<c:if test="${merchVo.merchStatus!=0}">
-						<div class="content merchpricediv">
-							<a
-								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
-								<img
-								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-								<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
-								<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
-								<h6 class="merchprice">$${merchVo.merchPrice}</h6>
-							</a> <button
-									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
-						</div>
-					</c:if>
+						<c:if test="${merchVo.merchStatus!=0}">
+							<div class="content merchpricediv">
+								<a
+									href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
+									<img
+									src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
+									<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
+									<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
+									<h6 class="merchprice">$${merchVo.merchPrice}</h6>
+								</a>
+								<button class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
+							</div>
+						</c:if>
 					</c:forEach>
 				</div>
 			</div>
@@ -226,19 +228,19 @@
 				<div class="gallery">
 
 					<c:forEach var="merchVo" items="${merchSvc.getByClass('生活用品')}">
-					<c:if test="${merchVo.merchStatus!=0}">
-						<div class="content merchpricediv">
-							<a
-								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
-								<img
-								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-								<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
-								<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
-								<h6 class="merchprice">$${merchVo.merchPrice}</h6>
-							</a> <button
-									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
-						</div>
-					</c:if>
+						<c:if test="${merchVo.merchStatus!=0}">
+							<div class="content merchpricediv">
+								<a
+									href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
+									<img
+									src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
+									<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
+									<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
+									<h6 class="merchprice">$${merchVo.merchPrice}</h6>
+								</a>
+								<button class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
+							</div>
+						</c:if>
 					</c:forEach>
 				</div>
 			</div>
@@ -250,19 +252,19 @@
 				<div class="gallery">
 
 					<c:forEach var="merchVo" items="${merchSvc.getByClass('服飾')}">
-					<c:if test="${merchVo.merchStatus!=0}">
-						<div class="content merchpricediv">
-							<a
-								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
-								<img
-								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-								<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
-								<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
-								<h6 class="merchprice">$${merchVo.merchPrice}</h6>
-							</a> <button
-									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
-						</div>
-					</c:if>
+						<c:if test="${merchVo.merchStatus!=0}">
+							<div class="content merchpricediv">
+								<a
+									href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
+									<img
+									src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
+									<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
+									<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
+									<h6 class="merchprice">$${merchVo.merchPrice}</h6>
+								</a>
+								<button class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
+							</div>
+						</c:if>
 					</c:forEach>
 				</div>
 			</div>
@@ -274,19 +276,19 @@
 				<div class="gallery">
 
 					<c:forEach var="merchVo" items="${merchSvc.getByClass('文具')}">
-					<c:if test="${merchVo.merchStatus!=0}">
-						<div class="content merchpricediv">
-							<a
-								href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
-								<img
-								src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-								<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
-								<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
-								<h6 class="merchprice">$${merchVo.merchPrice}</h6>
-							</a> <button
-									class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
-						</div>
-					</c:if>
+						<c:if test="${merchVo.merchStatus!=0}">
+							<div class="content merchpricediv">
+								<a
+									href="${pageContext.request.contextPath}/merch/controller?action=getMerchInfo&merchID=${merchVo.merchID}">
+									<img
+									src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
+									<h3 title="${merchVo.merchName}">${merchVo.merchName}</h3>
+									<p title="${merchVo.merchDT}">${merchVo.merchDT}</p>
+									<h6 class="merchprice">$${merchVo.merchPrice}</h6>
+								</a>
+								<button class="buy-1" name="merchID" value="${merchVo.merchID}">加入購物車</button>
+							</div>
+						</c:if>
 					</c:forEach>
 				</div>
 			</div>

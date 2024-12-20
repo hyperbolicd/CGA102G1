@@ -1,12 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
 <style type="text/css">
 html, body {
-	font: 15px verdana, Times New Roman, arial, helvetica, sans-serif, Microsoft JhengHei;
+	font: 15px verdana, Times New Roman, arial, helvetica, sans-serif,
+		Microsoft JhengHei;
 	width: 90%;
 	height: 90%;
 	background: #eeeeda;
@@ -37,11 +40,11 @@ html, body {
 	border-radius: 5px;
 	position: absolute;
 	width: 100px;
-	height: 40px; 
-	top : 50%;
+	height: 40px;
+	top: 50%;
 	left: 50%;
-	top: 50%; 
-	left : 50%;
+	top: 50%;
+	left: 50%;
 	margin: 20px 200px 0 -50px;
 }
 </style>
@@ -50,9 +53,11 @@ html, body {
 <body>
 	<div id="outPopUp">
 		<h1 align="center">tibame最大的私聊上線囉～</h1>
-		<form id="myForm" action="<%=request.getContextPath() %>/chat.do" method="POST">
-			<input id="userName" name="userName" class="text-field" type="text" placeholder="Input user name" /> 
-			<input type="submit" id="send" class="button" value="送出" onclick="sendName();" />
+		<form id="myForm" action="<%=request.getContextPath() %>/chat.do"
+			method="POST">
+			<input id="userName" name="userName" class="text-field" type="text"
+				placeholder="Input user name" /> <input type="submit" id="send"
+				class="button" value="送出" onclick="sendName();" />
 		</form>
 	</div>
 </body>

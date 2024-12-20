@@ -1,5 +1,4 @@
 package com.hall.model;
-import java.sql.Date;
 
 public class HallVO implements java.io.Serializable{
 	private Integer hlId;

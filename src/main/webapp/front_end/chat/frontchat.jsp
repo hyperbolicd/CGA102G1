@@ -1,24 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="css/friendchat.css" type="text/css" />
 <style type="text/css">
-
 </style>
 <title>HireMe 客服</title>
 </head>
 <body onload="connect();" onunload="disconnect();">
 	<h3 id="statusOutput" class="statusOutput"></h3>
 	<div id="row"></div>
-	<div id="messagesArea" class="panel message-area" ></div>
+	<div id="messagesArea" class="panel message-area"></div>
 	<div class="panel input-area">
-		<input id="message" class="text-field" type="text" placeholder="Message" onkeydown="if (event.keyCode == 13) sendMessage();" /> 
-		<input type="submit" id="sendMessage" class="button" value="Send" onclick="sendMessage();" /> 
-		<input type="button" id="connect" class="button" value="Connect" onclick="connect();" /> 
-		<input type="button" id="disconnect" class="button" value="Disconnect" onclick="disconnect();" />
+		<input id="message" class="text-field" type="text"
+			placeholder="Message"
+			onkeydown="if (event.keyCode == 13) sendMessage();" /> <input
+			type="submit" id="sendMessage" class="button" value="Send"
+			onclick="sendMessage();" /> <input type="button" id="connect"
+			class="button" value="Connect" onclick="connect();" /> <input
+			type="button" id="disconnect" class="button" value="Disconnect"
+			onclick="disconnect();" />
 	</div>
 </body>
 <script>

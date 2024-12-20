@@ -1,8 +1,5 @@
 package com.emp_privilege.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class EmpPrivilegeVO implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	

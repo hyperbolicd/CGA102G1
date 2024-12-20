@@ -2,13 +2,11 @@ package com.member.model;
 
 import java.util.*;
 
+import com.common.JDBCUtil;
+
 import java.sql.*;
 
 public class MemberJDBCDAO implements MemberDAO_interface {
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/movietheater?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
 
 	private static final String INSERT =             // 新增資料
 			"insert into `member`"
@@ -50,8 +48,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 		try {
 
-			Class.forName(driver); // 反射機制 載入驅動類，不同資料庫軟體驅動類不同
-			con = DriverManager.getConnection(url, userid, passwd);// 使用DriverManager獲得連線物件，其中url每個資料庫不同
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(INSERT);
 
 			pstmt.setString(1, memberVO.getMember_Level());
@@ -69,9 +66,6 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -102,8 +96,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setString(1, memberVO.getMember_Password());
@@ -116,9 +109,6 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -146,8 +136,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(UPDATE_WISH_TICKET);
 
 			pstmt.setInt(1, wish_ticket);
@@ -155,8 +144,6 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 			pstmt.executeUpdate();
 
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
@@ -182,16 +169,12 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STATUS);
 			pstmt.setInt(1, member_Status);
 			pstmt.setInt(2, member_ID);
 			pstmt.executeUpdate();
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -221,8 +204,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setInt(1, member_ID);
@@ -230,9 +212,6 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -264,8 +243,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setInt(1, member_ID);
@@ -290,9 +268,6 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -333,8 +308,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_MEM);
 			rs = pstmt.executeQuery();
 
@@ -357,9 +331,6 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -398,8 +369,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(loginMember);
 			pstmt.setString(1, memberVO.getMember_Email());
 			pstmt.setString(2, memberVO.getMember_Password());
@@ -414,9 +384,6 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			System.out.println(memberVO.getMember_ID());
 			System.out.println(memberVO.getMember_Status());
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -454,8 +421,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			ResultSet rs = null;
 
 			try {
-				Class.forName(driver);
-				con = DriverManager.getConnection(url, userid, passwd);
+				con = JDBCUtil.getConnection();
 				pstmt = con.prepareStatement(Register);
 				pstmt.setString(1, memberVO.getMember_Email());
 
@@ -467,9 +433,6 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 				}
 				System.out.println(memberVO.getMember_ID());
 				// Handle any driver errors
-			} catch (ClassNotFoundException e) {
-				throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-				// Handle any SQL errors
 			} catch (SQLException se) {
 				throw new RuntimeException("A database error occured. " + se.getMessage());
 				// Clean up JDBC resources
@@ -510,8 +473,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 			try {
 
-				Class.forName(driver);
-				con = DriverManager.getConnection(url, userid, passwd);
+				con = JDBCUtil.getConnection();
 				pstmt = con.prepareStatement(verifyEmail);
 
 				pstmt.setString(1, usrEmail);
@@ -525,9 +487,6 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 				}
 
 				// Handle any driver errors
-			} catch (ClassNotFoundException e) {
-				throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-				// Handle any SQL errors
 			} catch (SQLException se) {
 				throw new RuntimeException("A database error occured. " + se.getMessage());
 				// Clean up JDBC resources

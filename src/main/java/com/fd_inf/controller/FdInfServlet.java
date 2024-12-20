@@ -1,9 +1,9 @@
 package com.fd_inf.controller;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -158,14 +158,35 @@ public class FdInfServlet extends HttpServlet {
 
 			String fdDT = req.getParameter("fdDT").trim();
 
-
-			byte[] fdPicture = req.getPart("fdPicture").getInputStream().readAllBytes();
-			if (fdPicture.length == 0) {
+			// Tomcat 9.0 implements Servlet Spec 4.0, which is designed to work with Java SE 8. As a result, it does not support the readAllBytes() method, 
+			// which was introduced in Java 9.
+//			byte[] fdPicture = req.getPart("fdPicture").getInputStream().readAllBytes();
+//			if (fdPicture.length == 0) {
+//				FdInfService fdInfSvc = new FdInfService();
+//				FdInfVO fdInfVO = fdInfSvc.getOneFdInf(fdID);
+//				fdPicture = fdInfVO.getFdPicture();
+//			}
+			byte[] fdPicture = null;
+			
+			Part part = req.getPart("fdPicture");
+			if (part != null) { // 確認欄位是否存在
+	            try (InputStream inputStream = part.getInputStream();
+	                ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
+	                 
+	                byte[] temp = new byte[1024]; // 緩衝區大小
+	                int bytesRead;
+	                while ((bytesRead = inputStream.read(temp)) != -1) {
+	                    buffer.write(temp, 0, bytesRead);
+	                }
+	                fdPicture = buffer.toByteArray(); // 將輸出流轉為 byte[]
+	            } catch (IOException e) {
+	                e.printStackTrace(); // 打印錯誤資訊
+	            }
+	        } else {
 				FdInfService fdInfSvc = new FdInfService();
 				FdInfVO fdInfVO = fdInfSvc.getOneFdInf(fdID);
 				fdPicture = fdInfVO.getFdPicture();
 			}
-
 
 			java.lang.Byte fdState = java.lang.Byte.valueOf(req.getParameter("fdState"));
 

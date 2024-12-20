@@ -38,7 +38,7 @@ pageContext.setAttribute("list2", list2);
 </head>
 
 <body>
-<!-- ¸m³»«ö¶s -->
+	<!-- ¸m³»«ö¶s -->
 	<button type="button" id="BackTop" class="toTop-arrow"></button>
 	<script>
 		$(function() {
@@ -146,7 +146,7 @@ pageContext.setAttribute("list2", list2);
 				</div>
 				<!-- 				</FORM> -->
 				<div class="btBlock">
-					<a class="bt"style="text-decoration: none;">Ä~Äò</a>
+					<a class="bt" style="text-decoration: none;">Ä~Äò</a>
 				</div>
 			</div>
 			<div>
@@ -190,7 +190,7 @@ pageContext.setAttribute("list2", list2);
 			</p>
 		</footer>
 	</div>
-	
+
 	<script>
 	
 	$().ready(function(){

@@ -77,7 +77,7 @@ pageContext.setAttribute("avgstar", avgstar);
 
 	<!-- 置頂按鈕 -->
 	<button type="button" id="BackTop" class="toTop-arrow"></button>
-	 <script>
+	<script>
 	    $(function () {
 	      $('#BackTop').click(function () {
 	        $('html,body').animate({ scrollTop: 0 }, 333);
@@ -91,196 +91,197 @@ pageContext.setAttribute("avgstar", avgstar);
 	      }).scroll();
 	    });
 	  </script>
-	 <div class="wrapper row1" style="height: 60px;">
-	  <jsp:include page="/front_end/header.jsp" />
-	  <jsp:include page="/front_end/header_css.jsp" />
-	 </div>
+	<div class="wrapper row1" style="height: 60px;">
+		<jsp:include page="/front_end/header.jsp" />
+		<jsp:include page="/front_end/header_css.jsp" />
+	</div>
 
 
 
 	<!-- 內容 -->
-	<jsp:useBean id="movieSvc" scope="page" class="com.movie.model.MovieService" />
-<div class="main">
-	<div id="movie_detail_main" style='padding: 50px 100px; color: #979797; background-color: black;'>
-		<div id="movie">
-			<div id="movie_img">
-				<div id="pic">
-					<img src="<%=request.getContextPath()%>${movieVO.mvPicture}" alt="">
+	<jsp:useBean id="movieSvc" scope="page"
+		class="com.movie.model.MovieService" />
+	<div class="main">
+		<div id="movie_detail_main"
+			style='padding: 50px 100px; color: #979797; background-color: black;'>
+			<div id="movie">
+				<div id="movie_img">
+					<div id="pic">
+						<img src="<%=request.getContextPath()%>${movieVO.mvPicture}"
+							alt="">
+					</div>
 				</div>
-			</div>
-			<div id="movie_detail_1">
-				<div id="movie_title">
-					<span>${movieVO.mvName}</span>
-				</div>
-				<br> <span class="whiteBg" id="movie_title_eng">${movieVO.mvEName}</span><br>
-				<span class="whiteBg" id="movie_time">${movieVO.mvLong} 分鐘</span><br>
-				<span class="whiteBg" id="movie_level">${movieVO.mvLevel}</span><br>
-				<span class="whiteBg" id="movie_type">${movieVO.mvType}</span><br>
-				<span class="whiteBg" id="movie_cast">${movieVO.mvCast}</span><br>
-				<div id="movie_detail_2" class="whiteBg">
-					<p id="movie_dt">${movieVO.mvDt}</p>
-				</div>
-			</div>
-		</div>
-		
-		<hr class="hr-shadow">
-		
-		<div id="movie_tler">
-			${movieVO.mvTler}
-		</div>
-		
-		<hr class="hr-shadow">
-		
-		<div id="booking">
-			<div id="date">
-				<select name="" id="dateSelector" class="picker toRed">
-				<option>選擇日期</option>
-					<!-- inject date -->
-				</select>
-			</div>
-			<div id="time">
-				<select name="" id="showingTime" class="picker toRed">
-				<option value=0>請選擇場次</option>
-					<!-- inject showing time -->
-				</select>
-			</div>
-			<div id="book">
-				<button id="bookBtn" class="checkIn" type="button">BOOKING!</button>
-				<FORM METHOD="post" class="checkInForm"
-					ACTION="<%=request.getContextPath()%>/front/tkOrd.do"
-					style="margin-bottom: 0px;">
-					<input type="hidden" name="MV_ID" class="inputMV_ID"> 
-					<input type="hidden" name="SH_ID" class="inputSH_ID"> 
-					<input type="hidden" name="HL_ID" class="inputHL_ID"> 
-					<input type="hidden" name="action" value="go_To_TicketSelect">
-				</FORM>
-			</div>
-		</div>
-
-		<div id="comment">
-			<div id="cmt_info" value="0">
-				<div id="cmt_title">
-					<span>COMMENTS</span>
-				</div>
-				<div id="cmt_avg" value="${avgstar}" class="cmt_star">
-					
-				</div>
-				<div id="cmt_ttcmt">
-					<span>【${ttcmt}則評論】</span>
-				</div>
-				<div id="cmt_open">
-					<span class="fa fa-plus"></span>
+				<div id="movie_detail_1">
+					<div id="movie_title">
+						<span>${movieVO.mvName}</span>
+					</div>
+					<br> <span class="whiteBg" id="movie_title_eng">${movieVO.mvEName}</span><br>
+					<span class="whiteBg" id="movie_time">${movieVO.mvLong} 分鐘</span><br>
+					<span class="whiteBg" id="movie_level">${movieVO.mvLevel}</span><br>
+					<span class="whiteBg" id="movie_type">${movieVO.mvType}</span><br>
+					<span class="whiteBg" id="movie_cast">${movieVO.mvCast}</span><br>
+					<div id="movie_detail_2" class="whiteBg">
+						<p id="movie_dt">${movieVO.mvDt}</p>
+					</div>
 				</div>
 			</div>
 
+			<hr class="hr-shadow">
 
-			<!--    載入評論   -------- -->
-			<c:forEach var="cmtVO" items="${list}">
-				<div class="cmt">
+			<div id="movie_tler">${movieVO.mvTler}</div>
+
+			<hr class="hr-shadow">
+
+			<div id="booking">
+				<div id="date">
+					<select name="" id="dateSelector" class="picker toRed">
+						<option>選擇日期</option>
+						<!-- inject date -->
+					</select>
+				</div>
+				<div id="time">
+					<select name="" id="showingTime" class="picker toRed">
+						<option value=0>請選擇場次</option>
+						<!-- inject showing time -->
+					</select>
+				</div>
+				<div id="book">
+					<button id="bookBtn" class="checkIn" type="button">BOOKING!</button>
+					<FORM METHOD="post" class="checkInForm"
+						ACTION="<%=request.getContextPath()%>/front/tkOrd.do"
+						style="margin-bottom: 0px;">
+						<input type="hidden" name="MV_ID" class="inputMV_ID"> <input
+							type="hidden" name="SH_ID" class="inputSH_ID"> <input
+							type="hidden" name="HL_ID" class="inputHL_ID"> <input
+							type="hidden" name="action" value="go_To_TicketSelect">
+					</FORM>
+				</div>
+			</div>
+
+			<div id="comment">
+				<div id="cmt_info" value="0">
+					<div id="cmt_title">
+						<span>COMMENTS</span>
+					</div>
+					<div id="cmt_avg" value="${avgstar}" class="cmt_star"></div>
+					<div id="cmt_ttcmt">
+						<span>【${ttcmt}則評論】</span>
+					</div>
+					<div id="cmt_open">
+						<span class="fa fa-plus"></span>
+					</div>
+				</div>
+
+
+				<!--    載入評論   -------- -->
+				<c:forEach var="cmtVO" items="${list}">
+					<div class="cmt">
+						<div class="member">
+							<div class="member_pic">
+								<img
+									src="<%=request.getContextPath()%>${cmtVO.memberVO.member_Pic}"
+									alt="">
+							</div>
+							<div class="member_name">
+								<div class="member_nickname">
+									<span>${cmtVO.memberVO.member_Name}</span>
+								</div>
+								<div class="member_id">
+									<span>${cmtVO.MEMBER_ID}</span>
+								</div>
+							</div>
+						</div>
+						<div class="cmt_detail">
+							<div class="cmt_text whiteBg" value="${cmtVO.CM_STATE}">
+								${cmtVO.CM_TEXT}</div>
+							<hr class="hr_cmt">
+							<div class="cmt_like">
+								<span class="fa fa-heart like">${cmtVO.CM_LIKE}</span> <input
+									type="hidden" name="CM_ID" value="${cmtVO.CM_ID}">
+							</div>
+							<div class="cmt_date">
+								<span><fmt:formatDate value="${cmtVO.CM_DATE}"
+										pattern="yyyy-MM-dd HH:mm:ss" /></span>
+							</div>
+						</div>
+						<div class="cmt_right">
+							<div class="cmt_star" value="${cmtVO.CM_STAR}"></div>
+							<div class="cmt_report">
+								<button class="reportBtn">檢舉</button>
+								<input type="hidden" name="CM_ID" value="${cmtVO.CM_ID}">
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+
+
+			<!--     新評論 -->
+			<hr class="hr-shadow">
+
+
+			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cmt/cmt.do"
+				name="form1">
+				<div id="newCmt">
 					<div class="member">
 						<div class="member_pic">
-							<img src="<%=request.getContextPath()%>${cmtVO.memberVO.member_Pic}" alt="">
+							<img id="thisMemPic"
+								src="<%=request.getContextPath()%>${memberVO.member_Pic}" alt="">
 						</div>
 						<div class="member_name">
 							<div class="member_nickname">
-								<span>${cmtVO.memberVO.member_Name}</span>
+								<span id="thisMemNickname">${memberVO.member_Name}</span>
 							</div>
 							<div class="member_id">
-								<span>${cmtVO.MEMBER_ID}</span>
+								<span id="thisMemId">${memberVO.member_ID}</span>
 							</div>
 						</div>
 					</div>
 					<div class="cmt_detail">
-						<div class="cmt_text whiteBg" value="${cmtVO.CM_STATE}">
-							${cmtVO.CM_TEXT}</div>
-						<hr class="hr_cmt">
-						<div class="cmt_like">
-							<span class="fa fa-heart like">${cmtVO.CM_LIKE}</span>
-							<input type="hidden" name="CM_ID" value="${cmtVO.CM_ID}">
+						<div class="cmt_text">
+							<textarea name="CM_TEXT" id="" maxlength="500"></textarea>
 						</div>
-						<div class="cmt_date">
-							<span><fmt:formatDate value="${cmtVO.CM_DATE}"
-									pattern="yyyy-MM-dd HH:mm:ss" /></span>
+						<hr>
+						<div id="conf">
+							<div class="cmtBtnArea">
+								<input type="submit" value="comment">
+								<!-- 					<p>comment</p> -->
+							</div>
+							<div id="netaArea">
+								<div>評論是否劇透</div>
+								<input type="checkbox" name="" id="netabare">
+							</div>
 						</div>
 					</div>
-					<div class="cmt_right">
-						<div class="cmt_star" value="${cmtVO.CM_STAR}"></div>
-						<div class="cmt_report">
-							<button class="reportBtn">檢舉</button>
-							<input type="hidden" name="CM_ID" value="${cmtVO.CM_ID}">
+					<div class="cmt_star">
+						<div class="rating-box">
+							<span class="rating-boxH1">Rating</span>
+							<div class="rating">
+								<span class="fa fa-star-o"></span> <span class="fa fa-star-o"></span>
+								<span class="fa fa-star-o"></span> <span class="fa fa-star-o"></span>
+								<span class="fa fa-star-o"></span>
+							</div>
+							<!-- <h4 id="rating-value"></h1> -->
 						</div>
 					</div>
 				</div>
-			</c:forEach>
+				<input type="hidden" name="MEMBER_ID" value="${memberVO.member_ID}">
+				<input type="hidden" name="MV_ID" value="${movieVO.mvId}"> <input
+					type="hidden" name="CM_LIKE" value="0"> <input
+					type="hidden" name="CM_STAR" value=""> <input type="hidden"
+					name="CM_STATE" value="0"> <input type="hidden"
+					name="CM_DATE" value=""> <input type="hidden" name="ttcmt"
+					value="${ttcmt}"> <input type="hidden" name="ttstar"
+					value="${ttstar}"> <input type="hidden" name="action"
+					value="insert">
+				<!-- 		<input type="submit" value="送出新增"> -->
+			</FORM>
+
+
+
 		</div>
-
-
-		<!--     新評論 -->
-<hr class="hr-shadow">
-
-
-		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/cmt/cmt.do" name="form1">
-		<div id="newCmt">
-			<div class="member">
-				<div class="member_pic">
-					<img id="thisMemPic" src="<%=request.getContextPath()%>${memberVO.member_Pic}" alt="">
-				</div>
-				<div class="member_name">
-					<div class="member_nickname">
-						<span id="thisMemNickname">${memberVO.member_Name}</span>
-					</div>
-					<div class="member_id">
-						<span id="thisMemId">${memberVO.member_ID}</span>
-					</div>
-				</div>
-			</div>
-			<div class="cmt_detail">
-				<div class="cmt_text">
-					<textarea name="CM_TEXT" id="" maxlength="500"></textarea>
-				</div>
-				<hr>
-				<div id="conf">
-					<div class="cmtBtnArea">
-						<input type="submit" value="comment">
-<!-- 					<p>comment</p> -->
-					</div>
-					<div id="netaArea">
-						<div>評論是否劇透</div>
-						<input type="checkbox" name="" id="netabare">
-					</div>
-				</div>
-			</div>
-			<div class="cmt_star">
-				<div class="rating-box">
-					<span class="rating-boxH1">Rating</span>
-					<div class="rating">
-						<span class="fa fa-star-o"></span> <span class="fa fa-star-o"></span>
-						<span class="fa fa-star-o"></span> <span class="fa fa-star-o"></span>
-						<span class="fa fa-star-o"></span>
-					</div>
-					<!-- <h4 id="rating-value"></h1> -->
-				</div>
-			</div>
-		</div>
-		<input type="hidden" name="MEMBER_ID" value="${memberVO.member_ID}">
-		<input type="hidden" name="MV_ID" value="${movieVO.mvId}">
-		<input type="hidden" name="CM_LIKE" value="0">
-		<input type="hidden" name="CM_STAR" value="">
-		<input type="hidden" name="CM_STATE" value="0">
-		<input type="hidden" name="CM_DATE" value="">
-		
-		<input type="hidden" name="ttcmt" value="${ttcmt}">
-		<input type="hidden" name="ttstar" value="${ttstar}">
-		
-		<input type="hidden" name="action" value="insert">
-<!-- 		<input type="submit" value="送出新增"> -->
-	</FORM>
-
-
 
 	</div>
-
-</div>
 	<!--客服圖 請自行加連結-->
 	<img class="cs"
 		src="<%=request.getContextPath()%>/front_end/movieDetail/images/demo/cs.png"

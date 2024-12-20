@@ -7,12 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.NamingException;
-
 import com.common.JDBCUtil;
-import com.common.JedisPoolUtil;
-
-import redis.clients.jedis.Jedis;
 
 public class WishingListJDBCDAO implements WishingListDAO_interface{
 	
@@ -42,11 +37,7 @@ public class WishingListJDBCDAO implements WishingListDAO_interface{
 			
 			ps.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(ps != null) {
@@ -115,11 +106,7 @@ public class WishingListJDBCDAO implements WishingListDAO_interface{
 			
 			ps.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(ps != null) {
@@ -182,11 +169,7 @@ public class WishingListJDBCDAO implements WishingListDAO_interface{
 			
 			ps.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(ps != null) {
@@ -228,11 +211,7 @@ public class WishingListJDBCDAO implements WishingListDAO_interface{
 				list.add(wishingListVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(rs != null) {
@@ -280,11 +259,7 @@ public class WishingListJDBCDAO implements WishingListDAO_interface{
 				list.add(wishingListVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(rs != null) {

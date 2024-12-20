@@ -32,11 +32,11 @@ pageContext.setAttribute("list", list);
 
 <body>
 	<header>
-        <%@ include file="/back_end/header_html.jsp"%>   
-    </header>
-	<aside id="aside">     
-     <%@ include file="/back_end/aside_html.jsp"%>   
-    </aside>
+		<%@ include file="/back_end/header_html.jsp"%>
+	</header>
+	<aside id="aside">
+		<%@ include file="/back_end/aside_html.jsp"%>
+	</aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
 		<div class="all">
@@ -48,8 +48,8 @@ pageContext.setAttribute("list", list);
 					</div>
 				</div>
 				<div class="btBlock">
-<!-- 					<a class="bt" -->
-<%-- 						href='<%=request.getContextPath()%>/back/fd_inf/addFdInf.jsp'>新增</a> --%>
+					<!-- 					<a class="bt" -->
+					<%-- 						href='<%=request.getContextPath()%>/back/fd_inf/addFdInf.jsp'>新增</a> --%>
 				</div>
 
 				<div class="TKouter">
@@ -81,37 +81,34 @@ pageContext.setAttribute("list", list);
 								<td>${memberVO.member_Email}</td>
 								<td>${memberVO.member_Password}</td>
 								<td>${memberVO.member_Phone}</td>
-								<td><img src="<%=request.getContextPath()%>${memberVO.member_Pic}"></td>
+								<td><img
+									src="<%=request.getContextPath()%>${memberVO.member_Pic}"></td>
 								<%-- 			${pageContext.request.contextPath}<img src="\HireMe\image"> --%>
-								<td>
-									${memberVO.member_Status==0?'未啟用':''}
+								<td>${memberVO.member_Status==0?'未啟用':''}
 									${memberVO.member_Status==1?'啟用':''}
-									${memberVO.member_Status==2?'停權':''}
-								</td>
+									${memberVO.member_Status==2?'停權':''}</td>
 								<td>${memberVO.wish_Ticket}</td>
 								<td>${memberVO.bonus_Points}</td>
 								<td>${memberVO.sum_Count}</td>
-									<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member.do" style="margin-bottom: 0px;">
-								<td>
-								
-								 <!--  selected是代表當下表格 -->
-										<select name="member_Status">
-											<option value="0" >未啟用</option> 
-											<option value="1" >啟用</option> 
-											<option value="2" >停權</option> 
-																		
-										</select> 
+								<FORM METHOD="post"
+									ACTION="<%=request.getContextPath()%>/member.do"
+									style="margin-bottom: 0px;">
+									<td>
+										<!--  selected是代表當下表格 --> <select name="member_Status">
+											<option value="0">未啟用</option>
+											<option value="1">啟用</option>
+											<option value="2">停權</option>
+
+									</select>
 
 
 
-								</td>
-								<td>
-
-										<input type="hidden" name="member_ID" value="${memberVO.member_ID}">
-										<input type="hidden" name="action" value="revise">
-										<input type="submit" value="儲存">
-								</td>
-									</FORM>
+									</td>
+									<td><input type="hidden" name="member_ID"
+										value="${memberVO.member_ID}"> <input type="hidden"
+										name="action" value="revise"> <input type="submit"
+										value="儲存"></td>
+								</FORM>
 							</tr>
 							<tr>
 								<td class="Addresshead">地址</td>

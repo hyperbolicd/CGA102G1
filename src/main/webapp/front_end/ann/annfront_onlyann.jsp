@@ -110,41 +110,51 @@ pageContext.setAttribute("list", list);
 				<br>
 				<div class="row">
 					<div class="col-md-12">
-						<img src="<%=request.getContextPath()%>${annVO.ann_picture}" alt="image" class="border-radius">
+						<img src="<%=request.getContextPath()%>${annVO.ann_picture}"
+							alt="image" class="border-radius">
 					</div>
 				</div>
 				<br>
 				<div class="row">
-					<div class="col-md-12">
-						${annVO.ann_content}
-					</div>
+					<div class="col-md-12">${annVO.ann_content}</div>
 				</div>
-				<div class="row">
-				</div>
+				<div class="row"></div>
 			</div>
 		</div>
 	</div>
 	<!-- .Content -->
 
-		<!--   <!--客服圖 請自行加連結-->
-		<!--   <img class="cs" src="images/demo/cs.png" height="50px;" width="60px;" href="#"></img> -->
+	<!--   <!--客服圖 請自行加連結-->
+	<!--   <img class="cs" src="images/demo/cs.png" height="50px;" width="60px;" href="#"></img> -->
 
-		<!-- Copyright -->
-		<div class="wrapper row2">
-			<footer id="copyright" class="clear">
-				<p class="fl_left">
-					Copyright &copy; 2022 - All Rights Reserved <a href="#"></a>
-				</p>
-			</footer>
-		</div>
-		
-		    <!-- jQuery v3.4.1 -->
-    <script src="${pageContext.request.contextPath}/front_end/annlib/jquery/jquery-3.4.1.min.js"></script><!-- Bootstrap v4.3.1 JS -->
-    <script src="${pageContext.request.contextPath}/front_end/annlib/bootstrap/js/bootstrap.min.js"></script><!-- Magnific Popup core JS file -->
-    <script src="${pageContext.request.contextPath}/front_end/annlib/Magnific-Popup-master/dist/jquery.magnific-popup.js"></script><!-- Slick JS -->
-    <script src="${pageContext.request.contextPath}/front_end/annlib/slick/slick/slick.min.js"></script><!-- Date Picker -->
-    <script src="${pageContext.request.contextPath}/front_end/annlib/gijgo/js/gijgo.min.js" type="text/javascript"></script><!-- Custom JS -->
-    <script src="${pageContext.request.contextPath}/front_end/annjs/theme.js"></script>
+	<!-- Copyright -->
+	<div class="wrapper row2">
+		<footer id="copyright" class="clear">
+			<p class="fl_left">
+				Copyright &copy; 2022 - All Rights Reserved <a href="#"></a>
+			</p>
+		</footer>
+	</div>
+
+	<!-- jQuery v3.4.1 -->
+	<script
+		src="${pageContext.request.contextPath}/front_end/annlib/jquery/jquery-3.4.1.min.js"></script>
+	<!-- Bootstrap v4.3.1 JS -->
+	<script
+		src="${pageContext.request.contextPath}/front_end/annlib/bootstrap/js/bootstrap.min.js"></script>
+	<!-- Magnific Popup core JS file -->
+	<script
+		src="${pageContext.request.contextPath}/front_end/annlib/Magnific-Popup-master/dist/jquery.magnific-popup.js"></script>
+	<!-- Slick JS -->
+	<script
+		src="${pageContext.request.contextPath}/front_end/annlib/slick/slick/slick.min.js"></script>
+	<!-- Date Picker -->
+	<script
+		src="${pageContext.request.contextPath}/front_end/annlib/gijgo/js/gijgo.min.js"
+		type="text/javascript"></script>
+	<!-- Custom JS -->
+	<script
+		src="${pageContext.request.contextPath}/front_end/annjs/theme.js"></script>
 </body>
 
 </html>

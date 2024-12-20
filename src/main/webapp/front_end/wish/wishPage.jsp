@@ -4,15 +4,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>許願投票活動</title>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/front_end/css/layout.css" type="text/css">
-	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://fontawesome.com/v5/icons/edit?s=solid">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/front_end/membercentre/css/membercentre.css" />
-	<!-- 許願池 -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/front_end/wish/css/wishPage.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/front_end/wish/css/wishNotify.css">
+<title>許願投票活動</title>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/front_end/css/layout.css"
+	type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://fontawesome.com/v5/icons/edit?s=solid">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/front_end/membercentre/css/membercentre.css" />
+<!-- 許願池 -->
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/front_end/wish/css/wishPage.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/front_end/wish/css/wishNotify.css">
 </head>
 <body onload="connect();" onunload="disconnect();">
 	<%@ include file="/front_end/header.jsp"%>
@@ -23,76 +30,96 @@
 				<a
 					href="${pageContext.request.contextPath}/front_end/membercentre/membermod.jsp">
 					<i class="fa fa-edit" aria-hidden="true"></i> 會員修改資料
-				</a> <a href="${pageContext.request.contextPath}/front_end/wish/wishPage.jsp"> <i class="fa fa-object-group" aria-hidden="true"></i>
-					許願池
-				</a> <a href="${pageContext.request.contextPath}/front_end/memberCmt/memberCmt.jsp"> <i class="fa fa-clone" aria-hidden="true"></i> 評論區
+				</a> <a
+					href="${pageContext.request.contextPath}/front_end/wish/wishPage.jsp">
+					<i class="fa fa-object-group" aria-hidden="true"></i> 許願池
+				</a> <a
+					href="${pageContext.request.contextPath}/front_end/memberCmt/memberCmt.jsp">
+					<i class="fa fa-clone" aria-hidden="true"></i> 評論區
+				</a> <a href="#"> <i class="fa fa-gavel" aria-hidden="true"></i>
+					訂單明細
 				</a>
-				 <a href="#"> <i class="fa fa-gavel" aria-hidden="true"></i> 訂單明細</a>
 			</nav>
 		</div>
 		<!-- <div id="content">
     <iframe src="" width="100%" height="100%" frameborder="0"></iframe>
   </div> -->
- 	
-	<!-- 許願池 -->
-	<div id="main">
-		<h1>許願池投票活動</h1>
-		<span style="color: red;">${errMsg.isSuccess}</span>
-<!-- 		取消 -->
-<%--         <button id="historyWish"><a href="${pageContext.request.contextPath}/front_end/wish/wishHis.jsp">歷屆回顧</a></button> --%>
-        <div id="wishList">
-            <table>
-                <tr>
-                    <th>編號</th>
-                    <th>名稱</th>
-                    <th>起始時間</th>
-                    <th>結束時間</th>
-                    <th>查看詳情</th>
-                    <th>參加投票</th>
-                </tr>
-                <jsp:useBean id="wishSvc" class="com.wishing_pond.model.WishingPondService"/>
-                <c:forEach var="event" items="${wishSvc.avaliable}">
-	                 <tr>
-	                     <td>${event.wish_no}</td>
-	                     <td>${event.wish_name}</td>
-	                     <td>${event.wish_start}</td>
-	                     <td>${event.wish_end}</td>
-	                     <td>
-	                     	<form action="${pageContext.request.contextPath}/wish/WishingVote.do" method="post">
-		                      	<button type="submit" name="action" value="seeOneEvent"><img src="${pageContext.request.contextPath}/back_end/wish/icons8-detail-64.png" alt=""></button>
-		                      	<input type="hidden" name="wish_no" value="${event.wish_no}">
-		                      	<input type="hidden" name="wish_name" value="${event.wish_name}">
-		                      	<input type="hidden" name="wish_start" value="${event.wish_start}">
-		                      	<input type="hidden" name="wish_end" value="${event.wish_end}">
-	                     	</form>
-	                     </td>
-	                     <td>
-	                     	<form action="${pageContext.request.contextPath}/wish/WishingVote.do" method="post">
-		                      	<button type="submit" name="action" value="voteOneEvent"><img src="${pageContext.request.contextPath}/front_end/wish/icons8-vote-64.png" alt=""></button>
-		                      	<input type="hidden" name="member_id" value="${memberVO.member_ID}">
-		                      	<input type="hidden" name="wish_no" value="${event.wish_no}">
-	                     	</form>
-	                     </td>
-	                 </tr>
-				</c:forEach>
-            </table>
-        </div>
-        <div id="notifyBlock">
-        	<img src="${pageContext.request.contextPath}/front_end/wish/icons8-message-64.png" >
-        	<ul id="notifyUl" style="display: none;">
-        		<li>通知</li>
-        		<li>登入已逾時，請重新登入</li>
-        		<li>登入已逾時，請重新登入</li>
-        		<li>登入已逾時，請重新登入</li>
-        		<li>登入已逾時，請重新登入</li>
-        		<li>登入已逾時，請重新登入</li>
-        		<li>登入已逾時，請重新登入</li>
-        	</ul>
-        </div>
+
+		<!-- 許願池 -->
+		<div id="main">
+			<h1>許願池投票活動</h1>
+			<span style="color: red;">${errMsg.isSuccess}</span>
+			<!-- 		取消 -->
+			<%--         <button id="historyWish"><a href="${pageContext.request.contextPath}/front_end/wish/wishHis.jsp">歷屆回顧</a></button> --%>
+			<div id="wishList">
+				<table>
+					<tr>
+						<th>編號</th>
+						<th>名稱</th>
+						<th>起始時間</th>
+						<th>結束時間</th>
+						<th>查看詳情</th>
+						<th>參加投票</th>
+					</tr>
+					<jsp:useBean id="wishSvc"
+						class="com.wishing_pond.model.WishingPondService" />
+					<c:forEach var="event" items="${wishSvc.avaliable}">
+						<tr>
+							<td>${event.wish_no}</td>
+							<td>${event.wish_name}</td>
+							<td>${event.wish_start}</td>
+							<td>${event.wish_end}</td>
+							<td>
+								<form
+									action="${pageContext.request.contextPath}/wish/WishingVote.do"
+									method="post">
+									<button type="submit" name="action" value="seeOneEvent">
+										<img
+											src="${pageContext.request.contextPath}/back_end/wish/icons8-detail-64.png"
+											alt="">
+									</button>
+									<input type="hidden" name="wish_no" value="${event.wish_no}">
+									<input type="hidden" name="wish_name"
+										value="${event.wish_name}"> <input type="hidden"
+										name="wish_start" value="${event.wish_start}"> <input
+										type="hidden" name="wish_end" value="${event.wish_end}">
+								</form>
+							</td>
+							<td>
+								<form
+									action="${pageContext.request.contextPath}/wish/WishingVote.do"
+									method="post">
+									<button type="submit" name="action" value="voteOneEvent">
+										<img
+											src="${pageContext.request.contextPath}/front_end/wish/icons8-vote-64.png"
+											alt="">
+									</button>
+									<input type="hidden" name="member_id"
+										value="${memberVO.member_ID}"> <input type="hidden"
+										name="wish_no" value="${event.wish_no}">
+								</form>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+			<div id="notifyBlock">
+				<img
+					src="${pageContext.request.contextPath}/front_end/wish/icons8-message-64.png">
+				<ul id="notifyUl" style="display: none;">
+					<li>通知</li>
+					<li>登入已逾時，請重新登入</li>
+					<li>登入已逾時，請重新登入</li>
+					<li>登入已逾時，請重新登入</li>
+					<li>登入已逾時，請重新登入</li>
+					<li>登入已逾時，請重新登入</li>
+					<li>登入已逾時，請重新登入</li>
+				</ul>
+			</div>
+		</div>
+		<!-- 許願池 -->
 	</div>
-	<!-- 許願池 -->
-	</div>
-	
+
 	<!-- Copyright -->
 	<div class="wrapper row2">
 		<footer id="copyright" class="clear">
@@ -101,7 +128,7 @@
 			</p>
 		</footer>
 	</div>
-	
+
 	<script>
 		const notifyUl = document.querySelector('#notifyUl');
 		const notifyImg = document.querySelector('#notifyBlock>img');

@@ -2,8 +2,6 @@ package com.wish_reply.model;
 
 import java.util.*;
 
-import javax.naming.NamingException;
-
 import com.common.JDBCUtil;
 
 import java.sql.*;
@@ -33,11 +31,7 @@ public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 			ps.setString(3, wishReplyVO.getWish_msg());
 			
 			ps.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(ps != null) {
@@ -69,11 +63,7 @@ public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 			ps.setInt(1, replyNo);
 			
 			ps.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(ps != null) {
@@ -115,11 +105,7 @@ public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 				wishReplyVO.setWish_msg(rs.getString("WISH_MSG"));
 				list.add(wishReplyVO);
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(rs != null) {
@@ -167,11 +153,7 @@ public class WishReplyJDBCDAO implements WishReplyDAO_interface{
 				wishReplyVO.setWish_msg(rs.getString("WISH_MSG"));
 				list.add(wishReplyVO);
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NamingException e) {
 			e.printStackTrace();
 		} finally {
 			if(rs != null) {

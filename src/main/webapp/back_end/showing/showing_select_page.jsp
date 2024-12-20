@@ -29,18 +29,21 @@
 
 <body>
 	<header>
-        <%@ include file="/back_end/header_html.jsp"%>   
-    </header>
-    <aside id="aside">   
-    	<%@ include file="/back_end/aside_html.jsp"%>     
-    </aside>
+		<%@ include file="/back_end/header_html.jsp"%>
+	</header>
+	<aside id="aside">
+		<%@ include file="/back_end/aside_html.jsp"%>
+	</aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
 		<div id="main">
 
-			<jsp:useBean id="showingSvc" scope="page" class="com.showing.model.ShowingService" />
-			<jsp:useBean id="movieSvc" scope="page" class="com.movie.model.MovieService" />
-			<jsp:useBean id="hallSvc" scope="page" class="com.hall.model.HallService" />
+			<jsp:useBean id="showingSvc" scope="page"
+				class="com.showing.model.ShowingService" />
+			<jsp:useBean id="movieSvc" scope="page"
+				class="com.movie.model.MovieService" />
+			<jsp:useBean id="hallSvc" scope="page"
+				class="com.hall.model.HallService" />
 
 			<%-- 錯誤表列 --%>
 			<c:if test="${not empty errorMsgs}">
@@ -56,7 +59,8 @@
 				ACTION="<%=request.getContextPath()%>/showing/showing.do"
 				name="form1">
 				<div id="title">場次查詢</div>
-				<a href='<%=request.getContextPath()%>/back_end/showing/listAllShowing.jsp'>List</a>
+				<a
+					href='<%=request.getContextPath()%>/back_end/showing/listAllShowing.jsp'>List</a>
 				all Showings. <br>
 				<div id="selectById" class="selectBy">
 					<div id="selectById_title">
@@ -74,7 +78,8 @@
 						<select size="1" name="MV_ID">
 							<option value="">
 								<c:forEach var="movieVO" items="${movieSvc.all}">
-									<option value="${movieVO.mvId}">${movieVO.mvId} 【${movieVO.mvName}】
+									<option value="${movieVO.mvId}">${movieVO.mvId}
+										【${movieVO.mvName}】
 								</c:forEach>
 						</select><br>
 					</div>
@@ -84,11 +89,12 @@
 						<span>影廳編號: </span>
 					</div>
 					<div id="selectByHall_input">
-<!-- 						<input type="text" name="HL_ID" value=""><br> -->
-							<select size="1" name="HL_ID">
+						<!-- 						<input type="text" name="HL_ID" value=""><br> -->
+						<select size="1" name="HL_ID">
 							<option value="">
 								<c:forEach var="hallVO" items="${hallSvc.all}">
-									<option value="${hallVO.hlId}">${hallVO.hlId} 【${hallVO.hlName}】
+									<option value="${hallVO.hlId}">${hallVO.hlId}
+										【${hallVO.hlName}】
 								</c:forEach>
 						</select><br>
 					</div>
@@ -117,21 +123,21 @@
 				a new Showing.</li>
 		</ul>
 
-<!-- 		<h3> -->
-<!-- 			<font color=orange>電影管理</font> -->
-<!-- 		</h3> -->
+		<!-- 		<h3> -->
+		<!-- 			<font color=orange>電影管理</font> -->
+		<!-- 		</h3> -->
 
-<!-- 		<ul> -->
-<!-- 			<li><a -->
-<%-- 				href='<%=request.getContextPath()%>/back_end/movie/listAllMovie.jsp'>List</a> --%>
-<!-- 				all Movies.</li> -->
-<!-- 		</ul> -->
+		<!-- 		<ul> -->
+		<!-- 			<li><a -->
+		<%-- 				href='<%=request.getContextPath()%>/back_end/movie/listAllMovie.jsp'>List</a> --%>
+		<!-- 				all Movies.</li> -->
+		<!-- 		</ul> -->
 
 	</main>
 	<!-- <div id="tree"></div> -->
 	<footer>嗨邇覓影城 &copy; HIREME CINEMA 2022</footer>
 	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
-<%-- 	<script src="<%=request.getContextPath()%>/back_end/showing/emp_aside.js"></script> --%>
+	<%-- 	<script src="<%=request.getContextPath()%>/back_end/showing/emp_aside.js"></script> --%>
 
 	<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 

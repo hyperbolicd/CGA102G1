@@ -1,14 +1,13 @@
 package com.cnm_inf.model;
 
 import java.util.*;
+
+import com.common.JDBCUtil;
+
 import java.sql.*;
 
 public class Cnm_infJDBCDAO implements Cnm_infDAO_interface {
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/movietheater?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
-
+	
 	private static final String INSERT_STMT = 
 		"INSERT INTO cnm_inf (CNM_DT,CNM_TEL,CNM_EM,CNM_LC,CNM_TRP) VALUES (?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
@@ -28,8 +27,7 @@ public class Cnm_infJDBCDAO implements Cnm_infDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setString(1, cnm_infVO.getCNM_DT());
@@ -41,10 +39,6 @@ public class Cnm_infJDBCDAO implements Cnm_infDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -76,8 +70,7 @@ public class Cnm_infJDBCDAO implements Cnm_infDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setString(1, cnm_infVO.getCNM_DT());
@@ -91,10 +84,6 @@ public class Cnm_infJDBCDAO implements Cnm_infDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -126,8 +115,7 @@ public class Cnm_infJDBCDAO implements Cnm_infDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setInt(1, CNM_INF_ID);
@@ -135,10 +123,6 @@ public class Cnm_infJDBCDAO implements Cnm_infDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -172,8 +156,7 @@ public class Cnm_infJDBCDAO implements Cnm_infDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setInt(1, CNM_INF_ID);
@@ -192,10 +175,6 @@ public class Cnm_infJDBCDAO implements Cnm_infDAO_interface {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -237,8 +216,7 @@ public class Cnm_infJDBCDAO implements Cnm_infDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = JDBCUtil.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -255,10 +233,6 @@ public class Cnm_infJDBCDAO implements Cnm_infDAO_interface {
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());

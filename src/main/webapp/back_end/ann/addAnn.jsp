@@ -60,14 +60,14 @@ pageContext.setAttribute("list",list);
 					</div>
 				</div>
 
-<%-- 				<c:if test="${not empty errorMsgs}"> --%>
-<!-- 					<font style="color: red">請修正以下錯誤:</font> -->
-<!-- 					<ul> -->
-<%-- 						<c:forEach var="message" items="${errorMsgs}"> --%>
-<%-- 							<li style="color: red">${message}</li> --%>
-<%-- 						</c:forEach> --%>
-<!-- 					</ul> -->
-<%-- 				</c:if> --%>
+				<%-- 				<c:if test="${not empty errorMsgs}"> --%>
+				<!-- 					<font style="color: red">請修正以下錯誤:</font> -->
+				<!-- 					<ul> -->
+				<%-- 						<c:forEach var="message" items="${errorMsgs}"> --%>
+				<%-- 							<li style="color: red">${message}</li> --%>
+				<%-- 						</c:forEach> --%>
+				<!-- 					</ul> -->
+				<%-- 				</c:if> --%>
 
 
 				<FORM METHOD="post" enctype="multipart/form-data"
@@ -104,8 +104,10 @@ pageContext.setAttribute("list",list);
 							</tr>
 							<tr>
 								<td>圖片:</td>
-								<td><img id="img" src="<%=request.getContextPath()%>/back_end/act/annNoPhoto.jpg" style="width: 300px; height: 250px;">
-								<input id="ann_picture" type="file" name="ann_picture"
+								<td><img id="img"
+									src="<%=request.getContextPath()%>/back_end/act/annNoPhoto.jpg"
+									style="width: 300px; height: 250px;"> <input
+									id="ann_picture" type="file" name="ann_picture"
 									value="${param.ann_picture}"></td>
 								<td>${errorMsgs.ann_picture}</td>
 							</tr>

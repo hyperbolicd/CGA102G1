@@ -203,7 +203,6 @@
 	flex-wrap: wrap;
 }
 
-
 .sidetable {
 	width: 150px;
 	border-collapse: collapse;
@@ -216,7 +215,7 @@
 	position: fixed;
 	right: 10%;
 	top: 23%;
-    height: 50%;
+	height: 50%;
 	height: 50%;
 	display: flex;
 	justify-content: center;
@@ -266,8 +265,8 @@ button {
 
 .btBlock {
 	border-radius: 15px;
-    height: 300px;
-    width: 100%;
+	height: 300px;
+	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-content: center;

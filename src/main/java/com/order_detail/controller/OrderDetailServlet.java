@@ -1,8 +1,6 @@
 package com.order_detail.controller;
 
-import java.awt.event.ItemEvent;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,10 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
 import com.merchandise_inf.model.MerchService;
 import com.merchandise_inf.model.MerchVO;
-import com.merchandise_order.model.MerchOrdDAO;
 import com.merchandise_order.model.MerchOrdService;
 import com.merchandise_order.model.MerchOrdVO;
 import com.order_detail.model.OrderDetailService;

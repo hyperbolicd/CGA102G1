@@ -6,8 +6,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -17,22 +15,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.naming.java.javaURLContextFactory;
-
 import com.google.gson.Gson;
 import com.member.model.MemberService;
 import com.member.model.MemberVO;
 import com.merchandise_inf.model.MerchService;
 import com.merchandise_inf.model.MerchVO;
-import com.merchandise_order.model.MerchOrdDAO;
 import com.merchandise_order.model.MerchOrdService;
 import com.merchandise_order.model.MerchOrdVO;
 
 import com.order_detail.model.OrderDetailService;
 import com.order_detail.model.OrderDetailVO;
 
-import oracle.net.aso.g;
-import oracle.net.aso.i;
 
 @WebServlet("/merchOrd/merchOrd.do")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)

@@ -6,8 +6,6 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import com.code.model.*;
-
 public class CodeServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)

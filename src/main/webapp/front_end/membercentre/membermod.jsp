@@ -15,8 +15,8 @@
 	href="https://fontawesome.com/v5/icons/edit?s=solid">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front_end/membercentre/css/membercentre.css" />
- <%@ include file="/front_end/header.jsp"%>
- <%@ include file="/front_end/header_css.jsp"%>
+<%@ include file="/front_end/header.jsp"%>
+<%@ include file="/front_end/header_css.jsp"%>
 
 <style>
 #memInfo {
@@ -117,15 +117,21 @@ body {
 	<div id="mainDiv">
 
 		<div class="side-menu">
-		
+
 			<nav>
-				<a href="${pageContext.request.contextPath}/front_end/membercentre/membermod.jsp"> <i class="fa fa-edit" aria-hidden="true"></i>
-					會員修改資料
-				</a> <a href="${pageContext.request.contextPath}/front_end/wish/wishPage.jsp"> <i class="fa fa-object-group" aria-hidden="true"></i>
-					許願池
-				</a> <a href="${pageContext.request.contextPath}/front_end/memberCmt/memberCmt.jsp"> <i class="fa fa-clone" aria-hidden="true"></i> 評論區
+				<a
+					href="${pageContext.request.contextPath}/front_end/membercentre/membermod.jsp">
+					<i class="fa fa-edit" aria-hidden="true"></i> 會員修改資料
+				</a> <a
+					href="${pageContext.request.contextPath}/front_end/wish/wishPage.jsp">
+					<i class="fa fa-object-group" aria-hidden="true"></i> 許願池
+				</a> <a
+					href="${pageContext.request.contextPath}/front_end/memberCmt/memberCmt.jsp">
+					<i class="fa fa-clone" aria-hidden="true"></i> 評論區
+				</a> <a
+					href="${pageContext.request.contextPath}/front_end/merchandise/merchOrd_index.jsp">
+					<i class="fa fa-gavel" aria-hidden="true"></i> 訂單明細
 				</a>
-				 <a href="${pageContext.request.contextPath}/front_end/merchandise/merchOrd_index.jsp"> <i class="fa fa-gavel" aria-hidden="true"></i> 訂單明細</a>
 			</nav>
 		</div>
 		<!-- <div id="content">
@@ -134,40 +140,44 @@ body {
 		<div id="memInfo">
 			<!-- 會員塞這 -->
 			<div class="rg_center">
-				<div class="text-block" id="textone"><h1>會員修改資料</h1></div>
+				<div class="text-block" id="textone">
+					<h1>會員修改資料</h1>
+				</div>
 				<div class="rg_form">
 					<!--定義表單 form-->
-					<form action="${pageContext.request.contextPath}/member.do" id="form" method="post" enctype="multipart/form-data">
-						<input type="hidden" name="member_ID" value="${memberVO.member_ID}">
+					<form action="${pageContext.request.contextPath}/member.do"
+						id="form" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="member_ID"
+							value="${memberVO.member_ID}">
 						<table>
 							<tr>
-								<td class="td_left"><label for="member_Password" >會員密碼</label></td>
+								<td class="td_left"><label for="member_Password">會員密碼</label></td>
 								<td class="td_right"><input type="text"
-									id="member_Password"
-									value="${memberVO.member_Password}" disabled></td>
-									<div class="errMsgs">${errorMsgs}</div>
+									id="member_Password" value="${memberVO.member_Password}"
+									disabled></td>
+								<div class="errMsgs">${errorMsgs}</div>
 							</tr>
-							
+
 							<tr>
 								<td class="td_left"><label for="member_Password">更新密碼</label></td>
 								<td class="td_right"><input type="text"
 									name="member_Password" id="member_Password"
 									value="${memberVO.member_Password}"></td>
-									<div class="errMsgs"></div>
+								<div class="errMsgs"></div>
 							</tr>
 
 							<tr>
 								<td class="td_left"><label for="member_Name">會員名稱</label></td>
 								<td class="td_right"><input type="text" name="member_Name"
 									id="member_Name" value="${memberVO.member_Name}"></td>
-									<div class="errMsgs"></div>
+								<div class="errMsgs"></div>
 							</tr>
 
 							<tr>
 								<td class="td_left"><label for="member_Phone">會員電話</label></td>
 								<td class="td_right"><input type="text" name="member_Phone"
 									id="member_Phone" value="${memberVO.member_Phone}"></td>
-									<div class="errMsgs"></div>
+								<div class="errMsgs"></div>
 							</tr>
 
 							<tr>
@@ -175,25 +185,26 @@ body {
 								<td class="td_right"><input type="text"
 									name="member_Address" id="member_Address"
 									value="${memberVO.member_Address}"></td>
-									<div class="errMsgs"></div>
+								<div class="errMsgs"></div>
 							</tr>
 
 							<tr>
 								<td class="td_left"><label for="member_pic">會員照片</label></td>
- 								<td class="td_right"><img id="img" src=<%=request.getContextPath()%>${memberVO.member_Pic}></td> 
-								<td>
-								<input type="file" id="file-uploader" accept="image/*" name="myUpfile"><img id="file-uploader">
-								<input type="hidden" name="noUpload" value="${memberVO.member_Pic}">
+								<td class="td_right"><img id="img"
+									src=<%=request.getContextPath()%> ${memberVO.member_Pic}></td>
+								<td><input type="file" id="file-uploader" accept="image/*"
+									name="myUpfile"><img id="file-uploader"> <input
+									type="hidden" name="noUpload" value="${memberVO.member_Pic}">
 								</td>
 
 							</tr>
 
 							<td>
 								<div class="button">
-								<input type="hidden" name="member_ID" value="${memberVO.member_ID}">
-									<input type="submit" id="" value="確認送出"
-										onclick="checkRegister();"> <input type="hidden"
-										name="action" value="update">
+									<input type="hidden" name="member_ID"
+										value="${memberVO.member_ID}"> <input type="submit"
+										id="" value="確認送出" onclick="checkRegister();"> <input
+										type="hidden" name="action" value="update">
 								</div>
 							</td>
 
@@ -218,7 +229,7 @@ body {
 			</p>
 		</footer>
 	</div>
-<script>
+	<script>
 let inputfile = document.getElementById('file-uploader');
 let img = document.getElementById('img');
 inputfile.addEventListener('change',function(e){

@@ -1,16 +1,9 @@
 package com.level.model;
 
-import java.util.*;
-
-import com.member.model.MemberDAO_interface;
-
+import com.common.JDBCUtil;
 import java.sql.*;
 
 public class LevelJDBCDAO implements LevelDAO_interface {
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/movietheater?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
 
 	    private static final String INSERT_STMT = 
 	    	"INSERT INTO level_data "
@@ -33,8 +26,7 @@ public class LevelJDBCDAO implements LevelDAO_interface {
 
 			try {
 
-				Class.forName(driver); //反射機制  載入驅動類，不同資料庫軟體驅動類不同
-				con = DriverManager.getConnection(url, userid, passwd);//使用DriverManager獲得連線物件，其中url每個資料庫不同
+				con = JDBCUtil.getConnection();
 				pstmt = con.prepareStatement(INSERT_STMT);
 
 				pstmt.setString(1, levelVO.getMember_level());
@@ -46,10 +38,6 @@ public class LevelJDBCDAO implements LevelDAO_interface {
 				pstmt.executeUpdate();
 
 				// Handle any driver errors
-			} catch (ClassNotFoundException e) {
-				throw new RuntimeException("Couldn't load database driver. "
-						+ e.getMessage());
-				// Handle any SQL errors
 			} catch (SQLException se) {
 				throw new RuntimeException("A database error occured. "
 						+ se.getMessage());
@@ -81,8 +69,7 @@ public class LevelJDBCDAO implements LevelDAO_interface {
 
 			try {
 
-				Class.forName(driver);
-				con = DriverManager.getConnection(url, userid, passwd);
+				con = JDBCUtil.getConnection();
 				pstmt = con.prepareStatement(UPDATE);
 
 				
@@ -94,10 +81,6 @@ public class LevelJDBCDAO implements LevelDAO_interface {
 				pstmt.executeUpdate();
 
 				// Handle any driver errors
-			} catch (ClassNotFoundException e) {
-				throw new RuntimeException("Couldn't load database driver. "
-						+ e.getMessage());
-				// Handle any SQL errors
 			} catch (SQLException se) {
 				throw new RuntimeException("A database error occured. "
 						+ se.getMessage());
@@ -129,8 +112,7 @@ public class LevelJDBCDAO implements LevelDAO_interface {
 
 			try {
 
-				Class.forName(driver);
-				con = DriverManager.getConnection(url, userid, passwd);
+				con = JDBCUtil.getConnection();
 				pstmt = con.prepareStatement(DELETE);
 
 				pstmt.setString(1, member_level);
@@ -138,10 +120,6 @@ public class LevelJDBCDAO implements LevelDAO_interface {
 				pstmt.executeUpdate();
 
 				// Handle any driver errors
-			} catch (ClassNotFoundException e) {
-				throw new RuntimeException("Couldn't load database driver. "
-						+ e.getMessage());
-				// Handle any SQL errors
 			} catch (SQLException se) {
 				throw new RuntimeException("A database error occured. "
 						+ se.getMessage());

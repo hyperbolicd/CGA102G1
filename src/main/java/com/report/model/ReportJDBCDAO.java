@@ -1,14 +1,11 @@
 package com.report.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.naming.NamingException;
 
 import com.common.JDBCUtil;
 
@@ -49,14 +46,9 @@ public class ReportJDBCDAO implements ReportDAO_interface{
 			pstmt.setInt(5, reportVO.getRpState());
 			
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-			+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 			+se.getMessage());
-		} catch (NamingException e) {
-			e.printStackTrace();
 		}finally {
 			if (pstmt != null) {
 				try {
@@ -90,15 +82,9 @@ public class ReportJDBCDAO implements ReportDAO_interface{
 			
 			pstmt.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}finally {
 			if (pstmt != null) {
 				try {
@@ -128,17 +114,10 @@ public class ReportJDBCDAO implements ReportDAO_interface{
 			pstmt = conn.prepareStatement(DELETE);
 			pstmt.setInt(1, rpId);
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -182,15 +161,9 @@ public class ReportJDBCDAO implements ReportDAO_interface{
 				reportVO.setRpDate(rs.getTimestamp("RP_DATE"));
 			}
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("Couldn't load database driver."
 					+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -244,15 +217,9 @@ public class ReportJDBCDAO implements ReportDAO_interface{
 				list.add(reportVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("Couldn't load database driver."
 					+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -289,17 +256,10 @@ public class ReportJDBCDAO implements ReportDAO_interface{
 			pstmt = conn.prepareStatement(UPDATE_SAME_RP);
 			pstmt.setInt(1, cmId);
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -333,15 +293,9 @@ public class ReportJDBCDAO implements ReportDAO_interface{
 			if(rs.next())
 			undeal = rs.getInt("undeal");
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("Couldn't load database driver."
 					+se.getMessage());
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {

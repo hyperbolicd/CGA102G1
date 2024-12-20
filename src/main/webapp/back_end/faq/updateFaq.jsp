@@ -15,11 +15,11 @@ FaqVO faqVO = (FaqVO) request.getAttribute("faqVO"); //EmpServlet.java (Concroll
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>常見問題管理</title>
-<link rel="stylesheet" type="text/css" 
- 	href="${pageContext.request.contextPath}/back_end/css/emp_all.css">
-<link rel="stylesheet" type="text/css" 
-    href="${pageContext.request.contextPath}/back_end/css/emp_main.css">
-<link rel="stylesheet" type="text/css" 
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/back_end/css/emp_all.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/back_end/css/emp_main.css">
+<link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/back_end/css/emp_footer.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back_end/faq/css/faqback_update.css">
@@ -32,11 +32,11 @@ FaqVO faqVO = (FaqVO) request.getAttribute("faqVO"); //EmpServlet.java (Concroll
 
 <body>
 	<header>
-        <%@ include file="/back_end/header_html.jsp"%>   
-    </header>
-	<aside id="aside">     
-     <%@ include file="/back_end/aside_html.jsp"%>   
-    </aside>
+		<%@ include file="/back_end/header_html.jsp"%>
+	</header>
+	<aside id="aside">
+		<%@ include file="/back_end/aside_html.jsp"%>
+	</aside>
 	<!-- 你們的內容請放在 <main> 標籤內，其他部分勿動! -->
 	<main>
 		<div class="all">
@@ -72,8 +72,8 @@ FaqVO faqVO = (FaqVO) request.getAttribute("faqVO"); //EmpServlet.java (Concroll
 							</tr>
 							<tr>
 								<td>標題:</td>
-								<td><input style="text-align: center;" type="text" name="faq_title" size="45"
-									value="${faqVO.faq_title}"></td>
+								<td><input style="text-align: center;" type="text"
+									name="faq_title" size="45" value="${faqVO.faq_title}"></td>
 							</tr>
 							<tr>
 								<td>內容:</td>
@@ -87,8 +87,8 @@ FaqVO faqVO = (FaqVO) request.getAttribute("faqVO"); //EmpServlet.java (Concroll
 					</div>
 					<div class="btBlock">
 						<input type="hidden" name="action" value="update"> <input
-							type="hidden" name="faq_no" value="${faqVO.faq_no}">
-						<input type="submit" class="bt" value="送出修改">
+							type="hidden" name="faq_no" value="${faqVO.faq_no}"> <input
+							type="submit" class="bt" value="送出修改">
 
 
 					</div>

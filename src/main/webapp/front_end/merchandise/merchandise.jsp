@@ -14,7 +14,8 @@
 	type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-default/default.css">
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-default/default.css">
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.min.js"></script>
 </head>
@@ -40,76 +41,81 @@
 	<div class="wrapper row1" style="height: 60px;">
 		<jsp:include page="/front_end/header.jsp" />
 	</div>
-	
+
 	<main>
-<div class="outer">	
+		<div class="outer">
 
-	<div class="leftDiv">
-	<img id="photo"
-			src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1"
-			>
-		<div id="product-aside">
-			<img
-				class="product-img <c:if test="${merchVo.merchPic1==null}">nullimg</c:if>"
-				src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
-			<img
-				class="product-img <c:if test="${merchVo.merchPic2==null}">nullimg</c:if>"
-				src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=2">
-			<img
-				class="product-img <c:if test="${merchVo.merchPic3==null}">nullimg</c:if>"
-				src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=3">
-			<img
-				class="product-img <c:if test="${merchVo.merchPic4==null}">nullimg</c:if>"
-				src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=4">
-			<img
-				class="product-img <c:if test="${merchVo.merchPic5==null}">nullimg</c:if>"
-				src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=5">
+			<div class="leftDiv">
+				<img id="photo"
+					src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
+				<div id="product-aside">
+					<img
+						class="product-img <c:if test="${merchVo.merchPic1==null}">nullimg</c:if>"
+						src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=1">
+					<img
+						class="product-img <c:if test="${merchVo.merchPic2==null}">nullimg</c:if>"
+						src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=2">
+					<img
+						class="product-img <c:if test="${merchVo.merchPic3==null}">nullimg</c:if>"
+						src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=3">
+					<img
+						class="product-img <c:if test="${merchVo.merchPic4==null}">nullimg</c:if>"
+						src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=4">
+					<img
+						class="product-img <c:if test="${merchVo.merchPic5==null}">nullimg</c:if>"
+						src="${pageContext.request.contextPath}/merch/controller?action=getPic&merchID=${merchVo.merchID}&pic=5">
+				</div>
+
+
+
+
+			</div>
+
+			<div class="product-title-all">
+				<h1>${merchVo.merchName}</h1>
+				<div class="product-content">
+					<h2>商品詳情</h2>
+					${merchVo.merchDT}
+				</div>
+				<h1 class="hr1"></h1>
+				<span id="number-text">數量:</span>
+				<form
+					action="${pageContext.request.contextPath}/ShoppingCartServlet">
+					<div class="select-area">
+						<span class="down" onclick='decreaseCount(event, this)'><img
+							class="arrow-pic"
+							src="${pageContext.request.contextPath}/front_end/merchandise/images/LeftArrow.png"></span>
+						<input id="input-amount" type="number" value="1" name="scCount"
+							min=1> <span class="up"
+							onclick='increaseCount(event, this)'><img
+							class="arrow-pic"
+							src="${pageContext.request.contextPath}/front_end/merchandise/images/RightArrow.png"></span>
+					</div>
+					<span id="number-text">價格:</span>
+					<div class="select-area1">
+						<input id="totalCount" type="number" value="${merchVo.merchPrice}"
+							name="totalCount" readonly> 元整
+					</div>
+					<div class="purchase-area">
+						<!-- 				<input class="purchase-btn" type="submit" value="前往購買" id="payit" -->
+						<!-- 					form="pay">  -->
+						<input class="addCartaction" type="hidden" name="action"
+							value="add"> <input type="hidden" name="merchID"
+							value="${merchVo.merchID}"> <input type="hidden"
+							name="memberID" value="${memberVO.member_ID}"> <input
+							class="addcar-btn addCartButton" type="button" value="加入購物車">
+						<input class="purchase-btn payMerch" type="button" value="前往購買">
+					</div>
+				</form>
+				<form
+					action="${pageContext.request.contextPath}/ShoppingCartServlet"
+					id="pay">
+					<input class="payMerchaction" type="hidden" name="action"
+						value="payForOneMerch"> <input class="payMerchscCount"
+						type="hidden" name="scCount" value="1" id="paySCCount">
+				</form>
+			</div>
 		</div>
-
-
-
-		
-</div>
-
-	<div class="product-title-all">
-		<h1>${merchVo.merchName}</h1>
-		<div class="product-content">
-			<h2>商品詳情</h2>
-			${merchVo.merchDT}
-		</div>
-		<h1 class="hr1"></h1>
-		<span id="number-text">數量:</span>
-		<form action="${pageContext.request.contextPath}/ShoppingCartServlet">
-			<div class="select-area">
-				<span class="down" onclick='decreaseCount(event, this)'><img
-					class="arrow-pic"
-					src="${pageContext.request.contextPath}/front_end/merchandise/images/LeftArrow.png"></span>
-				<input id="input-amount" type="number" value="1" name="scCount" min=1>
-				<span class="up" onclick='increaseCount(event, this)'><img
-					class="arrow-pic"
-					src="${pageContext.request.contextPath}/front_end/merchandise/images/RightArrow.png"></span>
-			</div>
-			<span id="number-text">價格:</span>
-			<div class="select-area1">
-				<input id="totalCount" type="number" value="${merchVo.merchPrice}"
-					name="totalCount" readonly> 元整
-			</div>
-			<div class="purchase-area">
-				<!-- 				<input class="purchase-btn" type="submit" value="前往購買" id="payit" -->
-				<!-- 					form="pay">  -->
-				<input class="addCartaction" type="hidden" name="action" value="add"> 
-				<input	type="hidden" name="merchID" value="${merchVo.merchID}"> <input
-					type="hidden" name="memberID" value="${memberVO.member_ID}">
-				<input class="addcar-btn addCartButton" type="button" value="加入購物車">
-				<input class="purchase-btn payMerch" type="button" value="前往購買">
-			</div>
-		</form>
-		<form action="${pageContext.request.contextPath}/ShoppingCartServlet" id="pay">
-			<input class="payMerchaction" type="hidden" name="action" value="payForOneMerch">
-			<input class="payMerchscCount" type="hidden" name="scCount" value="1" id="paySCCount">
-		</form>
-	</div>
-</div>
 	</main>
 	<!--  客服圖 請自行加連結-->
 	<!--   <img class="cs" src="images/demo/cs.png" height="50px;" width="60px;" href="#"></img> -->

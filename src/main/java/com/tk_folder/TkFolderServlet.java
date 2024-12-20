@@ -1,8 +1,6 @@
 package com.tk_folder;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -12,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fd_ord_dt.model.FdOrdDtVO;
 import com.google.gson.Gson;
 import com.refundTicket.RefundTicketService;
 
