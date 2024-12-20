@@ -1,0 +1,9 @@
+service:
+  dev-redis:
+    image: "redis:latest"
+  dev-mysql:
+    image: "mysql:latest"
+    environment:
+      - MYSQL_ROOT_PASSWORD=1qaz@WSXD
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d

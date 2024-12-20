@@ -1,0 +1,17 @@
+# includes:
+#   - ./infra.yaml
+services:
+  web:
+    build: .
+    ports:
+      - "8888:8080"
+  dev-redis:
+    image: "redis:latest"
+  dev-mysql:
+    image: "mysql:latest"
+    environment:
+      - MYSQL_ROOT_PASSWORD=1qaz@WSX
+      - LANG=C.UTF-8 # init時中文亂碼問題
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+  
